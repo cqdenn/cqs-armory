@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "neoforge:separate_transforms",
+  "textures": {
+    "layer0": "cqs_armory:item/iron_halberd_gui"
+  },
+  "base": {
+    "parent": "cqs_armory:item/iron_halberd_handheld"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "cqs_armory:item/iron_halberd_gui"
+    },
+    "fixed": {
+      "parent": "cqs_armory:item/iron_halberd_gui"
+    }
+  }
+}

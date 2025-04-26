@@ -1,0 +1,5 @@
+{
+  "parent": "minecraft:item/handheld",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:dynamic_model"
+}

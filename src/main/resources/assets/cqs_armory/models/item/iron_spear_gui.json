@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "cqs_armory:item/iron_spear_gui"
+  }
+}
