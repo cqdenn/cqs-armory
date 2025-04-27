@@ -40,13 +40,19 @@ public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
             () -> new SummonSwordItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.NETHERITE, 5, -3.2F)
+                    .createAttributes(Tiers.NETHERITE, 5, -2.4F)
             ))
     );
 
     public static final DeferredItem<Item> GROUND_POUNDER = ITEMS.register("ground_pounder",
             () -> new GroundPounderItem(Tiers.NETHERITE, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.NETHERITE, 8, -3.5F)
+                    .createAttributes(Tiers.NETHERITE, 10, -3.1F)
+            ))
+    );
+
+    public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
+            () -> new MjolnirItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem
+                    .createAttributes(Tiers.NETHERITE, 12, -3.0F)
             ))
     );
 
@@ -135,7 +141,7 @@ public class ItemRegistry {
 
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(tier, new Item.Properties().attributes(ExtendedWeaponItem
-                        .createAttributes(tier, 5, -2.6F, new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, 2 * tier.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                        .createAttributes(tier, 5, -2.6F, new AttributeContainer[]{})
                 ))
         );
 
@@ -186,9 +192,6 @@ public class ItemRegistry {
 
 
 
-    public static final DeferredHolder<Item, Item> LEMON_HELMET = ITEMS.register("lemon_helmet", () -> new LemonArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> LEMON_CHESTPLATE = ITEMS.register("lemon_chestplate", () -> new LemonArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.BODY.getDurability(37))));
-    public static final DeferredHolder<Item, Item> LEMON_LEGGINGS = ITEMS.register("lemon_leggings", () -> new LemonArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> LEMON_BOOTS = ITEMS.register("lemon_boots", () -> new LemonArmorItem(ArmorMaterials.NETHERITE, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(37))));
-    ;
+
+
 }

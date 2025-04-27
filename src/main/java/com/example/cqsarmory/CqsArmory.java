@@ -60,13 +60,10 @@ public class CqsArmory
             .displayItems((parameters, output) -> {
                 output.accept(SUMMON_SWORD.get());
                 output.accept(GROUND_POUNDER.get());
+                output.accept(MJOLNIR.get());
                 output.accept(LEMON_HAMMER.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());
-                output.accept(LEMON_HELMET.get());
-                output.accept(LEMON_CHESTPLATE.get());
-                output.accept(LEMON_LEGGINGS.get());
-                output.accept(LEMON_BOOTS.get());
                 output.accept(IRON_WARHAMMER.get());
                 output.accept(IRON_GREATSWORD.get());
                 output.accept(IRON_HALBERD.get());
