@@ -1,10 +1,16 @@
 package com.example.cqsarmory.items;
 
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.effect.MagicMobEffect;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -15,6 +21,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+
+import java.sql.Time;
 
 public class MjolnirItem extends TridentItem {
     public MjolnirItem(Tier tier, Properties properties) {super(properties);}
@@ -28,6 +36,11 @@ public class MjolnirItem extends TridentItem {
             attacker.addEffect(new MobEffectInstance(MobEffectRegistry.THUNDERSTORM, 40, 20, false, false, false));
         }
 
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
 
     @Override
@@ -46,12 +59,12 @@ public class MjolnirItem extends TridentItem {
     public void releaseUsing(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft) {
         super.releaseUsing(stack, level, entityLiving, timeLeft);
         if (this.getUseDuration(stack, entityLiving) - timeLeft >= 10) {
-            entityLiving.push(entityLiving.getForward().scale(3));
+            entityLiving.push(entityLiving.getForward().scale(2));
+            level.playSound(entityLiving, entityLiving.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.MASTER, 1 ,1);
+            //FIXME
+            if (entityLiving.verticalCollisionBelow) {
+                entityLiving.push(4,0,0);
+            }
         }
     }
-
-    private static boolean isTooDamagedToUse(ItemStack stack) {
-        return stack.getDamageValue() >= stack.getMaxDamage() - 1;
-    }
-
 }
