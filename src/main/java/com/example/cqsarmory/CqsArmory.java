@@ -56,12 +56,11 @@ public class CqsArmory
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.cqs_armory")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> SUMMON_SWORD.get().getDefaultInstance())
+            .icon(() -> GROUND_POUNDER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(SUMMON_SWORD.get());
                 output.accept(GROUND_POUNDER.get());
                 output.accept(MJOLNIR.get());
-                output.accept(LEMON_HAMMER.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());
                 output.accept(IRON_WARHAMMER.get());
