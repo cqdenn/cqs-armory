@@ -51,23 +51,17 @@ public class ItemRegistry {
     );
 
     public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
-            () -> new MjolnirItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem
+            () -> new MjolnirItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1).attributes(SwordItem
                     .createAttributes(Tiers.NETHERITE, 12, -3.0F)
             ))
     );
 
-    public static final DeferredItem<Item> LEMON_HAMMER = ITEMS.register("lemon_hammer",
-            () -> new SwordItem(Tiers.NETHERITE, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.NETHERITE, 3, -3.1F)
-            ))
-    );
-
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
-            () -> new ShieldItem(new Item.Properties())
+            () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );
 
     public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
-            () -> new SoulSuckerItem(new Item.Properties()
+            () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
             ));
 
 
