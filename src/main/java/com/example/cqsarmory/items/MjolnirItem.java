@@ -119,7 +119,6 @@ public class MjolnirItem extends TridentItem {
         return 72000;
     }
 
-
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         player.startUsingItem(hand);

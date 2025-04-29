@@ -21,5 +21,5 @@ import org.joml.Vector3f;
 
 @EventBusSubscriber(Dist.DEDICATED_SERVER)
 public class ServerEvents {
-    
+
 }
