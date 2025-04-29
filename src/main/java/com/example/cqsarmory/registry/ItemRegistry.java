@@ -39,7 +39,7 @@ public class ItemRegistry {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
-            () -> new SummonSwordItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem
+            () -> new SummonSwordItem(Tiers.NETHERITE, new Item.Properties().attributes(SwordItem
                     .createAttributes(Tiers.NETHERITE, 5, -2.4F)
             ))
     );
@@ -51,8 +51,14 @@ public class ItemRegistry {
     );
 
     public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
-            () -> new MjolnirItem(Tiers.DIAMOND, new Item.Properties().stacksTo(1).attributes(SwordItem
+            () -> new MjolnirItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).attributes(SwordItem
                     .createAttributes(Tiers.NETHERITE, 12, -3.0F)
+            ))
+    );
+
+    public static final DeferredItem<Item> COSMIC_ARK = ITEMS.register("cosmic_ark",
+            () -> new CosmicArkItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.NETHERITE, 12, -2.5F, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
     );
 
