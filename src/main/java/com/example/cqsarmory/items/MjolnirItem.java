@@ -75,7 +75,7 @@ public class MjolnirItem extends TridentItem {
                     doDamage = true;
                     speed = 0;
                 }
-                level.playSound(entity, entity.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.MASTER, 0.5f, 1f);
+                level.playSound(entity, entity.blockPosition(), SoundRegistry.SHOCKWAVE_CAST.get(), SoundSource.MASTER, 0.5f, 1f);
             }
         }
         if (doDamage) {
