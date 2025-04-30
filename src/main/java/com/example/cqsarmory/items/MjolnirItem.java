@@ -6,9 +6,11 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.datafix.fixes.LevelLegacyWorldGenSettingsFix;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -59,7 +61,7 @@ public class MjolnirItem extends TridentItem {
                 level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
                 level.addParticle(new BlastwaveParticleOptions(edge, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
                 level.addParticle(new BlastwaveParticleOptions(edge, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 80; i++) {
                     float randDirection = random.nextFloat();
                     float direction;
                     if (randDirection <= 0.5f) {
@@ -73,6 +75,7 @@ public class MjolnirItem extends TridentItem {
                     doDamage = true;
                     speed = 0;
                 }
+                level.playSound(entity, entity.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.MASTER, 0.5f, 1f);
             }
         }
         if (doDamage) {
@@ -130,7 +133,7 @@ public class MjolnirItem extends TridentItem {
         super.releaseUsing(stack, level, entityLiving, timeLeft);
         if (this.getUseDuration(stack, entityLiving) - timeLeft >= 10) {
             entityLiving.push(entityLiving.getForward().scale(2));
-            level.playSound(entityLiving, entityLiving.blockPosition(), SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.MASTER, 1, 1);
+            level.playSound(entityLiving, entityLiving.blockPosition(), SoundRegistry.LIGHTNING_CAST.get(), SoundSource.MASTER, 0.5f, 1.0f);
             speed = entityLiving.getDeltaMovement().y;
         }
     }

@@ -44,18 +44,20 @@ public class CosmicArkItem extends SwordItem {
         super.postHurtEnemy(stack, target, attacker);
         Level level = attacker.level();
         abilityStacks++;
-        //FIXME sound doesnt play
-        switch (abilityStacks) {
-            case 1 ->
-                    level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.4f);
-            case 2 ->
-                    level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.8f);
-            case 3 ->
-                    level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.2f);
-            case 4 ->
-                    level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.6f);
-            default ->
-                    level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 2.0f);
+        if (attacker.level().isClientSide) {
+            //FIXME sound doesnt play
+            switch (abilityStacks) {
+                case 1 ->
+                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.4f);
+                case 2 ->
+                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.8f);
+                case 3 ->
+                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.2f);
+                case 4 ->
+                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.6f);
+                default ->
+                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 2.0f);
+            }
         }
 
     }
