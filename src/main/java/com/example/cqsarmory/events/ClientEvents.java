@@ -20,7 +20,6 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import static com.example.cqsarmory.items.CosmicArkItem.abilityStacks;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
@@ -32,20 +31,6 @@ public class ClientEvents {
         }
     }
 
-
-    @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) {
-        Entity target = event.getEntity();
-        if (event.getSource().getDirectEntity() instanceof Player player) {
-            if (player.getMainHandItem().is(ItemRegistry.COSMIC_ARK) && !player.level().getEntities(player, player.getBoundingBox().expandTowards(player.getForward().scale(7).multiply(1, 0, 1)).move(player.getForward().scale(2))).contains(target)) {
-                CosmicArkItem.refresh(player);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onDamage(LivingDamageEvent.Post event) {
-    }
 
 //    @SubscribeEvent
 //    public static void onLeftClick (AttackEntityEvent event) {

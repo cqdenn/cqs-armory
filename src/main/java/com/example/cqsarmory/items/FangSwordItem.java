@@ -26,17 +26,12 @@ public class FangSwordItem extends SwordItem {
         super.postHurtEnemy(stack, target, attacker);
 
         Random random = new Random();
-        List<Entity> fangs = new ArrayList<>();
         for (int i = 0; i < 20; i++) {
             EvokerFangs evokerFangs = new EvokerFangs(attacker.level(), attacker.getX(), attacker.getY(), attacker.getZ(), random.nextFloat(), 0, attacker);
             evokerFangs.moveTo(Utils.moveToRelativeGroundLevel(attacker.level(),
                     (attacker.position().add(Utils.getRandomVec3(3).add(0, 0.1, 0))), 4));
             evokerFangs.addTag("fang_sword");
-            fangs.add(evokerFangs);
+            attacker.level().addFreshEntity(evokerFangs);
         }
-        for (Entity fang : fangs) {
-            attacker.level().addFreshEntity(fang);
-        }
-
     }
 }
