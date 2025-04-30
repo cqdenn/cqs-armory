@@ -62,6 +62,12 @@ public class ItemRegistry {
             ))
     );
 
+    public static final DeferredItem<Item> FANG_SWORD = ITEMS.register("fang_sword",
+            () -> new FangSwordItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.NETHERITE, 6, -2.7F, new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 2, AttributeModifier.Operation.ADD_VALUE)})
+            ))
+    );
+
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
             () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );
