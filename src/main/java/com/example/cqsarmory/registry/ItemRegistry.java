@@ -68,6 +68,12 @@ public class ItemRegistry {
             ))
     );
 
+    public static final DeferredItem<Item> VOLCANO = ITEMS.register("volcano",
+            () -> new VolcanoSwordItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.NETHERITE, 6, -2.7F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+            ))
+    );
+
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
             () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );

@@ -32,6 +32,8 @@ public class MjolnirItem extends TridentItem {
 
     public MjolnirItem(Tier tier, Properties properties) {
         super(properties);
+        this.speed = 0;
+        this.doDamage = false;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class MjolnirItem extends TridentItem {
         double y = entity.getY();
         double z = entity.getZ();
         if (entity.verticalCollisionBelow) {
-            if (speed < 0) {
+            if (this.speed < 0) {
                 //this is immaculately stupid
                 level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
                 level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
@@ -72,13 +74,13 @@ public class MjolnirItem extends TridentItem {
                     level.addParticle(ParticleHelper.ELECTRICITY, x, y + 1f, z, random.nextFloat() * direction, random.nextFloat(), random.nextFloat() * direction);
                     level.addParticle(ParticleHelper.ELECTRICITY, x, y + 1f, z, random.nextFloat() * -direction, random.nextFloat(), random.nextFloat() * direction);
                     level.addParticle(ParticleHelper.ELECTRICITY, x, y + 1f, z, random.nextFloat() * direction, random.nextFloat(), random.nextFloat() * -direction);
-                    doDamage = true;
-                    speed = 0;
+                    this.doDamage = true;
+                    this.speed = 0;
                 }
                 level.playSound(entity, entity.blockPosition(), SoundRegistry.SHOCKWAVE_CAST.get(), SoundSource.MASTER, 0.5f, 1f);
             }
         }
-        if (doDamage) {
+        if (this.doDamage) {
             var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius, radius, radius), (target) -> !DamageSources.isFriendlyFireBetween(target, entity) && Utils.hasLineOfSight(level, entity, target, true));
             if (!level.isClientSide()) {
                 slamDamage(entities, level, entity);
@@ -95,7 +97,7 @@ public class MjolnirItem extends TridentItem {
                 target.hurt(genericDamage, 20);
             }
         }
-        doDamage = false;
+        this.doDamage = false;
     }
 
 
@@ -134,7 +136,7 @@ public class MjolnirItem extends TridentItem {
         if (this.getUseDuration(stack, entityLiving) - timeLeft >= 10) {
             entityLiving.push(entityLiving.getForward().scale(2));
             level.playSound(entityLiving, entityLiving.blockPosition(), SoundRegistry.LIGHTNING_CAST.get(), SoundSource.MASTER, 0.5f, 1.0f);
-            speed = entityLiving.getDeltaMovement().y;
+            this.speed = entityLiving.getDeltaMovement().y;
         }
     }
 }

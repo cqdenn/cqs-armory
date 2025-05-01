@@ -40,7 +40,7 @@ public class CosmicArkItem extends SwordItem {
     add gui for abilityStacks
      */
 
-    public int abilityStacks;
+    int abilityStacks;
 
     public CosmicArkItem(Tier tier, Item.Properties properties) {
         super(tier, properties);

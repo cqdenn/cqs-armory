@@ -63,6 +63,7 @@ public class CqsArmory
                 output.accept(MJOLNIR.get());
                 output.accept(COSMIC_ARK.get());
                 output.accept(FANG_SWORD.get());
+                output.accept(VOLCANO.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());
                 output.accept(IRON_WARHAMMER.get());
