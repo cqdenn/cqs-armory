@@ -76,8 +76,6 @@ public class CosmicArkItem extends SwordItem {
                 AbilityData.get(player).cosmicArk.abilityStacks = 0;
 
                 ServerLevel serverLevel = (ServerLevel) level;
-                var proj = player.getForward().scale(7);
-                //var entities = level.getEntities(player, player.getBoundingBox().expandTowards(proj).inflate(1, 2, 1));
                 Vec3 start = player.getEyePosition();
                 Vec3 startParticles = start.subtract(0, 1, 0);
                 Vec3 temp = new Vec3(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY(), teleLoc(level, player, 7f).getZ());
@@ -96,9 +94,6 @@ public class CosmicArkItem extends SwordItem {
                     }
                 }
                 entities.clear();
-
-
-                //var end = player.getEyePosition().subtract(0, 1, 0);
 
             } else {
                 level.playSound(null, player.blockPosition(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.MASTER, 0.5f, 0.8f);

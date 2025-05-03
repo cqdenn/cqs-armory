@@ -74,6 +74,12 @@ public class ItemRegistry {
             ))
     );
 
+    public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
+            () -> new DesertFuryItem(Tiers.NETHERITE, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.NETHERITE, 11, -2.7F, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+            ))
+    );
+
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
             () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );

@@ -2,6 +2,7 @@ package com.example.cqsarmory;
 
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.registry.AssetHandlerRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.mojang.logging.LogUtils;
@@ -66,6 +67,7 @@ public class CqsArmory
                 output.accept(COSMIC_ARK.get());
                 output.accept(FANG_SWORD.get());
                 output.accept(VOLCANO.get());
+                output.accept(DESERT_FURY.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());
                 output.accept(IRON_WARHAMMER.get());
@@ -94,6 +96,7 @@ public class CqsArmory
         EntityDataAttachmentRegistry.ATTACHMENT_TYPES.register(modEventBus);
 
         EntityRegistry.register(modEventBus);
+        CQSpellRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 
