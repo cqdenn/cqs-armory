@@ -13,6 +13,8 @@ import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -43,15 +45,14 @@ public class VolcanoExplosion extends AoeEntity {
     }
 
     public final int waitTime = 20;
-    public final DamageSource volcano = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), getOwner(), getOwner());
-
 
     @Override
     public void tick() {
         var level = this.level();
         float radius = getRadius();
+        if (tickCount == 1) {this.playSound(SoundEvents.CREEPER_PRIMED, 1, 0.1f);}
         if (tickCount == waitTime) {
-            this.playSound(SoundRegistry.FIREBALL_START.get(), 1, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
+            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
             if (level.isClientSide) {
                 var x = this.position().x;
                 var y = this.position().y;
@@ -94,6 +95,7 @@ public class VolcanoExplosion extends AoeEntity {
                 }
 
             }
+            DamageSource volcano = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), getOwner(), getOwner());
             var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted));
             for (Entity target : entities) {
                 if (target instanceof LivingEntity) {
@@ -108,7 +110,6 @@ public class VolcanoExplosion extends AoeEntity {
 
     @Override
     public void applyEffect(LivingEntity target) {
-        return;
     }
 
     @Override

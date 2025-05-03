@@ -44,12 +44,13 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onDeath (LivingDeathEvent event) {
         Entity entity = event.getEntity().getKillCredit();
-        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (event.getSource().getEntity() instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))) {
+        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (entity instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))) {
             VolcanoExplosion volcanoExplosion = new VolcanoExplosion(event.getEntity().level(), (LivingEntity) entity, 20, 4);
-            volcanoExplosion.moveTo(event.getEntity().position());
+            volcanoExplosion.moveTo(event.getEntity().position().add(0, 1, 0));
             event.getEntity().level().addFreshEntity(volcanoExplosion);
-            //VolcanoSwordItem.damage(event.getEntity().position(), event.getEntity().level(), livingEntity);
-            //PacketDistributor.sendToPlayersTrackingEntity(event.getEntity(), new FieryExplosionParticlesPacket(event.getEntity().position(), 4));
+            if (event.getSource().getDirectEntity() instanceof VolcanoExplosion volcanoExplosion1) {
+                volcanoExplosion.setOwner(volcanoExplosion1.getOwner());
+            }
         }
     }
 

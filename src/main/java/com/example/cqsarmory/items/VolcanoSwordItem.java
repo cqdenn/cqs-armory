@@ -26,35 +26,15 @@ import java.util.Random;
 
 public class VolcanoSwordItem extends SwordItem {
 
-    boolean hurt;
-    boolean chain;
-    Vec3 pos_chain;
-    Vec3 pos;
-    List<Vec3> chain_particles;
 
     public VolcanoSwordItem(Tier tier, Item.Properties properties) {
         super(tier, properties);
     }
 
-
-    public static void damage(Vec3 pos, Level level, Entity entity) {
-        float radius = 4;
-        DamageSource volcano = new DamageSource(level.damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), entity, entity);
-        if (!level.isClientSide) {
-            ServerLevel serverLevel = (ServerLevel) level;
-            var entities = level.getEntities(entity, new AABB(pos, pos).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(targeted, entity));
-            for (Entity target : entities) {
-                if (target instanceof LivingEntity) {
-                    target.hurt(volcano, 20);
-                }
-            }
-            entities.clear();
-        }
-    }
-
-
-    private boolean canHit(Entity owner, Entity target) {
-        return target.isAlive() && target.isPickable() && !target.isSpectator();
+    @Override
+    public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        super.postHurtEnemy(stack, target, attacker);
+        target.setRemainingFireTicks(160);
     }
 }
 
