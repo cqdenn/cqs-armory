@@ -37,19 +37,6 @@ public class ClientEvents {
     }
 
 
-    @SubscribeEvent
-    public static void onDeath(LivingDeathEvent event) {
-        /*
-        if (event.getSource().getEntity() instanceof Player player) {
-            if (player.getMainHandItem().is(ItemRegistry.VOLCANO)) {
-                VolcanoSwordItem.particles(event.getEntity().getEyePosition(), event.getEntity().level());
-                }
-            } else if(event.getEntity().getTags().contains("fire_sword")) {
-            VolcanoSwordItem.particles(event.getEntity().getEyePosition(), event.getEntity().level());
-        }
-
-         */
-        }
 
 
 

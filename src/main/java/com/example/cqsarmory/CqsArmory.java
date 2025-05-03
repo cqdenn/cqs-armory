@@ -2,6 +2,8 @@ package com.example.cqsarmory;
 
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.registry.AssetHandlerRegistry;
+import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
+import com.example.cqsarmory.registry.EntityRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -88,6 +90,10 @@ public class CqsArmory
         ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+
+        EntityDataAttachmentRegistry.ATTACHMENT_TYPES.register(modEventBus);
+
+        EntityRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 

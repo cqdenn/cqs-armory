@@ -1,8 +1,10 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.data.AbilityData;
 import com.llamalad7.mixinextras.lib.apache.commons.ObjectUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.Log;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
@@ -33,6 +35,8 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import org.checkerframework.checker.units.qual.A;
 import org.openjdk.nashorn.internal.runtime.Undefined;
 
+import java.util.List;
+
 public class CosmicArkItem extends SwordItem {
     /*
     TODO
@@ -40,87 +44,77 @@ public class CosmicArkItem extends SwordItem {
     add gui for abilityStacks
      */
 
-    int abilityStacks;
 
     public CosmicArkItem(Tier tier, Item.Properties properties) {
         super(tier, properties);
-        this.abilityStacks = 0;
     }
 
     @Override
     public void postHurtEnemy(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         super.postHurtEnemy(stack, target, attacker);
         Level level = attacker.level();
-        this.abilityStacks++;
-        if (attacker.level().isClientSide) {
-            //FIXME sound doesnt play
-            switch (this.abilityStacks) {
-                case 1 ->
-                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.4f);
-                case 2 ->
-                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.8f);
-                case 3 ->
-                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.2f);
-                case 4 ->
-                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.6f);
-                default ->
-                        level.playSound(attacker, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 2.0f);
-            }
+        AbilityData.get(attacker).cosmicArk.abilityStacks++;
+        switch (AbilityData.get(attacker).cosmicArk.abilityStacks) {
+            case 1 ->
+                    level.playSound(null, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.4f);
+            case 2 ->
+                    level.playSound(null, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 0.8f);
+            case 3 ->
+                    level.playSound(null, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.2f);
+            case 4 ->
+                    level.playSound(null, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 1.6f);
+            default ->
+                    level.playSound(null, attacker.blockPosition(), SoundEvents.END_PORTAL_FRAME_FILL, SoundSource.MASTER, 1f, 2.0f);
         }
-
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         DamageSource genericDamage = level.damageSources().indirectMagic(player, player);
-        if (this.abilityStacks >= 5) {
-            var start = player.getEyePosition().subtract(0, 1, 0);
-            if (!player.level().isClientSide()) {
+        if (!player.level().isClientSide()) {
+            if (AbilityData.get(player).cosmicArk.abilityStacks >= 5) {
+                AbilityData.get(player).cosmicArk.abilityStacks = 0;
+
                 ServerLevel serverLevel = (ServerLevel) level;
                 var proj = player.getForward().scale(7);
-                var entities = level.getEntities(player, player.getBoundingBox().expandTowards(proj).inflate(1, 2, 1).inflate(-1, -2, -1));
+                //var entities = level.getEntities(player, player.getBoundingBox().expandTowards(proj).inflate(1, 2, 1));
+                Vec3 start = player.getEyePosition();
+                Vec3 startParticles = start.subtract(0, 1, 0);
+                Vec3 temp = new Vec3(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY(), teleLoc(level, player, 7f).getZ());
+                Vec3 end = (temp).add(0, player.getEyeHeight(), 0);
+                AABB range = player.getBoundingBox().expandTowards(end.subtract(start));
+                List<? extends Entity> entities = player.level().getEntities(player, range);
                 player.teleportTo(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY() + 1, teleLoc(level, player, 7f).getZ());
-                this.abilityStacks = 0;
+                for (int i = 0; i <= 70; i++) {
+                    MagicManager.spawnParticles(level, ParticleHelper.UNSTABLE_ENDER, startParticles.x + (player.getForward().x * (0.1 * i)), startParticles.y + (player.getForward().y * (0.1 * i)), startParticles.z + (player.getForward().z * (0.1 * i)), 3, 0, 0, 0, 0, false);
+                }
+                level.playSound(null, player.blockPosition(), SoundRegistry.ABYSSAL_TELEPORT.get(), SoundSource.MASTER, 0.5f, 1f);
                 for (Entity target : entities) {
                     target.hurt(genericDamage, 20);
                     if (player.killedEntity(serverLevel, (LivingEntity) target)) {
-                        refresh();
+                        refresh(player);
                     }
                 }
                 entities.clear();
+
+
+                //var end = player.getEyePosition().subtract(0, 1, 0);
+
+            } else {
+                level.playSound(null, player.blockPosition(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.MASTER, 0.5f, 0.8f);
             }
-            //var end = player.getEyePosition().subtract(0, 1, 0);
-            for (int i = 0; i <= 70; i++) {
-                level.addParticle(ParticleHelper.UNSTABLE_ENDER, start.x + (player.getForward().x * (0.1 * i)), start.y + (player.getForward().y * (0.1 * i)), start.z + (player.getForward().z * (0.1 * i)), 0, 0, 0);
-                level.addParticle(ParticleHelper.UNSTABLE_ENDER, start.x + (player.getForward().x * (0.1 * i)), start.y + (player.getForward().y * (0.1 * i)), start.z + (player.getForward().z * (0.1 * i)), 0, 0, 0);
-                level.addParticle(ParticleHelper.UNSTABLE_ENDER, start.x + (player.getForward().x * (0.1 * i)), start.y + (player.getForward().y * (0.1 * i)), start.z + (player.getForward().z * (0.1 * i)), 0, 0, 0);
-                level.playSound(player, player.blockPosition(), SoundRegistry.ABYSSAL_TELEPORT.get(), SoundSource.MASTER, 0.5f, 1f);
-            }
-        } else {
-            level.playSound(player, player.blockPosition(), SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundSource.MASTER, 0.5f, 0.8f);
         }
         return super.use(level, player, usedHand);
     }
 
-    public void refresh() {
-        this.abilityStacks = 5;
+    public void refresh(LivingEntity entity) {
+        AbilityData.get(entity).cosmicArk.abilityStacks = 5;
     }
 
-    public BlockPos teleLoc (Level level, LivingEntity entity, float distance) {
+    public BlockPos teleLoc(Level level, LivingEntity entity, float distance) {
         var blockHitResult = Utils.getTargetBlock(level, entity, ClipContext.Fluid.NONE, distance);
         var pos = blockHitResult.getBlockPos();
-        return  pos;
+        return pos;
     }
-
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
-
-        if (isSelected) {
-
-        }
-
-    }
-
 }
 
