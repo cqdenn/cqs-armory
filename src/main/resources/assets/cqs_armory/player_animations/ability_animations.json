@@ -1,0 +1,36 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"spin": {
+			"animation_length": 5,
+			"bones": {
+				"body": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"5.0": {
+							"vector": [0, 7200, 0]
+						}
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"vector": [-63.04053, -20.13968, -10.4265]
+					}
+				},
+				"bipedHandRight": {
+					"rotation": {
+						"vector": [65, 0, 0]
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"vector": [-63.60782, 18.05776, 8.74472]
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

@@ -24,6 +24,12 @@ repositories {
         url "https://cursemaven.com"
     }
     maven {
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
+    }
+    maven {
         url = "https://code.redspace.io/releases"
     }
     maven {
@@ -121,9 +127,9 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "io.redspace:irons_spellbooks:1.21-3.8.8"
-    implementation "curse.maven:geckolib-388172:6027599"
-    implementation "curse.maven:playeranimator-658587:5698755"
+    implementation "io.redspace:irons_spellbooks:1.21.1-3.12.1"
+    implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7.5.1"
+    implementation "curse.maven:playeranimator-658587:6024462"
     implementation "top.theillusivec4.curios:curios-neoforge:9.2.2+${minecraft_version}"
     compileOnly "io.redspace:atlas_api:1.21-1.0.2:api"
     localRuntime "io.redspace:atlas_api:1.21-1.0.2"

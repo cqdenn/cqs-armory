@@ -1,10 +1,7 @@
 package com.example.cqsarmory;
 
 import com.example.cqsarmory.network.StartSuckingPacket;
-import com.example.cqsarmory.registry.AssetHandlerRegistry;
-import com.example.cqsarmory.registry.CQSpellRegistry;
-import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
-import com.example.cqsarmory.registry.EntityRegistry;
+import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -97,6 +94,7 @@ public class CqsArmory
 
         EntityRegistry.register(modEventBus);
         CQSpellRegistry.register(modEventBus);
+        EnchantmentEntityEffectRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 

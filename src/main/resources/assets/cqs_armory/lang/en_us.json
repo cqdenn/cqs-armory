@@ -15,6 +15,10 @@
   "item.cqs_armory.iron_mace": "Iron Mace",
   "item.cqs_armory.iron_spear": "Iron Spear",
   "item.cqs_armory.iron_rapier": "Iron Rapier",
-  "item.cqs_armory.iron_scythe": "Iron Scythe"
+  "item.cqs_armory.iron_scythe": "Iron Scythe",
+  "spell.cqs_armory.spin_spell": "Spin",
+  "enchantment.cqsarmory.smoldering_hone": "Hone: Smoldering",
+  "enchantment.cqsarmory.defense_hone": "Hone: Defense",
+  "enchantment.cqsarmory.lightning_aspect": "Lightning Aspect"
 
 }

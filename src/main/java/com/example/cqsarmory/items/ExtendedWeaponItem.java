@@ -1,5 +1,6 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -47,18 +48,21 @@ public class ExtendedWeaponItem extends TieredItem {
     /**
      * Neo: Method overload to allow giving a float for damage instead of an int.
      */
-    public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier tier, float attackDamage, float attackSpeed, AttributeContainer[] attributes) {
+    public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float attackDamage, float attackSpeed, AttributeContainer[] attributes) {
+
+
+
         var builder = ItemAttributeModifiers.builder()
                 .add(
                         Attributes.ATTACK_DAMAGE,
                         new AttributeModifier(
-                                BASE_ATTACK_DAMAGE_ID, (double)((float)attackDamage + tier.getAttackDamageBonus()), AttributeModifier.Operation.ADD_VALUE
+                                BASE_ATTACK_DAMAGE_ID, (double)((float)attackDamage + material.getAttackDamageBonus() + power.attackDamage()), AttributeModifier.Operation.ADD_VALUE
                         ),
                         EquipmentSlotGroup.MAINHAND
                 )
                 .add(
                         Attributes.ATTACK_SPEED,
-                        new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)attackSpeed + tier.getSpeed(), AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)attackSpeed + material.getSpeed() + power.attackSpeed(), AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.MAINHAND
                 );
 

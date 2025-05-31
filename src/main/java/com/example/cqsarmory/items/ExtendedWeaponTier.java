@@ -20,6 +20,7 @@ public class ExtendedWeaponTier implements Tier {
     public static com.example.cqsarmory.items.ExtendedWeaponTier GOLD;
     public static com.example.cqsarmory.items.ExtendedWeaponTier DIAMOND;
     public static com.example.cqsarmory.items.ExtendedWeaponTier NETHERITE;
+    public static com.example.cqsarmory.items.ExtendedWeaponTier CUSTOM;
     String name;
     float mult;
     int uses;
@@ -81,6 +82,7 @@ public class ExtendedWeaponTier implements Tier {
         GOLD = new com.example.cqsarmory.items.ExtendedWeaponTier("gold", 1, 150, 1.0F, 0.0F, 5, BlockTags.INCORRECT_FOR_GOLD_TOOL, () -> Ingredient.of(new ItemLike[]{Items.GOLD_INGOT}));
         DIAMOND = new com.example.cqsarmory.items.ExtendedWeaponTier("diamond", 1.2F, 250, 2.0F, 0.2F, 4, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(new ItemLike[]{Items.DIAMOND}));
         NETHERITE = new com.example.cqsarmory.items.ExtendedWeaponTier("netherite", 2, 2000, 3.0F, 0.3F, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{Items.NETHERITE_INGOT}));
+        CUSTOM = new com.example.cqsarmory.items.ExtendedWeaponTier("custom", 1, 2000, 0F, 0F, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.REPAIR_KIT.get()}));
 
 
     }

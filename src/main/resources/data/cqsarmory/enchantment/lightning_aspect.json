@@ -1,0 +1,42 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.cqsarmory.lightning_aspect"
+  },
+  "exclusive_set": "#cqsarmory:exclusive_enchants/elemental_mastery",
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "cqs_armory:chain_lightning",
+          "bounces": {
+            "type": "minecraft:linear",
+            "base": 3.0,
+            "per_level_above_first": 3.0
+          }
+        },
+        "enchanted": "attacker",
+        "requirements": {
+          "condition": "minecraft:random_chance",
+          "chance": 0.35
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 20
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/fire_aspect",
+  "weight": 2
+}

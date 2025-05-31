@@ -1,0 +1,36 @@
+{
+  "description": {
+    "translate": "enchantment.cqsarmory.defense_hone"
+  },
+  "exclusive_set": "#minecraft:exclusive_set/damage",
+  "supported_items": "#minecraft:enchantable/weapon",
+  "primary_items": "#minecraft:enchantable/sword",
+  "weight": 4,
+  "max_level": 5,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 4
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 4
+  },
+  "anvil_cost": 0,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "attribute": "minecraft:generic.armor",
+        "id": "cqsarmory:armor_hone",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.1,
+          "per_level_above_first": 0.075
+        },
+        "operation": "add_multiplied_total"
+      }
+    ]
+  }
+}
