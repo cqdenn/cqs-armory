@@ -19,6 +19,8 @@
   "spell.cqs_armory.spin_spell": "Spin",
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
-  "enchantment.cqs_armory.lightning_aspect": "Lightning Aspect"
+  "enchantment.cqs_armory.lightning_aspect": "Lightning Aspect",
+  "enchantment.cqs_armory.frost_aspect": "Frost Aspect",
+  "enchantment.cqs_armory.poison_aspect": "Poison Aspect"
 
 }

@@ -1,0 +1,44 @@
+{
+  "description": {
+    "translate": "enchantment.cqs_armory.poison_aspect"
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
+  "supported_items": "#minecraft:enchantable/fire_aspect",
+  "primary_items": "#minecraft:enchantable/sword",
+  "weight": 4,
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 20
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "victim",
+        "effect": {
+          "type": "cqs_armory:poison",
+          "duration": {
+            "type": "minecraft:linear",
+            "base": 80.0,
+            "per_level_above_first": 80.0
+          }
+        },
+        "enchanted": "attacker",
+        "requirements": {
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "is_direct": true
+          }
+        }
+      }
+    ]
+  }
+}

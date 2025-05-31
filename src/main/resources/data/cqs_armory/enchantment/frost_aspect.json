@@ -1,7 +1,7 @@
 {
   "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.cqs_armory.lightning_aspect"
+    "translate": "enchantment.cqs_armory.frost_aspect"
   },
   "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
   "effects": {
@@ -9,17 +9,19 @@
       {
         "affected": "victim",
         "effect": {
-          "type": "cqs_armory:chain_lightning",
-          "bounces": {
+          "type": "cqs_armory:frost",
+          "duration": {
             "type": "minecraft:linear",
-            "base": 3.0,
-            "per_level_above_first": 3.0
+            "base": 80.0,
+            "per_level_above_first": 80.0
           }
         },
         "enchanted": "attacker",
         "requirements": {
-          "condition": "minecraft:random_chance",
-          "chance": 0.75
+          "condition": "minecraft:damage_source_properties",
+          "predicate": {
+            "is_direct": true
+          }
         }
       }
     ]

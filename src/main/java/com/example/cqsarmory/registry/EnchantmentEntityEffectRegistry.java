@@ -1,7 +1,9 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.enchants.FrostAspect;
 import com.example.cqsarmory.data.enchants.LightningAspect;
+import com.example.cqsarmory.data.enchants.PoisonAspect;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
@@ -21,4 +23,10 @@ public class EnchantmentEntityEffectRegistry {
 
     public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> CHAIN_LIGHTNING_ENCHANTMENT_EFFECT =
             ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("chain_lightning", ()-> LightningAspect.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> FROST_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("frost", ()-> FrostAspect.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> POISON_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("poison", ()-> PoisonAspect.CODEC);
 }
