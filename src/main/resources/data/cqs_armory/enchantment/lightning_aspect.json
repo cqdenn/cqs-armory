@@ -1,9 +1,9 @@
 {
   "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.cqsarmory.lightning_aspect"
+    "translate": "enchantment.cqs_armory.lightning_aspect"
   },
-  "exclusive_set": "#cqsarmory:exclusive_enchants/elemental_mastery",
+  "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
   "effects": {
     "minecraft:post_attack": [
       {
@@ -19,7 +19,7 @@
         "enchanted": "attacker",
         "requirements": {
           "condition": "minecraft:random_chance",
-          "chance": 0.35
+          "chance": 0.75
         }
       }
     ]

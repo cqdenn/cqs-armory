@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class DamageTypes {
     public static ResourceKey<DamageType> register(String name) {
-        return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("cqsarmory", name ));
+        return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name ));
     }
 
     public static final ResourceKey<DamageType> VOLCANO = register("volcano");

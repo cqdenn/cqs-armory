@@ -28,6 +28,7 @@ public record LightningAspect(LevelBasedValue bounces) implements EnchantmentEnt
             //FIXME bow no work D:
             chainLightning.setDamage(attacker == null ? 4 : (float) (attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)) * 0.5f);
             chainLightning.maxConnections = (int) bounces.calculate(enchantmentLevel);
+            chainLightning.range = 8;
             level.addFreshEntity(chainLightning);
         }
     }

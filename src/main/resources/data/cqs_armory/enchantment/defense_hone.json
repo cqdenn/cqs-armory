@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "enchantment.cqsarmory.defense_hone"
+    "translate": "enchantment.cqs_armory.defense_hone"
   },
   "exclusive_set": "#minecraft:exclusive_set/damage",
   "supported_items": "#minecraft:enchantable/weapon",
@@ -23,7 +23,7 @@
     "minecraft:attributes": [
       {
         "attribute": "minecraft:generic.armor",
-        "id": "cqsarmory:armor_hone",
+        "id": "cqs_armory:armor_hone",
         "amount": {
           "type": "minecraft:linear",
           "base": 0.1,
