@@ -1,12 +1,15 @@
 package com.example.cqsarmory.events;
 
 
+import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.enchants.PoisonAspect;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.CosmicArkItem;
 import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.registry.DamageTypes;
+import com.example.cqsarmory.registry.EnchantmentEntityEffectRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.sun.jna.platform.win32.Winevt;
@@ -25,6 +28,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -32,6 +37,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Random;
 import org.joml.Vector3f;

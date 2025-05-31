@@ -21,6 +21,10 @@
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
   "enchantment.cqs_armory.lightning_aspect": "Lightning Aspect",
   "enchantment.cqs_armory.frost_aspect": "Frost Aspect",
-  "enchantment.cqs_armory.poison_aspect": "Poison Aspect"
-
+  "enchantment.cqs_armory.poison_aspect": "Poison Aspect",
+  "enchantment.cqs_armory.anti_protection": "Anti Protection",
+  "enchantment.cqs_armory.wind_aspect": "Wind Aspect",
+  "enchantment.cqs_armory.life_steal": "Life Steal",
+  "enchantment.cqs_armory.speed_steal": "Speed Steal",
+  "enchantment.cqs_armory.mana_steal": "Mana Steal"
 }

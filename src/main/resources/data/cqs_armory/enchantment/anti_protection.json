@@ -1,0 +1,31 @@
+{
+  "description": {
+    "translate": "enchantment.cqs_armory.anti_protection"
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/protections",
+  "supported_items": "#minecraft:enchantable/armor",
+  "weight": 5,
+  "max_level": 4,
+  "min_cost": {
+    "base": 3,
+    "per_level_above_first": 6
+  },
+  "max_cost": {
+    "base": 9,
+    "per_level_above_first": 4
+  },
+  "anvil_cost": 2,
+  "slots": [
+    "armor"
+  ],
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "attribute": "minecraft:generic.attack_damage",
+        "id": "cqs_armory:anti_protection",
+        "amount": 0.1,
+        "operation": "add_multiplied_total"
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.cqs_armory.wind_aspect"
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
+  "supported_items": "#minecraft:enchantable/fire_aspect",
+  "primary_items": "#minecraft:enchantable/sword",
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "attacker",
+        "effect": {
+          "type": "minecraft:explode",
+          "block_interaction": "trigger",
+          "immune_blocks": "#minecraft:blocks_wind_charge_explosions",
+          "knockback_multiplier": {
+            "type": "minecraft:lookup",
+            "fallback": {
+              "type": "minecraft:linear",
+              "base": 1.5,
+              "per_level_above_first": 0.35
+            },
+            "values": [
+              1.2,
+              1.75,
+              2.2
+            ]
+          },
+          "large_particle": {
+            "type": "minecraft:gust_emitter_large"
+          },
+          "radius": 3.5,
+          "small_particle": {
+            "type": "minecraft:gust_emitter_small"
+          },
+          "sound": "minecraft:entity.wind_charge.wind_burst"
+        },
+        "enchanted": "attacker",
+        "requirements": {
+          "condition": "minecraft:entity_properties",
+          "entity": "direct_attacker",
+          "predicate": {
+            "flags": {
+              "is_flying": false
+            },
+            "movement": {
+              "fall_distance": {
+                "min": 0.7
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 60,
+    "per_level_above_first": 20
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 10,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "weight": 2
+}

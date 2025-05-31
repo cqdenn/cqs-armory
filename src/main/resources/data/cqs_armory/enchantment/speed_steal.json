@@ -1,0 +1,74 @@
+{
+  "description": {
+    "translate": "enchantment.cqs_armory.speed_steal"
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/stealing",
+  "supported_items": "#minecraft:enchantable/weapon",
+  "primary_items": "#minecraft:enchantable/sword",
+  "weight": 4,
+  "max_level": 3,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 4
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 4
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "effect": {
+          "type": "minecraft:apply_mob_effect",
+          "to_apply": "minecraft:slowness",
+          "min_duration": 2,
+          "max_duration": {
+            "type": "minecraft:linear",
+            "base": 2,
+            "per_level_above_first": 1
+          },
+          "min_amplifier": {
+            "type": "minecraft:linear",
+            "base": 0,
+            "per_level_above_first": 1
+          },
+          "max_amplifier": {
+            "type": "minecraft:linear",
+            "base": 0,
+            "per_level_above_first": 1
+          }
+        },
+        "enchanted": "attacker",
+        "affected": "victim"
+      },
+      {
+        "effect": {
+          "type": "minecraft:apply_mob_effect",
+          "to_apply": "minecraft:speed",
+          "min_duration": 2,
+          "max_duration": {
+            "type": "minecraft:linear",
+            "base": 2,
+            "per_level_above_first": 1
+          },
+          "min_amplifier": {
+            "type": "minecraft:linear",
+            "base": 0,
+            "per_level_above_first": 1
+          },
+          "max_amplifier": {
+            "type": "minecraft:linear",
+            "base": 0,
+            "per_level_above_first": 1
+          }
+        },
+        "enchanted": "attacker",
+        "affected": "attacker"
+      }
+    ]
+  }
+}

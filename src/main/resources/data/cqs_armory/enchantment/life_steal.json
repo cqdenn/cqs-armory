@@ -1,0 +1,38 @@
+{
+  "description": {
+    "translate": "enchantment.cqs_armory.life_steal"
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/stealing",
+  "supported_items": "#minecraft:enchantable/weapon",
+  "primary_items": "#minecraft:enchantable/sword",
+  "weight": 4,
+  "max_level": 3,
+  "min_cost": {
+    "base": 5,
+    "per_level_above_first": 4
+  },
+  "max_cost": {
+    "base": 10,
+    "per_level_above_first": 4
+  },
+  "anvil_cost": 4,
+  "slots": [
+    "mainhand"
+  ],
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "effect": {
+          "type": "cqs_armory:life_steal",
+          "health": {
+            "type": "minecraft:linear",
+            "base": 2,
+            "per_level_above_first": 2
+          }
+        },
+        "enchanted": "attacker",
+        "affected": "attacker"
+      }
+    ]
+  }
+}

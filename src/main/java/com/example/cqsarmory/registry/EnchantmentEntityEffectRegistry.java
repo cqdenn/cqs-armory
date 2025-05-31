@@ -1,15 +1,11 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.enchants.FrostAspect;
-import com.example.cqsarmory.data.enchants.LightningAspect;
-import com.example.cqsarmory.data.enchants.PoisonAspect;
+import com.example.cqsarmory.data.enchants.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -29,4 +25,10 @@ public class EnchantmentEntityEffectRegistry {
 
     public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> POISON_ENCHANTMENT_EFFECT =
             ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("poison", ()-> PoisonAspect.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> LIFE_STEAL_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("life_steal", ()-> LifeSteal.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> MANA_STEAL_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("mana_steal", ()-> ManaSteal.CODEC);
 }

@@ -2,7 +2,7 @@
   "description": {
     "translate": "enchantment.cqs_armory.defense_hone"
   },
-  "exclusive_set": "#minecraft:exclusive_set/damage",
+  "exclusive_set": "#cqs_armory:exclusive_set/hone",
   "supported_items": "#minecraft:enchantable/weapon",
   "primary_items": "#minecraft:enchantable/sword",
   "weight": 4,

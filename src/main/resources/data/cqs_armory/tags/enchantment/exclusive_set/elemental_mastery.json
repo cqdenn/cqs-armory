@@ -2,6 +2,8 @@
   "values": [
     "minecraft:fire_aspect",
     "cqs_armory:lightning_aspect",
-    "cqs_armory:frost_aspect"
+    "cqs_armory:frost_aspect",
+    "cqs_armory:poison_aspect",
+    "cqs_armory:wind_aspect"
   ]
 }
