@@ -1,7 +1,7 @@
 {
   "anvil_cost": 2,
   "description": {
-    "translate": "enchantment.cqs_armory.smoldering_hone"
+    "translate": "enchantment.cqs_armory.aquatic_hone"
   },
   "effects": {
     "minecraft:damage": [
@@ -18,7 +18,7 @@
           "condition": "minecraft:entity_properties",
           "entity": "this",
           "predicate": {
-            "type": "#cqs_armory:sensitive_to_smoldering_hone"
+            "type": "#cqs_armory:sensitive_to_aquatic_hone"
           }
         }
       }

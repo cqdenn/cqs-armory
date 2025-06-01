@@ -1,8 +1,9 @@
 {
-  "anvil_cost": 2,
+  "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.cqs_armory.smoldering_hone"
+    "translate": "enchantment.cqs_armory.prosecute"
   },
+  "exclusive_set": "#cqs_armory:exclusive_set/executes",
   "effects": {
     "minecraft:damage": [
       {
@@ -10,34 +11,32 @@
           "type": "minecraft:add",
           "value": {
             "type": "minecraft:linear",
-            "base": 2.5,
-            "per_level_above_first": 2.5
+            "base": 2.0,
+            "per_level_above_first": 1.0
           }
         },
         "requirements": {
-          "condition": "minecraft:entity_properties",
+          "condition": "cqs_armory:health_check",
           "entity": "this",
-          "predicate": {
-            "type": "#cqs_armory:sensitive_to_smoldering_hone"
-          }
+          "threshold": 0.5,
+          "inverted": true
         }
       }
     ]
   },
-  "exclusive_set": "#cqs_armory:exclusive_set/hone",
   "max_cost": {
-    "base": 10,
-    "per_level_above_first": 4
+    "base": 60,
+    "per_level_above_first": 20
   },
   "max_level": 5,
   "min_cost": {
-    "base": 5,
-    "per_level_above_first": 4
+    "base": 10,
+    "per_level_above_first": 20
   },
   "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],
   "supported_items": "#minecraft:enchantable/weapon",
-  "weight": 5
+  "weight": 4
 }

@@ -31,4 +31,7 @@ public class EnchantmentEntityEffectRegistry {
 
     public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> MANA_STEAL_ENCHANTMENT_EFFECT =
             ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("mana_steal", ()-> ManaSteal.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> HOOKING_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("hooking", ()-> Hooking.CODEC);
 }

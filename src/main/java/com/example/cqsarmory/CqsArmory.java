@@ -95,6 +95,7 @@ public class CqsArmory
         EntityRegistry.register(modEventBus);
         CQSpellRegistry.register(modEventBus);
         EnchantmentEntityEffectRegistry.register(modEventBus);
+        LootItemConditionRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 

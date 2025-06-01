@@ -4,6 +4,8 @@
     "minecraft:bane_of_arthropods",
     "minecraft:smite",
     "cqs_armory:defense_hone",
-    "cqs_armory:smoldering_hone"
+    "cqs_armory:smoldering_hone",
+    "cqs_armory:ender_hone",
+    "cqs_armory:aquatic_hone"
   ]
 }

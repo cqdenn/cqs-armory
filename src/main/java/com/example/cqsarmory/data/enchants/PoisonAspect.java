@@ -23,7 +23,7 @@ public record PoisonAspect(LevelBasedValue duration) implements EnchantmentEntit
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
         if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.BLIGHT, (int) duration.calculate(enchantmentLevel), 2 * enchantmentLevel));
+            livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.BLIGHT, (int) duration.calculate(enchantmentLevel), enchantmentLevel));
             livingEntity.addEffect(new MobEffectInstance(MobEffects.POISON, (int) duration.calculate(enchantmentLevel), enchantmentLevel - 1));
         }
     }
