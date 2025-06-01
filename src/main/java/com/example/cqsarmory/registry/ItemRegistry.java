@@ -65,13 +65,13 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
             () -> new MjolnirItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 15, -2.7f, new AttributeContainer[]{})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 15, -2.7f, new AttributeContainer[]{})
             ))
     );
 
     public static final DeferredItem<Item> COSMIC_ARK = ITEMS.register("cosmic_ark",
             () -> new CosmicArkItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 15, -2.3F, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.3F, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
     );
 
@@ -83,7 +83,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> VOLCANO = ITEMS.register("volcano",
             () -> new VolcanoSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_THREE, 12, -2.6F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_THREE, 14, -2.6F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
     );
 
