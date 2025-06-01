@@ -1,5 +1,6 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.BlockPos;

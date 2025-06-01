@@ -1,23 +1,12 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.DataGenerators;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.SpellRarity;
-import io.redspace.ironsspellbooks.item.InkItem;
-import io.redspace.ironsspellbooks.item.UpgradeOrbItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
-import io.redspace.ironsspellbooks.registries.FluidRegistry;
-import io.redspace.ironsspellbooks.registries.UpgradeOrbTypeRegistry;
-import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
