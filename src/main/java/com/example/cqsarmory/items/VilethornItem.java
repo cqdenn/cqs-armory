@@ -23,8 +23,8 @@ public class VilethornItem extends SwordItem {
         super.postHurtEnemy(stack, target, attacker);
 
 
-        Random random = new Random();
-        if (random.nextFloat() <= 0.35) {
+        float chance = Utils.random.nextFloat();
+        if (chance <= 0.35) {
             Vec3 spawn = target.position();
             Level level = attacker.level();
             RootEntity rootEntity = new RootEntity(level, attacker);
