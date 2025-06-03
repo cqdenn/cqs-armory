@@ -65,6 +65,7 @@ public class CqsArmory
                 output.accept(FANG_SWORD.get());
                 output.accept(VOLCANO.get());
                 output.accept(DESERT_FURY.get());
+                output.accept(VILETHORN.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());
                 output.accept(IRON_WARHAMMER.get());

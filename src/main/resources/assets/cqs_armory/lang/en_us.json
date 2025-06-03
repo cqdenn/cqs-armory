@@ -6,6 +6,7 @@
   "item.cqs_armory.fang_sword": "Fang Sword",
   "item.cqs_armory.volcano": "Volcano",
   "item.cqs_armory.desert_fury": "Desert Fury",
+  "item.cqs_armory.vilethorn": "Vilethorn",
   "itemGroup.cqs_armory": "CQ's Armory",
   "item.cqs_armory.lemon_shield": "Lemon Shield",
   "item.cqs_armory.soul_sucker": "Soul Sucker",
@@ -21,6 +22,9 @@
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
   "enchantment.cqs_armory.ender_hone": "Hone: Ender",
   "enchantment.cqs_armory.aquatic_hone": "Hone: Aquatic",
+  "enchantment.cqs_armory.illager_hone": "Hone: Illager",
+  "enchantment.minecraft.smite": "Hone: Smite",
+  "enchantment.minecraft.bane_of_arthropods": "Hone: Arthropods",
   "enchantment.cqs_armory.lightning_aspect": "Lightning Aspect",
   "enchantment.cqs_armory.frost_aspect": "Frost Aspect",
   "enchantment.cqs_armory.poison_aspect": "Poison Aspect",
@@ -31,7 +35,6 @@
   "enchantment.cqs_armory.mana_steal": "Mana Steal",
   "enchantment.cqs_armory.execute": "Execute",
   "enchantment.cqs_armory.prosecute": "Prosecute",
-  "enchantment.cqs_armory.hooking": "Hooking",
-  "enchantment.minecraft.smite": "Hone: Smite",
-  "enchantment.minecraft.bane_of_arthropods": "Hone: Arthropods"
+  "enchantment.cqs_armory.hooking": "Hooking"
+
 }

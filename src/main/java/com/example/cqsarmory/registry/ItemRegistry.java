@@ -53,7 +53,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
             () -> new SummonSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 8, -2.1f, new AttributeContainer[]{})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 8, -2.4f, new AttributeContainer[]{})
             ))
     );
 
@@ -83,7 +83,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> VOLCANO = ITEMS.register("volcano",
             () -> new VolcanoSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_THREE, 14, -2.6F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_THREE, 14, -2.7F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
     );
 
@@ -91,6 +91,12 @@ public class ItemRegistry {
             () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 12, -2.5F, new AttributeContainer[]{new AttributeContainer(AttributeRegistry.CASTING_MOVESPEED, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+    );
+
+    public static final DeferredItem<Item> VILETHORN = ITEMS.register("vilethorn",
+            () -> new VilethornItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 18, -3.2F, new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4, AttributeModifier.Operation.ADD_VALUE)})
+            ))
     );
 
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
