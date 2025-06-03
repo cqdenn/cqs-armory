@@ -28,7 +28,7 @@ public class SpinSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
-            .setMaxLevel(10)
+            .setMaxLevel(1)
             .setCooldownSeconds(8)
             .build();
 
