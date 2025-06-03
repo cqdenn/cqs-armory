@@ -1,6 +1,7 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.spells.IceSmashSpell;
 import com.example.cqsarmory.spells.SpinSpell;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -22,5 +23,6 @@ public class CQSpellRegistry {
     }
 
     public static final Supplier<AbstractSpell> SPIN_SPELL = registerSpell(new SpinSpell());
+    public static final Supplier<AbstractSpell> ICE_SMASH_SPELL = registerSpell(new IceSmashSpell());
 
 }
