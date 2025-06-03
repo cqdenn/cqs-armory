@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "cqs_armory:anti_protection",
+    "cqs_armory:aquatic_hone",
+    "cqs_armory:defense_hone",
+    "cqs_armory:ender_hone",
+    "cqs_armory:execute",
+    "cqs_armory:frost_aspect",
+    "cqs_armory:hooking",
+    "cqs_armory:illager_hone",
+    "cqs_armory:life_steal",
+    "cqs_armory:lightning_aspect",
+    "cqs_armory:mana_steal",
+    "cqs_armory:poison_aspect",
+    "cqs_armory:prosecute",
+    "cqs_armory:smoldering_hone",
+    "cqs_armory:speed_steal",
+    "cqs_armory:wind_aspect"
+  ]
+}
