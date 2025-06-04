@@ -22,6 +22,7 @@ public class MobEffectRegistry {
     }
 
     public static final DeferredHolder<MobEffect, MobEffect> SPEED_STEAL = MOB_EFFECT_DEFERRED_REGISTER.register("speed_steal", () -> new SpeedStealEffect(MobEffectCategory.BENEFICIAL, 0xc1e0dc).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_speed_steal"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
-    public static final DeferredHolder<MobEffect, MobEffect> SPEED_STOLEN = MOB_EFFECT_DEFERRED_REGISTER.register("speed_stolen", () -> new SpeedStealEffect(MobEffectCategory.BENEFICIAL, 313635).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_speed_stolen"), -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> SPEED_STOLEN = MOB_EFFECT_DEFERRED_REGISTER.register("speed_stolen", () -> new SpeedStealEffect(MobEffectCategory.BENEFICIAL, 0x313635).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_speed_stolen"), -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+
 
 }
