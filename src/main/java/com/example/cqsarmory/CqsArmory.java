@@ -3,6 +3,7 @@ package com.example.cqsarmory;
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 
 import static com.example.cqsarmory.registry.ItemRegistry.*;
@@ -97,6 +99,7 @@ public class CqsArmory
         CQSpellRegistry.register(modEventBus);
         EnchantmentEntityEffectRegistry.register(modEventBus);
         LootItemConditionRegistry.register(modEventBus);
+        MobEffectRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 
@@ -110,6 +113,10 @@ public class CqsArmory
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    public static ResourceLocation id(@NotNull String path) {
+        return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, path);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)

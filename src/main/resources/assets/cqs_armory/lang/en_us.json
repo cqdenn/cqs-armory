@@ -35,6 +35,8 @@
   "enchantment.cqs_armory.mana_steal": "Mana Steal",
   "enchantment.cqs_armory.execute": "Execute",
   "enchantment.cqs_armory.prosecute": "Prosecute",
-  "enchantment.cqs_armory.hooking": "Hooking"
+  "enchantment.cqs_armory.hooking": "Hooking",
+  "effect.cqs_armory.speed_steal": "Speed Steal",
+  "effect.cqs_armory.speed_stolen": "Speed Stolen"
 
 }
