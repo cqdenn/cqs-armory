@@ -36,6 +36,8 @@
   "enchantment.cqs_armory.execute": "Execute",
   "enchantment.cqs_armory.prosecute": "Prosecute",
   "enchantment.cqs_armory.hooking": "Hooking",
+  "enchantment.cqs_armory.knockback_curse": "Curse of Knockback",
+  "enchantment.cqs_armory.reinforcement_curse": "Curse of Reinforcement",
   "effect.cqs_armory.speed_steal": "Speed Steal",
   "effect.cqs_armory.speed_stolen": "Speed Stolen"
 

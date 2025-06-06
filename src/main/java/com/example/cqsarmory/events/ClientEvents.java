@@ -1,11 +1,16 @@
 package com.example.cqsarmory.events;
 
+import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.CosmicArkItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -13,7 +18,12 @@ import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,6 +31,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Random;
@@ -34,6 +45,23 @@ public class ClientEvents {
         if (Minecraft.getInstance().options.keyAttack.isDown()) {
             PacketDistributor.sendToServer(new StartSuckingPacket());
         }
+    }
+
+    @SubscribeEvent
+    public static void heavinessCurse (LivingEquipmentChangeEvent event) {
+        ItemStack oldItem = event.getFrom();
+        ItemStack newItem = event.getTo();
+        LivingEntity entity = event.getEntity();
+        Holder.Reference<Enchantment> heavinessCurseHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "heaviness_curse")));
+        int heavinessCurseLevel = newItem.getEnchantmentLevel(heavinessCurseHolder);
+
+        if (heavinessCurseLevel > 0 && entity instanceof Player player) {
+            player.setForcedPose(Pose.CROUCHING);
+        }
+        if (oldItem.getEnchantmentLevel(heavinessCurseHolder) > 1  && heavinessCurseLevel == 0 && entity instanceof Player player) {
+            player.setForcedPose(Pose.STANDING);
+        }
+
     }
 
 

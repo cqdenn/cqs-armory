@@ -3,7 +3,9 @@ package com.example.cqsarmory.registry;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.enchants.*;
 import com.mojang.serialization.MapCodec;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -34,4 +36,8 @@ public class EnchantmentEntityEffectRegistry {
 
     public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> HOOKING_ENCHANTMENT_EFFECT =
             ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("hooking", ()-> Hooking.CODEC);
+
+    public static  final  Supplier<MapCodec<? extends EnchantmentEntityEffect>> REINFORCEMENT_CURSE_ENCHANTMENT_EFFECT =
+            ENCHANTMENT_ENTITY_EFFECT_DEFERRED_REGISTER.register("reinforcement_curse", ()-> ReinforcementCurse.CODEC);
+
 }

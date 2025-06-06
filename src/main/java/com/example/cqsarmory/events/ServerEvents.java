@@ -25,15 +25,20 @@ import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -42,10 +47,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -131,5 +133,27 @@ public class ServerEvents {
         }
 
     }
+    @SubscribeEvent
+    public static void onKnockback (LivingKnockBackEvent event) {
+        LivingEntity target = event.getEntity();
+        LivingEntity attacker = target.getLastAttacker();
+
+        if (attacker == null) {
+            return;
+        }
+
+        Holder.Reference<Enchantment> knockbackCurseHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "knockback_curse")));
+        int knockbackCurseLevel = attacker.getMainHandItem().getEnchantmentLevel(knockbackCurseHolder);
+
+        if (knockbackCurseLevel > 0) {
+            attacker.knockback(event.getStrength(), -1 * event.getRatioX(), -1 * event.getRatioZ());
+            attacker.hurtMarked = true;
+            event.setCanceled(true);
+        }
+
+    }
+
+
+
 
 }
