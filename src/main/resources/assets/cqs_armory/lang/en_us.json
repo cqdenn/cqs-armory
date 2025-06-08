@@ -38,6 +38,12 @@
   "enchantment.cqs_armory.hooking": "Hooking",
   "enchantment.cqs_armory.knockback_curse": "Curse of Knockback",
   "enchantment.cqs_armory.reinforcement_curse": "Curse of Reinforcement",
+  "enchantment.cqs_armory.heaviness_curse": "Curse of Heaviness",
+  "enchantment.cqs_armory.really_heaviness_curse": "Curse of Really Heaviness",
+  "enchantment.cqs_armory.rotting_curse": "Curse of Rotting",
+  "enchantment.cqs_armory.leaky_xp_curse": "Curse of Leaky XP",
+  "enchantment.cqs_armory.sneezing_curse": "Curse of Sneezing",
+  "enchantment.cqs_armory.tall_curse": "Curse of Tall",
   "effect.cqs_armory.speed_steal": "Speed Steal",
   "effect.cqs_armory.speed_stolen": "Speed Stolen"
 

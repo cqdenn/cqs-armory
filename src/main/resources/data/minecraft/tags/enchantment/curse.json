@@ -2,6 +2,12 @@
   "replace": false,
   "values": [
     "cqs_armory:knockback_curse",
-    "cqs_armory:reinforcement_curse"
+    "cqs_armory:reinforcement_curse",
+    "cqs_armory:heaviness_curse",
+    "cqs_armory:really_heaviness_curse",
+    "cqs_armory:tall_curse",
+    "cqs_armory:rotting_curse",
+    "cqs_armory:leaky_xp_curse",
+    "cqs_armory:sneezing_curse"
   ]
 }

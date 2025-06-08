@@ -1,7 +1,7 @@
 {
-  "anvil_cost": 8,
+  "anvil_cost": 4,
   "description": {
-    "translate": "enchantment.cqs_armory.knockback_curse"
+    "translate": "enchantment.cqs_armory.rotting_curse"
   },
   "max_cost": {
     "base": 50,
@@ -12,10 +12,9 @@
     "base": 25,
     "per_level_above_first": 0
   },
-  "primary_items": "#minecraft:enchantable/sword",
   "slots": [
     "mainhand"
   ],
   "supported_items": "#cqs_armory:enchantable/can_have_attack_curse",
-  "weight": 1
+  "weight": 2
 }

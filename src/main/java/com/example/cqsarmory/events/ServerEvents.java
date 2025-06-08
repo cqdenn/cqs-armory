@@ -28,21 +28,22 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -50,6 +51,7 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Random;
 import org.joml.Vector3f;
@@ -133,8 +135,9 @@ public class ServerEvents {
         }
 
     }
+
     @SubscribeEvent
-    public static void onKnockback (LivingKnockBackEvent event) {
+    public static void onKnockback(LivingKnockBackEvent event) {
         LivingEntity target = event.getEntity();
         LivingEntity attacker = target.getLastAttacker();
 
@@ -153,7 +156,61 @@ public class ServerEvents {
 
     }
 
+    @SubscribeEvent
+    public static void reallyHeavinessCurse(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        Holder.Reference<Enchantment> reallyHeavinessCurseHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "really_heaviness_curse")));
+        int reallyHeavinessCurseLevel = player.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(reallyHeavinessCurseHolder);
+
+        if (reallyHeavinessCurseLevel > 0) {
+            player.setForcedPose(Pose.SWIMMING);
+        } else if (player.getForcedPose() == Pose.SWIMMING) {
+            player.setForcedPose(null);
+        } //FIXME might mess w other setforcedpose implementations
 
 
+    }
+
+    @SubscribeEvent
+    public static void leakyXP(LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+
+        Holder.Reference<Enchantment> xpCurseHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "leaky_xp_curse")));
+        int headCurseLevel = entity.getItemBySlot(EquipmentSlot.HEAD).getEnchantmentLevel(xpCurseHolder);
+        int chestCurseLevel = entity.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(xpCurseHolder);
+        int legCurseLevel = entity.getItemBySlot(EquipmentSlot.LEGS).getEnchantmentLevel(xpCurseHolder);
+        int feetCurseLevel = entity.getItemBySlot(EquipmentSlot.FEET).getEnchantmentLevel(xpCurseHolder);
+        int totalCurseLevel = headCurseLevel + chestCurseLevel + legCurseLevel + feetCurseLevel;
+
+        if (totalCurseLevel > 0 && entity instanceof Player player) {
+            Vec3 offset = entity.getForward().multiply(3, 0, 3).scale(player.getScale()).yRot(180 * Mth.DEG_TO_RAD);
+            Vec3 spawn = Utils.moveToRelativeGroundLevel(player.level(), Utils.raycastForBlock(player.level(), player.getEyePosition(), player.position().add(offset), ClipContext.Fluid.NONE).getLocation(), 4);
+
+
+            ExperienceOrb experienceOrb = new ExperienceOrb(player.level(), spawn.x, spawn.add(0, 0.1, 0).y, spawn.z, 10 * totalCurseLevel);
+            player.giveExperiencePoints(-10 * totalCurseLevel);
+            player.level().addFreshEntity(experienceOrb);
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void sneezingCurse(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+
+        if (player.level().isClientSide) {return;}
+
+        Holder.Reference<Enchantment> sneezingCurseHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "sneezing_curse")));
+        int curseLevel = player.getItemBySlot(EquipmentSlot.HEAD).getEnchantmentLevel(sneezingCurseHolder);
+
+        if (curseLevel > 0 && Utils.random.nextIntBetweenInclusive(1, 100) == 10) {
+            int multX = Utils.random.nextBoolean() ? 1 : -1;
+            int multZ = Utils.random.nextBoolean() ? 1 : -1;
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), com.example.cqsarmory.registry.SoundRegistry.SNEEZE_SOUND, SoundSource.MASTER, 2f, 1f);
+            player.setDeltaMovement(multX * Utils.random.nextFloat(), 1, multZ * Utils.random.nextFloat());
+            player.hasImpulse = true;
+        }
+
+    }
 
 }

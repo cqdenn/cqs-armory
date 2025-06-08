@@ -27,6 +27,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#minecraft:enchantable/weapon",
+  "supported_items": "#cqs_armory:enchantable/can_have_attack_curse",
   "weight": 2
 }

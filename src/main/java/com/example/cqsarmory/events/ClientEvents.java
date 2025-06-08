@@ -29,9 +29,11 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Random;
@@ -48,24 +50,21 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void heavinessCurse (LivingEquipmentChangeEvent event) {
-        ItemStack oldItem = event.getFrom();
-        ItemStack newItem = event.getTo();
+    public static void heavinessCurse(MovementInputUpdateEvent event) {
+        //ItemStack oldItem = event.getFrom();
+        //ItemStack newItem = event.getTo();
         LivingEntity entity = event.getEntity();
         Holder.Reference<Enchantment> heavinessCurseHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "heaviness_curse")));
-        int heavinessCurseLevel = newItem.getEnchantmentLevel(heavinessCurseHolder);
+        Holder.Reference<Enchantment> reallyHeavinessCurseHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "really_heaviness_curse")));
+        int heavinessCurseLevel = entity.getItemBySlot(EquipmentSlot.FEET).getEnchantmentLevel(heavinessCurseHolder);
+        int reallyHeavinessCurseLevel = entity.getItemBySlot(EquipmentSlot.CHEST).getEnchantmentLevel(reallyHeavinessCurseHolder);
+        if (heavinessCurseLevel > 0 && !(reallyHeavinessCurseLevel > 0)) {
+            event.getInput().shiftKeyDown = true;
+        }
 
-        if (heavinessCurseLevel > 0 && entity instanceof Player player) {
-            player.setForcedPose(Pose.CROUCHING);
-        }
-        if (oldItem.getEnchantmentLevel(heavinessCurseHolder) > 1  && heavinessCurseLevel == 0 && entity instanceof Player player) {
-            player.setForcedPose(Pose.STANDING);
-        }
 
     }
 
 
 
-
-
-    }
+}
