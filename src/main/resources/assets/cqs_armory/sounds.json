@@ -3,5 +3,10 @@
     "sounds": [
       "cqs_armory:sneeze"
     ]
+  },
+  "dodge": {
+    "sounds": [
+      "cqs_armory:dodge"
+    ]
   }
 }
