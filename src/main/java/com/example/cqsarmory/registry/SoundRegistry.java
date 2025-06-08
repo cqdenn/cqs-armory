@@ -17,6 +17,7 @@ public class SoundRegistry {
     }
 
     public static DeferredHolder<SoundEvent, SoundEvent> SNEEZE_SOUND = registerSoundEvent("sneeze");
+    public static DeferredHolder<SoundEvent, SoundEvent> DODGE_SOUND = registerSoundEvent("dodge");
 
 
     private static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvent(String name) {

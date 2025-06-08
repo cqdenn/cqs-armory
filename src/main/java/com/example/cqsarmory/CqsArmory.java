@@ -102,6 +102,7 @@ public class CqsArmory
         MobEffectRegistry.register(modEventBus);
         LootModifierRegistry.register(modEventBus);
         SoundRegistry.register(modEventBus);
+        AttributeRegistry.register(modEventBus);
 
         AssetHandlerRegistry.register(modEventBus);
 

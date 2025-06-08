@@ -1,6 +1,6 @@
 {
   "description": {
-    "translate": "enchantment.cqs_armory.anti_protection"
+    "translate": "enchantment.cqs_armory.dodge_protection"
   },
   "exclusive_set": "#cqs_armory:exclusive_set/protections",
   "supported_items": "#minecraft:enchantable/armor",
@@ -21,14 +21,14 @@
   "effects": {
     "minecraft:attributes": [
       {
-        "attribute": "minecraft:generic.attack_damage",
-        "id": "cqs_armory:anti_protection",
+        "attribute": "cqs_armory:dodge_chance",
+        "id": "cqs_armory:dodge_protection",
         "amount": {
           "type": "minecraft:linear",
-          "base": 0.04,
-          "per_level_above_first": 0.02
+          "base": 0.02,
+          "per_level_above_first": 0.01
         },
-        "operation": "add_multiplied_total"
+        "operation": "add_value"
       }
     ]
   }

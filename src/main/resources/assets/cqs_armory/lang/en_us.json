@@ -28,7 +28,12 @@
   "enchantment.cqs_armory.lightning_aspect": "Lightning Aspect",
   "enchantment.cqs_armory.frost_aspect": "Frost Aspect",
   "enchantment.cqs_armory.poison_aspect": "Poison Aspect",
-  "enchantment.cqs_armory.anti_protection": "Anti Protection",
+  "enchantment.cqs_armory.anti_protection": "Ward: Reversed",
+  "enchantment.cqs_armory.dodge_protection": "Ward: Dodging",
+  "enchantment.minecraft.projectile_protection": "Ward: Projectile",
+  "enchantment.minecraft.fire_protection": "Ward: Fire",
+  "enchantment.minecraft.blast_protection": "Ward: Blast",
+  "enchantment.minecraft.protection": "Ward: Generic",
   "enchantment.cqs_armory.wind_aspect": "Wind Aspect",
   "enchantment.cqs_armory.life_steal": "Life Steal",
   "enchantment.cqs_armory.speed_steal": "Speed Steal",
@@ -45,6 +50,7 @@
   "enchantment.cqs_armory.sneezing_curse": "Curse of Sneezing",
   "enchantment.cqs_armory.tall_curse": "Curse of Tall",
   "effect.cqs_armory.speed_steal": "Speed Steal",
-  "effect.cqs_armory.speed_stolen": "Speed Stolen"
+  "effect.cqs_armory.speed_stolen": "Speed Stolen",
+  "attribute.cqs_armory.dodge_chance": "Dodge Chance"
 
 }

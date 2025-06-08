@@ -8,10 +8,7 @@ import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.CosmicArkItem;
 import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
-import com.example.cqsarmory.registry.DamageTypes;
-import com.example.cqsarmory.registry.EnchantmentEntityEffectRegistry;
-import com.example.cqsarmory.registry.EntityRegistry;
-import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.*;
 import com.sun.jna.platform.win32.Winevt;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -23,6 +20,8 @@ import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
@@ -198,17 +197,33 @@ public class ServerEvents {
     public static void sneezingCurse(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
 
-        if (player.level().isClientSide) {return;}
-
         Holder.Reference<Enchantment> sneezingCurseHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "sneezing_curse")));
         int curseLevel = player.getItemBySlot(EquipmentSlot.HEAD).getEnchantmentLevel(sneezingCurseHolder);
 
-        if (curseLevel > 0 && Utils.random.nextIntBetweenInclusive(1, 100) == 10) {
+        if (curseLevel > 0 && Utils.random.nextIntBetweenInclusive(1, 6000) == 999) {
             int multX = Utils.random.nextBoolean() ? 1 : -1;
             int multZ = Utils.random.nextBoolean() ? 1 : -1;
-            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), com.example.cqsarmory.registry.SoundRegistry.SNEEZE_SOUND, SoundSource.MASTER, 2f, 1f);
-            player.setDeltaMovement(multX * Utils.random.nextFloat(), 1, multZ * Utils.random.nextFloat());
-            player.hasImpulse = true;
+            if (!player.level().isClientSide) {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(), com.example.cqsarmory.registry.SoundRegistry.SNEEZE_SOUND, SoundSource.PLAYERS, 2f, 1f);
+                player.push(multX * Utils.random.nextFloat(), 1, multZ * Utils.random.nextFloat());
+                player.hurtMarked = true;
+            }
+        }
+
+    }
+    @SubscribeEvent
+    public static void checkDodge (LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+
+        if (Utils.random.nextDouble() <= entity.getAttributeValue(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(AttributeRegistry.DODGE_CHANCE.get()))) {
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 2, 1 * Utils.random.nextDouble(), 1, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 2, -1 * Utils.random.nextDouble(), 1, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 2, -1 * Utils.random.nextDouble(), 1, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 2, 1 * Utils.random.nextDouble(), 1, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
+
+            entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), com.example.cqsarmory.registry.SoundRegistry.DODGE_SOUND, SoundSource.PLAYERS, 1, 1.5f);
+
+            event.setCanceled(true);
         }
 
     }
