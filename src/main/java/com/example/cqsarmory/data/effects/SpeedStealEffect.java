@@ -17,5 +17,4 @@ public class SpeedStealEffect extends MobEffect {
         super(mobEffectCategory, color);
     }
 
-
 }
