@@ -20,6 +20,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -76,19 +77,19 @@ public class CosmicArkItem extends SwordItem {
                 AbilityData.get(player).cosmicArk.abilityStacks = 0;
 
                 ServerLevel serverLevel = (ServerLevel) level;
-                Vec3 start = player.getEyePosition();
-                Vec3 startParticles = start.subtract(0, 1, 0);
-                Vec3 temp = new Vec3(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY(), teleLoc(level, player, 7f).getZ());
-                Vec3 end = (temp).add(0, player.getEyeHeight(), 0);
-                AABB range = player.getBoundingBox().expandTowards(end.subtract(start));
-                List<? extends Entity> entities = player.level().getEntities(player, range);
+                Vec3 start = player.position();
+                Vec3 startParticles = start.add(0, 1, 0);
+                Vec3 end = new Vec3(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY(), teleLoc(level, player, 7f).getZ());
+                AABB range = player.getBoundingBox().expandTowards(end).inflate(1, 2, 1);
+                AABB test = new AABB(start, end).inflate(2);
+                List<? extends Entity> entities = player.level().getEntities(player, test);
                 player.teleportTo(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY() + 1, teleLoc(level, player, 7f).getZ());
                 for (int i = 0; i <= 70; i++) {
                     MagicManager.spawnParticles(level, ParticleHelper.UNSTABLE_ENDER, startParticles.x + (player.getForward().x * (0.1 * i)), startParticles.y + (player.getForward().y * (0.1 * i)), startParticles.z + (player.getForward().z * (0.1 * i)), 3, 0, 0, 0, 0, false);
                 }
                 level.playSound(null, player.blockPosition(), SoundRegistry.ABYSSAL_TELEPORT.get(), SoundSource.MASTER, 0.5f, 1f);
                 for (Entity target : entities) {
-                    target.hurt(genericDamage, 20);
+                    target.hurt(genericDamage, (float) (player.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 2));
                     if (player.killedEntity(serverLevel, (LivingEntity) target)) {
                         refresh(player);
                     }

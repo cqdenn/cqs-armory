@@ -108,20 +108,20 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void onHit(LivingDamageEvent.Pre event) {
+    public static void onHit(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
-        LivingEntity attacker = target.getLastAttacker();
+        Entity source = event.getSource().getDirectEntity();
 
-        if (attacker == null) {
+        if (source == null) {
             return;
         }
 
-        Level level = attacker.level();
-        Holder.Reference<Enchantment> fireAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT);
-        int fireAspectLevel = attacker.getMainHandItem().getEnchantmentLevel(fireAspectHolder);
+        Level level = target.level();
+        Holder.Reference<Enchantment> fireAspectHolder = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT);
+        if (source instanceof LivingEntity attacker) {
+            int fireAspectLevel = attacker.getMainHandItem().getEnchantmentLevel(fireAspectHolder);
 
-        if (fireAspectLevel > 0 && event.getSource().getDirectEntity() instanceof LivingEntity) {
-            if (!level.isClientSide) {
+            if (fireAspectLevel > 0 && !level.isClientSide) {
                 FireField fire = new FireField(level);
                 fire.setOwner(attacker);
                 fire.setDuration(100);
@@ -211,8 +211,9 @@ public class ServerEvents {
         }
 
     }
+
     @SubscribeEvent
-    public static void checkDodge (LivingIncomingDamageEvent event) {
+    public static void checkDodge(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
 
         if (Utils.random.nextDouble() <= entity.getAttributeValue(BuiltInRegistries.ATTRIBUTE.wrapAsHolder(AttributeRegistry.DODGE_CHANCE.get()))) {
