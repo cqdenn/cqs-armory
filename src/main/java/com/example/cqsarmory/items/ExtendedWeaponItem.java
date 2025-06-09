@@ -2,6 +2,7 @@ package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
+import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -31,7 +32,7 @@ public class ExtendedWeaponItem extends TieredItem {
     public static final ResourceLocation BASE_ARMOR_ID = ResourceLocation.withDefaultNamespace("base_armor");
     private static final ResourceLocation BASE_MAX_HEALTH_ID = ResourceLocation.withDefaultNamespace("base_max_health");
 
-    public ExtendedWeaponItem(Tier tier, Item.Properties properties) {
+    public ExtendedWeaponItem(Tier tier, Item.Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
         super(tier, properties.component(DataComponents.TOOL, createToolProperties()));
     }
 
