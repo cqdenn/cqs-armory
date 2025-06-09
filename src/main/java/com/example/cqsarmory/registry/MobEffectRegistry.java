@@ -2,6 +2,7 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.effects.SpeedStealEffect;
+import com.example.cqsarmory.data.effects.StunEffect;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.effect.AngelWingsEffect;
 import io.redspace.ironsspellbooks.effect.ChargeEffect;
@@ -23,6 +24,7 @@ public class MobEffectRegistry {
 
     public static final DeferredHolder<MobEffect, MobEffect> SPEED_STEAL = MOB_EFFECT_DEFERRED_REGISTER.register("speed_steal", () -> new SpeedStealEffect(MobEffectCategory.BENEFICIAL, 0xc1e0dc).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_speed_steal"), 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> SPEED_STOLEN = MOB_EFFECT_DEFERRED_REGISTER.register("speed_stolen", () -> new SpeedStealEffect(MobEffectCategory.BENEFICIAL, 0x313635).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_speed_stolen"), -0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> STUNNED = MOB_EFFECT_DEFERRED_REGISTER.register("stunned", () -> new StunEffect(MobEffectCategory.HARMFUL, 0xc5d15a).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_stunned"), -1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.ATTACK_SPEED, CqsArmory.id("mobeffect_stunned"), -1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 
 
 }
