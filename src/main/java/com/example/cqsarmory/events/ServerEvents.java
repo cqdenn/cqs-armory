@@ -19,6 +19,7 @@ import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.minecraft.client.particle.Particle;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,6 +34,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -74,6 +76,27 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void stunned (LivingIncomingDamageEvent event) {
+        if (event.getSource().getEntity() instanceof LivingEntity livingEntity && livingEntity.hasEffect(MobEffectRegistry.STUNNED)) {
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public static void stunnedParticles (MobEffectEvent.Added event) {
+        Holder<MobEffect> effect = event.getEffectInstance().getEffect();
+        LivingEntity entity = event.getEntity();
+        if (effect != null) {
+            event.getEffectInstance().onEffectAdded(entity);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
+            entity.level().playSound(null, entity.blockPosition(), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 1, 1);
+        }
+    }
+
+    @SubscribeEvent
     public static void onFall(LivingFallEvent event) {
         if (event.getEntity() instanceof LivingEntity entity && entity.getMainHandItem().is(ItemRegistry.MJOLNIR) && AbilityData.get(entity).mjolnirData.speed < 0) {
             if (event.getDistance() > 1.5) {
@@ -108,7 +131,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void onHit(LivingDamageEvent.Post event) {
+    public static void fireAspectBuff(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
         Entity source = event.getSource().getDirectEntity();
 
