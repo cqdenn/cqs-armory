@@ -76,11 +76,12 @@ public class CosmicArkItem extends SwordItem {
             if (AbilityData.get(player).cosmicArk.abilityStacks >= 5) {
                 AbilityData.get(player).cosmicArk.abilityStacks = 0;
 
+                //FIXME: hit reg kinda bad
                 ServerLevel serverLevel = (ServerLevel) level;
                 Vec3 start = player.position();
                 Vec3 startParticles = start.add(0, 1, 0);
                 Vec3 end = new Vec3(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY(), teleLoc(level, player, 7f).getZ());
-                AABB range = player.getBoundingBox().expandTowards(end).inflate(1, 2, 1);
+                //AABB range = player.getBoundingBox().expandTowards(end).inflate(1, 2, 1);
                 AABB test = new AABB(start, end).inflate(2);
                 List<? extends Entity> entities = player.level().getEntities(player, test);
                 player.teleportTo(teleLoc(level, player, 7f).getX(), teleLoc(level, player, 7f).getY() + 1, teleLoc(level, player, 7f).getZ());
