@@ -86,8 +86,7 @@ public class ServerEvents {
     public static void stunnedParticles (MobEffectEvent.Added event) {
         Holder<MobEffect> effect = event.getEffectInstance().getEffect();
         LivingEntity entity = event.getEntity();
-        if (effect != null) {
-            event.getEffectInstance().onEffectAdded(entity);
+        if (effect == MobEffectRegistry.STUNNED) {
             MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
             MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
             MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);

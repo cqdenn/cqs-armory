@@ -16,7 +16,7 @@
 				},
 				"right_arm": {
 					"rotation": {
-						"vector": [-63.04053, -20.13968, -10.4265]
+						"vector": [-35.54053, -20.13968, -10.4265]
 					}
 				},
 				"bipedHandRight": {
@@ -26,7 +26,129 @@
 				},
 				"left_arm": {
 					"rotation": {
-						"vector": [-63.60782, 18.05776, 8.74472]
+						"vector": [-43.60782, 18.05776, 8.74472]
+					}
+				},
+				"torso": {
+					"rotation": {
+						"vector": [-15, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 3]
+					}
+				},
+				"head": {
+					"rotation": {
+						"vector": [-12.5, 360, 0]
+					},
+					"position": {
+						"vector": [0, 0, 3]
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"vector": [-20, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"vector": [22.47178, 0.65182, -4.95744]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"rupture": {
+			"animation_length": 0.75,
+			"override_previous_animation": true,
+			"bones": {
+				"torso": {
+					"rotation": {
+						"0.0": {
+							"vector": [-15, 0, 0]
+						},
+						"0.7083": {
+							"vector": [15, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 3]
+						},
+						"0.7083": {
+							"vector": [0, 0, -3]
+						}
+					}
+				},
+				"head": {
+					"rotation": {
+						"0.0": {
+							"vector": [-17.5, 0, 0]
+						},
+						"0.7083": {
+							"vector": [27.5, 0, 0]
+						}
+					},
+					"position": {
+						"0.0": {
+							"vector": [0, 0, 4]
+						},
+						"0.7083": {
+							"vector": [0, 0, -3]
+						}
+					}
+				},
+				"right_leg": {
+					"rotation": {
+						"vector": [0, 0, 7.5]
+					}
+				},
+				"left_leg": {
+					"rotation": {
+						"vector": [0, 0, -10]
+					}
+				},
+				"right_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-166.49155, -10.29469, 7.99284]
+						},
+						"0.7083": {
+							"vector": [-56.54158, -5.34807, -2.08589]
+						}
+					}
+				},
+				"bipedHandRight": {
+					"rotation": {
+						"0.0": {
+							"vector": [187.5, 0, 0]
+						},
+						"0.7083": {
+							"vector": [132.44074, 12.59694, 1.94387]
+						}
+					}
+				},
+				"rightItem": {
+					"rotation": {
+						"vector": [180, 0, 0]
+					},
+					"position": {
+						"vector": [0, 0, 0]
+					}
+				},
+				"left_arm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-174.24437, 12.70001, -15.57939]
+						},
+						"0.7083": {
+							"vector": [-61.72168, 22.36078, -7.24736]
+						}
 					}
 				}
 			}

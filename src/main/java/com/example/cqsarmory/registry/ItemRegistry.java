@@ -171,13 +171,13 @@ public class ItemRegistry {
         var warhammer = ITEMS.register(name + "_warhammer",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.WARHAMMER.attackDamage(), WeaponType.WARHAMMER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 6 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, 1)))
         );
 
         var greatsword = ITEMS.register(name + "_greatsword",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.GREATSWORD.attackDamage(), WeaponType.GREATSWORD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, 1)))
         );
 
         var halberd = ITEMS.register(name + "_halberd",
