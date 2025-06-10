@@ -171,43 +171,43 @@ public class ItemRegistry {
         var warhammer = ITEMS.register(name + "_warhammer",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.WARHAMMER.attackDamage(), WeaponType.WARHAMMER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 6 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, power.power())))
         );
 
         var greatsword = ITEMS.register(name + "_greatsword",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.GREATSWORD.attackDamage(), WeaponType.GREATSWORD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, power.power())))
         );
 
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
         );
 
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.SWEEPING_DAMAGE_RATIO, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REAP_SPELL, power.power())))
         );
 
         var mace = ITEMS.register(name + "_mace",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_KNOCKBACK, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRECKING_BALL_SPELL, power.power())))
         );
 
         var spear = ITEMS.register(name + "_spear",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SPEAR.attackDamage(), WeaponType.SPEAR.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
         );
 
         var rapier = ITEMS.register(name + "_rapier",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.RAPIER.attackDamage(), WeaponType.RAPIER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
         );
 
         Optional<DeferredItem> ingot = Optional.empty();

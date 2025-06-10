@@ -18,6 +18,12 @@
   "item.cqs_armory.iron_rapier": "Iron Rapier",
   "item.cqs_armory.iron_scythe": "Iron Scythe",
   "spell.cqs_armory.spin_spell": "Spin",
+  "spell.cqs_armory.ice_smash_spell": "Ice Smash",
+  "spell.cqs_armory.reap_spell": "Reap",
+  "spell.cqs_armory.berserk_spell": "Berserk",
+  "spell.cqs_armory.rupture_spell": "Rupture",
+  "spell.cqs_armory.stun_spell": "Stun",
+  "spell.cqs_armory.wrecking_ball_spell": "Wrecking Ball",
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
   "enchantment.cqs_armory.ender_hone": "Hone: Ender",
@@ -52,6 +58,8 @@
   "effect.cqs_armory.speed_steal": "Speed Steal",
   "effect.cqs_armory.speed_stolen": "Speed Stolen",
   "effect.cqs_armory.absorbing_rupture": "Aborsbing Rupture",
+  "effect.cqs_armory.stunned": "Stunned",
+  "effect.cqs_armory.berserk": "Berserk",
   "attribute.cqs_armory.dodge_chance": "Dodge Chance"
 
 }

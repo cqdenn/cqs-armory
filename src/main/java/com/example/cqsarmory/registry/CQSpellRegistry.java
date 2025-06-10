@@ -1,10 +1,7 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.spells.IceSmashSpell;
-import com.example.cqsarmory.spells.RuptureSpell;
-import com.example.cqsarmory.spells.SpinSpell;
-import com.example.cqsarmory.spells.StunSpell;
+import com.example.cqsarmory.spells.*;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +25,11 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> ICE_SMASH_SPELL = registerSpell(new IceSmashSpell()); // WIP
     public static final Supplier<AbstractSpell> STUN_SPELL = registerSpell(new StunSpell());
     public static final Supplier<AbstractSpell> RUPTURE_SPELL = registerSpell(new RuptureSpell());
+    public static final Supplier<AbstractSpell> BERSERK_SPELL = registerSpell(new BerserkSpell());
+    public static final Supplier<AbstractSpell> REAP_SPELL = registerSpell(new ReapSpell());
+    public static final Supplier<AbstractSpell> WRECKING_BALL_SPELL = registerSpell(new WreckingBallSpell());
+
+
 
 
 }

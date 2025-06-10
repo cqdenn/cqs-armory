@@ -30,6 +30,7 @@ import java.util.Optional;
 
 public class StunSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "stun_spell");
+
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -38,7 +39,7 @@ public class StunSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
-            .setMaxLevel(1)
+            .setMaxLevel(4)
             .setCooldownSeconds(30)
             .build();
 
@@ -88,11 +89,12 @@ public class StunSpell extends AbstractSpell {
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity livingEntity) {
-                livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 60, 100,false, false, true));
-                target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+                    livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 40 * spellLevel, 100, false, false, true));
+                    target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                }
             }
         }
 
     }
-
 }

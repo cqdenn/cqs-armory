@@ -10,6 +10,7 @@ import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.registry.*;
 import com.sun.jna.platform.win32.Winevt;
+import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;

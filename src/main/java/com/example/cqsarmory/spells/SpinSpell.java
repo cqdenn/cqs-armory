@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 @AutoSpellConfig
 public class SpinSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "spin_spell");
+
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -71,8 +72,10 @@ public class SpinSpell extends AbstractSpell {
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
         var damageSource = level.damageSources().mobAttack(entity);
         for (Entity target : entities) {
-            if (DamageSources.applyDamage(target, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue(), damageSource)) {
-                EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
+            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+                if (DamageSources.applyDamage(target, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue(), damageSource)) {
+                    EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
+                }
             }
         }
 

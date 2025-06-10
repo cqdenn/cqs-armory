@@ -26,6 +26,7 @@ import java.util.Optional;
 
 public class IceSmashSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_smash_spell");
+
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -83,15 +84,17 @@ public class IceSmashSpell extends AbstractSpell {
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity livingEntity) {
-                Vec3 spawn = livingEntity.position();
-                IceBlockProjectile iceBlock = new IceBlockProjectile(level, entity, livingEntity);
-                iceBlock.moveTo(raiseWithCollision(spawn, 4, level));
-                if (!level.noBlockCollision(iceBlock, iceBlock.getBoundingBox())) {
-                    iceBlock.noPhysics = true;
+                if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+                    Vec3 spawn = livingEntity.position();
+                    IceBlockProjectile iceBlock = new IceBlockProjectile(level, entity, livingEntity);
+                    iceBlock.moveTo(raiseWithCollision(spawn, 4, level));
+                    if (!level.noBlockCollision(iceBlock, iceBlock.getBoundingBox())) {
+                        iceBlock.noPhysics = true;
+                    }
+                    iceBlock.setAirTime(25);
+                    iceBlock.setDamage(40);
+                    level.addFreshEntity(iceBlock);
                 }
-                iceBlock.setAirTime(25);
-                iceBlock.setDamage(40);
-                level.addFreshEntity(iceBlock);
             }
         }
 

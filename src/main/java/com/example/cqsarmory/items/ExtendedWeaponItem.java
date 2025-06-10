@@ -2,6 +2,7 @@ package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
+import io.redspace.ironsspellbooks.api.item.weapons.MagicSwordItem;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.BlockPos;
@@ -27,20 +28,13 @@ import net.minecraft.world.level.block.state.BlockState;
 import java.util.List;
 
 
-public class ExtendedWeaponItem extends TieredItem {
+public class ExtendedWeaponItem extends MagicSwordItem {
 
     public static final ResourceLocation BASE_ARMOR_ID = ResourceLocation.withDefaultNamespace("base_armor");
     private static final ResourceLocation BASE_MAX_HEALTH_ID = ResourceLocation.withDefaultNamespace("base_max_health");
 
     public ExtendedWeaponItem(Tier tier, Item.Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
-        super(tier, properties.component(DataComponents.TOOL, createToolProperties()));
-    }
-
-    /**
-     * Neo: Allow modded Swords to set exactly what Tool data component to use for their sword.
-     */
-    public ExtendedWeaponItem(Tier p_tier, Item.Properties p_properties, Tool toolComponentData) {
-        super(p_tier, p_properties.component(DataComponents.TOOL, toolComponentData));
+        super(tier, properties, spellDataRegistryHolder);
     }
 
     public static Tool createToolProperties() {

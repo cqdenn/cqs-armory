@@ -25,8 +25,8 @@ import net.minecraft.world.level.Level;
 import java.util.Optional;
 
 @AutoSpellConfig
-public class RuptureSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "rupture_spell");
+public class BerserkSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "berserk_spell");
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -36,10 +36,10 @@ public class RuptureSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(40)
             .build();
 
-    public RuptureSpell() {
+    public BerserkSpell() {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
@@ -54,22 +54,7 @@ public class RuptureSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
-    }
-
-    @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.DIVINE_SMITE_WINDUP.get());
-    }
-
-    @Override
-    public AnimationHolder getCastStartAnimation() {
-        return AbilityAnimations.RUPTURE_ANIMATION;
-    }
-
-    @Override
-    public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.pass();
+        return CastType.INSTANT;
     }
 
     @Override
@@ -80,19 +65,8 @@ public class RuptureSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 2 * spellLevel;
-        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-        EarthquakeAoe aoeEntity = new EarthquakeAoe(level);
-        aoeEntity.moveTo(entity.position());
-        aoeEntity.setOwner(entity);
-        aoeEntity.setCircular();
-        aoeEntity.setRadius(radius);
-        aoeEntity.setDuration(20);
-        aoeEntity.setDamage((float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-        aoeEntity.setSlownessAmplifier(1);
-        level.addFreshEntity(aoeEntity);
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * spellLevel) - 1, false, false, true));
-        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entities.size() * (2 * spellLevel));
+
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.BERSERK, 100 * spellLevel, spellLevel - 1, false, false, true));
 
     }
 }
