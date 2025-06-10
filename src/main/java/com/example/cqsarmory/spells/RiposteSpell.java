@@ -2,34 +2,28 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
-import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.Optional;
 
-public class StunSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "stun_spell");
+@AutoSpellConfig
+public class RiposteSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "riposte_spell");
 
     @Override
     public ResourceLocation getSpellResource() {
@@ -40,14 +34,14 @@ public class StunSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(20)
             .build();
 
-    public StunSpell() {
+    public RiposteSpell() {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 16;
+        this.castTime = 30;
         this.baseManaCost = 0;
     }
 
@@ -58,22 +52,22 @@ public class StunSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.CONTINUOUS;
     }
 
     @Override
     public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.DIVINE_SMITE_WINDUP.get());
+        return Optional.of(SoundRegistry.RIPOSTE_CAST_SOUND.get());
     }
 
     @Override
     public AnimationHolder getCastStartAnimation() {
-        return SpellAnimations.OVERHEAD_MELEE_SWING_ANIMATION;
+        return AbilityAnimations.RIPOSTE_ANIMATION;
     }
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.pass();
+        return AnimationHolder.none();
     }
 
     @Override
@@ -84,17 +78,5 @@ public class StunSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(4));
-        var damageSource = level.damageSources().mobAttack(entity);
-
-        for (Entity target : entities) {
-            if (target instanceof LivingEntity livingEntity) {
-                if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 20 * spellLevel, 100, false, false, true));
-                    target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                }
-            }
-        }
-
     }
 }

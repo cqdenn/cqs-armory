@@ -10,15 +10,19 @@ import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.registry.*;
 import com.sun.jna.platform.win32.Winevt;
+import io.redspace.ironsspellbooks.api.entity.IMagicEntity;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.spells.EntityCastData;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.core.Holder;
@@ -29,6 +33,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -36,8 +41,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -77,14 +85,14 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void stunned (LivingIncomingDamageEvent event) {
+    public static void stunned(LivingIncomingDamageEvent event) {
         if (event.getSource().getEntity() instanceof LivingEntity livingEntity && livingEntity.hasEffect(MobEffectRegistry.STUNNED)) {
             event.setCanceled(true);
         }
     }
 
     @SubscribeEvent
-    public static void stunnedParticles (MobEffectEvent.Added event) {
+    public static void stunnedParticles(MobEffectEvent.Added event) {
         Holder<MobEffect> effect = event.getEffectInstance().getEffect();
         LivingEntity entity = event.getEntity();
         if (effect == MobEffectRegistry.STUNNED) {
@@ -231,6 +239,31 @@ public class ServerEvents {
                 player.push(multX * Utils.random.nextFloat(), 1, multZ * Utils.random.nextFloat());
                 player.hurtMarked = true;
             }
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void riposte(LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        DamageSource damage = event.getSource();
+        MagicData magicData = MagicData.getPlayerMagicData(entity);
+        int spellLevel = magicData.getCastingSpellLevel();
+        var damageSource = entity.level().damageSources().mobAttack(entity);
+
+        if (magicData.isCasting() && Objects.equals(magicData.getCastingSpellId(), "cqs_armory:riposte_spell")) {
+            if (damage.getDirectEntity() instanceof LivingEntity livingEntity) {
+                livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 40 * spellLevel, 100, false, false, true));
+                livingEntity.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 4);
+            } else if (damage.getEntity() instanceof Projectile projectile) {
+                projectile.setDeltaMovement(entity.getForward().scale(10));
+            }
+            if (entity instanceof ServerPlayer serverPlayer) {
+                Utils.serverSideCancelCast(serverPlayer, true);
+                MagicData.getPlayerMagicData(serverPlayer).getPlayerRecasts().removeAll(RecastResult.USER_CANCEL);
+            }
+            entity.level().playSound(null, entity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.RIPOSTE_HIT_SOUND.get(), SoundSource.PLAYERS, 1, 1);
+            event.setCanceled(true);
         }
 
     }

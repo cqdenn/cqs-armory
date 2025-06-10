@@ -18,6 +18,10 @@ public class SoundRegistry {
 
     public static DeferredHolder<SoundEvent, SoundEvent> SNEEZE_SOUND = registerSoundEvent("sneeze");
     public static DeferredHolder<SoundEvent, SoundEvent> DODGE_SOUND = registerSoundEvent("dodge");
+    public static DeferredHolder<SoundEvent, SoundEvent> RIPOSTE_CAST_SOUND = registerSoundEvent("riposte_cast");
+    public static DeferredHolder<SoundEvent, SoundEvent> RIPOSTE_HIT_SOUND = registerSoundEvent("riposte_hit");
+
+
 
 
     private static DeferredHolder<SoundEvent, SoundEvent> registerSoundEvent(String name) {

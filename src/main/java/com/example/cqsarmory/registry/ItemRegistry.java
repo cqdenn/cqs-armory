@@ -207,7 +207,7 @@ public class ItemRegistry {
         var rapier = ITEMS.register(name + "_rapier",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.RAPIER.attackDamage(), WeaponType.RAPIER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RIPOSTE_SPELL, power.power())))
         );
 
         Optional<DeferredItem> ingot = Optional.empty();

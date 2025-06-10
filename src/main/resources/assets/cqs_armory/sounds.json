@@ -8,5 +8,15 @@
     "sounds": [
       "cqs_armory:dodge"
     ]
+  },
+  "riposte_cast": {
+    "sounds": [
+      "cqs_armory:riposte_cast"
+    ]
+  },
+  "riposte_hit": {
+    "sounds": [
+      "cqs_armory:riposte_hit"
+    ]
   }
 }
