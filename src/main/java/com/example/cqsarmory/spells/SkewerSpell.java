@@ -84,12 +84,8 @@ public class SkewerSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        //float multiplier = (15.0F + spellLevel) / 12.0F;
         Vec3 forward = entity.getLookAngle().scale(2 + (0.5f * spellLevel));
-
-        //var vec = forward.multiply(3.0F, 1.0F, 3.0F).normalize().add(0.0F, 0.25F, 0.0F).scale(multiplier);
-
-        float y = !entity.onGround() ? 0 : 0.5f;
+        float y = !entity.onGround() ? 0.1f : 0.5f;
 
         entity.setDeltaMovement(forward.x, y, forward.z);
         entity.hurtMarked = true;

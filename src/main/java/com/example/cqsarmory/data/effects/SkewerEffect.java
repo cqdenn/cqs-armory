@@ -27,7 +27,6 @@ public class SkewerEffect extends MobEffect {
                 if (entity instanceof LivingEntity target) {
                     target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
                     target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 80 * (amplifier + 1), amplifier, false, false, true));
-                    target.invulnerableTime = 20;
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;
                     return false;
