@@ -1,7 +1,9 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.effects.BleedEffect;
 import com.example.cqsarmory.data.effects.GenericEffect;
+import com.example.cqsarmory.data.effects.SkewerEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -23,6 +25,8 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> STUNNED = MOB_EFFECT_DEFERRED_REGISTER.register("stunned", () -> new GenericEffect(MobEffectCategory.HARMFUL, 0xc5d15a).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_stunned"), -1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.ATTACK_SPEED, CqsArmory.id("mobeffect_stunned"), -1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> ABSORBING_RUPTURE = MOB_EFFECT_DEFERRED_REGISTER.register("absorbing_rupture", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0xc5d15a).addAttributeModifier(Attributes.MAX_ABSORPTION, CqsArmory.id("mobeffect_absorbing_rupture"), 2, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> BERSERK = MOB_EFFECT_DEFERRED_REGISTER.register("berserk", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0xe60800).addAttributeModifier(Attributes.ATTACK_DAMAGE, CqsArmory.id("mobeffect_berserk"), 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.ATTACK_SPEED, CqsArmory.id("mobeffect_berserk"), 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_berserk"), 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> SKEWER = MOB_EFFECT_DEFERRED_REGISTER.register("skewer", () -> new SkewerEffect(MobEffectCategory.BENEFICIAL, 0x6b6969));
+    public static final DeferredHolder<MobEffect, MobEffect> BLEED = MOB_EFFECT_DEFERRED_REGISTER.register("bleed", () -> new BleedEffect(MobEffectCategory.HARMFUL, 0x630606));
 
 
 }

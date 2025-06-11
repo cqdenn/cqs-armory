@@ -8,25 +8,35 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.ImpulseCastData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.spells.EarthquakeAoe;
+import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
+import io.redspace.ironsspellbooks.player.SpinAttackType;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.spells.fire.BurningDashSpell;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.objectweb.asm.util.TraceRecordComponentVisitor;
 
 import java.util.Optional;
 
-@AutoSpellConfig
-public class RuptureSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "rupture_spell");
+public class SkewerSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "skewer_spell");
+
     @Override
     public ResourceLocation getSpellResource() {
         return spellId;
@@ -36,14 +46,14 @@ public class RuptureSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(20)
             .build();
 
-    public RuptureSpell() {
+    public SkewerSpell() {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 16;
+        this.castTime = 0;
         this.baseManaCost = 0;
     }
 
@@ -64,22 +74,7 @@ public class RuptureSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
-    }
-
-    @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.DIVINE_SMITE_WINDUP.get());
-    }
-
-    @Override
-    public AnimationHolder getCastStartAnimation() {
-        return AbilityAnimations.RUPTURE_ANIMATION;
-    }
-
-    @Override
-    public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.pass();
+        return CastType.INSTANT;
     }
 
     @Override
@@ -89,21 +84,17 @@ public class RuptureSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 2 * spellLevel;
-        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-        EarthquakeAoe aoeEntity = new EarthquakeAoe(level);
-        aoeEntity.moveTo(entity.position());
-        aoeEntity.setOwner(entity);
-        aoeEntity.setCircular();
-        aoeEntity.setRadius(radius);
-        aoeEntity.setDuration(20);
-        aoeEntity.setDamage((float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-        aoeEntity.setSlownessAmplifier(1);
-        level.addFreshEntity(aoeEntity);
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * spellLevel) - 1, false, false, true));
-        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entities.size() * (2 * spellLevel));
+        //float multiplier = (15.0F + spellLevel) / 12.0F;
+        Vec3 forward = entity.getLookAngle().scale(2 + (0.5f * spellLevel));
 
+        //var vec = forward.multiply(3.0F, 1.0F, 3.0F).normalize().add(0.0F, 0.25F, 0.0F).scale(multiplier);
+
+        float y = !entity.onGround() ? 0 : 0.5f;
+
+        entity.setDeltaMovement(forward.x, y, forward.z);
+        entity.hurtMarked = true;
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 40, spellLevel - 1, false, false, false));
+        entity.invulnerableTime = 20;
+        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }
-

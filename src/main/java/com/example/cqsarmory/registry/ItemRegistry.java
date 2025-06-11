@@ -201,7 +201,7 @@ public class ItemRegistry {
         var spear = ITEMS.register(name + "_spear",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SPEAR.attackDamage(), WeaponType.SPEAR.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKEWER_SPELL, power.power())))
         );
 
         var rapier = ITEMS.register(name + "_rapier",

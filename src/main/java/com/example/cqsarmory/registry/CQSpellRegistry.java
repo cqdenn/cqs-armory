@@ -29,6 +29,8 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> REAP_SPELL = registerSpell(new ReapSpell());
     public static final Supplier<AbstractSpell> WRECKING_BALL_SPELL = registerSpell(new WreckingBallSpell());
     public static final Supplier<AbstractSpell> RIPOSTE_SPELL = registerSpell(new RiposteSpell());
+    public static final Supplier<AbstractSpell> SKEWER_SPELL = registerSpell(new SkewerSpell());
+
 
 
 

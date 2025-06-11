@@ -46,6 +46,16 @@ public class RiposteSpell extends AbstractSpell {
     }
 
     @Override
+    public boolean allowCrafting() {
+        return false;
+    }
+
+    @Override
+    public boolean allowLooting() {
+        return false;
+    }
+
+    @Override
     public DefaultConfig getDefaultConfig() {
         return defaultConfig;
     }
