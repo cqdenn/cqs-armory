@@ -68,6 +68,11 @@ public class BerserkSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean canBeInterrupted(Player player) {
         return false;
     }

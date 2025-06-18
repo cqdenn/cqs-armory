@@ -77,6 +77,11 @@ public class StunSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.empty();
+    }
+
+    @Override
     public AnimationHolder getCastStartAnimation() {
         return SpellAnimations.OVERHEAD_MELEE_SWING_ANIMATION;
     }

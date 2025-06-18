@@ -77,6 +77,11 @@ public class WreckingBallSpell extends AbstractSpell {
     public Optional<SoundEvent> getCastStartSound() {return Optional.of(SoundRegistry.DIVINE_SMITE_WINDUP.get());}
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.of(SoundRegistry.DIVINE_SMITE_CAST.get());
+    }
+
+    @Override
     public AnimationHolder getCastStartAnimation() {
         return SpellAnimations.OVERHEAD_MELEE_SWING_ANIMATION;
     }

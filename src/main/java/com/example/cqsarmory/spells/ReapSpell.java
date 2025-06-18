@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 
@@ -84,6 +86,11 @@ public class ReapSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean canBeInterrupted(Player player) {
         return false;
     }
@@ -91,13 +98,13 @@ public class ReapSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 2 * spellLevel;
+        int radius = 3 * spellLevel;
         Vec3 pullTo = entity.position();
-        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius).move(entity.getForward().scale(radius / 2.0)));
+        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
         var damageSource = level.damageSources().mobAttack(entity);
 
         for (Entity target : entities) {
-            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
                 float distance = (float) pullTo.distanceTo(target.position());
                 float f = distance / (radius);
                 float scale = f * 0.5f;

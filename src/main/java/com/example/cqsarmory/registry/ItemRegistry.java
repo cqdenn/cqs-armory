@@ -183,7 +183,7 @@ public class ItemRegistry {
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.UPPERCUT_SPELL, power.power())))
         );
 
         var scythe = ITEMS.register(name + "_scythe",

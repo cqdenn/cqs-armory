@@ -30,10 +30,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> WRECKING_BALL_SPELL = registerSpell(new WreckingBallSpell());
     public static final Supplier<AbstractSpell> RIPOSTE_SPELL = registerSpell(new RiposteSpell());
     public static final Supplier<AbstractSpell> SKEWER_SPELL = registerSpell(new SkewerSpell());
-
-
-
-
-
+    public static final Supplier<AbstractSpell> UPPERCUT_SPELL = registerSpell(new UppercutSpell());
+    public static final Supplier<AbstractSpell> TAUNT_SPELL = registerSpell(new TauntSpell());
 
 }

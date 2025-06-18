@@ -71,6 +71,11 @@ public class RiposteSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.empty();
+    }
+
+    @Override
     public AnimationHolder getCastStartAnimation() {
         return AbilityAnimations.RIPOSTE_ANIMATION;
     }

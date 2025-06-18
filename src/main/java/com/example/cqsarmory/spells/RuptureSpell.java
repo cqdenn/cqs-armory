@@ -73,6 +73,11 @@ public class RuptureSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.empty();
+    }
+
+    @Override
     public AnimationHolder getCastStartAnimation() {
         return AbilityAnimations.RUPTURE_ANIMATION;
     }
