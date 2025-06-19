@@ -102,7 +102,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
             () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).stacksTo(1).attributes(ExtendedWeaponItem
-                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 10, AttributeModifier.Operation.ADD_VALUE)})
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
     );
 
