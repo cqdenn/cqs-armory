@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.effects.BleedEffect;
 import com.example.cqsarmory.data.effects.GenericEffect;
 import com.example.cqsarmory.data.effects.SkewerEffect;
+import com.example.cqsarmory.data.effects.SkyStrikeEffect;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -27,6 +28,7 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> BERSERK = MOB_EFFECT_DEFERRED_REGISTER.register("berserk", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0xe60800).addAttributeModifier(Attributes.ATTACK_DAMAGE, CqsArmory.id("mobeffect_berserk"), 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.ATTACK_SPEED, CqsArmory.id("mobeffect_berserk"), 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_berserk"), 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     public static final DeferredHolder<MobEffect, MobEffect> SKEWER = MOB_EFFECT_DEFERRED_REGISTER.register("skewer", () -> new SkewerEffect(MobEffectCategory.BENEFICIAL, 0x6b6969));
     public static final DeferredHolder<MobEffect, MobEffect> BLEED = MOB_EFFECT_DEFERRED_REGISTER.register("bleed", () -> new BleedEffect(MobEffectCategory.HARMFUL, 0x630606));
+    public static final DeferredHolder<MobEffect, MobEffect> SKY_STRIKE = MOB_EFFECT_DEFERRED_REGISTER.register("sky_strike", () -> new SkyStrikeEffect(MobEffectCategory.BENEFICIAL, 0x99a2a8));
 
 
 }
