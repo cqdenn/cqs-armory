@@ -1,5 +1,8 @@
 {
-  "parent": "minecraft:item/handheld",
+  "parent": "cqs_armory:item/template_large_sword",
   "handler": "cqs_armory:weaponset_handler",
-  "loader": "atlas_api:dynamic_model"
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "cqs_armory:item/iron_spear_handheld_diamond"
+  }
 }

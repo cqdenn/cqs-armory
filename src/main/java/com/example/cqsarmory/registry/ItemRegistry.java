@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -150,6 +151,12 @@ public class ItemRegistry {
     public static final Weaponset GOLD_WEAPONSET = createWeaponset(ExtendedWeaponTier.GOLD, WeaponPower.POWER_ONE, "gold", false);
     public static final Weaponset COPPER_WEAPONSET = createWeaponset(ExtendedWeaponTier.COPPER, WeaponPower.POWER_ONE, "copper", false);
     public static final Weaponset WITHERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.WITHERSTEEL, WeaponPower.POWER_THREE, "withersteel", true);
+    public static final Weaponset SCULK_WEAPONSET = createWeaponset(ExtendedWeaponTier.SCULK, WeaponPower.POWER_TWO, "sculk", true);
+    public static final Weaponset OBSIDIAN_WEAPONSET = createWeaponset(ExtendedWeaponTier.OBSIDIAN, WeaponPower.POWER_ONE, "obsidian", false);
+    public static final Weaponset AMETHYST_WEAPONSET = createWeaponset(ExtendedWeaponTier.AMETHYST, WeaponPower.POWER_ONE, "amethyst", false);
+    public static final Weaponset BLAZING_WEAPONSET = createWeaponset(ExtendedWeaponTier.BLAZING, WeaponPower.POWER_THREE, "blazing", true);
+    public static final Weaponset LIVING_WEAPONSET = createWeaponset(ExtendedWeaponTier.LIVING, WeaponPower.POWER_TWO, "living", true);
+    public static final Weaponset ENDERIUM_WEAPONSET = createWeaponset(ExtendedWeaponTier.ENDERIUM, WeaponPower.POWER_TWO, "enderium", true);
 
     public record Weaponset (DeferredItem warhammer,
                              DeferredItem greatsword,
@@ -220,13 +227,13 @@ public class ItemRegistry {
             ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(val));
         }
 
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(warhammer));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(greatsword));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(halberd));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(scythe));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(mace));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(spear));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(rapier));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(warhammer, generator.atlas3DItem(warhammer, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_warhammer_handheld"))));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greatsword, generator.atlasLargeItem(greatsword)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(halberd, generator.atlasLargeItem(halberd)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(scythe, generator.atlasLargeItem(scythe)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(mace, generator.atlasLargeItem(mace)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(spear, generator.atlasLargeItem(spear)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
 
         var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, ingot);
         WEAPONSETS.add(weaponset);

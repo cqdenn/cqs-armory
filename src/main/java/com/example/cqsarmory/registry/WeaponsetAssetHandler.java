@@ -33,16 +33,31 @@ public class WeaponsetAssetHandler extends AssetHandler {
         permutaions.put("gold", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/gold"));
         permutaions.put("netherite", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/netherite"));
         permutaions.put("withersteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/withersteel"));
+        permutaions.put("sculk", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sculk"));
+        permutaions.put("amethyst", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/amethyst"));
+        permutaions.put("blazing", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/blazing"));
+        permutaions.put("enderium", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/enderium"));
+        permutaions.put("living", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/living"));
+        permutaions.put("obsidian", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/obsidian"));
+
+
 
 
         var weapon_source = new PalettedPermutations(List.of(
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_warhammer_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_warhammer_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greatsword_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greatsword_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_halberd_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_halberd_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_scythe_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_scythe_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_mace_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_mace_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_spear_gui"),
-                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_gui")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_spear_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
         var ingot_source = new PalettedPermutations(List.of(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/ingot_key")), ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/gold"), permutaions);
         return List.of(weapon_source, ingot_source);
     }
@@ -51,10 +66,7 @@ public class WeaponsetAssetHandler extends AssetHandler {
     public @NotNull BakingPreparations makeBakedModelPreparations(ItemStack itemStack, @Nullable ClientLevel clientLevel, @Nullable LivingEntity livingEntity, int seed) {
         ResourceLocation resources;
         if (itemStack.getItem() instanceof TieredItem tieredItem) {
-            var tier = tieredItem.getTier().toString().toLowerCase();
-            var type = BuiltInRegistries.ITEM.getKey(itemStack.getItem()).getPath().split("_")[1];
-
-            var path = String.format("item/iron_%s_gui_%s", type, tier);
+            var path = getAtlasLocation(tieredItem, true);
 
             resources = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, path);
             return new BakingPreparations(List.of(new ModelLayer(resources, 1, Optional.empty())));
@@ -67,6 +79,15 @@ public class WeaponsetAssetHandler extends AssetHandler {
 
 
 
+    }
+
+    public static @NotNull String getAtlasLocation(TieredItem tieredItem, boolean gui) {
+        var transform = gui ? "gui" : "handheld";
+        var tier = tieredItem.getTier().toString().toLowerCase();
+        var type = BuiltInRegistries.ITEM.getKey(tieredItem).getPath().split("_")[1];
+
+        var path = String.format("item/iron_%s_%s_%s", type, transform, tier);
+        return path;
     }
 
     public static Map <Holder<Item>, Integer> cache = new HashMap<>();
