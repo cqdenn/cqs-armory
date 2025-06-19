@@ -29,7 +29,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.Optional;
-
+@AutoSpellConfig
 public class WreckingBallSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "wrecking_ball_spell");
 

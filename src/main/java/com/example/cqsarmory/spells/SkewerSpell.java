@@ -33,7 +33,7 @@ import net.minecraft.world.phys.Vec3;
 import org.objectweb.asm.util.TraceRecordComponentVisitor;
 
 import java.util.Optional;
-
+@AutoSpellConfig
 public class SkewerSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "skewer_spell");
 
