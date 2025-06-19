@@ -100,6 +100,12 @@ public class ItemRegistry {
             ))
     );
 
+    public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
+            () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).stacksTo(1).attributes(ExtendedWeaponItem
+                    .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 10, AttributeModifier.Operation.ADD_VALUE)})
+            ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
+    );
+
     public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
             () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );
@@ -109,45 +115,9 @@ public class ItemRegistry {
             ));
 
 
-
-    public static final DeferredItem<Item> IRON_WARHAMMER = ITEMS.register("iron_warhammer",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 10, -3.2F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_GREATSWORD = ITEMS.register("iron_greatsword",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 6, -2.8F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_HALBERD = ITEMS.register("iron_halberd",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 5, -2.6F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_SCYTHE = ITEMS.register("iron_scythe",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 5, -2.6F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_MACE = ITEMS.register("iron_mace",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 4, -2.4F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_SPEAR = ITEMS.register("iron_spear",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 4, -2.4F)
-            ))
-    );
-    public static final DeferredItem<Item> IRON_RAPIER = ITEMS.register("iron_rapier",
-            () -> new SwordItem(Tiers.IRON, new Item.Properties().attributes(SwordItem
-                    .createAttributes(Tiers.IRON, 2, -2.0F)
-            ))
-    );
-
     public static final Weaponset DIAMOND_WEAPONSET = createWeaponset(ExtendedWeaponTier.DIAMOND, WeaponPower.POWER_ONE, "diamond", false);
-    public static final Weaponset NETHERITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.NETHERITE, WeaponPower.POWER_ONE, "netherite", false);
+    public static final Weaponset NETHERITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.NETHERITE, WeaponPower.POWER_THREE, "netherite", false);
+    public static final Weaponset IRON_WEAPONSET = createWeaponset(ExtendedWeaponTier.IRON, WeaponPower.POWER_ONE, "iron", false);
     public static final Weaponset GOLD_WEAPONSET = createWeaponset(ExtendedWeaponTier.GOLD, WeaponPower.POWER_ONE, "gold", false);
     public static final Weaponset COPPER_WEAPONSET = createWeaponset(ExtendedWeaponTier.COPPER, WeaponPower.POWER_ONE, "copper", false);
     public static final Weaponset WITHERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.WITHERSTEEL, WeaponPower.POWER_THREE, "withersteel", true);
@@ -156,7 +126,9 @@ public class ItemRegistry {
     public static final Weaponset AMETHYST_WEAPONSET = createWeaponset(ExtendedWeaponTier.AMETHYST, WeaponPower.POWER_ONE, "amethyst", false);
     public static final Weaponset BLAZING_WEAPONSET = createWeaponset(ExtendedWeaponTier.BLAZING, WeaponPower.POWER_THREE, "blazing", true);
     public static final Weaponset LIVING_WEAPONSET = createWeaponset(ExtendedWeaponTier.LIVING, WeaponPower.POWER_TWO, "living", true);
-    public static final Weaponset ENDERIUM_WEAPONSET = createWeaponset(ExtendedWeaponTier.ENDERIUM, WeaponPower.POWER_TWO, "enderium", true);
+    public static final Weaponset UMBRITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.UMBRITE, WeaponPower.POWER_TWO, "umbrite", true);
+    public static final Weaponset SILVERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.SILVERSTEEL, WeaponPower.POWER_TWO, "silversteel", true);
+    public static final Weaponset DWARVEN_STEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.DWARVEN_STEEL, WeaponPower.POWER_TWO, "dwarvensteel", true);
 
     public record Weaponset (DeferredItem warhammer,
                              DeferredItem greatsword,
@@ -227,7 +199,7 @@ public class ItemRegistry {
             ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(val));
         }
 
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(warhammer, generator.atlas3DItem(warhammer, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_warhammer_handheld"))));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(warhammer, generator.atlas3DItem(warhammer, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/base_warhammer_handheld"))));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greatsword, generator.atlasLargeItem(greatsword)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(halberd, generator.atlasLargeItem(halberd)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(scythe, generator.atlasLargeItem(scythe)));

@@ -8,14 +8,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 
-public class DesertFuryItem extends ExtendedWeaponItem {
+public class WinglashItem extends ExtendedWeaponItem {
 
-    public DesertFuryItem(Tier tier, Item.Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
+    public WinglashItem(Tier tier, Item.Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
         super(tier, properties, spellDataRegistryHolder);
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
-        return super.use(level, player, usedHand);
     }
 }

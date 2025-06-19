@@ -32,5 +32,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> SKEWER_SPELL = registerSpell(new SkewerSpell());
     public static final Supplier<AbstractSpell> UPPERCUT_SPELL = registerSpell(new UppercutSpell());
     public static final Supplier<AbstractSpell> TAUNT_SPELL = registerSpell(new TauntSpell());
+    public static final Supplier<AbstractSpell> SKY_STRIKE_SPELL = registerSpell(new SkyStrikeSpell());
+
 
 }

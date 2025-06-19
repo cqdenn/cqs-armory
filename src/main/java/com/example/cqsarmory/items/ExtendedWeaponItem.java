@@ -41,9 +41,6 @@ public class ExtendedWeaponItem extends MagicSwordItem {
         return new Tool(List.of(Tool.Rule.minesAndDrops(List.of(Blocks.COBWEB), 15.0F), Tool.Rule.overrideSpeed(BlockTags.SWORD_EFFICIENT, 1.5F)), 1.0F, 2);
     }
 
-    /**
-     * Neo: Method overload to allow giving a float for damage instead of an int.
-     */
     public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float attackDamage, float attackSpeed, AttributeContainer[] attributes) {
 
 

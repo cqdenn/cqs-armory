@@ -69,14 +69,7 @@ public class CqsArmory
                 output.accept(DESERT_FURY.get());
                 output.accept(VILETHORN.get());
                 output.accept(LEMON_SHIELD.get());
-                output.accept(SOUL_SUCKER.get());
-                output.accept(IRON_WARHAMMER.get());
-                output.accept(IRON_GREATSWORD.get());
-                output.accept(IRON_HALBERD.get());
-                output.accept(IRON_SCYTHE.get());
-                output.accept(IRON_MACE.get());
-                output.accept(IRON_SPEAR.get());
-                output.accept(IRON_RAPIER.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(SOUL_SUCKER.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

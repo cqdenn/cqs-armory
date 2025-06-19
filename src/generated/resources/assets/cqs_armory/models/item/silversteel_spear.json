@@ -3,6 +3,6 @@
   "handler": "cqs_armory:weaponset_handler",
   "loader": "atlas_api:simple_model",
   "textures": {
-    "layer0": "cqs_armory:item/iron_spear_handheld_enderium"
+    "layer0": "cqs_armory:item/iron_spear_handheld_silversteel"
   }
 }

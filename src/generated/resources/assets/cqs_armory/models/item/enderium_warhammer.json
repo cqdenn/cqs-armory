@@ -1,8 +1,0 @@
-{
-  "parent": "cqs_armory:item/iron_warhammer_handheld",
-  "handler": "cqs_armory:weaponset_handler",
-  "loader": "atlas_api:simple_model",
-  "textures": {
-    "layer0": "cqs_armory:item/iron_warhammer_handheld_enderium"
-  }
-}
