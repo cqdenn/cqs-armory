@@ -36,9 +36,12 @@ public class WeaponsetAssetHandler extends AssetHandler {
         permutaions.put("sculk", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sculk"));
         permutaions.put("amethyst", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/amethyst"));
         permutaions.put("blazing", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/blazing"));
-        permutaions.put("enderium", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/enderium"));
+        permutaions.put("umbrite", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/umbrite"));
         permutaions.put("living", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/living"));
         permutaions.put("obsidian", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/obsidian"));
+        permutaions.put("iron", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"));
+        permutaions.put("dwarvensteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/dwarvensteel"));
+        permutaions.put("silversteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/silversteel"));
 
 
 
