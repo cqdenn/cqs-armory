@@ -1,4 +1,5 @@
-// 1.21.1	2025-06-19T17:41:17.9105242	
+// 1.21.1	2025-06-20T00:08:43.6759191	
+da8daa21ddf4f0c4049f0e5eee17f70e0afb8ba3 assets/cqs_armory/models/item/amethyst_greataxe.json
 6f69e52c45369c59b449e382c6260a8b12c0e2d1 assets/cqs_armory/models/item/amethyst_greatsword.json
 31ac4122eb51a4b8fd73fc78288385f32d84c2c1 assets/cqs_armory/models/item/amethyst_halberd.json
 48168a6cabac0cc721818da4e65dc99e77899e56 assets/cqs_armory/models/item/amethyst_mace.json
@@ -6,6 +7,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/amethyst_
 ed003d86c0b28c8343c441710ba8f9a7c22849ae assets/cqs_armory/models/item/amethyst_scythe.json
 936ccc61b01578a59da3622acea25f384b99fa49 assets/cqs_armory/models/item/amethyst_spear.json
 14afa9d6d74accc3b5daba7feb3a26593462e0af assets/cqs_armory/models/item/amethyst_warhammer.json
+9cd86a34b19cc8f3d582ca3c24ab91abba809049 assets/cqs_armory/models/item/blazing_greataxe.json
 f4363a221ca76499bef4f21b265a2b3b481a85cb assets/cqs_armory/models/item/blazing_greatsword.json
 e92d3f02def590a84dcc4275fe64ee202ce74fe1 assets/cqs_armory/models/item/blazing_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/blazing_ingot.json
@@ -14,6 +16,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/blazing_r
 cc4327e29013078ffd91aed5ed1c014cbf9e891f assets/cqs_armory/models/item/blazing_scythe.json
 741ad16f5b76af1deccd735b572612540445afe0 assets/cqs_armory/models/item/blazing_spear.json
 9bbdd44da6a175da569e1cc98a7e57e6c429b4de assets/cqs_armory/models/item/blazing_warhammer.json
+84abcf411189f2b6207f0372d9345ee04d4ba10a assets/cqs_armory/models/item/copper_greataxe.json
 7a72bf92a186de28fb8eda36c9e902e9288f51d8 assets/cqs_armory/models/item/copper_greatsword.json
 909455135684aed6d6282265937305ee25b19b49 assets/cqs_armory/models/item/copper_halberd.json
 b4e75da6bb2887d470b84f21900da2928f1b1dc8 assets/cqs_armory/models/item/copper_mace.json
@@ -21,6 +24,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/copper_ra
 5bd3e9d3134ae1f21c319f672bc9eb1c9b3771e5 assets/cqs_armory/models/item/copper_scythe.json
 ab1f7894d98fc471fe8fd4614027b5db724fb744 assets/cqs_armory/models/item/copper_spear.json
 2fd5bbc01fe8c455c7549fd6a1d49da3b96a9bb3 assets/cqs_armory/models/item/copper_warhammer.json
+9f09573b03167bd42adfc70cee05ff16ef46e23f assets/cqs_armory/models/item/diamond_greataxe.json
 d91593751995320d14e97761aa2fb0f264798aab assets/cqs_armory/models/item/diamond_greatsword.json
 0ed864adea5583487745ba6e557cd71f88b7472d assets/cqs_armory/models/item/diamond_halberd.json
 2ca4afd576d41fd34e7a209999ca4b11d52dbe7e assets/cqs_armory/models/item/diamond_mace.json
@@ -28,6 +32,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/diamond_r
 15ffdc536552e2319f1c0a128f087035044f3afb assets/cqs_armory/models/item/diamond_scythe.json
 4f6c1f3a57269471fe5ce73da9ecd98175f4a2ea assets/cqs_armory/models/item/diamond_spear.json
 2ceba1a86d92d6731842e0a33abbfe71ef25edec assets/cqs_armory/models/item/diamond_warhammer.json
+b4279e72d45f8c387fa102fbd93fe83477ee7a20 assets/cqs_armory/models/item/dwarvensteel_greataxe.json
 f8709e54a8a88ecbb6498d46e7026a05796b892a assets/cqs_armory/models/item/dwarvensteel_greatsword.json
 b74ef3a0cd036a09aa7663589fb9e62280fb19fd assets/cqs_armory/models/item/dwarvensteel_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/dwarvensteel_ingot.json
@@ -36,6 +41,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/dwarvenst
 af2b7bf7fd5ccefd8dccd2355b7babf6b80304c0 assets/cqs_armory/models/item/dwarvensteel_scythe.json
 a3e816f1fec4a2c875bdf66a069c271cdac7b34f assets/cqs_armory/models/item/dwarvensteel_spear.json
 2c3d5f12d1c36ac0243d872fa55112737b01c0c2 assets/cqs_armory/models/item/dwarvensteel_warhammer.json
+3daacbca0ffad0d0a450b5f3bbe8c61c7f5ad377 assets/cqs_armory/models/item/gold_greataxe.json
 a595178b0ca70a17f354ec8b838804d394e6bf65 assets/cqs_armory/models/item/gold_greatsword.json
 f1d26f5db4c8fe5f42f619c2f5c96d743b2a5c57 assets/cqs_armory/models/item/gold_halberd.json
 b65e5979600f1dc63e2172f0fa1e334ad7df51c7 assets/cqs_armory/models/item/gold_mace.json
@@ -43,6 +49,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/gold_rapi
 307c8e700f5213154a641cdb7ff561ef04a10ccb assets/cqs_armory/models/item/gold_scythe.json
 10aa67fa7347da4e375cb51e72b0fbdde78a94f5 assets/cqs_armory/models/item/gold_spear.json
 6e326fe2ef4da0aba70c703383bfb69d630a3c17 assets/cqs_armory/models/item/gold_warhammer.json
+8f3f1fc64f8637a0b2bf3ae9e28df99208accf94 assets/cqs_armory/models/item/iron_greataxe.json
 d224ea6a778bc27f8ec7a4c6aaf005b7f4e8536a assets/cqs_armory/models/item/iron_greatsword.json
 1dcc1c50ed349461e8fd621b2e4d7c1d8f488334 assets/cqs_armory/models/item/iron_halberd.json
 d7068c054a8504c291c58c191baa41f2713078c0 assets/cqs_armory/models/item/iron_mace.json
@@ -50,6 +57,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/iron_rapi
 931e2360d1c48a27b055092be50fc6f3b7a5e5c5 assets/cqs_armory/models/item/iron_scythe.json
 4007b0e1f012c3abcf8d6fcb743d0275bf481a9f assets/cqs_armory/models/item/iron_spear.json
 643171edb144417d98d76a53248997a62b2e1059 assets/cqs_armory/models/item/iron_warhammer.json
+667b6c9b2a17f52a729cf14b4836b9eb3457cb1f assets/cqs_armory/models/item/living_greataxe.json
 67970c8e63972166dd6d28089b68fe41e2bbb5c0 assets/cqs_armory/models/item/living_greatsword.json
 36db1bf50ff05325f6e6dcc21e48b998e4a25611 assets/cqs_armory/models/item/living_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/living_ingot.json
@@ -58,6 +66,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/living_ra
 f10f4f690ff38bab7089b539bbf9891937ca5c78 assets/cqs_armory/models/item/living_scythe.json
 7c01e7db417358ff7ea324a6fba5e6185e49eaf6 assets/cqs_armory/models/item/living_spear.json
 8b3b6aa7c4a210ac5931ceaf4a5f454f1d6bd727 assets/cqs_armory/models/item/living_warhammer.json
+ef796e46565b59053ca55b2dd2a8150710bff270 assets/cqs_armory/models/item/netherite_greataxe.json
 fb4a27385a01df9bbd8b1a4f949cff57c18c4712 assets/cqs_armory/models/item/netherite_greatsword.json
 0856a7adaf7b400960c6aba5c76e09971c164091 assets/cqs_armory/models/item/netherite_halberd.json
 22801bebba76d88b64e870a0b153754cffb945a3 assets/cqs_armory/models/item/netherite_mace.json
@@ -65,6 +74,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/netherite
 be3a992e18824df70b394a0600022a69861c391c assets/cqs_armory/models/item/netherite_scythe.json
 e22086bc63b749a14699be14b6ec1aae7fde60de assets/cqs_armory/models/item/netherite_spear.json
 9981b27db91d66b8a3065bf8e6a73bfcc7377f26 assets/cqs_armory/models/item/netherite_warhammer.json
+099e5980b277bf232e03b403946b8b4e940ce6ec assets/cqs_armory/models/item/obsidian_greataxe.json
 4e293f008b64047220437adc3a211f9872d83121 assets/cqs_armory/models/item/obsidian_greatsword.json
 5c3b3cc9a13ebd8586bc7d80eac2ae14aa6b2804 assets/cqs_armory/models/item/obsidian_halberd.json
 bb0e56dc75bf101a141db29cf471d719bbdb4bc5 assets/cqs_armory/models/item/obsidian_mace.json
@@ -72,6 +82,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/obsidian_
 4dbf17bbc1c3dde934d6ed1c4b6d89e22aab6ac3 assets/cqs_armory/models/item/obsidian_scythe.json
 98aabf417a91ed6bc8ddc4b09d5110cf5d46a43a assets/cqs_armory/models/item/obsidian_spear.json
 9edfc2308128b467bce6639dbb2031f2c7b94cb4 assets/cqs_armory/models/item/obsidian_warhammer.json
+e51e8f6814db0772e4a85a96e75600157e45bbef assets/cqs_armory/models/item/sculk_greataxe.json
 d3358e7652bda9736693573440e022e400f705e2 assets/cqs_armory/models/item/sculk_greatsword.json
 bab7f705c0b3ff43258609a1c9d34548cc66d03b assets/cqs_armory/models/item/sculk_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/sculk_ingot.json
@@ -80,6 +91,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/sculk_rap
 1ecd62e3a49ec1019181039f83997b0427cc5d93 assets/cqs_armory/models/item/sculk_scythe.json
 90dbe6f10ca394740a46d6658367acc17ef3ae14 assets/cqs_armory/models/item/sculk_spear.json
 50689c2285902f2ffe51ba56c728e8aa49ac8189 assets/cqs_armory/models/item/sculk_warhammer.json
+80e85c7a63a5749554b0ede2317404373af6e615 assets/cqs_armory/models/item/silversteel_greataxe.json
 ab21358db52b19e55c6ef7fe2afce7cb73d1c056 assets/cqs_armory/models/item/silversteel_greatsword.json
 d55ca19bc2be1917a479717e630f45dbe30aaa57 assets/cqs_armory/models/item/silversteel_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/silversteel_ingot.json
@@ -88,6 +100,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/silverste
 a585fb56806d1c7c9e30e255c220014f904e1b96 assets/cqs_armory/models/item/silversteel_scythe.json
 3ef8dc8f753dd59ec922ff4825b923eb84f403fc assets/cqs_armory/models/item/silversteel_spear.json
 cc486a68ecc78e75031ed30a80b4e4847e8c1d2a assets/cqs_armory/models/item/silversteel_warhammer.json
+511b59eeb92c8485cd32b5b150a64494f9f4b028 assets/cqs_armory/models/item/umbrite_greataxe.json
 007d24a9eaa593a6b501cc632ff35df6827d32bc assets/cqs_armory/models/item/umbrite_greatsword.json
 f48dbf3c59a865ce22c3bdaabaf06364cd5bc0ea assets/cqs_armory/models/item/umbrite_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/umbrite_ingot.json
@@ -96,6 +109,7 @@ e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/umbrite_r
 c64ff17952257a5428a4c50ed9ef1b31f42fd826 assets/cqs_armory/models/item/umbrite_scythe.json
 f944e2c9cb3b302b6097763d21b659cc6aa0742f assets/cqs_armory/models/item/umbrite_spear.json
 34cdb40d65598625e6de8081f46ef6800b75b535 assets/cqs_armory/models/item/umbrite_warhammer.json
+bc419579b6bc6371fe822f150b057c268da10c22 assets/cqs_armory/models/item/withersteel_greataxe.json
 c1e2d824b72fda5127c40e91add2f8c052a2cd7c assets/cqs_armory/models/item/withersteel_greatsword.json
 a343c04e47f107cd212e71755ec01fa0f5a0e14f assets/cqs_armory/models/item/withersteel_halberd.json
 e80c565100d53af70bea26d1f2457e68e8c01463 assets/cqs_armory/models/item/withersteel_ingot.json

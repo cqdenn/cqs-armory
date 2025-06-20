@@ -70,6 +70,7 @@
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
 
   "item.cqs_armory.iron_greatsword": "Iron Greatsword",
+  "item.cqs_armory.iron_greataxe": "Iron Greataxe",
   "item.cqs_armory.iron_warhammer": "Iron Warhammer",
   "item.cqs_armory.iron_halberd": "Iron Halberd",
   "item.cqs_armory.iron_mace": "Iron Mace",
@@ -78,6 +79,7 @@
   "item.cqs_armory.iron_scythe": "Iron Scythe",
 
   "item.cqs_armory.amethyst_greatsword": "Amethyst Greatsword",
+  "item.cqs_armory.amethyst_greataxe": "Amethyst Greataxe",
   "item.cqs_armory.amethyst_warhammer": "Amethyst Warhammer",
   "item.cqs_armory.amethyst_halberd": "Amethyst Halberd",
   "item.cqs_armory.amethyst_mace": "Amethyst Mace",
@@ -86,6 +88,7 @@
   "item.cqs_armory.amethyst_scythe": "Amethyst Scythe",
 
   "item.cqs_armory.blazing_greatsword": "Blazing Greatsword",
+  "item.cqs_armory.blazing_greataxe": "Blazing Greataxe",
   "item.cqs_armory.blazing_warhammer": "Blazing Warhammer",
   "item.cqs_armory.blazing_halberd": "Blazing Halberd",
   "item.cqs_armory.blazing_mace": "Blazing Mace",
@@ -94,6 +97,7 @@
   "item.cqs_armory.blazing_scythe": "Blazing Scythe",
 
   "item.cqs_armory.copper_greatsword": "Copper Greatsword",
+  "item.cqs_armory.copper_greataxe": "Copper Greataxe",
   "item.cqs_armory.copper_warhammer": "Copper Warhammer",
   "item.cqs_armory.copper_halberd": "Copper Halberd",
   "item.cqs_armory.copper_mace": "Copper Mace",
@@ -102,6 +106,7 @@
   "item.cqs_armory.copper_scythe": "Copper Scythe",
 
   "item.cqs_armory.diamond_greatsword": "Diamond Greatsword",
+  "item.cqs_armory.diamond_greataxe": "Diamond Greataxe",
   "item.cqs_armory.diamond_warhammer": "Diamond Warhammer",
   "item.cqs_armory.diamond_halberd": "Diamond Halberd",
   "item.cqs_armory.diamond_mace": "Diamond Mace",
@@ -110,6 +115,7 @@
   "item.cqs_armory.diamond_scythe": "Diamond Scythe",
 
   "item.cqs_armory.dwarvensteel_greatsword": "Dwarven Steel Greatsword",
+  "item.cqs_armory.dwarvensteel_greataxe": "Dwarven Steel Greataxe",
   "item.cqs_armory.dwarvensteel_warhammer": "Dwarven Steel Warhammer",
   "item.cqs_armory.dwarvensteel_halberd": "Dwarven Steel Halberd",
   "item.cqs_armory.dwarvensteel_mace": "Dwarven Steel Mace",
@@ -118,6 +124,7 @@
   "item.cqs_armory.dwarvensteel_scythe": "Dwarven Steel Scythe",
 
   "item.cqs_armory.gold_greatsword": "Gold Greatsword",
+  "item.cqs_armory.gold_greataxe": "Gold Greataxe",
   "item.cqs_armory.gold_warhammer": "Gold Warhammer",
   "item.cqs_armory.gold_halberd": "Gold Halberd",
   "item.cqs_armory.gold_mace": "Gold Mace",
@@ -126,6 +133,7 @@
   "item.cqs_armory.gold_scythe": "Gold Scythe",
 
   "item.cqs_armory.living_greatsword": "Living Greatsword",
+  "item.cqs_armory.living_greataxe": "Living Greataxe",
   "item.cqs_armory.living_warhammer": "Living Warhammer",
   "item.cqs_armory.living_halberd": "Living Halberd",
   "item.cqs_armory.living_mace": "Living Mace",
@@ -134,6 +142,7 @@
   "item.cqs_armory.living_scythe": "Living Scythe",
 
   "item.cqs_armory.netherite_greatsword": "Netherite Greatsword",
+  "item.cqs_armory.netherite_greataxe": "Netherite Greataxe",
   "item.cqs_armory.netherite_warhammer": "Netherite Warhammer",
   "item.cqs_armory.netherite_halberd": "Netherite Halberd",
   "item.cqs_armory.netherite_mace": "Netherite Mace",
@@ -142,6 +151,7 @@
   "item.cqs_armory.netherite_scythe": "Netherite Scythe",
 
   "item.cqs_armory.obsidian_greatsword": "Obsidian Greatsword",
+  "item.cqs_armory.obsidian_greataxe": "Obsidian Greataxe",
   "item.cqs_armory.obsidian_warhammer": "Obsidian Warhammer",
   "item.cqs_armory.obsidian_halberd": "Obsidian Halberd",
   "item.cqs_armory.obsidian_mace": "Obsidian Mace",
@@ -150,6 +160,7 @@
   "item.cqs_armory.obsidian_scythe": "Obsidian Scythe",
 
   "item.cqs_armory.sculk_greatsword": "Sculk Greatsword",
+  "item.cqs_armory.sculk_greataxe": "Sculk Greataxe",
   "item.cqs_armory.sculk_warhammer": "Sculk Warhammer",
   "item.cqs_armory.sculk_halberd": "Sculk Halberd",
   "item.cqs_armory.sculk_mace": "Sculk Mace",
@@ -158,6 +169,7 @@
   "item.cqs_armory.sculk_scythe": "Sculk Scythe",
 
   "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
+  "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
   "item.cqs_armory.silversteel_warhammer": "Silversteel Warhammer",
   "item.cqs_armory.silversteel_halberd": "Silversteel Halberd",
   "item.cqs_armory.silversteel_mace": "Silversteel Mace",
@@ -165,7 +177,8 @@
   "item.cqs_armory.silversteel_rapier": "Silversteel Rapier",
   "item.cqs_armory.silversteel_scythe": "Silversteel Scythe",
 
-  "item.cqs_armory.umbrite_greatsword": "Umbrite Greatsword",
+  "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
+  "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
   "item.cqs_armory.umbrite_warhammer": "Umbrite Warhammer",
   "item.cqs_armory.umbrite_halberd": "Umbrite Halberd",
   "item.cqs_armory.umbrite_mace": "Umbrite Mace",
@@ -174,6 +187,7 @@
   "item.cqs_armory.umbrite_scythe": "Umbrite Scythe",
 
   "item.cqs_armory.withersteel_greatsword": "Withersteel Greatsword",
+  "item.cqs_armory.withersteel_greataxe": "Withersteel Greataxe",
   "item.cqs_armory.withersteel_warhammer": "Withersteel Warhammer",
   "item.cqs_armory.withersteel_halberd": "Withersteel Halberd",
   "item.cqs_armory.withersteel_mace": "Withersteel Mace",

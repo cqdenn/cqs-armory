@@ -11,4 +11,5 @@ public record WeaponType(float attackDamage, float attackSpeed) {
     public static final WeaponType MACE = new WeaponType(4, -2.4f);
     public static final WeaponType SPEAR = new WeaponType(4, -2.4f);
     public static final WeaponType RAPIER = new WeaponType(2, -2.0f);
+    public static final WeaponType GREATAXE = new WeaponType(8, -2.7f);
 }

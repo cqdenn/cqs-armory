@@ -60,7 +60,9 @@ public class WeaponsetAssetHandler extends AssetHandler {
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_spear_gui"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_spear_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_gui"),
-                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greataxe_gui"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greataxe_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
         var ingot_source = new PalettedPermutations(List.of(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/ingot_key")), ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/gold"), permutaions);
         return List.of(weapon_source, ingot_source);
     }

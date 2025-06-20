@@ -143,11 +143,12 @@ public class ItemRegistry {
                              DeferredItem mace,
                              DeferredItem spear,
                              DeferredItem rapier,
+                             DeferredItem greataxe,
                              Optional<DeferredItem> ingot) implements Iterable<DeferredItem>{
 
         @Override
         public @NotNull Iterator<DeferredItem> iterator() {
-            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier).iterator();
+            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe).iterator();
         }
     }
 
@@ -167,7 +168,7 @@ public class ItemRegistry {
 
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
-                        .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{})
+                        .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.UPPERCUT_SPELL, power.power())))
         );
 
@@ -195,6 +196,12 @@ public class ItemRegistry {
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RIPOSTE_SPELL, power.power())))
         );
 
+        var greataxe = ITEMS.register(name + "_greataxe",
+                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
+        );
+
         Optional<DeferredItem> ingot = Optional.empty();
 
         if (create_ingot) {
@@ -212,8 +219,9 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(mace, generator.atlasLargeItem(mace)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(spear, generator.atlasLargeItem(spear)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
 
-        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, ingot);
+        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, ingot);
         WEAPONSETS.add(weaponset);
 
         return weaponset;
