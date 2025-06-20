@@ -54,7 +54,7 @@ public class SkyStrikeSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 15;
+        this.castTime = 5;
         this.baseManaCost = 0;
     }
 
@@ -76,18 +76,20 @@ public class SkyStrikeSpell extends AbstractSpell {
     @Override
     public CastType getCastType() {
         return CastType.INSTANT;
-    } //FIXME: long cast with animation logic below
+    }
 
     @Override
     public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
         return 2;
     }
 
-    /*@Override
+  /*  @Override
     public void onClientPreCast(Level level, int spellLevel, LivingEntity entity, InteractionHand hand, @Nullable MagicData playerMagicData) {
         super.onClientPreCast(level, spellLevel, entity, hand, playerMagicData);
-        if (entity instanceof Player player) {
-            ClientSpellCastHelper.animatePlayerStart(player, AbilityAnimations.UPPERCUT_ANIMATION.getForPlayer().get()); FIXME
+        if (MagicData.getPlayerMagicData(entity).getPlayerRecasts() != null) {
+            if (entity instanceof Player player && MagicData.getPlayerMagicData(entity).getPlayerRecasts().getRemainingRecastsForSpell(this) == 1) {
+                ClientSpellCastHelper.animatePlayerStart(player, AbilityAnimations.UPPERCUT_ANIMATION.getForPlayer().get());
+            }
         }
     }*/
 
@@ -112,10 +114,10 @@ public class SkyStrikeSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) { //FIXME nothing happens on recast
+    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 4;
-        Vec3 direction = new Vec3(entity.getForward().x * 0.1, 0.4, entity.getForward().z * 0.1);
+        Vec3 direction = new Vec3(entity.getForward().x, 1, entity.getForward().z);
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
             playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 40, castSource, null), playerMagicData);
 
@@ -124,15 +126,16 @@ public class SkyStrikeSpell extends AbstractSpell {
             for (Entity target : entities) {
                 if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
                     target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                    ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 100 * spellLevel, spellLevel, false, false, true));
-                    target.push(direction);
+                    //((LivingEntity) target).addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 100 * spellLevel, spellLevel, false, false, true));
+                    target.push(direction.multiply(0.5, 1.3, 0.5));
                     target.hurtMarked = true;
                 }
             }
-            entity.push(direction.multiply(1, 2, 1));
+            entity.push(direction.multiply(0.5, 2, 0.5));
             entity.hurtMarked = true;
         } else {
-            entity.push(direction.multiply(1, -2, 1));
+            entity.setDeltaMovement(direction.multiply(1, -1, 1));
+            entity.hurtMarked = true;
             entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKY_STRIKE, 40, 0, false, false, false));
         }
 

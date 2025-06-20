@@ -112,7 +112,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(Attributes.MAX_HEALTH, 10, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(Attributes.MOVEMENT_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 1)))
     ); //FIXME model/texture
 

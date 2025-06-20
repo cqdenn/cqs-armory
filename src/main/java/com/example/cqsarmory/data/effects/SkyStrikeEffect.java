@@ -10,6 +10,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -25,8 +26,9 @@ public class SkyStrikeEffect extends MobEffect {
         if (!list.isEmpty()) {
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity target) {
+                    Vec3 pos = livingEntity.position().add(livingEntity.getForward());
                     target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 3);
-                    target.push(livingEntity.getDeltaMovement());
+                    target.setDeltaMovement(livingEntity.getDeltaMovement().scale(1.5));
                     target.hurtMarked = true;
                     return false;
                 }
