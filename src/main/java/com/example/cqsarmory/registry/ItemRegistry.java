@@ -110,6 +110,12 @@ public class ItemRegistry {
             () -> new ShieldItem(new Item.Properties().stacksTo(1))
     );
 
+    public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
+            () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
+                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(Attributes.MAX_HEALTH, 10, AttributeModifier.Operation.ADD_VALUE)})),
+                    SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 1)))
+    ); //FIXME model/texture
+
     public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
             () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
             ));

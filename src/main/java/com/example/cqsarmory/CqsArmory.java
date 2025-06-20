@@ -68,6 +68,8 @@ public class CqsArmory
                 output.accept(VOLCANO.get());
                 output.accept(DESERT_FURY.get());
                 output.accept(VILETHORN.get());
+                output.accept(WINGLASH.get());
+                output.accept(IRONWALL.get());
                 output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());

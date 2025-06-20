@@ -1,0 +1,11 @@
+{
+  "parent": "cqs_armory:item/tower_shield_base",
+  "overrides": [
+    {
+      "model": "cqs_armory:item/tower_shield_base_blocking",
+      "predicate": {
+        "minecraft:blocking": 1.0
+      }
+    }
+  ]
+}
