@@ -106,10 +106,6 @@ public class ItemRegistry {
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
     );
 
-    public static final DeferredItem<Item> LEMON_SHIELD = ITEMS.register("lemon_shield",
-            () -> new ShieldItem(new Item.Properties().stacksTo(1))
-    );
-
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
                     .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 100, AttributeModifier.Operation.ADD_VALUE)})),
