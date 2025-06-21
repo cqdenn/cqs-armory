@@ -1,10 +1,7 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.effects.BleedEffect;
-import com.example.cqsarmory.data.effects.GenericEffect;
-import com.example.cqsarmory.data.effects.SkewerEffect;
-import com.example.cqsarmory.data.effects.SkyStrikeEffect;
+import com.example.cqsarmory.data.effects.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -29,6 +26,6 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> SKEWER = MOB_EFFECT_DEFERRED_REGISTER.register("skewer", () -> new SkewerEffect(MobEffectCategory.BENEFICIAL, 0x6b6969));
     public static final DeferredHolder<MobEffect, MobEffect> BLEED = MOB_EFFECT_DEFERRED_REGISTER.register("bleed", () -> new BleedEffect(MobEffectCategory.HARMFUL, 0x630606));
     public static final DeferredHolder<MobEffect, MobEffect> SKY_STRIKE = MOB_EFFECT_DEFERRED_REGISTER.register("sky_strike", () -> new SkyStrikeEffect(MobEffectCategory.BENEFICIAL, 0x99a2a8));
-
+    public static final DeferredHolder<MobEffect, MobEffect> SHIELD_BASH = MOB_EFFECT_DEFERRED_REGISTER.register("shield_bash", () -> new ShieldBashEffect(MobEffectCategory.BENEFICIAL, 0x9882a8));
 
 }

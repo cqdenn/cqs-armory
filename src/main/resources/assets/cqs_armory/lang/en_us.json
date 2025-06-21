@@ -7,6 +7,9 @@
   "item.cqs_armory.volcano": "Volcano",
   "item.cqs_armory.desert_fury": "Desert Fury",
   "item.cqs_armory.vilethorn": "Vilethorn",
+  "item.cqs_armory.ironwall": "Ironwall",
+  "item.cqs_armory.thornbark": "Thornbark",
+  "item.cqs_armory.winglash": "Winglash",
   "itemGroup.cqs_armory": "CQ's Armory",
   "item.cqs_armory.lemon_shield": "Lemon Shield",
   "item.cqs_armory.soul_sucker": "Soul Sucker",
@@ -23,6 +26,7 @@
   "spell.cqs_armory.uppercut_spell": "Uppercut",
   "spell.cqs_armory.taunt_spell": "Taunt",
   "spell.cqs_armory.sky_strike_spell": "Sky Strike",
+  "spell.cqs_armory.shield_bash_spell": "Shield Bash",
 
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
@@ -68,6 +72,7 @@
   "effect.cqs_armory.sky_strike": "Sky Strike",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
+  "attribute.cqs_armory.block_strength": "Block Strength",
 
   "item.cqs_armory.iron_greatsword": "Iron Greatsword",
   "item.cqs_armory.iron_greataxe": "Iron Greataxe",

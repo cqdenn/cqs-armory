@@ -3,43 +3,30 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.data.enchants.PoisonAspect;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
-import com.example.cqsarmory.items.CosmicArkItem;
 import com.example.cqsarmory.items.MjolnirItem;
-import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.registry.*;
-import com.sun.jna.platform.win32.Winevt;
-import io.redspace.ironsspellbooks.api.entity.IMagicEntity;
-import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
-import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
-import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import io.redspace.ironsspellbooks.spells.EntityCastData;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
@@ -48,22 +35,16 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
-import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import org.joml.Random;
 import org.joml.Vector3f;
 
 import java.util.Objects;
@@ -94,13 +75,14 @@ public class ServerEvents {
     @SubscribeEvent
     public static void stunnedParticles(MobEffectEvent.Added event) {
         Holder<MobEffect> effect = event.getEffectInstance().getEffect();
+        Level level = event.getEntity().level();
         LivingEntity entity = event.getEntity();
-        if (effect == MobEffectRegistry.STUNNED) {
-            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
-            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
-            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
-            MagicManager.spawnParticles(entity.level(), ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
-            entity.level().playSound(null, entity.blockPosition(), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 1, 1);
+        if (effect == MobEffectRegistry.STUNNED && level.getServer() != null) {
+            MagicManager.spawnParticles(level, ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(level, ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(level, ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), 1 * Utils.random.nextDouble(), 0.2, false);
+            MagicManager.spawnParticles(level, ParticleTypes.CRIT, entity.getEyePosition().x, entity.getEyePosition().y + 1, entity.getEyePosition().z, 5, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), -1 * Utils.random.nextDouble(), 0.2, false);
+            level.playSound(null, entity.blockPosition(), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 1, 1);
         }
     }
 
@@ -281,6 +263,52 @@ public class ServerEvents {
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), com.example.cqsarmory.registry.SoundRegistry.DODGE_SOUND, SoundSource.PLAYERS, 1, 1.5f);
 
             event.setCanceled(true);
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void stopUsingShield (LivingEntityUseItemEvent.Stop event) {
+        LivingEntity livingEntity = event.getEntity();
+        Item item = livingEntity.getUseItem().getItem();
+
+        if (item instanceof ShieldItem && livingEntity instanceof Player player) {
+            CQtils.disableShield(player, 20);
+            AbilityData.get(player).currentShieldDamage = 0;
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void shieldBlock (LivingShieldBlockEvent event) {
+        LivingEntity livingEntity = event.getEntity();
+        float damage = event.getBlockedDamage();
+        if (event.getOriginalBlock()) {
+            Item item = livingEntity.getUseItem().getItem();
+            if (item instanceof ShieldItem shield && livingEntity instanceof Player player) {
+                AbilityData.get(livingEntity).currentShieldDamage += damage;
+
+                if (AbilityData.get(livingEntity).currentShieldDamage >= livingEntity.getAttribute(AttributeRegistry.BLOCK_STRENGTH).getValue()) {
+                    CQtils.disableShield(player, 100);
+                    AbilityData.get(livingEntity).currentShieldDamage = 0;
+                }
+            }
+        }
+
+    }
+
+    public static void shieldEffects (LivingShieldBlockEvent event) {
+        boolean blocked = event.getOriginalBlock();
+        LivingEntity defender = event.getEntity();
+        Entity attacker = event.getDamageSource().getEntity();
+        ItemStack item = defender.getUseItem();
+        DamageSource damageSource = defender.level().damageSources().mobAttack(defender);
+
+
+        //thornbark
+        if (item.is(ItemRegistry.THORNBARK) && Utils.random.nextFloat() > 0.35 && blocked) {
+            float damage = Utils.random.nextIntBetweenInclusive(1, 5);
+            attacker.hurt(damageSource, damage);
         }
 
     }

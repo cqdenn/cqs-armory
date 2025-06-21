@@ -89,7 +89,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
-            () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).stacksTo(1).attributes(ExtendedWeaponItem
+            () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 12, -2.5F, new AttributeContainer[]{new AttributeContainer(AttributeRegistry.CASTING_MOVESPEED, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
     );
@@ -101,7 +101,7 @@ public class ItemRegistry {
     );
 
     public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
-            () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).stacksTo(1).attributes(ExtendedWeaponItem
+            () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
     );
@@ -112,9 +112,15 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(Attributes.MOVEMENT_SPEED, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)})),
+                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 100, AttributeModifier.Operation.ADD_VALUE)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 1)))
-    ); //FIXME model/texture
+    );
+
+    public static final DeferredItem<Item> THORNBARK = ITEMS.register("thornbark",
+            () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
+                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 15, AttributeModifier.Operation.ADD_VALUE)})),
+                    SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
+    );
 
     public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
             () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
@@ -155,49 +161,49 @@ public class ItemRegistry {
     public static Weaponset createWeaponset(ExtendedWeaponTier material, WeaponPower power, String name, boolean create_ingot) {
 
         var warhammer = ITEMS.register(name + "_warhammer",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.WARHAMMER.attackDamage(), WeaponType.WARHAMMER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 6 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, power.power())))
         );
 
         var greatsword = ITEMS.register(name + "_greatsword",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.GREATSWORD.attackDamage(), WeaponType.GREATSWORD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, power.power())))
         );
 
         var halberd = ITEMS.register(name + "_halberd",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.UPPERCUT_SPELL, power.power())))
         );
 
         var scythe = ITEMS.register(name + "_scythe",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.SWEEPING_DAMAGE_RATIO, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REAP_SPELL, power.power())))
         );
 
         var mace = ITEMS.register(name + "_mace",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_KNOCKBACK, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRECKING_BALL_SPELL, power.power())))
         );
 
         var spear = ITEMS.register(name + "_spear",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SPEAR.attackDamage(), WeaponType.SPEAR.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKEWER_SPELL, power.power())))
         );
 
         var rapier = ITEMS.register(name + "_rapier",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.RAPIER.attackDamage(), WeaponType.RAPIER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RIPOSTE_SPELL, power.power())))
         );
 
         var greataxe = ITEMS.register(name + "_greataxe",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().component(ComponentRegistry.CASTING_IMPLEMENT.get(), Unit.INSTANCE).attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
         );
