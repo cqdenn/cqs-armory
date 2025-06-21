@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.api.attribute.MagicPercentAttribute;
 import io.redspace.ironsspellbooks.api.attribute.MagicRangedAttribute;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -24,6 +25,7 @@ public class AttributeRegistry {
     }
 
     public static final DeferredHolder<Attribute, Attribute> DODGE_CHANCE = ATTRIBUTES.register("dodge_chance", () -> (new PercentageAttribute("attribute.cqs_armory.dodge_chance", 0.0D, 0.0D, 1.0D, 100).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> BLOCK_STRENGTH = ATTRIBUTES.register("block_strength", () -> (new RangedAttribute("attribute.cqs_armory.block_strength", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
 
     @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
