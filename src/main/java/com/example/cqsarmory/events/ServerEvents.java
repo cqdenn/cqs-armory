@@ -297,6 +297,7 @@ public class ServerEvents {
 
     }
 
+    @SubscribeEvent
     public static void shieldEffects (LivingShieldBlockEvent event) {
         boolean blocked = event.getOriginalBlock();
         LivingEntity defender = event.getEntity();
@@ -306,8 +307,8 @@ public class ServerEvents {
 
 
         //thornbark
-        if (item.is(ItemRegistry.THORNBARK) && Utils.random.nextFloat() > 0.35 && blocked) {
-            float damage = Utils.random.nextIntBetweenInclusive(1, 5);
+        if (item.is(ItemRegistry.THORNBARK) && Utils.random.nextFloat() <= 0.35 && blocked) {
+            float damage = Utils.random.nextIntBetweenInclusive(4, 8);
             attacker.hurt(damageSource, damage);
         }
 
