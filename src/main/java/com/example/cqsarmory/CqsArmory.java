@@ -70,7 +70,6 @@ public class CqsArmory
                 output.accept(VILETHORN.get());
                 output.accept(WINGLASH.get());
                 output.accept(IRONWALL.get());
-                output.accept(LEMON_SHIELD.get());
                 output.accept(SOUL_SUCKER.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
@@ -160,13 +159,7 @@ public class CqsArmory
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-            event.enqueueWork(()->{
-                ItemProperties.register(
-                        LEMON_SHIELD.get(),
-                        ResourceLocation.withDefaultNamespace("blocking"),
-                        (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
-                );
-            });
+            event.enqueueWork(()->{});
         }
     }
 }
