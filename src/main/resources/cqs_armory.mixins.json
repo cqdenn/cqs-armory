@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.example.cqsarmory.mixin",
+  "refmap": "cqs_armory.refmap.json",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}
