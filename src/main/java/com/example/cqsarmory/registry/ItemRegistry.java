@@ -5,8 +5,10 @@ import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
+import io.redspace.ironsspellbooks.item.armor.WanderingMagicianArmorItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -50,7 +52,7 @@ public class ItemRegistry {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
 
-    //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
+    public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
             () -> new SummonSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
