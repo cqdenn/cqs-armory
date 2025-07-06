@@ -1,5 +1,7 @@
 package com.example.cqsarmory;
 
+import com.example.cqsarmory.config.ClientConfigs;
+import com.example.cqsarmory.gui.overlays.RageBarOverlay;
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
@@ -22,6 +24,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -78,9 +81,9 @@ public class CqsArmory
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public CqsArmory(IEventBus modEventBus, ModContainer modContainer)
     {
-        // Register the commonSetup method for modloading
-        modEventBus.addListener(this::commonSetup);
 
+
+        // Register the commonSetup method for modloading
         // Register the Deferred Register to the mod event bus so blocks get registered
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
@@ -98,8 +101,11 @@ public class CqsArmory
         LootModifierRegistry.register(modEventBus);
         SoundRegistry.register(modEventBus);
         AttributeRegistry.register(modEventBus);
-
         AssetHandlerRegistry.register(modEventBus);
+
+
+
+        modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC, String.format("%s-client.toml", CqsArmory.MODID));
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (cqs_armory) to respond directly to events.
@@ -109,26 +115,14 @@ public class CqsArmory
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
     }
+
 
     public static ResourceLocation id(@NotNull String path) {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, path);
     }
 
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.logDirtBlock)
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-
-        LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
-    }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
