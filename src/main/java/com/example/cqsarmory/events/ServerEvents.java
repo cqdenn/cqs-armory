@@ -344,7 +344,7 @@ public class ServerEvents {
 
         if (AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
-            float newRage = newRageTest > 0 ? newRageTest : 0;
+            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
             AbilityData.get(player).setRage(newRage);
         }
     }
