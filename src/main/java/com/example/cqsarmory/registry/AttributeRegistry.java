@@ -26,6 +26,10 @@ public class AttributeRegistry {
 
     public static final DeferredHolder<Attribute, Attribute> DODGE_CHANCE = ATTRIBUTES.register("dodge_chance", () -> (new PercentageAttribute("attribute.cqs_armory.dodge_chance", 0.0D, 0.0D, 1.0D, 100).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> BLOCK_STRENGTH = ATTRIBUTES.register("block_strength", () -> (new RangedAttribute("attribute.cqs_armory.block_strength", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> MAX_RAGE = ATTRIBUTES.register("max_rage", () -> (new RangedAttribute("attribute.cqs_armory.max_rage", 10.0D, 0.0D, 10000.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> RAGE_ON_HIT = ATTRIBUTES.register("rage_on_hit", () -> (new RangedAttribute("attribute.cqs_armory.rage_on_hit", 1.0D, 1.0D, 10000.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> RAGE_DAMAGE = ATTRIBUTES.register("rage_damage", () -> (new RangedAttribute("attribute.cqs_armory.rage_damage", 0.01D, 0.01D, 10000.0D).setSyncable(true)));
+
 
     @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {

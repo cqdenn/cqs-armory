@@ -7,6 +7,7 @@ import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
+import com.google.gson.internal.NonNullElementWrapperList;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -312,6 +313,40 @@ public class ServerEvents {
             attacker.hurt(damageSource, damage);
         }
 
+    }
+
+    @SubscribeEvent
+    public static void rageOnHit (LivingDamageEvent.Pre event) {
+        Entity directEntity = event.getSource().getDirectEntity();
+        Entity sourceEntity = event.getSource().getEntity();
+
+        if (sourceEntity == directEntity && directEntity instanceof Player player) {
+            if (AbilityData.get(player).getRage() > 0) {
+                event.setNewDamage(event.getOriginalDamage() + (event.getOriginalDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
+            }
+
+            float newRageTest = (AbilityData.get(player).getRage() + (float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue());
+            float newRage = newRageTest < player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
+            AbilityData.get(player).setRage(newRage);
+
+            AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
+
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void outOfCombatRageLoss (PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        if (AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
+            float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
+            float newRage = newRageTest > 0 ? newRageTest : 0;
+            AbilityData.get(player).setRage(newRage);
+        }
     }
 
 }
