@@ -75,8 +75,9 @@
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
   "attribute.cqs_armory.max_rage": "Max Rage",
+  "attribute.cqs_armory.min_rage": "Min Rage",
   "attribute.cqs_armory.rage_on_hit": "Rage on Hit",
-  "attribute.cqs_armory.rage_damage": "Damage per Rage",
+  "attribute.cqs_armory.rage_damage": "Damage per Rage Point",
 
   "item.cqs_armory.iron_greatsword": "Iron Greatsword",
   "item.cqs_armory.iron_greataxe": "Iron Greataxe",
