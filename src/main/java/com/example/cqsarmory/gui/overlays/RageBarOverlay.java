@@ -27,7 +27,7 @@ public class RageBarOverlay implements LayeredDraw.Layer {
         return instance;
     }
 
-    public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/icons.png");
+    public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/gui/icons.png");
 
     public enum Anchor {
         Hunger,

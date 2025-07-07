@@ -208,7 +208,7 @@ public class ItemRegistry {
 
         var greataxe = ITEMS.register(name + "_greataxe",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
-                        .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{})
+                        .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
         );
 

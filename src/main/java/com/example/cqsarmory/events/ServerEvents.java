@@ -5,6 +5,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.MjolnirItem;
+import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import com.google.gson.internal.NonNullElementWrapperList;
@@ -46,6 +47,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 
 import java.util.Objects;
@@ -328,6 +330,7 @@ public class ServerEvents {
             float newRageTest = (AbilityData.get(player).getRage() + (float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue());
             float newRage = newRageTest < player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
             AbilityData.get(player).setRage(newRage);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
 
             AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
 
@@ -346,6 +349,7 @@ public class ServerEvents {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
             float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
             AbilityData.get(player).setRage(newRage);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
         }
     }
 
