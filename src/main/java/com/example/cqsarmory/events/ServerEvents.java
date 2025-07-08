@@ -32,6 +32,8 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -351,6 +353,22 @@ public class ServerEvents {
             float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
+        }
+    }
+
+    @SubscribeEvent
+    public static void speedPerRage(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        var rage = AbilityData.get(player).getRage();
+        float speed = (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
+
+        ResourceLocation rageSpeedModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "rage_speed_modifier");
+        AttributeModifier speedModifierRage = new AttributeModifier(rageSpeedModifier, speed, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        AttributeInstance attributeinstance = player.getAttribute(Attributes.MOVEMENT_SPEED);
+        attributeinstance.removeModifier(speedModifierRage.id());
+
+        if (rage > 0) {
+            attributeinstance.addTransientModifier(speedModifierRage);
         }
     }
 

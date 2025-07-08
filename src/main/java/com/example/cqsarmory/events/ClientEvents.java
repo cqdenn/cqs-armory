@@ -23,6 +23,9 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -65,18 +68,6 @@ public class ClientEvents {
         }
 
 
-    }
-    //FIXME this method does not work, impulse can only be multiplied by 0-1
-    @SubscribeEvent
-    public static void speedPerRage(MovementInputUpdateEvent event) {
-        Player player = event.getEntity();
-        var rage = AbilityData.get(player).getRage();
-        if (rage > 0) {
-            float speed = 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
-
-            event.getInput().forwardImpulse *= speed;
-            event.getInput().leftImpulse *= speed;
-        }
     }
 
 }

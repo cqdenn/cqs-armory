@@ -32,7 +32,6 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> RAGE_DAMAGE = ATTRIBUTES.register("rage_damage", () -> (new PercentageAttribute("attribute.cqs_armory.rage_damage", 0.01D, 0.00D, 10000.0D, 100).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> RAGE_SPEED = ATTRIBUTES.register("rage_speed", () -> (new PercentageAttribute("attribute.cqs_armory.rage_speed", 0.00D, 0.00D, 10000.0D, 100).setSyncable(true)));
 
-
     @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
         e.getTypes().forEach(entity -> ATTRIBUTES.getEntries().forEach(attribute -> e.add(entity, attribute)));
