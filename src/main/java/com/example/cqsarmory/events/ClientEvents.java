@@ -1,9 +1,11 @@
 package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.items.CosmicArkItem;
 import com.example.cqsarmory.items.VolcanoSwordItem;
 import com.example.cqsarmory.network.StartSuckingPacket;
+import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.client.Minecraft;
@@ -62,6 +64,19 @@ public class ClientEvents {
             event.getInput().shiftKeyDown = true;
         }
 
+
+    }
+
+    @SubscribeEvent
+    public static void speedPerRage (MovementInputUpdateEvent event) {
+        Player player = event.getEntity();
+        var rage = AbilityData.get(player).getRage();
+
+
+        event.getInput().getMoveVector().scale(1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue()));
+
+        event.getInput().forwardImpulse *= 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
+        event.getInput().leftImpulse *= 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
 
     }
 

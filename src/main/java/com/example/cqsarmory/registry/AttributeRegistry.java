@@ -29,7 +29,8 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> MAX_RAGE = ATTRIBUTES.register("max_rage", () -> (new RangedAttribute("attribute.cqs_armory.max_rage", 10.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MIN_RAGE = ATTRIBUTES.register("min_rage", () -> (new RangedAttribute("attribute.cqs_armory.min_rage", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> RAGE_ON_HIT = ATTRIBUTES.register("rage_on_hit", () -> (new RangedAttribute("attribute.cqs_armory.rage_on_hit", 1.0D, 1.0D, 10000.0D).setSyncable(true)));
-    public static final DeferredHolder<Attribute, Attribute> RAGE_DAMAGE = ATTRIBUTES.register("rage_damage", () -> (new PercentageAttribute("attribute.cqs_armory.rage_damage", 0.01D, 0.01D, 10000.0D, 100).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> RAGE_DAMAGE = ATTRIBUTES.register("rage_damage", () -> (new PercentageAttribute("attribute.cqs_armory.rage_damage", 0.01D, 0.00D, 10000.0D, 100).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> RAGE_SPEED = ATTRIBUTES.register("rage_speed", () -> (new PercentageAttribute("attribute.cqs_armory.rage_speed", 0.00D, 0.00D, 10000.0D, 100).setSyncable(true)));
 
 
     @SubscribeEvent
