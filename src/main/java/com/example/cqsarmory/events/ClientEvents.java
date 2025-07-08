@@ -66,20 +66,17 @@ public class ClientEvents {
 
 
     }
-
+    //FIXME this method does not work, impulse can only be multiplied by 0-1
     @SubscribeEvent
-    public static void speedPerRage (MovementInputUpdateEvent event) {
+    public static void speedPerRage(MovementInputUpdateEvent event) {
         Player player = event.getEntity();
         var rage = AbilityData.get(player).getRage();
+        if (rage > 0) {
+            float speed = 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
 
-
-        event.getInput().getMoveVector().scale(1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue()));
-
-        event.getInput().forwardImpulse *= 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
-        event.getInput().leftImpulse *= 1 + (rage * (float) player.getAttribute(AttributeRegistry.RAGE_SPEED).getValue());
-
+            event.getInput().forwardImpulse *= speed;
+            event.getInput().leftImpulse *= speed;
+        }
     }
-
-
 
 }
