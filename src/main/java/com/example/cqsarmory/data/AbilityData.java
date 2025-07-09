@@ -14,7 +14,8 @@ public class AbilityData {
     public float currentShieldDamage;
     private float rage;
     private float momentum;
-    public int combatEnd;
+    public int combatEndRage;
+    public int combatEndMomentum;
 
     public float getRage() {
         return rage;
@@ -28,7 +29,9 @@ public class AbilityData {
 
     public void setMomentum(float momentum) {this.momentum = momentum;}
 
-    public static boolean inCombat(Player player) {return get(player).combatEnd > player.tickCount;}
+    public static boolean inCombatRage(Player player) {return get(player).combatEndRage > player.tickCount;}
+
+    public static boolean inCombatMomentum(Player player) {return get(player).combatEndMomentum > player.tickCount;}
 
     public class Mjolnir {
         public boolean doDamage;

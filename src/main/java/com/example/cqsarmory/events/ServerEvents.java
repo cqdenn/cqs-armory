@@ -338,10 +338,10 @@ public class ServerEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
 
             //remove momentum on rage gain
-            AbilityData.get(player).setMomentum(0);
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) 0));
+            /*AbilityData.get(player).setMomentum(0);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) 0));*/
 
-            AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
+            AbilityData.get(player).combatEndRage = player.tickCount + (20 * 5);
 
         }
 
@@ -354,7 +354,7 @@ public class ServerEvents {
             return;
         }
 
-        if (!AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
+        if (!AbilityData.inCombatRage(player) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
             float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
             AbilityData.get(player).setRage(newRage);
@@ -391,11 +391,11 @@ public class ServerEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
 
             //remove rage on momentum gain
-            AbilityData.get(player).setRage(0);
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));
+            /*AbilityData.get(player).setRage(0);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));*/
 
 
-            AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
+            AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 5);
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
                 //add logic for momentum orbs
@@ -412,7 +412,7 @@ public class ServerEvents {
             return;
         }
 
-        if (!AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
+        if (!AbilityData.inCombatMomentum(player) && player.level().getGameTime() % 20 == 0) {
             float newMomentumTest = ((float) (AbilityData.get(player).getMomentum() - 5));
             float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue();
             AbilityData.get(player).setMomentum(newMomentum);

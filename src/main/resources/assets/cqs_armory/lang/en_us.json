@@ -79,6 +79,9 @@
   "attribute.cqs_armory.rage_on_hit": "Rage on Hit",
   "attribute.cqs_armory.rage_damage": "Damage per Rage Point",
   "attribute.cqs_armory.rage_speed": "Speed per Rage Point",
+  "attribute.cqs_armory.max_momentum": "Max Momentum",
+  "attribute.cqs_armory.min_momentum": "Min Momentum",
+  "attribute.cqs_armory.momentum_on_hit": "Momentum on Hit",
 
   "item.cqs_armory.iron_greatsword": "Iron Greatsword",
   "item.cqs_armory.iron_greataxe": "Iron Greataxe",

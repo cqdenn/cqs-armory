@@ -73,7 +73,7 @@ public class RageBarOverlay implements LayeredDraw.Layer {
         Anchor anchor = com.example.cqsarmory.config.ClientConfigs.RAGE_BAR_ANCHOR.get();
         if (anchor == Anchor.XP && player.getJumpRidingScale() > 0) //Hide XP Rage bar when actively jumping on a horse
             return;
-        barX = getBarX(anchor, screenWidth) + configOffsetX;
+        barX = getBarX(anchor, screenWidth, player) + configOffsetX;
         barY = getBarY(anchor, screenHeight, Minecraft.getInstance().gui) - configOffsetY;
 
         int imageWidth = anchor == Anchor.XP ? XP_IMAGE_WIDTH : DEFAULT_IMAGE_WIDTH;
@@ -102,11 +102,13 @@ public class RageBarOverlay implements LayeredDraw.Layer {
 
     }
 
-    private static int getBarX(Anchor anchor, int screenWidth) {
+    private static int getBarX(Anchor anchor, int screenWidth, Player player) {
         if (anchor == Anchor.XP)
             return screenWidth / 2 - 91 - 3; //Vanilla's Pos - 3
-        if (anchor == Anchor.Hunger || anchor == Anchor.Center)
-            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (anchor == Anchor.Center ? 0 : HUNGER_BAR_OFFSET);
+        if (anchor == Anchor.Hunger)
+            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (HUNGER_BAR_OFFSET);
+        else if (anchor == Anchor.Center)
+            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (AbilityData.get(player).getMomentum() > 0 ? 60 : 0);
         else if (anchor == Anchor.TopLeft || anchor == Anchor.BottomLeft)
             return SCREEN_BORDER_MARGIN;
         else return screenWidth - SCREEN_BORDER_MARGIN - DEFAULT_IMAGE_WIDTH;
