@@ -3,6 +3,7 @@ package com.example.cqsarmory;
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.gui.overlays.RageBarOverlay;
 import com.example.cqsarmory.network.StartSuckingPacket;
+import com.example.cqsarmory.network.SyncMomentumPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
@@ -148,6 +149,7 @@ public class CqsArmory
             final PayloadRegistrar payloadRegistrar = event.registrar(CqsArmory.MODID).versioned("1.0.0").optional();
             payloadRegistrar.playToServer(StartSuckingPacket.TYPE, StartSuckingPacket.STREAM_CODEC, StartSuckingPacket::handle);
             payloadRegistrar.playToClient(SyncRagePacket.TYPE, SyncRagePacket.STREAM_CODEC, SyncRagePacket::handle);
+            payloadRegistrar.playToClient(SyncMomentumPacket.TYPE, SyncMomentumPacket.STREAM_CODEC, SyncMomentumPacket::handle);
         }
 
         @SubscribeEvent

@@ -13,6 +13,7 @@ public class AbilityData {
     public CosmicArk cosmicArk = new CosmicArk();
     public float currentShieldDamage;
     private float rage;
+    private float momentum;
     public int combatEnd;
 
     public float getRage() {
@@ -21,7 +22,13 @@ public class AbilityData {
 
     public void setRage(float rage) {this.rage = rage;}
 
-    public static boolean inCombat(Player player) {return get(player).combatEnd < player.tickCount;}
+    public float getMomentum() {
+        return momentum;
+    }
+
+    public void setMomentum(float momentum) {this.momentum = momentum;}
+
+    public static boolean inCombat(Player player) {return get(player).combatEnd > player.tickCount;}
 
     public class Mjolnir {
         public boolean doDamage;

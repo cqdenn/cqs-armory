@@ -5,6 +5,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.MjolnirItem;
+import com.example.cqsarmory.network.SyncMomentumPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
@@ -36,6 +37,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -335,6 +337,10 @@ public class ServerEvents {
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
 
+            //remove momentum on rage gain
+            AbilityData.get(player).setMomentum(0);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) 0));
+
             AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
 
         }
@@ -348,7 +354,7 @@ public class ServerEvents {
             return;
         }
 
-        if (AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
+        if (!AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
             float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
             AbilityData.get(player).setRage(newRage);
@@ -369,6 +375,49 @@ public class ServerEvents {
 
         if (rage > 0) {
             attributeinstance.addTransientModifier(speedModifierRage);
+        }
+    }
+
+    @SubscribeEvent
+    public static void momentumOnHit (LivingDamageEvent.Pre event) {
+        Entity directEntity = event.getSource().getDirectEntity();
+        Entity sourceEntity = event.getSource().getEntity();
+
+        if (directEntity instanceof Arrow && sourceEntity instanceof Player player) {
+
+            float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue());
+            float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
+            AbilityData.get(player).setMomentum(newMomentum);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+
+            //remove rage on momentum gain
+            AbilityData.get(player).setRage(0);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));
+
+
+            AbilityData.get(player).combatEnd = player.tickCount + (20 * 5);
+
+            if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
+                //add logic for momentum orbs
+            }
+
+        }
+
+    }
+
+    @SubscribeEvent
+    public static void outOfCombatMomentumLoss (PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        if (!AbilityData.inCombat(player) && player.level().getGameTime() % 20 == 0) {
+            float newMomentumTest = ((float) (AbilityData.get(player).getMomentum() - 5));
+            float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue();
+            AbilityData.get(player).setMomentum(newMomentum);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+
         }
     }
 
