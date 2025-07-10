@@ -385,20 +385,24 @@ public class ServerEvents {
 
         if (directEntity instanceof Arrow && sourceEntity instanceof Player player) {
 
-            float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue());
-            float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
-            AbilityData.get(player).setMomentum(newMomentum);
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+            if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
+                AbilityData.get(player).setMomentum(0);
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket(0));
+                //add logic for momentum orbs
 
-            //remove rage on momentum gain
+            } else {
+
+                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue());
+                float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
+                AbilityData.get(player).setMomentum(newMomentum);
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+
+                //remove rage on momentum gain
             /*AbilityData.get(player).setRage(0);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));*/
 
 
-            AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 5);
-
-            if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
-                //add logic for momentum orbs
+                AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 5);
             }
 
         }
