@@ -4,10 +4,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class MomentumOrb extends Entity {
-    public MomentumOrb(EntityType<?> entityType, Level level) {
+    public MomentumOrb(EntityType<?> entityType, Level level, Player creator) {
         super(entityType, level);
     }
 
@@ -23,6 +24,18 @@ public class MomentumOrb extends Entity {
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
+
+    }
+
+    public final int waitTime = 200;
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (tickCount == waitTime) {
+            discard();
+        }
 
     }
 }
