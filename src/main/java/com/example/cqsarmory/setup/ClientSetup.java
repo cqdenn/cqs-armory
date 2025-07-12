@@ -69,5 +69,6 @@ public class ClientSetup {
     @SubscribeEvent
     public static void rendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.VOLCANO_EXPLOSION.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.MOMENTUM_ORB.get(), NoopRenderer::new);
     }
 }
