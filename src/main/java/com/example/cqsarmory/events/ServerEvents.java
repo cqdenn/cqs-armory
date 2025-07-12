@@ -3,6 +3,7 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.network.SyncMomentumPacket;
@@ -383,12 +384,19 @@ public class ServerEvents {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
 
+
         if (directEntity instanceof Arrow && sourceEntity instanceof Player player) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
-                AbilityData.get(player).setMomentum(0);
-                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket(0));
+                AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
                 //add logic for momentum orbs
+                Level level = player.level();
+                Entity target = player.getLastHurtMob();
+
+                SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
+                speedOrb.moveTo(target.position().add(0, 1, 0));
+                level.addFreshEntity(speedOrb);
 
             } else {
 

@@ -8,9 +8,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
 public class MomentumOrb extends Entity {
+
+    private Player creator = null;
+
     public MomentumOrb(EntityType<?> entityType, Level level, Player creator) {
         super(entityType, level);
+        this.creator = creator;
     }
+
+    public MomentumOrb(EntityType<MomentumOrb> momentumOrbEntityType, Level level) {
+        super(momentumOrbEntityType, level);
+    }
+
+    public Player getCreator() { return this.creator; }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
