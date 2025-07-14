@@ -2,6 +2,7 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.MomentumOrb;
+import com.example.cqsarmory.data.entity.ability.OrbExplosion;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.entity.spells.wisp.WispEntity;
@@ -31,4 +32,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "momentum_orb").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<OrbExplosion>> ORB_EXPLOSION =
+            ENTITIES.register("orb_explosion", () -> EntityType.Builder.<OrbExplosion>of(OrbExplosion::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_explosion").toString()));
 }

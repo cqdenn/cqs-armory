@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.AbilityData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;

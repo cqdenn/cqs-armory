@@ -70,5 +70,6 @@ public class ClientSetup {
     public static void rendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.VOLCANO_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MOMENTUM_ORB.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ORB_EXPLOSION.get(), NoopRenderer::new);
     }
 }

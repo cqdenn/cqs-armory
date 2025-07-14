@@ -51,6 +51,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -422,13 +423,19 @@ public class ServerEvents {
                 //add logic for creating momentum orbs
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
+                float rand = Utils.random.nextFloat();
 
-                ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
-                SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
-                speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
-                explosiveMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
-                level.addFreshEntity(speedOrb);
-                level.addFreshEntity(explosiveMomentumOrb);
+                //adjust values as we add more orbs
+                if (rand <= 1) {
+                    ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
+                    explosiveMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    level.addFreshEntity(explosiveMomentumOrb);
+                }
+                else if (rand >= 0.5) {
+                    SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
+                    speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    level.addFreshEntity(speedOrb);
+                }
 
             } else {
 
@@ -467,15 +474,10 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void shootMomentumOrb (ProjectileImpactEvent event) {
-        if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
-            Level level = event.getEntity().level();
-            var entities = level.getEntities(event.getEntity(), event.getProjectile().getBoundingBox().inflate(1));
-            for (Entity target : entities) {
-                if (target instanceof MomentumOrb momentumOrb) {
-                    CQtils.momentumOrbEffects(momentumOrb);
-                    entities.clear();
-                    break;
-                }
+        if (event.getRayTraceResult() instanceof EntityHitResult entityHitResult) {
+            Entity entity = entityHitResult.getEntity();
+            if (entity instanceof MomentumOrb momentumOrb && !DamageSources.isFriendlyFireBetween(momentumOrb.getCreator(), event.getProjectile().getOwner()) && momentumOrb.getCreator() != event.getProjectile().getOwner()) {
+                event.setCanceled(true);
             }
         }
     }

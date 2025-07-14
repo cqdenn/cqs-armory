@@ -3,6 +3,7 @@ package com.example.cqsarmory.utils;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.MomentumOrb;
+import com.example.cqsarmory.data.entity.ability.OrbExplosion;
 import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,7 +22,7 @@ public class CQtils {
         player.level().broadcastEntityEvent(player, (byte)30);
     }
 
-    public static void momentumOrbEffects (MomentumOrb momentumOrb) {
+    public static void momentumOrbEffects (MomentumOrb momentumOrb, DamageSource source) {
         Level level = momentumOrb.level();
         Player player = momentumOrb.getCreator();
 
@@ -31,18 +32,20 @@ public class CQtils {
             speedMomentumOrb.discard();
         }
         else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
-            double radius = 4 + (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
-            DamageSource damageSource = level.damageSources().explosion(player, explosiveMomentumOrb);
+            float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
+            /*DamageSource damageSource = level.damageSources().explosion(player, explosiveMomentumOrb);
             var entitiesInRadius = level.getEntities(explosiveMomentumOrb, explosiveMomentumOrb.getBoundingBox().inflate(radius));
             for (Entity entity : entitiesInRadius) {
-                if (entity instanceof LivingEntity) {
+                if ((entity instanceof LivingEntity || entity instanceof MomentumOrb) && entity != source.getEntity()) {
                     //amount TBD FIXME
                     entity.hurt(damageSource, 20);
                 }
-                else if (entity instanceof MomentumOrb secondaryMomentumOrb) {
-                    CQtils.momentumOrbEffects(secondaryMomentumOrb);
-                }
-            }
+            }*/
+
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), 20, radius);
+            orbExplosion.moveTo(explosiveMomentumOrb.position());
+            level.addFreshEntity(orbExplosion);
+
             explosiveMomentumOrb.discard();
         }
     }
