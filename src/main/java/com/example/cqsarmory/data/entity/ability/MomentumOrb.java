@@ -37,6 +37,11 @@ public class MomentumOrb extends Entity {
 
     }
 
+    @Override
+    public boolean canBeHitByProjectile() {
+        return true;
+    }
+
     public final int waitTime = 200;
 
     @Override

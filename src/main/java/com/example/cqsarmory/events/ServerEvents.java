@@ -3,6 +3,7 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.entity.ability.MomentumOrb;
 import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
 import com.example.cqsarmory.items.MjolnirItem;
@@ -33,6 +34,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -47,10 +49,12 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -395,7 +399,7 @@ public class ServerEvents {
                 Entity target = player.getLastHurtMob();
 
                 SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
-                speedOrb.moveTo(target.position().add(0, 1, 0));
+                speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                 level.addFreshEntity(speedOrb);
 
             } else {
@@ -430,6 +434,16 @@ public class ServerEvents {
             AbilityData.get(player).setMomentum(newMomentum);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
 
+        }
+    }
+
+    @SubscribeEvent
+    public static void shootMomentumOrb (ProjectileImpactEvent event) {
+        if (event.getEntity() instanceof MomentumOrb momentumOrb) {
+            if (momentumOrb instanceof SpeedMomentumOrb speedMomentumOrb) {
+                speedMomentumOrb.getCreator().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1, false, false, true));
+                speedMomentumOrb.discard();
+            }
         }
     }
 
