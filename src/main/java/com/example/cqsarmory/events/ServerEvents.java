@@ -3,6 +3,7 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.MomentumOrb;
 import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;
@@ -48,6 +49,7 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -384,6 +386,29 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void momentumSpeed(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (!player.level().isClientSide) {
+            var speedStacks = AbilityData.get(player).momentumOrbEffects.speedStacks;
+            //capped at +100% speed, TBD FIXME
+            float speed = (float) Math.min(speedStacks * 0.1, 1);
+
+            ResourceLocation orbSpeedModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_speed_modifier");
+            AttributeModifier speedModifierOrb = new AttributeModifier(orbSpeedModifier, speed, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            AttributeInstance attributeinstance = player.getAttribute(Attributes.MOVEMENT_SPEED);
+            attributeinstance.removeModifier(speedModifierOrb.id());
+
+            if (speedStacks > 0) {
+                attributeinstance.addTransientModifier(speedModifierOrb);
+            }
+            if (AbilityData.get(player).momentumOrbEffects.speedEnd < player.tickCount && player.level().getGameTime() % 20 == 0) {
+                AbilityData.get(player).momentumOrbEffects.speedStacks = Math.max(AbilityData.get(player).momentumOrbEffects.speedStacks - 1, 0);
+            }
+        }
+
+    }
+
+    @SubscribeEvent
     public static void momentumOnHit (LivingDamageEvent.Pre event) {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
@@ -394,13 +419,16 @@ public class ServerEvents {
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
-                //add logic for momentum orbs
+                //add logic for creating momentum orbs
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
 
+                ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                 SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                 speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                explosiveMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                 level.addFreshEntity(speedOrb);
+                level.addFreshEntity(explosiveMomentumOrb);
 
             } else {
 
@@ -439,10 +467,15 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void shootMomentumOrb (ProjectileImpactEvent event) {
-        if (event.getEntity() instanceof MomentumOrb momentumOrb) {
-            if (momentumOrb instanceof SpeedMomentumOrb speedMomentumOrb) {
-                speedMomentumOrb.getCreator().addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 100, 1, false, false, true));
-                speedMomentumOrb.discard();
+        if (event.getRayTraceResult().getType() == HitResult.Type.ENTITY) {
+            Level level = event.getEntity().level();
+            var entities = level.getEntities(event.getEntity(), event.getProjectile().getBoundingBox().inflate(1));
+            for (Entity target : entities) {
+                if (target instanceof MomentumOrb momentumOrb) {
+                    CQtils.momentumOrbEffects(momentumOrb);
+                    entities.clear();
+                    break;
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import net.neoforged.neoforge.common.NeoForge;
 public class AbilityData {
     public Mjolnir mjolnirData = new Mjolnir();
     public CosmicArk cosmicArk = new CosmicArk();
+    public MomentumOrbEffects momentumOrbEffects = new MomentumOrbEffects();
     public float currentShieldDamage;
     private float rage;
     private float momentum;
@@ -32,6 +33,11 @@ public class AbilityData {
     public static boolean inCombatRage(Player player) {return get(player).combatEndRage > player.tickCount;}
 
     public static boolean inCombatMomentum(Player player) {return get(player).combatEndMomentum > player.tickCount;}
+
+    public class MomentumOrbEffects {
+        public int speedEnd;
+        public int speedStacks;
+    }
 
     public class Mjolnir {
         public boolean doDamage;

@@ -1,6 +1,17 @@
 package com.example.cqsarmory.utils;
 
+import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
+import com.example.cqsarmory.data.entity.ability.MomentumOrb;
+import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
+import com.example.cqsarmory.registry.AttributeRegistry;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class CQtils {
 
@@ -8,5 +19,31 @@ public class CQtils {
         player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
         player.stopUsingItem();
         player.level().broadcastEntityEvent(player, (byte)30);
+    }
+
+    public static void momentumOrbEffects (MomentumOrb momentumOrb) {
+        Level level = momentumOrb.level();
+        Player player = momentumOrb.getCreator();
+
+        if (momentumOrb instanceof SpeedMomentumOrb speedMomentumOrb) {
+            AbilityData.get(player).momentumOrbEffects.speedStacks += 1;
+            AbilityData.get(player).momentumOrbEffects.speedEnd = player.tickCount + (20 * 10);
+            speedMomentumOrb.discard();
+        }
+        else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
+            double radius = 4 + (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
+            DamageSource damageSource = level.damageSources().explosion(player, explosiveMomentumOrb);
+            var entitiesInRadius = level.getEntities(explosiveMomentumOrb, explosiveMomentumOrb.getBoundingBox().inflate(radius));
+            for (Entity entity : entitiesInRadius) {
+                if (entity instanceof LivingEntity) {
+                    //amount TBD FIXME
+                    entity.hurt(damageSource, 20);
+                }
+                else if (entity instanceof MomentumOrb secondaryMomentumOrb) {
+                    CQtils.momentumOrbEffects(secondaryMomentumOrb);
+                }
+            }
+            explosiveMomentumOrb.discard();
+        }
     }
 }
