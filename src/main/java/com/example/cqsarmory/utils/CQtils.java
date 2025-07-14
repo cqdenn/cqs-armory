@@ -1,16 +1,10 @@
 package com.example.cqsarmory.utils;
 
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
-import com.example.cqsarmory.data.entity.ability.MomentumOrb;
-import com.example.cqsarmory.data.entity.ability.OrbExplosion;
-import com.example.cqsarmory.data.entity.ability.SpeedMomentumOrb;
+import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.registry.AttributeRegistry;
-import net.minecraft.world.damagesource.DamageSource;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 
@@ -39,6 +33,10 @@ public class CQtils {
             level.addFreshEntity(orbExplosion);
 
             explosiveMomentumOrb.discard();
+        }
+        else if (momentumOrb instanceof DodgeMomentumOrb dodgeOrb) {
+            player.addEffect(new MobEffectInstance(MobEffectRegistry.DODGE, 20 * 5, 0, false, false, true));
+            dodgeOrb.discard();
         }
     }
 }
