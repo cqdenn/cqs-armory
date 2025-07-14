@@ -53,7 +53,7 @@ public class MomentumOrb extends Entity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion) {
-            CQtils.momentumOrbEffects(this, source);
+            CQtils.momentumOrbEffects(this);
             return true;
         }
         else {return false;}

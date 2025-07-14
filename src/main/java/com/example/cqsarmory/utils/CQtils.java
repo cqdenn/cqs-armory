@@ -22,7 +22,7 @@ public class CQtils {
         player.level().broadcastEntityEvent(player, (byte)30);
     }
 
-    public static void momentumOrbEffects (MomentumOrb momentumOrb, DamageSource source) {
+    public static void momentumOrbEffects (MomentumOrb momentumOrb) {
         Level level = momentumOrb.level();
         Player player = momentumOrb.getCreator();
 
@@ -33,14 +33,6 @@ public class CQtils {
         }
         else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
-            /*DamageSource damageSource = level.damageSources().explosion(player, explosiveMomentumOrb);
-            var entitiesInRadius = level.getEntities(explosiveMomentumOrb, explosiveMomentumOrb.getBoundingBox().inflate(radius));
-            for (Entity entity : entitiesInRadius) {
-                if ((entity instanceof LivingEntity || entity instanceof MomentumOrb) && entity != source.getEntity()) {
-                    //amount TBD FIXME
-                    entity.hurt(damageSource, 20);
-                }
-            }*/
 
             OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), 20, radius);
             orbExplosion.moveTo(explosiveMomentumOrb.position());

@@ -35,6 +35,8 @@ public class OrbExplosion extends AoeEntity {
         this.setLevel(level);
     }
 
+    public int waitTime = 1;
+
     @Override
     public void tick() {
         var level = this.level();
@@ -44,7 +46,7 @@ public class OrbExplosion extends AoeEntity {
         var y = this.position().y;
         var z = this.position().z;
 
-        if (tickCount == 1) {
+        if (tickCount == waitTime) {
             if (level.isClientSide) {
                 int cloudDensity = 25 + (int) (25 * radius);
                 for (int i = 0; i < cloudDensity; i++) {
@@ -67,7 +69,7 @@ public class OrbExplosion extends AoeEntity {
             }
             entities.clear();
         }
-        else if (tickCount > 1) {discard();}
+        else if (tickCount > waitTime) {discard();}
     }
 
     @Override
