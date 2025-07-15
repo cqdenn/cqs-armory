@@ -430,10 +430,15 @@ public class ServerEvents {
                     speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(speedOrb);
                 }
-                else if (true) {
+                else if (false) {
                     DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     dodgeMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(dodgeMomentumOrb);
+                }
+                else if (true) {
+                    InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
+                    instaDrawMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    level.addFreshEntity(instaDrawMomentumOrb);
                 }
 
             } else {

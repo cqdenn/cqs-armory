@@ -38,5 +38,9 @@ public class CQtils {
             player.addEffect(new MobEffectInstance(MobEffectRegistry.DODGE, 20 * 5, 0, false, false, true));
             dodgeOrb.discard();
         }
+        else if (momentumOrb instanceof InstaDrawMomentumOrb instaDrawMomentumOrb) {
+            player.addEffect(new MobEffectInstance(MobEffectRegistry.INSTA_DRAW, 20 * 5, 0, false, false, true));
+            instaDrawMomentumOrb.discard();
+        }
     }
 }
