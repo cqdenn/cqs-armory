@@ -37,6 +37,9 @@ public class AbilityData {
     public class MomentumOrbEffects {
         public int speedEnd;
         public int speedStacks;
+
+        public int arrowDamageEnd;
+        public int arrowDamageStacks;
     }
 
     public class Mjolnir {

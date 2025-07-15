@@ -9,6 +9,7 @@ import com.example.cqsarmory.network.SyncMomentumPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -404,6 +405,29 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void momentumOrbArrowDamage(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (!player.level().isClientSide) {
+            var dmgStacks = AbilityData.get(player).momentumOrbEffects.arrowDamageStacks;
+            //capped at +100% dmg, TBD FIXME
+            float dmg = (float) Math.min(dmgStacks * 0.1, 1);
+
+            ResourceLocation orbDmgModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_dmg_modifier");
+            AttributeModifier dmgModifierOrb = new AttributeModifier(orbDmgModifier, dmg, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            AttributeInstance attributeinstance = player.getAttribute(BowAttributes.ARROW_DAMAGE);
+            attributeinstance.removeModifier(dmgModifierOrb.id());
+
+            if (dmgStacks > 0) {
+                attributeinstance.addTransientModifier(dmgModifierOrb);
+            }
+            if (AbilityData.get(player).momentumOrbEffects.arrowDamageEnd < player.tickCount && player.level().getGameTime() % 20 == 0) {
+                AbilityData.get(player).momentumOrbEffects.arrowDamageStacks = Math.max(AbilityData.get(player).momentumOrbEffects.arrowDamageStacks - 1, 0);
+            }
+        }
+
+    }
+
+    @SubscribeEvent
     public static void momentumOnHit (LivingDamageEvent.Pre event) {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
@@ -435,10 +459,15 @@ public class ServerEvents {
                     dodgeMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(dodgeMomentumOrb);
                 }
-                else if (true) {
+                else if (false) {
                     InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     instaDrawMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(instaDrawMomentumOrb);
+                }
+                else if (true) {
+                    ArrowDamageMomentumOrb arrowDamageMomentumOrb = new ArrowDamageMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
+                    arrowDamageMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    level.addFreshEntity(arrowDamageMomentumOrb);
                 }
 
             } else {

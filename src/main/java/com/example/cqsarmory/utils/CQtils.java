@@ -42,5 +42,10 @@ public class CQtils {
             player.addEffect(new MobEffectInstance(MobEffectRegistry.INSTA_DRAW, 20 * 5, 0, false, false, true));
             instaDrawMomentumOrb.discard();
         }
+        else if (momentumOrb instanceof ArrowDamageMomentumOrb arrowDamageMomentumOrb) {
+            AbilityData.get(player).momentumOrbEffects.arrowDamageStacks += 1;
+            AbilityData.get(player).momentumOrbEffects.arrowDamageEnd = player.tickCount + (20 * 10);
+            arrowDamageMomentumOrb.discard();
+        }
     }
 }
