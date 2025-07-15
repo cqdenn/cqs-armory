@@ -443,28 +443,28 @@ public class ServerEvents {
                 Entity target = player.getLastHurtMob();
                 float rand = Utils.random.nextFloat();
 
-                //adjust values as we add more orbs
-                if (false) {
+                //adjust values as we add more orbs, weird formatting in order to leave room forcing orb spawning logic
+                if ((rand <= 0.2)) {
                     ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     explosiveMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(explosiveMomentumOrb);
                 }
-                else if (false) {
+                if ((0.2 < rand && rand <= 0.4)) {
                     SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(speedOrb);
                 }
-                else if (false) {
+                if ((0.4 < rand && rand <= 0.6)) {
                     DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     dodgeMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(dodgeMomentumOrb);
                 }
-                else if (false) {
+                if ((0.6 < rand && rand <= 0.8)) {
                     InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     instaDrawMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(instaDrawMomentumOrb);
                 }
-                else if (true) {
+                if ((0.8 < rand && rand <= 1)) {
                     ArrowDamageMomentumOrb arrowDamageMomentumOrb = new ArrowDamageMomentumOrb(EntityRegistry.MOMENTUM_ORB.get(), level, player);
                     arrowDamageMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
                     level.addFreshEntity(arrowDamageMomentumOrb);
