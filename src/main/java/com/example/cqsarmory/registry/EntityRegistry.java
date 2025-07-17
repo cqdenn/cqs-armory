@@ -1,6 +1,7 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.MomentumOrb;
 import com.example.cqsarmory.data.entity.ability.OrbExplosion;
 import com.example.cqsarmory.data.entity.ability.VolcanoExplosion;

@@ -1,16 +1,22 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class MomentumOrb extends Entity {
+public class MomentumOrb extends Entity implements GeoEntity {
 
     private Player creator = null;
 
@@ -24,6 +30,8 @@ public class MomentumOrb extends Entity {
     }
 
     public Player getCreator() { return this.creator; }
+
+    public ResourceLocation getTexture() {return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/momentum_orb.png");}
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
@@ -69,5 +77,17 @@ public class MomentumOrb extends Entity {
             discard();
         }
 
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 }
