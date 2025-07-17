@@ -92,7 +92,7 @@ public class ExtendedWeaponTier implements Tier {
         GOLD = new ExtendedWeaponTier("gold", 1.2f, 150, 1.0F, 0.0F, 5, BlockTags.INCORRECT_FOR_GOLD_TOOL, () -> Ingredient.of(new ItemLike[]{Items.GOLD_INGOT}));
         DIAMOND = new ExtendedWeaponTier("diamond", 1.5F, 250, 3.0F, 0.2F, 4, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(new ItemLike[]{Items.DIAMOND}));
         NETHERITE = new ExtendedWeaponTier("netherite", 4, 2000, 4.0F, 0.0F, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{Items.NETHERITE_INGOT}));
-        SCULK = new ExtendedWeaponTier("sculk", 2, 2000, 2.0F, 0.2F, 4, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(new ItemLike[]{Items.SCULK}));
+        SCULK = new ExtendedWeaponTier("sculk", 2, 2000, 2.0F, 0.2F, 4, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.SCULK_WEAPONSET.ingot().get()}));
         OBSIDIAN = new ExtendedWeaponTier("obsidian", 1, 3000, 4.0F, -0.3F, 4, BlockTags.INCORRECT_FOR_IRON_TOOL, () -> Ingredient.of(new ItemLike[]{Items.OBSIDIAN}));
         AMETHYST = new ExtendedWeaponTier("amethyst", 1, 300, 1.0F, 0.2F, 4, BlockTags.INCORRECT_FOR_STONE_TOOL, () -> Ingredient.of(new ItemLike[]{Items.AMETHYST_SHARD}));
         BLAZING = new ExtendedWeaponTier("blazing", 5, 2500, 2.0F, 0.4F, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.BLAZING_WEAPONSET.ingot().get()}));
