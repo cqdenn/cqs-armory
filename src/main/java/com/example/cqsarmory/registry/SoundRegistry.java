@@ -20,6 +20,8 @@ public class SoundRegistry {
     public static DeferredHolder<SoundEvent, SoundEvent> DODGE_SOUND = registerSoundEvent("dodge");
     public static DeferredHolder<SoundEvent, SoundEvent> RIPOSTE_CAST_SOUND = registerSoundEvent("riposte_cast");
     public static DeferredHolder<SoundEvent, SoundEvent> RIPOSTE_HIT_SOUND = registerSoundEvent("riposte_hit");
+    public static DeferredHolder<SoundEvent, SoundEvent> ORB_SHOT_SOUND = registerSoundEvent("orb_shot");
+
 
 
 

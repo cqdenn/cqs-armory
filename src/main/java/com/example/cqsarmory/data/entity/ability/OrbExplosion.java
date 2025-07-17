@@ -7,6 +7,8 @@ import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,7 +37,7 @@ public class OrbExplosion extends AoeEntity {
         this.setLevel(level);
     }
 
-    public int waitTime = 1;
+    public int waitTime = 20;
 
     @Override
     public void tick() {
@@ -46,7 +48,10 @@ public class OrbExplosion extends AoeEntity {
         var y = this.position().y;
         var z = this.position().z;
 
+        if (tickCount == 1) {this.playSound(SoundEvents.CREEPER_PRIMED, 1, 0.1f);}
+        if (tickCount < waitTime) {level.addParticle(ParticleTypes.FLAME, x, y, z, 0, 0, 0);}
         if (tickCount == waitTime) {
+            this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
             if (level.isClientSide) {
                 int cloudDensity = 25 + (int) (25 * radius);
                 for (int i = 0; i < cloudDensity; i++) {
@@ -59,15 +64,16 @@ public class OrbExplosion extends AoeEntity {
 
                 level.addParticle(new BlastwaveParticleOptions(new Vector3f(1, .6f, 0.3f), radius + 1), x, y, z, 0, 0, 0);
 
-            }
-            DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
-            var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
-            for (Entity target : entities) {
-                if (target instanceof LivingEntity || target instanceof MomentumOrb) {
-                    target.hurt(damageSource, damage);
+            } else {
+                DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
+                var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
+                for (Entity target : entities) {
+                    if (target instanceof LivingEntity || target instanceof MomentumOrb) {
+                        target.hurt(damageSource, damage);
+                    }
                 }
+                entities.clear();
             }
-            entities.clear();
         }
         else if (tickCount > waitTime) {discard();}
     }

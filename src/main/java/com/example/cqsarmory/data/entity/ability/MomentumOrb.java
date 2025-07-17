@@ -1,11 +1,13 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.registry.SoundRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -35,17 +37,19 @@ public class MomentumOrb extends Entity implements GeoEntity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
-
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag compound) {
-
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compound) {
+    }
 
+    @Override
+    public boolean shouldBeSaved() {
+        return false;
     }
 
     @Override
@@ -61,8 +65,13 @@ public class MomentumOrb extends Entity implements GeoEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion) {
-            CQtils.momentumOrbEffects(this);
-            return true;
+            if (!level().isClientSide) {
+                CQtils.momentumOrbEffects(this);
+                this.level().playSound(null, this.blockPosition(), SoundRegistry.ORB_SHOT_SOUND.get(), SoundSource.MASTER, 0.2f, 2f);
+                return true;
+            } else {
+                return false;
+            }
         }
         else {return false;}
     }

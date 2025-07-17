@@ -18,5 +18,10 @@
     "sounds": [
       "cqs_armory:riposte_hit"
     ]
+  },
+  "orb_shot": {
+    "sounds": [
+      "cqs_armory:orb_shot"
+    ]
   }
 }

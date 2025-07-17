@@ -9,6 +9,7 @@ import com.example.cqsarmory.network.SyncMomentumPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
+import dev.kosmx.playerAnim.core.util.Vec3f;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -442,31 +443,32 @@ public class ServerEvents {
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
                 float rand = Utils.random.nextFloat();
+                Vec3 startingPos = target.getEyePosition().add(0, 1, 0);
 
                 //adjust values as we add more orbs, weird formatting in order to leave room forcing orb spawning logic
                 if ((rand <= 0.2)) {
                     ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-                    explosiveMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    CQtils.findOrbLoc(startingPos, explosiveMomentumOrb, level);
                     level.addFreshEntity(explosiveMomentumOrb);
                 }
                 if ((0.2 < rand && rand <= 0.4)) {
                     SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.SPEED_MOMENTUM_ORB.get(), level, player);
-                    speedOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    CQtils.findOrbLoc(startingPos, speedOrb, level);
                     level.addFreshEntity(speedOrb);
                 }
                 if ((0.4 < rand && rand <= 0.6)) {
                     DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
-                    dodgeMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    CQtils.findOrbLoc(startingPos, dodgeMomentumOrb, level);
                     level.addFreshEntity(dodgeMomentumOrb);
                 }
                 if ((0.6 < rand && rand <= 0.8)) {
                     InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
-                    instaDrawMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    CQtils.findOrbLoc(startingPos, instaDrawMomentumOrb, level);
                     level.addFreshEntity(instaDrawMomentumOrb);
                 }
                 if ((0.8 < rand && rand <= 1)) {
                     ArrowDamageMomentumOrb arrowDamageMomentumOrb = new ArrowDamageMomentumOrb(EntityRegistry.ARROW_DAMAGE_MOMENTUM_ORB.get(), level, player);
-                    arrowDamageMomentumOrb.moveTo(target.getEyePosition().add(0, 1, 0));
+                    CQtils.findOrbLoc(startingPos, arrowDamageMomentumOrb, level);
                     level.addFreshEntity(arrowDamageMomentumOrb);
                 }
 
