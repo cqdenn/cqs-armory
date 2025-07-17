@@ -11,6 +11,10 @@ public class ArrowDamageMomentumOrb extends MomentumOrb{
         super(entityType, level, creator);
     }
 
+    public ArrowDamageMomentumOrb(EntityType<?> arrowDamageMomentumOrbEntityType, Level level) {
+        super(arrowDamageMomentumOrbEntityType, level);
+    }
+
     @Override
     public ResourceLocation getTexture() {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/arrow_damage_orb.png");

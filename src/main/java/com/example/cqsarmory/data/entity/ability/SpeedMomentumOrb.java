@@ -17,6 +17,10 @@ public class SpeedMomentumOrb extends MomentumOrb{
         super(entityType, level, creator);
     }
 
+    public SpeedMomentumOrb(EntityType<?> speedMomentumOrbEntityType, Level level) {
+        super(speedMomentumOrbEntityType, level);
+    }
+
     @Override
     public ResourceLocation getTexture() {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/speed_orb.png");

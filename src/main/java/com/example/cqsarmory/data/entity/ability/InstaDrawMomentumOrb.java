@@ -11,6 +11,10 @@ public class InstaDrawMomentumOrb extends MomentumOrb{
         super(entityType, level, creator);
     }
 
+    public InstaDrawMomentumOrb(EntityType<?> instaDrawMomentumOrbEntityType, Level level) {
+        super(instaDrawMomentumOrbEntityType, level);
+    }
+
     @Override
     public ResourceLocation getTexture() {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/insta_draw_orb.png");

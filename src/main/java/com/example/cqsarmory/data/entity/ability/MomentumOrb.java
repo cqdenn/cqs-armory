@@ -25,7 +25,7 @@ public class MomentumOrb extends Entity implements GeoEntity {
         this.creator = creator;
     }
 
-    public MomentumOrb(EntityType<MomentumOrb> momentumOrbEntityType, Level level) {
+    public MomentumOrb(EntityType<?> momentumOrbEntityType, Level level) {
         super(momentumOrbEntityType, level);
     }
 

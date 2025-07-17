@@ -11,6 +11,11 @@ public class DodgeMomentumOrb extends MomentumOrb{
         super(entityType, level, creator);
     }
 
+    public DodgeMomentumOrb(EntityType<?> dodgeMomentumOrbEntityType, Level level) {
+        super(dodgeMomentumOrbEntityType, level);
+
+    }
+
     @Override
     public ResourceLocation getTexture() {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/dodge_orb.png");

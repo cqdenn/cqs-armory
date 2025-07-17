@@ -17,6 +17,11 @@ public class ExplosiveMomentumOrb extends MomentumOrb{
         super(entityType, level, creator);
     }
 
+    public ExplosiveMomentumOrb(EntityType<?> explosiveMomentumOrbEntityType, Level level) {
+        super(explosiveMomentumOrbEntityType, level);
+
+    }
+
     @Override
     public ResourceLocation getTexture() {
         return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/explosive_orb.png");

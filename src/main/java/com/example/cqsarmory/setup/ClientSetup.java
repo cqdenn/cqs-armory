@@ -1,7 +1,7 @@
 package com.example.cqsarmory.setup;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.entity.renderers.MomentumOrbRenderer;
+import com.example.cqsarmory.data.entity.renderers.*;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
@@ -71,6 +71,11 @@ public class ClientSetup {
     public static void rendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.VOLCANO_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.MOMENTUM_ORB.get(), MomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), ExplosiveMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ARROW_DAMAGE_MOMENTUM_ORB.get(), ArrowDamageMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.DODGE_MOMENTUM_ORB.get(), DodgeMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), InstaDrawMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.SPEED_MOMENTUM_ORB.get(), SpeedMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ORB_EXPLOSION.get(), NoopRenderer::new);
     }
 }
