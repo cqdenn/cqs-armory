@@ -125,7 +125,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> FLASHGUARD = ITEMS.register("flashguard",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 5, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 5, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
     );
 
