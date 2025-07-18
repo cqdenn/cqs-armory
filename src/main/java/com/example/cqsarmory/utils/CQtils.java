@@ -45,7 +45,7 @@ public class CQtils {
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
 
-            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), 20, radius);
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), 20, radius); // 20 dmg tbd FIXME
             orbExplosion.moveTo(explosiveMomentumOrb.position());
             level.addFreshEntity(orbExplosion);
 
