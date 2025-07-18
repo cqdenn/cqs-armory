@@ -3,6 +3,8 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.gui.overlays.MomentumBarOverlay;
+import com.example.cqsarmory.gui.overlays.MomentumDamageOverlay;
+import com.example.cqsarmory.gui.overlays.MomentumSpeedOverlay;
 import com.example.cqsarmory.gui.overlays.RageBarOverlay;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.gui.overlays.*;
@@ -20,5 +22,7 @@ public class OverlayRegistry {
     public static void onRegisterOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("rage_overlay"), RageBarOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_overlay"), MomentumBarOverlay.getInstance());
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_speed_overlay"), MomentumSpeedOverlay.getInstance());
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_damage_overlay"), MomentumDamageOverlay.getInstance());
     }
 }

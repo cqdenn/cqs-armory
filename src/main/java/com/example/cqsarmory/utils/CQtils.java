@@ -2,9 +2,14 @@ package com.example.cqsarmory.utils;
 
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.*;
+import com.example.cqsarmory.network.SyncMomentumDamageEndPacket;
+import com.example.cqsarmory.network.SyncMomentumDamagePacket;
+import com.example.cqsarmory.network.SyncMomentumSpeedEndPacket;
+import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -12,6 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +35,12 @@ public class CQtils {
         Player player = momentumOrb.getCreator();
 
         if (momentumOrb instanceof SpeedMomentumOrb speedMomentumOrb) {
-            AbilityData.get(player).momentumOrbEffects.speedStacks += 1;
+            int newMomentumSpeedTest = (AbilityData.get(player).momentumOrbEffects.speedStacks + 1);
+            int newMomentumSpeed = Math.min(newMomentumSpeedTest, 10); // capped at 10 for some reason idk its hardcoded everywhere at this point FIXME
             AbilityData.get(player).momentumOrbEffects.speedEnd = player.tickCount + (20 * 10);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumSpeedEndPacket(player.tickCount + (20 * 10)));
+            AbilityData.get(player).momentumOrbEffects.speedStacks = newMomentumSpeed;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumSpeedPacket(newMomentumSpeed));
             speedMomentumOrb.discard();
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
@@ -47,8 +57,12 @@ public class CQtils {
             player.addEffect(new MobEffectInstance(MobEffectRegistry.INSTA_DRAW, 20 * 5, 0, false, false, true));
             instaDrawMomentumOrb.discard();
         } else if (momentumOrb instanceof ArrowDamageMomentumOrb arrowDamageMomentumOrb) {
-            AbilityData.get(player).momentumOrbEffects.arrowDamageStacks += 1;
+            int newMomentumDamageTest = (AbilityData.get(player).momentumOrbEffects.arrowDamageStacks + 1);
+            int newMomentumDamage = Math.min(newMomentumDamageTest, 10); // capped at 10 for some reason idk its hardcoded everywhere at this point FIXME
             AbilityData.get(player).momentumOrbEffects.arrowDamageEnd = player.tickCount + (20 * 10);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumDamageEndPacket(player.tickCount + (20 * 10)));
+            AbilityData.get(player).momentumOrbEffects.arrowDamageStacks = newMomentumDamage;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumDamagePacket(newMomentumDamage));
             arrowDamageMomentumOrb.discard();
         }
     }

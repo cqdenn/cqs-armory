@@ -2,9 +2,7 @@ package com.example.cqsarmory;
 
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.gui.overlays.RageBarOverlay;
-import com.example.cqsarmory.network.StartSuckingPacket;
-import com.example.cqsarmory.network.SyncMomentumPacket;
-import com.example.cqsarmory.network.SyncRagePacket;
+import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
@@ -151,6 +149,10 @@ public class CqsArmory
             payloadRegistrar.playToServer(StartSuckingPacket.TYPE, StartSuckingPacket.STREAM_CODEC, StartSuckingPacket::handle);
             payloadRegistrar.playToClient(SyncRagePacket.TYPE, SyncRagePacket.STREAM_CODEC, SyncRagePacket::handle);
             payloadRegistrar.playToClient(SyncMomentumPacket.TYPE, SyncMomentumPacket.STREAM_CODEC, SyncMomentumPacket::handle);
+            payloadRegistrar.playToClient(SyncMomentumSpeedPacket.TYPE, SyncMomentumSpeedPacket.STREAM_CODEC, SyncMomentumSpeedPacket::handle);
+            payloadRegistrar.playToClient(SyncMomentumSpeedEndPacket.TYPE, SyncMomentumSpeedEndPacket.STREAM_CODEC, SyncMomentumSpeedEndPacket::handle);
+            payloadRegistrar.playToClient(SyncMomentumDamagePacket.TYPE, SyncMomentumDamagePacket.STREAM_CODEC, SyncMomentumDamagePacket::handle);
+            payloadRegistrar.playToClient(SyncMomentumDamageEndPacket.TYPE, SyncMomentumDamageEndPacket.STREAM_CODEC, SyncMomentumDamageEndPacket::handle);
         }
 
         @SubscribeEvent

@@ -5,7 +5,9 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.MjolnirItem;
+import com.example.cqsarmory.network.SyncMomentumDamagePacket;
 import com.example.cqsarmory.network.SyncMomentumPacket;
+import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
@@ -387,7 +389,7 @@ public class ServerEvents {
         Player player = event.getEntity();
         if (!player.level().isClientSide) {
             var speedStacks = AbilityData.get(player).momentumOrbEffects.speedStacks;
-            //capped at +100% speed, TBD FIXME
+            //capped at +100% speed, TBD, fix in momentumspeedoverlay if changed FIXME
             float speed = (float) Math.min(speedStacks * 0.1, 1);
 
             ResourceLocation orbSpeedModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_speed_modifier");
@@ -399,7 +401,9 @@ public class ServerEvents {
                 attributeinstance.addTransientModifier(speedModifierOrb);
             }
             if (AbilityData.get(player).momentumOrbEffects.speedEnd < player.tickCount && player.level().getGameTime() % 20 == 0) {
-                AbilityData.get(player).momentumOrbEffects.speedStacks = Math.max(AbilityData.get(player).momentumOrbEffects.speedStacks - 1, 0);
+                int newSpeedStacks = Math.max(AbilityData.get(player).momentumOrbEffects.speedStacks - 1, 0);
+                AbilityData.get(player).momentumOrbEffects.speedStacks = newSpeedStacks;
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumSpeedPacket(newSpeedStacks));
             }
         }
 
@@ -410,7 +414,7 @@ public class ServerEvents {
         Player player = event.getEntity();
         if (!player.level().isClientSide) {
             var dmgStacks = AbilityData.get(player).momentumOrbEffects.arrowDamageStacks;
-            //capped at +100% dmg, TBD FIXME
+            //capped at +100% dmg, TBD, fix in momentumdamageoverlay if changed FIXME
             float dmg = (float) Math.min(dmgStacks * 0.1, 1);
 
             ResourceLocation orbDmgModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_dmg_modifier");
@@ -422,7 +426,9 @@ public class ServerEvents {
                 attributeinstance.addTransientModifier(dmgModifierOrb);
             }
             if (AbilityData.get(player).momentumOrbEffects.arrowDamageEnd < player.tickCount && player.level().getGameTime() % 20 == 0) {
-                AbilityData.get(player).momentumOrbEffects.arrowDamageStacks = Math.max(AbilityData.get(player).momentumOrbEffects.arrowDamageStacks - 1, 0);
+                int newDamageStacks = Math.max(AbilityData.get(player).momentumOrbEffects.arrowDamageStacks - 1, 0);
+                AbilityData.get(player).momentumOrbEffects.arrowDamageStacks = newDamageStacks;
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumDamagePacket(newDamageStacks));
             }
         }
 
