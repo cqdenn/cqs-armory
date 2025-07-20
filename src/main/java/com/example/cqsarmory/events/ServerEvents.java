@@ -526,11 +526,12 @@ public class ServerEvents {
     @SubscribeEvent
     public static void focus(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
+        float focusThreshold = 0.7f;
 
-        if (AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < 0.7) {
+        if (AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < focusThreshold) {
             AbilityData.get(player).focused = false;
         }
-        if (!AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= 0.7) {
+        if (!AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= focusThreshold) {
             AbilityData.get(player).focused = true;
         }
     }
