@@ -282,7 +282,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void stopUsingShield (LivingEntityUseItemEvent.Stop event) {
+    public static void stopUsingShield(LivingEntityUseItemEvent.Stop event) {
         LivingEntity livingEntity = event.getEntity();
         Item item = livingEntity.getUseItem().getItem();
 
@@ -294,7 +294,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void shieldBlock (LivingShieldBlockEvent event) {
+    public static void shieldBlock(LivingShieldBlockEvent event) {
         LivingEntity livingEntity = event.getEntity();
         float damage = event.getBlockedDamage();
         if (event.getOriginalBlock()) {
@@ -312,7 +312,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void shieldEffects (LivingShieldBlockEvent event) {
+    public static void shieldEffects(LivingShieldBlockEvent event) {
         boolean blocked = event.getOriginalBlock();
         LivingEntity defender = event.getEntity();
         Entity attacker = event.getDamageSource().getEntity();
@@ -329,7 +329,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void rageOnHit (LivingDamageEvent.Pre event) {
+    public static void rageOnHit(LivingDamageEvent.Pre event) {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
 
@@ -354,7 +354,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void outOfCombatRageLoss (PlayerTickEvent.Pre event) {
+    public static void outOfCombatRageLoss(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         if (player.level().isClientSide) {
             return;
@@ -362,7 +362,7 @@ public class ServerEvents {
 
         if (!AbilityData.inCombatRage(player) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
-            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE) .getValue();
+            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
         }
@@ -435,7 +435,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void momentumOnHit (LivingDamageEvent.Pre event) {
+    public static void momentumOnHit(LivingDamageEvent.Pre event) {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
 
@@ -498,7 +498,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void outOfCombatMomentumLoss (PlayerTickEvent.Pre event) {
+    public static void outOfCombatMomentumLoss(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         if (player.level().isClientSide) {
             return;
@@ -506,7 +506,7 @@ public class ServerEvents {
 
         if (!AbilityData.inCombatMomentum(player) && player.level().getGameTime() % 20 == 0) {
             float newMomentumTest = ((float) (AbilityData.get(player).getMomentum() - 5));
-            float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM) .getValue();
+            float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
             AbilityData.get(player).setMomentum(newMomentum);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
 
@@ -514,12 +514,24 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void shootMomentumOrb (ProjectileImpactEvent event) {
+    public static void shootMomentumOrb(ProjectileImpactEvent event) {
         if (event.getRayTraceResult() instanceof EntityHitResult entityHitResult) {
             Entity entity = entityHitResult.getEntity();
             if (entity instanceof MomentumOrb momentumOrb && !DamageSources.isFriendlyFireBetween(momentumOrb.getCreator(), event.getProjectile().getOwner()) && momentumOrb.getCreator() != event.getProjectile().getOwner()) {
                 event.setCanceled(true);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void focus(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+
+        if (AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < 0.7) {
+            AbilityData.get(player).focused = false;
+        }
+        if (!AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= 0.7) {
+            AbilityData.get(player).focused = true;
         }
     }
 

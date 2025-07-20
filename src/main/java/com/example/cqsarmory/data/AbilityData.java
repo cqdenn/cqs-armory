@@ -17,6 +17,7 @@ public class AbilityData {
     private float momentum;
     public int combatEndRage;
     public int combatEndMomentum;
+    public boolean focused;
 
     public float getRage() {
         return rage;
