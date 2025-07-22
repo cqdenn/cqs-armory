@@ -2,10 +2,12 @@ package com.example.cqsarmory.data.enchants;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,7 +28,7 @@ public record LightningAspect(LevelBasedValue bounces) implements EnchantmentEnt
             LivingEntity attacker = livingEntity.getLastAttacker();
             ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
             //FIXME bow no work D:
-            chainLightning.setDamage(attacker == null ? 4 : (float) (attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)) * 0.5f);
+            chainLightning.setDamage(attacker == null ? 4 : Math.max((float) ((attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)) * 0.5f), (float)  (attacker.getAttributeValue(BowAttributes.ARROW_DAMAGE)) * 0.5f));
             chainLightning.maxConnections = (int) bounces.calculate(enchantmentLevel);
             chainLightning.range = 8;
             level.addFreshEntity(chainLightning);
