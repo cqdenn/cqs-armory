@@ -66,7 +66,7 @@ public class MomentumOrb extends Entity implements GeoEntity {
     public boolean hurt(DamageSource source, float amount) {
         if (DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion) {
             if (!level().isClientSide) {
-                CQtils.momentumOrbEffects(this);
+                CQtils.momentumOrbEffects(this, amount);
                 this.level().playSound(null, this.blockPosition(), SoundRegistry.ORB_SHOT_SOUND.get(), SoundSource.MASTER, 0.2f, 2f);
                 return true;
             } else {

@@ -1,6 +1,7 @@
 package com.example.cqsarmory.utils;
 
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.network.SyncMomentumDamageEndPacket;
 import com.example.cqsarmory.network.SyncMomentumDamagePacket;
@@ -14,6 +15,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +32,7 @@ public class CQtils {
         player.level().broadcastEntityEvent(player, (byte) 30);
     }
 
-    public static void momentumOrbEffects(MomentumOrb momentumOrb) {
+    public static void momentumOrbEffects(MomentumOrb momentumOrb, float incomingDamage) {
         Level level = momentumOrb.level();
         Player player = momentumOrb.getCreator();
 
@@ -44,8 +46,9 @@ public class CQtils {
             speedMomentumOrb.discard();
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
+            float dmg = incomingDamage;
 
-            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), 20, radius); // 20 dmg tbd FIXME
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg * 2, radius); // dmg tbd FIXME
             orbExplosion.moveTo(explosiveMomentumOrb.position());
             level.addFreshEntity(orbExplosion);
 

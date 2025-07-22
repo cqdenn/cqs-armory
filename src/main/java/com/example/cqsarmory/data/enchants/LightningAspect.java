@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.enchants;
 
+import com.example.cqsarmory.data.DamageData;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.redspace.bowattributes.registry.BowAttributes;
@@ -11,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.LevelBasedValue;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
@@ -26,8 +28,9 @@ public record LightningAspect(LevelBasedValue bounces) implements EnchantmentEnt
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
         if (entity instanceof LivingEntity livingEntity) {
             LivingEntity attacker = livingEntity.getLastAttacker();
+            float dmg = DamageData.get(livingEntity).lastDamage;
             ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
-            chainLightning.setDamage(attacker == null ? 4 : Math.max((float) ((attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)) * 0.5f), (float)  (attacker.getAttributeValue(BowAttributes.ARROW_DAMAGE)) * 0.5f));
+            chainLightning.setDamage(dmg);
             chainLightning.maxConnections = (int) bounces.calculate(enchantmentLevel);
             chainLightning.range = 8;
             level.addFreshEntity(chainLightning);
