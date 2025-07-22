@@ -3,6 +3,7 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.MjolnirItem;
 import com.example.cqsarmory.network.SyncMomentumDamagePacket;
@@ -79,6 +80,9 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void stunned(LivingIncomingDamageEvent event) {
+        DamageData.get(event.getEntity()).lastSource = event.getSource();
+        DamageData.get(event.getEntity()).lastDamage = event.getAmount();
+
         if (event.getSource().getEntity() instanceof LivingEntity livingEntity && livingEntity.hasEffect(MobEffectRegistry.STUNNED)) {
             event.setCanceled(true);
         }
