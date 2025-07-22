@@ -27,7 +27,6 @@ public record LightningAspect(LevelBasedValue bounces) implements EnchantmentEnt
         if (entity instanceof LivingEntity livingEntity) {
             LivingEntity attacker = livingEntity.getLastAttacker();
             ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
-            //FIXME bow no work D:
             chainLightning.setDamage(attacker == null ? 4 : Math.max((float) ((attacker.getAttributeValue(Attributes.ATTACK_DAMAGE)) * 0.5f), (float)  (attacker.getAttributeValue(BowAttributes.ARROW_DAMAGE)) * 0.5f));
             chainLightning.maxConnections = (int) bounces.calculate(enchantmentLevel);
             chainLightning.range = 8;
