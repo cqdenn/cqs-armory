@@ -2,6 +2,7 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.data.DamageData;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -14,4 +15,8 @@ public class EntityDataAttachmentRegistry {
     public static final Supplier<AttachmentType<AbilityData>> ABILITY_DATA = ATTACHMENT_TYPES.register(
             "ability_data", () -> AttachmentType.builder(() -> new AbilityData()).build()
     );
+    public static final Supplier<AttachmentType<DamageData>> DAMAGE_DATA = ATTACHMENT_TYPES.register(
+            "damage_data", () -> AttachmentType.builder(() -> new DamageData()).build()
+    );
+
 }
