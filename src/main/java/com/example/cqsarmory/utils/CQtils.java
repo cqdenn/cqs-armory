@@ -32,7 +32,7 @@ public class CQtils {
         player.level().broadcastEntityEvent(player, (byte) 30);
     }
 
-    public static void momentumOrbEffects(MomentumOrb momentumOrb, float incomingDamage) {
+    public static void momentumOrbEffects(MomentumOrb momentumOrb) {
         Level level = momentumOrb.level();
         Player player = momentumOrb.getCreator();
 
@@ -46,7 +46,7 @@ public class CQtils {
             speedMomentumOrb.discard();
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
-            float dmg = incomingDamage;
+            float dmg = DamageData.get(explosiveMomentumOrb).lastDamage;
 
             OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg * 2, radius); // dmg tbd FIXME
             orbExplosion.moveTo(explosiveMomentumOrb.position());
