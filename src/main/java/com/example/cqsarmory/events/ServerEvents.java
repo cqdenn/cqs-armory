@@ -166,14 +166,15 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void frostAspect (ArrowLooseEvent event) {
-        ItemStack bow = event.getBow();
-        Player player = event.getEntity();
-        Holder.Reference<Enchantment> frostAspectHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
-        int frostAspectLevel = player.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
+    public static void frostAspect (LivingDamageEvent.Pre event) {
+        //ItemStack bow = event.getBow();
+        if (event.getSource().getEntity() instanceof Player player) {
+            Holder.Reference<Enchantment> frostAspectHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
+            int frostAspectLevel = player.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
 
-        if (frostAspectLevel > 0) {
-            player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 80, 0, false, false, true));
+            if (frostAspectLevel > 0) {
+                player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 20, 0, false, false, true));
+            }
         }
     }
 
