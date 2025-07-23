@@ -173,7 +173,7 @@ public class ServerEvents {
             int frostAspectLevel = player.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
 
             if (frostAspectLevel > 0) {
-                player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 20, 0, false, false, true));
+                player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 1, 0, false, false, true));
             }
         }
     }
