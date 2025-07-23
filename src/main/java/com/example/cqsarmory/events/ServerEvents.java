@@ -56,6 +56,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
@@ -162,6 +163,18 @@ public class ServerEvents {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public static void frostAspect (ArrowLooseEvent event) {
+        ItemStack bow = event.getBow();
+        Player player = event.getEntity();
+        Holder.Reference<Enchantment> frostAspectHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
+        int frostAspectLevel = player.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
+
+        if (frostAspectLevel > 0) {
+            player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 80, 0, false, false, true));
+        }
     }
 
     @SubscribeEvent
