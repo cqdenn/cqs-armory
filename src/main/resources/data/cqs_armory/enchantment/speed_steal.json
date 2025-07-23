@@ -3,8 +3,8 @@
     "translate": "enchantment.cqs_armory.speed_steal"
   },
   "exclusive_set": "#cqs_armory:exclusive_set/stealing",
-  "supported_items": "#minecraft:enchantable/weapon",
-  "primary_items": "#minecraft:enchantable/sword",
+  "supported_items": "#cqs_armory:enchantable/weapon_item",
+  "primary_items": "#cqs_armory:enchantable/weapon_item",
   "weight": 4,
   "max_level": 3,
   "min_cost": {

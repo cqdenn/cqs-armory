@@ -3,8 +3,8 @@
     "translate": "enchantment.cqs_armory.poison_aspect"
   },
   "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
-  "supported_items": "#minecraft:enchantable/fire_aspect",
-  "primary_items": "#minecraft:enchantable/sword",
+  "supported_items": "#cqs_armory:enchantable/weapon_item",
+  "primary_items": "#cqs_armory:enchantable/weapon_item",
   "weight": 4,
   "max_cost": {
     "base": 60,
@@ -31,13 +31,7 @@
             "per_level_above_first": 80.0
           }
         },
-        "enchanted": "attacker",
-        "requirements": {
-          "condition": "minecraft:damage_source_properties",
-          "predicate": {
-            "is_direct": true
-          }
-        }
+        "enchanted": "attacker"
       }
     ]
   }
