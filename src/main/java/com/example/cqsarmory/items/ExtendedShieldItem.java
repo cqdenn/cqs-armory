@@ -69,11 +69,11 @@ public class ExtendedShieldItem extends ShieldItem implements IPresetSpellContai
                 new AttributeModifier(
                         ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_block_strength"), blockStrength, AttributeModifier.Operation.ADD_VALUE
                 ),
-                EquipmentSlotGroup.OFFHAND
+                EquipmentSlotGroup.HAND
         );
 
         for (AttributeContainer holder : attributes) {
-            builder.add(holder.attribute(), holder.createModifier(EquipmentSlot.OFFHAND.getName()), EquipmentSlotGroup.OFFHAND);
+            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name()), EquipmentSlotGroup.HAND);
         }
         return builder.build();
     }
