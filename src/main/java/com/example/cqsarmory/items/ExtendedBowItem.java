@@ -1,6 +1,7 @@
 package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
+import io.redspace.bowattributes.BowAttributeLib;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
@@ -63,13 +64,13 @@ public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
                 .add(
                         BowAttributes.ARROW_DAMAGE,
                         new AttributeModifier(
-                                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_arrow_damage"), arrowDamage, AttributeModifier.Operation.ADD_VALUE
+                                BowAttributeLib.BASE_ARROW_DAMAGE_ID, arrowDamage, AttributeModifier.Operation.ADD_VALUE
                         ),
                         EquipmentSlotGroup.HAND
                 )
                 .add(
                         BowAttributes.DRAW_SPEED,
-                        new AttributeModifier(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_draw_speed"), drawSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BowAttributeLib.BASE_DRAWSPEED_ID, drawSpeed, AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.HAND
                 );
 
