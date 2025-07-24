@@ -14,7 +14,7 @@
   },
   "primary_items": "#minecraft:enchantable/sword",
   "slots": [
-    "mainhand"
+    "hand"
   ],
   "supported_items": "#cqs_armory:enchantable/can_have_attack_curse",
   "weight": 1

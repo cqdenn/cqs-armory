@@ -64,7 +64,7 @@
     "per_level_above_first": 20
   },
   "slots": [
-    "mainhand"
+    "hand"
   ],
   "weight": 2
 }

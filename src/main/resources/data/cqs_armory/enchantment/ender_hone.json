@@ -36,7 +36,7 @@
   },
   "primary_items": "#cqs_armory:enchantable/weapon_item",
   "slots": [
-    "mainhand"
+    "hand"
   ],
   "supported_items": "#cqs_armory:enchantable/weapon_item",
   "weight": 5

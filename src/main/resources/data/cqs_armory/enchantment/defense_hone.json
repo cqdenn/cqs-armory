@@ -17,7 +17,7 @@
   },
   "anvil_cost": 4,
   "slots": [
-    "mainhand"
+    "hand"
   ],
   "effects": {
     "minecraft:attributes": [
