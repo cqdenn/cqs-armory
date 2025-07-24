@@ -113,20 +113,26 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 100, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedShieldItem.createAttributes(100, new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 1)))
     );
 
     public static final DeferredItem<Item> THORNBARK = ITEMS.register("thornbark",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 15, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedShieldItem.createAttributes(15, new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
     );
 
     public static final DeferredItem<Item> FLASHGUARD = ITEMS.register("flashguard",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedShieldItem.createAttributes(new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 5, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedShieldItem.createAttributes(5, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})),
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
+    );
+
+    public static final DeferredItem<Item> LONGBOW = ITEMS.register("longbow",
+            () -> new ExtendedBowItem(new Item.Properties().stacksTo(1)
+                    .attributes(ExtendedBowItem.createAttributes(12, 0.8f, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)})),
+                    SpellDataRegistryHolder.of(/*add spell FIXME*/))
     );
 
     public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",

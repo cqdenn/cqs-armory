@@ -1,9 +1,6 @@
 package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.registry.AttributeRegistry;
-import com.example.cqsarmory.registry.ExtendedWeaponTier;
-import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
@@ -16,21 +13,20 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class ExtendedShieldItem extends ShieldItem implements IPresetSpellContainer {
+public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
 
     List<SpellData> spellData = null;
     SpellDataRegistryHolder[] spellDataRegistryHolders;
 
-    public ExtendedShieldItem(Properties pProperties, SpellDataRegistryHolder[] spellDataRegistryHolders) {
+    public ExtendedBowItem(Properties pProperties, SpellDataRegistryHolder[] spellDataRegistryHolders) {
         super(pProperties);
         this.spellDataRegistryHolders = spellDataRegistryHolders;
 
@@ -59,21 +55,26 @@ public class ExtendedShieldItem extends ShieldItem implements IPresetSpellContai
     }
 
 
-    public static ItemAttributeModifiers createAttributes(int blockStrength, AttributeContainer[] attributes) {
+    public static ItemAttributeModifiers createAttributes(float arrowDamage, float drawSpeed, AttributeContainer[] attributes) {
 
 
 
         var builder = ItemAttributeModifiers.builder()
                 .add(
-                AttributeRegistry.BLOCK_STRENGTH,
-                new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_block_strength"), blockStrength, AttributeModifier.Operation.ADD_VALUE
-                ),
-                EquipmentSlotGroup.OFFHAND
-        );
+                        BowAttributes.ARROW_DAMAGE,
+                        new AttributeModifier(
+                                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_arrow_damage"), arrowDamage, AttributeModifier.Operation.ADD_VALUE
+                        ),
+                        EquipmentSlotGroup.HAND
+                )
+                .add(
+                        BowAttributes.DRAW_SPEED,
+                        new AttributeModifier(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_draw_speed"), drawSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.HAND
+                );
 
         for (AttributeContainer holder : attributes) {
-            builder.add(holder.attribute(), holder.createModifier(EquipmentSlot.OFFHAND.getName()), EquipmentSlotGroup.OFFHAND);
+            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name()), EquipmentSlotGroup.HAND);
         }
         return builder.build();
     }
