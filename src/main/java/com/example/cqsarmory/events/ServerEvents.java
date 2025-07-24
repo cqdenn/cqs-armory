@@ -140,7 +140,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void fireAspectBuff(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
-        Entity source = event.getSource().getDirectEntity();
+        Entity source = event.getSource().getEntity();
 
         if (source == null) {
             return;
@@ -151,7 +151,7 @@ public class ServerEvents {
         if (source instanceof LivingEntity attacker) {
             int fireAspectLevel = attacker.getMainHandItem().getEnchantmentLevel(fireAspectHolder);
 
-            if (fireAspectLevel > 0 && !level.isClientSide) {
+            if (fireAspectLevel > 0 && !level.isClientSide && AbilityData.get(attacker).fireAspectCooldownEnd < attacker.tickCount) {
                 FireField fire = new FireField(level);
                 fire.setOwner(attacker);
                 fire.setDuration(100);
@@ -160,6 +160,7 @@ public class ServerEvents {
                 fire.setCircular();
                 fire.moveTo(target.position());
                 level.addFreshEntity(fire);
+                AbilityData.get(attacker).fireAspectCooldownEnd = attacker.tickCount + (20 * 5);
             }
         }
 
