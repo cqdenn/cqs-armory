@@ -33,27 +33,10 @@ import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_DAMAG
 import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_SPEED_ID;
 
 public class ItemRegistry {
-
     public static final List<Weaponset> WEAPONSETS = new ArrayList<>();
 
-    public static ItemAttributeModifiers createCustomAttributes(Tier tier, float attackDamage, float attackSpeed, float maxHealth) {
-        return ItemAttributeModifiers.builder()
-                .add(
-                        Attributes.ATTACK_DAMAGE,
-                        new AttributeModifier(
-                                BASE_ATTACK_DAMAGE_ID, (double)((float)attackDamage + tier.getAttackDamageBonus()), AttributeModifier.Operation.ADD_VALUE
-                        ),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .add(
-                        Attributes.ATTACK_SPEED,
-                        new AttributeModifier(BASE_ATTACK_SPEED_ID, (double)attackSpeed, AttributeModifier.Operation.ADD_VALUE),
-                        EquipmentSlotGroup.MAINHAND
-                )
-                .build();
-    }
-
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
+
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
