@@ -20,7 +20,7 @@ public class DataGenerators {
                 new ItemModelDataGenerator(packOutput, existingFileHelper));
 
         generator.addProvider(event.includeServer(),
-                new SwordTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
+                new CQItemTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
 
     }
 }
