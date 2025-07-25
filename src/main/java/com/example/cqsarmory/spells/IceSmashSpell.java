@@ -9,6 +9,7 @@ import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
+import io.redspace.ironsspellbooks.entity.spells.ice_tomb.IceTombEntity;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -96,14 +97,12 @@ public class IceSmashSpell extends AbstractSpell {
             if (target instanceof LivingEntity livingEntity) {
                 if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
                     Vec3 spawn = livingEntity.position();
-                    IceBlockProjectile iceBlock = new IceBlockProjectile(level, entity, livingEntity);
-                    iceBlock.moveTo(raiseWithCollision(spawn, 4, level));
-                    if (!level.noBlockCollision(iceBlock, iceBlock.getBoundingBox())) {
-                        iceBlock.noPhysics = true;
-                    }
-                    iceBlock.setAirTime(25);
-                    iceBlock.setDamage(40);
-                    level.addFreshEntity(iceBlock);
+                    IceTombEntity iceTombEntity = new IceTombEntity(level, entity);
+                    iceTombEntity.setEvil();
+                    iceTombEntity.moveTo(spawn);
+                    iceTombEntity.setLifetime(40);
+                    level.addFreshEntity(iceTombEntity);
+                    livingEntity.startRiding(iceTombEntity, true);
                 }
             }
         }
