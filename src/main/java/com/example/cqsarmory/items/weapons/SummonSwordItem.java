@@ -1,4 +1,4 @@
-package com.example.cqsarmory.items;
+package com.example.cqsarmory.items.weapons;
 
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -71,7 +71,7 @@ public class SummonSwordItem extends SwordItem {
                 DamageSources.applyDamage(victim, damage * p, SpellRegistry.SACRIFICE_SPELL.get().getDamageSource(zombie, zombie.getSummoner()));
             }
         }
-        CameraShakeManager.addCameraShake(new CameraShakeData(10, zombie.position(), 20));
+        //CameraShakeManager.addCameraShake(new CameraShakeData(10, zombie.position(), 20));
         zombie.remove(Entity.RemovalReason.KILLED);
         level.playSound(null, zombie.blockPosition(), SoundRegistry.BLOOD_EXPLOSION.get(), SoundSource.PLAYERS, 3, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
     }

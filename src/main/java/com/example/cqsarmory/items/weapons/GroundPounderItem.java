@@ -1,4 +1,4 @@
-package com.example.cqsarmory.items;
+package com.example.cqsarmory.items.weapons;
 
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import net.minecraft.core.particles.ParticleTypes;

@@ -1,17 +1,14 @@
-package com.example.cqsarmory.items;
+package com.example.cqsarmory.items.weapons;
 
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Random;
 
 public class VilethornItem extends SwordItem {
     public VilethornItem(Tier tier, Item.Properties properties) {
