@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.SoundRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -12,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -64,6 +66,12 @@ public class MomentumOrb extends Entity implements GeoEntity {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
+        DamageData.get(this).lastSource = source;
+        if (source.getDirectEntity() instanceof Arrow arrow) {
+            DamageData.get(this).lastDamage = (float) arrow.getBaseDamage();
+        } else {
+            DamageData.get(this).lastDamage = amount;
+        }
         if (DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion) {
             if (!level().isClientSide) {
                 CQtils.momentumOrbEffects(this);
