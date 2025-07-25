@@ -18,6 +18,7 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -165,15 +166,27 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void frostAspect (LivingDamageEvent.Pre event) {
-        //ItemStack bow = event.getBow();
-        if (event.getSource().getEntity() instanceof Player player) {
-            Holder.Reference<Enchantment> frostAspectHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
-            int frostAspectLevel = player.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
+    public static void frostAspect(LivingDeathEvent event) {
+        var damageSource = event.getSource();
+        LivingEntity entity = event.getEntity();
+        Level level = entity.level();
+        if (damageSource != null && damageSource.getEntity() instanceof LivingEntity attacker) {
+            Holder.Reference<Enchantment> frostAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
+            int frostAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
+            int frostAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(frostAspectHolder);
+            int frostAspectLevel = frostAspectMainHand + frostAspectOffHand;
+            int damage = event.getSource().getDirectEntity() instanceof Arrow arrow ? (int) arrow.getBaseDamage() : (int) DamageData.get(entity).lastDamage;
 
             if (frostAspectLevel > 0) {
-                player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FROSTBITTEN_STRIKES, 1, 0, false, false, true));
+                FrozenHumanoid iceClone = new FrozenHumanoid(level, entity);
+                iceClone.setSummoner(attacker);
+                iceClone.setShatterDamage(damage);
+                iceClone.setDeathTimer(20 * 5);
+                level.addFreshEntity(iceClone);
+                entity.deathTime = 1000;
+                iceClone.playSound(SoundRegistry.FROSTBITE_FREEZE.get(), 2, Utils.random.nextInt(9, 11) * .1f);
             }
+
         }
     }
 
