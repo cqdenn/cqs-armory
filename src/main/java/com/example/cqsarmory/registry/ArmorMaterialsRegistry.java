@@ -11,7 +11,6 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -27,10 +26,10 @@ public class ArmorMaterialsRegistry {
     }
 
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> HUNTER = register("hunter",
-            makeArmorMap(0, 0, 0, 0),
+            makeArmorMap(2, 6, 5, 2),
             15,
-            SoundEvents.ARMOR_EQUIP_DIAMOND,
-            () -> Ingredient.of(Tags.Items.INGOTS_IRON),
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
             0,
             0);
 

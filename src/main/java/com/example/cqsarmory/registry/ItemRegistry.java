@@ -3,22 +3,17 @@ package com.example.cqsarmory.registry;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
-import io.redspace.bowattributes.registry.BowAttributes;
+import com.example.cqsarmory.items.armor.HunterArmorItem;
+import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.item.armor.WanderingMagicianArmorItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Unit;
-import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ChargedProjectiles;
-import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,13 +24,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_DAMAGE_ID;
-import static net.neoforged.neoforge.common.util.AttributeUtil.BASE_ATTACK_SPEED_ID;
-
 public class ItemRegistry {
     public static final List<Weaponset> WEAPONSETS = new ArrayList<>();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
+
+    public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_CHESTPLATE = ITEMS.register("hunter_chestplate", () -> new HunterArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_LEGGINGS = ITEMS.register("hunter_leggings", () -> new HunterArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22)), new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
 
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));

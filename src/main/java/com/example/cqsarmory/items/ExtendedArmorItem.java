@@ -1,6 +1,8 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.registry.AttributeRegistry;
 import com.google.common.base.Suppliers;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
@@ -11,6 +13,9 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import software.bernie.geckolib.animatable.GeoItem;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Supplier;
 
@@ -48,6 +53,29 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
                     return builder.build();
                 }
         );
+    }
+
+    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit, AttributeContainer extraAttribute) {
+        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE), extraAttribute};
+    }
+
+    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit) {
+        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE)};
+    }
+
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
+    }
+
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers() {
+        return this.defaultModifiers.get();
     }
 
 

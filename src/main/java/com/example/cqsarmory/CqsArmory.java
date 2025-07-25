@@ -103,6 +103,7 @@ public class CqsArmory
         SoundRegistry.register(modEventBus);
         AttributeRegistry.register(modEventBus);
         AssetHandlerRegistry.register(modEventBus);
+        ArmorMaterialsRegistry.register(modEventBus);
 
 
 
