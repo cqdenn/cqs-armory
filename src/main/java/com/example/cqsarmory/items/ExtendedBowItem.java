@@ -21,6 +21,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
 
@@ -75,7 +76,7 @@ public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
                 );
 
         for (AttributeContainer holder : attributes) {
-            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name()), EquipmentSlotGroup.HAND);
+            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name().toLowerCase(Locale.ROOT)), EquipmentSlotGroup.HAND);
         }
         return builder.build();
     }
