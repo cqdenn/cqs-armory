@@ -7,6 +7,7 @@ import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -92,6 +93,38 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> JUGGERNAUT_LEGGINGS = ITEMS.register("juggernaut_leggings", () -> new JuggernautArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> JUGGERNAUT_BOOTS = ITEMS.register("juggernaut_boots", () -> new JuggernautArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 
+    //mage dmg
+    public static final DeferredHolder<Item, Item> APPRENTICE_HELMET = ITEMS.register("apprentice_helmet", () -> new ApprenticeArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_CHESTPLATE = ITEMS.register("apprentice_chestplate", () -> new ApprenticeArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_LEGGINGS = ITEMS.register("apprentice_leggings", () -> new ApprenticeArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_BOOTS = ITEMS.register("apprentice_boots", () -> new ApprenticeArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+
+    public static final DeferredHolder<Item, Item> MAGUS_HELMET = ITEMS.register("magus_helmet", () -> new MagusArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_CHESTPLATE = ITEMS.register("magus_chestplate", () -> new MagusArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_LEGGINGS = ITEMS.register("magus_leggings", () -> new MagusArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_BOOTS = ITEMS.register("magus_boots", () -> new MagusArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+
+    public static final DeferredHolder<Item, Item> ARCHMAGE_HELMET = ITEMS.register("archmage_helmet", () -> new ArchmageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_CHESTPLATE = ITEMS.register("archmage_chestplate", () -> new ArchmageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_LEGGINGS = ITEMS.register("archmage_leggings", () -> new ArchmageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_BOOTS = ITEMS.register("archmage_boots", () -> new ArchmageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+
+    //mage mana
+    public static final DeferredHolder<Item, Item> SEER_HELMET = ITEMS.register("seer_helmet", () -> new SeerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_CHESTPLATE = ITEMS.register("seer_chestplate", () -> new SeerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_LEGGINGS = ITEMS.register("seer_leggings", () -> new SeerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_BOOTS = ITEMS.register("seer_boots", () -> new SeerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+
+    public static final DeferredHolder<Item, Item> MYSTIC_HELMET = ITEMS.register("mystic_helmet", () -> new MysticArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_CHESTPLATE = ITEMS.register("mystic_chestplate", () -> new MysticArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_LEGGINGS = ITEMS.register("mystic_leggings", () -> new MysticArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_BOOTS = ITEMS.register("mystic_boots", () -> new MysticArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+
+    public static final DeferredHolder<Item, Item> SAGE_HELMET = ITEMS.register("sage_helmet", () -> new SageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_CHESTPLATE = ITEMS.register("sage_chestplate", () -> new SageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
@@ -169,7 +202,7 @@ public class ItemRegistry {
 
     public static final DeferredItem<Item> LONGBOW = ITEMS.register("longbow",
             () -> new ExtendedBowItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedBowItem.createAttributes(12, 0.8f, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)})),
+                    .attributes(ExtendedBowItem.createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)})),
                     SpellDataRegistryHolder.of(/*add spell FIXME*/))
     );
 
@@ -201,11 +234,15 @@ public class ItemRegistry {
                              DeferredItem spear,
                              DeferredItem rapier,
                              DeferredItem greataxe,
+                             DeferredItem shortbow,
+                             DeferredItem bow,
+                             DeferredItem recurve,
+                             DeferredItem longbow,
                              Optional<DeferredItem> ingot) implements Iterable<DeferredItem>{
 
         @Override
         public @NotNull Iterator<DeferredItem> iterator() {
-            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe).iterator();
+            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, bow, recurve, longbow).iterator();
         }
     }
 
@@ -259,6 +296,30 @@ public class ItemRegistry {
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
         );
 
+        var shortbow = ITEMS.register(name + "_shortbow",
+                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.SHORTBOW.attackDamage(), WeaponType.SHORTBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.ARROW_VOLLEY_SPELL, power.power() + 2)))//FIXME needs proper spell and attribute
+        );
+
+        var bow = ITEMS.register(name + "_bow",
+                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.BOW.attackDamage(), WeaponType.BOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+        );
+
+        var recurve = ITEMS.register(name + "_recurve_bow",
+                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+        );
+
+        var longbow = ITEMS.register(name + "_longbow",
+                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGIC_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+        );
+
         Optional<DeferredItem> ingot = Optional.empty();
 
         if (create_ingot) {
@@ -278,7 +339,7 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
 
-        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, ingot);
+        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, bow, recurve, longbow, ingot);
         WEAPONSETS.add(weaponset);
 
         return weaponset;
