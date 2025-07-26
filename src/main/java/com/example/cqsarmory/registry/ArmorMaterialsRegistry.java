@@ -25,6 +25,7 @@ public class ArmorMaterialsRegistry {
         ARMOR_MATERIALS.register(eventBus);
     }
 
+    //archer dmg
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> HUNTER = register("hunter",
             makeArmorMap(2, 6, 5, 2),
             15,
@@ -49,6 +50,32 @@ public class ArmorMaterialsRegistry {
             2,
             0);
 
+    //archer speed
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> SCOUT = register("scout",
+            makeArmorMap(2, 6, 5, 2),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
+            0,
+            0);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> RANGER = register("ranger",
+            makeArmorMap(3, 8, 6, 3),
+            15,
+            SoundEvents.ARMOR_EQUIP_CHAIN,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            1,
+            0);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> SKIRMISHER = register("skirmisher",
+            makeArmorMap(4, 9, 7, 4),
+            20,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            2,
+            0);
+
+    //melee dmg
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> WARRIOR = register("warrior",
             makeArmorMap(3, 8, 6, 3),
             15,
@@ -72,6 +99,81 @@ public class ArmorMaterialsRegistry {
             () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
             4,
             0.15f);
+
+    //melee tank
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> RAMPART = register("rampart",
+            makeArmorMap(5, 10, 8, 5),
+            15,
+            SoundEvents.ARMOR_EQUIP_CHAIN,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
+            3,
+            0.15f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> BASTION = register("bastion",
+            makeArmorMap(6, 11, 9, 6),
+            15,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            4,
+            0.2f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> JUGGERNAUT = register("juggernaut",
+            makeArmorMap(7, 12, 10, 7),
+            20,
+            SoundEvents.ARMOR_EQUIP_NETHERITE,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            5,
+            0.25f);
+
+    //mage dmg
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> APPRENTICE = register("apprentice",
+            makeArmorMap(2, 5, 4, 2),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
+            0,
+            0f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> MAGUS = register("magus",
+            makeArmorMap(3, 7, 6, 3),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            0,
+            0f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> ARCHMAGE = register("archmage",
+            makeArmorMap(4, 9, 7, 4),
+            20,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            0,
+            0f);
+
+    //mage mana
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> SEER = register("seer",
+            makeArmorMap(2, 5, 4, 2),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
+            0,
+            0f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> MYSTIC = register("mystic",
+            makeArmorMap(3, 7, 6, 3),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            0,
+            0f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> SAGE = register("sage",
+            makeArmorMap(4, 8, 7, 4),
+            20,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            0,
+            0f);
 
 
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> register(
