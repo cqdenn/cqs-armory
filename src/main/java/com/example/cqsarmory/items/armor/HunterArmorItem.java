@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
 
 public class HunterArmorItem extends ExtendedArmorItem {
     public HunterArmorItem(Type type, Properties properties, AttributeContainer extraAttribute) {
-        super(ArmorMaterialsRegistry.HUNTER, type, properties, genericArcherArmorAttributes(0.1f, 0.05f, 0, extraAttribute));
+        super(ArmorMaterialsRegistry.HUNTER, type, properties, genericArcherArmorAttributes(0.1f, 0.05f, 1, 0, extraAttribute));
     }
     public HunterArmorItem(Type type, Properties properties) {
-        super(ArmorMaterialsRegistry.HUNTER, type, properties, genericArcherArmorAttributes(0.1f, 0.05f, 0));
+        super(ArmorMaterialsRegistry.HUNTER, type, properties, genericArcherArmorAttributes(0.1f, 0.05f, 1, 0));
     }
 
 

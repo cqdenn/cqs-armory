@@ -33,6 +33,46 @@ public class ArmorMaterialsRegistry {
             0,
             0);
 
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> TRACKER = register("tracker",
+            makeArmorMap(3, 8, 6, 3),
+            15,
+            SoundEvents.ARMOR_EQUIP_CHAIN,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            1,
+            0);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> MARKSMAN = register("marksman",
+            makeArmorMap(4, 9, 7, 4),
+            20,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            2,
+            0);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> WARRIOR = register("warrior",
+            makeArmorMap(3, 8, 6, 3),
+            15,
+            SoundEvents.ARMOR_EQUIP_CHAIN,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_ONE),
+            2,
+            0.05f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> SOLDIER = register("soldier",
+            makeArmorMap(4, 9, 7, 4),
+            15,
+            SoundEvents.ARMOR_EQUIP_IRON,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_TWO),
+            3,
+            0.1f);
+
+    public static DeferredHolder<ArmorMaterial, ArmorMaterial> CHAMPION = register("champion",
+            makeArmorMap(5, 10, 8, 5),
+            20,
+            SoundEvents.ARMOR_EQUIP_NETHERITE,
+            () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
+            4,
+            0.15f);
+
 
     private static DeferredHolder<ArmorMaterial, ArmorMaterial> register(
             String name,
@@ -43,7 +83,7 @@ public class ArmorMaterialsRegistry {
             float toughness,
             float knockbackResistance
     ) {
-        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(IronsSpellbooks.id(name)));
+        List<ArmorMaterial.Layer> list = List.of(new ArmorMaterial.Layer(CqsArmory.id(name)));
         return ARMOR_MATERIALS.register(name, ()-> new ArmorMaterial(defense, enchantmentValue, equipSound, repairIngredient, list, toughness, knockbackResistance));
     }
 

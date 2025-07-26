@@ -55,12 +55,20 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
         );
     }
 
-    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit, AttributeContainer extraAttribute) {
-        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE), extraAttribute};
+    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit, float dodgeChance, AttributeContainer extraAttribute) {
+        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(AttributeRegistry.DODGE_CHANCE, dodgeChance, AttributeModifier.Operation.ADD_VALUE), extraAttribute};
     }
 
-    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit) {
-        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE)};
+    public static AttributeContainer[] genericArcherArmorAttributes (float arrowDamage, float drawSpeed, int momentumOnHit, float dodgeChance) {
+        return new AttributeContainer[]{new AttributeContainer(BowAttributes.ARROW_DAMAGE, arrowDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(BowAttributes.DRAW_SPEED, drawSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MOMENTUM_ON_HIT, momentumOnHit, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(AttributeRegistry.DODGE_CHANCE, dodgeChance, AttributeModifier.Operation.ADD_VALUE)};
+    }
+
+    public static AttributeContainer[] genericMeleeArmorAttributes (float attackDamage, float attackSpeed, int maxRage, float rageDamage, AttributeContainer extraAttribute) {
+        return new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, attackDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(Attributes.ATTACK_SPEED, attackSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_RAGE, maxRage, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(AttributeRegistry.RAGE_DAMAGE, rageDamage, AttributeModifier.Operation.ADD_VALUE), extraAttribute};
+    }
+
+    public static AttributeContainer[] genericMeleeArmorAttributes (float attackDamage, float attackSpeed, int maxRage, float rageDamage) {
+        return new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, attackDamage, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(Attributes.ATTACK_SPEED, attackSpeed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_RAGE, maxRage, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(AttributeRegistry.RAGE_DAMAGE, rageDamage, AttributeModifier.Operation.ADD_VALUE)};
     }
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
