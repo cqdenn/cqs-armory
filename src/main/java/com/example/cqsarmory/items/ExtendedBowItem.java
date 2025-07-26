@@ -1,6 +1,8 @@
 package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.registry.ExtendedWeaponTier;
+import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.bowattributes.BowAttributeLib;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
@@ -22,6 +24,9 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+
+import static io.redspace.bowattributes.BowAttributeLib.BASE_ARROW_DAMAGE_ID;
+import static io.redspace.bowattributes.BowAttributeLib.BASE_DRAWSPEED_ID;
 
 public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
 
@@ -57,7 +62,7 @@ public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
     }
 
 
-    public static ItemAttributeModifiers createAttributes(float arrowDamage, float drawSpeed, AttributeContainer[] attributes) {
+    public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float arrowDamage, float drawSpeed, AttributeContainer[] attributes) {
 
 
 
@@ -65,18 +70,18 @@ public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
                 .add(
                         BowAttributes.ARROW_DAMAGE,
                         new AttributeModifier(
-                                BowAttributeLib.BASE_ARROW_DAMAGE_ID, arrowDamage, AttributeModifier.Operation.ADD_VALUE
+                                BASE_ARROW_DAMAGE_ID, (double)((float)arrowDamage + material.getAttackDamageBonus() + power.attackDamage()), AttributeModifier.Operation.ADD_VALUE
                         ),
                         EquipmentSlotGroup.HAND
                 )
                 .add(
                         BowAttributes.DRAW_SPEED,
-                        new AttributeModifier(BowAttributeLib.BASE_DRAWSPEED_ID, drawSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        new AttributeModifier(BASE_DRAWSPEED_ID, (double)drawSpeed + material.getDrawSpeed() + power.drawspeed(), AttributeModifier.Operation.ADD_VALUE),
                         EquipmentSlotGroup.HAND
                 );
 
         for (AttributeContainer holder : attributes) {
-            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name().toLowerCase(Locale.ROOT)), EquipmentSlotGroup.HAND);
+            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name()), EquipmentSlotGroup.HAND);
         }
         return builder.build();
     }
