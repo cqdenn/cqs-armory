@@ -73,7 +73,7 @@ public class ExtendedShieldItem extends ShieldItem implements IPresetSpellContai
         );
 
         for (AttributeContainer holder : attributes) {
-            builder.add(holder.attribute(), holder.createModifier(EquipmentSlotGroup.HAND.name()), EquipmentSlotGroup.HAND);
+            builder.add(holder.attribute(), holder.createModifier("hand"), EquipmentSlotGroup.HAND);
         }
         return builder.build();
     }
