@@ -8,6 +8,8 @@ import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.compat.Curios;
+import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class ItemRegistry {
     public static final List<Weaponset> WEAPONSETS = new ArrayList<>();
@@ -125,6 +128,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 
+    public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

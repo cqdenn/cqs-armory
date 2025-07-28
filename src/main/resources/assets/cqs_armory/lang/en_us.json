@@ -85,6 +85,11 @@
   "attribute.cqs_armory.min_momentum": "Min Momentum",
   "attribute.cqs_armory.momentum_on_hit": "Momentum on Hit",
 
+  "curios.modifiers.booster": "When equipped as booster:",
+  "curios.identifier.booster": "Booster",
+
+  "item.cqs_armory.berserkers_rush": "Berserker's Rush",
+
   "item.cqs_armory.iron_greatsword": "Iron Greatsword",
   "item.cqs_armory.iron_greataxe": "Iron Greataxe",
   "item.cqs_armory.iron_warhammer": "Iron Warhammer",
