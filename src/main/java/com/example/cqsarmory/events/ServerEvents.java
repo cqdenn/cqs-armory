@@ -12,7 +12,6 @@ import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
-import com.example.cqsarmory.utils.WeaponsetMaterials;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
