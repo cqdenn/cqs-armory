@@ -22,5 +22,8 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(),
                 new CQItemTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
 
+        generator.addProvider(event.includeServer(),
+                new RecipeDataGenerator(packOutput, event.getLookupProvider()));
+
     }
 }

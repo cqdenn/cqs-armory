@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "cqs_armory:withersteel_ingot"
+    }
+  },
+  "pattern": [
+    " xx",
+    " xx",
+    "s  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "cqs_armory:wrecking_ball_spell",
+            "index": 0,
+            "level": 3,
+            "locked": true
+          }
+        ],
+        "maxSpells": 1,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:withersteel_mace"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "item": "minecraft:string"
+    },
+    "x": {
+      "item": "cqs_armory:blazing_ingot"
+    }
+  },
+  "pattern": [
+    " xS",
+    "x S",
+    " xS"
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:magic_arrow",
+            "index": 0,
+            "level": 6,
+            "locked": true
+          }
+        ],
+        "maxSpells": 1,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:blazing_longbow"
+  }
+}
