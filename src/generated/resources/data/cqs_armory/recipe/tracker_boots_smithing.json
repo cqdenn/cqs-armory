@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "cqs_armory:hunter_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:tracker_boots"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "cqs_armory:bastion_boots"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:juggernaut_boots"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}

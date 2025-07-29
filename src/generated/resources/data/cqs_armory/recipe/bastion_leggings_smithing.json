@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "cqs_armory:rampart_leggings"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:bastion_leggings"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}

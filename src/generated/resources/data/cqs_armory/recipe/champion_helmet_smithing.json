@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "cqs_armory:soldier_helmet"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:champion_helmet"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}

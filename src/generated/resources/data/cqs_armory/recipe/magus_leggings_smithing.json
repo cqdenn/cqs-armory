@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:diamond"
+  },
+  "base": {
+    "item": "cqs_armory:apprentice_leggings"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:magus_leggings"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}

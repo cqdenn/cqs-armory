@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "a": {
+      "item": "minecraft:iron_boots"
+    },
+    "x": {
+      "item": "irons_spellbooks:arcane_essence"
+    }
+  },
+  "pattern": [
+    "xxx",
+    "xax",
+    "xxx"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:apprentice_boots"
+  }
+}

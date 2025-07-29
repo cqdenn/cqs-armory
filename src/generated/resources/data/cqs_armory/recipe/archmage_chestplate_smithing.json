@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:netherite_ingot"
+  },
+  "base": {
+    "item": "cqs_armory:magus_chestplate"
+  },
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:archmage_chestplate"
+  },
+  "template": {
+    "item": "minecraft:diamond"
+  }
+}
