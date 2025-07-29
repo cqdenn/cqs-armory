@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.items.ExtendedWeaponItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
 import net.minecraft.core.HolderLookup;
@@ -12,6 +13,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SwordItem;
@@ -32,12 +34,18 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     }
 
     public static final TagKey<Item> swordTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "swords"));
+    public static final TagKey<Item> bowTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/bow"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         for (ItemRegistry.Weaponset weaponset : WEAPONSETS) {
             for (DeferredItem weapon : weaponset) {
-                tag(swordTag).add((Item) weapon.get());
+                if (weapon.get() instanceof SwordItem) {
+                    tag(swordTag).add((Item) weapon.get());
+                }
+                else if (weapon.get() instanceof BowItem) {
+                    tag(bowTag).add((Item) weapon.get());
+                }
             }
         }
         for (DeferredHolder weapon : ItemRegistry.ITEMS.getEntries()) {
