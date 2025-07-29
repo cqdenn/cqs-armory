@@ -95,7 +95,7 @@ public class RuptureSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 2 * spellLevel;
+        int radius = 2 * spellLevel + 2;
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
         EarthquakeAoe aoeEntity = new EarthquakeAoe(level);
         aoeEntity.moveTo(entity.position());
