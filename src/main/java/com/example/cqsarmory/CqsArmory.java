@@ -144,17 +144,6 @@ public class CqsArmory
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
-        @SubscribeEvent
-        public static void register (RegisterPayloadHandlersEvent event) {
-            final PayloadRegistrar payloadRegistrar = event.registrar(CqsArmory.MODID).versioned("1.0.0").optional();
-            payloadRegistrar.playToServer(StartSuckingPacket.TYPE, StartSuckingPacket.STREAM_CODEC, StartSuckingPacket::handle);
-            payloadRegistrar.playToClient(SyncRagePacket.TYPE, SyncRagePacket.STREAM_CODEC, SyncRagePacket::handle);
-            payloadRegistrar.playToClient(SyncMomentumPacket.TYPE, SyncMomentumPacket.STREAM_CODEC, SyncMomentumPacket::handle);
-            payloadRegistrar.playToClient(SyncMomentumSpeedPacket.TYPE, SyncMomentumSpeedPacket.STREAM_CODEC, SyncMomentumSpeedPacket::handle);
-            payloadRegistrar.playToClient(SyncMomentumSpeedEndPacket.TYPE, SyncMomentumSpeedEndPacket.STREAM_CODEC, SyncMomentumSpeedEndPacket::handle);
-            payloadRegistrar.playToClient(SyncMomentumDamagePacket.TYPE, SyncMomentumDamagePacket.STREAM_CODEC, SyncMomentumDamagePacket::handle);
-            payloadRegistrar.playToClient(SyncMomentumDamageEndPacket.TYPE, SyncMomentumDamageEndPacket.STREAM_CODEC, SyncMomentumDamageEndPacket::handle);
-        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
