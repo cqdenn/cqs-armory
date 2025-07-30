@@ -5,6 +5,7 @@ import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.SoundRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
@@ -74,7 +75,7 @@ public class MomentumOrb extends Entity implements GeoEntity {
         }else {
             DamageData.get(this).lastDamage = amount;
         }
-        if (DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion) {
+        if ((DamageSources.isFriendlyFireBetween(this.getCreator(), source.getEntity()) || source.getEntity() instanceof OrbExplosion || source.getEntity() instanceof IceOrbExplosion) && !(source.getDirectEntity() instanceof ChainLightning)) {
             if (!level().isClientSide) {
                 CQtils.momentumOrbEffects(this);
                 this.level().playSound(null, this.blockPosition(), SoundRegistry.ORB_SHOT_SOUND.get(), SoundSource.MASTER, 0.2f, 2f);

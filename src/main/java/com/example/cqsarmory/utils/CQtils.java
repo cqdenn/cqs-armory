@@ -75,7 +75,7 @@ public class CQtils {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumDamagePacket(newMomentumDamage));
             arrowDamageMomentumOrb.discard();
         } else if (momentumOrb instanceof ChainLightningMomentumOrb chainLightningMomentumOrb) {
-            ChainLightning chainLightning = new ChainLightning(level, player, player);
+            ChainLightning chainLightning = new ChainLightning(level, player, chainLightningMomentumOrb);
             chainLightning.range = 30;
             chainLightning.setDamage(DamageData.get(chainLightningMomentumOrb).lastDamage);
             chainLightning.maxConnections = 20;
@@ -91,7 +91,7 @@ public class CQtils {
 
             iceExplosionMomentumOrb.discard();
         } else if (momentumOrb instanceof BlackHoleMomentumOrb blackHoleMomentumOrb) {
-            float radius = 5;
+            float radius = 3.5f;
             float dmg = DamageData.get(blackHoleMomentumOrb).lastDamage;
 
             BlackHole blackHole = new BlackHole(level, player);
