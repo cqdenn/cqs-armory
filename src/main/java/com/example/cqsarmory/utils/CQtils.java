@@ -61,7 +61,7 @@ public class CQtils {
 
             explosiveMomentumOrb.discard();
         } else if (momentumOrb instanceof DodgeMomentumOrb dodgeOrb) {
-            player.addEffect(new MobEffectInstance(MobEffectRegistry.DODGE, 20 * 5, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(MobEffectRegistry.DODGE, 20 * 10, 0, false, false, true));
             dodgeOrb.discard();
         } else if (momentumOrb instanceof InstaDrawMomentumOrb instaDrawMomentumOrb) {
             player.addEffect(new MobEffectInstance(MobEffectRegistry.INSTA_DRAW, 20 * 10, 0, false, false, true));
