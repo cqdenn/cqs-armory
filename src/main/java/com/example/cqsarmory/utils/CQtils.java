@@ -11,10 +11,15 @@ import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
+import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
+import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
@@ -47,10 +52,10 @@ public class CQtils {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumSpeedPacket(newMomentumSpeed));
             speedMomentumOrb.discard();
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
-            float radius = 2 + (float) (player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() / 10);
+            float radius = 10;
             float dmg = DamageData.get(explosiveMomentumOrb).lastDamage;
 
-            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg * 2, radius); // dmg tbd FIXME
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg * 4, radius); // dmg tbd FIXME
             orbExplosion.moveTo(explosiveMomentumOrb.position());
             level.addFreshEntity(orbExplosion);
 
@@ -69,6 +74,51 @@ public class CQtils {
             AbilityData.get(player).momentumOrbEffects.arrowDamageStacks = newMomentumDamage;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumDamagePacket(newMomentumDamage));
             arrowDamageMomentumOrb.discard();
+        } else if (momentumOrb instanceof ChainLightningMomentumOrb chainLightningMomentumOrb) {
+            ChainLightning chainLightning = new ChainLightning(level, player, player);
+            chainLightning.range = 30;
+            chainLightning.setDamage(DamageData.get(chainLightningMomentumOrb).lastDamage);
+            chainLightning.maxConnections = 20;
+            chainLightningMomentumOrb.discard();
+            level.addFreshEntity(chainLightning);
+        } else if (momentumOrb instanceof IceExplosionMomentumOrb iceExplosionMomentumOrb) {
+            float radius = 10;
+            float dmg = DamageData.get(iceExplosionMomentumOrb).lastDamage;
+
+            IceOrbExplosion iceOrbExplosion = new IceOrbExplosion(level, iceExplosionMomentumOrb.getCreator(), dmg * 4, radius); // dmg tbd FIXME
+            iceOrbExplosion.moveTo(iceExplosionMomentumOrb.position());
+            level.addFreshEntity(iceOrbExplosion);
+
+            iceExplosionMomentumOrb.discard();
+        } else if (momentumOrb instanceof BlackHoleMomentumOrb blackHoleMomentumOrb) {
+            float radius = 5;
+            float dmg = DamageData.get(blackHoleMomentumOrb).lastDamage;
+
+            BlackHole blackHole = new BlackHole(level, player);
+            blackHole.setDamage(dmg * 0.5f);
+            blackHole.setRadius(radius);
+            blackHole.moveTo(blackHoleMomentumOrb.position().add(0, -2, 0));
+            level.addFreshEntity(blackHole);
+
+            blackHoleMomentumOrb.discard();
+        } else if (momentumOrb instanceof RootMomentumOrb rootMomentumOrb) {
+            float radius = 5;
+            var entities = level.getEntities(rootMomentumOrb, new AABB(rootMomentumOrb.position(), rootMomentumOrb.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(player, targeted));
+
+            for (Entity entity : entities) {
+                if (entity instanceof LivingEntity target) {
+                    Vec3 spawn = target.position();
+                    RootEntity rootEntity = new RootEntity(level, player);
+                    rootEntity.setDuration(100);
+                    rootEntity.setTarget(target);
+                    rootEntity.moveTo(spawn);
+                    level.addFreshEntity(rootEntity);
+                    target.stopRiding();
+                    target.startRiding(rootEntity, true);
+                }
+            }
+
+            rootMomentumOrb.discard();
         }
     }
 

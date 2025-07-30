@@ -58,6 +58,7 @@ import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import org.joml.Vector3f;
 
 import java.util.Objects;
@@ -396,6 +397,13 @@ public class ServerEvents {
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
         }
+
+        if (player.hasEffect(MobEffectRegistry.BERSERK) && player.level().getGameTime() % 20 == 0) {
+            float newRageTest = ((float) (AbilityData.get(player).getRage() - player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() * 0.1));
+            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
+            AbilityData.get(player).setRage(newRage);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
+        }
     }
 
     @SubscribeEvent
@@ -479,33 +487,43 @@ public class ServerEvents {
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
                 float rand = Utils.random.nextFloat();
-                Vec3 startingPos = target.getEyePosition().add(0, 1, 0);
+                Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(0, 1, 0);
 
                 //adjust values as we add more orbs, weird formatting in order to leave room forcing orb spawning logic
-                if ((rand <= 0.2)) {
+                if ((rand <= 0.16)) {
                     ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
                     CQtils.findOrbLoc(startingPos, explosiveMomentumOrb, level);
                     level.addFreshEntity(explosiveMomentumOrb);
                 }
-                if ((0.2 < rand && rand <= 0.4)) {
-                    SpeedMomentumOrb speedOrb = new SpeedMomentumOrb(EntityRegistry.SPEED_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, speedOrb, level);
-                    level.addFreshEntity(speedOrb);
+                if ((0.14 < rand && rand <= 0.28)) {
+                    BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
+                    CQtils.findOrbLoc(startingPos, blackHoleMomentumOrb, level);
+                    level.addFreshEntity(blackHoleMomentumOrb);
                 }
-                if ((0.4 < rand && rand <= 0.6)) {
+                if ((0.28 < rand && rand <= 0.42)) {
                     DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
                     CQtils.findOrbLoc(startingPos, dodgeMomentumOrb, level);
                     level.addFreshEntity(dodgeMomentumOrb);
                 }
-                if ((0.6 < rand && rand <= 0.8)) {
+                if ((0.42 < rand && rand <= 0.56)) {
                     InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
                     CQtils.findOrbLoc(startingPos, instaDrawMomentumOrb, level);
                     level.addFreshEntity(instaDrawMomentumOrb);
                 }
-                if ((0.8 < rand && rand <= 1)) {
-                    ArrowDamageMomentumOrb arrowDamageMomentumOrb = new ArrowDamageMomentumOrb(EntityRegistry.ARROW_DAMAGE_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, arrowDamageMomentumOrb, level);
-                    level.addFreshEntity(arrowDamageMomentumOrb);
+                if ((0.56 < rand && rand <= 0.7)) {
+                    IceExplosionMomentumOrb iceExplosionMomentumOrb = new IceExplosionMomentumOrb(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
+                    CQtils.findOrbLoc(startingPos, iceExplosionMomentumOrb, level);
+                    level.addFreshEntity(iceExplosionMomentumOrb);
+                }
+                if ((0.7 < rand && rand <= 0.84)) {
+                    RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
+                    CQtils.findOrbLoc(startingPos, rootMomentumOrb, level);
+                    level.addFreshEntity(rootMomentumOrb);
+                }
+                if ((0.84 < rand && rand <= 1)) {
+                    ChainLightningMomentumOrb chainLightningMomentumOrb = new ChainLightningMomentumOrb(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), level, player);
+                    CQtils.findOrbLoc(startingPos, chainLightningMomentumOrb, level);
+                    level.addFreshEntity(chainLightningMomentumOrb);
                 }
 
             } else {

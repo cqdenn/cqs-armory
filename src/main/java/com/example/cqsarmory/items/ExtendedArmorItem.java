@@ -1,17 +1,23 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.registry.ArmorMaterialsRegistry;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.google.common.base.Suppliers;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
@@ -94,5 +100,30 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
         return this.defaultModifiers.get();
     }
 
-
+    @Override
+    public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
+        switch (((ArmorItem) stack.getItem()).getMaterial().getRegisteredName()) {
+            case "hunter", "scout" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_1_layer_1.png");
+            }
+            case "tracker", "ranger" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_2_layer_1.png");
+            }
+            case "marksman", "skirmisher" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_3_layer_1.png");
+            }
+            case "warrior", "rampart" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_1.png");
+            }
+            case "soldier", "bastion" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_2_layer_1.png");
+            }
+            case "champion", "juggernaut" -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_3_layer_1.png");
+            }
+            default -> {
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_1.png");
+            }
+        }
+    }
 }

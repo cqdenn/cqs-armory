@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -27,6 +28,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 
@@ -63,6 +65,24 @@ public class ClientSetup {
                     (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
             );
 
+            for (var item : ItemRegistry.ITEMS.getEntries()) {
+                if (item.get() instanceof BowItem) {
+                    ItemProperties.register(
+                            item.get(),
+                            ResourceLocation.withDefaultNamespace("pulling"),
+                            (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
+                    );
+
+                    ItemProperties.register(item.get(), ResourceLocation.withDefaultNamespace("pull"), (p_344163_, p_344164_, p_344165_, p_344166_) -> {
+                        if (p_344165_ == null) {
+                            return 0.0F;
+                        } else {
+                            return p_344165_.getUseItem() != p_344163_ ? 0.0F : (float)(p_344163_.getUseDuration(p_344165_) - p_344165_.getUseItemRemainingTicks()) / 20.0F;
+                        }
+                    });
+                }
+            }
+
         });
 
     }
@@ -76,6 +96,11 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.DODGE_MOMENTUM_ORB.get(), DodgeMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), InstaDrawMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.SPEED_MOMENTUM_ORB.get(), SpeedMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), BlackHoleMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), IceExplosionMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ROOT_MOMENTUM_ORB.get(), RootMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), ChainLightningMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ORB_EXPLOSION.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ICE_ORB_EXPLOSION.get(), NoopRenderer::new);
     }
 }

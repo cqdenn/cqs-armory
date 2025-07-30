@@ -6,10 +6,10 @@ import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 
 public class BastionArmorItem extends ExtendedArmorItem {
     public BastionArmorItem(Type type, Properties properties, AttributeContainer extraAttribute) {
-        super(ArmorMaterialsRegistry.BASTION, type, properties, genericMeleeArmorAttributes(0.12f, 0f, 0, 0.0f, 5, 25, extraAttribute));
+        super(ArmorMaterialsRegistry.BASTION, type, properties, genericMeleeArmorAttributes(0.15f, 0f, 0, 0.0f, 5, 25, extraAttribute));
     }
     public BastionArmorItem(Type type, Properties properties) {
-        super(ArmorMaterialsRegistry.BASTION, type, properties, genericMeleeArmorAttributes(0.12f, 0f, 0, 0.0f, 5, 25));
+        super(ArmorMaterialsRegistry.BASTION, type, properties, genericMeleeArmorAttributes(0.15f, 0f, 0, 0.0f, 5, 25));
     }
 
 

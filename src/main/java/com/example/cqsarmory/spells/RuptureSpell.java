@@ -107,7 +107,7 @@ public class RuptureSpell extends AbstractSpell {
         aoeEntity.setSlownessAmplifier(1);
         level.addFreshEntity(aoeEntity);
         entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * spellLevel) - 1, false, false, true));
-        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entities.size() * (2 * spellLevel));
+        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entities.size() * (2));
 
     }
 }

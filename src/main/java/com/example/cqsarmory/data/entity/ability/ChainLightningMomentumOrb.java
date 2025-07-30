@@ -1,0 +1,23 @@
+package com.example.cqsarmory.data.entity.ability;
+
+import com.example.cqsarmory.CqsArmory;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+
+public class ChainLightningMomentumOrb extends MomentumOrb{
+
+    public ChainLightningMomentumOrb(EntityType<?> momentumOrbEntityType, Level level) {
+        super(momentumOrbEntityType, level);
+    }
+
+    public ChainLightningMomentumOrb(EntityType<?> entityType, Level level, Player creator) {
+        super(entityType, level, creator);
+    }
+
+    @Override
+    public ResourceLocation getTexture() {
+        return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/chain_lightning_orb.png");
+    }
+}

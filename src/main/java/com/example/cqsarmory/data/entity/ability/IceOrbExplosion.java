@@ -1,9 +1,11 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
+import io.redspace.ironsspellbooks.entity.spells.ice_tomb.IceTombEntity;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -23,15 +25,15 @@ import org.joml.Vector3f;
 
 import java.util.Optional;
 
-public class OrbExplosion extends AoeEntity {
+public class IceOrbExplosion extends AoeEntity {
 
-    public OrbExplosion(EntityType<? extends Projectile> pEntityType, Level pLevel) {
+    public IceOrbExplosion(EntityType<? extends Projectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setCircular();
     }
 
-    public OrbExplosion(Level level, LivingEntity owner, float damage, float radius) {
-        this(EntityRegistry.ORB_EXPLOSION.get(), level);
+    public IceOrbExplosion(Level level, LivingEntity owner, float damage, float radius) {
+        this(EntityRegistry.ICE_ORB_EXPLOSION.get(), level);
         setOwner(owner);
         this.setRadius(radius);
         this.setDamage(damage);
@@ -60,16 +62,24 @@ public class OrbExplosion extends AoeEntity {
                     Vec3 motion = posOffset.normalize().scale(speed * .5f);
                     posOffset = posOffset.add(motion.scale(Utils.getRandomScaled(1)));
                     motion = motion.add(Utils.getRandomVec3(0.02));
-                    level.addParticle(ParticleRegistry.FIERY_SMOKE_PARTICLE.get(), x + posOffset.x, y + posOffset.y, z + posOffset.z, motion.x, motion.y, motion.z);
+                    level.addParticle(ParticleRegistry.SNOW_DUST.get(), x + posOffset.x, y + posOffset.y, z + posOffset.z, motion.x, motion.y, motion.z);
                 }
 
-                level.addParticle(new BlastwaveParticleOptions(new Vector3f(1, .6f, 0.3f), radius + 1), x, y, z, 0, 0, 0);
+                level.addParticle(new BlastwaveParticleOptions(SchoolRegistry.ICE.get().getTargetingColor(), radius + 1), x, y, z, 0, 0, 0);
 
             } else {
                 DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {
-                    if (target instanceof LivingEntity || target instanceof MomentumOrb) {
+                    if (target instanceof LivingEntity) {
+                        Vec3 spawn = target.position();
+                        IceTombEntity iceTombEntity = new IceTombEntity(level, getOwner());
+                        iceTombEntity.setEvil();
+                        iceTombEntity.moveTo(spawn);
+                        iceTombEntity.setLifetime(100);
+                        level.addFreshEntity(iceTombEntity);
+                        target.startRiding(iceTombEntity, true);
+                    } else if (target instanceof MomentumOrb) {
                         target.hurt(damageSource, damage);
                     }
                 }
@@ -96,3 +106,4 @@ public class OrbExplosion extends AoeEntity {
 
 
 }
+
