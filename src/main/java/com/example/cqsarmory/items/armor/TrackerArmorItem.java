@@ -6,10 +6,10 @@ import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 
 public class TrackerArmorItem extends ExtendedArmorItem {
     public TrackerArmorItem(Type type, Properties properties, AttributeContainer extraAttribute) {
-        super(ArmorMaterialsRegistry.TRACKER, type, properties, genericArcherArmorAttributes(0.15f, 0f, 1, 0.025f, 0, extraAttribute));
+        super(ArmorMaterialsRegistry.TRACKER, type, properties, genericArcherArmorAttributes(0.2f, 0f, 1, 0.015f, 0, extraAttribute));
     }
     public TrackerArmorItem(Type type, Properties properties) {
-        super(ArmorMaterialsRegistry.TRACKER, type, properties, genericArcherArmorAttributes(0.15f, 0f, 1, 0.025f, 0));
+        super(ArmorMaterialsRegistry.TRACKER, type, properties, genericArcherArmorAttributes(0.2f, 0f, 1, 0.015f, 0));
     }
 
 
