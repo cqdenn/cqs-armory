@@ -71,7 +71,7 @@
   "effect.cqs_armory.skewer": "Skewer",
   "effect.cqs_armory.bleed": "Bleed",
   "effect.cqs_armory.sky_strike": "Sky Strike",
-  "effect.cqs_armory.dodge": "Dodge Next Attack",
+  "effect.cqs_armory.dodge": "Dodge Incoming Attacks",
   "effect.cqs_armory.insta_draw": "Insta Draw",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",

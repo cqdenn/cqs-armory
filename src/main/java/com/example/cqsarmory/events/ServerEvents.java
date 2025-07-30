@@ -302,9 +302,7 @@ public class ServerEvents {
             MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 15, -1 * Utils.random.nextDouble(), 1, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
             MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 15, -1 * Utils.random.nextDouble(), 1, 1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
             MagicManager.spawnParticles(entity.level(), ParticleTypes.POOF, entity.getX(), entity.getY() + 1, entity.getZ(), 15, 1 * Utils.random.nextDouble(), 1, -1 * Utils.random.nextDouble(), Utils.random.nextDouble(), false);
-*/
-            Vec3 pos = entity.position().add(0, entity.getBbHeight() / 2, 0);
-            MagicManager.spawnParticles(entity.level(), ParticleTypes.SMOKE, pos.x, pos.y, pos.z, 70, entity.getBbWidth() / 4, entity.getBbHeight() / 5, entity.getBbWidth() / 4, .035, false);
+            */
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), com.example.cqsarmory.registry.SoundRegistry.DODGE_SOUND, SoundSource.PLAYERS, 1, 1.5f);
 
             //entity.removeEffect(MobEffectRegistry.DODGE);
