@@ -96,4 +96,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_orb_explosion").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AbilityArrow>> ABILITY_ARROW =
+            ENTITIES.register("ability_arrow", () -> EntityType.Builder.<AbilityArrow>of(AbilityArrow::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ability_arrow").toString()));
 }

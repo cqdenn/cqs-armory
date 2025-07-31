@@ -102,5 +102,6 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), ChainLightningMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ORB_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ICE_ORB_EXPLOSION.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ABILITY_ARROW.get(), AbilityArrowRenderer::new);
     }
 }
