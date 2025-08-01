@@ -4,7 +4,6 @@
   "refmap": "cqs_armory.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EntityAccessor",
     "PlayerMixin"
   ],
   "client": [
