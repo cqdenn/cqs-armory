@@ -103,7 +103,8 @@ public class BarrageSpell extends AbstractSpell {
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
             playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
         }
-        for (int i=0;i<spellLevel * 5;i++) {
+        int arrowCount = 15; //tbd fixme
+        for (int i=0;i<arrowCount;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             AbilityArrow arrow = new AbilityArrow(world);
             arrow.setOwner(entity);
