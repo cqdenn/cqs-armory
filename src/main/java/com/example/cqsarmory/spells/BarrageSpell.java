@@ -9,6 +9,7 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -43,7 +44,7 @@ public class BarrageSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 30;
+        this.castTime = 20;
         this.baseManaCost = 0;
     }
 
@@ -99,7 +100,10 @@ public class BarrageSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        for (int i=0;i<spellLevel * 8;i++) {
+        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
+            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
+        }
+        for (int i=0;i<spellLevel * 5;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             AbilityArrow arrow = new AbilityArrow(world);
             arrow.setOwner(entity);
