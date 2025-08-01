@@ -174,16 +174,6 @@ public class RecipeDataGenerator extends RecipeProvider {
                     .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
                     .save(recipeOutput);
 
-            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.bow().asItem())
-                    .pattern(" xS")
-                    .pattern("s S")
-                    .pattern(" xS")
-                    .define('x', material)
-                    .define('s', Items.STICK)
-                    .define('S', Items.STRING)
-                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
-                    .save(recipeOutput);
-
             ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.recurve().asItem())
                     .pattern("xxS")
                     .pattern(" sS")
