@@ -240,14 +240,13 @@ public class ItemRegistry {
                              DeferredItem rapier,
                              DeferredItem greataxe,
                              DeferredItem shortbow,
-                             DeferredItem bow,
                              DeferredItem recurve,
                              DeferredItem longbow,
                              Optional<DeferredItem> ingot) implements Iterable<DeferredItem>{
 
         @Override
         public @NotNull Iterator<DeferredItem> iterator() {
-            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, bow, recurve, longbow).iterator();
+            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow).iterator();
         }
     }
 
@@ -304,25 +303,19 @@ public class ItemRegistry {
         var shortbow = ITEMS.register(name + "_shortbow",
                 () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.SHORTBOW.attackDamage(), WeaponType.SHORTBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.ARROW_VOLLEY_SPELL, power.power() + 2)))//FIXME needs proper spell and attribute
-        );
-
-        var bow = ITEMS.register(name + "_bow",
-                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
-                        .createAttributes(material, power,WeaponType.BOW.attackDamage(), WeaponType.BOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RAPID_FIRE_SPELL, power.power())))
         );
 
         var recurve = ITEMS.register(name + "_recurve_bow",
                 () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
-                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BARRAGE_SPELL, power.power())))
         );
 
         var longbow = ITEMS.register(name + "_longbow",
                 () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGIC_ARROW_SPELL, power.power() * 2)))//FIXME needs proper spell and attribute
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power())))
         );
 
         Optional<DeferredItem> ingot = Optional.empty();
@@ -344,7 +337,7 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
 
-        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, bow, recurve, longbow, ingot);
+        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ingot);
         WEAPONSETS.add(weaponset);
 
         return weaponset;

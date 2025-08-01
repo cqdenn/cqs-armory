@@ -1,7 +1,6 @@
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
@@ -9,27 +8,23 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
 @AutoSpellConfig
-public class PiercingArrowSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "piercing_arrow_spell");
+public class RapidFireSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "rapid_fire_spell");
 
     @Override
     public ResourceLocation getSpellResource() {
@@ -40,14 +35,14 @@ public class PiercingArrowSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.EVOCATION_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(10)
+            .setCooldownSeconds(20)
             .build();
 
-    public PiercingArrowSpell() {
+    public RapidFireSpell() {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 30;
+        this.castTime = 40;
         this.baseManaCost = 0;
     }
 
@@ -97,18 +92,27 @@ public class PiercingArrowSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        AbilityArrow arrow = new AbilityArrow(level);
-        arrow.setOwner(entity);
-        arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel);
-        arrow.setNoGravity(true);
-        arrow.setScale(6f);
-        arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
-        arrow.setDeltaMovement(entity.getForward().scale(4));
-        arrow.setPierceLevel((byte) 5);
-        arrow.setCritArrow(true);
+    public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+        super.onCast(world, spellLevel, entity, castSource, playerMagicData);
+    }
 
-        level.addFreshEntity(arrow);
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    @Override
+    public void onServerCastTick(Level level, int spellLevel, LivingEntity entity, @Nullable MagicData playerMagicData) {
+        int speed = 5 - spellLevel; //4, 3, 2, 1 == 5, 6.6, 10, 20 times per second
+        if (playerMagicData != null && (playerMagicData.getCastDurationRemaining() + 1) % speed == 0) {
+            Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
+            AbilityArrow arrow = new AbilityArrow(level);
+            arrow.setOwner(entity);
+            arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE));
+            arrow.setNoGravity(false);
+            arrow.setScale(1f);
+            arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
+            arrow.setDeltaMovement(entity.getForward().scale(4));
+            arrow.setPierceLevel((byte) 0);
+            arrow.setCritArrow(true);
+            level.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
+            level.addFreshEntity(arrow);
+        }
     }
 }
+
