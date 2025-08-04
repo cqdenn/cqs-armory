@@ -22,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -47,24 +48,6 @@ public class ClientSetup {
                 }
             };
 
-            ItemProperties.register(
-                    ItemRegistry.IRONWALL.get(),
-                    ResourceLocation.withDefaultNamespace("blocking"),
-                    (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
-            );
-
-            ItemProperties.register(
-                    ItemRegistry.THORNBARK.get(),
-                    ResourceLocation.withDefaultNamespace("blocking"),
-                    (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
-            );
-
-            ItemProperties.register(
-                    ItemRegistry.FLASHGUARD.get(),
-                    ResourceLocation.withDefaultNamespace("blocking"),
-                    (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
-            );
-
             for (var item : ItemRegistry.ITEMS.getEntries()) {
                 if (item.get() instanceof BowItem) {
                     ItemProperties.register(
@@ -80,6 +63,13 @@ public class ClientSetup {
                             return p_344165_.getUseItem() != p_344163_ ? 0.0F : (float)(p_344163_.getUseDuration(p_344165_) - p_344165_.getUseItemRemainingTicks()) / 20.0F;
                         }
                     });
+                }
+                else if (item.get() instanceof ShieldItem) {
+                    ItemProperties.register(
+                            item.get(),
+                            ResourceLocation.withDefaultNamespace("blocking"),
+                            (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
+                    );
                 }
             }
 
