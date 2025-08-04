@@ -72,5 +72,9 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
         tag(Tags.Items.MATERIALS_POWER_THREE).add(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_THREE).add(ItemRegistry.BLAZING_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_THREE).add(Items.NETHERITE_INGOT);
+
+        tag(Tags.Items.ARROWS).add(Items.ARROW);
+        tag(Tags.Items.ARROWS).add(Items.TIPPED_ARROW);
+
     }
 }

@@ -34,10 +34,23 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> MAX_MOMENTUM = ATTRIBUTES.register("max_momentum", () -> (new RangedAttribute("attribute.cqs_armory.max_momentum", 100.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MIN_MOMENTUM = ATTRIBUTES.register("min_momentum", () -> (new RangedAttribute("attribute.cqs_armory.min_momentum", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MOMENTUM_ON_HIT = ATTRIBUTES.register("momentum_on_hit", () -> (new RangedAttribute("attribute.cqs_armory.momentum_on_hit", 1.0D, 1.0D, 10000.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> MELEE_SKILL_RESIST = newResistanceAttribute("melee");
+    public static final DeferredHolder<Attribute, Attribute> MELEE_SKILL_POWER = newSkillAttribute("melee");
+    public static final DeferredHolder<Attribute, Attribute> ARCHER_SKILL_RESIST = newResistanceAttribute("archer");
+    public static final DeferredHolder<Attribute, Attribute> ARCHER_SKILL_POWER = newSkillAttribute("archer");
+
 
     @SubscribeEvent
     public static void modifyEntityAttributes(EntityAttributeModificationEvent e) {
         e.getTypes().forEach(entity -> ATTRIBUTES.getEntries().forEach(attribute -> e.add(entity, attribute)));
+    }
+
+    private static DeferredHolder<Attribute, Attribute> newResistanceAttribute(String id) {
+        return (DeferredHolder<Attribute, Attribute>) ATTRIBUTES.register(id + "_skill_resist", () -> (new MagicPercentAttribute("attribute.cqs_armory." + id + "_skill_resist", 1.0D, -100, 100).setSyncable(true)));
+    }
+
+    private static DeferredHolder<Attribute, Attribute> newSkillAttribute(String id) {
+        return ATTRIBUTES.register(id + "_skill_power", () -> (new MagicPercentAttribute("attribute.cqs_armory." + id + "_spell_power", 1.0D, -100, 100).setSyncable(true)));
     }
 
 }

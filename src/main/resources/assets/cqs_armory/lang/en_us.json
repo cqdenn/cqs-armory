@@ -28,6 +28,9 @@
   "spell.cqs_armory.taunt_spell": "Taunt",
   "spell.cqs_armory.sky_strike_spell": "Sky Strike",
   "spell.cqs_armory.shield_bash_spell": "Shield Bash",
+  "spell.cqs_armory.barrage_spell": "Barrage",
+  "spell.cqs_armory.rapid_fire_spell": "Rapid Fire",
+  "spell.cqs_armory.piercing_arrow_spell": "Piercing Arrow",
 
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
@@ -84,6 +87,10 @@
   "attribute.cqs_armory.max_momentum": "Max Momentum",
   "attribute.cqs_armory.min_momentum": "Min Momentum",
   "attribute.cqs_armory.momentum_on_hit": "Momentum on Hit",
+  "attribute.cqs_armory.archer_skill_resist": "Momentum on Hit",
+  "attribute.cqs_armory.archer_skill_power": "Momentum on Hit",
+  "attribute.cqs_armory.melee_skill_resist": "Momentum on Hit",
+  "attribute.cqs_armory.melee_skill_power": "Momentum on Hit",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
@@ -98,6 +105,9 @@
   "item.cqs_armory.iron_spear": "Iron Spear",
   "item.cqs_armory.iron_rapier": "Iron Rapier",
   "item.cqs_armory.iron_scythe": "Iron Scythe",
+  "item.cqs_armory.iron_shortbow": "Iron Shortbow",
+  "item.cqs_armory.iron_recurve_bow": "Iron Recurve Bow",
+  "item.cqs_armory.iron_longbow": "Iron Longbow",
 
   "item.cqs_armory.amethyst_greatsword": "Amethyst Greatsword",
   "item.cqs_armory.amethyst_greataxe": "Amethyst Greataxe",
@@ -107,6 +117,9 @@
   "item.cqs_armory.amethyst_spear": "Amethyst Spear",
   "item.cqs_armory.amethyst_rapier": "Amethyst Rapier",
   "item.cqs_armory.amethyst_scythe": "Amethyst Scythe",
+  "item.cqs_armory.amethyst_shortbow": "Amethyst Shortbow",
+  "item.cqs_armory.amethyst_recurve_bow": "Amethyst Recurve Bow",
+  "item.cqs_armory.amethyst_longbow": "Amethyst Longbow",
 
   "item.cqs_armory.blazing_greatsword": "Blazing Greatsword",
   "item.cqs_armory.blazing_greataxe": "Blazing Greataxe",
@@ -116,6 +129,9 @@
   "item.cqs_armory.blazing_spear": "Blazing Spear",
   "item.cqs_armory.blazing_rapier": "Blazing Rapier",
   "item.cqs_armory.blazing_scythe": "Blazing Scythe",
+  "item.cqs_armory.blazing_shortbow": "Blazing Shortbow",
+  "item.cqs_armory.blazing_recurve_bow": "Blazing Recurve Bow",
+  "item.cqs_armory.blazing_longbow": "Blazing Longbow",
 
   "item.cqs_armory.copper_greatsword": "Copper Greatsword",
   "item.cqs_armory.copper_greataxe": "Copper Greataxe",
@@ -125,6 +141,9 @@
   "item.cqs_armory.copper_spear": "Copper Spear",
   "item.cqs_armory.copper_rapier": "Copper Rapier",
   "item.cqs_armory.copper_scythe": "Copper Scythe",
+  "item.cqs_armory.copper_shortbow": "Copper Shortbow",
+  "item.cqs_armory.copper_recurve_bow": "Copper Recurve Bow",
+  "item.cqs_armory.copper_longbow": "Copper Longbow",
 
   "item.cqs_armory.diamond_greatsword": "Diamond Greatsword",
   "item.cqs_armory.diamond_greataxe": "Diamond Greataxe",
@@ -134,6 +153,9 @@
   "item.cqs_armory.diamond_spear": "Diamond Spear",
   "item.cqs_armory.diamond_rapier": "Diamond Rapier",
   "item.cqs_armory.diamond_scythe": "Diamond Scythe",
+  "item.cqs_armory.diamond_shortbow": "Diamond Shortbow",
+  "item.cqs_armory.diamond_recurve_bow": "Diamond Recurve Bow",
+  "item.cqs_armory.diamond_longbow": "Diamond Longbow",
 
   "item.cqs_armory.dwarvensteel_greatsword": "Dwarven Steel Greatsword",
   "item.cqs_armory.dwarvensteel_greataxe": "Dwarven Steel Greataxe",
@@ -143,6 +165,9 @@
   "item.cqs_armory.dwarvensteel_spear": "Dwarven Steel Spear",
   "item.cqs_armory.dwarvensteel_rapier": "Dwarven Steel Rapier",
   "item.cqs_armory.dwarvensteel_scythe": "Dwarven Steel Scythe",
+  "item.cqs_armory.dwarvensteel_shortbow": "Dwarven Steel Shortbow",
+  "item.cqs_armory.dwarvensteel_recurve_bow": "Dwarven Steel Recurve Bow",
+  "item.cqs_armory.dwarvensteel_longbow": "Dwarven Steel Longbow",
 
   "item.cqs_armory.gold_greatsword": "Gold Greatsword",
   "item.cqs_armory.gold_greataxe": "Gold Greataxe",
@@ -152,6 +177,9 @@
   "item.cqs_armory.gold_spear": "Gold Spear",
   "item.cqs_armory.gold_rapier": "Gold Rapier",
   "item.cqs_armory.gold_scythe": "Gold Scythe",
+  "item.cqs_armory.gold_shortbow": "Gold Shortbow",
+  "item.cqs_armory.gold_recurve_bow": "Gold Recurve Bow",
+  "item.cqs_armory.gold_longbow": "Gold Longbow",
 
   "item.cqs_armory.living_greatsword": "Living Greatsword",
   "item.cqs_armory.living_greataxe": "Living Greataxe",
@@ -161,6 +189,9 @@
   "item.cqs_armory.living_spear": "Living Spear",
   "item.cqs_armory.living_rapier": "Living Rapier",
   "item.cqs_armory.living_scythe": "Living Scythe",
+  "item.cqs_armory.living_shortbow": "Living Shortbow",
+  "item.cqs_armory.living_recurve_bow": "Living Recurve Bow",
+  "item.cqs_armory.living_longbow": "Living Longbow",
 
   "item.cqs_armory.netherite_greatsword": "Netherite Greatsword",
   "item.cqs_armory.netherite_greataxe": "Netherite Greataxe",
@@ -170,6 +201,9 @@
   "item.cqs_armory.netherite_spear": "Netherite Spear",
   "item.cqs_armory.netherite_rapier": "Netherite Rapier",
   "item.cqs_armory.netherite_scythe": "Netherite Scythe",
+  "item.cqs_armory.netherite_shortbow": "Netherite Shortbow",
+  "item.cqs_armory.netherite_recurve_bow": "Netherite Recurve Bow",
+  "item.cqs_armory.netherite_longbow": "Netherite Longbow",
 
   "item.cqs_armory.obsidian_greatsword": "Obsidian Greatsword",
   "item.cqs_armory.obsidian_greataxe": "Obsidian Greataxe",
@@ -179,6 +213,9 @@
   "item.cqs_armory.obsidian_spear": "Obsidian Spear",
   "item.cqs_armory.obsidian_rapier": "Obsidian Rapier",
   "item.cqs_armory.obsidian_scythe": "Obsidian Scythe",
+  "item.cqs_armory.obsidian_shortbow": "Obsidian Shortbow",
+  "item.cqs_armory.obsidian_recurve_bow": "Obsidian Recurve Bow",
+  "item.cqs_armory.obsidian_longbow": "Obsidian Longbow",
 
   "item.cqs_armory.sculk_greatsword": "Sculk Greatsword",
   "item.cqs_armory.sculk_greataxe": "Sculk Greataxe",
@@ -188,6 +225,9 @@
   "item.cqs_armory.sculk_spear": "Sculk Spear",
   "item.cqs_armory.sculk_rapier": "Sculk Rapier",
   "item.cqs_armory.sculk_scythe": "Sculk Scythe",
+  "item.cqs_armory.sculk_shortbow": "Sculk Shortbow",
+  "item.cqs_armory.sculk_recurve_bow": "Sculk Recurve Bow",
+  "item.cqs_armory.sculk_longbow": "Sculk Longbow",
 
   "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
   "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
@@ -197,6 +237,9 @@
   "item.cqs_armory.silversteel_spear": "Silversteel Spear",
   "item.cqs_armory.silversteel_rapier": "Silversteel Rapier",
   "item.cqs_armory.silversteel_scythe": "Silversteel Scythe",
+  "item.cqs_armory.silversteel_shortbow": "Silversteel Shortbow",
+  "item.cqs_armory.silversteel_recurve_bow": "Silversteel Recurve Bow",
+  "item.cqs_armory.silversteel_longbow": "Silversteel Longbow",
 
   "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
   "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
@@ -206,6 +249,9 @@
   "item.cqs_armory.umbrite_spear": "Umbrite Spear",
   "item.cqs_armory.umbrite_rapier": "Umbrite Rapier",
   "item.cqs_armory.umbrite_scythe": "Umbrite Scythe",
+  "item.cqs_armory.umbrite_shortbow": "Umbrite Shortbow",
+  "item.cqs_armory.umbrite_recurve_bow": "Umbrite Recurve Bow",
+  "item.cqs_armory.umbrite_longbow": "Umbrite Longbow",
 
   "item.cqs_armory.withersteel_greatsword": "Withersteel Greatsword",
   "item.cqs_armory.withersteel_greataxe": "Withersteel Greataxe",
@@ -214,5 +260,8 @@
   "item.cqs_armory.withersteel_mace": "Withersteel Mace",
   "item.cqs_armory.withersteel_spear": "Withersteel Spear",
   "item.cqs_armory.withersteel_rapier": "Withersteel Rapier",
-  "item.cqs_armory.withersteel_scythe": "Withersteel Scythe"
+  "item.cqs_armory.withersteel_scythe": "Withersteel Scythe",
+  "item.cqs_armory.withersteel_shortbow": "Withersteel Shortbow",
+  "item.cqs_armory.withersteel_recurve_bow": "Withersteel Recurve Bow",
+  "item.cqs_armory.withersteel_longbow": "Withersteel Longbow"
 }

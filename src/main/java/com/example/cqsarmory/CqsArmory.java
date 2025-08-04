@@ -6,6 +6,7 @@ import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -104,6 +105,7 @@ public class CqsArmory
         AttributeRegistry.register(modEventBus);
         AssetHandlerRegistry.register(modEventBus);
         ArmorMaterialsRegistry.register(modEventBus);
+        modEventBus.addListener(CQSchoolRegistry::registerRegistry);
 
 
 

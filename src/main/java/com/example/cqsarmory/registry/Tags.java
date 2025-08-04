@@ -11,6 +11,7 @@ public class Tags {
         public static final TagKey<Item> MATERIALS_POWER_ONE = tag("ingots/power_one");
         public static final TagKey<Item> MATERIALS_POWER_TWO = tag("ingots/power_two");
         public static final TagKey<Item> MATERIALS_POWER_THREE = tag("ingots/power_three");
+        public static final TagKey<Item> ARROWS = tag("arrows");
 
 
         private static TagKey<Item> tag(String name) {
