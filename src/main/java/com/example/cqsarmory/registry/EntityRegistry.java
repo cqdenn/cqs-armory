@@ -25,6 +25,12 @@ public class EntityRegistry {
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "volcano_explosion").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<GenericMageAOE>> GENERIC_MAGE_AOE =
+            ENTITIES.register("generic_mage_aoe", () -> EntityType.Builder.<GenericMageAOE>of(GenericMageAOE::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "generic_mage_aoe").toString()));
+
     public static final DeferredHolder<EntityType<?>, EntityType<MomentumOrb>> MOMENTUM_ORB =
             ENTITIES.register("momentum_orb", () -> EntityType.Builder.<MomentumOrb>of(MomentumOrb::new, MobCategory.MISC)
                     .sized(.5f, .5f)

@@ -580,13 +580,22 @@ public class ServerEvents {
     public static void focus(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         float focusThreshold = 0.7f;
+        float defaultMinMana = 100;
 
-        if (AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < focusThreshold) {
+        if ((MagicData.getPlayerMagicData(player).getMana() <= defaultMinMana) || AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < focusThreshold) {
             AbilityData.get(player).focused = false;
         }
-        if (!AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= focusThreshold) {
+        if ((MagicData.getPlayerMagicData(player).getMana() > defaultMinMana) && !AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= focusThreshold) {
             AbilityData.get(player).focused = true;
         }
+
+        if (AbilityData.get(player).focused && !AbilityData.get(player).hasMageAOE) {
+            GenericMageAOE aoe = new GenericMageAOE(player.level(), player, 10, 5);
+            aoe.moveTo(player.position().add(0, 1, 0));
+            player.level().addFreshEntity(aoe);
+            AbilityData.get(player).hasMageAOE = true;
+        }
+
     }
 
 }
