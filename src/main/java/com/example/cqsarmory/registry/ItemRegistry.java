@@ -347,7 +347,7 @@ public class ItemRegistry {
         CQSpellDataRegistryHolder[] necromancySpellsForPower = new CQSpellDataRegistryHolder[spellCount];
         CQSpellDataRegistryHolder[] lightningSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
         CQSpellDataRegistryHolder[] fireSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
-        for (int i = 0; i < iceSpellsForPower.length; i++) {
+        for (int i = 0; i < spellCount; i++) {
             iceSpellsForPower[i] = new CQSpellDataRegistryHolder(iceSpells.get(i).getSpellSupplier(), iceSpells.get(i).getLevel() + power.power());
             fireSpellsForPower[i] = new CQSpellDataRegistryHolder(fireSpells.get(i).getSpellSupplier(), fireSpells.get(i).getLevel() + power.power());
             lightningSpellsForPower[i] = new CQSpellDataRegistryHolder(lightningSpells.get(i).getSpellSupplier(), lightningSpells.get(i).getLevel() + power.power());
