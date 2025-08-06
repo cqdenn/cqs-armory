@@ -590,7 +590,7 @@ public class ServerEvents {
         }
 
         if (AbilityData.get(player).focused && !AbilityData.get(player).hasMageAOE) {
-            GenericMageAOE aoe = new GenericMageAOE(player.level(), player, 10, 5);
+            GenericMageAOE aoe = new GenericMageAOE(player.level(), player, MagicData.getPlayerMagicData(player).getMana() / 10, 5);
             aoe.moveTo(player.position().add(0, 1, 0));
             player.level().addFreshEntity(aoe);
             AbilityData.get(player).hasMageAOE = true;
