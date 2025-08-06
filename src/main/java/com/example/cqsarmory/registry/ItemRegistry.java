@@ -223,12 +223,6 @@ public class ItemRegistry {
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
     );
 
-    public static final DeferredItem<Item> LONGBOW = ITEMS.register("longbow",
-            () -> new ExtendedBowItem(new Item.Properties().stacksTo(1)
-                    .attributes(ExtendedBowItem.createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)})),
-                    SpellDataRegistryHolder.of(/*add spell FIXME*/))
-    );
-
     public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
             () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
             ));
