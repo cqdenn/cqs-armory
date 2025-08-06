@@ -20,29 +20,19 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 import java.util.function.Supplier;
 
+import static io.redspace.ironsspellbooks.api.registry.SchoolRegistry.SCHOOL_REGISTRY_KEY;
+
 public class CQSchoolRegistry {
-    public static final ResourceKey<Registry<SchoolType>> SCHOOL_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "schools"));
     private static final DeferredRegister<SchoolType> SCHOOLS = DeferredRegister.create(SCHOOL_REGISTRY_KEY, IronsSpellbooks.MODID);
-    public static final Registry<SchoolType> REGISTRY = new RegistryBuilder<>(SCHOOL_REGISTRY_KEY).create();
 
     public static void register(IEventBus eventBus) {
         SCHOOLS.register(eventBus);
-    }
-
-    public static void registerRegistry(NewRegistryEvent event) {
-        IronsSpellbooks.LOGGER.debug("SchoolRegistry.registerRegistry");
-        event.register(REGISTRY);
     }
 
 
     private static Supplier<SchoolType> registerSchool(SchoolType schoolType) {
         return SCHOOLS.register(schoolType.getId().getPath(), () -> schoolType);
     }
-
-    public static SchoolType getSchool(ResourceLocation resourceLocation) {
-        return REGISTRY.get(resourceLocation);
-    }
-
 
     public static final ResourceLocation MELEE_RESOURCE = CqsArmory.id("melee");
     public static final ResourceLocation ARCHER_RESOURCE = CqsArmory.id("archer");

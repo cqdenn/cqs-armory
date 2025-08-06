@@ -112,13 +112,13 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
             case "marksman", "skirmisher" -> {
                 return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_3_layer_1.png");
             }
-            case "warrior", "rampart" -> {
+            case "warrior", "rampart", "seer", "apprentice" -> {
                 return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_1.png");
             }
-            case "soldier", "bastion" -> {
+            case "soldier", "bastion", "mystic", "magus" -> {
                 return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_2_layer_1.png");
             }
-            case "champion", "juggernaut" -> {
+            case "champion", "juggernaut", "archmage", "sage" -> {
                 return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_3_layer_1.png");
             }
             default -> {
