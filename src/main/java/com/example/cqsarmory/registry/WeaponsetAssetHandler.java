@@ -62,7 +62,13 @@ public class WeaponsetAssetHandler extends AssetHandler {
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_gui"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_rapier_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greataxe_gui"),
-                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greataxe_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_greataxe_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_ice_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_fire_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_lightning_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_necromancy_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_arcane_handheld"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_holy_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
         var ingot_source = new PalettedPermutations(List.of(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/ingot_key")), ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/gold"), permutaions);
         return List.of(weapon_source, ingot_source);
     }

@@ -19,9 +19,9 @@
       "irons_spellbooks:spell_container": {
         "data": [
           {
-            "id": "irons_spellbooks:magic_arrow",
+            "id": "cqs_armory:piercing_arrow_spell",
             "index": 0,
-            "level": 4,
+            "level": 2,
             "locked": true
           }
         ],

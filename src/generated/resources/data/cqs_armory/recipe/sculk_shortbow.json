@@ -22,9 +22,9 @@
       "irons_spellbooks:spell_container": {
         "data": [
           {
-            "id": "irons_spellbooks:arrow_volley",
+            "id": "cqs_armory:rapid_fire_spell",
             "index": 0,
-            "level": 4,
+            "level": 2,
             "locked": true
           }
         ],

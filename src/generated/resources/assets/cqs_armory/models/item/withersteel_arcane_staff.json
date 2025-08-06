@@ -1,0 +1,8 @@
+{
+  "parent": "cqs_armory:item/template_large_sword",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "cqs_armory:item/iron_arcane_handheld_withersteel"
+  }
+}

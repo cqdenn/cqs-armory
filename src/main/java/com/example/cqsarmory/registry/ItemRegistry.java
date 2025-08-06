@@ -1,6 +1,7 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.*;
@@ -8,6 +9,7 @@ import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
@@ -19,9 +21,11 @@ import net.minecraft.world.item.*;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -254,15 +258,103 @@ public class ItemRegistry {
                              DeferredItem shortbow,
                              DeferredItem recurve,
                              DeferredItem longbow,
+                             DeferredItem ice,
+                             DeferredItem fire,
+                             DeferredItem lightning,
+                             DeferredItem necromancy,
+                             DeferredItem arcane,
+                             DeferredItem holy,
                              Optional<DeferredItem> ingot) implements Iterable<DeferredItem>{
 
         @Override
         public @NotNull Iterator<DeferredItem> iterator() {
-            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow).iterator();
+            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ice, fire, lightning, necromancy, arcane, holy).iterator();
         }
     }
 
     public static Weaponset createWeaponset(ExtendedWeaponTier material, WeaponPower power, String name, boolean create_ingot) {
+
+        final List<CQSpellDataRegistryHolder> iceSpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.ICICLE_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.SNOWBALL_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.RAY_OF_FROST_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_TOMB_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_SPIKES_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.FROSTWAVE_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_BLOCK_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.FROST_STEP_SPELL, 2)
+        );
+
+        final List<CQSpellDataRegistryHolder> fireSpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.FIREBOLT_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.BURNING_DASH_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEAT_SURGE_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.SCORCH_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.FIREBALL_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.WALL_OF_FIRE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.FLAMING_BARRAGE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_HELL_SPELL, 2)
+        );
+
+        final List<CQSpellDataRegistryHolder> lightningSpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.BALL_LIGHTNING_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.SHOCKWAVE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.ELECTROCUTE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_BOLT_SPELL, 5),
+                new CQSpellDataRegistryHolder(SpellRegistry.CHAIN_LIGHTNING_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.CHARGE_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.THUNDERSTORM_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_LANCE_SPELL, 4)
+        );
+
+        final List<CQSpellDataRegistryHolder> necromancySpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.FANG_STRIKE_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_DEAD_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.DEVOUR_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLIGHT_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.SUMMON_VEX_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.SACRIFICE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLOOD_SLASH_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEARTSTOP_SPELL, 4)
+        );
+
+        final List<CQSpellDataRegistryHolder> arcaneSpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.MAGIC_MISSILE_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.GUST_SPELL, 5),
+                new CQSpellDataRegistryHolder(SpellRegistry.STARFALL_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.INVISIBILITY_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.ELDRITCH_BLAST_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.SLOW_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.TELEKINESIS_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.TELEPORT_SPELL, 4)
+        );
+
+        final List<CQSpellDataRegistryHolder> holySpells = List.of(
+                new CQSpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLESSING_OF_LIFE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.SHIELD_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.FORTIFY_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.SUNBEAM_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.CLEANSE_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEAL_SPELL, 4),
+                new CQSpellDataRegistryHolder(SpellRegistry.HASTE_SPELL, 4)
+        );
+
+        int spellCount = power.power() * 2;
+        CQSpellDataRegistryHolder[] iceSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        CQSpellDataRegistryHolder[] holySpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        CQSpellDataRegistryHolder[] arcaneSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        CQSpellDataRegistryHolder[] necromancySpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        CQSpellDataRegistryHolder[] lightningSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        CQSpellDataRegistryHolder[] fireSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
+        for (int i = 0; i < iceSpellsForPower.length; i++) {
+            iceSpellsForPower[i] = new CQSpellDataRegistryHolder(iceSpells.get(i).getSpellSupplier(), iceSpells.get(i).getLevel() + power.power());
+            fireSpellsForPower[i] = new CQSpellDataRegistryHolder(fireSpells.get(i).getSpellSupplier(), fireSpells.get(i).getLevel() + power.power());
+            lightningSpellsForPower[i] = new CQSpellDataRegistryHolder(lightningSpells.get(i).getSpellSupplier(), lightningSpells.get(i).getLevel() + power.power());
+            necromancySpellsForPower[i] = new CQSpellDataRegistryHolder(necromancySpells.get(i).getSpellSupplier(), necromancySpells.get(i).getLevel() + power.power());
+            arcaneSpellsForPower[i] = new CQSpellDataRegistryHolder(arcaneSpells.get(i).getSpellSupplier(), arcaneSpells.get(i).getLevel() + power.power());
+            holySpellsForPower[i] = new CQSpellDataRegistryHolder(holySpells.get(i).getSpellSupplier(), holySpells.get(i).getLevel() + power.power());
+        }
 
         var warhammer = ITEMS.register(name + "_warhammer",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
@@ -284,7 +376,7 @@ public class ItemRegistry {
 
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
-                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.SWEEPING_DAMAGE_RATIO, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.5 + (0.1 * material.getMult()), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REAP_SPELL, power.power())))
         );
 
@@ -330,6 +422,42 @@ public class ItemRegistry {
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power())))
         );
 
+        var ice = ITEMS.register(name + "_ice_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                ), iceSpellsForPower)
+        );
+
+        var fire = ITEMS.register(name + "_fire_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                ), fireSpellsForPower)
+        );
+
+        var lightning = ITEMS.register(name + "_lightning_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                ), lightningSpellsForPower)
+        );
+
+        var necromancy = ITEMS.register(name + "_necromancy_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 1 + (0.2 * material.getMult()), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ), necromancySpellsForPower)
+        );
+
+        var arcane = ITEMS.register(name + "_arcane_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                ), arcaneSpellsForPower)
+        );
+
+        var holy = ITEMS.register(name + "_holy_staff",
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                ), holySpellsForPower)
+        );
+
         Optional<DeferredItem> ingot = Optional.empty();
 
         if (create_ingot) {
@@ -348,8 +476,14 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(spear, generator.atlasLargeItem(spear)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(ice, generator.atlasLargeItem(ice)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(fire, generator.atlasLargeItem(fire)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(lightning, generator.atlasLargeItem(lightning)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(necromancy, generator.atlasLargeItem(necromancy)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(arcane, generator.atlasLargeItem(arcane)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(holy, generator.atlasLargeItem(holy)));
 
-        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ingot);
+        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ice, fire, lightning, necromancy, arcane, holy, ingot);
         WEAPONSETS.add(weaponset);
 
         return weaponset;

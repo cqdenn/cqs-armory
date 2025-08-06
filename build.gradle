@@ -131,8 +131,7 @@ dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7.5.1"
     implementation "curse.maven:playeranimator-658587:6024462"
     implementation "top.theillusivec4.curios:curios-neoforge:9.2.2+${minecraft_version}"
-    compileOnly "io.redspace:atlas_api:1.21.1-1.1-SNAPSHOT"
-    localRuntime "io.redspace:atlas_api:1.21.1-1.1-SNAPSHOT"
+    implementation "io.redspace:atlas_api:1.21.1-1.1.0-SNAPSHOT"
     implementation "curse.maven:atlasviewer-633577:5490697"
     localRuntime "curse.maven:tslatentitystatus-tes-830420:6041374"
     implementation 'io.redspace:bow_attributes:0.0.2-SNAPSHOT'

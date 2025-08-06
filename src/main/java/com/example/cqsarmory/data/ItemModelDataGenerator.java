@@ -63,13 +63,13 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
 
         /*ItemModelBuilder model = withExistingParent(item.getId().getPath(), "item/handheld");
 
-        *//*ItemModelBuilder base = getBuilder(item.getId().getPath())
+        ItemModelBuilder base = getBuilder(item.getId().getPath())
                 .parent(new ModelFile.UncheckedModelFile("minecraft:item/handheld"))
-                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false));*//*
+                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false));
 
-        ItemModelBuilder guiModel = atlasGuiItem(item);*//*getBuilder(item.getId().getPath())
+        ItemModelBuilder guiModel = atlasGuiItem(item);getBuilder(item.getId().getPath())
                 .parent(new ModelFile.UncheckedModelFile("minecraft:item/generated"))
-                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), true));*//*
+                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), true));
 
         return model.customLoader(SeparateTransformsModelBuilder::begin)
                 .base(base)

@@ -22,9 +22,9 @@
       "irons_spellbooks:spell_container": {
         "data": [
           {
-            "id": "irons_spellbooks:poison_arrow",
+            "id": "cqs_armory:barrage_spell",
             "index": 0,
-            "level": 6,
+            "level": 3,
             "locked": true
           }
         ],

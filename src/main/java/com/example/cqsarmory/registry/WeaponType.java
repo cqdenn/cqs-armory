@@ -16,4 +16,5 @@ public record WeaponType(float attackDamage, float attackSpeed) {
     public static final WeaponType BOW = new WeaponType(8, 1f);
     public static final WeaponType RECURVE = new WeaponType(10, 0.6f);
     public static final WeaponType LONGBOW = new WeaponType(12, 0.4f);
+    public static final WeaponType STAFF = new WeaponType(5, -3f);
 }
