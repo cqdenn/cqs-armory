@@ -580,7 +580,7 @@ public class ServerEvents {
     public static void focus(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         float focusThreshold = 0.7f;
-        float defaultMinMana = 100;
+        float defaultMinMana = 100; // FIXME what if default mana changes?
 
         if ((MagicData.getPlayerMagicData(player).getMana() <= defaultMinMana) || AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < focusThreshold) {
             AbilityData.get(player).focused = false;
