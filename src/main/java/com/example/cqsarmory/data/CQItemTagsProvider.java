@@ -14,6 +14,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -59,6 +61,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
             }
         }
         tag(swordTag).add(ItemRegistry.MJOLNIR.get());
+
 
 
         tag(Tags.Items.MATERIALS_POWER_ONE).add(Items.AMETHYST_SHARD);
