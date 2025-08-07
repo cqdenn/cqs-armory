@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.ExtendedWeaponItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
+import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -35,6 +36,8 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
 
     public static final TagKey<Item> swordTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "swords"));
     public static final TagKey<Item> bowTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/bow"));
+    public static final TagKey<Item> curioTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "booster"));
+    public static final TagKey<Item> axeTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "axes"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -48,9 +51,11 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 }
             }
         }
-        for (DeferredHolder weapon : ItemRegistry.ITEMS.getEntries()) {
-            if (weapon.get() instanceof SwordItem) {
-                tag(swordTag).add((Item)weapon.get());
+        for (DeferredHolder item : ItemRegistry.ITEMS.getEntries()) {
+            if (item.get() instanceof SwordItem) {
+                tag(swordTag).add((Item)item.get());
+            }else if (item.get() instanceof CurioBaseItem) {
+                tag(curioTag).add((Item)item.get());
             }
         }
         tag(swordTag).add(ItemRegistry.MJOLNIR.get());

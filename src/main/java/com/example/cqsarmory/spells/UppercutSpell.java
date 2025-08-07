@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -99,7 +100,7 @@ public class UppercutSpell extends AbstractSpell {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 2 * spellLevel;
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-        var damageSource = level.damageSources().mobAttack(entity);
+        var damageSource = CQSpellRegistry.SKY_STRIKE_SPELL.get().getDamageSource(entity);
         Vec3 direction = new Vec3(entity.getForward().x * 0.1, 0.2 * spellLevel, entity.getForward().z * 0.1);
 
         for (Entity target : entities) {

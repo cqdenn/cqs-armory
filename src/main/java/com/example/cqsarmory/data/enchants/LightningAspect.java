@@ -26,15 +26,7 @@ public record LightningAspect(LevelBasedValue bounces) implements EnchantmentEnt
 
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        if (entity instanceof LivingEntity livingEntity) {
-            LivingEntity attacker = livingEntity.getLastAttacker();
-            float dmg = DamageData.get(livingEntity).lastDamage * 0.5f;
-            ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
-            chainLightning.setDamage(dmg);
-            chainLightning.maxConnections = (int) bounces.calculate(enchantmentLevel);
-            chainLightning.range = 8;
-            level.addFreshEntity(chainLightning);
-        }
+
     }
 
     @Override

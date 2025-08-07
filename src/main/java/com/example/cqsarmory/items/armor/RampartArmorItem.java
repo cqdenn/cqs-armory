@@ -6,10 +6,10 @@ import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 
 public class RampartArmorItem extends ExtendedArmorItem {
     public RampartArmorItem(Type type, Properties properties, AttributeContainer extraAttribute) {
-        super(ArmorMaterialsRegistry.RAMPART, type, properties, genericMeleeArmorAttributes(0.1f, 0f, 0, 0.0f, 2, 10, extraAttribute));
+        super(ArmorMaterialsRegistry.RAMPART, type, properties, genericMeleeArmorAttributes(0f, 0f, 0, 0.0f, 2, 10, extraAttribute));
     }
     public RampartArmorItem(Type type, Properties properties) {
-        super(ArmorMaterialsRegistry.RAMPART, type, properties, genericMeleeArmorAttributes(0.1f, 0f, 0, 0.0f, 2, 10));
+        super(ArmorMaterialsRegistry.RAMPART, type, properties, genericMeleeArmorAttributes(0f, 0f, 0, 0.0f, 2, 10));
     }
 
 

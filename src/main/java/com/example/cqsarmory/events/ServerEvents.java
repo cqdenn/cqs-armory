@@ -13,12 +13,14 @@ import com.example.cqsarmory.network.SyncRagePacket;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
+import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -193,6 +195,28 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void lightningAspect (LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        Entity entityAttacker = event.getSource().getEntity();
+        float rand = Utils.random.nextFloat();
+        Level level = entity.level();
+        if (entityAttacker instanceof LivingEntity attacker) {
+            Holder.Reference<Enchantment> lightningAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_aspect")));
+            int lightningAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(lightningAspectHolder);
+            int lightningAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(lightningAspectHolder);
+            int lightningAspectLevel = Math.max(lightningAspectOffHand, lightningAspectMainHand);
+            if (rand <= 0.35 && lightningAspectLevel > 0) {
+                float dmg = DamageData.get(entity).lastDamage * 0.5f;
+                ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
+                chainLightning.setDamage(dmg);
+                chainLightning.maxConnections = 3 * lightningAspectLevel;
+                chainLightning.range = 8;
+                level.addFreshEntity(chainLightning);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onKnockback(LivingKnockBackEvent event) {
         LivingEntity target = event.getEntity();
         LivingEntity attacker = target.getLastAttacker();
@@ -275,7 +299,7 @@ public class ServerEvents {
         DamageSource damage = event.getSource();
         MagicData magicData = MagicData.getPlayerMagicData(entity);
         int spellLevel = magicData.getCastingSpellLevel();
-        var damageSource = entity.level().damageSources().mobAttack(entity);
+        var damageSource = CQSpellRegistry.RIPOSTE_SPELL.get().getDamageSource(entity);
 
         if (magicData.isCasting() && Objects.equals(magicData.getCastingSpellId(), "cqs_armory:riposte_spell")) {
             if (damage.getDirectEntity() instanceof LivingEntity livingEntity) {
@@ -577,25 +601,25 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void focus(PlayerTickEvent.Pre event) {
+    public static void mageAOE(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
-        float focusThreshold = 0.7f;
-        float defaultMinMana = 100; // FIXME what if default mana changes?
+        float defaultMinManaSpent = 300; //can add curios changing later
 
-        if ((MagicData.getPlayerMagicData(player).getMana() <= defaultMinMana) || AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() < focusThreshold) {
-            AbilityData.get(player).focused = false;
-        }
-        if ((MagicData.getPlayerMagicData(player).getMana() > defaultMinMana) && !AbilityData.get(player).focused && MagicData.getPlayerMagicData(player).getMana() / player.getAttribute(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA).getValue() >= focusThreshold) {
-            AbilityData.get(player).focused = true;
-        }
+       if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
+           player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * 8), 0, false, false, false));
+           AbilityData.get(player).manaSpentSinceLastAOE = 0;
+       }
 
-        if (AbilityData.get(player).focused && !AbilityData.get(player).hasMageAOE) {
-            GenericMageAOE aoe = new GenericMageAOE(player.level(), player, MagicData.getPlayerMagicData(player).getMana() / 10, 5);
-            aoe.moveTo(player.position().add(0, 1, 0));
-            player.level().addFreshEntity(aoe);
-            AbilityData.get(player).hasMageAOE = true;
-        }
+    }
 
+    @SubscribeEvent
+    public static void trackManaSpent (ChangeManaEvent event) {
+        Player player = event.getEntity();
+        float manaSpent = event.getOldMana() - event.getNewMana();
+
+        if (manaSpent > 0) {
+            AbilityData.get(player).manaSpentSinceLastAOE += manaSpent;
+        }
     }
 
 }

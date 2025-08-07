@@ -1,0 +1,24 @@
+{
+  "values": [
+    "cqs_armory:berserkers_rush",
+    "cqs_armory:berserkers_fury",
+    "cqs_armory:hunter_talisman",
+    "cqs_armory:tracker_talisman",
+    "cqs_armory:marksman_talisman",
+    "cqs_armory:scout_talisman",
+    "cqs_armory:ranger_talisman",
+    "cqs_armory:skirmisher_talisman",
+    "cqs_armory:warrior_talisman",
+    "cqs_armory:soldier_talisman",
+    "cqs_armory:champion_talisman",
+    "cqs_armory:rampart_talisman",
+    "cqs_armory:bastion_talisman",
+    "cqs_armory:juggernaut_talisman",
+    "cqs_armory:seer_talisman",
+    "cqs_armory:mystic_talisman",
+    "cqs_armory:sage_talisman",
+    "cqs_armory:apprentice_talisman",
+    "cqs_armory:magus_talisman",
+    "cqs_armory:archmage_talisman"
+  ]
+}

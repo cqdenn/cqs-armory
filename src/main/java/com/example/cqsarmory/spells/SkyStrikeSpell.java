@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -123,7 +124,7 @@ public class SkyStrikeSpell extends AbstractSpell {
             playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 40, castSource, null), playerMagicData);
 
             var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-            var damageSource = level.damageSources().mobAttack(entity);
+            var damageSource = CQSpellRegistry.SKY_STRIKE_SPELL.get().getDamageSource(entity);
             for (Entity target : entities) {
                 if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
                     target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());

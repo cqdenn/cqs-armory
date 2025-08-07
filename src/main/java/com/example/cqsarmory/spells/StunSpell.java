@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -101,7 +102,7 @@ public class StunSpell extends AbstractSpell {
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(4));
-        var damageSource = level.damageSources().mobAttack(entity);
+        var damageSource = CQSpellRegistry.STUN_SPELL.get().getDamageSource(entity);
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity livingEntity) {

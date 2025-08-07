@@ -64,7 +64,7 @@ public class RapidFireSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.CONTINUOUS;
     }
 
     @Override

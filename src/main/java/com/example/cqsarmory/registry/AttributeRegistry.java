@@ -38,6 +38,10 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> MELEE_SKILL_POWER = newSkillAttribute("melee");
     public static final DeferredHolder<Attribute, Attribute> ARCHER_SKILL_RESIST = newResistanceAttribute("archer");
     public static final DeferredHolder<Attribute, Attribute> ARCHER_SKILL_POWER = newSkillAttribute("archer");
+    public static final DeferredHolder<Attribute, Attribute> ARCANE_SKILL_RESIST = newResistanceAttribute("arcane");
+    public static final DeferredHolder<Attribute, Attribute> ARCANE_SKILL_POWER = newSkillAttribute("arcane");
+    public static final DeferredHolder<Attribute, Attribute> NECROMANCY_SKILL_RESIST = newResistanceAttribute("necromancy");
+    public static final DeferredHolder<Attribute, Attribute> NECROMANCY_SKILL_POWER = newSkillAttribute("necromancy");
 
 
     @SubscribeEvent

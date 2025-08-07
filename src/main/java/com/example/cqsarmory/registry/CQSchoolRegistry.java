@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 import static io.redspace.ironsspellbooks.api.registry.SchoolRegistry.SCHOOL_REGISTRY_KEY;
 
 public class CQSchoolRegistry {
-    private static final DeferredRegister<SchoolType> SCHOOLS = DeferredRegister.create(SCHOOL_REGISTRY_KEY, IronsSpellbooks.MODID);
+    private static final DeferredRegister<SchoolType> SCHOOLS = DeferredRegister.create(SCHOOL_REGISTRY_KEY, CqsArmory.MODID);
 
     public static void register(IEventBus eventBus) {
         SCHOOLS.register(eventBus);
@@ -36,6 +36,8 @@ public class CQSchoolRegistry {
 
     public static final ResourceLocation MELEE_RESOURCE = CqsArmory.id("melee");
     public static final ResourceLocation ARCHER_RESOURCE = CqsArmory.id("archer");
+    public static final ResourceLocation ARCANE_RESOURCE = CqsArmory.id("arcane");
+    public static final ResourceLocation NECROMANCY_RESOURCE = CqsArmory.id("necromancy");
 
     public static final Supplier<SchoolType> MELEE = registerSchool(new SchoolType(
             MELEE_RESOURCE,
@@ -55,6 +57,26 @@ public class CQSchoolRegistry {
             AttributeRegistry.ARCHER_SKILL_RESIST,
             SoundRegistry.ARROW_SHOOT,
             DamageTypes.ARCHER_SKILL
+    ));
+
+    public static final Supplier<SchoolType> ARCANE = registerSchool(new SchoolType(
+            ARCANE_RESOURCE,
+            Tags.Items.ENDER_PEARLS,
+            Component.translatable("school.cqs_armory.arcane").withStyle(ChatFormatting.DARK_PURPLE),
+            AttributeRegistry.ARCANE_SKILL_POWER,
+            AttributeRegistry.ARCANE_SKILL_RESIST,
+            io.redspace.ironsspellbooks.registries.SoundRegistry.ENDER_CAST,
+            DamageTypes.ARCANE_SKILL
+    ));
+
+    public static final Supplier<SchoolType> NECROMANCY = registerSchool(new SchoolType(
+            NECROMANCY_RESOURCE,
+            Tags.Items.BONES,
+            Component.translatable("school.cqs_armory.necromancy").withStyle(ChatFormatting.GRAY),
+            AttributeRegistry.NECROMANCY_SKILL_POWER,
+            AttributeRegistry.NECROMANCY_SKILL_RESIST,
+            io.redspace.ironsspellbooks.registries.SoundRegistry.BLOOD_CAST,
+            DamageTypes.NECROMANCY_SKILL
     ));
 
 

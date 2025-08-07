@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.effects;
 
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -22,7 +23,7 @@ public class ShieldBashEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         List<Entity> list = livingEntity.level().getEntities(livingEntity, livingEntity.getBoundingBox().inflate(1.2));
-        var damageSource = livingEntity.level().damageSources().mobAttack(livingEntity);
+        var damageSource = CQSpellRegistry.SHIELD_BASH_SPELL.get().getDamageSource(livingEntity);
         if (!list.isEmpty()) {
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity target) {

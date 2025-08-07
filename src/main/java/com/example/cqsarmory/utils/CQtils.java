@@ -8,8 +8,12 @@ import com.example.cqsarmory.network.SyncMomentumDamagePacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedEndPacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.registry.AttributeRegistry;
+import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
@@ -29,14 +33,43 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 
 public class CQtils {
+
+    public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
 
     public static void disableShield(Player player, int ticks) {
         player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
         player.stopUsingItem();
         player.level().broadcastEntityEvent(player, (byte) 30);
+    }
+
+    private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap () {
+        Map<AbstractSpell, Supplier<SchoolType>> schoolMap = new HashMap<>();
+
+        schoolMap.put(SpellRegistry.FANG_STRIKE_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.RAISE_DEAD_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.DEVOUR_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.BLIGHT_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.SUMMON_VEX_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.SACRIFICE_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.BLOOD_SLASH_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.HEARTSTOP_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+
+        schoolMap.put(SpellRegistry.MAGIC_MISSILE_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.GUST_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.STARFALL_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.INVISIBILITY_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.ELDRITCH_BLAST_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.SLOW_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.TELEKINESIS_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.TELEPORT_SPELL.get(), CQSchoolRegistry.ARCANE);
+
+        return schoolMap;
     }
 
     public static void momentumOrbEffects(MomentumOrb momentumOrb) {

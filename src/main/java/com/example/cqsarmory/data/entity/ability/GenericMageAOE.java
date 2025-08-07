@@ -63,7 +63,7 @@ public class GenericMageAOE extends AoeEntity {
             }
         }else if (tickCount > waitTime) {
             discard();
-            AbilityData.get(getOwner()).hasMageAOE = false;
+            //AbilityData.get(getOwner()).hasMageAOE = false;
         }
     }
 

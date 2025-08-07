@@ -30,4 +30,5 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> SHIELD_BASH = MOB_EFFECT_DEFERRED_REGISTER.register("shield_bash", () -> new ShieldBashEffect(MobEffectCategory.BENEFICIAL, 0x9882a8));
     public static final DeferredHolder<MobEffect, MobEffect> DODGE = MOB_EFFECT_DEFERRED_REGISTER.register("dodge", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x9882a8).addAttributeModifier(AttributeRegistry.DODGE_CHANCE, CqsArmory.id("mobeffect_dodge"), 1, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> INSTA_DRAW = MOB_EFFECT_DEFERRED_REGISTER.register("insta_draw", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x7772a8).addAttributeModifier(BowAttributes.DRAW_SPEED, CqsArmory.id("mobeffect_insta_draw"), 20, AttributeModifier.Operation.ADD_VALUE));
+    public static final DeferredHolder<MobEffect, MobEffect> GENERIC_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("generic_mage_aoe", () -> new GenericMageAOEEffect(MobEffectCategory.BENEFICIAL, 0x7112a8));
 }

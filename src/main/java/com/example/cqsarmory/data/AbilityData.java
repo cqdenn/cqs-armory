@@ -18,7 +18,7 @@ public class AbilityData {
     public int combatEndRage;
     public int combatEndMomentum;
     public boolean focused;
-    public boolean hasMageAOE;
+    public float manaSpentSinceLastAOE;
     public int fireAspectCooldownEnd;
 
     public float getRage() {

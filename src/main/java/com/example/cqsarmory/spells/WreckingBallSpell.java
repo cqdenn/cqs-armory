@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -103,7 +104,7 @@ public class WreckingBallSpell extends AbstractSpell {
         int radius = 2 * spellLevel;
         Vec3 start = entity.position();
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-        var damageSource = level.damageSources().mobAttack(entity);
+        var damageSource = CQSpellRegistry.WRECKING_BALL_SPELL.get().getDamageSource(entity);
 
         for (Entity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {

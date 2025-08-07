@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
@@ -89,7 +90,7 @@ public class SpinSpell extends AbstractSpell {
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
-        var damageSource = level.damageSources().mobAttack(entity);
+        var damageSource = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(entity);
         for (Entity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
                 if (DamageSources.applyDamage(target, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue(), damageSource)) {

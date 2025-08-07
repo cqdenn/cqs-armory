@@ -20,7 +20,6 @@ public record FrostAspect(LevelBasedValue duration) implements EnchantmentEntity
 
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        entity.setTicksFrozen((int) duration.calculate(enchantmentLevel));
     }
 
     @Override

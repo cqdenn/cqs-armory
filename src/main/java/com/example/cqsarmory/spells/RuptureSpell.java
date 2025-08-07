@@ -2,7 +2,9 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
+import com.example.cqsarmory.data.entity.ability.MomentumOrb;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -104,11 +106,15 @@ public class RuptureSpell extends AbstractSpell {
         aoeEntity.setCircular();
         aoeEntity.setRadius(radius);
         aoeEntity.setDuration(20);
-        aoeEntity.setDamage((float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
         aoeEntity.setSlownessAmplifier(1);
         level.addFreshEntity(aoeEntity);
         entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * spellLevel) - 1, false, false, true));
         entity.setAbsorptionAmount(entity.getAbsorptionAmount() + entities.size() * (2));
+        for (Entity target : entities) {
+            if (target instanceof LivingEntity || target instanceof MomentumOrb) {
+                target.hurt(CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(entity),(float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+            }
+        }
 
     }
 }

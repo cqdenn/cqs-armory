@@ -14,10 +14,13 @@ import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.Tool;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -25,6 +28,7 @@ import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 import top.theillusivec4.curios.api.SlotContext;
 
+import java.awt.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -134,6 +138,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 
     public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.04, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> MARKSMAN_TALISMAN = ITEMS.register("marksman_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.06, AttributeModifier.Operation.ADD_VALUE)));
@@ -276,68 +281,68 @@ public class ItemRegistry {
 
         final List<CQSpellDataRegistryHolder> iceSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.ICICLE_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.SNOWBALL_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.RAY_OF_FROST_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.ICE_TOMB_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.ICE_SPIKES_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.FROSTWAVE_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.ICE_BLOCK_SPELL, 2),
-                new CQSpellDataRegistryHolder(SpellRegistry.FROST_STEP_SPELL, 2)
+                new CQSpellDataRegistryHolder(SpellRegistry.SNOWBALL_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.RAY_OF_FROST_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_TOMB_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_SPIKES_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.FROSTWAVE_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.ICE_BLOCK_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.FROST_STEP_SPELL, 1)
         );
 
         final List<CQSpellDataRegistryHolder> fireSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.FIREBOLT_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.BURNING_DASH_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.HEAT_SURGE_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.SCORCH_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.FIREBALL_SPELL, 2),
-                new CQSpellDataRegistryHolder(SpellRegistry.WALL_OF_FIRE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.FLAMING_BARRAGE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_HELL_SPELL, 2)
+                new CQSpellDataRegistryHolder(SpellRegistry.BURNING_DASH_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEAT_SURGE_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.SCORCH_SPELL, -1),
+                new CQSpellDataRegistryHolder(SpellRegistry.FIREBALL_SPELL, -1),
+                new CQSpellDataRegistryHolder(SpellRegistry.WALL_OF_FIRE_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.FLAMING_BARRAGE_SPELL, 0),
+                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_HELL_SPELL, 1)
         );
 
         final List<CQSpellDataRegistryHolder> lightningSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.BALL_LIGHTNING_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.SHOCKWAVE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.ELECTROCUTE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_BOLT_SPELL, 5),
-                new CQSpellDataRegistryHolder(SpellRegistry.CHAIN_LIGHTNING_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.CHARGE_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.THUNDERSTORM_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_LANCE_SPELL, 4)
+                new CQSpellDataRegistryHolder(SpellRegistry.SHOCKWAVE_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.ELECTROCUTE_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_BOLT_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.CHAIN_LIGHTNING_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.CHARGE_SPELL, -3),
+                new CQSpellDataRegistryHolder(SpellRegistry.THUNDERSTORM_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.LIGHTNING_LANCE_SPELL, 2)
         );
 
         final List<CQSpellDataRegistryHolder> necromancySpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.FANG_STRIKE_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_DEAD_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.DEVOUR_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.BLIGHT_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.SUMMON_VEX_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.SACRIFICE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.BLOOD_SLASH_SPELL, 2),
-                new CQSpellDataRegistryHolder(SpellRegistry.HEARTSTOP_SPELL, 4)
+                new CQSpellDataRegistryHolder(SpellRegistry.RAISE_DEAD_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.DEVOUR_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLIGHT_SPELL, -1),
+                new CQSpellDataRegistryHolder(SpellRegistry.SUMMON_VEX_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.SACRIFICE_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLOOD_SLASH_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEARTSTOP_SPELL, 1)
         );
 
         final List<CQSpellDataRegistryHolder> arcaneSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.MAGIC_MISSILE_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.GUST_SPELL, 5),
-                new CQSpellDataRegistryHolder(SpellRegistry.STARFALL_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.INVISIBILITY_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.ELDRITCH_BLAST_SPELL, 1),
-                new CQSpellDataRegistryHolder(SpellRegistry.SLOW_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.GUST_SPELL, 3),
+                new CQSpellDataRegistryHolder(SpellRegistry.STARFALL_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.INVISIBILITY_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.ELDRITCH_BLAST_SPELL, -4),
+                new CQSpellDataRegistryHolder(SpellRegistry.SLOW_SPELL, 1),
                 new CQSpellDataRegistryHolder(SpellRegistry.TELEKINESIS_SPELL, 1),
-                new CQSpellDataRegistryHolder(SpellRegistry.TELEPORT_SPELL, 4)
+                new CQSpellDataRegistryHolder(SpellRegistry.TELEPORT_SPELL, 2)
         );
 
         final List<CQSpellDataRegistryHolder> holySpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 6),
-                new CQSpellDataRegistryHolder(SpellRegistry.BLESSING_OF_LIFE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.SHIELD_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.FORTIFY_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.SUNBEAM_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.CLEANSE_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.HEAL_SPELL, 4),
-                new CQSpellDataRegistryHolder(SpellRegistry.HASTE_SPELL, 4)
+                new CQSpellDataRegistryHolder(SpellRegistry.BLESSING_OF_LIFE_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.SHIELD_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.FORTIFY_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.SUNBEAM_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.CLEANSE_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.HEAL_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.HASTE_SPELL, 2)
         );
 
         int spellCount = power.power() * 2;
@@ -348,12 +353,12 @@ public class ItemRegistry {
         CQSpellDataRegistryHolder[] lightningSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
         CQSpellDataRegistryHolder[] fireSpellsForPower = new CQSpellDataRegistryHolder[spellCount];
         for (int i = 0; i < spellCount; i++) {
-            iceSpellsForPower[i] = new CQSpellDataRegistryHolder(iceSpells.get(i).getSpellSupplier(), iceSpells.get(i).getLevel() + power.power());
-            fireSpellsForPower[i] = new CQSpellDataRegistryHolder(fireSpells.get(i).getSpellSupplier(), fireSpells.get(i).getLevel() + power.power());
-            lightningSpellsForPower[i] = new CQSpellDataRegistryHolder(lightningSpells.get(i).getSpellSupplier(), lightningSpells.get(i).getLevel() + power.power());
-            necromancySpellsForPower[i] = new CQSpellDataRegistryHolder(necromancySpells.get(i).getSpellSupplier(), necromancySpells.get(i).getLevel() + power.power());
-            arcaneSpellsForPower[i] = new CQSpellDataRegistryHolder(arcaneSpells.get(i).getSpellSupplier(), arcaneSpells.get(i).getLevel() + power.power());
-            holySpellsForPower[i] = new CQSpellDataRegistryHolder(holySpells.get(i).getSpellSupplier(), holySpells.get(i).getLevel() + power.power());
+            iceSpellsForPower[i] = new CQSpellDataRegistryHolder(iceSpells.get(i).getSpellSupplier(), iceSpells.get(i).getLevel() + (power.power() * 2));
+            fireSpellsForPower[i] = new CQSpellDataRegistryHolder(fireSpells.get(i).getSpellSupplier(), fireSpells.get(i).getLevel() + (power.power() * 2));
+            lightningSpellsForPower[i] = new CQSpellDataRegistryHolder(lightningSpells.get(i).getSpellSupplier(), lightningSpells.get(i).getLevel() + (power.power() * 2));
+            necromancySpellsForPower[i] = new CQSpellDataRegistryHolder(necromancySpells.get(i).getSpellSupplier(), necromancySpells.get(i).getLevel() + (power.power() * 2));
+            arcaneSpellsForPower[i] = new CQSpellDataRegistryHolder(arcaneSpells.get(i).getSpellSupplier(), arcaneSpells.get(i).getLevel() + (power.power() * 2));
+            holySpellsForPower[i] = new CQSpellDataRegistryHolder(holySpells.get(i).getSpellSupplier(), holySpells.get(i).getLevel() + (power.power() * 2));
         }
 
         var warhammer = ITEMS.register(name + "_warhammer",
@@ -423,37 +428,37 @@ public class ItemRegistry {
         );
 
         var ice = ITEMS.register(name + "_ice_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), iceSpellsForPower)
         );
 
         var fire = ITEMS.register(name + "_fire_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), fireSpellsForPower)
         );
 
         var lightning = ITEMS.register(name + "_lightning_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), lightningSpellsForPower)
         );
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 1 + (0.2 * material.getMult()), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), necromancySpellsForPower)
         );
 
         var arcane = ITEMS.register(name + "_arcane_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), arcaneSpellsForPower)
         );
 
         var holy = ITEMS.register(name + "_holy_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), holySpellsForPower)
         );
