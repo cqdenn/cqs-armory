@@ -102,27 +102,28 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public @Nullable ResourceLocation getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, ArmorMaterial.Layer layer, boolean innerModel) {
-        switch (((ArmorItem) stack.getItem()).getMaterial().getRegisteredName()) {
+        String layerNum = slot == EquipmentSlot.LEGS ? "2" : "1";
+        switch (((ArmorItem) stack.getItem()).getMaterial().getRegisteredName().split(":")[1]) {
             case "hunter", "scout" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_1_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_1_layer_" + layerNum + ".png");
             }
             case "tracker", "ranger" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_2_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_2_layer_" + layerNum + ".png");
             }
             case "marksman", "skirmisher" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_3_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/archer_power_3_layer_" + layerNum + ".png");
             }
             case "warrior", "rampart", "seer", "apprentice" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_" + layerNum + ".png");
             }
             case "soldier", "bastion", "mystic", "magus" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_2_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_2_layer_" + layerNum + ".png");
             }
             case "champion", "juggernaut", "archmage", "sage" -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_3_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_3_layer_" + layerNum + ".png");
             }
             default -> {
-                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_1.png");
+                return ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/models/armor/melee_power_1_layer_" + layerNum + ".png");
             }
         }
     }
