@@ -66,6 +66,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import org.joml.Vector3f;
 
+import java.util.List;
 import java.util.Objects;
 
 @EventBusSubscriber
@@ -521,41 +522,15 @@ public class ServerEvents {
                 float rand = Utils.random.nextFloat();
                 Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(0, 1, 0);
 
-                //adjust values as we add more orbs, weird formatting in order to leave room forcing orb spawning logic
-                if ((rand <= 0.16)) {
-                    ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, explosiveMomentumOrb, level);
-                    level.addFreshEntity(explosiveMomentumOrb);
-                }
-                if ((0.14 < rand && rand <= 0.28)) {
-                    BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, blackHoleMomentumOrb, level);
-                    level.addFreshEntity(blackHoleMomentumOrb);
-                }
-                if ((0.28 < rand && rand <= 0.42)) {
-                    DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, dodgeMomentumOrb, level);
-                    level.addFreshEntity(dodgeMomentumOrb);
-                }
-                if ((0.42 < rand && rand <= 0.56)) {
-                    InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, instaDrawMomentumOrb, level);
-                    level.addFreshEntity(instaDrawMomentumOrb);
-                }
-                if ((0.56 < rand && rand <= 0.7)) {
-                    IceExplosionMomentumOrb iceExplosionMomentumOrb = new IceExplosionMomentumOrb(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, iceExplosionMomentumOrb, level);
-                    level.addFreshEntity(iceExplosionMomentumOrb);
-                }
-                if ((0.7 < rand && rand <= 0.84)) {
-                    RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, rootMomentumOrb, level);
-                    level.addFreshEntity(rootMomentumOrb);
-                }
-                if ((0.84 < rand && rand <= 1)) {
-                    ChainLightningMomentumOrb chainLightningMomentumOrb = new ChainLightningMomentumOrb(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), level, player);
-                    CQtils.findOrbLoc(startingPos, chainLightningMomentumOrb, level);
-                    level.addFreshEntity(chainLightningMomentumOrb);
+
+                int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
+                MomentumOrb orb = CQtils.getRandomOrbType(level, player);
+                for (int i = 0; i < orbsSpawned; i++) {
+                    if (ItemRegistry.BLASTERS_BRAND.get().isEquippedBy(player)) {
+                        orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
+                    }
+                    CQtils.findOrbLoc(startingPos, orb, level);
+                    level.addFreshEntity(orb);
                 }
 
             } else {
@@ -570,7 +545,7 @@ public class ServerEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));*/
 
 
-                AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 5);
+                AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 15);
             }
 
         }

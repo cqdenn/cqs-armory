@@ -7,10 +7,7 @@ import com.example.cqsarmory.network.SyncMomentumDamageEndPacket;
 import com.example.cqsarmory.network.SyncMomentumDamagePacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedEndPacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
-import com.example.cqsarmory.registry.AttributeRegistry;
-import com.example.cqsarmory.registry.CQSchoolRegistry;
-import com.example.cqsarmory.registry.ItemRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.registry.*;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
@@ -70,6 +67,21 @@ public class CQtils {
         schoolMap.put(SpellRegistry.TELEPORT_SPELL.get(), CQSchoolRegistry.ARCANE);
 
         return schoolMap;
+    }
+
+    public static MomentumOrb getRandomOrbType(Level level, Player player) {
+        ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
+        BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
+        DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
+        InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
+        IceExplosionMomentumOrb iceExplosionMomentumOrb = new IceExplosionMomentumOrb(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
+        RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
+        ChainLightningMomentumOrb chainLightningMomentumOrb = new ChainLightningMomentumOrb(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), level, player);
+
+        List<MomentumOrb> orbs = List.of(
+                explosiveMomentumOrb, blackHoleMomentumOrb, dodgeMomentumOrb, instaDrawMomentumOrb, iceExplosionMomentumOrb, rootMomentumOrb, chainLightningMomentumOrb
+        );
+        return orbs.get(Utils.random.nextIntBetweenInclusive(0, orbs.size() - 1));
     }
 
     public static void momentumOrbEffects(MomentumOrb momentumOrb) {
