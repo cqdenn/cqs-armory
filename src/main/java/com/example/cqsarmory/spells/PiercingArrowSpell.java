@@ -106,7 +106,7 @@ public class PiercingArrowSpell extends AbstractSpell {
         arrow.setScale(6f);
         arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         arrow.setDeltaMovement(entity.getForward().scale(4));
-        arrow.setPierceLevel((byte) 5);
+        arrow.setPierceLevel((byte) 10);
         arrow.setCritArrow(true);
 
         level.addFreshEntity(arrow);
