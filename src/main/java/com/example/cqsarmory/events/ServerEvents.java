@@ -56,11 +56,14 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
+import net.neoforged.neoforge.event.entity.player.ArrowNockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
@@ -198,7 +201,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void lightningAspect (LivingIncomingDamageEvent event) {
+    public static void lightningAspect(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
         Entity entityAttacker = event.getSource().getEntity();
         float rand = Utils.random.nextFloat();
@@ -519,13 +522,12 @@ public class ServerEvents {
                 //add logic for creating momentum orbs
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
-                float rand = Utils.random.nextFloat();
                 Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(0, 1, 0);
 
 
                 int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
-                MomentumOrb orb = CQtils.getRandomOrbType(level, player);
                 for (int i = 0; i < orbsSpawned; i++) {
+                    MomentumOrb orb = CQtils.getRandomOrbType(level, player);
                     if (ItemRegistry.BLASTERS_BRAND.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
                     }
@@ -584,25 +586,41 @@ public class ServerEvents {
         float defaultMinManaSpent = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
         int seconds = ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(player) ? 16 : 8;
 
-       if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
-           if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
-               player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
-           }
-           else {
-               player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
-           }
-           AbilityData.get(player).manaSpentSinceLastAOE = 0;
-       }
+        if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
+            if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
+            } else {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
+            }
+            AbilityData.get(player).manaSpentSinceLastAOE = 0;
+        }
 
     }
 
     @SubscribeEvent
-    public static void trackManaSpent (ChangeManaEvent event) {
+    public static void trackManaSpent(ChangeManaEvent event) {
         Player player = event.getEntity();
         float manaSpent = event.getOldMana() - event.getNewMana();
 
         if (manaSpent > 0) {
             AbilityData.get(player).manaSpentSinceLastAOE += manaSpent;
+        }
+    }
+
+    @SubscribeEvent
+    public static void damageReduction(LivingIncomingDamageEvent event) {
+        if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
+            event.setAmount(event.getAmount() * 0.75f);
+        }
+        if (event.getSource().getDirectEntity() instanceof AbilityArrow) {
+            event.setInvulnerabilityTicks(0);
+        }
+    }
+
+    @SubscribeEvent
+    public static void arrowPierce(ProjectileImpactEvent event) {
+        if (event.getProjectile() instanceof AbstractArrow arrow && arrow.getOwner() instanceof Player player && ItemRegistry.SHARPHOOTER.get().isEquippedBy(player) && event.getRayTraceResult() instanceof EntityHitResult && !player.level().isClientSide) {
+            arrow.setPierceLevel((byte) (arrow.getPierceLevel() + 5));
         }
     }
 
