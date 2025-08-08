@@ -103,6 +103,12 @@
 
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
+  "item.cqs_armory.hellfire_sigil": "Hellfire Sigil",
+  "item.cqs_armory.hellfire_sigil.desc": "Converts generic mage AOE into a meteor storm",
+  "item.cqs_armory.chronowarp_rune": "Chronowarp Rune",
+  "item.cqs_armory.chronowarp_rune.desc": "Doubles how long your mage AOE lasts",
+  "item.cqs_armory.manasaver": "Manasaver",
+  "item.cqs_armory.manasaver.desc": "Halves the mana required to spawn a mage AOE",
   "item.cqs_armory.hunter_talisman": "Hunter Talisman",
   "item.cqs_armory.tracker_talisman": "Tracker Talisman",
   "item.cqs_armory.marksman_talisman": "Marksman Talisman",

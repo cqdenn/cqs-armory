@@ -12,6 +12,7 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
+import io.redspace.ironsspellbooks.item.curios.SimpleDescriptiveCurio;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.core.component.DataComponents;
@@ -139,6 +140,9 @@ public class ItemRegistry {
 
     public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveCurio(ItemPropertiesHelper.equipment(1), "booster"));
+    public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveCurio(ItemPropertiesHelper.equipment(1), "booster"));
+    public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveCurio(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.04, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> MARKSMAN_TALISMAN = ITEMS.register("marksman_talisman", () -> new CurioBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.06, AttributeModifier.Operation.ADD_VALUE)));

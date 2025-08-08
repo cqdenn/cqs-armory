@@ -606,10 +606,16 @@ public class ServerEvents {
     @SubscribeEvent
     public static void mageAOE(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
-        float defaultMinManaSpent = 300; //can add curios changing later
+        float defaultMinManaSpent = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
+        int seconds = ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(player) ? 16 : 8;
 
        if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
-           player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * 8), 0, false, false, false));
+           if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
+               player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
+           }
+           else {
+               player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
+           }
            AbilityData.get(player).manaSpentSinceLastAOE = 0;
        }
 
