@@ -142,6 +142,7 @@ public class CQtils {
             BlackHole blackHole = new BlackHole(level, player);
             blackHole.setDamage(dmg * 0.5f);
             blackHole.setRadius(radius);
+            blackHole.setDuration(100);
             blackHole.moveTo(blackHoleMomentumOrb.position().add(0, -2, 0));
             level.addFreshEntity(blackHole);
 
