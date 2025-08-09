@@ -1,26 +1,26 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.items.BowType;
 import io.redspace.atlasapi.api.AssetHandler;
 import io.redspace.atlasapi.api.data.BakingPreparations;
 import io.redspace.atlasapi.api.data.ModelLayer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
+import net.minecraft.client.renderer.texture.atlas.sources.SingleFile;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class WeaponsetAssetHandler extends AssetHandler {
 
@@ -42,6 +42,10 @@ public class WeaponsetAssetHandler extends AssetHandler {
         permutaions.put("iron", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"));
         permutaions.put("dwarvensteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/dwarvensteel"));
         permutaions.put("silversteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/silversteel"));
+
+        Map <String, ResourceLocation> bowPermutations = new HashMap<>();
+        bowPermutations.put("diamond", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_diamond"));
+        bowPermutations.put("netherite", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_netherite"));
 
 
 
@@ -70,7 +74,30 @@ public class WeaponsetAssetHandler extends AssetHandler {
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_arcane_handheld"),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_holy_handheld")),ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/sword_key"), permutaions);
         var ingot_source = new PalettedPermutations(List.of(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/ingot_key")), ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/gold"), permutaions);
-        return List.of(weapon_source, ingot_source);
+        var bow_source = new PalettedPermutations(List.of(
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/longbow"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/longbow_pulling_0"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/longbow_pulling_1"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/longbow_pulling_2"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/shortbow"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/shortbow_pulling_0"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/shortbow_pulling_1"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/shortbow_pulling_2"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/recurve"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/recurve_pulling_0"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/recurve_pulling_1"),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/recurve_pulling_2")), ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_palette_key"), bowPermutations
+        );
+        List<SpriteSource> spriteSources = new ArrayList<>();
+        for (BowType bowType : BowType.values()) {
+            for (int i=0;i<=2;i++) {
+                spriteSources.add(new SingleFile(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, String.format("item/%s_arrow_%s", bowType.getArrowString(), i)), Optional.empty()));
+            }
+        }
+        spriteSources.add(weapon_source);
+        spriteSources.add(ingot_source);
+        spriteSources.add(bow_source);
+        return spriteSources;
     }
 
     @Override
@@ -98,6 +125,24 @@ public class WeaponsetAssetHandler extends AssetHandler {
         var type = BuiltInRegistries.ITEM.getKey(tieredItem).getPath().split("_")[1];
 
         var path = String.format("item/iron_%s_%s_%s", type, transform, tier);
+        return path;
+    }
+
+    public static @NotNull String getBowAtlasLocation(BowItem bowItem) {
+        String[] name = BuiltInRegistries.ITEM.getKey(bowItem).getPath().split("_");
+        var tier = name[0];
+        var type = name[1];
+
+        var path = String.format("item/%s_%s", type, tier);
+        return path;
+    }
+
+    public static @NotNull String getBowAtlasLocation(BowItem bowItem, int pull) {
+        String[] name = BuiltInRegistries.ITEM.getKey(bowItem).getPath().split("_");
+        var tier = name[0];
+        var type = name[1];
+
+        var path = String.format("item/%s_pulling_%s_%s", type, pull, tier);
         return path;
     }
 

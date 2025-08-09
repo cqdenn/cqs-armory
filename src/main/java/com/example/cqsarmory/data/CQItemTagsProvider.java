@@ -16,10 +16,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -40,6 +37,10 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> bowTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/bow"));
     public static final TagKey<Item> curioTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "booster"));
     public static final TagKey<Item> axeTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "axes"));
+    public static final TagKey<Item> headTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/head_armor"));
+    public static final TagKey<Item> chestTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/chest_armor"));
+    public static final TagKey<Item> legsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/leg_armor"));
+    public static final TagKey<Item> bootsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/foot_armor"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -58,6 +59,13 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 tag(swordTag).add((Item)item.get());
             }else if (item.get() instanceof CurioBaseItem) {
                 tag(curioTag).add((Item)item.get());
+            }else if (item.get() instanceof ArmorItem armorItem) {
+                switch (armorItem.getEquipmentSlot()) {
+                    case HEAD -> tag(headTag).add((Item)item.get());
+                    case CHEST -> tag(chestTag).add((Item)item.get());
+                    case LEGS -> tag(legsTag).add((Item)item.get());
+                    case FEET -> tag(bootsTag).add((Item)item.get());
+                }
             }
         }
         tag(swordTag).add(ItemRegistry.MJOLNIR.get());

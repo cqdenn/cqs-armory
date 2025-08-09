@@ -1,0 +1,9 @@
+{
+  "parent": "cqs_armory:item/template_large_bow",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "cqs_armory:item/longbow_pulling_1_dwarvensteel",
+    "layer1": "cqs_armory:item/longbow_arrow_1"
+  }
+}

@@ -489,6 +489,9 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(spear, generator.atlasLargeItem(spear)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(rapier, generator.atlasItem(rapier)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasBowItem(longbow, BowType.LONGBOW));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasBowItem(recurve, BowType.RECURVE_BOW));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasBowItem(shortbow, BowType.SHORTBOW));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(ice, generator.atlasLargeItem(ice)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(fire, generator.atlasLargeItem(fire)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(lightning, generator.atlasLargeItem(lightning)));

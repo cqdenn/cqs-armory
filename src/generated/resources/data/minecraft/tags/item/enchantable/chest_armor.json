@@ -1,0 +1,22 @@
+{
+  "values": [
+    "cqs_armory:hunter_chestplate",
+    "cqs_armory:tracker_chestplate",
+    "cqs_armory:marksman_chestplate",
+    "cqs_armory:scout_chestplate",
+    "cqs_armory:ranger_chestplate",
+    "cqs_armory:skirmisher_chestplate",
+    "cqs_armory:warrior_chestplate",
+    "cqs_armory:soldier_chestplate",
+    "cqs_armory:champion_chestplate",
+    "cqs_armory:rampart_chestplate",
+    "cqs_armory:bastion_chestplate",
+    "cqs_armory:juggernaut_chestplate",
+    "cqs_armory:apprentice_chestplate",
+    "cqs_armory:magus_chestplate",
+    "cqs_armory:archmage_chestplate",
+    "cqs_armory:seer_chestplate",
+    "cqs_armory:mystic_chestplate",
+    "cqs_armory:sage_chestplate"
+  ]
+}

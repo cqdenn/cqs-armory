@@ -1,0 +1,9 @@
+{
+  "parent": "cqs_armory:item/template_shortbow",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "cqs_armory:item/shortbow_pulling_1_gold",
+    "layer1": "cqs_armory:item/shortbow_arrow_1"
+  }
+}

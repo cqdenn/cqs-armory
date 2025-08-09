@@ -1,0 +1,9 @@
+{
+  "parent": "cqs_armory:item/template_large_bow",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:simple_model",
+  "textures": {
+    "layer0": "cqs_armory:item/recurve_pulling_2_netherite",
+    "layer1": "cqs_armory:item/recurve_arrow_2"
+  }
+}
