@@ -46,9 +46,18 @@ public class WeaponsetAssetHandler extends AssetHandler {
         Map <String, ResourceLocation> bowPermutations = new HashMap<>();
         bowPermutations.put("diamond", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_diamond"));
         bowPermutations.put("netherite", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_netherite"));
-
-
-
+        bowPermutations.put("copper", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_copper"));
+        bowPermutations.put("iron", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_iron"));
+        bowPermutations.put("gold", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_gold"));
+        bowPermutations.put("withersteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_withersteel"));
+        bowPermutations.put("sculk", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_sculk"));
+        bowPermutations.put("amethyst", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_amethyst"));
+        bowPermutations.put("blazing", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_blazing"));
+        bowPermutations.put("umbrite", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_umbrite"));
+        bowPermutations.put("living", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_living"));
+        bowPermutations.put("obsidian", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_obsidian"));
+        bowPermutations.put("dwarvensteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_dwarvensteel"));
+        bowPermutations.put("silversteel", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "palettes/bow_silversteel"));
 
         var weapon_source = new PalettedPermutations(List.of(
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/iron_warhammer_gui"),
