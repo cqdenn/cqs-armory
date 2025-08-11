@@ -1,9 +1,24 @@
 {
   "parent": "cqs_armory:item/template_large_bow",
-  "handler": "cqs_armory:weaponset_handler",
-  "loader": "atlas_api:simple_model",
-  "textures": {
-    "layer0": "cqs_armory:item/longbow_pulling_1_netherite",
-    "layer1": "cqs_armory:item/longbow_arrow_1"
+  "base": {
+    "parent": "cqs_armory:item/template_large_bow",
+    "handler": "cqs_armory:weaponset_handler",
+    "loader": "atlas_api:simple_model",
+    "textures": {
+      "layer0": "cqs_armory:item/longbow_pulling_1_netherite",
+      "layer1": "cqs_armory:item/longbow_arrow_1"
+    }
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "gui": {
+      "parent": "cqs_armory:item/template_shortbow",
+      "handler": "cqs_armory:weaponset_handler",
+      "loader": "atlas_api:simple_model",
+      "textures": {
+        "layer0": "cqs_armory:item/longbow_pulling_1_gui_netherite",
+        "layer1": "cqs_armory:item/shortbow_arrow_1"
+      }
+    }
   }
 }

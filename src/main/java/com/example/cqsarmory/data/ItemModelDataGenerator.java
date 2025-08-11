@@ -69,31 +69,85 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_large_sword"))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false))));
     }
 
-    public ItemModelBuilder atlasBowItem(DeferredHolder<Item, ? extends Item> item, BowType bowType) {
+    public ItemModelBuilder bowItemStandalone(DeferredHolder<Item, ? extends Item> item, BowType bowType) {
         String template = bowType.isLarge() ? "large_bow" : "shortbow";
         return ((AtlasBuilder) (withExistingParent(item.getId().getPath(),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))))
                 .handler(CqsArmory.MODID + ":weaponset_handler")
                 .loader("atlas_api:simple_model")
                 .texture("layer0",
-                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get()))
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), false))
                 )
-                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).model(makeBowPulling(item, bowType, 0)).end()
-                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.65f).model(makeBowPulling(item, bowType, 1)).end()
-                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.9f).model(makeBowPulling(item, bowType, 2)).end();
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).model(makeBowPullingStandalone(item, bowType, 0)).end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.65f).model(makeBowPullingStandalone(item, bowType, 1)).end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.9f).model(makeBowPullingStandalone(item, bowType, 2)).end();
 
     }
 
-    public ItemModelBuilder makeBowPulling(DeferredHolder<Item, ? extends Item> item, BowType bowType, int pull) {
+    public ItemModelBuilder makeBowPullingStandalone(DeferredHolder<Item, ? extends Item> item, BowType bowType, int pull) {
         String template = bowType.isLarge() ? "large_bow" : "shortbow";
         return ((AtlasBuilder) (withExistingParent(item.getId().getPath() + "_pulling_" + pull,
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))))
                 .handler(CqsArmory.MODID + ":weaponset_handler")
                 .loader("atlas_api:simple_model")
                 .texture("layer0",
-                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), pull))
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), false, pull))
                 )
                 .texture("layer1", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, String.format("item/%s_arrow_%s", bowType.getArrowString(), pull)));
+    }
+
+    public ItemModelBuilder bowItemSeparateTransform(DeferredHolder<Item, ? extends Item> item, BowType bowType) {
+        String template = bowType.isLarge() ? "large_bow" : "shortbow";
+        var base = hiddenModel("", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))
+                .handler(CqsArmory.MODID + ":weaponset_handler")
+                .loader("atlas_api:simple_model")
+                .texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), false))
+                );
+
+        var gui = hiddenModel("", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_shortbow"))
+                .handler(CqsArmory.MODID + ":weaponset_handler")
+                .loader("atlas_api:simple_model")
+                .texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), true))
+                );
+        return ((AtlasBuilder) (withExistingParent(item.getId().getPath(),
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))))
+                .customLoader(SeparateTransformsModelBuilder::begin)
+                .base(base)
+                .perspective(ItemDisplayContext.GUI, gui)
+                .end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).model(makeBowPullingSeparateTransform(item, bowType, 0)).end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.65f).model(makeBowPullingSeparateTransform(item, bowType, 1)).end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("pulling"), 1).predicate(ResourceLocation.withDefaultNamespace("pull"), 0.9f).model(makeBowPullingSeparateTransform(item, bowType, 2)).end();
+
+    }
+
+    public ItemModelBuilder makeBowPullingSeparateTransform(DeferredHolder<Item, ? extends Item> item, BowType bowType, int pull) {
+        String template = bowType.isLarge() ? "large_bow" : "shortbow";
+        var base = hiddenModel("", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))
+                .handler(CqsArmory.MODID + ":weaponset_handler")
+                .loader("atlas_api:simple_model")
+                .texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), false, pull))
+                )
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, String.format("item/%s_arrow_%s", bowType.getArrowString(), pull)));
+                ;
+
+        var gui = hiddenModel("", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_shortbow"))
+                .handler(CqsArmory.MODID + ":weaponset_handler")
+                .loader("atlas_api:simple_model")
+                .texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getBowAtlasLocation((BowItem) item.get(), true, pull))
+                )
+                .texture("layer1", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, String.format("item/%s_arrow_%s", BowType.SHORTBOW.getArrowString(), pull)));
+                ;
+        return ((AtlasBuilder) (withExistingParent(item.getId().getPath() + "_pulling_" + pull,
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))))
+                .customLoader(SeparateTransformsModelBuilder::begin)
+                .base(base)
+                .perspective(ItemDisplayContext.GUI, gui)
+                .end();
     }
 
     public ItemModelBuilder atlasTransform(DeferredHolder<Item, ? extends Item> item, ItemModelBuilder base) {

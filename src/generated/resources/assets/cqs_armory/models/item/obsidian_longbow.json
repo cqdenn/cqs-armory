@@ -1,7 +1,14 @@
 {
   "parent": "cqs_armory:item/template_large_bow",
-  "handler": "cqs_armory:weaponset_handler",
-  "loader": "atlas_api:simple_model",
+  "base": {
+    "parent": "cqs_armory:item/template_large_bow",
+    "handler": "cqs_armory:weaponset_handler",
+    "loader": "atlas_api:simple_model",
+    "textures": {
+      "layer0": "cqs_armory:item/longbow_obsidian"
+    }
+  },
+  "loader": "neoforge:separate_transforms",
   "overrides": [
     {
       "model": "cqs_armory:item/obsidian_longbow_pulling_0",
@@ -24,7 +31,14 @@
       }
     }
   ],
-  "textures": {
-    "layer0": "cqs_armory:item/longbow_obsidian"
+  "perspectives": {
+    "gui": {
+      "parent": "cqs_armory:item/template_shortbow",
+      "handler": "cqs_armory:weaponset_handler",
+      "loader": "atlas_api:simple_model",
+      "textures": {
+        "layer0": "cqs_armory:item/longbow_gui_obsidian"
+      }
+    }
   }
 }
