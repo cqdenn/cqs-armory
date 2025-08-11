@@ -1,8 +1,22 @@
 {
-  "parent": "cqs_armory:item/template_large_sword",
-  "handler": "cqs_armory:weaponset_handler",
-  "loader": "atlas_api:simple_model",
-  "textures": {
-    "layer0": "cqs_armory:item/iron_fire_handheld_iron"
+  "parent": "minecraft:item/handheld",
+  "base": {
+    "parent": "cqs_armory:item/template_large_sword",
+    "handler": "cqs_armory:weaponset_handler",
+    "loader": "atlas_api:simple_model",
+    "textures": {
+      "layer0": "cqs_armory:item/iron_fire_handheld_iron"
+    }
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "handler": "cqs_armory:weaponset_handler",
+      "loader": "atlas_api:simple_model",
+      "textures": {
+        "layer0": "cqs_armory:item/iron_fire_gui_iron"
+      }
+    }
   }
 }

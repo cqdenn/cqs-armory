@@ -21,6 +21,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.logging.Logger;
 
 public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
 
@@ -28,6 +29,10 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
 
     public ItemModelDataGenerator(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, CqsArmory.MODID, ITEM_FOLDER, AtlasBuilder::new, exFileHelper);
+    }
+
+    public AtlasBuilder hiddenModel (String name, ResourceLocation parent) {
+        return (AtlasBuilder) new AtlasBuilder(CqsArmory.id(name), this.existingFileHelper).parent(getExistingFile(parent));
     }
 
     @Override
@@ -47,23 +52,26 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
     }
 
     public ItemModelBuilder atlas3DItem(DeferredHolder<Item, ? extends Item> item, ResourceLocation model3d) {
-        return ((AtlasBuilder) (withExistingParent(item.getId().getPath()/* + "_handheld"*/,
+        return ((AtlasBuilder) (hiddenModel(item.getId().getPath() + "_handheld",
                 model3d))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false)));
     }
 
     public ItemModelBuilder atlasGuiItem(DeferredHolder<Item, ? extends Item> item) {
-        return ((AtlasBuilder) (withExistingParent(item.getId().getPath() + "_gui",
-                ResourceLocation.withDefaultNamespace("item/handheld")))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), true)));
+        return ((AtlasBuilder) (hiddenModel(item.getId().getPath() + "_gui",
+                ResourceLocation.withDefaultNamespace("item/handheld"))))
+                .handler(CqsArmory.MODID + ":weaponset_handler")
+                .loader("atlas_api:simple_model")
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), true)));
     }
 
     public ItemModelBuilder atlasLargeItem(DeferredHolder<Item, ? extends Item> item) {
-        return ((AtlasBuilder) (withExistingParent(item.getId().getPath()/* + "_handheld"*/,
-                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_large_sword")))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false)));
+        return ((AtlasBuilder) (hiddenModel(item.getId().getPath() + "_handheld",
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_large_sword"))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false))));
     }
 
     public ItemModelBuilder atlasBowItem(DeferredHolder<Item, ? extends Item> item, BowType bowType) {
         String template = bowType.isLarge() ? "large_bow" : "shortbow";
-        return ((AtlasBuilder) (withExistingParent(item.getId().getPath()/* + "_handheld"*/,
+        return ((AtlasBuilder) (withExistingParent(item.getId().getPath(),
                 ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_" + template))))
                 .handler(CqsArmory.MODID + ":weaponset_handler")
                 .loader("atlas_api:simple_model")
@@ -90,20 +98,16 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
 
     public ItemModelBuilder atlasTransform(DeferredHolder<Item, ? extends Item> item, ItemModelBuilder base) {
 
-        /*ItemModelBuilder model = withExistingParent(item.getId().getPath(), "item/handheld");
+        ItemModelBuilder model = withExistingParent(item.getId().getPath(), "item/handheld");
+        //((AtlasBuilder) base).debugLoader();
 
-        ItemModelBuilder base = getBuilder(item.getId().getPath())
-                .parent(new ModelFile.UncheckedModelFile("minecraft:item/handheld"))
-                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false));
-
-        ItemModelBuilder guiModel = atlasGuiItem(item);getBuilder(item.getId().getPath())
-                .parent(new ModelFile.UncheckedModelFile("minecraft:item/generated"))
-                .texture("layer0", WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), true));
+        ItemModelBuilder guiModel = atlasGuiItem(item);
+        //((AtlasBuilder) guiModel).debugLoader();
 
         return model.customLoader(SeparateTransformsModelBuilder::begin)
                 .base(base)
-                .perspective(ItemDisplayContext.GUI, guiModel).end();*/
-        return base;
+                .perspective(ItemDisplayContext.GUI, guiModel).end();
+        //return base;
     }
 
     @Override
@@ -147,6 +151,10 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
                 json.addProperty("handler", handler);
             }
             return json;
+        }
+
+        public void debugLoader() {
+            CqsArmory.LOGGER.debug("{}", this.customLoader);
         }
     }
 
