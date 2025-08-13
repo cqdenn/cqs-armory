@@ -33,61 +33,61 @@ public class EntityRegistry {
 
     public static final DeferredHolder<EntityType<?>, EntityType<MomentumOrb>> MOMENTUM_ORB =
             ENTITIES.register("momentum_orb", () -> EntityType.Builder.<MomentumOrb>of(MomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ExplosiveMomentumOrb>> EXPLOSIVE_MOMENTUM_ORB =
             ENTITIES.register("explosive_momentum_orb", () -> EntityType.Builder.<ExplosiveMomentumOrb>of(ExplosiveMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "explosive_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ArrowDamageMomentumOrb>> ARROW_DAMAGE_MOMENTUM_ORB =
             ENTITIES.register("arrow_damage_momentum_orb", () -> EntityType.Builder.<ArrowDamageMomentumOrb>of(ArrowDamageMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "arrow_damage_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<SpeedMomentumOrb>> SPEED_MOMENTUM_ORB =
             ENTITIES.register("speed_momentum_orb", () -> EntityType.Builder.<SpeedMomentumOrb>of(SpeedMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "speed_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<InstaDrawMomentumOrb>> INSTA_DRAW_MOMENTUM_ORB =
             ENTITIES.register("insta_draw_momentum_orb", () -> EntityType.Builder.<InstaDrawMomentumOrb>of(InstaDrawMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "insta_draw_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<DodgeMomentumOrb>> DODGE_MOMENTUM_ORB =
             ENTITIES.register("dodge_momentum_orb", () -> EntityType.Builder.<DodgeMomentumOrb>of(DodgeMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "dodge_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BlackHoleMomentumOrb>> BLACK_HOLE_MOMENTUM_ORB =
             ENTITIES.register("black_hole_momentum_orb", () -> EntityType.Builder.<BlackHoleMomentumOrb>of(BlackHoleMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "black_hole_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChainLightningMomentumOrb>> CHAIN_LIGHTNING_MOMENTUM_ORB =
             ENTITIES.register("chain_lightning_momentum_orb", () -> EntityType.Builder.<ChainLightningMomentumOrb>of(ChainLightningMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "chain_lightning_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<IceExplosionMomentumOrb>> ICE_EXPLOSIVE_MOMENTUM_ORB =
             ENTITIES.register("ice_explosive_momentum_orb", () -> EntityType.Builder.<IceExplosionMomentumOrb>of(IceExplosionMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_explosive_momentum_orb").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<RootMomentumOrb>> ROOT_MOMENTUM_ORB =
             ENTITIES.register("root_momentum_orb", () -> EntityType.Builder.<RootMomentumOrb>of(RootMomentumOrb::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "root_momentum_orb").toString()));
 

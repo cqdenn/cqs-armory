@@ -418,20 +418,20 @@ public class ItemRegistry {
         );
 
         var shortbow = ITEMS.register(name + "_shortbow",
-                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.SHORTBOW.attackDamage(), WeaponType.SHORTBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RAPID_FIRE_SPELL, power.power())))
         );
 
         var recurve = ITEMS.register(name + "_recurve_bow",
-                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
+                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BARRAGE_SPELL, power.power())))
         );
 
         var longbow = ITEMS.register(name + "_longbow",
-                () -> new ExtendedBowItem(new Item.Properties().attributes(ExtendedBowItem
-                        .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power())))
         );
 

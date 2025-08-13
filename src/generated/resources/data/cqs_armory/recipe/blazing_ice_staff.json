@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:snowball"
+    },
+    "x": {
+      "item": "cqs_armory:blazing_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:icicle",
+            "index": 0,
+            "level": 12,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:snowball",
+            "index": 1,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:ray_of_frost",
+            "index": 2,
+            "level": 7,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:ice_tomb",
+            "index": 3,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:ice_spikes",
+            "index": 4,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:frostwave",
+            "index": 5,
+            "level": 8,
+            "locked": true
+          }
+        ],
+        "maxSpells": 6,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:blazing_ice_staff"
+  }
+}

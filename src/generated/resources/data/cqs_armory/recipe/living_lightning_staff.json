@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:lightning_rod"
+    },
+    "x": {
+      "item": "cqs_armory:living_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:ball_lightning",
+            "index": 0,
+            "level": 10,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:shockwave",
+            "index": 1,
+            "level": 5,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:electrocute",
+            "index": 2,
+            "level": 5,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:lightning_bolt",
+            "index": 3,
+            "level": 5,
+            "locked": true
+          }
+        ],
+        "maxSpells": 4,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:living_lightning_staff"
+  }
+}

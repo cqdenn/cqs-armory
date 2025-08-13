@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:lightning_rod"
+    },
+    "x": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:ball_lightning",
+            "index": 0,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:shockwave",
+            "index": 1,
+            "level": 3,
+            "locked": true
+          }
+        ],
+        "maxSpells": 2,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:obsidian_lightning_staff"
+  }
+}

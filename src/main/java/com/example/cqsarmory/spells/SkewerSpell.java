@@ -2,6 +2,8 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
+import com.example.cqsarmory.data.effects.ShieldBashEffect;
+import com.example.cqsarmory.data.effects.SkewerEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
@@ -17,6 +19,8 @@ import io.redspace.ironsspellbooks.player.SpinAttackType;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.spells.fire.BurningDashSpell;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -33,6 +37,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.objectweb.asm.util.TraceRecordComponentVisitor;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class SkewerSpell extends AbstractSpell {
@@ -79,13 +84,20 @@ public class SkewerSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
+    public boolean canBeInterrupted(Player player) {
+        return false;
+    }
+
+    public float getWeaponDamagePercent() {
+        return SkewerEffect.SKEWER_ATTACK_DAMAGE_MULTIPLIER * 100;
     }
 
     @Override
-    public boolean canBeInterrupted(Player player) {
-        return false;
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent()),
+                Component.translatable("ui.cqs_armory.bleed_duration", (4 * spellLevel) + "s")
+        );
     }
 
     @Override

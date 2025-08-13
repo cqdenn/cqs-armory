@@ -10,6 +10,8 @@ import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -20,6 +22,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
+import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
@@ -77,13 +80,15 @@ public class SpinSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
+    public boolean canBeInterrupted(Player player) {
+        return false;
     }
 
     @Override
-    public boolean canBeInterrupted(Player player) {
-        return false;
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 100)
+        );
     }
 
     @Override

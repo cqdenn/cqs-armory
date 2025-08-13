@@ -52,7 +52,7 @@ public class CQSchoolRegistry {
     public static final Supplier<SchoolType> ARCHER = registerSchool(new SchoolType(
             ARCHER_RESOURCE,
             com.example.cqsarmory.registry.Tags.Items.ARROWS,
-            Component.translatable("school.cqs_armory.archer").withStyle(ChatFormatting.DARK_GREEN),
+            Component.translatable("school.cqs_armory.archer").withStyle(ChatFormatting.GREEN),
             AttributeRegistry.ARCHER_SKILL_POWER,
             AttributeRegistry.ARCHER_SKILL_RESIST,
             SoundRegistry.ARROW_SHOOT,

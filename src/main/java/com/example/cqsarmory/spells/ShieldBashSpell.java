@@ -1,6 +1,7 @@
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.effects.ShieldBashEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
@@ -8,6 +9,8 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.damagesource.DamageSource;
@@ -20,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class ShieldBashSpell extends AbstractSpell {
@@ -73,6 +77,18 @@ public class ShieldBashSpell extends AbstractSpell {
     @Override
     public boolean canBeInterrupted(Player player) {
         return false;
+    }
+
+    public float getWeaponDamagePercent() {
+        return ShieldBashEffect.SHIELD_BASH_ATTACK_DAMAGE_MULTIPLIER * 100;
+    }
+
+    @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent()),
+                Component.translatable("ui.cqs_armory.stun_duration", (1 * spellLevel) + "s")
+        );
     }
 
     @Override

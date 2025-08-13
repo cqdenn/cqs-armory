@@ -13,6 +13,8 @@ import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -21,11 +23,14 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
@@ -98,6 +103,23 @@ public class PiercingArrowSpell extends AbstractSpell {
     }
 
     @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 200 * spellLevel),
+                Component.literal("Pierces 10 Times")
+        );
+    }
+
+    @Override
+    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
+        double entityCastTimeModifier = 1;
+        if (entity != null) {
+            entityCastTimeModifier = 2 - Utils.softCapFormula(entity.getAttributeValue(BowAttributes.DRAW_SPEED));
+        }
+        return Math.round(this.getCastTime(spellLevel) * (float) entityCastTimeModifier);
+    }
+
+    @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         AbilityArrow arrow = new AbilityArrow(level);
         arrow.setOwner(entity);
@@ -106,6 +128,12 @@ public class PiercingArrowSpell extends AbstractSpell {
         arrow.setScale(6f);
         arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         arrow.setDeltaMovement(entity.getForward().scale(4));
+        Vec3 vec3 = arrow.getDeltaMovement();
+        double d0 = vec3.horizontalDistance();
+        arrow.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+        arrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+        arrow.yRotO = arrow.getYRot();
+        arrow.xRotO = arrow.getXRot();
         arrow.setPierceLevel((byte) 10);
         arrow.setCritArrow(true);
 

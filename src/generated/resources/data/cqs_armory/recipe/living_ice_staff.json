@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:snowball"
+    },
+    "x": {
+      "item": "cqs_armory:living_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:icicle",
+            "index": 0,
+            "level": 10,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:snowball",
+            "index": 1,
+            "level": 6,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:ray_of_frost",
+            "index": 2,
+            "level": 5,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:ice_tomb",
+            "index": 3,
+            "level": 6,
+            "locked": true
+          }
+        ],
+        "maxSpells": 4,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:living_ice_staff"
+  }
+}

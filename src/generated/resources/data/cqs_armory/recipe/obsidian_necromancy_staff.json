@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:bone"
+    },
+    "x": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:fang_strike",
+            "index": 0,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:raise_dead",
+            "index": 1,
+            "level": 4,
+            "locked": true
+          }
+        ],
+        "maxSpells": 2,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:obsidian_necromancy_staff"
+  }
+}

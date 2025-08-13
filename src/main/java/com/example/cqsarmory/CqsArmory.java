@@ -76,7 +76,10 @@ public class CqsArmory
                 output.accept(IRONWALL.get());
                 output.accept(THORNBARK.get());
                 output.accept(FLASHGUARD.get());
-                output.accept(SOUL_SUCKER.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(SOUL_SUCKER.get());
+                for (var item : ITEMS.getEntries()) {
+                    output.accept(item.get());
+                }// Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

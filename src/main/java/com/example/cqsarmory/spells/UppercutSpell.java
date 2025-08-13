@@ -15,6 +15,8 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -30,6 +32,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class UppercutSpell extends AbstractSpell {
@@ -86,13 +89,16 @@ public class UppercutSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
+    public boolean canBeInterrupted(Player player) {
+        return false;
     }
 
     @Override
-    public boolean canBeInterrupted(Player player) {
-        return false;
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 100),
+                Component.translatable("ui.cqs_armory.bleed_duration", (4 * spellLevel) + "s")
+        );
     }
 
     @Override
@@ -100,7 +106,7 @@ public class UppercutSpell extends AbstractSpell {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 2 * spellLevel;
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
-        var damageSource = CQSpellRegistry.SKY_STRIKE_SPELL.get().getDamageSource(entity);
+        var damageSource = CQSpellRegistry.UPPERCUT_SPELL.get().getDamageSource(entity);
         Vec3 direction = new Vec3(entity.getForward().x * 0.1, 0.2 * spellLevel, entity.getForward().z * 0.1);
 
         for (Entity target : entities) {

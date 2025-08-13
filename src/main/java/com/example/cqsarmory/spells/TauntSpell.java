@@ -14,9 +14,12 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -29,6 +32,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class TauntSpell extends AbstractSpell {
@@ -76,12 +80,19 @@ public class TauntSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
+        return Optional.of(SoundEvents.ENDER_DRAGON_GROWL);
     }
 
     @Override
     public boolean canBeInterrupted(Player player) {
         return false;
+    }
+
+    @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.irons_spellbooks.radius", 4 * spellLevel)
+        );
     }
 
     @Override

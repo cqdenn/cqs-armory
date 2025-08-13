@@ -32,6 +32,12 @@
   "spell.cqs_armory.rapid_fire_spell": "Rapid Fire",
   "spell.cqs_armory.piercing_arrow_spell": "Piercing Arrow",
 
+  "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
+  "ui.cqs_armory.stun_duration": "%s Stun Duration",
+  "ui.cqs_armory.bleed_duration": "%s Bleed Duration",
+  "ui.cqs_armory.absorption_per_enemy": "%d Temporary HP Per Hit",
+  "ui.cqs_armory.arrows_per_second": "%s Arrows Per Second",
+
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
   "enchantment.cqs_armory.ender_hone": "Hone: Ender",
@@ -101,6 +107,7 @@
   "death.attack.archer_skill": "%1$s was dominated by %2$s",
   "death.attack.arcane_skill": "%1$s was slain by %2$s's arcane magic",
   "death.attack.necromancy_skill": "%1$s was slain by %2$s's necromancy magic",
+  "death.attack.bleeding": "%1$s bled to death",
 
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",

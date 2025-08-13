@@ -19,4 +19,5 @@ public class DamageTypes {
     public static final ResourceKey<DamageType> ARCHER_SKILL = register("archer_skill");
     public static final ResourceKey<DamageType> ARCANE_SKILL = register("arcane_skill");
     public static final ResourceKey<DamageType> NECROMANCY_SKILL = register("necromancy_skill");
+    public static final ResourceKey<DamageType> BLEEDING = register("bleeding");
 }

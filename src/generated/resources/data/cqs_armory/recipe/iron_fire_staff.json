@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:magma_block"
+    },
+    "x": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:firebolt",
+            "index": 0,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:burning_dash",
+            "index": 1,
+            "level": 4,
+            "locked": true
+          }
+        ],
+        "maxSpells": 2,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:iron_fire_staff"
+  }
+}

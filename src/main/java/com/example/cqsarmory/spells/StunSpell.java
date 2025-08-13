@@ -14,6 +14,8 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -28,6 +30,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class StunSpell extends AbstractSpell {
@@ -96,6 +99,14 @@ public class StunSpell extends AbstractSpell {
     @Override
     public boolean canBeInterrupted(Player player) {
         return false;
+    }
+
+    @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 100),
+                Component.translatable("ui.cqs_armory.stun_duration", (1 * spellLevel) + "s")
+        );
     }
 
     @Override

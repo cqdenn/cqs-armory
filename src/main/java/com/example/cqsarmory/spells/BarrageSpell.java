@@ -13,16 +13,21 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 @AutoSpellConfig
@@ -100,6 +105,24 @@ public class BarrageSpell extends AbstractSpell {
     }
 
     @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 20),
+                Component.literal("15 Projectiles"),
+                Component.translatable("ui.irons_spellbooks.recast_count", getRecastCount(spellLevel, caster))
+        );
+    }
+
+    @Override
+    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
+        double entityCastTimeModifier = 1;
+        if (entity != null) {
+            entityCastTimeModifier = 2 - Utils.softCapFormula(entity.getAttributeValue(BowAttributes.DRAW_SPEED));
+        }
+        return Math.round(this.getCastTime(spellLevel) * (float) entityCastTimeModifier);
+    }
+
+    @Override
     public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
             playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
@@ -113,7 +136,13 @@ public class BarrageSpell extends AbstractSpell {
             arrow.setScale(1f);
             arrow.setPos(origin.subtract(0, arrow.getBbHeight() * 0.5f, 0));
             shootFromRandom(entity.getLookAngle(), .1f, arrow);
-            arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE));
+            Vec3 vec3 = arrow.getDeltaMovement();
+            double d0 = vec3.horizontalDistance();
+            arrow.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+            arrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+            arrow.yRotO = arrow.getYRot();
+            arrow.xRotO = arrow.getXRot();
+            arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f);
             arrow.setPierceLevel((byte) 0);
             arrow.setCritArrow(true);
             world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);

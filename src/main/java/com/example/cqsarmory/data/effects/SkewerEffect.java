@@ -19,14 +19,16 @@ public class SkewerEffect extends MobEffect {
         super(category, color);
     }
 
+    public static final float SKEWER_ATTACK_DAMAGE_MULTIPLIER = 1.3f;
+
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         List<Entity> list = livingEntity.level().getEntities(livingEntity, livingEntity.getBoundingBox().inflate(1.2));
         var damageSource = CQSpellRegistry.SKEWER_SPELL.get().getDamageSource(livingEntity);
         if (!list.isEmpty()) {
             for (Entity entity : list) {
-                if (entity instanceof LivingEntity target) {
-                    target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target)) {
+                    target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * SKEWER_ATTACK_DAMAGE_MULTIPLIER);
                     target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 80 * (amplifier + 1), amplifier, false, false, true));
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;

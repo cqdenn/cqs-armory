@@ -20,14 +20,16 @@ public class ShieldBashEffect extends MobEffect {
         super(category, color);
     }
 
+    public static final float SHIELD_BASH_ATTACK_DAMAGE_MULTIPLIER = 0.5f;
+
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         List<Entity> list = livingEntity.level().getEntities(livingEntity, livingEntity.getBoundingBox().inflate(1.2));
         var damageSource = CQSpellRegistry.SHIELD_BASH_SPELL.get().getDamageSource(livingEntity);
         if (!list.isEmpty()) {
             for (Entity entity : list) {
-                if (entity instanceof LivingEntity target) {
-                    target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target)) {
+                    target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * SHIELD_BASH_ATTACK_DAMAGE_MULTIPLIER);
                     target.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 20 * (amplifier + 1), 100, false, false, true));
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;

@@ -4,6 +4,7 @@ import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
+import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import net.minecraft.core.particles.ParticleOptions;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 
 import java.util.Optional;
@@ -54,7 +56,7 @@ public class OrbExplosion extends AoeEntity {
         if (tickCount == waitTime) {
             this.playSound(SoundEvents.GENERIC_EXPLODE.value(), 1, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
             if (level.isClientSide) {
-                int cloudDensity = 25 + (int) (25 * radius);
+                /*int cloudDensity = 25 + (int) (25 * radius);
                 for (int i = 0; i < cloudDensity; i++) {
                     Vec3 posOffset = Utils.getRandomVec3(1).scale(radius * .4f);
                     Vec3 motion = posOffset.normalize().scale(speed * .5f);
@@ -63,9 +65,10 @@ public class OrbExplosion extends AoeEntity {
                     level.addParticle(ParticleRegistry.FIERY_SMOKE_PARTICLE.get(), x + posOffset.x, y + posOffset.y, z + posOffset.z, motion.x, motion.y, motion.z);
                 }
 
-                level.addParticle(new BlastwaveParticleOptions(new Vector3f(1, .6f, 0.3f), radius + 1), x, y, z, 0, 0, 0);
+                level.addParticle(new BlastwaveParticleOptions(new Vector3f(1, .6f, 0.3f), radius + 1), x, y, z, 0, 0, 0);*/
 
             } else {
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(this, new FieryExplosionParticlesPacket(this.getBoundingBox().getCenter(), getRadius()));
                 DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {

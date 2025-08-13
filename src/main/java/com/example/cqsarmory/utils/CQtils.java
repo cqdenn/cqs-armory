@@ -73,13 +73,13 @@ public class CQtils {
         ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
         BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
         DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
-        InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
+        //InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
         IceExplosionMomentumOrb iceExplosionMomentumOrb = new IceExplosionMomentumOrb(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
         RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
         ChainLightningMomentumOrb chainLightningMomentumOrb = new ChainLightningMomentumOrb(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), level, player);
 
         List<MomentumOrb> orbs = List.of(
-                explosiveMomentumOrb, blackHoleMomentumOrb, dodgeMomentumOrb, instaDrawMomentumOrb, iceExplosionMomentumOrb, rootMomentumOrb, chainLightningMomentumOrb
+                explosiveMomentumOrb, blackHoleMomentumOrb, dodgeMomentumOrb, iceExplosionMomentumOrb, rootMomentumOrb, chainLightningMomentumOrb
         );
         return orbs.get(Utils.random.nextIntBetweenInclusive(0, orbs.size() - 1));
     }
@@ -126,6 +126,7 @@ public class CQtils {
             chainLightning.maxConnections = 20;
             chainLightningMomentumOrb.discard();
             level.addFreshEntity(chainLightning);
+            chainLightningMomentumOrb.discard();
         } else if (momentumOrb instanceof IceExplosionMomentumOrb iceExplosionMomentumOrb) {
             float radius = 10;
             float dmg = DamageData.get(iceExplosionMomentumOrb).lastDamage;
@@ -136,14 +137,14 @@ public class CQtils {
 
             iceExplosionMomentumOrb.discard();
         } else if (momentumOrb instanceof BlackHoleMomentumOrb blackHoleMomentumOrb) {
-            float radius = 3.5f;
-            float dmg = DamageData.get(blackHoleMomentumOrb).lastDamage;
+            float radius = Math.min(DamageData.get(blackHoleMomentumOrb).lastDamage / 2, 15);
+            float dmg = DamageData.get(blackHoleMomentumOrb).lastDamage * 0.5f;
 
             BlackHole blackHole = new BlackHole(level, player);
             blackHole.setDamage(dmg * 0.5f);
             blackHole.setRadius(radius);
-            blackHole.setDuration(100);
-            blackHole.moveTo(blackHoleMomentumOrb.position().add(0, -2, 0));
+            blackHole.setDuration(120);
+            blackHole.moveTo(Utils.moveToRelativeGroundLevel(level, blackHoleMomentumOrb.position(), 6));
             level.addFreshEntity(blackHole);
 
             blackHoleMomentumOrb.discard();
@@ -170,7 +171,7 @@ public class CQtils {
 
     public static void findOrbLoc(Vec3 startLoc, MomentumOrb orb, Level level) {
         List<MomentumOrb> orbs = new ArrayList<>();
-        var entities = level.getEntities(orb, new AABB(startLoc, startLoc).inflate(0.25));
+        var entities = level.getEntities(orb, new AABB(startLoc, startLoc).inflate(0.3));
         for (Entity entity : entities) {
             if (entity instanceof MomentumOrb momentumOrb) {
                 orbs.add(momentumOrb);

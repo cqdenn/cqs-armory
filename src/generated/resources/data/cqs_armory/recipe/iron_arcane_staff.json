@@ -1,0 +1,42 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "x": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:magic_missile",
+            "index": 0,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:gust",
+            "index": 1,
+            "level": 5,
+            "locked": true
+          }
+        ],
+        "maxSpells": 2,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:iron_arcane_staff"
+  }
+}

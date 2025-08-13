@@ -15,6 +15,8 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -32,6 +34,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 
+import java.util.List;
 import java.util.Optional;
 @AutoSpellConfig
 public class ReapSpell extends AbstractSpell {
@@ -87,14 +90,17 @@ public class ReapSpell extends AbstractSpell {
         return AnimationHolder.pass();
     }
 
-    @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.empty();
-    }
 
     @Override
     public boolean canBeInterrupted(Player player) {
         return false;
+    }
+
+    @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.translatable("ui.cqs_armory.weapon_damage", 100)
+        );
     }
 
     @Override

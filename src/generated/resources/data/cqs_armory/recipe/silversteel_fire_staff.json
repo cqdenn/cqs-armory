@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "minecraft:magma_block"
+    },
+    "x": {
+      "item": "cqs_armory:silversteel_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:firebolt",
+            "index": 0,
+            "level": 10,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:burning_dash",
+            "index": 1,
+            "level": 6,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:heat_surge",
+            "index": 2,
+            "level": 6,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:scorch",
+            "index": 3,
+            "level": 3,
+            "locked": true
+          }
+        ],
+        "maxSpells": 4,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:silversteel_fire_staff"
+  }
+}

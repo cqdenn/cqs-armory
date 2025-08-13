@@ -192,6 +192,60 @@ public class RecipeDataGenerator extends RecipeProvider {
                     .define('S', Items.STRING)
                     .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
                     .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.ice().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', Items.SNOWBALL)
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.fire().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', Items.MAGMA_BLOCK)
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.lightning().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', Items.LIGHTNING_ROD)
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.necromancy().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', Items.BONE)
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.arcane().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', Items.AMETHYST_SHARD)
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.holy().asItem())
+                    .pattern("  f")
+                    .pattern(" x ")
+                    .pattern("x  ")
+                    .define('x', material)
+                    .define('f', io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get())
+                    .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(material))
+                    .save(recipeOutput);
         }
     }
 }

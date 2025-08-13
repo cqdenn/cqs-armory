@@ -427,19 +427,19 @@ public class ServerEvents {
             return;
         }
 
-        if (!AbilityData.inCombatRage(player) && player.level().getGameTime() % 20 == 0) {
-            float newRageTest = ((float) (AbilityData.get(player).getRage() - 5));
-            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
-            AbilityData.get(player).setRage(newRage);
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
-        }
-
-        if (player.hasEffect(MobEffectRegistry.BERSERK) && player.level().getGameTime() % 20 == 0) {
+        if ((!AbilityData.inCombatRage(player) || player.hasEffect(MobEffectRegistry.BERSERK)) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() * 0.1));
             float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
         }
+
+        /*if (player.hasEffect(MobEffectRegistry.BERSERK) && player.level().getGameTime() % 20 == 0) {
+            float newRageTest = ((float) (AbilityData.get(player).getRage() - player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() * 0.1));
+            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
+            AbilityData.get(player).setRage(newRage);
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
+        }*/
     }
 
     @SubscribeEvent
@@ -522,7 +522,9 @@ public class ServerEvents {
                 //add logic for creating momentum orbs
                 Level level = player.level();
                 Entity target = player.getLastHurtMob();
-                Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(0, 1, 0);
+                int startX = Utils.random.nextBoolean() ? 1 : -1;
+                int startZ = Utils.random.nextBoolean() ? 1 : -1;
+                Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(startX * Utils.random.nextFloat(), 2, startZ * Utils.random.nextFloat());
 
 
                 int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();

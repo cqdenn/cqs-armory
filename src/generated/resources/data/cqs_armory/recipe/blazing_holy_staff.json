@@ -1,0 +1,66 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    "x": {
+      "item": "cqs_armory:blazing_ingot"
+    }
+  },
+  "pattern": [
+    "  f",
+    " x ",
+    "x  "
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "irons_spellbooks:guiding_bolt",
+            "index": 0,
+            "level": 12,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:blessing_of_life",
+            "index": 1,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:shield",
+            "index": 2,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:fortify",
+            "index": 3,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:sunbeam",
+            "index": 4,
+            "level": 8,
+            "locked": true
+          },
+          {
+            "id": "irons_spellbooks:cleanse",
+            "index": 5,
+            "level": 8,
+            "locked": true
+          }
+        ],
+        "maxSpells": 6,
+        "mustEquip": false,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:blazing_holy_staff"
+  }
+}
