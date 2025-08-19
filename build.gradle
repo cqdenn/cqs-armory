@@ -134,7 +134,7 @@ dependencies {
     implementation "io.redspace:atlas_api:1.21.1-1.1.0-SNAPSHOT"
     implementation "curse.maven:atlasviewer-633577:5490697"
     localRuntime "curse.maven:tslatentitystatus-tes-830420:6041374"
-    implementation 'io.redspace:bow_attributes:0.0.2-SNAPSHOT'
+    implementation 'io.redspace:bow_attributes:0.0.3-SNAPSHOT'
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
