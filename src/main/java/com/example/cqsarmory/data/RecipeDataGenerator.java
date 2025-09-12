@@ -2,6 +2,7 @@ package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.Tags;
 import com.example.cqsarmory.utils.CraftingMaterials;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
@@ -77,14 +78,14 @@ public class RecipeDataGenerator extends RecipeProvider {
                 else {
                     if (armor instanceof TrackerArmorItem || armor instanceof RangerArmorItem || armor instanceof SoldierArmorItem || armor instanceof BastionArmorItem || armor instanceof MagusArmorItem || armor instanceof MysticArmorItem) {
                         var downgrade = CraftingMaterials.getSmithingDowngrade(armor);
-                        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.DIAMOND), Ingredient.of(downgrade), Ingredient.of(Items.DIAMOND), RecipeCategory.MISC, armor)
+                        SmithingTransformRecipeBuilder.smithing(Ingredient.of(), Ingredient.of(downgrade), Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), RecipeCategory.COMBAT, armor)
                                 .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                                 .save(recipeOutput, armor + "_smithing");
                     }
                     if (armor instanceof MarksmanArmorItem || armor instanceof SkirmisherArmorItem || armor instanceof ChampionArmorItem || armor instanceof JuggernautArmorItem || armor instanceof ArchmageArmorItem || armor instanceof SageArmorItem) {
                         var downgrade = CraftingMaterials.getSmithingDowngrade(armor);
-                        SmithingTransformRecipeBuilder.smithing(Ingredient.of(Items.DIAMOND), Ingredient.of(downgrade), Ingredient.of(Items.NETHERITE_INGOT), RecipeCategory.MISC, armor)
-                                .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHERITE_INGOT))
+                        SmithingTransformRecipeBuilder.smithing(Ingredient.of(), Ingredient.of(downgrade), Ingredient.of(Tags.Items.MATERIALS_POWER_THREE), RecipeCategory.COMBAT, armor)
+                                .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                                 .save(recipeOutput, armor + "_smithing");
                     }
                 }
