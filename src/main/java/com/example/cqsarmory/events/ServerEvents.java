@@ -26,6 +26,7 @@ import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -625,5 +626,16 @@ public class ServerEvents {
             arrow.setPierceLevel((byte) (arrow.getPierceLevel() + 5));
         }
     }
+
+    @SubscribeEvent
+    public static void quiverArrows(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();;
+        if (ItemRegistry.BASIC_QUIVER.get().isEquippedBy(player) && player.level().getGameTime() % 100 == 0 && AbilityData.get(player).quiverArrowCount < 100) {
+            AbilityData.get(player).quiverArrowCount++;
+        }
+    }
+
+    @SubscribeEvent
+    public static void shootFromQuiver(ArrowLooseEvent event) {}
 
 }

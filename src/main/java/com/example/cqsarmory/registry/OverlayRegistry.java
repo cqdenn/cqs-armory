@@ -2,10 +2,7 @@ package com.example.cqsarmory.registry;
 
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.gui.overlays.MomentumBarOverlay;
-import com.example.cqsarmory.gui.overlays.MomentumDamageOverlay;
-import com.example.cqsarmory.gui.overlays.MomentumSpeedOverlay;
-import com.example.cqsarmory.gui.overlays.RageBarOverlay;
+import com.example.cqsarmory.gui.overlays.*;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.gui.overlays.*;
 import net.neoforged.api.distmarker.Dist;
@@ -25,5 +22,6 @@ public class OverlayRegistry {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_overlay"), MomentumBarOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_speed_overlay"), MomentumSpeedOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_damage_overlay"), MomentumDamageOverlay.getInstance());
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("quiver_arrow_overlay"), QuiverArrowOverlay.getInstance());
     }
 }

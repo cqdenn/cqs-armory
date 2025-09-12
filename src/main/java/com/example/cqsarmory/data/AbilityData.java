@@ -20,6 +20,7 @@ public class AbilityData {
     public boolean focused;
     public float manaSpentSinceLastAOE;
     public int fireAspectCooldownEnd;
+    public int quiverArrowCount;
 
     public float getRage() {
         return rage;

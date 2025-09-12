@@ -1,9 +1,6 @@
 package com.example.cqsarmory.config;
 
-import com.example.cqsarmory.gui.overlays.MomentumBarOverlay;
-import com.example.cqsarmory.gui.overlays.MomentumDamageOverlay;
-import com.example.cqsarmory.gui.overlays.MomentumSpeedOverlay;
-import com.example.cqsarmory.gui.overlays.RageBarOverlay;
+import com.example.cqsarmory.gui.overlays.*;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ClientConfigs {
@@ -24,6 +21,14 @@ public class ClientConfigs {
     public static final ModConfigSpec.ConfigValue<Integer> MOMENTUM_TEXT_X_OFFSET;
     public static final ModConfigSpec.ConfigValue<Integer> MOMENTUM_TEXT_Y_OFFSET;
     public static final ModConfigSpec.ConfigValue<Boolean> MOMENTUM_BAR_TEXT_VISIBLE;
+
+    public static final ModConfigSpec.ConfigValue<QuiverArrowOverlay.Anchor> QUIVER_ARROWS_ANCHOR;
+    public static final ModConfigSpec.ConfigValue<QuiverArrowOverlay.Display> QUIVER_ARROWS_DISPLAY;
+    public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_TEXT_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_TEXT_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Boolean> QUIVER_ARROWS_TEXT_VISIBLE;
 
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Anchor> MOMENTUM_SPEED_ANCHOR;
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Display> MOMENTUM_SPEED_DISPLAY;
@@ -68,6 +73,18 @@ public class ClientConfigs {
         MOMENTUM_BAR_ANCHOR = BUILDER.defineEnum("momentumBarAnchor", MomentumBarOverlay.Anchor.Center);
         MOMENTUM_TEXT_X_OFFSET = BUILDER.define("momentumTextXOffset", 0);
         MOMENTUM_TEXT_Y_OFFSET = BUILDER.define("momentumTextYOffset", 0);
+        BUILDER.pop();
+
+        BUILDER.push("QuiverArrows");
+        BUILDER.comment("By default (Contextual), the arrow count only appears when you are holding a bow item with a quiver equipped.");
+        QUIVER_ARROWS_DISPLAY = BUILDER.defineEnum("quiverArrowDisplay", QuiverArrowOverlay.Display.Contextual);
+        BUILDER.comment("Used to adjust arrows position (11 is one full hunger bar up).");
+        QUIVER_ARROWS_X_OFFSET = BUILDER.define("quiverArrowXOffset", 0);
+        QUIVER_ARROWS_Y_OFFSET = BUILDER.define("quiverArrowYOffset", 0);
+        QUIVER_ARROWS_TEXT_VISIBLE = BUILDER.define("quiverArrowTextVisible", true);
+        QUIVER_ARROWS_ANCHOR = BUILDER.defineEnum("quiverArrowAnchor", QuiverArrowOverlay.Anchor.BottomLeft);
+        QUIVER_ARROWS_TEXT_X_OFFSET = BUILDER.define("quiverArrowTextXOffset", 0);
+        QUIVER_ARROWS_TEXT_Y_OFFSET = BUILDER.define("quiverArrowTextYOffset", 0);
         BUILDER.pop();
 
         BUILDER.push("MomentumSpeed");
