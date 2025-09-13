@@ -6,10 +6,7 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.weapons.MjolnirItem;
-import com.example.cqsarmory.network.SyncMomentumDamagePacket;
-import com.example.cqsarmory.network.SyncMomentumPacket;
-import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
-import com.example.cqsarmory.network.SyncRagePacket;
+import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
@@ -629,13 +626,13 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void quiverArrows(PlayerTickEvent.Pre event) {
-        Player player = event.getEntity();;
+        Player player = event.getEntity();
+        if (player.level().isClientSide) {return;}
         if (ItemRegistry.BASIC_QUIVER.get().isEquippedBy(player) && player.level().getGameTime() % 100 == 0 && AbilityData.get(player).quiverArrowCount < 100) {
-            AbilityData.get(player).quiverArrowCount++;
+            int newArrowCount = AbilityData.get(player).quiverArrowCount + 1;
+            AbilityData.get(player).quiverArrowCount = newArrowCount;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncQuiverArrowsPacket(newArrowCount));
         }
     }
-
-    @SubscribeEvent
-    public static void shootFromQuiver(ArrowLooseEvent event) {}
 
 }
