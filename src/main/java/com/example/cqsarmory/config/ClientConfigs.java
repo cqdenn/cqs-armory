@@ -76,7 +76,7 @@ public class ClientConfigs {
         BUILDER.pop();
 
         BUILDER.push("QuiverArrows");
-        BUILDER.comment("By default (Contextual), the arrow count only appears when you are holding a bow item with a quiver equipped.");
+        BUILDER.comment("By default (Contextual), the arrow count only appears when you have a quiver equipped.");
         QUIVER_ARROWS_DISPLAY = BUILDER.defineEnum("quiverArrowDisplay", QuiverArrowOverlay.Display.Contextual);
         BUILDER.comment("Used to adjust arrows position (11 is one full hunger bar up).");
         QUIVER_ARROWS_X_OFFSET = BUILDER.define("quiverArrowXOffset", 0);

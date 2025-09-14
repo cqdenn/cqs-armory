@@ -7,9 +7,11 @@ import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
@@ -17,6 +19,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.function.Predicate;
@@ -88,7 +92,7 @@ public class QuiverArrowOverlay implements LayeredDraw.Layer {
         int textX, textY;
         String arrowCount = AbilityData.get(player).quiverArrowCount + "";
 
-        textX = com.example.cqsarmory.config.ClientConfigs.QUIVER_ARROWS_TEXT_X_OFFSET.get() + 8 + barX + imageWidth / 2 - (int) (((arrowCount).length() + 0.5) * CHAR_WIDTH);
+        textX = com.example.cqsarmory.config.ClientConfigs.QUIVER_ARROWS_TEXT_X_OFFSET.get() + 8 + (Minecraft.getInstance().font.width(arrowCount)) + barX + imageWidth / 2 - (int) (((arrowCount).length() + 0.5) * CHAR_WIDTH);
         textY = com.example.cqsarmory.config.ClientConfigs.QUIVER_ARROWS_TEXT_Y_OFFSET.get() + barY + (anchor == Anchor.XP ? ICON_ROW_HEIGHT / 3 : ICON_ROW_HEIGHT);
 
         if (com.example.cqsarmory.config.ClientConfigs.QUIVER_ARROWS_TEXT_VISIBLE.get()) {
@@ -98,10 +102,10 @@ public class QuiverArrowOverlay implements LayeredDraw.Layer {
     }
 
     public static boolean shouldShowQuiverArrows(Player player) {
-        //We show if holding bow/crossbow and a quiver is equipped
+        //We show if a quiver is equipped
         var display = com.example.cqsarmory.config.ClientConfigs.QUIVER_ARROWS_DISPLAY.get();
         return !player.isSpectator() && display != Display.Never &&
-                (display == Display.Always || ((player.getMainHandItem().getItem() instanceof BowItem || player.getOffhandItem().getItem() instanceof BowItem || player.getMainHandItem().getItem() instanceof CrossbowItem || player.getOffhandItem().getItem() instanceof CrossbowItem) && ItemRegistry.BASIC_QUIVER.get().isEquippedBy(player)));
+                (display == Display.Always ||  !CQtils.getPlayerCurioStack(player, "quiver").isEmpty());
 
     }
 

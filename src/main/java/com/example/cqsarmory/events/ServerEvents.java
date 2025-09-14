@@ -66,6 +66,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import org.joml.Vector3f;
+import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 import java.util.Objects;
@@ -627,8 +628,8 @@ public class ServerEvents {
     @SubscribeEvent
     public static void quiverArrows(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
-        if (player.level().isClientSide) {return;}
-        if (ItemRegistry.BASIC_QUIVER.get().isEquippedBy(player) && player.level().getGameTime() % 100 == 0 && AbilityData.get(player).quiverArrowCount < 100) {
+        if (player.level().isClientSide) return;
+        if (AbilityData.get(player).quiverArrowCount < 250 && player.level().getGameTime() % 100 == 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             int newArrowCount = AbilityData.get(player).quiverArrowCount + 1;
             AbilityData.get(player).quiverArrowCount = newArrowCount;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncQuiverArrowsPacket(newArrowCount));

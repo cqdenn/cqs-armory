@@ -12,6 +12,7 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
@@ -24,10 +25,15 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -183,5 +189,9 @@ public class CQtils {
         } else {
             orb.moveTo(startLoc);
         }
+    }
+
+    public static ItemStack getPlayerCurioStack (@NotNull Player player, String slot) {
+        return CuriosApi.getCuriosInventory(player).flatMap(curios -> curios.findCurio(slot, 0).map(SlotResult::stack)).orElse(ItemStack.EMPTY);
     }
 }

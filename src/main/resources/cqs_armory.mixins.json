@@ -6,7 +6,8 @@
   "mixins": [
     "AbstractSpellMixin",
     "BowItemMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "ProjectileWeaponItemMixin"
   ],
   "client": [
   ],

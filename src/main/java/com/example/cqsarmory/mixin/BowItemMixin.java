@@ -41,7 +41,7 @@ import static net.minecraft.world.item.BowItem.getPowerForTime;
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
 
-    @Inject(method = "use", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void cqs_armory$bowUse (Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
         ItemStack itemstack = player.getItemInHand(hand);
         boolean flag = !player.getProjectile(itemstack).isEmpty();
@@ -58,9 +58,9 @@ public abstract class BowItemMixin {
         } else  {
             cir.setReturnValue(InteractionResultHolder.fail(itemstack));
         }
-    }
+    }*/
 
-    @Inject(method = "releaseUsing", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method = "releaseUsing", at = @At("HEAD"), cancellable = true)
     public void cqs_armory$bowRelease(ItemStack stack, Level level, LivingEntity entityLiving, int timeLeft, CallbackInfo ci) {
 
         if (!(entityLiving instanceof Player player)) return;
@@ -104,6 +104,6 @@ public abstract class BowItemMixin {
             // Cancel original method so vanilla doesn't interfere
             ci.cancel();
         }
-    }
+    }*/
 
 }
