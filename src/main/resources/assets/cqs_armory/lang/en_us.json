@@ -93,6 +93,7 @@
   "attribute.cqs_armory.max_momentum": "Max Momentum",
   "attribute.cqs_armory.min_momentum": "Min Momentum",
   "attribute.cqs_armory.momentum_orbs_spawned": "Momentum Orbs Spawned",
+  "attribute.cqs_armory.quiver_capacity": "Quiver Capacity",
   "attribute.cqs_armory.momentum_on_hit": "Momentum on Hit",
   "attribute.cqs_armory.archer_skill_resist": "Momentum on Hit",
   "attribute.cqs_armory.archer_skill_power": "Momentum on Hit",

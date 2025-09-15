@@ -8,6 +8,8 @@ import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.BoosterBaseItem;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveBooster;
+import com.example.cqsarmory.items.curios.quivers.FireworkQuiver;
+import com.example.cqsarmory.items.curios.quivers.PoisonQuiver;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
@@ -160,7 +162,9 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> MAGUS_TALISMAN = ITEMS.register("magus_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> ARCHMAGE_TALISMAN = ITEMS.register("archmage_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
 
-    public static final Supplier<QuiverItem> BASIC_QUIVER = ITEMS.register("basic_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, 1))));
+    public static final Supplier<CurioBaseItem> BASIC_QUIVER = ITEMS.register("basic_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(100));
+    public static final Supplier<CurioBaseItem> POISON_QUIVER = ITEMS.register("poison_quiver", () -> new PoisonQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, 5))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> FIREWORK_QUIVER = ITEMS.register("firework_quiver", () -> new FireworkQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRECRACKER_SPELL, 5))).withQuiverAttributes(25));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

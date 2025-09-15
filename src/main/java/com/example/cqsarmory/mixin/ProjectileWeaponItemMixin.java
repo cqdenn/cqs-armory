@@ -1,12 +1,17 @@
 package com.example.cqsarmory.mixin;
 
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.items.curios.QuiverItem;
+import com.example.cqsarmory.utils.CQtils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,6 +33,16 @@ public abstract class ProjectileWeaponItemMixin {
         ItemStack arrow = new ItemStack(Items.ARROW);
         arrow.set(DataComponents.INTANGIBLE_PROJECTILE, Unit.INSTANCE);
         cir.setReturnValue(arrow);
+    }
+
+    @Inject(method = "createProjectile", at = @At("RETURN"), cancellable = true)
+    private void cqs_armory$createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit, CallbackInfoReturnable<Projectile> cir) {
+        if (shooter instanceof Player player) {
+            var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
+            if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+                cir.setReturnValue(quiver.getCustomProjectile(cir.getReturnValue(), player, ammo, weapon));
+            }
+        }
     }
 
 }

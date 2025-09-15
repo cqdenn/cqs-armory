@@ -628,8 +628,9 @@ public class ServerEvents {
     @SubscribeEvent
     public static void quiverArrows(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
+        int capacity = (int) player.getAttribute(AttributeRegistry.QUIVER_CAPACITY).getValue();
         if (player.level().isClientSide) return;
-        if (AbilityData.get(player).quiverArrowCount < 250 && player.level().getGameTime() % 100 == 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+        if (AbilityData.get(player).quiverArrowCount < capacity && player.level().getGameTime() % 100 == 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             int newArrowCount = AbilityData.get(player).quiverArrowCount + 1;
             AbilityData.get(player).quiverArrowCount = newArrowCount;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncQuiverArrowsPacket(newArrowCount));

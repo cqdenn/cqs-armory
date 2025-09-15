@@ -1,5 +1,7 @@
 {
   "values": [
-    "cqs_armory:basic_quiver"
+    "cqs_armory:basic_quiver",
+    "cqs_armory:poison_quiver",
+    "cqs_armory:firework_quiver"
   ]
 }
