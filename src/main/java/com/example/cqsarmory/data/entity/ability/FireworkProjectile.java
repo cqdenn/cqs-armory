@@ -141,7 +141,7 @@ public class FireworkProjectile extends FireworkRocketEntity {
         double explosionRadius = 2;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
             if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
-                DamageSources.applyDamage(livingentity, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), this, this.getOwner()));
+                DamageSources.applyDamage(livingentity, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
             }
         }
     }
