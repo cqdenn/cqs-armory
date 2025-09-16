@@ -2,8 +2,10 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
+import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -22,6 +24,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -117,9 +120,11 @@ public class RapidFireSpell extends AbstractSpell {
         int speed = Math.max(5 - spellLevel, 1); //4, 3, 2, 1 == 5, 6.6, 10, 20 times per second
         if (playerMagicData != null && (playerMagicData.getCastDurationRemaining() + 1) % speed == 0) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
+            float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE);
+
             AbilityArrow arrow = new AbilityArrow(level);
             arrow.setOwner(entity);
-            arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE));
+            arrow.setBaseDamage(dmg);
             arrow.setNoGravity(false);
             arrow.setScale(1f);
             arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
@@ -132,8 +137,15 @@ public class RapidFireSpell extends AbstractSpell {
             arrow.xRotO = arrow.getXRot();
             arrow.setPierceLevel((byte) 0);
             arrow.setCritArrow(true);
+            Projectile projectile = arrow;
+            if (entity instanceof Player player) {
+                var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
+                if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+                    projectile = quiver.getCustomProjectile(arrow, player, dmg);
+                }
+            }
             level.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
-            level.addFreshEntity(arrow);
+            level.addFreshEntity(projectile);
         }
     }
 }
