@@ -613,8 +613,12 @@ public class ServerEvents {
         if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
             event.setAmount(event.getAmount() * 0.75f);
         }
-        if (event.getSource().getDirectEntity() instanceof AbilityArrow) {
+        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().getDirectEntity() instanceof FireworkProjectile) {
             event.setInvulnerabilityTicks(0);
+        }
+        if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof Projectile) {
+            event.setAmount(event.getAmount() * 2);
+            DamageData.get(event.getEntity()).markedBy = null;
         }
     }
 
