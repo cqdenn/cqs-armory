@@ -62,7 +62,7 @@ public class QuiverItem extends CurioBaseItem implements IPresetSpellContainer {
         return withAttributes("quiver", new AttributeContainer(AttributeRegistry.QUIVER_CAPACITY, capacity, AttributeModifier.Operation.ADD_VALUE));
     }
 
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, ItemStack projectileStack, ItemStack weaponStack) {
+    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         return arrow;
     }
 }

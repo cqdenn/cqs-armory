@@ -35,7 +35,7 @@ public class FireworkProjectile extends FireworkRocketEntity {
 
     private final float damage;
     private int life;
-    private int lifetime;
+    private final int lifetime;
 
     public float getDamage() {
         return damage;

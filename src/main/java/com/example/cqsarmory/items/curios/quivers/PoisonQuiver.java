@@ -1,5 +1,6 @@
 package com.example.cqsarmory.items.curios.quivers;
 
+import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -16,8 +17,12 @@ public class PoisonQuiver extends QuiverItem {
     }
 
     @Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, ItemStack projectileStack, ItemStack weaponStack) {
+    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         if (arrow instanceof Arrow newArrow) {
+            newArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+            return newArrow;
+        }
+        if (arrow instanceof AbilityArrow newArrow) {
             newArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
             return newArrow;
         }

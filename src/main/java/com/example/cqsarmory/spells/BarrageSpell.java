@@ -2,7 +2,9 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
+import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -22,7 +24,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -130,6 +136,8 @@ public class BarrageSpell extends AbstractSpell {
         int arrowCount = 15; //tbd fixme
         for (int i=0;i<arrowCount;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
+            float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
+
             AbilityArrow arrow = new AbilityArrow(world);
             arrow.setOwner(entity);
             arrow.setNoGravity(false);
@@ -142,11 +150,18 @@ public class BarrageSpell extends AbstractSpell {
             arrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
             arrow.yRotO = arrow.getYRot();
             arrow.xRotO = arrow.getXRot();
-            arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f);
+            arrow.setBaseDamage(dmg);
             arrow.setPierceLevel((byte) 0);
             arrow.setCritArrow(true);
-            world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
-            world.addFreshEntity(arrow);
+            Projectile projectile = arrow;
+            if (entity instanceof Player player) {
+                var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
+                if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+                    projectile = quiver.getCustomProjectile(arrow, player, dmg);
+                }
+            }
+            //world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
+            world.addFreshEntity(projectile);
         }
 
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);

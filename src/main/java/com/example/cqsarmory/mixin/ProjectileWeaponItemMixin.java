@@ -3,6 +3,7 @@ package com.example.cqsarmory.mixin;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.utils.CQtils;
+import io.redspace.bowattributes.registry.BowAttributes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Unit;
 import net.minecraft.world.InteractionHand;
@@ -40,7 +41,7 @@ public abstract class ProjectileWeaponItemMixin {
         if (shooter instanceof Player player) {
             var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
             if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
-                cir.setReturnValue(quiver.getCustomProjectile(cir.getReturnValue(), player, ammo, weapon));
+                cir.setReturnValue(quiver.getCustomProjectile(cir.getReturnValue(), player, (float) shooter.getAttribute(BowAttributes.ARROW_DAMAGE).getValue()));
             }
         }
     }

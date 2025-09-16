@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.entity.spells.ExtendedFireworkRocket;
 import it.unimi.dsi.fastutil.ints.IntImmutableList;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -25,8 +26,15 @@ public class FireworkQuiver extends QuiverItem {
     }
 
     @Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, ItemStack projectileStack, ItemStack weaponStack) {
-        return new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, (float) shooter.getAttribute(BowAttributes.ARROW_DAMAGE).getValue());
+    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
+        FireworkProjectile firework = new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, arrowDmg);
+        firework.setDeltaMovement(arrow.getDeltaMovement());
+        firework.setPos(arrow.position());
+        firework.setYRot((float)(Mth.atan2(arrow.getDeltaMovement().x, arrow.getDeltaMovement().z) * 180.0F / (float)Math.PI));
+        firework.setXRot((float)(Mth.atan2(arrow.getDeltaMovement().y, arrow.getDeltaMovement().horizontalDistance()) * 180.0F / (float)Math.PI));
+        firework.yRotO = firework.getYRot();
+        firework.xRotO = firework.getXRot();
+        return firework;
     }
 
     //praise Iron431
