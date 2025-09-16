@@ -112,6 +112,7 @@
   "death.attack.arcane_skill": "%1$s was slain by %2$s's arcane magic",
   "death.attack.necromancy_skill": "%1$s was slain by %2$s's necromancy magic",
   "death.attack.bleeding": "%1$s bled to death",
+  "death.attack.firework_projectile": "%1$s went out with a bang",
 
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
@@ -148,6 +149,9 @@
   "item.cqs_armory.archmage_talisman": "Archmage Talisman",
 
   "item.cqs_armory.basic_quiver": "Basic Quiver",
+  "item.cqs_armory.poison_quiver": "Poison Quiver",
+  "item.cqs_armory.firework_quiver": "Firework Quiver",
+  "item.cqs_armory.hunters_quiver": "Hunter's Quiver",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",
