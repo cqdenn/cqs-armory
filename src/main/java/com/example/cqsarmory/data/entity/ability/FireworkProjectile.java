@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.registry.DamageTypes;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -7,11 +8,16 @@ import it.unimi.dsi.fastutil.ints.IntImmutableList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
@@ -26,6 +32,9 @@ import java.util.List;
 import java.util.Random;
 
 public class FireworkProjectile extends FireworkRocketEntity {
+    /*private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(FireworkProjectile.class, EntityDataSerializers.FLOAT);
+    private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(FireworkProjectile.class, EntityDataSerializers.BYTE);*/
+
     public FireworkProjectile(Level level, ItemStack stack, Entity shooter, double x, double y, double z, boolean shotAtAngle, float damage) {
         super(level, stack, shooter, x, y, z, shotAtAngle);
         this.damage = damage;
@@ -33,9 +42,24 @@ public class FireworkProjectile extends FireworkRocketEntity {
         this.lifetime = 60;
     }
 
+    /*public FireworkProjectile(Level level, ItemStack stack, Entity shooter, double x, double y, double z, boolean shotAtAngle, float damage, float scale) {
+        super(level, stack, shooter, x, y, z, shotAtAngle);
+        this.damage = damage;
+        this.life = 0;
+        this.lifetime = 60;
+        this.setScale(scale);
+    }*/
+
     private final float damage;
     private int life;
     private final int lifetime;
+
+    /*@Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(ID_SCALE, 2f);
+        builder.define(ID_FLAGS, (byte)0);
+    }*/
 
     public float getDamage() {
         return damage;
@@ -117,8 +141,16 @@ public class FireworkProjectile extends FireworkRocketEntity {
         double explosionRadius = 2;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
             if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
-                DamageSources.applyDamage(livingentity, this.getDamage(), damageSources().fireworks(this, this.getOwner()));
+                DamageSources.applyDamage(livingentity, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), this, this.getOwner()));
             }
         }
     }
+
+    /*public float getScale() {
+        return this.entityData.get(ID_SCALE);
+    }
+
+    public void setScale(float scale) {
+        this.entityData.set(ID_SCALE, scale);
+    }*/
 }

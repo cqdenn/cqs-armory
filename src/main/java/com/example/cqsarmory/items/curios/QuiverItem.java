@@ -65,4 +65,8 @@ public class QuiverItem extends CurioBaseItem implements IPresetSpellContainer {
     public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         return arrow;
     }
+
+    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg, float scale) {
+        return arrow;
+    }
 }

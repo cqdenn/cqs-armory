@@ -3,7 +3,10 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
+import com.example.cqsarmory.items.curios.QuiverItem;
+import com.example.cqsarmory.items.curios.quivers.FireworkQuiver;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -23,6 +26,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
@@ -121,11 +125,13 @@ public class PiercingArrowSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel;
+        float scale = 6f;
         AbilityArrow arrow = new AbilityArrow(level);
         arrow.setOwner(entity);
-        arrow.setBaseDamage(entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel);
+        arrow.setBaseDamage(dmg);
         arrow.setNoGravity(true);
-        arrow.setScale(6f);
+        arrow.setScale(scale);
         arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         arrow.setDeltaMovement(entity.getForward().scale(4));
         Vec3 vec3 = arrow.getDeltaMovement();
@@ -136,8 +142,15 @@ public class PiercingArrowSpell extends AbstractSpell {
         arrow.xRotO = arrow.getXRot();
         arrow.setPierceLevel((byte) 10);
         arrow.setCritArrow(true);
+        Projectile projectile = arrow;
+        if (entity instanceof Player player) {
+            var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
+            if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver && !(quiver instanceof FireworkQuiver)) {
+                projectile = quiver.getCustomProjectile(arrow, player, dmg, scale);
+            }
+        }
 
-        level.addFreshEntity(arrow);
+        level.addFreshEntity(projectile);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }
