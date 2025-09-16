@@ -31,6 +31,7 @@
   "spell.cqs_armory.barrage_spell": "Barrage",
   "spell.cqs_armory.rapid_fire_spell": "Rapid Fire",
   "spell.cqs_armory.piercing_arrow_spell": "Piercing Arrow",
+  "spell.cqs_armory.hunters_mark_spell": "Hunter's Mark",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",

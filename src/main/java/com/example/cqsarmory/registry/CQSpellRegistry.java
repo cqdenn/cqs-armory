@@ -37,6 +37,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> PIERCING_ARROW_SPELL = registerSpell(new PiercingArrowSpell());
     public static final Supplier<AbstractSpell> RAPID_FIRE_SPELL = registerSpell(new RapidFireSpell());
     public static final Supplier<AbstractSpell> BARRAGE_SPELL = registerSpell(new BarrageSpell());
+    public static final Supplier<AbstractSpell> HUNTERS_MARK_SPELL = registerSpell(new HuntersMarkSpell());
 
 
 

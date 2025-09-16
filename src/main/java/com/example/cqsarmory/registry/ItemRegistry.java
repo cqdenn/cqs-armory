@@ -165,6 +165,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> BASIC_QUIVER = ITEMS.register("basic_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(100));
     public static final Supplier<CurioBaseItem> POISON_QUIVER = ITEMS.register("poison_quiver", () -> new PoisonQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, 5))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> FIREWORK_QUIVER = ITEMS.register("firework_quiver", () -> new FireworkQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> HUNTERS_QUIVER = ITEMS.register("hunters_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.HUNTERS_MARK_SPELL, 1))).withQuiverAttributes(250));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
