@@ -108,4 +108,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ability_arrow").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FireworkProjectile>> FIREWORK_PROJECTILE =
+            ENTITIES.register("firework_projectile", () -> EntityType.Builder.<FireworkProjectile>of(FireworkProjectile::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "firework_projectile").toString()));
 }

@@ -94,5 +94,6 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.ICE_ORB_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ABILITY_ARROW.get(), AbilityArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.GENERIC_MAGE_AOE.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.FIREWORK_PROJECTILE.get(), FireworkProjectileRenderer::new);
     }
 }

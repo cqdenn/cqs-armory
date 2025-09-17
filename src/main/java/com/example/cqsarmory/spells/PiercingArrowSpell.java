@@ -127,28 +127,28 @@ public class PiercingArrowSpell extends AbstractSpell {
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel;
         float scale = 6f;
-        AbilityArrow arrow = new AbilityArrow(level);
-        arrow.setOwner(entity);
-        arrow.setBaseDamage(dmg);
-        arrow.setNoGravity(true);
-        arrow.setScale(scale);
-        arrow.setPos(entity.position().add(0, entity.getEyeHeight() - arrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
-        arrow.setDeltaMovement(entity.getForward().scale(4));
-        Vec3 vec3 = arrow.getDeltaMovement();
-        double d0 = vec3.horizontalDistance();
-        arrow.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
-        arrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
-        arrow.yRotO = arrow.getYRot();
-        arrow.xRotO = arrow.getXRot();
-        arrow.setPierceLevel((byte) 10);
-        arrow.setCritArrow(true);
-        Projectile projectile = arrow;
+        AbilityArrow projectile = new AbilityArrow(level);
         if (entity instanceof Player player) {
             var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
-            if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver && !(quiver instanceof FireworkQuiver)) {
-                projectile = quiver.getCustomProjectile(arrow, player, dmg, scale);
+            if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+                projectile = quiver.getCustomProjectile(projectile, player, dmg);
             }
         }
+        projectile.setOwner(entity);
+        projectile.setBaseDamage(dmg);
+        projectile.setNoGravity(true);
+        projectile.setScale(scale);
+        projectile.setPos(entity.position().add(0, entity.getEyeHeight() - projectile.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
+        projectile.setDeltaMovement(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f));
+        Vec3 vec3 = projectile.getDeltaMovement();
+        double d0 = vec3.horizontalDistance();
+        projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+        projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+        projectile.yRotO = projectile.getYRot();
+        projectile.xRotO = projectile.getXRot();
+        projectile.setPierceLevel((byte) 10);
+        projectile.setCritArrow(true);
+
 
         level.addFreshEntity(projectile);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);

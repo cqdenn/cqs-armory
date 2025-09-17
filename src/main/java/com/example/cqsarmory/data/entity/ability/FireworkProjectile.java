@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.DamageTypes;
+import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -15,10 +16,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,48 +30,67 @@ import net.minecraft.world.item.component.Fireworks;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 import java.util.Random;
 
-public class FireworkProjectile extends FireworkRocketEntity {
-    /*private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(FireworkProjectile.class, EntityDataSerializers.FLOAT);
-    private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(FireworkProjectile.class, EntityDataSerializers.BYTE);*/
+public class FireworkProjectile extends AbilityArrow {
+    private static final EntityDataAccessor<ItemStack> DATA_ID_FIREWORKS_ITEM = SynchedEntityData.defineId(
+            FireworkProjectile.class, EntityDataSerializers.ITEM_STACK
+    );
 
     public FireworkProjectile(Level level, ItemStack stack, Entity shooter, double x, double y, double z, boolean shotAtAngle, float damage) {
-        super(level, stack, shooter, x, y, z, shotAtAngle);
+        super(EntityRegistry.FIREWORK_PROJECTILE.get(), level);
+        this.setOwner(shooter);
+        this.entityData.set(DATA_ID_FIREWORKS_ITEM, stack.copy());
+        this.setPos(x, y, z);
         this.damage = damage;
         this.life = 0;
-        this.lifetime = 60;
+        this.lifetime = 10 + (Utils.random.nextInt(10));
+        this.shotAtAngle = shotAtAngle;
     }
 
-    /*public FireworkProjectile(Level level, ItemStack stack, Entity shooter, double x, double y, double z, boolean shotAtAngle, float damage, float scale) {
-        super(level, stack, shooter, x, y, z, shotAtAngle);
-        this.damage = damage;
-        this.life = 0;
-        this.lifetime = 60;
-        this.setScale(scale);
-    }*/
+    public FireworkProjectile(EntityType<FireworkProjectile> fireworkProjectileEntityType, Level level) {
+        super(fireworkProjectileEntityType, level);
+    }
 
-    private final float damage;
-    private int life;
-    private final int lifetime;
-
-    /*@Override
+    @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(ID_SCALE, 2f);
-        builder.define(ID_FLAGS, (byte)0);
-    }*/
+        builder.define(DATA_ID_FIREWORKS_ITEM, new ItemStack(Items.FIREWORK_ROCKET));
+    }
+
+    private float damage;
+    private int life;
+    private int lifetime;
+    private boolean shotAtAngle;
 
     public float getDamage() {
         return damage;
     }
 
+    public boolean isShotAtAngle() {return shotAtAngle;}
+
+    @Override
+    @NotNull
+    public Vec3 getMovementToShoot(double x, double y, double z, float velocity, float inaccuracy) {
+        return super.getMovementToShoot(x, y, z, velocity, inaccuracy).scale(0.5f);
+    }
+
+    @Override
+    public boolean isNoGravity() {
+        return true;
+    }
+
+    @Override
+    public boolean isCritArrow() {
+        return false;
+    }
+
     @Override
     public void tick() {
         super.tick();
-
         if (!this.isShotAtAngle()) {
             double d2 = this.horizontalCollision ? 1.0 : 1.15;
             this.setDeltaMovement(this.getDeltaMovement().multiply(d2, 1.0, d2).add(0.0, 0.04, 0.0));
@@ -111,8 +133,8 @@ public class FireworkProjectile extends FireworkRocketEntity {
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
-        if (!this.level().isClientSide) {
+        //super.onHitEntity(result);
+        if (!this.level().isClientSide && this.canHitEntity(result.getEntity())) {
             this.explode();
         }
     }
@@ -121,11 +143,10 @@ public class FireworkProjectile extends FireworkRocketEntity {
     protected void onHitBlock(BlockHitResult result) {
         BlockPos blockpos = new BlockPos(result.getBlockPos());
         this.level().getBlockState(blockpos).entityInside(this.level(), blockpos, this);
-        if (!this.level().isClientSide()) {
+        if (!this.level().isClientSide) {
             this.explode();
         }
-
-        super.onHitBlock(result);
+        //super.onHitBlock(result);
     }
 
     private void explode() {
@@ -133,6 +154,22 @@ public class FireworkProjectile extends FireworkRocketEntity {
         this.gameEvent(GameEvent.EXPLODE, this.getOwner());
         this.dealExplosionDamage();
         this.discard();
+    }
+
+    @Override
+    public void handleEntityEvent(byte id) {
+        if (id == 17 && this.level().isClientSide) {
+            Vec3 vec3 = this.getDeltaMovement();
+            this.level().createFireworks(this.getX(), this.getY(), this.getZ(), vec3.x, vec3.y, vec3.z, this.getExplosions());
+        }
+
+        super.handleEntityEvent(id);
+    }
+
+    private List<FireworkExplosion> getExplosions() {
+        ItemStack itemstack = this.entityData.get(DATA_ID_FIREWORKS_ITEM);
+        Fireworks fireworks = itemstack.get(DataComponents.FIREWORKS);
+        return fireworks != null ? fireworks.explosions() : List.of();
     }
 
     private void dealExplosionDamage() {
@@ -145,12 +182,4 @@ public class FireworkProjectile extends FireworkRocketEntity {
             }
         }
     }
-
-    /*public float getScale() {
-        return this.entityData.get(ID_SCALE);
-    }
-
-    public void setScale(float scale) {
-        this.entityData.set(ID_SCALE, scale);
-    }*/
 }

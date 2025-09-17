@@ -1,6 +1,7 @@
 package com.example.cqsarmory.items.curios;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
@@ -62,11 +63,9 @@ public class QuiverItem extends CurioBaseItem implements IPresetSpellContainer {
         return withAttributes("quiver", new AttributeContainer(AttributeRegistry.QUIVER_CAPACITY, capacity, AttributeModifier.Operation.ADD_VALUE));
     }
 
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        return arrow;
-    }
-
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg, float scale) {
-        return arrow;
+    public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
+        AbilityArrow abilityArrow = new AbilityArrow(shooter.level());
+        abilityArrow.copyStats(arrow, shooter);
+        return abilityArrow;
     }
 }

@@ -18,29 +18,11 @@ public class PoisonQuiver extends QuiverItem {
     }
 
     @Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        if (arrow instanceof Arrow newArrow) {
-            newArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
-            return newArrow;
-        }
-        if (arrow instanceof AbilityArrow newArrow) {
-            newArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
-            return newArrow;
-        }
-        return arrow;
+    public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
+        AbilityArrow abilityArrow = new AbilityArrow(shooter.level());
+        abilityArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+        abilityArrow.copyStats(arrow, shooter);
+        return abilityArrow;
     }
 
-    @Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg, float scale) {
-        Projectile projectile = getCustomProjectile(arrow, shooter, arrowDmg);
-        if (projectile instanceof AbilityArrow abilityArrow) {
-            abilityArrow.setScale(scale);
-            return abilityArrow;
-        }
-        /*if (projectile instanceof FireworkProjectile firework) {
-            firework.setScale(scale);
-            return firework;
-        }*/
-        return projectile;
-    }
 }

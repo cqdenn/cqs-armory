@@ -1,5 +1,6 @@
 package com.example.cqsarmory.items.curios.quivers;
 
+import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.data.entity.ability.FireworkProjectile;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import io.redspace.bowattributes.registry.BowAttributes;
@@ -26,29 +27,11 @@ public class FireworkQuiver extends QuiverItem {
     }
 
     @Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
+    public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         FireworkProjectile firework = new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, arrowDmg);
-        firework.setDeltaMovement(arrow.getDeltaMovement());
-        firework.setPos(arrow.position());
-        firework.setYRot((float)(Mth.atan2(arrow.getDeltaMovement().x, arrow.getDeltaMovement().z) * 180.0F / (float)Math.PI));
-        firework.setXRot((float)(Mth.atan2(arrow.getDeltaMovement().y, arrow.getDeltaMovement().horizontalDistance()) * 180.0F / (float)Math.PI));
-        firework.yRotO = firework.getYRot();
-        firework.xRotO = firework.getXRot();
+        firework.copyStats(arrow, shooter);
         return firework;
     }
-
-    /*@Override
-    public Projectile getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg, float scale) {
-        FireworkProjectile firework = new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, arrowDmg);
-        firework.setDeltaMovement(arrow.getDeltaMovement());
-        firework.setPos(arrow.position());
-        firework.setYRot((float)(Mth.atan2(arrow.getDeltaMovement().x, arrow.getDeltaMovement().z) * 180.0F / (float)Math.PI));
-        firework.setXRot((float)(Mth.atan2(arrow.getDeltaMovement().y, arrow.getDeltaMovement().horizontalDistance()) * 180.0F / (float)Math.PI));
-        firework.yRotO = firework.getYRot();
-        firework.xRotO = firework.getXRot();
-        firework.setScale(scale);
-        return firework;
-    }*/
 
     //praise Iron431
     private ItemStack randomFireworkRocket() {

@@ -1,16 +1,19 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
+import io.redspace.bowattributes.registry.BowAttributes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -125,6 +128,21 @@ public class AbilityArrow extends AbstractArrow {
         }
         super.onHitBlock(result);
         this.setNoGravity(false);
+    }
+
+    /*copies stats of given arrow*/
+    public void copyStats(Projectile arrow, LivingEntity owner) {
+        this.setOwner(owner);
+        this.setBaseDamage(owner.getAttributeValue(BowAttributes.ARROW_DAMAGE));
+        this.setPos(arrow.position());
+        this.setDeltaMovement(arrow.getDeltaMovement());
+        this.setYRot((float)(Mth.atan2(arrow.getDeltaMovement().x, arrow.getDeltaMovement().z) * 180.0F / (float)Math.PI));
+        this.setXRot((float)(Mth.atan2(arrow.getDeltaMovement().y, arrow.getDeltaMovement().horizontalDistance()) * 180.0F / (float)Math.PI));
+        this.yRotO = this.getYRot();
+        this.xRotO = this.getXRot();
+        if (arrow instanceof AbstractArrow abstractArrow && abstractArrow.isCritArrow()) {
+            this.setCritArrow(true);
+        }
     }
 }
 

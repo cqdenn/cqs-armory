@@ -137,29 +137,27 @@ public class BarrageSpell extends AbstractSpell {
         for (int i=0;i<arrowCount;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
-
-            AbilityArrow arrow = new AbilityArrow(world);
-            arrow.setOwner(entity);
-            arrow.setNoGravity(false);
-            arrow.setScale(1f);
-            arrow.setPos(origin.subtract(0, arrow.getBbHeight() * 0.5f, 0));
-            shootFromRandom(entity.getLookAngle(), .1f, arrow);
-            Vec3 vec3 = arrow.getDeltaMovement();
-            double d0 = vec3.horizontalDistance();
-            arrow.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
-            arrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
-            arrow.yRotO = arrow.getYRot();
-            arrow.xRotO = arrow.getXRot();
-            arrow.setBaseDamage(dmg);
-            arrow.setPierceLevel((byte) 0);
-            arrow.setCritArrow(true);
-            Projectile projectile = arrow;
+            AbilityArrow projectile = new AbilityArrow(world);
             if (entity instanceof Player player) {
                 var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
                 if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
-                    projectile = quiver.getCustomProjectile(arrow, player, dmg);
+                    projectile = quiver.getCustomProjectile(projectile, player, dmg);
                 }
             }
+            projectile.setOwner(entity);
+            projectile.setNoGravity(false);
+            projectile.setPos(origin.subtract(0, projectile.getBbHeight() * 0.5f, 0));
+            shootFromRandom(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f), .1f, projectile);
+            Vec3 vec3 = projectile.getDeltaMovement();
+            double d0 = vec3.horizontalDistance();
+            projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+            projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+            projectile.yRotO = projectile.getYRot();
+            projectile.xRotO = projectile.getXRot();
+            projectile.setBaseDamage(dmg);
+            projectile.setCritArrow(true);
+
+
             //world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
             world.addFreshEntity(projectile);
         }
@@ -171,6 +169,6 @@ public class BarrageSpell extends AbstractSpell {
         var speed = rotation.length();
         Vec3 offset = Utils.getRandomVec3(1).normalize().scale(inaccuracy);
         var motion = rotation.normalize().add(offset).normalize().scale(speed);
-        arrow.setDeltaMovement(motion.scale(4));
+        arrow.setDeltaMovement(motion);
     }
 }
