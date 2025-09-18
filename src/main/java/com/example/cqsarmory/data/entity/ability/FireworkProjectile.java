@@ -2,10 +2,12 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
+import com.google.common.collect.Lists;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import it.unimi.dsi.fastutil.ints.IntImmutableList;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
@@ -39,6 +41,7 @@ public class FireworkProjectile extends AbilityArrow {
     private static final EntityDataAccessor<ItemStack> DATA_ID_FIREWORKS_ITEM = SynchedEntityData.defineId(
             FireworkProjectile.class, EntityDataSerializers.ITEM_STACK
     );
+    private IntOpenHashSet piercingIgnoreEntityIds;
 
     public FireworkProjectile(Level level, ItemStack stack, Entity shooter, double x, double y, double z, boolean shotAtAngle, float damage) {
         super(EntityRegistry.FIREWORK_PROJECTILE.get(), level);
@@ -66,9 +69,7 @@ public class FireworkProjectile extends AbilityArrow {
     private int lifetime;
     private boolean shotAtAngle;
 
-    public float getDamage() {
-        return damage;
-    }
+    public float getDamage() { return damage; }
 
     public boolean isShotAtAngle() {return shotAtAngle;}
 
@@ -91,7 +92,7 @@ public class FireworkProjectile extends AbilityArrow {
     @Override
     public void tick() {
         super.tick();
-        if (!this.isShotAtAngle()) {
+        /*if (!this.isShotAtAngle()) {
             double d2 = this.horizontalCollision ? 1.0 : 1.15;
             this.setDeltaMovement(this.getDeltaMovement().multiply(d2, 1.0, d2).add(0.0, 0.04, 0.0));
         }
@@ -107,7 +108,7 @@ public class FireworkProjectile extends AbilityArrow {
             this.hasImpulse = true;
         }
 
-        this.updateRotation();
+        this.updateRotation();*/
         if (this.life == 0 && !this.isSilent()) {
             this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.AMBIENT, 3.0F, 1.0F);
         }
@@ -127,15 +128,37 @@ public class FireworkProjectile extends AbilityArrow {
         }
 
         if (!this.level().isClientSide && this.life > this.lifetime) {
-            this.explode();
+            this.explode(this.position());
+            this.discard();
         }
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity target) {
+        return super.canHitEntity(target) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(target.getId()));
     }
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
         //super.onHitEntity(result);
-        if (!this.level().isClientSide && this.canHitEntity(result.getEntity())) {
-            this.explode();
+        if (this.canHitEntity(result.getEntity())) {
+            if (!this.level().isClientSide) {
+                this.explode(result.getLocation());
+            }
+            if (this.getPierceLevel() > 0) {
+                if (this.piercingIgnoreEntityIds == null) {
+                    this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
+                }
+
+                if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1) {
+                    this.discard();
+                    return;
+                }
+
+                this.piercingIgnoreEntityIds.add(result.getEntity().getId());
+            } else {
+                discard();
+            }
         }
     }
 
@@ -144,23 +167,23 @@ public class FireworkProjectile extends AbilityArrow {
         BlockPos blockpos = new BlockPos(result.getBlockPos());
         this.level().getBlockState(blockpos).entityInside(this.level(), blockpos, this);
         if (!this.level().isClientSide) {
-            this.explode();
+            this.explode(result.getLocation());
+            this.discard();
         }
         //super.onHitBlock(result);
     }
 
-    private void explode() {
+    private void explode(Vec3 pos) {
         this.level().broadcastEntityEvent(this, (byte) 17);
         this.gameEvent(GameEvent.EXPLODE, this.getOwner());
-        this.dealExplosionDamage();
-        this.discard();
+        this.dealExplosionDamage(pos);
     }
 
     @Override
     public void handleEntityEvent(byte id) {
         if (id == 17 && this.level().isClientSide) {
             Vec3 vec3 = this.getDeltaMovement();
-            this.level().createFireworks(this.getX(), this.getY(), this.getZ(), vec3.x, vec3.y, vec3.z, this.getExplosions());
+            this.level().createFireworks(this.getX() + vec3.x, this.getY() + vec3.y, this.getZ() + vec3.z, vec3.x, vec3.y, vec3.z, this.getExplosions());
         }
 
         super.handleEntityEvent(id);
@@ -172,13 +195,18 @@ public class FireworkProjectile extends AbilityArrow {
         return fireworks != null ? fireworks.explosions() : List.of();
     }
 
-    private void dealExplosionDamage() {
-        Vec3 hitPos = this.position();
+    private void dealExplosionDamage(Vec3 hitPos) {
         Level level = this.level();
         double explosionRadius = 2;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
             if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
                 DamageSources.applyDamage(livingentity, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
+            }
+        }
+
+        for (MomentumOrb orb : level.getEntitiesOfClass(MomentumOrb.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
+            if (Utils.hasLineOfSight(level, hitPos, orb.getBoundingBox().getCenter(), true)) {
+                DamageSources.applyDamage(orb, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
             }
         }
     }

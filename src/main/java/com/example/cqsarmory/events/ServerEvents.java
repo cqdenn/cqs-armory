@@ -63,6 +63,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
 import net.neoforged.neoforge.event.entity.player.ArrowNockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
 import org.joml.Vector3f;
@@ -511,6 +512,7 @@ public class ServerEvents {
     public static void momentumOnHit(LivingDamageEvent.Pre event) {
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
+        Entity target = event.getEntity();
 
 
         if (directEntity instanceof AbstractArrow && sourceEntity instanceof Player player) {
@@ -520,7 +522,6 @@ public class ServerEvents {
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
                 //add logic for creating momentum orbs
                 Level level = player.level();
-                Entity target = player.getLastHurtMob();
                 int startX = Utils.random.nextBoolean() ? 1 : -1;
                 int startZ = Utils.random.nextBoolean() ? 1 : -1;
                 Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(startX * Utils.random.nextFloat(), 2, startZ * Utils.random.nextFloat());
@@ -624,7 +625,7 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void arrowPierce(ProjectileImpactEvent event) {
-        if (event.getProjectile() instanceof AbstractArrow arrow && arrow.getOwner() instanceof Player player && ItemRegistry.SHARPHOOTER.get().isEquippedBy(player) && event.getRayTraceResult() instanceof EntityHitResult && !player.level().isClientSide) {
+        if (event.getProjectile() instanceof AbstractArrow arrow && arrow.getOwner() instanceof Player player && ItemRegistry.SHARPHOOTER.get().isEquippedBy(player)) {
             arrow.setPierceLevel((byte) (arrow.getPierceLevel() + 5));
         }
     }

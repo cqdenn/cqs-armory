@@ -32,6 +32,8 @@
   "spell.cqs_armory.rapid_fire_spell": "Rapid Fire",
   "spell.cqs_armory.piercing_arrow_spell": "Piercing Arrow",
   "spell.cqs_armory.hunters_mark_spell": "Hunter's Mark",
+  "spell.cqs_armory.ice_arrow_spell": "Ice Arrow",
+  "spell.cqs_armory.gravity_snare_spell": "Gravity Snare",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
@@ -83,6 +85,7 @@
   "effect.cqs_armory.sky_strike": "Sky Strike",
   "effect.cqs_armory.dodge": "Dodge Incoming Attacks",
   "effect.cqs_armory.insta_draw": "Insta Draw",
+  "effect.cqs_armory.gravity_snare": "Gravity Snare",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -152,6 +155,9 @@
   "item.cqs_armory.poison_quiver": "Poison Quiver",
   "item.cqs_armory.firework_quiver": "Firework Quiver",
   "item.cqs_armory.hunters_quiver": "Hunter's Quiver",
+  "item.cqs_armory.ice_quiver": "Ice Quiver",
+  "item.cqs_armory.fire_quiver": "Fire Quiver",
+  "item.cqs_armory.gravity_quiver": "Gravity Quiver",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

@@ -8,14 +8,12 @@ import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.BoosterBaseItem;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveBooster;
-import com.example.cqsarmory.items.curios.quivers.FireworkQuiver;
-import com.example.cqsarmory.items.curios.quivers.PoisonQuiver;
+import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
-import io.redspace.ironsspellbooks.item.curios.SimpleDescriptiveCurio;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -166,6 +164,9 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> POISON_QUIVER = ITEMS.register("poison_quiver", () -> new PoisonQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, 5))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> FIREWORK_QUIVER = ITEMS.register("firework_quiver", () -> new FireworkQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> HUNTERS_QUIVER = ITEMS.register("hunters_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.HUNTERS_MARK_SPELL, 1))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> FIRE_QUIVER = ITEMS.register("fire_quiver", () -> new FireQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, 5))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> ICE_QUIVER = ITEMS.register("ice_quiver", () -> new IceQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.ICE_ARROW_SPELL, 5))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

@@ -2,6 +2,10 @@
   "values": [
     "cqs_armory:basic_quiver",
     "cqs_armory:poison_quiver",
-    "cqs_armory:firework_quiver"
+    "cqs_armory:firework_quiver",
+    "cqs_armory:hunters_quiver",
+    "cqs_armory:fire_quiver",
+    "cqs_armory:ice_quiver",
+    "cqs_armory:gravity_quiver"
   ]
 }

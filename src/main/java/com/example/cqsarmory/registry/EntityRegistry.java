@@ -114,4 +114,16 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "firework_projectile").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FireArrow>> FIRE_ARROW =
+            ENTITIES.register("fire_arrow", () -> EntityType.Builder.<FireArrow>of(FireArrow::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "fire_arrow").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<IceArrow>> ICE_ARROW =
+            ENTITIES.register("ice_arrow", () -> EntityType.Builder.<IceArrow>of(IceArrow::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_arrow").toString()));
 }

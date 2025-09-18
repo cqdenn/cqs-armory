@@ -3,6 +3,7 @@ package com.example.cqsarmory.registry;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.effects.*;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -32,4 +33,5 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> INSTA_DRAW = MOB_EFFECT_DEFERRED_REGISTER.register("insta_draw", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x7772a8).addAttributeModifier(BowAttributes.DRAW_SPEED, CqsArmory.id("mobeffect_insta_draw"), 20, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> GENERIC_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("generic_mage_aoe", () -> new GenericMageAOEEffect(MobEffectCategory.BENEFICIAL, 0x7112a8));
     public static final DeferredHolder<MobEffect, MobEffect> HELLFIRE_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("hellfire_mage_aoe", () -> new HellfireMageAOEEffect(MobEffectCategory.BENEFICIAL, 0x7112a8));
+    public static final DeferredHolder<MobEffect, MobEffect> GRAVITY_SNARE = MOB_EFFECT_DEFERRED_REGISTER.register("gravity_snare", () -> new GravitySnareEffect(MobEffectCategory.HARMFUL, 0xae34eb).addAttributeModifier(Attributes.GRAVITY, CqsArmory.id("mobeffect_gravity_snare"), -1.02, AttributeModifier.Operation.ADD_MULTIPLIED_BASE).addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, CqsArmory.id("mobeffect_gravity_snare"), 0.9, AttributeModifier.Operation.ADD_VALUE));
 }

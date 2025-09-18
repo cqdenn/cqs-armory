@@ -14,6 +14,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -68,7 +69,7 @@ public class MomentumOrb extends Entity implements GeoEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         DamageData.get(this).lastSource = source;
-        if (source.getDirectEntity() instanceof Arrow arrow) {
+        if (source.getDirectEntity() instanceof AbstractArrow arrow) {
             DamageData.get(this).lastDamage = (float) arrow.getBaseDamage();
         } else if (source.getEntity() instanceof OrbExplosion orbExplosion) {
             DamageData.get(this).lastDamage = (orbExplosion.getDamage() * 0.625f);
