@@ -86,7 +86,7 @@ public class GravitySnareSpell extends AbstractSpell {
             var target = targetingData.getTarget((ServerLevel) level);
             if (target != null) {
                 int duration = 100;
-                target.addEffect(new MobEffectInstance(MobEffectRegistry.GRAVITY_SNARE, duration, 0));
+                target.addEffect(new MobEffectInstance(MobEffectRegistry.GRAVITY_SNARE, duration, 0, false, false, true));
             }
         }
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
