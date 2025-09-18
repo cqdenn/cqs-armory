@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.BoosterBaseItem;
+import com.example.cqsarmory.items.curios.BrandBaseItem;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveBooster;
 import com.example.cqsarmory.items.curios.quivers.*;
@@ -167,6 +168,9 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> FIRE_QUIVER = ITEMS.register("fire_quiver", () -> new FireQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, 5))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> ICE_QUIVER = ITEMS.register("ice_quiver", () -> new IceQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.ICE_ARROW_SPELL, 5))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
+
+    public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGMA_BOMB_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

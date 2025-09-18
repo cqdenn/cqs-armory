@@ -108,6 +108,8 @@
   "curios.identifier.booster": "Booster",
   "curios.modifiers.quiver": "When equipped as quiver:",
   "curios.identifier.quiver": "Quiver",
+  "curios.modifiers.brand": "When branded:",
+  "curios.identifier.brand": "Brand",
 
   "death.attack.volcano": "%1$s was erupted by %2$s",
   "death.attack.melee_skill": "%1$s was dominated by %2$s",
@@ -158,6 +160,9 @@
   "item.cqs_armory.ice_quiver": "Ice Quiver",
   "item.cqs_armory.fire_quiver": "Fire Quiver",
   "item.cqs_armory.gravity_quiver": "Gravity Quiver",
+
+  "item.cqs_armory.magma_brand": "Brand of Magma",
+  "item.cqs_armory.veil_brand": "Brand of Veil",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

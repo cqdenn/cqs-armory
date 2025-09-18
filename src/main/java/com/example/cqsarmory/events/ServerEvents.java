@@ -5,6 +5,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
+import com.example.cqsarmory.items.curios.BrandBaseItem;
 import com.example.cqsarmory.items.weapons.MjolnirItem;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
@@ -38,6 +39,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -640,6 +642,16 @@ public class ServerEvents {
             AbilityData.get(player).quiverArrowCount = newArrowCount;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncQuiverArrowsPacket(newArrowCount));
         }
+    }
+
+    @SubscribeEvent
+    public static void brandEffects(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+
+        if (ItemRegistry.VEIL_BRAND.get().isEquippedBy(player)) {
+            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, true));
+        }
+
     }
 
 }
