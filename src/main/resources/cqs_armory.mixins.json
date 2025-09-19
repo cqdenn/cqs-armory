@@ -10,6 +10,7 @@
     "ProjectileWeaponItemMixin"
   ],
   "client": [
+    "LocalPlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
