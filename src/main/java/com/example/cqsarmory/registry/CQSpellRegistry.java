@@ -40,6 +40,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> HUNTERS_MARK_SPELL = registerSpell(new HuntersMarkSpell());
     public static final Supplier<AbstractSpell> ICE_ARROW_SPELL = registerSpell(new IceArrowSpell());
     public static final Supplier<AbstractSpell> GRAVITY_SNARE_SPELL = registerSpell(new GravitySnareSpell());
+    public static final Supplier<AbstractSpell> INFINITE_MAGIC_SPELL = registerSpell(new InfiniteMagicSpell());
 
 
 

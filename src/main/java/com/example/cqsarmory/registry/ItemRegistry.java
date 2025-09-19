@@ -175,6 +175,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> ANGEL_BRAND = ITEMS.register("angel_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.ANGEL_WINGS_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrandItem().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1))));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

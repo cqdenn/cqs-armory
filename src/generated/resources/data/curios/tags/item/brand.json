@@ -1,7 +1,13 @@
 {
   "values": [
     "cqs_armory:magma_brand",
+    "cqs_armory:cold_brand",
+    "cqs_armory:volt_brand",
+    "cqs_armory:blood_brand",
+    "cqs_armory:evasive_brand",
+    "cqs_armory:angel_brand",
     "cqs_armory:veil_brand",
-    "cqs_armory:arcane_brand"
+    "cqs_armory:arcane_brand",
+    "cqs_armory:infinity_brand"
   ]
 }

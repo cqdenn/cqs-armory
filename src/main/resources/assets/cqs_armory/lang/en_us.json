@@ -34,6 +34,7 @@
   "spell.cqs_armory.hunters_mark_spell": "Hunter's Mark",
   "spell.cqs_armory.ice_arrow_spell": "Ice Arrow",
   "spell.cqs_armory.gravity_snare_spell": "Gravity Snare",
+  "spell.cqs_armory.infinite_magic_spell": "Infinite Magic",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
@@ -86,6 +87,9 @@
   "effect.cqs_armory.dodge": "Dodge Incoming Attacks",
   "effect.cqs_armory.insta_draw": "Insta Draw",
   "effect.cqs_armory.gravity_snare": "Gravity Snare",
+  "effect.cqs_armory.infinite_magic": "Infinite Magic",
+  "effect.cqs_armory.generic_mage_aoe": "Generic Mage AOE",
+  "effect.cqs_armory.hellfire_mage_aoe": "Hellfire Mage AOE",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -171,6 +175,7 @@
   "item.cqs_armory.veil_brand.desc": "Permanently blinds you",
   "item.cqs_armory.arcane_brand": "Brand of Arcane",
   "item.cqs_armory.arcane_brand.desc": "Refills your mana when below 10%",
+  "item.cqs_armory.infinity_brand": "Brand of Infinity",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

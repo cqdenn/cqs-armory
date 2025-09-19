@@ -13,6 +13,8 @@ import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
+import io.redspace.ironsspellbooks.api.events.SpellCooldownAddedEvent;
+import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -663,6 +665,26 @@ public class ServerEvents {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public static void infinityBrandCD(SpellCooldownAddedEvent.Pre event) {
+        Player player = event.getEntity();
+        if (player.hasEffect(MobEffectRegistry.INFINITE_MAGIC) && event.getSpell() != CQSpellRegistry.INFINITE_MAGIC_SPELL.get()) {
+            event.setEffectiveCooldown(0);
+        }
+    }
+
+    @SubscribeEvent
+    public static void infinityBrandMana(ChangeManaEvent event) {
+        Player player = event.getEntity();
+        if (player.hasEffect(MobEffectRegistry.INFINITE_MAGIC)) {
+            float oldMana = event.getOldMana();
+            float newMana = event.getNewMana();
+            if (newMana - oldMana < 0) {
+                event.setCanceled(true);
+            }
+        }
     }
 
 }

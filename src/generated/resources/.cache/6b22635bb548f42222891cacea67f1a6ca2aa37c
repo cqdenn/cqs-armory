@@ -1,10 +1,10 @@
-// 1.21.1	2025-09-18T19:42:48.4700149	Tags for minecraft:item mod id cqs_armory
+// 1.21.1	2025-09-18T21:26:43.3047513	Tags for minecraft:item mod id cqs_armory
 7bfe59bf58e4916df21173dffdf1edc3f8aa5af1 data/cqs_armory/tags/item/arrows.json
 f1226abaa51fc09eca620ffd9298f8ac52422852 data/cqs_armory/tags/item/ingots/power_one.json
 d4c8ee7f43ee48273cf1e9cd1226be32f9db3840 data/cqs_armory/tags/item/ingots/power_three.json
 93e2a340cd07c82e91b429d7d4b0263db3597e2c data/cqs_armory/tags/item/ingots/power_two.json
 368b253e593c8ead162275a5e689dd379c637a36 data/curios/tags/item/booster.json
-2f2e5d966761c750003ce8df5f8e3344f83e1874 data/curios/tags/item/brand.json
+ac5805a3b521e764b5bb67b6d1e28f4b90367d68 data/curios/tags/item/brand.json
 c6eed1746da5d5939d15fe4032b11bcaf5c4c9ec data/curios/tags/item/quiver.json
 562d8ea2481b21360dc3ce5cc9f50a80f1a56062 data/minecraft/tags/item/enchantable/bow.json
 9c88d5763dc32291edf70a4c3c6b4f93f5273632 data/minecraft/tags/item/enchantable/chest_armor.json
