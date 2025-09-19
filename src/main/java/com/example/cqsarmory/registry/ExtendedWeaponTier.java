@@ -106,7 +106,7 @@ public class ExtendedWeaponTier implements Tier {
 
     static {
         WITHERSTEEL = new ExtendedWeaponTier("withersteel", 5, 2500, 5.0F, 0.0F, 0f, 0.2f, 0f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()}));
-        COPPER = new ExtendedWeaponTier("copper", 1, 250, 1.0F, 0.2F, 0.5f, 0f, 0.1f, 4, BlockTags.INCORRECT_FOR_IRON_TOOL, () -> Ingredient.of(new ItemLike[]{Items.COPPER_INGOT}));
+        COPPER = new ExtendedWeaponTier("copper", 1, 250, 0.0F, 0.2F, 0.5f, 0f, 0.1f, 4, BlockTags.INCORRECT_FOR_IRON_TOOL, () -> Ingredient.of(new ItemLike[]{Items.COPPER_INGOT}));
         IRON = new ExtendedWeaponTier("iron", 1, 250, 2.0F, 0.0F, 0f, 0.1f, 0f,4, BlockTags.INCORRECT_FOR_IRON_TOOL, () -> Ingredient.of(new ItemLike[]{Items.IRON_INGOT}));
         GOLD = new ExtendedWeaponTier("gold", 1.2f, 150, 1.0F, 0.0F, 0f, 0.03f, 0.03f, 5, BlockTags.INCORRECT_FOR_GOLD_TOOL, () -> Ingredient.of(new ItemLike[]{Items.GOLD_INGOT}));
         DIAMOND = new ExtendedWeaponTier("diamond", 1.5F, 250, 3.0F, 0.2F, 0.5f, 0.05f, 0.02f, 4, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, () -> Ingredient.of(new ItemLike[]{Items.DIAMOND}));
