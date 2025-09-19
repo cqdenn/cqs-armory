@@ -1,10 +1,7 @@
 package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.items.curios.BoosterBaseItem;
-import com.example.cqsarmory.items.curios.BrandBaseItem;
-import com.example.cqsarmory.items.curios.QuiverItem;
-import com.example.cqsarmory.items.curios.SimpleDescriptiveBooster;
+import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
@@ -64,7 +61,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 tag(boosterTag).add((Item)item.get());
             }else if (item.get() instanceof QuiverItem) {
                 tag(quiverTag).add((Item)item.get());
-            }else if (item.get() instanceof BrandBaseItem) {
+            }else if (item.get() instanceof BrandBaseItem || item.get() instanceof SimpleDescriptiveBrand || item.get() instanceof PassiveAbilityBrand) {
                 tag(brandTag).add((Item)item.get());
             }else if (item.get() instanceof ArmorItem armorItem) {
                 switch (armorItem.getEquipmentSlot()) {

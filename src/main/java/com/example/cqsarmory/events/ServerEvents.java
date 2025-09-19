@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.BrandBaseItem;
+import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
 import com.example.cqsarmory.items.weapons.MjolnirItem;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
@@ -21,6 +22,8 @@ import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
+import io.redspace.ironsspellbooks.item.curios.BetrayerSignetRingItem;
+import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
@@ -650,6 +653,14 @@ public class ServerEvents {
 
         if (ItemRegistry.VEIL_BRAND.get().isEquippedBy(player)) {
             player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, true));
+        }
+
+        if (ItemRegistry.ARCANE_BRAND.get().isEquippedBy(player) && player instanceof ServerPlayer serverPlayer) {
+            var RING = ((ArcaneBrandItem) ItemRegistry.ARCANE_BRAND.get());
+            if ((MagicData.getPlayerMagicData(player).getMana() <= player.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA) * 0.1) && RING.tryProcCooldown(serverPlayer)) {
+                MagicData.getPlayerMagicData(serverPlayer).setMana((float) serverPlayer.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA));
+                PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
+            }
         }
 
     }

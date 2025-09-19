@@ -5,10 +5,8 @@ import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.*;
-import com.example.cqsarmory.items.curios.BoosterBaseItem;
-import com.example.cqsarmory.items.curios.BrandBaseItem;
-import com.example.cqsarmory.items.curios.QuiverItem;
-import com.example.cqsarmory.items.curios.SimpleDescriptiveBooster;
+import com.example.cqsarmory.items.curios.*;
+import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -170,7 +168,13 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
 
     public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGMA_BOMB_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.CONE_OF_COLD_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.VOLT_STRIKE_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.BLOOD_NEEDLES_SPELL, 10))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.EVASION_SPELL, 5))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARCANE_SKILL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> ANGEL_BRAND = ITEMS.register("angel_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.ANGEL_WINGS_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrandItem().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
 
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

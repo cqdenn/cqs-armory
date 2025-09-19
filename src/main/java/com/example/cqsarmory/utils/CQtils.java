@@ -62,6 +62,7 @@ public class CQtils {
         schoolMap.put(SpellRegistry.SACRIFICE_SPELL.get(), CQSchoolRegistry.NECROMANCY);
         schoolMap.put(SpellRegistry.BLOOD_SLASH_SPELL.get(), CQSchoolRegistry.NECROMANCY);
         schoolMap.put(SpellRegistry.HEARTSTOP_SPELL.get(), CQSchoolRegistry.NECROMANCY);
+        schoolMap.put(SpellRegistry.BLOOD_NEEDLES_SPELL.get(), CQSchoolRegistry.NECROMANCY);
 
         schoolMap.put(SpellRegistry.MAGIC_MISSILE_SPELL.get(), CQSchoolRegistry.ARCANE);
         schoolMap.put(SpellRegistry.GUST_SPELL.get(), CQSchoolRegistry.ARCANE);
@@ -71,6 +72,7 @@ public class CQtils {
         schoolMap.put(SpellRegistry.SLOW_SPELL.get(), CQSchoolRegistry.ARCANE);
         schoolMap.put(SpellRegistry.TELEKINESIS_SPELL.get(), CQSchoolRegistry.ARCANE);
         schoolMap.put(SpellRegistry.TELEPORT_SPELL.get(), CQSchoolRegistry.ARCANE);
+        schoolMap.put(SpellRegistry.EVASION_SPELL.get(), CQSchoolRegistry.ARCANE);
 
         return schoolMap;
     }

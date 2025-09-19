@@ -162,7 +162,15 @@
   "item.cqs_armory.gravity_quiver": "Gravity Quiver",
 
   "item.cqs_armory.magma_brand": "Brand of Magma",
+  "item.cqs_armory.cold_brand": "Brand of Cold",
+  "item.cqs_armory.volt_brand": "Brand of Voltage",
+  "item.cqs_armory.blood_brand": "Brand of Blood",
+  "item.cqs_armory.evasive_brand": "Brand of Evasion",
+  "item.cqs_armory.angel_brand": "Brand of Angels",
   "item.cqs_armory.veil_brand": "Brand of Veil",
+  "item.cqs_armory.veil_brand.desc": "Permanently blinds you",
+  "item.cqs_armory.arcane_brand": "Brand of Arcane",
+  "item.cqs_armory.arcane_brand.desc": "Refills your mana when below 10%",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",
