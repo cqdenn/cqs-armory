@@ -1,0 +1,11 @@
+{
+  "values": [
+    "minecraft:fireworks",
+    "minecraft:explosion",
+    "minecraft:player_explosion",
+    "minecraft:fireball",
+    "minecraft:unattributed_fireball",
+    "cqs_armory:volcano",
+    "cqs_armory:firework_projectile"
+  ]
+}

@@ -7,6 +7,7 @@ import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 
 public class Tags {
@@ -24,9 +25,18 @@ public class Tags {
 
     public static class DamageTypes {
         public static final TagKey<DamageType> CAUSES_RAGE_GAIN = tag("causes_rage_gain");
+        public static final TagKey<DamageType> EXPLOSIVE_DAMAGE = tag("explosive_damage");
 
         private static TagKey<DamageType> tag(String name) {
             return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
+        }
+    }
+
+    public static class EntityTypes {
+        public static final TagKey<EntityType<?>> EXPLOSIVE_ENTITIES = tag("explosive_entities");
+
+        private static TagKey<EntityType<?>> tag(String name) {
+            return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
         }
     }
 }

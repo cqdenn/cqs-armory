@@ -28,5 +28,13 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.MOB_ATTACK);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.PLAYER_ATTACK);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.MELEE_SKILL);
+
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.FIREWORKS);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.EXPLOSION);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.PLAYER_EXPLOSION);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.FIREBALL);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.UNATTRIBUTED_FIREBALL);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(com.example.cqsarmory.registry.DamageTypes.VOLCANO);
+        tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(com.example.cqsarmory.registry.DamageTypes.FIREWORK_PROJECTILE);
     }
 }

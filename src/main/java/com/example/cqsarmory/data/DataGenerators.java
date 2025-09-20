@@ -26,6 +26,9 @@ public class DataGenerators {
                 new CQDamageTypeTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
 
         generator.addProvider(event.includeServer(),
+                new CQEntityTypeTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
+
+        generator.addProvider(event.includeServer(),
                 new RecipeDataGenerator(packOutput, event.getLookupProvider()));
 
     }
