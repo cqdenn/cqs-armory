@@ -103,4 +103,14 @@ public class GravitySnareSpell extends AbstractSpell {
         return SpellAnimations.ANIMATION_LONG_CAST_FINISH;
     }
 
+    @Override
+    public boolean allowCrafting() {
+        return false;
+    }
+
+    @Override
+    public boolean allowLooting() {
+        return false;
+    }
+
 }

@@ -21,10 +21,10 @@ public record ManaSteal(LevelBasedValue mana) implements EnchantmentEntityEffect
 
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        if (item.owner() instanceof ServerPlayer serverPlayer) {
+        /*if (item.owner() instanceof ServerPlayer serverPlayer) {
             MagicData.getPlayerMagicData(serverPlayer).addMana(mana.calculate(enchantmentLevel));
             PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
-        }
+        }*/
     }
 
     @Override

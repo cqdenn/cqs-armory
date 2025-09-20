@@ -22,6 +22,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
+import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.item.curios.BetrayerSignetRingItem;
@@ -213,19 +214,49 @@ public class ServerEvents {
         Entity entityAttacker = event.getSource().getEntity();
         float rand = Utils.random.nextFloat();
         Level level = entity.level();
-        if (entityAttacker instanceof LivingEntity attacker) {
+        if (entityAttacker instanceof LivingEntity attacker && !(event.getSource().getDirectEntity() instanceof ChainLightning)) {
             Holder.Reference<Enchantment> lightningAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_aspect")));
             int lightningAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(lightningAspectHolder);
             int lightningAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(lightningAspectHolder);
             int lightningAspectLevel = Math.max(lightningAspectOffHand, lightningAspectMainHand);
             if (rand <= 0.35 && lightningAspectLevel > 0) {
-                float dmg = DamageData.get(entity).lastDamage * 0.5f;
+                float dmg = event.getAmount() * 0.5f;
                 ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
                 chainLightning.setDamage(dmg);
                 chainLightning.maxConnections = 3 * lightningAspectLevel;
                 chainLightning.range = 8;
                 level.addFreshEntity(chainLightning);
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void stealingEnchants(LivingDamageEvent.Post event) {
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof Player player) {
+            Holder.Reference<Enchantment> lifeStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "life_steal")));
+            Holder.Reference<Enchantment> manaStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "mana_steal")));
+            Holder.Reference<Enchantment> speedStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "speed_steal")));
+            int lifeStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(lifeStealHolder), player.getMainHandItem().getEnchantmentLevel(lifeStealHolder));
+            int manaStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(manaStealHolder), player.getMainHandItem().getEnchantmentLevel(manaStealHolder));
+            int speedStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(speedStealHolder), player.getMainHandItem().getEnchantmentLevel(speedStealHolder));
+            //life steal
+            if (lifeStealLevel > 0) {
+                player.heal(lifeStealLevel);
+            }
+            //mana steal
+            if (manaStealLevel > 0 && player instanceof ServerPlayer serverPlayer) {
+                MagicData.getPlayerMagicData(serverPlayer).addMana(5 * manaStealLevel);
+                PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
+            }
+            //speed steal
+            if (speedStealLevel > 0) {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.SPEED_STEAL, 40 + (20 * (speedStealLevel - 1)), speedStealLevel - 1, false, false, true));
+                if (event.getEntity() instanceof LivingEntity living) {
+                    living.addEffect(new MobEffectInstance(MobEffectRegistry.SPEED_STOLEN, 40 + (20 * (speedStealLevel - 1)), speedStealLevel - 1, false, false, true));
+                }
+            }
+
         }
     }
 
@@ -537,7 +568,7 @@ public class ServerEvents {
                 int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
                 for (int i = 0; i < orbsSpawned; i++) {
                     MomentumOrb orb = CQtils.getRandomOrbType(level, player);
-                    if (ItemRegistry.BLASTERS_BRAND.get().isEquippedBy(player)) {
+                    if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
                     }
                     CQtils.findOrbLoc(startingPos, orb, level);
@@ -642,7 +673,7 @@ public class ServerEvents {
         Player player = event.getEntity();
         int capacity = (int) player.getAttribute(AttributeRegistry.QUIVER_CAPACITY).getValue();
         if (player.level().isClientSide) return;
-        if (AbilityData.get(player).quiverArrowCount < capacity && player.level().getGameTime() % 100 == 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+        if (AbilityData.get(player).quiverArrowCount < capacity && player.level().getGameTime() % 40 == 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             int newArrowCount = AbilityData.get(player).quiverArrowCount + 1;
             AbilityData.get(player).quiverArrowCount = newArrowCount;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncQuiverArrowsPacket(newArrowCount));
@@ -683,6 +714,18 @@ public class ServerEvents {
             float newMana = event.getNewMana();
             if (newMana - oldMana < 0) {
                 event.setCanceled(true);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void explosiveDamage(LivingIncomingDamageEvent event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof Player attacker) {
+            float multiplier = (float) attacker.getAttributeValue(AttributeRegistry.EXPLOSIVE_DAMAGE);
+            if (event.getSource().is(Tags.DamageTypes.EXPLOSIVE_DAMAGE) || (event.getSource().getDirectEntity() != null && event.getSource().getDirectEntity().getType().is(Tags.EntityTypes.EXPLOSIVE_ENTITIES))) {
+                event.setAmount(event.getAmount() * multiplier);
             }
         }
     }

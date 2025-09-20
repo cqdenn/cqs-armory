@@ -26,8 +26,8 @@
           "type": "cqs_armory:life_steal",
           "health": {
             "type": "minecraft:linear",
-            "base": 2,
-            "per_level_above_first": 2
+            "base": 1,
+            "per_level_above_first": 1
           }
         },
         "enchanted": "attacker",

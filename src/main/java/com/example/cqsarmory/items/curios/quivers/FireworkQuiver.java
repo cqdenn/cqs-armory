@@ -28,7 +28,7 @@ public class FireworkQuiver extends QuiverItem {
 
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        FireworkProjectile firework = new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, arrowDmg * 0.5f);
+        FireworkProjectile firework = new FireworkProjectile(shooter.level(), randomFireworkRocket(), shooter, shooter.getX(), shooter.getEyeY() - 0.15F, shooter.getZ(), true, arrowDmg * 0.6f);
         firework.copyStats(arrow, shooter);
         return firework;
     }

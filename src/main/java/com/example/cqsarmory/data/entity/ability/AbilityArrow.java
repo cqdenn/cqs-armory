@@ -44,6 +44,10 @@ public class AbilityArrow extends AbstractArrow {
         builder.define(ID_IGNORE_BLOCKS, false);
     }
 
+    public void setWeaponItem(ItemStack weaponItem) {
+        this.firedFromWeapon = weaponItem;
+    }
+
     public float getScale() {
         return this.entityData.get(ID_SCALE);
     }

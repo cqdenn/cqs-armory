@@ -17,9 +17,9 @@ public record LifeSteal(LevelBasedValue health) implements EnchantmentEntityEffe
 
     @Override
     public void apply(ServerLevel level, int enchantmentLevel, EnchantedItemInUse item, Entity entity, Vec3 origin) {
-        if (item.owner() != null){
+        /*if (item.owner() != null){
             item.owner().heal(health.calculate(enchantmentLevel));
-        }
+        }*/
     }
 
     @Override

@@ -5,7 +5,6 @@ import com.example.cqsarmory.spells.*;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -41,6 +40,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> ICE_ARROW_SPELL = registerSpell(new IceArrowSpell());
     public static final Supplier<AbstractSpell> GRAVITY_SNARE_SPELL = registerSpell(new GravitySnareSpell());
     public static final Supplier<AbstractSpell> INFINITE_MAGIC_SPELL = registerSpell(new InfiniteMagicSpell());
+    public static final Supplier<AbstractSpell> REFILL_SPELL = registerSpell(new RefillSpell());
 
 
 
