@@ -665,7 +665,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void arrowPierce(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() != null && arrow.getOwner() instanceof LivingEntity living) {
-            arrow.setPierceLevel((byte) living.getAttributeValue(AttributeRegistry.ARROW_PIERCING));
+            arrow.setPierceLevel((byte) (arrow.getPierceLevel() + living.getAttributeValue(AttributeRegistry.ARROW_PIERCING)));
         }
     }
 

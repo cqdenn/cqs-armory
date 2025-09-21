@@ -16,7 +16,7 @@ public class BatQuiver extends QuiverItem {
 
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg * 0.5f);
+        BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg * 0.33f);
         //bat.copyStats(arrow, shooter);
         bat.setPos(arrow.position());
         return bat;

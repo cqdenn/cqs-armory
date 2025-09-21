@@ -92,6 +92,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         this.setDeltaMovement(this.getDeltaMovement().scale(-2));
+        level().playSound(null, this.blockPosition(), SoundEvents.ANVIL_FALL, SoundSource.PLAYERS, 1f, 2f);
     }
 
     @Override
@@ -100,6 +101,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         if (this.canHitEntity(entity)) {
             if (!this.level().isClientSide) {
                 this.bite(entity);
+                this.setBaseDamage(this.getBaseDamage() * 0.9);
             }
             if (this.getPierceLevel() > 0) {
                 if (this.piercingIgnoreEntityIds == null) {
@@ -108,6 +110,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
 
                 if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1 || this.numPierced >= this.getPierceLevel()) {
                     this.discard();
+                    MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
                     return;
                 }
 
