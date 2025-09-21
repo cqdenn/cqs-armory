@@ -126,4 +126,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_arrow").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<BatProjectile>> BAT_PROJECTILE =
+            ENTITIES.register("bat_projectile", () -> EntityType.Builder.<BatProjectile>of(BatProjectile::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "bat_projectile").toString()));
 }

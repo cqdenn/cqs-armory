@@ -128,14 +128,15 @@ public class PiercingArrowSpell extends AbstractSpell {
         float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel;
         float scale = 6f;
         AbilityArrow projectile = new AbilityArrow(level);
-        if (entity instanceof Player player) {
-            var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
-            if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+        if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+            if (CQtils.getPlayerCurioStack(player, "quiver").getItem() instanceof QuiverItem quiver) {
                 projectile = quiver.getCustomProjectile(projectile, player, dmg);
             }
+        } else {
+            projectile.setBaseDamage(dmg);
         }
         projectile.setOwner(entity);
-        projectile.setBaseDamage(dmg);
+        //projectile.setBaseDamage(dmg);
         projectile.setNoGravity(true);
         projectile.setScale(scale);
         projectile.setPos(entity.position().add(0, entity.getEyeHeight() - projectile.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));

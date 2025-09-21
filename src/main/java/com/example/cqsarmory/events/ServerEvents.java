@@ -66,6 +66,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
@@ -652,7 +653,7 @@ public class ServerEvents {
         if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
             event.setAmount(event.getAmount() * 0.75f);
         }
-        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().getDirectEntity() instanceof FireworkProjectile) {
+        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING)) {
             event.setInvulnerabilityTicks(0);
         }
         if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof Projectile) {
@@ -662,9 +663,9 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void arrowPierce(ProjectileImpactEvent event) {
-        if (event.getProjectile() instanceof AbstractArrow arrow && arrow.getOwner() instanceof Player player && ItemRegistry.SHARPHOOTER.get().isEquippedBy(player)) {
-            arrow.setPierceLevel((byte) (arrow.getPierceLevel() + 5));
+    public static void arrowPierce(EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() != null && arrow.getOwner() instanceof LivingEntity living) {
+            arrow.setPierceLevel((byte) living.getAttributeValue(AttributeRegistry.ARROW_PIERCING));
         }
     }
 
@@ -728,6 +729,20 @@ public class ServerEvents {
                 event.setAmount(event.getAmount() * multiplier);
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void bowVelocity(ArrowLooseEvent event) {
+        int charge = event.getCharge();
+        Player player = event.getEntity();
+
+        float f = (float)charge / 20.0F;
+        f = (f * f + f * 2.0F) / 3.0F;
+        if (f > 1.0F) {
+            f = 1.0F;
+        }
+
+        AbilityData.get(player).bowVelocity = f;
     }
 
 }

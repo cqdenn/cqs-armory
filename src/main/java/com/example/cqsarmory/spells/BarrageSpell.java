@@ -138,11 +138,12 @@ public class BarrageSpell extends AbstractSpell {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
             AbilityArrow projectile = new AbilityArrow(world);
-            if (entity instanceof Player player) {
-                var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
-                if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+            if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+                if (CQtils.getPlayerCurioStack(player, "quiver").getItem() instanceof QuiverItem quiver) {
                     projectile = quiver.getCustomProjectile(projectile, player, dmg);
                 }
+            } else {
+                projectile.setBaseDamage(dmg);
             }
             projectile.setOwner(entity);
             projectile.setNoGravity(false);
@@ -154,7 +155,7 @@ public class BarrageSpell extends AbstractSpell {
             projectile.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
             projectile.yRotO = projectile.getYRot();
             projectile.xRotO = projectile.getXRot();
-            projectile.setBaseDamage(dmg);
+            //projectile.setBaseDamage(dmg);
             projectile.setCritArrow(true);
             projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
 

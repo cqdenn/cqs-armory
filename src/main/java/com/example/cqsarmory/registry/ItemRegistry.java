@@ -139,7 +139,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> HUNTERS_ECHO = ITEMS.register("hunters_echo", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ORBS_SPAWNED, 1, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BLASTER = ITEMS.register("blaster", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
+    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARROW_PIERCING, 2, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BIGGER_BOOMER = ITEMS.register("bigger_boomer", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.EXPLOSIVE_DAMAGE, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.04, AttributeModifier.Operation.ADD_VALUE)));
@@ -168,6 +168,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> ICE_QUIVER = ITEMS.register("ice_quiver", () -> new IceQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.ICE_ARROW_SPELL, 5))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> PLENTY_QUIVER = ITEMS.register("plenty_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REFILL_SPELL, 1))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> BAT_QUIVER = ITEMS.register("bat_quiver", () -> new BatQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(250));
 
     public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGMA_BOMB_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.CONE_OF_COLD_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
@@ -337,9 +338,9 @@ public class ItemRegistry {
                 new CQSpellDataRegistryHolder(SpellRegistry.FANG_STRIKE_SPELL, 6),
                 new CQSpellDataRegistryHolder(SpellRegistry.RAISE_DEAD_SPELL, 2),
                 new CQSpellDataRegistryHolder(SpellRegistry.DEVOUR_SPELL, 3),
-                new CQSpellDataRegistryHolder(SpellRegistry.BLIGHT_SPELL, -1),
-                new CQSpellDataRegistryHolder(SpellRegistry.SUMMON_VEX_SPELL, 2),
                 new CQSpellDataRegistryHolder(SpellRegistry.SACRIFICE_SPELL, 1),
+                new CQSpellDataRegistryHolder(SpellRegistry.SUMMON_VEX_SPELL, 2),
+                new CQSpellDataRegistryHolder(SpellRegistry.BLIGHT_SPELL, -1),
                 new CQSpellDataRegistryHolder(SpellRegistry.BLOOD_SLASH_SPELL, 1),
                 new CQSpellDataRegistryHolder(SpellRegistry.HEARTSTOP_SPELL, 1)
         );

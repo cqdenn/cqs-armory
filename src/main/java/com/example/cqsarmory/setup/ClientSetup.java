@@ -13,6 +13,7 @@ import io.redspace.ironsspellbooks.util.IMinecraftInstanceHelper;
 import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.entity.BatRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -97,5 +98,6 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.FIREWORK_PROJECTILE.get(), FireworkProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FIRE_ARROW.get(), AbilityArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ICE_ARROW.get(), AbilityArrowRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.BAT_PROJECTILE.get(), BatProjectileRenderer::new);
     }
 }

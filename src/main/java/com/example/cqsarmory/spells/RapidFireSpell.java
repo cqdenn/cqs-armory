@@ -122,14 +122,14 @@ public class RapidFireSpell extends AbstractSpell {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE);
             AbilityArrow projectile = new AbilityArrow(level);
-            if (entity instanceof Player player) {
-                var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
-                if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
+            if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+                if (CQtils.getPlayerCurioStack(player, "quiver").getItem() instanceof QuiverItem quiver) {
                     projectile = quiver.getCustomProjectile(projectile, player, dmg);
                 }
+            } else {
+                projectile.setBaseDamage(dmg);
             }
             projectile.setOwner(entity);
-            projectile.setBaseDamage(dmg);
             projectile.setNoGravity(false);
             projectile.setScale(1f);
             projectile.setPos(entity.position().add(0, entity.getEyeHeight() - projectile.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));

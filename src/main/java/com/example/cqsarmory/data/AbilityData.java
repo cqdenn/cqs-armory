@@ -21,6 +21,7 @@ public class AbilityData {
     public float manaSpentSinceLastAOE;
     public int fireAspectCooldownEnd;
     public int quiverArrowCount;
+    public float bowVelocity;
 
     public float getRage() {
         return rage;
