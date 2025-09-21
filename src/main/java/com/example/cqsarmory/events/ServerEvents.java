@@ -699,13 +699,13 @@ public class ServerEvents {
 
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void infinityBrandCD(SpellCooldownAddedEvent.Pre event) {
         Player player = event.getEntity();
         if (player.hasEffect(MobEffectRegistry.INFINITE_MAGIC) && event.getSpell() != CQSpellRegistry.INFINITE_MAGIC_SPELL.get()) {
             event.setEffectiveCooldown(0);
         }
-    }
+    }*/ // removed for being too broken
 
     @SubscribeEvent
     public static void infinityBrandMana(ChangeManaEvent event) {
