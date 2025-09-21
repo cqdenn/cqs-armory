@@ -20,7 +20,7 @@ public class PoisonQuiver extends QuiverItem {
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         AbilityArrow abilityArrow = new AbilityArrow(shooter.level());
-        abilityArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 1));
+        abilityArrow.addEffect(new MobEffectInstance(MobEffects.POISON, 200, 3));
         abilityArrow.copyStats(arrow, shooter);
         return abilityArrow;
     }
