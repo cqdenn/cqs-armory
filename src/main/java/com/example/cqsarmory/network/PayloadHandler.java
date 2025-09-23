@@ -22,5 +22,6 @@ public class PayloadHandler {
         payloadRegistrar.playToClient(SyncMomentumSpeedEndPacket.TYPE, SyncMomentumSpeedEndPacket.STREAM_CODEC, SyncMomentumSpeedEndPacket::handle);
         payloadRegistrar.playToClient(SyncMomentumDamagePacket.TYPE, SyncMomentumDamagePacket.STREAM_CODEC, SyncMomentumDamagePacket::handle);
         payloadRegistrar.playToClient(SyncMomentumDamageEndPacket.TYPE, SyncMomentumDamageEndPacket.STREAM_CODEC, SyncMomentumDamageEndPacket::handle);
+        payloadRegistrar.playToServer(doOnSwingEffectPacket.TYPE, doOnSwingEffectPacket.STREAM_CODEC, doOnSwingEffectPacket::handle);
     }
 }

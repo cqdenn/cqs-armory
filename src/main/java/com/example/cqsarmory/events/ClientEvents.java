@@ -2,9 +2,11 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.network.StartSuckingPacket;
+import com.example.cqsarmory.network.doOnSwingEffectPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -15,11 +17,17 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void onSwing(PlayerInteractEvent.LeftClickEmpty event) {
+        PacketDistributor.sendToServer(new doOnSwingEffectPacket());
+    }
 
     @SubscribeEvent
     public static void onLeftClick(ClientTickEvent.Pre event) {
