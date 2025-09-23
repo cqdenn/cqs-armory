@@ -190,6 +190,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> EXPLOSIVE_COATING = ITEMS.register("explosive_coating", () -> new ExplosiveCoating(ItemPropertiesHelper.equipment(1), "coating"));
     public static final Supplier<CurioBaseItem> TAUNT_COATING = ITEMS.register("taunt_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 50, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BASH_COATING = ITEMS.register("bash_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MIN_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BLEED_COATING = ITEMS.register("bleed_coating", () -> new BleedCoating(ItemPropertiesHelper.equipment(1), "coating", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CONSUME_BLEED_SPELL, 1))));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

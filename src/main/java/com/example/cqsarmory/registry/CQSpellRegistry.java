@@ -41,7 +41,5 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> GRAVITY_SNARE_SPELL = registerSpell(new GravitySnareSpell());
     public static final Supplier<AbstractSpell> INFINITE_MAGIC_SPELL = registerSpell(new InfiniteMagicSpell());
     public static final Supplier<AbstractSpell> REFILL_SPELL = registerSpell(new RefillSpell());
-
-
-
+    public static final Supplier<AbstractSpell> CONSUME_BLEED_SPELL = registerSpell(new ConsumeBleedSpell());
 }

@@ -5,6 +5,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
+import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.BrandBaseItem;
 import com.example.cqsarmory.items.curios.OnHitCoating;
@@ -787,6 +788,21 @@ public class ServerEvents {
             var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
             if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && (entity == event.getSource().getDirectEntity())) {
                 coating.doOnHitEffect(player, target, damage);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void bleedStacks(MobEffectEvent.Added event) {
+        MobEffectInstance newInstance = event.getEffectInstance();
+        MobEffectInstance oldInstance = event.getOldEffectInstance();
+        LivingEntity living = event.getEntity();
+        if (newInstance.getEffect() == MobEffectRegistry.BLEED && oldInstance != null) {
+            if (newInstance instanceof CQMobEffectInstance newInstanceCQ && oldInstance instanceof CQMobEffectInstance oldInstanceCQ && newInstanceCQ.getOwner() == oldInstanceCQ.getOwner() && newInstanceCQ.getTriggersEvent()) {
+                int newAmplifier = newInstance.getAmplifier() + oldInstance.getAmplifier() + 1;
+                newAmplifier = Math.min(newAmplifier, 4);
+                int duration = Math.max(newInstance.getDuration(), oldInstance.getDuration());
+                living.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, duration, newAmplifier, false, false, true, newInstanceCQ.getOwner(), false));
             }
         }
     }

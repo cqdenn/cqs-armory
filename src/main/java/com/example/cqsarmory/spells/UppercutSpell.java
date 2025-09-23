@@ -2,6 +2,7 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
+import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
@@ -112,7 +113,7 @@ public class UppercutSpell extends AbstractSpell {
         for (Entity target : entities) {
             if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
                 target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                ((LivingEntity) target).addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 80 * spellLevel, spellLevel - 1, false, false, true));
+                ((LivingEntity) target).addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 80 * spellLevel, spellLevel - 1, false, false, true, entity, true));
                 target.push(direction);
                 target.hurtMarked = true;
             }

@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data.entity.ability;
 
 
+import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
@@ -77,7 +78,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     public void bite(Entity entity) {
         if (entity instanceof LivingEntity target) {
             target.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), (float) this.getBaseDamage());
-            target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 100, (int) Math.floor(this.getBaseDamage()) / 10, false, false, true));
+            target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, (int) Math.floor(this.getBaseDamage()) / 10, false, false, true, getOwner(), true));
         } else if (entity instanceof MomentumOrb orb) {
             orb.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), (float) this.getBaseDamage());
         }

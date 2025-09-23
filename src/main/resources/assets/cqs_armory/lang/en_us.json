@@ -36,12 +36,16 @@
   "spell.cqs_armory.gravity_snare_spell": "Gravity Snare",
   "spell.cqs_armory.infinite_magic_spell": "Infinite Magic",
   "spell.cqs_armory.refill_spell": "Refill",
+  "spell.cqs_armory.consume_bleed_spell": "Consume Bleed",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
   "ui.cqs_armory.bleed_duration": "%s Bleed Duration",
   "ui.cqs_armory.absorption_per_enemy": "%d Temporary HP Per Hit",
   "ui.cqs_armory.arrows_per_second": "%s Arrows Per Second",
+  "ui.cqs_armory.shield_bash_target_failure": "Spell requires a shield in off hand",
+  "ui.cqs_armory.damage_per_bleed_stack": "%s Damage Per Bleed Stack",
+  "ui.cqs_armory.no_bleed_stack_error": "Target must be bleeding",
 
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
@@ -197,8 +201,8 @@
   "item.cqs_armory.thorn_coating.desc": "Chance to root on hit based on damage",
   "item.cqs_armory.explosive_coating": "Explosive Coating",
   "item.cqs_armory.explosive_coating.desc": "Explode on hit",
-
-  "ui.cqs_armory.shield_bash_target_failure": "Spell requires a shield in off hand",
+  "item.cqs_armory.bleed_coating": "Bleed Coating",
+  "item.cqs_armory.bleed_coating.desc": "Causes bleed on hit",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

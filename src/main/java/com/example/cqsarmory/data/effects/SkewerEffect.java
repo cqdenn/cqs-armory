@@ -29,7 +29,7 @@ public class SkewerEffect extends MobEffect {
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target)) {
                     target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * SKEWER_ATTACK_DAMAGE_MULTIPLIER);
-                    target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, 80 * (amplifier + 1), amplifier, false, false, true));
+                    target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 80 * (amplifier + 1), amplifier, false, false, true, livingEntity, true));
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;
                     return false;
