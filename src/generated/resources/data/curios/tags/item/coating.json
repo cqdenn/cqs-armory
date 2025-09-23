@@ -9,6 +9,7 @@
     "cqs_armory:explosive_coating",
     "cqs_armory:taunt_coating",
     "cqs_armory:bash_coating",
-    "cqs_armory:bleed_coating"
+    "cqs_armory:bleed_coating",
+    "cqs_armory:fire_coating"
   ]
 }

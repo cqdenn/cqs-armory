@@ -9,6 +9,7 @@ import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.BrandBaseItem;
 import com.example.cqsarmory.items.curios.OnHitCoating;
+import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
 import com.example.cqsarmory.items.weapons.MjolnirItem;
 import com.example.cqsarmory.network.*;
@@ -788,6 +789,8 @@ public class ServerEvents {
             var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
             if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && (entity == event.getSource().getDirectEntity())) {
                 coating.doOnHitEffect(player, target, damage);
+            } else if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && (entity == event.getSource().getDirectEntity())) {
+                coating.doOnSwingEffect(player, damage);
             }
         }
     }
