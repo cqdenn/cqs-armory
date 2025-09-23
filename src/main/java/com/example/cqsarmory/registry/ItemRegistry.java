@@ -7,10 +7,7 @@ import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
-import com.example.cqsarmory.items.curios.coatings.CosmicCoating;
-import com.example.cqsarmory.items.curios.coatings.FangCoating;
-import com.example.cqsarmory.items.curios.coatings.LightningCoating;
-import com.example.cqsarmory.items.curios.coatings.ThornCoating;
+import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -190,8 +187,11 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> FANG_COATING = ITEMS.register("fang_coating", () -> new FangCoating(ItemPropertiesHelper.equipment(1), "coating"));
     public static final Supplier<CurioBaseItem> COSMIC_COATING = ITEMS.register("cosmic_coating", () -> new CosmicCoating(ItemPropertiesHelper.equipment(1), "coating"));
     public static final Supplier<CurioBaseItem> THORN_COATING = ITEMS.register("thorn_coating", () -> new ThornCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> EXPLOSIVE_COATING = ITEMS.register("explosive_coating", () -> new ExplosiveCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> TAUNT_COATING = ITEMS.register("taunt_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 50, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BASH_COATING = ITEMS.register("bash_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MIN_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
 
-    public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
+    //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
             () -> new SummonSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
@@ -235,11 +235,11 @@ public class ItemRegistry {
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
     );
 
-    public static final DeferredItem<Item> VILETHORN = ITEMS.register("vilethorn",
+    /*public static final DeferredItem<Item> VILETHORN = ITEMS.register("vilethorn",
             () -> new VilethornItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 18, -3.2F, new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4, AttributeModifier.Operation.ADD_VALUE)})
             ))
-    );
+    );*/
 
     public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
             () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem

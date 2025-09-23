@@ -195,6 +195,10 @@
   "item.cqs_armory.cosmic_coating.desc": "Reduces cooldowns on hit",
   "item.cqs_armory.thorn_coating": "Thorn Coating",
   "item.cqs_armory.thorn_coating.desc": "Chance to root on hit based on damage",
+  "item.cqs_armory.explosive_coating": "Explosive Coating",
+  "item.cqs_armory.explosive_coating.desc": "Explode on hit",
+
+  "ui.cqs_armory.shield_bash_target_failure": "Spell requires a shield in off hand",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

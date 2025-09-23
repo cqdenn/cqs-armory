@@ -5,6 +5,9 @@
     "cqs_armory:lightning_coating",
     "cqs_armory:fang_coating",
     "cqs_armory:cosmic_coating",
-    "cqs_armory:thorn_coating"
+    "cqs_armory:thorn_coating",
+    "cqs_armory:explosive_coating",
+    "cqs_armory:taunt_coating",
+    "cqs_armory:bash_coating"
   ]
 }

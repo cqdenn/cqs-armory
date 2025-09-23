@@ -1,6 +1,7 @@
 package com.example.cqsarmory;
 
 import com.example.cqsarmory.config.ClientConfigs;
+import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.gui.overlays.RageBarOverlay;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
@@ -112,6 +113,7 @@ public class CqsArmory
 
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC, String.format("%s-client.toml", CqsArmory.MODID));
+        modContainer.registerConfig(ModConfig.Type.SERVER, ServerConfigs.SPEC, String.format("%s-server.toml", CqsArmory.MODID));
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (cqs_armory) to respond directly to events.

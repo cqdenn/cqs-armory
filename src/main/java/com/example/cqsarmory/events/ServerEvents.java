@@ -2,6 +2,7 @@ package com.example.cqsarmory.events;
 
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
@@ -660,7 +661,7 @@ public class ServerEvents {
         if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
             event.setAmount(event.getAmount() * 0.75f);
         }
-        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
+        if (ServerConfigs.DISABLE_IFRAMES.get() || event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
             event.setInvulnerabilityTicks(0);
         }
         if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof Projectile) {

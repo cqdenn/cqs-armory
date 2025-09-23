@@ -119,8 +119,6 @@ public class ExtendedWeaponTier implements Tier {
         UMBRITE = new ExtendedWeaponTier("umbrite", 3, 2000, 1.0F, 0.5F, 5f, 0.1f, 0.05f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.UMBRITE_WEAPONSET.ingot().get()}));
         SILVERSTEEL = new ExtendedWeaponTier("silversteel", 3, 2000, 0.0F, 0.4F, 2f, 0f, 0.25f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()}));
         DWARVEN_STEEL = new ExtendedWeaponTier("dwarvensteel", 3, 2000, 3.0F, 0.0F, 0f, 0.15f, 0f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()}));
-        CUSTOM = new ExtendedWeaponTier("custom", 1, 2000, 0F, 0F, 0f, 0f, 0f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{ItemRegistry.REPAIR_KIT.get()}));
-
-
+        CUSTOM = new ExtendedWeaponTier("custom", 1, 2000, 0F, 0F, 0f, 0f, 0f, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, () -> Ingredient.of(new ItemLike[]{Items.NETHERITE_INGOT}));
     }
 }
