@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.BrandBaseItem;
+import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
 import com.example.cqsarmory.items.weapons.MjolnirItem;
 import com.example.cqsarmory.network.*;
@@ -24,6 +25,7 @@ import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
+import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.item.curios.BetrayerSignetRingItem;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
@@ -75,6 +77,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
+import org.checkerframework.checker.signature.qual.SignatureBottom;
 import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 
@@ -87,8 +90,12 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
         Entity entity = event.getEntity().getKillCredit();
-        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (entity instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))) {
-            VolcanoExplosion volcanoExplosion = new VolcanoExplosion(event.getEntity().level(), (LivingEntity) entity, 20, 4);
+        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (entity instanceof LivingEntity livingEntity1 && ItemRegistry.VOLCANO_COATING.get().isEquippedBy(livingEntity1) && event.getSource().getEntity() == event.getSource().getDirectEntity())/* || (entity instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))*/) {
+            float damage = entity instanceof LivingEntity living ? (float) living.getAttributeValue(Attributes.ATTACK_DAMAGE) : 20f;
+            if (entity instanceof VolcanoExplosion volcano) {
+                damage = volcano.getDamage();
+            }
+            VolcanoExplosion volcanoExplosion = new VolcanoExplosion(event.getEntity().level(), (LivingEntity) entity, damage, 4);
             volcanoExplosion.moveTo(event.getEntity().position().add(0, 1, 0));
             event.getEntity().level().addFreshEntity(volcanoExplosion);
             if (event.getSource().getDirectEntity() instanceof VolcanoExplosion volcanoExplosion1) {
@@ -121,7 +128,7 @@ public class ServerEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onFall(LivingFallEvent event) {
         if (event.getEntity() instanceof LivingEntity entity && entity.getMainHandItem().is(ItemRegistry.MJOLNIR) && AbilityData.get(entity).mjolnirData.speed < 0) {
             if (event.getDistance() > 1.5) {
@@ -153,7 +160,7 @@ public class ServerEvents {
         } else {
             AbilityData.get(event.getEntity()).mjolnirData.speed = 0;
         }
-    }
+    }*/
 
     @SubscribeEvent
     public static void fireAspectBuff(LivingDamageEvent.Post event) {
@@ -653,7 +660,7 @@ public class ServerEvents {
         if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
             event.setAmount(event.getAmount() * 0.75f);
         }
-        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING)) {
+        if (event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
             event.setInvulnerabilityTicks(0);
         }
         if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof Projectile) {
@@ -743,6 +750,44 @@ public class ServerEvents {
         }
 
         AbilityData.get(player).bowVelocity = f;
+    }
+
+    @SubscribeEvent
+    public static void poisonEffects(LivingIncomingDamageEvent event) {
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof Player player) {
+            Level level = player.level();
+            if (ItemRegistry.POISON_QUIVER.get().isEquippedBy(player) && event.getSource().getDirectEntity() instanceof AbstractArrow) {
+                AbilityData.get(player).poisonStacks++;
+            } else if (ItemRegistry.POISON_COATING.get().isEquippedBy(player) && event.getSource().getDirectEntity() == event.getSource().getEntity()) {
+                AbilityData.get(player).poisonStacks++;
+            }
+            if (AbilityData.get(player).poisonStacks >= 20) {
+                AbilityData.get(player).poisonStacks = 0;
+                LivingEntity target = event.getEntity();
+                AcidOrb orb = new AcidOrb(level, player);
+                orb.setPos(target.position().add(0, 1, 0));
+                orb.shoot(new Vec3(0, 0.5f, 0));
+                //orb.setDeltaMovement(orb.getDeltaMovement().add(0, 0.2, 0));
+                orb.setExplosionRadius(3);
+                orb.setRendLevel(4);
+                orb.setRendDuration(200);
+                level.addFreshEntity(orb);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void coatingEffects(LivingDamageEvent.Post event) {
+        Entity entity = event.getSource().getEntity();
+        float damage = event.getNewDamage();
+        LivingEntity target = event.getEntity();
+        if (entity instanceof Player player) {
+            var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
+            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && (entity == event.getSource().getDirectEntity())) {
+                coating.doOnHitEffect(player, target, damage);
+            }
+        }
     }
 
 }

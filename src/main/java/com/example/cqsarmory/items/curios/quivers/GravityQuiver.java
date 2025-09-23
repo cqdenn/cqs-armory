@@ -14,7 +14,7 @@ public class GravityQuiver extends QuiverItem {
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         AbilityArrow abilityArrow = new AbilityArrow(shooter.level());
-        abilityArrow.copyStats(arrow, shooter);
+        abilityArrow.copyStats(arrow, shooter, arrowDmg);
         abilityArrow.setNoGravity(true);
         return abilityArrow;
     }

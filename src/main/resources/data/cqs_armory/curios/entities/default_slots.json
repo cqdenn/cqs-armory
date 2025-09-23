@@ -1,4 +1,4 @@
 {
   "entities": ["player"],
-  "slots": ["booster", "quiver", "brand"]
+  "slots": ["booster", "quiver", "brand", "coating"]
 }

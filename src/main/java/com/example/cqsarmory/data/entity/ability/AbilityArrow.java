@@ -135,9 +135,9 @@ public class AbilityArrow extends AbstractArrow {
     }
 
     /*copies stats of given arrow*/
-    public void copyStats(Projectile arrow, LivingEntity owner) {
+    public void copyStats(Projectile arrow, LivingEntity owner, float arrowDmg) {
         this.setOwner(owner);
-        this.setBaseDamage(owner.getAttributeValue(BowAttributes.ARROW_DAMAGE));
+        this.setBaseDamage(arrowDmg);
         this.setPos(arrow.position());
         this.setDeltaMovement(arrow.getDeltaMovement());
         this.setYRot((float)(Mth.atan2(arrow.getDeltaMovement().x, arrow.getDeltaMovement().z) * 180.0F / (float)Math.PI));

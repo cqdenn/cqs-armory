@@ -15,7 +15,7 @@ public class FireQuiver extends QuiverItem {
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         FireArrow abilityArrow = new FireArrow(shooter.level());
-        abilityArrow.copyStats(arrow, shooter);
+        abilityArrow.copyStats(arrow, shooter, arrowDmg);
         return abilityArrow;
     }
 }

@@ -7,6 +7,10 @@ import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
+import com.example.cqsarmory.items.curios.coatings.CosmicCoating;
+import com.example.cqsarmory.items.curios.coatings.FangCoating;
+import com.example.cqsarmory.items.curios.coatings.LightningCoating;
+import com.example.cqsarmory.items.curios.coatings.ThornCoating;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -180,6 +184,13 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrandItem().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1))));
 
+    public static final Supplier<CurioBaseItem> POISON_COATING = ITEMS.register("poison_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.SPIDER_ASPECT_SPELL, 4))));
+    public static final Supplier<CurioBaseItem> VOLCANO_COATING = ITEMS.register("volcano_coating", () -> new SimpleDescriptiveCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> LIGHTNING_COATING = ITEMS.register("lightning_coating", () -> new LightningCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> FANG_COATING = ITEMS.register("fang_coating", () -> new FangCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> COSMIC_COATING = ITEMS.register("cosmic_coating", () -> new CosmicCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> THORN_COATING = ITEMS.register("thorn_coating", () -> new ThornCoating(ItemPropertiesHelper.equipment(1), "coating"));
+
     public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
     public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
@@ -194,29 +205,29 @@ public class ItemRegistry {
             ))
     );
 
-    public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
+    /*public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
             () -> new MjolnirItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 15, -2.7f, new AttributeContainer[]{})
             ))
-    );
+    );*/
 
-    public static final DeferredItem<Item> COSMIC_ARK = ITEMS.register("cosmic_ark",
+    /*public static final DeferredItem<Item> COSMIC_ARK = ITEMS.register("cosmic_ark",
             () -> new CosmicArkItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.3F, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
-    );
+    );*/
 
-    public static final DeferredItem<Item> FANG_SWORD = ITEMS.register("fang_sword",
+    /*public static final DeferredItem<Item> FANG_SWORD = ITEMS.register("fang_sword",
             () -> new FangSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 9, -2.4F, new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 2, AttributeModifier.Operation.ADD_VALUE)})
             ))
-    );
+    );*/
 
-    public static final DeferredItem<Item> VOLCANO = ITEMS.register("volcano",
+    /*public static final DeferredItem<Item> VOLCANO = ITEMS.register("volcano",
             () -> new VolcanoSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_THREE, 14, -2.7F, new AttributeContainer[]{new AttributeContainer(Attributes.BURNING_TIME, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ))
-    );
+    );*/
 
     public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
             () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem

@@ -36,6 +36,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> boosterTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "booster"));
     public static final TagKey<Item> quiverTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "quiver"));
     public static final TagKey<Item> brandTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "brand"));
+    public static final TagKey<Item> coatingTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "coating"));
     public static final TagKey<Item> axeTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "axes"));
     public static final TagKey<Item> headTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/head_armor"));
     public static final TagKey<Item> chestTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/chest_armor"));
@@ -63,6 +64,8 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 tag(quiverTag).add((Item)item.get());
             }else if (item.get() instanceof BrandBaseItem || item.get() instanceof SimpleDescriptiveBrand || item.get() instanceof PassiveAbilityBrand) {
                 tag(brandTag).add((Item)item.get());
+            }else if (item.get() instanceof CoatingBaseItem || item.get() instanceof SimpleDescriptiveCoating) {
+                tag(coatingTag).add((Item)item.get());
             }else if (item.get() instanceof ArmorItem armorItem) {
                 switch (armorItem.getEquipmentSlot()) {
                     case HEAD -> tag(headTag).add((Item)item.get());
@@ -72,7 +75,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 }
             }
         }
-        tag(swordTag).add(ItemRegistry.MJOLNIR.get());
+        //tag(swordTag).add(ItemRegistry.MJOLNIR.get());
 
 
 

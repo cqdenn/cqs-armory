@@ -37,9 +37,9 @@
             "locked": true
           },
           {
-            "id": "irons_spellbooks:blight",
+            "id": "irons_spellbooks:sacrifice",
             "index": 3,
-            "level": 5,
+            "level": 7,
             "locked": true
           },
           {
@@ -49,9 +49,9 @@
             "locked": true
           },
           {
-            "id": "irons_spellbooks:sacrifice",
+            "id": "irons_spellbooks:blight",
             "index": 5,
-            "level": 7,
+            "level": 5,
             "locked": true
           }
         ],

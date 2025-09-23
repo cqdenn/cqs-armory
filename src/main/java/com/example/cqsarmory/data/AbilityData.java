@@ -3,6 +3,7 @@ package com.example.cqsarmory.data;
 import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ShieldItem;
@@ -22,6 +23,7 @@ public class AbilityData {
     public int fireAspectCooldownEnd;
     public int quiverArrowCount;
     public float bowVelocity;
+    public int poisonStacks;
 
     public float getRage() {
         return rage;

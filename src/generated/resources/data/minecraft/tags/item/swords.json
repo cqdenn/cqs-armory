@@ -198,9 +198,6 @@
     "cqs_armory:dwarvensteel_holy_staff",
     "cqs_armory:summon_sword",
     "cqs_armory:ground_pounder",
-    "cqs_armory:cosmic_ark",
-    "cqs_armory:fang_sword",
-    "cqs_armory:volcano",
     "cqs_armory:desert_fury",
     "cqs_armory:vilethorn",
     "cqs_armory:winglash",
@@ -399,7 +396,6 @@
     "cqs_armory:dwarvensteel_lightning_staff",
     "cqs_armory:dwarvensteel_necromancy_staff",
     "cqs_armory:dwarvensteel_arcane_staff",
-    "cqs_armory:dwarvensteel_holy_staff",
-    "cqs_armory:mjolnir"
+    "cqs_armory:dwarvensteel_holy_staff"
   ]
 }

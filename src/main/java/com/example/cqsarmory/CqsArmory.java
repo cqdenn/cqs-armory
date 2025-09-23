@@ -64,7 +64,7 @@ public class CqsArmory
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> GROUND_POUNDER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(SUMMON_SWORD.get());
+                /*output.accept(SUMMON_SWORD.get());
                 output.accept(GROUND_POUNDER.get());
                 output.accept(MJOLNIR.get());
                 output.accept(COSMIC_ARK.get());
@@ -76,7 +76,7 @@ public class CqsArmory
                 output.accept(IRONWALL.get());
                 output.accept(THORNBARK.get());
                 output.accept(FLASHGUARD.get());
-                output.accept(SOUL_SUCKER.get());
+                output.accept(SOUL_SUCKER.get());*/
                 for (var item : ITEMS.getEntries()) {
                     output.accept(item.get());
                 }// Add the example item to the tab. For your own tabs, this method is preferred over the event
