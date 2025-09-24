@@ -15,7 +15,7 @@ public class ThornCoating extends OnHitCoating {
 
     @Override
     public void doOnHitEffect(Player attacker, LivingEntity target, float hitDamage) {
-        float chance =(hitDamage / 400);
+        float chance = Math.min(0.1f + (hitDamage / 200), 0.35f); //caps at 50 damage
         if (Utils.random.nextFloat() <= chance) {
             Vec3 spawn = target.position();
             Level level = attacker.level();
