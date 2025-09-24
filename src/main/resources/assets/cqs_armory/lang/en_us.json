@@ -169,6 +169,7 @@
 
   "item.cqs_armory.basic_quiver": "Basic Quiver",
   "item.cqs_armory.poison_quiver": "Poison Quiver",
+  "item.cqs_armory.poison_quiver.desc": "Applies poison stacks, rend nearby enemies at 20 stacks",
   "item.cqs_armory.firework_quiver": "Firework Quiver",
   "item.cqs_armory.hunters_quiver": "Hunter's Quiver",
   "item.cqs_armory.ice_quiver": "Ice Quiver",
@@ -192,6 +193,7 @@
   "item.cqs_armory.infinity_brand": "Brand of Infinity",
 
   "item.cqs_armory.poison_coating": "Poison Coating",
+  "item.cqs_armory.poison_coating.desc": "Applies poison stacks, rend nearby enemies at 20 stacks",
   "item.cqs_armory.volcano_coating": "Volcanic Coating",
   "item.cqs_armory.volcano_coating.desc": "Killed enemies erupt",
   "item.cqs_armory.lightning_coating": "Lightning Coating",
