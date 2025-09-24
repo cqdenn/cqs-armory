@@ -356,6 +356,7 @@
   "item.cqs_armory.blazing_necromancy_staff": "Blazing Necromancy Staff",
   "item.cqs_armory.blazing_arcane_staff": "Blazing Arcane Staff",
   "item.cqs_armory.blazing_holy_staff": "Blazing Holy Staff",
+  "item.cqs_armory.blazing_ingot": "Blazing Ingot",
 
   "item.cqs_armory.copper_greatsword": "Copper Greatsword",
   "item.cqs_armory.copper_greataxe": "Copper Greataxe",
@@ -410,6 +411,7 @@
   "item.cqs_armory.dwarvensteel_necromancy_staff": "Dwarvensteel Necromancy Staff",
   "item.cqs_armory.dwarvensteel_arcane_staff": "Dwarvensteel Arcane Staff",
   "item.cqs_armory.dwarvensteel_holy_staff": "Dwarvensteel Holy Staff",
+  "item.cqs_armory.dwarvensteel_ingot": "Dwarven Steel Ingot",
 
   "item.cqs_armory.gold_greatsword": "Gold Greatsword",
   "item.cqs_armory.gold_greataxe": "Gold Greataxe",
@@ -446,6 +448,7 @@
   "item.cqs_armory.living_necromancy_staff": "Living Necromancy Staff",
   "item.cqs_armory.living_arcane_staff": "Living Arcane Staff",
   "item.cqs_armory.living_holy_staff": "Living Holy Staff",
+  "item.cqs_armory.living_ingot": "Living Ingot",
 
   "item.cqs_armory.netherite_greatsword": "Netherite Greatsword",
   "item.cqs_armory.netherite_greataxe": "Netherite Greataxe",
@@ -500,6 +503,7 @@
   "item.cqs_armory.sculk_necromancy_staff": "Sculk Necromancy Staff",
   "item.cqs_armory.sculk_arcane_staff": "Sculk Arcane Staff",
   "item.cqs_armory.sculk_holy_staff": "Sculk Holy Staff",
+  "item.cqs_armory.sculk_ingot": "Sculk Ingot",
 
   "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
   "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
@@ -518,9 +522,10 @@
   "item.cqs_armory.silversteel_necromancy_staff": "Silversteel Necromancy Staff",
   "item.cqs_armory.silversteel_arcane_staff": "Silversteel Arcane Staff",
   "item.cqs_armory.silversteel_holy_staff": "Silversteel Holy Staff",
+  "item.cqs_armory.silversteel_ingot": "Silversteel Ingot",
 
-  "item.cqs_armory.silversteel_greatsword": "Silversteel Greatsword",
-  "item.cqs_armory.silversteel_greataxe": "Silversteel Greataxe",
+  "item.cqs_armory.umbrite_greatsword": "Umbrite Greatsword",
+  "item.cqs_armory.umbrite_greataxe": "Umbrite Greataxe",
   "item.cqs_armory.umbrite_warhammer": "Umbrite Warhammer",
   "item.cqs_armory.umbrite_halberd": "Umbrite Halberd",
   "item.cqs_armory.umbrite_mace": "Umbrite Mace",
@@ -536,6 +541,7 @@
   "item.cqs_armory.umbrite_necromancy_staff": "Umbrite Necromancy Staff",
   "item.cqs_armory.umbrite_arcane_staff": "Umbrite Arcane Staff",
   "item.cqs_armory.umbrite_holy_staff": "Umbrite Holy Staff",
+  "item.cqs_armory.umbrite_ingot": "Umbrite Ingot",
 
   "item.cqs_armory.withersteel_greatsword": "Withersteel Greatsword",
   "item.cqs_armory.withersteel_greataxe": "Withersteel Greataxe",
@@ -553,5 +559,6 @@
   "item.cqs_armory.withersteel_lightning_staff": "Withersteel Lightning Staff",
   "item.cqs_armory.withersteel_necromancy_staff": "Withersteel Necromancy Staff",
   "item.cqs_armory.withersteel_arcane_staff": "Withersteel Arcane Staff",
-  "item.cqs_armory.withersteel_holy_staff": "Withersteel Holy Staff"
+  "item.cqs_armory.withersteel_holy_staff": "Withersteel Holy Staff",
+  "item.cqs_armory.withersteel_ingot": "Withersteel Ingot"
 }
