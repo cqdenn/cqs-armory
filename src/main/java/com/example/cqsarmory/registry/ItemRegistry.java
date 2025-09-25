@@ -422,7 +422,7 @@ public class ItemRegistry {
         );
 
         var mace = ITEMS.register(name + "_mace",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedMaceItem(material, new Item.Properties().attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_KNOCKBACK, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRECKING_BALL_SPELL, power.power())))
         );
@@ -513,7 +513,7 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greatsword, generator.atlasLargeItem(greatsword)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(halberd, generator.atlasLargeItem(halberd)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(scythe, generator.atlasLargeItem(scythe)));
-        ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(mace, generator.atlasLargeItem(mace)));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.maceItem(mace));
         ItemModelDataGenerator.toRegister.add(generator -> generator.spearAtlasTransform(spear, generator.atlasLargeItem(spear)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(rapier));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(greataxe, generator.atlasLargeItem(greataxe)));
