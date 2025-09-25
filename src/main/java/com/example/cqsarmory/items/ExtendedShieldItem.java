@@ -67,7 +67,7 @@ public class ExtendedShieldItem extends ShieldItem implements IPresetSpellContai
                 .add(
                 AttributeRegistry.BLOCK_STRENGTH,
                 new AttributeModifier(
-                        ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_block_strength"), blockStrength, AttributeModifier.Operation.ADD_VALUE
+                        CqsArmory.BASE_BLOCK_STRENGTH_ID, blockStrength, AttributeModifier.Operation.ADD_VALUE
                 ),
                 EquipmentSlotGroup.HAND
         );
