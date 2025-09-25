@@ -2,6 +2,7 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ServerConfigs;
+import com.example.cqsarmory.data.effects.BleedEffect;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
@@ -54,7 +55,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(60)
             .build();
 
     public ConsumeBleedSpell() {
@@ -103,8 +104,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.literal("Consumes bleed stacks"),
-                Component.translatable("ui.cqs_armory.damage_per_bleed_stack", Utils.stringTruncation(getDamagePerStack(caster), 2))
+                Component.literal("Consumes bleed stacks for the damage it would deal")
         );
     }
 
@@ -137,9 +137,9 @@ public class ConsumeBleedSpell extends AbstractSpell {
             if (target != null) {
                 MobEffectInstance effectInstance = target.getEffect(MobEffectRegistry.BLEED);
                 int stacks = effectInstance.getAmplifier() + 1;
-
-                float damage = (float) (getDamagePerStack(entity) * stacks);
-                float explosionRadius = 1.2f * stacks;
+                int seconds = (int) Math.ceil(effectInstance.getDuration() / 20);
+                float damage = BleedEffect.DAMAGE_PER_STACK * stacks * seconds;
+                float explosionRadius = 5;
                 MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, true);
                 MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, false);
                 MagicManager.spawnParticles(level, new BlastwaveParticleOptions(SchoolRegistry.BLOOD.get().getTargetingColor(), explosionRadius), target.getX(), target.getBoundingBox().getCenter().y, target.getZ(), 1, 0, 0, 0, 0, true);

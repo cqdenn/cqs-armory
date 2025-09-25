@@ -10,20 +10,21 @@ public class BleedEffect extends MobEffect {
     public BleedEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
+    public static final float DAMAGE_PER_STACK = 5;
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         /*var dTypeReg = livingEntity.damageSources().damageTypes;
         var dType = dTypeReg.getHolder(net.neoforged.neoforge.common.NeoForgeMod.POISON_DAMAGE).orElse(dTypeReg.getHolderOrThrow(net.minecraft.world.damagesource.DamageTypes.MAGIC));*/
         DamageSource bleeding = new DamageSource(livingEntity.damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get());
-        livingEntity.hurt(bleeding, 2);
+        float damage = DAMAGE_PER_STACK * (amplifier + 1);
+        livingEntity.hurt(bleeding, damage);
 
         return true;
     }
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        int i = 25 >> amplifier;
-        return i > 0 ? duration % i == 0 : true;
+        return duration % 20 == 0;
     }
 }

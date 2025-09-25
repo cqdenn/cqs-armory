@@ -803,7 +803,7 @@ public class ServerEvents {
         if (newInstance.getEffect() == MobEffectRegistry.BLEED && oldInstance != null) {
             if (newInstance instanceof CQMobEffectInstance newInstanceCQ && oldInstance instanceof CQMobEffectInstance oldInstanceCQ && newInstanceCQ.getOwner() == oldInstanceCQ.getOwner() && newInstanceCQ.getTriggersEvent()) {
                 int newAmplifier = newInstance.getAmplifier() + oldInstance.getAmplifier() + 1;
-                newAmplifier = Math.min(newAmplifier, 4);
+                newAmplifier = Math.min(newAmplifier, 9); //bleed capped at 10 stacks
                 int duration = Math.max(newInstance.getDuration(), oldInstance.getDuration());
                 living.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, duration, newAmplifier, false, false, true, newInstanceCQ.getOwner(), false));
             }
