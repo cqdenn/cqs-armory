@@ -37,7 +37,6 @@ public class ExtendedWeaponItem extends MagicSwordItem {
     public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float attackDamage, float attackSpeed, AttributeContainer[] attributes) {
 
 
-
         var builder = ItemAttributeModifiers.builder()
                 .add(
                         Attributes.ATTACK_DAMAGE,
