@@ -1,22 +1,5 @@
 {
-  "parent": "minecraft:item/handheld",
-  "base": {
-    "parent": "cqs_armory:item/template_large_sword",
-    "handler": "cqs_armory:weaponset_handler",
-    "loader": "atlas_api:simple_model",
-    "textures": {
-      "layer0": "cqs_armory:item/iron_mace_handheld_withersteel"
-    }
-  },
-  "loader": "neoforge:separate_transforms",
-  "perspectives": {
-    "gui": {
-      "parent": "minecraft:item/handheld",
-      "handler": "cqs_armory:weaponset_handler",
-      "loader": "atlas_api:simple_model",
-      "textures": {
-        "layer0": "cqs_armory:item/iron_mace_gui_withersteel"
-      }
-    }
-  }
+  "parent": "minecraft:item/handheld_mace",
+  "handler": "cqs_armory:weaponset_handler",
+  "loader": "atlas_api:dynamic_model"
 }

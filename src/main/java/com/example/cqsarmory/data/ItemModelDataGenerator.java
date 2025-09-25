@@ -51,6 +51,11 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
                 ResourceLocation.withDefaultNamespace("item/handheld")))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:dynamic_model");
     }
 
+    public ItemModelBuilder maceItem(DeferredHolder<Item, ? extends Item> item) {
+        return ((AtlasBuilder) (withExistingParent(item.getId().getPath(),
+                ResourceLocation.withDefaultNamespace("item/handheld_mace")))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:dynamic_model");
+    }
+
     public ItemModelBuilder atlas3DItem(DeferredHolder<Item, ? extends Item> item, ResourceLocation model3d) {
         return ((AtlasBuilder) (hiddenModel(item.getId().getPath() + "_handheld",
                 model3d))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false)));
