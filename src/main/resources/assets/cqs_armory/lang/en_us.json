@@ -212,6 +212,8 @@
   "item.cqs_armory.fire_coating.desc": "Swings fire, scales with fire spell power",
   "item.cqs_armory.ice_coating": "Ice Coating",
   "item.cqs_armory.ice_coating.desc": "Shoots ice, scales with ice spell power",
+  "item.cqs_armory.bash_coating": "Bash Coating",
+  "item.cqs_armory.taunt_coating": "Taunt Coating",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",
