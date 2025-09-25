@@ -1,10 +1,12 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import io.redspace.bowattributes.BowAttributeLib;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.attribute.MagicPercentAttribute;
 import io.redspace.ironsspellbooks.api.attribute.MagicRangedAttribute;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.neoforged.bus.api.IEventBus;
@@ -14,6 +16,7 @@ import net.neoforged.neoforge.common.PercentageAttribute;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = CqsArmory.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class AttributeRegistry {
@@ -25,7 +28,9 @@ public class AttributeRegistry {
     }
 
     public static final DeferredHolder<Attribute, Attribute> DODGE_CHANCE = ATTRIBUTES.register("dodge_chance", () -> (new PercentageAttribute("attribute.cqs_armory.dodge_chance", 0.0D, 0.0D, 1.0D, 100).setSyncable(true)));
-    public static final DeferredHolder<Attribute, Attribute> BLOCK_STRENGTH = ATTRIBUTES.register("block_strength", () -> (new RangedAttribute("attribute.cqs_armory.block_strength", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> BLOCK_STRENGTH = ATTRIBUTES.register("block_strength", () -> (new RangedAttribute("attribute.cqs_armory.block_strength", 0.0D, 0.0D, 10000.0D) {public @Nullable ResourceLocation getBaseId() {
+        return CqsArmory.BASE_BLOCK_STRENGTH_ID;
+    }}.setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MAX_RAGE = ATTRIBUTES.register("max_rage", () -> (new RangedAttribute("attribute.cqs_armory.max_rage", 10.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MIN_RAGE = ATTRIBUTES.register("min_rage", () -> (new RangedAttribute("attribute.cqs_armory.min_rage", 0.0D, 0.0D, 10000.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> RAGE_ON_HIT = ATTRIBUTES.register("rage_on_hit", () -> (new RangedAttribute("attribute.cqs_armory.rage_on_hit", 1.0D, 1.0D, 10000.0D).setSyncable(true)));

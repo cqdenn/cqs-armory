@@ -84,6 +84,26 @@ public class ItemModelDataGenerator extends ModelProvider<ItemModelBuilder> {
 
     }
 
+    public ItemModelBuilder spearThrowing(DeferredHolder<Item, ? extends Item> item) {
+        return ((AtlasBuilder) (withExistingParent(item.getId().getPath() + "_throwing",
+                ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/template_large_sword_throwing")))).handler(CqsArmory.MODID + ":weaponset_handler").loader("atlas_api:simple_model").texture("layer0", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, WeaponsetAssetHandler.getAtlasLocation((TieredItem) item.get(), false)));
+    }
+
+    public ItemModelBuilder spearAtlasTransform(DeferredHolder<Item, ? extends Item> item, ItemModelBuilder base) {
+
+        ItemModelBuilder model = withExistingParent(item.getId().getPath(), "item/handheld");
+        //((AtlasBuilder) base).debugLoader();
+
+        ItemModelBuilder guiModel = atlasGuiItem(item);
+        //((AtlasBuilder) guiModel).debugLoader();
+
+        return model.customLoader(SeparateTransformsModelBuilder::begin)
+                .base(base)
+                .perspective(ItemDisplayContext.GUI, guiModel).end()
+                .override().predicate(ResourceLocation.withDefaultNamespace("throwing"), 1).model(spearThrowing(item)).end();
+        //return base;
+    }
+
     public ItemModelBuilder makeBowPullingStandalone(DeferredHolder<Item, ? extends Item> item, BowType bowType, int pull) {
         String template = bowType.isLarge() ? "large_bow" : "shortbow";
         return ((AtlasBuilder) (withExistingParent(item.getId().getPath() + "_pulling_" + pull,

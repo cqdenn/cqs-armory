@@ -2,6 +2,7 @@ package com.example.cqsarmory.setup;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.renderers.*;
+import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
@@ -72,8 +73,10 @@ public class ClientSetup {
                             (p_174575_, p_174576_, p_174577_, p_174578_) -> p_174577_ != null && p_174577_.isUsingItem() && p_174577_.getUseItem() == p_174575_ ? 1.0F : 0.0F
                     );
                 }
+                else if (item.get() instanceof SpearItem) {
+                    ItemProperties.register(item.get(), ResourceLocation.withDefaultNamespace("throwing"), (p_234996_, p_234997_, p_234998_, p_234999_) -> p_234998_ != null && p_234998_.isUsingItem() && p_234998_.getUseItem() == p_234996_ ? 1.0F : 0.0F);
+                }
             }
-
         });
 
     }

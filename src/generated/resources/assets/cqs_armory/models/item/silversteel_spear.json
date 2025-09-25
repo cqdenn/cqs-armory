@@ -9,6 +9,14 @@
     }
   },
   "loader": "neoforge:separate_transforms",
+  "overrides": [
+    {
+      "model": "cqs_armory:item/silversteel_spear_throwing",
+      "predicate": {
+        "minecraft:throwing": 1.0
+      }
+    }
+  ],
   "perspectives": {
     "gui": {
       "parent": "minecraft:item/handheld",

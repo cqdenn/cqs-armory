@@ -43,6 +43,7 @@ import static com.example.cqsarmory.registry.ItemRegistry.*;
 @Mod(CqsArmory.MODID)
 public class CqsArmory
 {
+    public static final ResourceLocation BASE_BLOCK_STRENGTH_ID = id("base_block_strength");
     // Define mod id in a common place for everything to reference
     public static final String MODID = "cqs_armory";
     // Directly reference a slf4j logger
