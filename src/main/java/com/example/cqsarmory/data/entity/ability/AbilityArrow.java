@@ -112,6 +112,15 @@ public class AbilityArrow extends AbstractArrow {
     }
 
     @Override
+    public void tick() {
+        Vec3 vec3 = this.getDeltaMovement();
+        super.tick();
+        if (this.isInWater() && this.isNoGravity()) {
+            this.setDeltaMovement(vec3);
+        }
+    }
+
+    @Override
     @Nullable
     protected EntityHitResult findHitEntity(Vec3 startVec, Vec3 endVec) {
         return ProjectileUtil.getEntityHitResult(
