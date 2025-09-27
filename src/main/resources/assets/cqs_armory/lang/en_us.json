@@ -132,6 +132,7 @@
   "death.attack.bleeding": "%1$s bled to death",
   "death.attack.firework_projectile": "%1$s went out with a bang",
   "death.attack.ice": "%1$s was put on ice",
+  "death.attack.thrown_item": "%1$s died",
 
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
@@ -179,6 +180,8 @@
   "item.cqs_armory.gravity_quiver": "Gravity Quiver",
   "item.cqs_armory.plenty_quiver": "Quiver of Plenty",
   "item.cqs_armory.bat_quiver": "Bat Quiver",
+  "item.cqs_armory.sword_quiver": "Sword Quiver",
+  "item.cqs_armory.sword_quiver.desc": "Arrows also scale with attack damage",
 
   "item.cqs_armory.magma_brand": "Brand of Magma",
   "item.cqs_armory.cold_brand": "Brand of Cold",
