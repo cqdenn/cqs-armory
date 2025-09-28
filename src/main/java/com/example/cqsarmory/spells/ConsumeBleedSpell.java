@@ -146,7 +146,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
                 var entities = level.getEntities(null, target.getBoundingBox().inflate(explosionRadius));
                 for (Entity victim : entities) {
                     double distanceSqr = victim.distanceToSqr(target.position());
-                    if (victim.canBeHitByProjectile() && distanceSqr < explosionRadius * explosionRadius && Utils.hasLineOfSight(level, target.getBoundingBox().getCenter(), victim.getBoundingBox().getCenter(), true)) {
+                    if (victim != entity && victim.canBeHitByProjectile() && distanceSqr < explosionRadius * explosionRadius && Utils.hasLineOfSight(level, target.getBoundingBox().getCenter(), victim.getBoundingBox().getCenter(), true)) {
                         float p = (float) (distanceSqr / (explosionRadius * explosionRadius));
                         p = 1 - p * p * p;
                         DamageSources.applyDamage(victim, damage * p, new DamageSource(entity.level().damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get(), null, entity));
