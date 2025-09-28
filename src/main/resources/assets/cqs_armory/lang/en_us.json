@@ -114,6 +114,10 @@
   "attribute.cqs_armory.archer_skill_power": "Archer Skill Power",
   "attribute.cqs_armory.melee_skill_resist": "Melee Skill Resistance",
   "attribute.cqs_armory.melee_skill_power": "Melee Skill Power",
+  "attribute.cqs_armory.arcane_skill_resist": "Arcane Skill Resistance",
+  "attribute.cqs_armory.arcane_skill_power": "Arcane Skill Power",
+  "attribute.cqs_armory.necromancy_skill_resist": "Necromancy Skill Resistance",
+  "attribute.cqs_armory.necromancy_skill_power": "Necromancy Skill Power",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
