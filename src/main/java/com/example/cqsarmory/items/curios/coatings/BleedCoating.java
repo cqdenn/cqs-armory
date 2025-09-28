@@ -62,6 +62,6 @@ public class BleedCoating extends OnHitCoating implements IPresetSpellContainer 
         } else {
             target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, 0, false, false, true, attacker));
         }*/
-        target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, 0, false, false, true, attacker, true));
+        target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 40, 0, false, false, true, attacker, true));
     }
 }
