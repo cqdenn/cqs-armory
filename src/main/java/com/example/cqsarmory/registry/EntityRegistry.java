@@ -138,4 +138,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "thrown_item").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AnvilProjectile>> ANVIL_PROJECTILE =
+            ENTITIES.register("anvil_projectile", () -> EntityType.Builder.<AnvilProjectile>of(AnvilProjectile::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "anvil_projectile").toString()));
 }
