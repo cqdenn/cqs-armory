@@ -2,44 +2,32 @@ package com.example.cqsarmory.events;
 
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.entity.ability.*;
-import com.example.cqsarmory.items.curios.BrandBaseItem;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
-import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
-import com.example.cqsarmory.items.weapons.MjolnirItem;
+import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
-import io.redspace.ironsspellbooks.api.events.SpellCooldownAddedEvent;
-import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
-import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
-import io.redspace.ironsspellbooks.item.curios.BetrayerSignetRingItem;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
-import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -71,7 +59,6 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -79,14 +66,8 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
-import net.neoforged.neoforge.event.entity.player.ArrowNockEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
-import org.checkerframework.checker.signature.qual.SignatureBottom;
-import org.joml.Vector3f;
-import top.theillusivec4.curios.api.CuriosApi;
 
 import java.util.List;
 import java.util.Objects;
@@ -720,7 +701,7 @@ public class ServerEvents {
         }
 
         if (ItemRegistry.ARCANE_BRAND.get().isEquippedBy(player) && player instanceof ServerPlayer serverPlayer) {
-            var RING = ((ArcaneBrandItem) ItemRegistry.ARCANE_BRAND.get());
+            var RING = ((ArcaneBrand) ItemRegistry.ARCANE_BRAND.get());
             if ((MagicData.getPlayerMagicData(player).getMana() <= player.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA) * 0.1) && RING.tryProcCooldown(serverPlayer)) {
                 MagicData.getPlayerMagicData(serverPlayer).setMana((float) serverPlayer.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA));
                 PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
