@@ -147,7 +147,7 @@ public class ElementalStacksOverlay implements LayeredDraw.Layer {
             return screenHeight - HOTBAR_HEIGHT - (int) (ICON_ROW_HEIGHT * 2.5f) - IMAGE_HEIGHT / 2 - (Math.max(gui.rightHeight, gui.leftHeight) - 39);
         if (anchor == Anchor.TopLeft || anchor == Anchor.TopRight)
             return SCREEN_BORDER_MARGIN;
-        return screenHeight - SCREEN_BORDER_MARGIN - IMAGE_HEIGHT - (AbilityData.get(player).quiverArrowCount > 0 && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty() ? 20 : 0);
+        return screenHeight - SCREEN_BORDER_MARGIN - IMAGE_HEIGHT - (!CQtils.getPlayerCurioStack(player, "quiver").isEmpty() ? 20 : 0);
 
     }
 
