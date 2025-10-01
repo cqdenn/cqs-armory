@@ -25,7 +25,7 @@ public class ElementalStacksOverlay implements LayeredDraw.Layer {
 
     public ResourceLocation getTexture(Player player) {
         if (AbilityData.get(player).elementalistStacks.iceStacks > 0) {
-            return ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/spell_icons/cone_of_cold.png");
+            return ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/spell_icons/ice_tomb.png");
         } else if (AbilityData.get(player).elementalistStacks.lightningStacks > 0) {
             return ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "textures/gui/spell_icons/lightning_bolt.png");
         } else {
