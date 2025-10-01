@@ -246,6 +246,22 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void poisonAspect(LivingIncomingDamageEvent event) {
+        LivingEntity entity = event.getEntity();
+        Entity entityAttacker = event.getSource().getEntity();
+        if (entityAttacker instanceof LivingEntity attacker) {
+            Holder.Reference<Enchantment> poisonAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "poison_aspect")));
+            int poisonAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(poisonAspectHolder);
+            int poisonAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(poisonAspectHolder);
+            int poisonAspectLevel = Math.max(poisonAspectOffHand, poisonAspectMainHand);
+            if (poisonAspectLevel > 0) {
+                entity.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.BLIGHT, 80 * poisonAspectLevel, poisonAspectLevel));
+                entity.addEffect(new MobEffectInstance(MobEffects.POISON, 80 * poisonAspectLevel, poisonAspectLevel - 1));
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void stealingEnchants(LivingDamageEvent.Post event) {
         Entity entity = event.getSource().getEntity();
         if (entity instanceof Player player) {
