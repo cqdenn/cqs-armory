@@ -9,11 +9,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ShieldItem;
 import net.neoforged.neoforge.common.NeoForge;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AbilityData {
     public Mjolnir mjolnirData = new Mjolnir();
     public CosmicArk cosmicArk = new CosmicArk();
     public MomentumOrbEffects momentumOrbEffects = new MomentumOrbEffects();
     public ElementalistStacks elementalistStacks = new ElementalistStacks();
+    public SummonersStacks summonersStacks = new SummonersStacks();
     public float currentShieldDamage;
     private float rage;
     private float momentum;
@@ -47,6 +51,10 @@ public class AbilityData {
         public int iceStacks;
         public int lightningStacks;
         public int stackDecayTime;
+    }
+
+    public class SummonersStacks {
+        public int summonsAlive;
     }
 
     public class MomentumOrbEffects {

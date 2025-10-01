@@ -8,6 +8,8 @@ import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
+import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
@@ -57,6 +59,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         this.setBaseDamage(damage);
         this.life = 0;
         this.lifetime = 160 + Utils.random.nextInt(40);
+        SummonManager.initSummon(shooter, this, this.lifetime, new SummonedEntitiesCastData());
     }
 
     @Override
@@ -110,7 +113,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
                 }
 
                 if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1 || this.numPierced >= this.getPierceLevel()) {
-                    this.discard();
+                    removeBat();
                     MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
                     return;
                 }
@@ -118,9 +121,14 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
                 this.piercingIgnoreEntityIds.add(entity.getId());
                 this.numPierced++;
             } else {
-                discard();
+                removeBat();
             }
         }
+    }
+
+    public void removeBat() {
+        SummonManager.removeSummon(this);
+        discard();
     }
 
     private void setupAnimationStates() {
@@ -198,7 +206,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         this.life++;
         if (!level().isClientSide && this.life > this.lifetime) {
             MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
-            this.discard();
+            removeBat();
 
         }
     }

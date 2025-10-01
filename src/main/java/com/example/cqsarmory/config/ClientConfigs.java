@@ -38,6 +38,14 @@ public class ClientConfigs {
     public static final ModConfigSpec.ConfigValue<Integer> ELEMENTAL_STACKS_TEXT_Y_OFFSET;
     public static final ModConfigSpec.ConfigValue<Boolean> ELEMENTAL_STACKS_TEXT_VISIBLE;
 
+    public static final ModConfigSpec.ConfigValue<SummonersStacksOverlay.Anchor> SUMMONER_STACKS_ANCHOR;
+    public static final ModConfigSpec.ConfigValue<SummonersStacksOverlay.Display> SUMMONER_STACKS_DISPLAY;
+    public static final ModConfigSpec.ConfigValue<Integer> SUMMONER_STACKS_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> SUMMONER_STACKS_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> SUMMONER_STACKS_TEXT_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> SUMMONER_STACKS_TEXT_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Boolean> SUMMONER_STACKS_TEXT_VISIBLE;
+
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Anchor> MOMENTUM_SPEED_ANCHOR;
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Display> MOMENTUM_SPEED_DISPLAY;
     public static final ModConfigSpec.ConfigValue<Integer> MOMENTUM_SPEED_Y_OFFSET;
@@ -96,7 +104,7 @@ public class ClientConfigs {
         BUILDER.pop();
 
         BUILDER.push("ElementalStacks");
-        BUILDER.comment("By default (Contextual), the arrow count only appears when your stacks are > 0.");
+        BUILDER.comment("By default (Contextual), the stacks only appear when your stacks are > 0.");
         ELEMENTAL_STACKS_DISPLAY = BUILDER.defineEnum("elementalStacksDisplay", ElementalStacksOverlay.Display.Contextual);
         BUILDER.comment("Used to adjust stacks position (11 is one full hunger bar up).");
         ELEMENTAL_STACKS_X_OFFSET = BUILDER.define("elementalStacksXOffset", 0);
@@ -105,6 +113,18 @@ public class ClientConfigs {
         ELEMENTAL_STACKS_ANCHOR = BUILDER.defineEnum("elementalStacksAnchor", ElementalStacksOverlay.Anchor.BottomLeft);
         ELEMENTAL_STACKS_TEXT_X_OFFSET = BUILDER.define("elementalStacksTextXOffset", 0);
         ELEMENTAL_STACKS_TEXT_Y_OFFSET = BUILDER.define("elementalStacksTextYOffset", 0);
+        BUILDER.pop();
+
+        BUILDER.push("SummonersStacks");
+        BUILDER.comment("By default (Contextual), the stacks only appear when your stacks are > 0.");
+        SUMMONER_STACKS_DISPLAY = BUILDER.defineEnum("summonerStacksDisplay", SummonersStacksOverlay.Display.Contextual);
+        BUILDER.comment("Used to adjust stacks position (11 is one full hunger bar up).");
+        SUMMONER_STACKS_X_OFFSET = BUILDER.define("summonerStacksXOffset", 0);
+        SUMMONER_STACKS_Y_OFFSET = BUILDER.define("summonerStacksYOffset", 0);
+        SUMMONER_STACKS_TEXT_VISIBLE = BUILDER.define("summonerStacksTextVisible", true);
+        SUMMONER_STACKS_ANCHOR = BUILDER.defineEnum("summonerStacksAnchor", SummonersStacksOverlay.Anchor.BottomLeft);
+        SUMMONER_STACKS_TEXT_X_OFFSET = BUILDER.define("summonerStacksTextXOffset", 0);
+        SUMMONER_STACKS_TEXT_Y_OFFSET = BUILDER.define("summonerStacksTextYOffset", 0);
         BUILDER.pop();
 
         BUILDER.push("MomentumSpeed");

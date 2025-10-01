@@ -21,5 +21,6 @@ public class OverlayRegistry {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_damage_overlay"), MomentumDamageOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("quiver_arrow_overlay"), QuiverArrowOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("elementalist_stacks_overlay"), ElementalStacksOverlay.getInstance());
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("summoners_stacks_overlay"), SummonersStacksOverlay.getInstance());
     }
 }
