@@ -30,6 +30,14 @@ public class ClientConfigs {
     public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_TEXT_Y_OFFSET;
     public static final ModConfigSpec.ConfigValue<Boolean> QUIVER_ARROWS_TEXT_VISIBLE;
 
+    public static final ModConfigSpec.ConfigValue<ElementalStacksOverlay.Anchor> ELEMENTAL_STACKS_ANCHOR;
+    public static final ModConfigSpec.ConfigValue<ElementalStacksOverlay.Display> ELEMENTAL_STACKS_DISPLAY;
+    public static final ModConfigSpec.ConfigValue<Integer> ELEMENTAL_STACKS_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> ELEMENTAL_STACKS_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> ELEMENTAL_STACKS_TEXT_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> ELEMENTAL_STACKS_TEXT_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Boolean> ELEMENTAL_STACKS_TEXT_VISIBLE;
+
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Anchor> MOMENTUM_SPEED_ANCHOR;
     public static final ModConfigSpec.ConfigValue<MomentumSpeedOverlay.Display> MOMENTUM_SPEED_DISPLAY;
     public static final ModConfigSpec.ConfigValue<Integer> MOMENTUM_SPEED_Y_OFFSET;
@@ -85,6 +93,18 @@ public class ClientConfigs {
         QUIVER_ARROWS_ANCHOR = BUILDER.defineEnum("quiverArrowAnchor", QuiverArrowOverlay.Anchor.BottomLeft);
         QUIVER_ARROWS_TEXT_X_OFFSET = BUILDER.define("quiverArrowTextXOffset", 0);
         QUIVER_ARROWS_TEXT_Y_OFFSET = BUILDER.define("quiverArrowTextYOffset", 0);
+        BUILDER.pop();
+
+        BUILDER.push("ElementalStacks");
+        BUILDER.comment("By default (Contextual), the arrow count only appears when your stacks are > 0.");
+        ELEMENTAL_STACKS_DISPLAY = BUILDER.defineEnum("elementalStacksDisplay", ElementalStacksOverlay.Display.Contextual);
+        BUILDER.comment("Used to adjust stacks position (11 is one full hunger bar up).");
+        ELEMENTAL_STACKS_X_OFFSET = BUILDER.define("elementalStacksXOffset", 0);
+        ELEMENTAL_STACKS_Y_OFFSET = BUILDER.define("elementalStacksYOffset", 0);
+        ELEMENTAL_STACKS_TEXT_VISIBLE = BUILDER.define("elementalStacksTextVisible", true);
+        ELEMENTAL_STACKS_ANCHOR = BUILDER.defineEnum("elementalStacksAnchor", ElementalStacksOverlay.Anchor.BottomLeft);
+        ELEMENTAL_STACKS_TEXT_X_OFFSET = BUILDER.define("elementalStacksTextXOffset", 0);
+        ELEMENTAL_STACKS_TEXT_Y_OFFSET = BUILDER.define("elementalStacksTextYOffset", 0);
         BUILDER.pop();
 
         BUILDER.push("MomentumSpeed");

@@ -2,12 +2,14 @@ package com.example.cqsarmory.events;
 
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.BrandBaseItem;
+import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrandItem;
@@ -20,10 +22,12 @@ import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.events.SpellCooldownAddedEvent;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
@@ -781,16 +785,39 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void coatingEffects(LivingDamageEvent.Post event) {
+    public static void onHitEffects(LivingDamageEvent.Post event) {
         Entity entity = event.getSource().getEntity();
+        Entity directEntity = event.getSource().getDirectEntity();
+        DamageSource source = event.getSource();
         float damage = event.getNewDamage();
         LivingEntity target = event.getEntity();
         if (entity instanceof Player player) {
             var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
-            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && (entity == event.getSource().getDirectEntity())) {
+            var brandSlot = CQtils.getPlayerCurioStack(player, "brand");
+            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
                 coating.doOnHitEffect(player, target, damage);
-            } else if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && (entity == event.getSource().getDirectEntity())) {
+            } else if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
                 coating.doOnSwingEffect(player, damage);
+            } else if (!brandSlot.isEmpty() && brandSlot.getItem() instanceof OnHitBrand brand) {
+
+                final List<ResourceKey<DamageType>> spellTypes = List.of(
+                        ISSDamageTypes.FIRE_MAGIC,
+                        ISSDamageTypes.HOLY_MAGIC,
+                        ISSDamageTypes.ICE_MAGIC,
+                        ISSDamageTypes.LIGHTNING_MAGIC,
+                        ISSDamageTypes.BLOOD_MAGIC,
+                        ISSDamageTypes.ELDRITCH_MAGIC,
+                        ISSDamageTypes.EVOCATION_MAGIC,
+                        ISSDamageTypes.NATURE_MAGIC,
+                        ISSDamageTypes.ENDER_MAGIC
+                );
+
+                for (ResourceKey<DamageType> spellType : spellTypes) {
+                    if (source.is(spellType)) {
+                        brand.doOnHitEffect(player, target, damage, source);
+                        break;
+                    }
+                }
             }
         }
     }

@@ -201,6 +201,8 @@
   "item.cqs_armory.arcane_brand": "Brand of Arcane",
   "item.cqs_armory.arcane_brand.desc": "Refills your mana when below 10%",
   "item.cqs_armory.infinity_brand": "Brand of Infinity",
+  "item.cqs_armory.elemental_brand": "Brand of Elements",
+  "item.cqs_armory.elemental_brand.desc": "Gain damage stacks on elemental damage",
 
   "item.cqs_armory.poison_coating": "Poison Coating",
   "item.cqs_armory.poison_coating.desc": "Applies poison stacks, rend nearby enemies at 20 stacks",

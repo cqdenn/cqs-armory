@@ -13,6 +13,7 @@ public class AbilityData {
     public Mjolnir mjolnirData = new Mjolnir();
     public CosmicArk cosmicArk = new CosmicArk();
     public MomentumOrbEffects momentumOrbEffects = new MomentumOrbEffects();
+    public ElementalistStacks elementalistStacks = new ElementalistStacks();
     public float currentShieldDamage;
     private float rage;
     private float momentum;
@@ -40,6 +41,13 @@ public class AbilityData {
     public static boolean inCombatRage(Player player) {return get(player).combatEndRage > player.tickCount;}
 
     public static boolean inCombatMomentum(Player player) {return get(player).combatEndMomentum > player.tickCount;}
+
+    public class ElementalistStacks {
+        public int fireStacks;
+        public int iceStacks;
+        public int lightningStacks;
+        public int stackDecayTime;
+    }
 
     public class MomentumOrbEffects {
         public int speedEnd;
