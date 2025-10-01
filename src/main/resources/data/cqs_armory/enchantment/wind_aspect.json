@@ -4,7 +4,7 @@
     "translate": "enchantment.cqs_armory.wind_aspect"
   },
   "exclusive_set": "#cqs_armory:exclusive_set/elemental_mastery",
-  "supported_items": "#minecraft:enchantable/fire_aspect",
+  "supported_items": "#minecraft:enchantable/weapon",
   "primary_items": "#minecraft:enchantable/sword",
   "effects": {
     "minecraft:post_attack": [
