@@ -50,8 +50,7 @@ public class SummonersBrand extends SimpleDescriptiveBrand {
     @SubscribeEvent
     public static void stacks(EntityTickEvent.Pre event) {
         Entity entity = event.getEntity();
-        if (entity.level().isClientSide) return;
-        if (entity instanceof Player player) {
+        if (entity instanceof Player player && !entity.level().isClientSide) {
             int newSummons = Math.min(SummonManager.getSummons(player).size(), 15);
             AbilityData.get(player).summonersStacks.summonsAlive = newSummons;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncSummonersStacksPacket(newSummons));
