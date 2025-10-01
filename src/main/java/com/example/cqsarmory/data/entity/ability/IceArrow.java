@@ -84,6 +84,7 @@ public class IceArrow extends AbilityArrow{
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
         if (this.isSpellArrow && result.getEntity() instanceof LivingEntity livingEntity) {
             createAoe(result.getLocation());
             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED,  60));
