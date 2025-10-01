@@ -686,7 +686,7 @@ public class ServerEvents {
         if (ServerConfigs.DISABLE_IFRAMES.get() || event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
             event.setInvulnerabilityTicks(0);
         }
-        if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof Projectile) {
+        if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof AbstractArrow) {
             event.setAmount(event.getAmount() * 2);
             DamageData.get(event.getEntity()).markedBy = null;
         }
