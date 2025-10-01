@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.particle.FlameStrikeParticleOptions;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.server.level.ServerLevel;
@@ -37,7 +38,7 @@ public class FireCoating extends OnSwingCoating {
         Vec3 forward = attacker.getForward();
         Vec3 hitLocation = attacker.position().add(0, attacker.getBbHeight() * .3f, 0).add(forward.scale(distance));
         var entities = level.getEntities(attacker, AABB.ofSize(hitLocation, radius * 2, radius, radius * 2));
-        var damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(DamageTypes.IN_FIRE).get(), null, attacker);
+        var damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(ISSDamageTypes.FIRE_MAGIC).get(), null, attacker);
         for (Entity targetEntity : entities) {
             if (targetEntity instanceof LivingEntity && targetEntity.isAlive() && attacker.isPickable() && targetEntity.position().subtract(attacker.getEyePosition()).dot(forward) >= 0 && attacker.distanceToSqr(targetEntity) < radius * radius && Utils.hasLineOfSight(level, attacker.getEyePosition(), targetEntity.getBoundingBox().getCenter(), true)) {
                 Vec3 offsetVector = targetEntity.getBoundingBox().getCenter().subtract(attacker.getEyePosition());

@@ -6,6 +6,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.spells.ray_of_frost.RayOfFrostVisualEntity;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,7 +26,7 @@ public class IceCoating extends OnSwingCoating {
     public void doOnSwingEffect(Player attacker, float hitDamage) {
         Level level = attacker.level();
         double damage = (hitDamage * 0.25) * attacker.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER);
-        DamageSource damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(DamageTypes.ICE).get(), null, attacker);
+        DamageSource damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(ISSDamageTypes.ICE_MAGIC).get(), null, attacker);
         var hitResult = Utils.raycastForEntity(level, attacker, 32, true, .15f);
         level.addFreshEntity(new RayOfFrostVisualEntity(level, attacker.getEyePosition(), hitResult.getLocation(), attacker));
         if (hitResult.getType() == HitResult.Type.ENTITY) {
