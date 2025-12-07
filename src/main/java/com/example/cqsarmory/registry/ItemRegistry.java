@@ -202,17 +202,17 @@ public class ItemRegistry {
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
-    public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
+    /*public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",
             () -> new SummonSwordItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 8, -2.4f, new AttributeContainer[]{})
             ))
-    );
+    );*/
 
-    public static final DeferredItem<Item> GROUND_POUNDER = ITEMS.register("ground_pounder",
+    /*public static final DeferredItem<Item> GROUND_POUNDER = ITEMS.register("ground_pounder",
             () -> new GroundPounderItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 13, -2.8f, new AttributeContainer[]{})
             ))
-    );
+    );*/
 
     /*public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
             () -> new MjolnirItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
@@ -238,11 +238,11 @@ public class ItemRegistry {
             ))
     );*/
 
-    public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
+    /*public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
             () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 12, -2.5F, new AttributeContainer[]{new AttributeContainer(AttributeRegistry.CASTING_MOVESPEED, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
-    );
+    );*/
 
     /*public static final DeferredItem<Item> VILETHORN = ITEMS.register("vilethorn",
             () -> new VilethornItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
@@ -250,11 +250,11 @@ public class ItemRegistry {
             ))
     );*/
 
-    public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
+    /*public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
             () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})
             ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
-    );
+    );*/
 
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
@@ -274,9 +274,9 @@ public class ItemRegistry {
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
     );
 
-    public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
+    /*public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
             () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
-            ));
+            ));*/
 
 
     public static final Weaponset DIAMOND_WEAPONSET = createWeaponset(ExtendedWeaponTier.DIAMOND, WeaponPower.POWER_ONE, "diamond", false);
