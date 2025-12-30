@@ -1,17 +1,19 @@
 package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.network.PlayerDodgePacket;
 import com.example.cqsarmory.network.StartSuckingPacket;
 import com.example.cqsarmory.network.doOnSwingEffectPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -23,6 +25,32 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void dodge(ClientTickEvent.Pre event) {
+        if (KeyMappings.DODGE_KEYMAP.consumeClick()) {
+            Player player = Minecraft.getInstance().player;
+            var options = Minecraft.getInstance().options;
+            int lateral = 0;
+            int forward = 0;
+            if (options.keyUp.isDown()) {
+                forward += 1;
+            }
+            if (options.keyDown.isDown()) {
+                forward -= 1;
+            }
+            if (options.keyRight.isDown()) {
+                lateral -= 1;
+            }
+            if (options.keyLeft.isDown()) {
+                lateral += 1;
+            }
+
+            if (lateral == 0 && forward == 0) {forward = 1;}
+            PacketDistributor.sendToServer(new PlayerDodgePacket(new Vec3(lateral, 0, forward)));
+
+        }
+    }
 
     @SubscribeEvent
     public static void onSwing(PlayerInteractEvent.LeftClickEmpty event) {
