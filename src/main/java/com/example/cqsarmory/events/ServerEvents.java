@@ -5,6 +5,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
+import com.example.cqsarmory.data.DodgeData;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.OnHitBrand;
@@ -670,6 +671,9 @@ public class ServerEvents {
         if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof AbstractArrow) {
             event.setAmount(event.getAmount() * 2);
             DamageData.get(event.getEntity()).markedBy = null;
+        }
+        if (DodgeData.get(event.getEntity()).invulnerableTimeEnd > event.getEntity().level().getGameTime()) {
+            event.setCanceled(true);
         }
     }
 
