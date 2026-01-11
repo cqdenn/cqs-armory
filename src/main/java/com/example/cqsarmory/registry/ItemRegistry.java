@@ -208,11 +208,11 @@ public class ItemRegistry {
             ))
     );*/
 
-    /*public static final DeferredItem<Item> GROUND_POUNDER = ITEMS.register("ground_pounder",
+    public static final DeferredItem<Item> GROUND_POUNDER = ITEMS.register("ground_pounder",
             () -> new GroundPounderItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_ONE, 13, -2.8f, new AttributeContainer[]{})
             ))
-    );*/
+    );
 
     /*public static final DeferredItem<Item> MJOLNIR = ITEMS.register("mjolnir",
             () -> new MjolnirItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
