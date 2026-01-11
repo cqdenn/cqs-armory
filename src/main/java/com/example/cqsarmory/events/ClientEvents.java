@@ -29,7 +29,6 @@ public class ClientEvents {
     @SubscribeEvent
     public static void dodge(ClientTickEvent.Pre event) {
         if (KeyMappings.DODGE_KEYMAP.consumeClick()) {
-            Player player = Minecraft.getInstance().player;
             var options = Minecraft.getInstance().options;
             int lateral = 0;
             int forward = 0;
