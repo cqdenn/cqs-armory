@@ -95,7 +95,7 @@ public class SpearItem extends ExtendedWeaponItem {
                         if (!player.hasInfiniteMaterials()) {
                             player.getCooldowns().addCooldown(stack.getItem(), 20 * 10);
                         }
-                        level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                        level.playSound(null, throwntrident, holder.value(), SoundSource.PLAYERS, 1.0F, 0.5F);
                     }
                     player.awardStat(Stats.ITEM_USED.get(this));
                 }
