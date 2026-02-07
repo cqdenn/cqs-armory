@@ -400,6 +400,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void stopUsingShield(LivingEntityUseItemEvent.Stop event) {
+        if (ServerConfigs.DISABLE_SHIELD_CHANGES.get()) return;
+
         LivingEntity livingEntity = event.getEntity();
         Item item = livingEntity.getUseItem().getItem();
 
@@ -412,6 +414,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void shieldBlock(LivingShieldBlockEvent event) {
+        if (ServerConfigs.DISABLE_SHIELD_CHANGES.get()) return;
+
         LivingEntity livingEntity = event.getEntity();
         float damage = event.getBlockedDamage();
         if (event.getOriginalBlock()) {
@@ -447,6 +451,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void rageOnHit(LivingDamageEvent.Pre event) {
+        if (ServerConfigs.DISABLE_RAGE.get()) return;
+
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
         DamageSource dmgSource = event.getSource();
@@ -561,6 +567,9 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void momentumOnHit(LivingDamageEvent.Pre event) {
+        if (ServerConfigs.DISABLE_MOMENTUM.get()) return;
+
+
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
         Entity target = event.getEntity();
