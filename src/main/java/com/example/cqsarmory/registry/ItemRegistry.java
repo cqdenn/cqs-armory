@@ -37,6 +37,7 @@ public class ItemRegistry {
     public static final List<Weaponset> WEAPONSETS = new ArrayList<>();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
+/*
 
     //archer dmg
     public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
@@ -133,6 +134,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SAGE_CHESTPLATE = ITEMS.register("sage_chestplate", () -> new SageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+*/
 
     public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));

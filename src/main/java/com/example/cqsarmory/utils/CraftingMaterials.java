@@ -62,7 +62,7 @@ public class CraftingMaterials {
     }
 
     public static Item getSmithingDowngrade (ArmorItem armorItem) {
-        var slot = armorItem.getEquipmentSlot();
+        /*var slot = armorItem.getEquipmentSlot();
         if (armorItem instanceof TrackerArmorItem) {
             if (slot == EquipmentSlot.HEAD) {
                 return ItemRegistry.HUNTER_HELMET.get();
@@ -230,7 +230,7 @@ public class CraftingMaterials {
             else if (slot == EquipmentSlot.FEET) {
                 return ItemRegistry.MYSTIC_BOOTS.get();
             }
-        }
+        }*/
         return Items.ACACIA_TRAPDOOR;
     }
 }
