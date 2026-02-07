@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:ranger_talisman"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:skirmisher_talisman"
+  }
+}

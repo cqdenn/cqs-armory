@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    },
+    {
+      "item": "minecraft:end_crystal"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:umbrite_ingot"
+  }
+}

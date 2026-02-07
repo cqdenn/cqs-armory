@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:veil_brand"
+  }
+}

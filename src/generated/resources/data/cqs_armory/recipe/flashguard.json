@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:flashguard"
+  }
+}

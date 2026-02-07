@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "item": "irons_spellbooks:lightning_bottle"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:lightning_coating"
+  }
+}

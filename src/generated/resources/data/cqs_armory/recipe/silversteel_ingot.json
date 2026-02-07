@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:breeze_rod"
+    },
+    {
+      "item": "minecraft:breeze_rod"
+    },
+    {
+      "item": "minecraft:breeze_rod"
+    },
+    {
+      "item": "minecraft:breeze_rod"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:silversteel_ingot"
+  }
+}

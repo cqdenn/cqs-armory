@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "item": "irons_spellbooks:mithril_ingot"
+    }
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "cqs_armory:infinite_magic_spell",
+            "index": 0,
+            "level": 1,
+            "locked": true
+          }
+        ],
+        "maxSpells": 1,
+        "mustEquip": true,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:infinity_brand"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:arrow"
+    }
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [],
+        "maxSpells": 0,
+        "mustEquip": true,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:basic_quiver"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:glow_ink_sac"
+    },
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "minecraft:spore_blossom"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:thornbark"
+  }
+}

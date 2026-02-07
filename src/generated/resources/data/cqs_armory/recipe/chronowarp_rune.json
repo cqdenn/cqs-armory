@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "minecraft:clock"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:chronowarp_rune"
+  }
+}

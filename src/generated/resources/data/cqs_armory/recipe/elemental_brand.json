@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "item": "cqs_armory:blazing_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:elemental_brand"
+  }
+}

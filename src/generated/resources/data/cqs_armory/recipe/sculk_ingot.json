@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:sculk_ingot"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:warrior_talisman"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:soldier_talisman"
+  }
+}

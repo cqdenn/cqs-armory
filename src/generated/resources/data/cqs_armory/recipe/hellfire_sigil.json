@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:blazing_ingot"
+    },
+    {
+      "item": "cqs_armory:blazing_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:hellfire_sigil"
+  }
+}

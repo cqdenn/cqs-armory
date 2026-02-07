@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:sculk_ingot"
+    },
+    {
+      "item": "cqs_armory:sculk_ingot"
+    },
+    {
+      "item": "minecraft:arrow"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:hunters_echo"
+  }
+}

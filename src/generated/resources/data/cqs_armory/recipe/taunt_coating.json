@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_sword"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_one"
+    },
+    {
+      "item": "minecraft:iron_chestplate"
+    }
+  ],
+  "result": {
+    "components": {
+      "irons_spellbooks:spell_container": {
+        "data": [
+          {
+            "id": "cqs_armory:taunt_spell",
+            "index": 0,
+            "level": 3,
+            "locked": true
+          }
+        ],
+        "maxSpells": 1,
+        "mustEquip": true,
+        "spellWheel": true
+      }
+    },
+    "count": 1,
+    "id": "cqs_armory:taunt_coating"
+  }
+}

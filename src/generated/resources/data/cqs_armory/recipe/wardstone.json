@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:dwarvensteel_ingot"
+    },
+    {
+      "item": "cqs_armory:dwarvensteel_ingot"
+    },
+    {
+      "item": "cqs_armory:dwarvensteel_ingot"
+    },
+    {
+      "item": "cqs_armory:dwarvensteel_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:wardstone"
+  }
+}
