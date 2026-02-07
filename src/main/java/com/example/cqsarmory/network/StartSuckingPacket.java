@@ -40,7 +40,7 @@ public class StartSuckingPacket implements CustomPacketPayload {
     }
 
     public static void handle(StartSuckingPacket packet, IPayloadContext context) {
-        context.enqueueWork(() -> {
+        /*context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer serverPlayer) {
                 if (serverPlayer.getMainHandItem().is(ItemRegistry.SOUL_SUCKER)) {
 //                    serverPlayer.startUsingItem(InteractionHand.MAIN_HAND);
@@ -63,6 +63,6 @@ public class StartSuckingPacket implements CustomPacketPayload {
                     }
                 }
             }
-        });
+        });*/
     }
 }

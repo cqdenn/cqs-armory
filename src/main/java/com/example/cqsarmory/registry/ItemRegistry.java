@@ -276,9 +276,9 @@ public class ItemRegistry {
                     SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
     );
 
-    public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
+    /*public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
             () -> new SoulSuckerItem(new Item.Properties().stacksTo(1)
-            ));
+            ));*/
 
 
     public static final Weaponset DIAMOND_WEAPONSET = createWeaponset(ExtendedWeaponTier.DIAMOND, WeaponPower.POWER_ONE, "diamond", false);

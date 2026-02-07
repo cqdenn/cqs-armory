@@ -56,12 +56,12 @@ public class ClientEvents {
         PacketDistributor.sendToServer(new doOnSwingEffectPacket());
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void onLeftClick(ClientTickEvent.Pre event) {
         if (Minecraft.getInstance().options.keyAttack.isDown()) {
             PacketDistributor.sendToServer(new StartSuckingPacket());
         }
-    }
+    }*/
 
     @SubscribeEvent
     public static void heavinessCurse(MovementInputUpdateEvent event) {
