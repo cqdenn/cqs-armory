@@ -26,7 +26,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void dodge(ClientTickEvent.Pre event) {
         if (KeyMappings.DODGE_KEYMAP.consumeClick()) {
             var options = Minecraft.getInstance().options;
@@ -49,7 +49,7 @@ public class ClientEvents {
             PacketDistributor.sendToServer(new PlayerDodgePacket(new Vec3(lateral, 0, forward)));
 
         }
-    }
+    }*/
 
     @SubscribeEvent
     public static void onSwing(PlayerInteractEvent.LeftClickEmpty event) {
