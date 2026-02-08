@@ -2,17 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "f": {
-      "item": "cqs_armory:withersteel_ingot"
+    "d": {
+      "item": "cqs_armory:dwarvensteel_ingot"
+    },
+    "l": {
+      "item": "cqs_armory:living_ingot"
     },
     "x": {
       "item": "irons_spellbooks:upgrade_orb"
     }
   },
   "pattern": [
-    " f ",
-    "fxf",
-    " f "
+    "   ",
+    "dxl",
+    "   "
   ],
   "result": {
     "count": 1,

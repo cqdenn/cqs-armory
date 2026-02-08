@@ -2,17 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "f": {
-      "item": "cqs_armory:blazing_ingot"
+    "s": {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    "u": {
+      "item": "cqs_armory:umbrite_ingot"
     },
     "x": {
       "item": "irons_spellbooks:upgrade_orb"
     }
   },
   "pattern": [
-    " f ",
-    "fxf",
-    " f "
+    "   ",
+    "sxu",
+    "   "
   ],
   "result": {
     "count": 1,

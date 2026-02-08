@@ -270,10 +270,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.LIVING_WEAPONSET.ingot().get().asItem(), 1)
                 .requires(Items.DIAMOND, 5)
-                .requires(Items.HONEY_BOTTLE, 1)
-                .requires(Items.GLOW_INK_SAC, 1)
-                .requires(Items.AMETHYST_CLUSTER, 1)
-                .requires(Items.SPORE_BLOSSOM, 1)
+                .requires(Items.SLIME_BALL, 4)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -715,20 +712,22 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MAX_RAGE_UPGRADE_ORB.get())
-                .pattern(" f ")
-                .pattern("fxf")
-                .pattern(" f ")
+                .pattern("   ")
+                .pattern("dxl")
+                .pattern("   ")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
-                .define('f', ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get())
+                .define('d', ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get())
+                .define('l', ItemRegistry.LIVING_WEAPONSET.ingot().get())
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MOMENTUM_ON_HIT_UPGRADE_ORB.get())
-                .pattern(" f ")
-                .pattern("fxf")
-                .pattern(" f ")
+                .pattern("   ")
+                .pattern("sxu")
+                .pattern("   ")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
-                .define('f', ItemRegistry.BLAZING_WEAPONSET.ingot().get())
+                .define('s', ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get())
+                .define('u', ItemRegistry.UMBRITE_WEAPONSET.ingot().get())
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
