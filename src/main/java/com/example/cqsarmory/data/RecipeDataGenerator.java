@@ -714,5 +714,23 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MAX_RAGE_UPGRADE_ORB.get())
+                .pattern(" f ")
+                .pattern("fxf")
+                .pattern(" f ")
+                .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .define('f', ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MOMENTUM_ON_HIT_UPGRADE_ORB.get())
+                .pattern(" f ")
+                .pattern("fxf")
+                .pattern(" f ")
+                .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .define('f', ItemRegistry.BLAZING_WEAPONSET.ingot().get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
     }
 }

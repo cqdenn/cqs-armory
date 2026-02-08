@@ -12,12 +12,19 @@ import com.example.cqsarmory.items.curios.brands.SummonersBrand;
 import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.item.UpgradeOrbItem;
+import io.redspace.ironsspellbooks.item.armor.UpgradeOrbType;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
+import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import io.redspace.ironsspellbooks.registries.UpgradeOrbTypeRegistry;
 import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -201,6 +208,9 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> BLEED_COATING = ITEMS.register("bleed_coating", () -> new BleedCoating(ItemPropertiesHelper.equipment(1), "coating", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CONSUME_BLEED_SPELL, 1))));
     public static final Supplier<CurioBaseItem> FIRE_COATING = ITEMS.register("fire_coating", () -> new FireCoating(ItemPropertiesHelper.equipment(1), "coating"));
     public static final Supplier<CurioBaseItem> ICE_COATING = ITEMS.register("ice_coating", () -> new IceCoating(ItemPropertiesHelper.equipment(1), "coating"));
+
+    public static final DeferredHolder<Item, Item> MAX_RAGE_UPGRADE_ORB = ITEMS.register("max_rage_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_RAGE)));
+    public static final DeferredHolder<Item, Item> MOMENTUM_ON_HIT_UPGRADE_ORB = ITEMS.register("momentum_on_hit_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MOMENTUM_ON_HIT)));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

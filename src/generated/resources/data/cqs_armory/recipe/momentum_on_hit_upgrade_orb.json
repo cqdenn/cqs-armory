@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "f": {
+      "item": "cqs_armory:blazing_ingot"
+    },
+    "x": {
+      "item": "irons_spellbooks:upgrade_orb"
+    }
+  },
+  "pattern": [
+    " f ",
+    "fxf",
+    " f "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:momentum_on_hit_upgrade_orb"
+  }
+}

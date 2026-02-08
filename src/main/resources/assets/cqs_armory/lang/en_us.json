@@ -132,6 +132,9 @@
   "death.attack.ice": "%1$s was put on ice",
   "death.attack.thrown_item": "%1$s died",
 
+  "item.cqs_armory.max_rage_upgrade_orb": "Max Rage Upgrade Orb",
+  "item.cqs_armory.momentum_on_hit_upgrade_orb": "Momentum on Hit Upgrade Orb",
+
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
   "item.cqs_armory.wardstone": "Wardstone",

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-07T04:31:31.8073127	Recipes
+// 1.21.1	2026-02-08T02:18:00.1812817	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -179,6 +179,8 @@ e050797c7e6eea8c7127b0fddc0790fc02a70abb data/cqs_armory/advancement/recipes/com
 785b7f4b8cbabe8a175fdbdaaba6f620ff669952 data/cqs_armory/advancement/recipes/combat/magus_talisman.json
 ef4cea7745761ed1e93e8d7e859d35b02edbff50 data/cqs_armory/advancement/recipes/combat/manasaver.json
 24ebdc9507b8bef4788cdbde2e14f43d2d93e04c data/cqs_armory/advancement/recipes/combat/marksman_talisman.json
+d7521341d809bebd9547b0d7d695c91d8ec78843 data/cqs_armory/advancement/recipes/combat/max_rage_upgrade_orb.json
+e5eee1b1fd97ce508b5b21690024158983403cf1 data/cqs_armory/advancement/recipes/combat/momentum_on_hit_upgrade_orb.json
 a201799b697d4d44815e8ef9cfb847882156a195 data/cqs_armory/advancement/recipes/combat/mystic_talisman.json
 7f2e27dc81e012e7135001abecd377a31013339d data/cqs_armory/advancement/recipes/combat/netherite_arcane_staff.json
 007362025e285eac6e966ad2f0c6926ee5321286 data/cqs_armory/advancement/recipes/combat/netherite_fire_staff.json
@@ -488,6 +490,8 @@ a28f2e61080b0e9d97c4d45991cbe48f565ac2d9 data/cqs_armory/recipe/living_recurve_b
 6a7582efdb28495e20de224d928dbcd61ffb524e data/cqs_armory/recipe/magus_talisman.json
 9a06a398ce27606cb0503878df788d1f3b2ff662 data/cqs_armory/recipe/manasaver.json
 c2423eca433e18b6e959cf78fa24c124d20b9778 data/cqs_armory/recipe/marksman_talisman.json
+0fd09b1dd8288e9e0010dbb677a91faf62c31248 data/cqs_armory/recipe/max_rage_upgrade_orb.json
+1388eff0a17687784088b612c1eaa142edbf9746 data/cqs_armory/recipe/momentum_on_hit_upgrade_orb.json
 060022011267b6bd8fa39365cd698ecd5d9da1ca data/cqs_armory/recipe/mystic_talisman.json
 3c7056e0740ba0ec31bb8db1689e4561133aa53b data/cqs_armory/recipe/netherite_arcane_staff.json
 c5709ba027ab8ec61aa20a6be4c6a4d963a1fdf0 data/cqs_armory/recipe/netherite_fire_staff.json

@@ -1,0 +1,9 @@
+{
+  "amount": 2,
+  "attribute": "cqs_armory:momentum_on_hit",
+  "containerItem": {
+    "count": 1,
+    "id": "cqs_armory:momentum_on_hit_upgrade_orb"
+  },
+  "operation": "add_value"
+}
