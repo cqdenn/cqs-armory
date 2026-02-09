@@ -10,7 +10,7 @@ public class BleedEffect extends MobEffect {
     public BleedEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
-    public static final float DAMAGE_PER_STACK = 5;
+    public static final float DAMAGE_PER_STACK = 2;
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
