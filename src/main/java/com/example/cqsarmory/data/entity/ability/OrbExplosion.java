@@ -72,8 +72,10 @@ public class OrbExplosion extends AoeEntity {
                 DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {
-                    if (target instanceof LivingEntity || target instanceof MomentumOrb) {
-                        target.hurt(damageSource, damage);
+                    if (Utils.hasLineOfSight(level, this.position(), target.getBoundingBox().getCenter(), true)) {
+                        if (target instanceof LivingEntity || target instanceof MomentumOrb) {
+                            target.hurt(damageSource, damage);
+                        }
                     }
                 }
                 entities.clear();
