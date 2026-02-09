@@ -28,7 +28,8 @@ public abstract class ProjectileWeaponItemMixin {
     @Inject(method = "useAmmo", at = @At("HEAD"), cancellable = true)
     private static void cqs_armory$useAmmo(ItemStack weapon, ItemStack ammo, LivingEntity shooter, boolean intangable, CallbackInfoReturnable<ItemStack> cir) {
         if (!ammo.is(Items.ARROW)) return;
-        if (AbilityData.get(shooter).quiverArrowCount <= 0 || (shooter instanceof Player player && CQtils.getPlayerCurioStack(player, "quiver").isEmpty())) return;
+        if (AbilityData.get(shooter).quiverArrowCount <= 0 || (shooter instanceof Player player && CQtils.getPlayerCurioStack(player, "quiver").isEmpty()))
+            return;
         if (intangable) return;
         AbilityData.get(shooter).quiverArrowCount--;
         ItemStack arrow = new ItemStack(Items.ARROW);
@@ -38,14 +39,12 @@ public abstract class ProjectileWeaponItemMixin {
 
     @Inject(method = "createProjectile", at = @At("RETURN"), cancellable = true)
     private void cqs_armory$createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit, CallbackInfoReturnable<Projectile> cir) {
-        if (shooter instanceof Player player) {
+        if (shooter instanceof Player player && cir.getReturnValue() instanceof AbstractArrow abstractArrow) {
             var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
             if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
                 double damage = shooter.getAttributeValue(BowAttributes.ARROW_DAMAGE);
-                if (cir.getReturnValue() instanceof AbstractArrow abstractArrow) {
-                    if (!abstractArrow.isCritArrow()) {
-                        damage = damage * AbilityData.get(shooter).bowVelocity;
-                    }
+                if (!abstractArrow.isCritArrow()) {
+                    damage = damage * AbilityData.get(shooter).bowVelocity;
                 }
                 cir.setReturnValue(quiver.getCustomProjectile(cir.getReturnValue(), player, (float) damage));
             }
