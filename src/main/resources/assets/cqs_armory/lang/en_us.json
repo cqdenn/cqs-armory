@@ -38,6 +38,11 @@
   "spell.cqs_armory.refill_spell": "Refill",
   "spell.cqs_armory.consume_bleed_spell": "Consume Bleed",
 
+  "school.cqs_armory.arcane": "Arcane",
+  "school.cqs_armory.necromancy": "Necromancy",
+  "school.cqs_armory.melee": "Melee",
+  "school.cqs_armory.archer": "Archer",
+
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
   "ui.cqs_armory.bleed_duration": "%s Bleed Duration",
