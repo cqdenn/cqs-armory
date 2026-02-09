@@ -98,7 +98,7 @@ public class UppercutSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 100),
-                Component.translatable("ui.cqs_armory.bleed_duration", (4 * spellLevel) + "s")
+                Component.translatable("ui.cqs_armory.bleed_duration", (3 * spellLevel) + "s")
         );
     }
 
@@ -111,9 +111,9 @@ public class UppercutSpell extends AbstractSpell {
         Vec3 direction = new Vec3(entity.getForward().x * 0.1, 0.2 * spellLevel, entity.getForward().z * 0.1);
 
         for (Entity target : entities) {
-            if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
+            if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS) && Utils.hasLineOfSight(level, entity.position(), target.getBoundingBox().getCenter(), true)) {
                 target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                ((LivingEntity) target).addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 80 * spellLevel, spellLevel - 1, false, false, true, entity, true));
+                ((LivingEntity) target).addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 60 * spellLevel, spellLevel - 1, false, false, true, entity, true));
                 target.push(direction);
                 target.hurtMarked = true;
             }

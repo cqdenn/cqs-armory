@@ -71,7 +71,7 @@ public class IceOrbExplosion extends AoeEntity {
                 DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {
-                    if (target instanceof LivingEntity) {
+                    if (target instanceof LivingEntity && Utils.hasLineOfSight(target.level(), this.position(), target.getBoundingBox().getCenter(), true)) {
                         Vec3 spawn = target.position();
                         IceTombEntity iceTombEntity = new IceTombEntity(level, getOwner());
                         iceTombEntity.setEvil();

@@ -98,7 +98,7 @@ public class VolcanoExplosion extends AoeEntity {
             DamageSource volcano = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.VOLCANO).get(), getOwner(), getOwner());
             var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted));
             for (Entity target : entities) {
-                if (target instanceof LivingEntity) {
+                if (target instanceof LivingEntity && Utils.hasLineOfSight(target.level(), this.position(), target.getBoundingBox().getCenter(), true)) {
                     target.hurt(volcano, damage);
                 }
             }

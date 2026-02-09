@@ -10,6 +10,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -112,12 +113,12 @@ public class StunSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(4));
+        var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
         var damageSource = CQSpellRegistry.STUN_SPELL.get().getDamageSource(entity);
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity livingEntity) {
-                if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+                if (!DamageSources.isFriendlyFireBetween(entity, target) && !livingEntity.isSpectator() && Utils.hasLineOfSight(level, entity.position(), livingEntity.getBoundingBox().getCenter(), true)) {
                     livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 20 * spellLevel, 100, false, false, true));
                     target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
                 }

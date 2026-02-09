@@ -3,6 +3,7 @@ package com.example.cqsarmory.data.effects;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -27,7 +28,7 @@ public class SkewerEffect extends MobEffect {
         var damageSource = CQSpellRegistry.SKEWER_SPELL.get().getDamageSource(livingEntity);
         if (!list.isEmpty()) {
             for (Entity entity : list) {
-                if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target)) {
+                if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(livingEntity.level(), livingEntity.position(), target.getBoundingBox().getCenter(), true)) {
                     int duration = 40 * (amplifier + 1);
                     target.hurt(damageSource, (float) livingEntity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * SKEWER_ATTACK_DAMAGE_MULTIPLIER);
                     target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, duration, amplifier, false, false, true, livingEntity, true));

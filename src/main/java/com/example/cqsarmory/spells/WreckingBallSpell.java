@@ -10,6 +10,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -113,7 +114,7 @@ public class WreckingBallSpell extends AbstractSpell {
         var damageSource = CQSpellRegistry.WRECKING_BALL_SPELL.get().getDamageSource(entity);
 
         for (Entity target : entities) {
-            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
+            if (!DamageSources.isFriendlyFireBetween(entity, target) && !target.isSpectator() && Utils.hasLineOfSight(level, entity.position(), target.getBoundingBox().getCenter(), true)) {
                 float distance = (float) start.distanceTo(target.position());
                 float f = radius / distance;
                 float scale = f * ((0.5f + (0.1f * (spellLevel - 1))));

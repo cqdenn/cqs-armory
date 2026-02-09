@@ -106,13 +106,13 @@ public class ReapSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 3 * spellLevel;
+        int radius = 1 * spellLevel;
         Vec3 pullTo = entity.position();
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
         var damageSource = CQSpellRegistry.REAP_SPELL.get().getDamageSource(entity);
 
         for (Entity target : entities) {
-            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS)) {
+            if (!DamageSources.isFriendlyFireBetween(entity, target) && !target.isSpectator() && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS) && Utils.hasLineOfSight(level, entity.position(), target.getBoundingBox().getCenter(), true)) {
                 float distance = (float) pullTo.distanceTo(target.position());
                 float f = distance / (radius);
                 float scale = f * 0.5f;
