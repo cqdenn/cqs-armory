@@ -1,6 +1,7 @@
 package com.example.cqsarmory.mixin;
 
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.utils.CQtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Unit;
@@ -26,7 +27,7 @@ public abstract class PlayerMixin {
 
     @Inject(method = "getProjectile", at = @At("RETURN"), cancellable = true)
     private void cqs_armory$getProjectile(ItemStack shootable, CallbackInfoReturnable<ItemStack> cir) {
-        if (cir.getReturnValue().isEmpty() && AbilityData.get((Player) (Object) this).quiverArrowCount >= 1) {
+        if (cir.getReturnValue().isEmpty() && AbilityData.get((Player) (Object) this).quiverArrowCount >= 1 && !CQtils.getPlayerCurioStack((Player) (Object) this, "quiver").isEmpty()) {
             ItemStack arrow = new ItemStack(Items.ARROW);
             arrow.set(DataComponents.INTANGIBLE_PROJECTILE, Unit.INSTANCE);
             cir.setReturnValue(arrow);
