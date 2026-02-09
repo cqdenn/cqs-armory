@@ -124,7 +124,9 @@ public class RuptureSpell extends AbstractSpell {
         entity.setAbsorptionAmount(entity.getAbsorptionAmount() + (entities.size() * (2 * spellLevel)));
         for (Entity target : entities) {
             if (target instanceof LivingEntity || target instanceof MomentumOrb) {
-                target.hurt(CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(entity),(float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 0.75f);
+                if (!(target == entity)) {
+                    target.hurt(CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(entity), (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 0.75f);
+                }
             }
         }
 
