@@ -263,32 +263,32 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SCULK_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 1)
-                .requires(Items.ECHO_SHARD, 4)
+                .requires(Items.DIAMOND, 3)
+                .requires(Items.ECHO_SHARD, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.LIVING_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 5)
-                .requires(Items.SLIME_BALL, 4)
+                .requires(Items.DIAMOND, 3)
+                .requires(Items.SLIME_BALL, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.UMBRITE_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 5)
-                .requires(Items.END_CRYSTAL, 4)
+                .requires(Items.DIAMOND, 3)
+                .requires(Items.ENDER_PEARL, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 5)
-                .requires(Items.BREEZE_ROD, 4)
+                .requires(Items.DIAMOND, 3)
+                .requires(Items.BREEZE_ROD, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 5)
-                .requires(Items.COPPER_BLOCK, 4)
+                .requires(Items.DIAMOND, 3)
+                .requires(Items.COPPER_BLOCK, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
