@@ -42,6 +42,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> chestTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/chest_armor"));
     public static final TagKey<Item> legsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/leg_armor"));
     public static final TagKey<Item> bootsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/foot_armor"));
+    public static final TagKey<Item> durabilityTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/durability"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -52,6 +53,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 }
                 else if (weapon.get() instanceof BowItem) {
                     tag(bowTag).add((Item) weapon.get());
+                    tag(durabilityTag).add((Item) weapon.get());
                 }
             }
         }
