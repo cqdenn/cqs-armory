@@ -54,6 +54,6 @@ public class FireCoating extends OnSwingCoating {
         }
         boolean mirrored = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.MAINHAND);
         MagicManager.spawnParticles(level, new FlameStrikeParticleOptions((float) forward.x, (float) forward.y, (float) forward.z, mirrored, false, 1f), hitLocation.x, hitLocation.y+.3, hitLocation.z, 1, 0, 0, 0, 0, true);
-        level.playSound(null, attacker.blockPosition(), SoundRegistry.FLAMING_STRIKE_SWING.get(), SoundSource.PLAYERS);
+        level.playSound(null, attacker.blockPosition(), SoundRegistry.FLAMING_STRIKE_SWING.get(), SoundSource.PLAYERS, 0.2f, 1);
     }
 }

@@ -7,6 +7,8 @@ import com.example.cqsarmory.network.SyncElementalistStacksPacket;
 import com.example.cqsarmory.network.SyncSummonersStacksPacket;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.utils.CQtils;
+import com.mojang.datafixers.types.templates.Sum;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import net.minecraft.resources.ResourceLocation;
@@ -41,7 +43,7 @@ public class SummonersBrand extends SimpleDescriptiveBrand {
         AttributeInstance summonInstance = player.getAttribute(AttributeRegistry.NECROMANCY_SKILL_POWER);
         summonInstance.removeModifier(summonMod.id());
 
-        if (summonStacks > 0) {
+        if (summonStacks > 0 && CQtils.getPlayerCurioStack(player, "brand").getItem() instanceof SummonersBrand) {
             summonInstance.addTransientModifier(summonMod);
         }
 
@@ -50,7 +52,8 @@ public class SummonersBrand extends SimpleDescriptiveBrand {
     @SubscribeEvent
     public static void stacks(EntityTickEvent.Pre event) {
         Entity entity = event.getEntity();
-        if (entity instanceof Player player && !entity.level().isClientSide) {
+        if (entity.level().isClientSide) return;
+        if (entity instanceof Player player) {
             int newSummons = Math.min(SummonManager.getSummons(player).size(), 15);
             AbilityData.get(player).summonersStacks.summonsAlive = newSummons;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncSummonersStacksPacket(newSummons));

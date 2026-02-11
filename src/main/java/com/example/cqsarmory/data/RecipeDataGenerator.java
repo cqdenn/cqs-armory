@@ -375,7 +375,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTER_TALISMAN.get(), 1)
                 .requires(Items.ARROW, 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -393,7 +393,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SCOUT_TALISMAN.get(), 1)
                 .requires(Items.FEATHER, 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -411,7 +411,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.WARRIOR_TALISMAN.get(), 1)
                 .requires(Items.GOLD_INGOT, 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -429,7 +429,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.RAMPART_TALISMAN.get(), 1)
                 .requires(Items.IRON_INGOT, 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -447,7 +447,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SEER_TALISMAN.get(), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
@@ -465,7 +465,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.APPRENTICE_TALISMAN.get(), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_ESSENCE.get(), 1)
-                .requires(Items.DIAMOND, 8)
+                .requires(Items.IRON_INGOT, 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 

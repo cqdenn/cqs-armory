@@ -3,6 +3,7 @@ package com.example.cqsarmory.gui.overlays;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.items.curios.brands.SummonersBrand;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import net.minecraft.ChatFormatting;
@@ -99,7 +100,7 @@ public class SummonersStacksOverlay implements LayeredDraw.Layer {
         //We show if a quiver is equipped
         var display = com.example.cqsarmory.config.ClientConfigs.SUMMONER_STACKS_DISPLAY.get();
         return !player.isSpectator() && display != Display.Never &&
-                (display == Display.Always || AbilityData.get(player).summonersStacks.summonsAlive > 0);
+                (display == Display.Always || (AbilityData.get(player).summonersStacks.summonsAlive > 0 && CQtils.getPlayerCurioStack(player, "brand").getItem() instanceof SummonersBrand));
 
     }
 
