@@ -2,6 +2,8 @@
   "values": [
     "minecraft:sharpness",
     "minecraft:power",
+    "minecraft:breach",
+    "minecraft:density",
     "minecraft:bane_of_arthropods",
     "minecraft:smite",
     "cqs_armory:defense_hone",

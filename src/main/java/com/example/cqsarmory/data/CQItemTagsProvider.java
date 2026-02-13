@@ -2,6 +2,7 @@ package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.curios.*;
+import com.example.cqsarmory.items.weapons.ExtendedMaceItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
@@ -43,11 +44,15 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> legsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/leg_armor"));
     public static final TagKey<Item> bootsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/foot_armor"));
     public static final TagKey<Item> durabilityTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/durability"));
+    public static final TagKey<Item> maceTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/mace"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         for (ItemRegistry.Weaponset weaponset : WEAPONSETS) {
             for (DeferredItem weapon : weaponset) {
+                if (weapon.get() instanceof ExtendedMaceItem) {
+                    tag(maceTag).add((Item) weapon.get());
+                }
                 if (weapon.get() instanceof SwordItem) {
                     tag(swordTag).add((Item) weapon.get());
                 }
