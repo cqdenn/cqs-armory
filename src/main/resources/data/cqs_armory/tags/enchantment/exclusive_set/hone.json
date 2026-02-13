@@ -1,6 +1,7 @@
 {
   "values": [
     "minecraft:sharpness",
+    "minecraft:power",
     "minecraft:bane_of_arthropods",
     "minecraft:smite",
     "cqs_armory:defense_hone",
