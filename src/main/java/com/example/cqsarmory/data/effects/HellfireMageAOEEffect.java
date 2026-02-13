@@ -33,7 +33,8 @@ public class HellfireMageAOEEffect extends MobEffect {
         var y = livingEntity.position().y + 4;
         var z = livingEntity.position().z + (Utils.random.nextFloat() * radius) * randZ;
         Level level = livingEntity.level();
-        float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 20; //5% of max mana
+        //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 20; //5% of max mana
+        float damage = (float) (30 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
 
         SmallMagicFireball fireball = new SmallMagicFireball(level, livingEntity);
         fireball.setDamage(damage);

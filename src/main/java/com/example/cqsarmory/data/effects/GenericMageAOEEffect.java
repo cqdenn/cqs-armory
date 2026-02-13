@@ -36,7 +36,8 @@ public class GenericMageAOEEffect extends MobEffect {
         var z = livingEntity.position().z;
         Level level = livingEntity.level();
         var damageSource = SpellRegistry.MAGIC_MISSILE_SPELL.get().getDamageSource(livingEntity);
-        float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 40; //2.5% of max mana
+        //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 40; //2.5% of max mana
+        float damage = (float) (30 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER));
         var entities = level.getEntities(livingEntity, new AABB(livingEntity.position(), livingEntity.position()).inflate(radius, 1, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(livingEntity, targeted) && Utils.hasLineOfSight(level, livingEntity.position(), targeted.position(), true));
 
         level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
