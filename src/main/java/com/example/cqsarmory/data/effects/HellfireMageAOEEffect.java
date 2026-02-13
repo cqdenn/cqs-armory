@@ -8,6 +8,8 @@ import io.redspace.ironsspellbooks.entity.spells.fireball.MagicFireball;
 import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.spells.fire.FireballSpell;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
@@ -24,7 +26,7 @@ public class HellfireMageAOEEffect extends MobEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        float radius = 6;
+        float radius = 5;
         int randX = Utils.random.nextBoolean() ? 1 : -1;
         int randZ = Utils.random.nextBoolean() ? 1 : -1;
         var x = livingEntity.position().x + (Utils.random.nextFloat() * radius) * randX;
@@ -39,6 +41,7 @@ public class HellfireMageAOEEffect extends MobEffect {
         fireball.setPos(new Vec3(x, y, z));
         fireball.setDeltaMovement(0, -1, 0);
         level.addFreshEntity(fireball);
+        level.playSound(null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 0.2f, 1);
 
 
         return true;

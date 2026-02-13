@@ -8,6 +8,8 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -41,6 +43,7 @@ public class GenericMageAOEEffect extends MobEffect {
         level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
         level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
         level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
+        level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity) {
