@@ -135,6 +135,8 @@ dependencies {
     implementation "curse.maven:atlasviewer-633577:5490697"
     localRuntime "curse.maven:tslatentitystatus-tes-830420:6041374"
     localRuntime "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
+    localRuntime "curse.maven:mmmmmmmmmmmm-225738:7206981"
+    localRuntime "curse.maven:selene-499980:7522321"
     implementation 'io.redspace:bow_attributes:0.0.3-SNAPSHOT'
 
     // Example optional mod dependency with JEI
