@@ -13,9 +13,9 @@
     }
   },
   "pattern": [
-    "xxS",
+    "xsS",
     " sS",
-    "xxS"
+    "xsS"
   ],
   "result": {
     "components": {

@@ -176,9 +176,9 @@ public class RecipeDataGenerator extends RecipeProvider {
                     .save(recipeOutput);
 
             ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, weaponset.recurve().asItem())
-                    .pattern("xxS")
+                    .pattern("xsS")
                     .pattern(" sS")
-                    .pattern("xxS")
+                    .pattern("xsS")
                     .define('x', material)
                     .define('s', Items.STICK)
                     .define('S', Items.STRING)
