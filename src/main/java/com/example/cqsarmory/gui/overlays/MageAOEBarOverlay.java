@@ -3,6 +3,7 @@ package com.example.cqsarmory.gui.overlays;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.AttributeRegistry;
+import com.example.cqsarmory.registry.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
@@ -12,17 +13,17 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public class MomentumBarOverlay implements LayeredDraw.Layer {
-    private static MomentumBarOverlay instance;
+public class MageAOEBarOverlay implements LayeredDraw.Layer {
+    private static MageAOEBarOverlay instance;
 
-    public static MomentumBarOverlay getInstance() {
+    public static MageAOEBarOverlay getInstance() {
         if (instance == null) {
-            instance = new MomentumBarOverlay();
+            instance = new MageAOEBarOverlay();
         }
         return instance;
     }
 
-    public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/gui/momentum_bar.png");
+    public final static ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/gui/mage_aoe_bar.png");
 
     public enum Anchor {
         Hunger,
@@ -48,7 +49,7 @@ public class MomentumBarOverlay implements LayeredDraw.Layer {
     static final int CHAR_WIDTH = 6;
     static final int HUNGER_BAR_OFFSET = 50;
     static final int SCREEN_BORDER_MARGIN = 20;
-    static final int TEXT_COLOR = ChatFormatting.GREEN.getColor();
+    static final int TEXT_COLOR = ChatFormatting.BLUE.getColor();
 
     public void render(GuiGraphics guiHelper, DeltaTracker deltaTracker) {
         if (Minecraft.getInstance().options.hideGui || Minecraft.getInstance().player.isSpectator()) {
@@ -57,44 +58,62 @@ public class MomentumBarOverlay implements LayeredDraw.Layer {
         var player = Minecraft.getInstance().player;
         var screenWidth = guiHelper.guiWidth();
         var screenHeight = guiHelper.guiHeight();
-        if (!shouldShowMomentumBar(player))
+        if (!shouldShowMageAOEBar(player))
             return;
 
-        int maxMomentum = (int) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
-        int momentum = (int) AbilityData.get(player).getMomentum();
+        int maxValue = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
+        int spent = (int) AbilityData.get(player).manaSpentSinceLastAOE;
         int barX, barY;
-        int configOffsetY = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_BAR_Y_OFFSET.get();
-        int configOffsetX = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_BAR_X_OFFSET.get();
-        Anchor anchor = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_BAR_ANCHOR.get();
-        if (anchor == Anchor.XP && player.getJumpRidingScale() > 0) //Hide XP Momentum bar when actively jumping on a horse
+        int configOffsetY = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_Y_OFFSET.get();
+        int configOffsetX = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_X_OFFSET.get();
+        Anchor anchor = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_ANCHOR.get();
+        if (anchor == Anchor.XP && player.getJumpRidingScale() > 0) //Hide XP bar when actively jumping on a horse
             return;
         barX = getBarX(anchor, screenWidth, player) + configOffsetX;
-        barY = getBarY(anchor, screenHeight, Minecraft.getInstance().gui) - configOffsetY;
+        barY = getBarY(anchor, screenHeight, Minecraft.getInstance().gui, player) - configOffsetY;
 
         int imageWidth = anchor == Anchor.XP ? XP_IMAGE_WIDTH : DEFAULT_IMAGE_WIDTH;
         int spriteX = anchor == Anchor.XP ? 68 : 0;
         int spriteY = anchor == Anchor.XP ? 40 : 0;
         guiHelper.blit(TEXTURE, barX, barY, spriteX, spriteY, imageWidth, IMAGE_HEIGHT, 256, 256);
-        guiHelper.blit(TEXTURE, barX, barY, spriteX, spriteY + IMAGE_HEIGHT, (int) (imageWidth * Math.min((momentum / (double) maxMomentum), 1)), IMAGE_HEIGHT);
+        guiHelper.blit(TEXTURE, barX, barY, spriteX, spriteY + IMAGE_HEIGHT, (int) (imageWidth * Math.min((spent / (double) maxValue), 1)), IMAGE_HEIGHT);
 
         int textX, textY;
-        String momentumFraction = (momentum) + "/" + maxMomentum;
+        String fraction = (spent) + "/" + maxValue;
 
-        textX = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_TEXT_X_OFFSET.get() + barX + imageWidth / 2 - (int) ((("" + momentum).length() + 0.5) * CHAR_WIDTH);
-        textY = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_TEXT_Y_OFFSET.get() + barY + (anchor == Anchor.XP ? ICON_ROW_HEIGHT / 3 : ICON_ROW_HEIGHT);
+        textX = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_X_OFFSET.get() + barX + imageWidth / 2 - (int) ((("" + spent).length() + 0.5) * CHAR_WIDTH);
+        textY = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_Y_OFFSET.get() + barY + (anchor == Anchor.XP ? ICON_ROW_HEIGHT / 3 : ICON_ROW_HEIGHT);
 
-        if (com.example.cqsarmory.config.ClientConfigs.MOMENTUM_BAR_TEXT_VISIBLE.get()) {
-            guiHelper.drawString(Minecraft.getInstance().font, momentumFraction, textX, textY, TEXT_COLOR);
+        if (com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_TEXT_VISIBLE.get()) {
+            guiHelper.drawString(Minecraft.getInstance().font, fraction, textX, textY, TEXT_COLOR);
             //gui.getFont().draw(poseStack, manaFraction, textX, textY, TEXT_COLOR);
         }
     }
 
-    public static boolean shouldShowMomentumBar(Player player) {
-        //We show momentum if their momentum is not 0
-        var display = com.example.cqsarmory.config.ClientConfigs.MOMENTUM_BAR_DISPLAY.get();
+    public static boolean shouldShowMageAOEBar(Player player) {
+        var display = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_DISPLAY.get();
         return !player.isSpectator() && display != Display.Never &&
-                (display == Display.Always || AbilityData.get(player).getMomentum() != 0);
+                (display == Display.Always || AbilityData.get(player).manaSpentSinceLastAOE != 0);
 
+    }
+
+    public static int XValueFromOtherBars(Player player) {
+        if (RageBarOverlay.shouldShowRageBar(player) && !MomentumBarOverlay.shouldShowMomentumBar(player)) {
+            return -60;
+        }
+        else if (!RageBarOverlay.shouldShowRageBar(player) && MomentumBarOverlay.shouldShowMomentumBar(player)) {
+            return 60;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    public static int YValueFromOtherBars(Player player) {
+        if (RageBarOverlay.shouldShowRageBar(player) && MomentumBarOverlay.shouldShowMomentumBar(player)) {
+            return -20;
+        }
+        else return 0;
     }
 
     private static int getBarX(Anchor anchor, int screenWidth, Player player) {
@@ -103,20 +122,20 @@ public class MomentumBarOverlay implements LayeredDraw.Layer {
         if (anchor == Anchor.Hunger)
             return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (HUNGER_BAR_OFFSET);
         else if (anchor == Anchor.Center)
-            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (RageBarOverlay.shouldShowRageBar(player) || MageAOEBarOverlay.shouldShowMageAOEBar(player) ? -60 : 0);
+            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + XValueFromOtherBars(player);
         else if (anchor == Anchor.TopLeft || anchor == Anchor.BottomLeft)
             return SCREEN_BORDER_MARGIN;
         else return screenWidth - SCREEN_BORDER_MARGIN - DEFAULT_IMAGE_WIDTH;
 
     }
 
-    private static int getBarY(Anchor anchor, int screenHeight, Gui gui) {
+    private static int getBarY(Anchor anchor, int screenHeight, Gui gui, Player player) {
         if (anchor == Anchor.XP)
             return screenHeight - 32 + 3 - 7; //Vanilla's Pos - 7
         if (anchor == Anchor.Hunger)
             return screenHeight - (getAndIncrementRightHeight(gui) - 2) - IMAGE_HEIGHT / 2;
         if (anchor == Anchor.Center)
-            return screenHeight - HOTBAR_HEIGHT - (int) (ICON_ROW_HEIGHT * 2.5f) - IMAGE_HEIGHT / 2 - (Math.max(gui.rightHeight, gui.leftHeight) - 35);
+            return screenHeight - HOTBAR_HEIGHT - (int) (ICON_ROW_HEIGHT * 2.5f) - IMAGE_HEIGHT / 2 - (Math.max(gui.rightHeight, gui.leftHeight) - 35) + YValueFromOtherBars(player);
         if (anchor == Anchor.TopLeft || anchor == Anchor.TopRight)
             return SCREEN_BORDER_MARGIN;
         return screenHeight - SCREEN_BORDER_MARGIN - IMAGE_HEIGHT;

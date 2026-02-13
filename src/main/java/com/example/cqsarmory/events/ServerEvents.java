@@ -647,6 +647,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void mageAOE(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
+        if (player.level().isClientSide) return;
         float defaultMinManaSpent = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
         int seconds = ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(player) ? 16 : 8;
 
@@ -657,6 +658,7 @@ public class ServerEvents {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
             }
             AbilityData.get(player).manaSpentSinceLastAOE = 0;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket(0));
         }
 
     }
@@ -664,10 +666,29 @@ public class ServerEvents {
     @SubscribeEvent
     public static void trackManaSpent(ChangeManaEvent event) {
         Player player = event.getEntity();
+        if (player.level().isClientSide) return;
         float manaSpent = event.getOldMana() - event.getNewMana();
 
-        if (manaSpent > 0) {
-            AbilityData.get(player).manaSpentSinceLastAOE += manaSpent;
+        if (manaSpent > 0 && !player.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !player.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE)) {
+            float newManaSpent = AbilityData.get(player).manaSpentSinceLastAOE + manaSpent;
+            AbilityData.get(player).manaSpentSinceLastAOE = newManaSpent;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket((int) newManaSpent));
+            AbilityData.get(player).startMageAOEDecay = player.tickCount + (20 * 5);
+        }
+    }
+
+    @SubscribeEvent
+    public static void manaSpentDecay(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (player.level().isClientSide) {
+            return;
+        }
+
+        float manaNeeded = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
+        if (AbilityData.get(player).startMageAOEDecay < player.tickCount && player.level().getGameTime() % 20 == 0) {
+            float newManaSpent = Math.max(AbilityData.get(player).manaSpentSinceLastAOE - (manaNeeded / 10), 0);
+            AbilityData.get(player).manaSpentSinceLastAOE = newManaSpent;
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket((int) newManaSpent));
         }
     }
 

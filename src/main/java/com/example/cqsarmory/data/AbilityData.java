@@ -25,6 +25,7 @@ public class AbilityData {
     public int combatEndMomentum;
     public boolean focused;
     public float manaSpentSinceLastAOE;
+    public int startMageAOEDecay;
     public int fireAspectCooldownEnd;
     public int quiverArrowCount;
     public float bowVelocity;

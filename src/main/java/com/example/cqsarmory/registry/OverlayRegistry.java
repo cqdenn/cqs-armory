@@ -17,6 +17,7 @@ public class OverlayRegistry {
     public static void onRegisterOverlays(RegisterGuiLayersEvent event) {
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("rage_overlay"), RageBarOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_overlay"), MomentumBarOverlay.getInstance());
+        event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("mage_aoe_overlay"), MageAOEBarOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_speed_overlay"), MomentumSpeedOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("momentum_damage_overlay"), MomentumDamageOverlay.getInstance());
         event.registerAbove(VanillaGuiLayers.AIR_LEVEL, CqsArmory.id("quiver_arrow_overlay"), QuiverArrowOverlay.getInstance());

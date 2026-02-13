@@ -22,6 +22,14 @@ public class ClientConfigs {
     public static final ModConfigSpec.ConfigValue<Integer> MOMENTUM_TEXT_Y_OFFSET;
     public static final ModConfigSpec.ConfigValue<Boolean> MOMENTUM_BAR_TEXT_VISIBLE;
 
+    public static final ModConfigSpec.ConfigValue<MageAOEBarOverlay.Anchor> MAGE_AOE_BAR_ANCHOR;
+    public static final ModConfigSpec.ConfigValue<MageAOEBarOverlay.Display> MAGE_AOE_BAR_DISPLAY;
+    public static final ModConfigSpec.ConfigValue<Integer> MAGE_AOE_BAR_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> MAGE_AOE_BAR_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> MAGE_AOE_TEXT_X_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Integer> MAGE_AOE_TEXT_Y_OFFSET;
+    public static final ModConfigSpec.ConfigValue<Boolean> MAGE_AOE_BAR_TEXT_VISIBLE;
+
     public static final ModConfigSpec.ConfigValue<QuiverArrowOverlay.Anchor> QUIVER_ARROWS_ANCHOR;
     public static final ModConfigSpec.ConfigValue<QuiverArrowOverlay.Display> QUIVER_ARROWS_DISPLAY;
     public static final ModConfigSpec.ConfigValue<Integer> QUIVER_ARROWS_X_OFFSET;
@@ -89,6 +97,18 @@ public class ClientConfigs {
         MOMENTUM_BAR_ANCHOR = BUILDER.defineEnum("momentumBarAnchor", MomentumBarOverlay.Anchor.Center);
         MOMENTUM_TEXT_X_OFFSET = BUILDER.define("momentumTextXOffset", 0);
         MOMENTUM_TEXT_Y_OFFSET = BUILDER.define("momentumTextYOffset", 0);
+        BUILDER.pop();
+
+        BUILDER.push("MageAOEBar");
+        BUILDER.comment("By default (Contextual), the mage aoe bar only appears when you are above 0 mana towards your next mage aoe.");
+        MAGE_AOE_BAR_DISPLAY = BUILDER.defineEnum("mageAOEBarDisplay", MageAOEBarOverlay.Display.Contextual);
+        BUILDER.comment("Used to adjust mage aoe bar's position (11 is one full hunger bar up).");
+        MAGE_AOE_BAR_X_OFFSET = BUILDER.define("mageAOEBarXOffset", 0);
+        MAGE_AOE_BAR_Y_OFFSET = BUILDER.define("mageAOEBarYOffset", 0);
+        MAGE_AOE_BAR_TEXT_VISIBLE = BUILDER.define("mageAOEBarTextVisible", true);
+        MAGE_AOE_BAR_ANCHOR = BUILDER.defineEnum("mageAOEBarAnchor", MageAOEBarOverlay.Anchor.Center);
+        MAGE_AOE_TEXT_X_OFFSET = BUILDER.define("mageAOETextXOffset", 0);
+        MAGE_AOE_TEXT_Y_OFFSET = BUILDER.define("mageAOETextYOffset", 0);
         BUILDER.pop();
 
         BUILDER.push("QuiverArrows");

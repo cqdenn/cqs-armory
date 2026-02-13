@@ -17,6 +17,7 @@ public class PayloadHandler {
         payloadRegistrar.playToServer(StartSuckingPacket.TYPE, StartSuckingPacket.STREAM_CODEC, StartSuckingPacket::handle);
         payloadRegistrar.playToClient(SyncRagePacket.TYPE, SyncRagePacket.STREAM_CODEC, SyncRagePacket::handle);
         payloadRegistrar.playToClient(SyncMomentumPacket.TYPE, SyncMomentumPacket.STREAM_CODEC, SyncMomentumPacket::handle);
+        payloadRegistrar.playToClient(SyncManaSpentPacket.TYPE, SyncManaSpentPacket.STREAM_CODEC, SyncManaSpentPacket::handle);
         payloadRegistrar.playToClient(SyncQuiverArrowsPacket.TYPE, SyncQuiverArrowsPacket.STREAM_CODEC, SyncQuiverArrowsPacket::handle);
         payloadRegistrar.playToClient(SyncMomentumSpeedPacket.TYPE, SyncMomentumSpeedPacket.STREAM_CODEC, SyncMomentumSpeedPacket::handle);
         payloadRegistrar.playToClient(SyncMomentumSpeedEndPacket.TYPE, SyncMomentumSpeedEndPacket.STREAM_CODEC, SyncMomentumSpeedEndPacket::handle);

@@ -108,7 +108,7 @@ public class RageBarOverlay implements LayeredDraw.Layer {
         if (anchor == Anchor.Hunger)
             return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (HUNGER_BAR_OFFSET);
         else if (anchor == Anchor.Center)
-            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (AbilityData.get(player).getMomentum() > 0 ? 60 : 0);
+            return screenWidth / 2 - DEFAULT_IMAGE_WIDTH / 2 + (MomentumBarOverlay.shouldShowMomentumBar(player)  || MageAOEBarOverlay.shouldShowMageAOEBar(player)? 60 : 0);
         else if (anchor == Anchor.TopLeft || anchor == Anchor.BottomLeft)
             return SCREEN_BORDER_MARGIN;
         else return screenWidth - SCREEN_BORDER_MARGIN - DEFAULT_IMAGE_WIDTH;
@@ -121,7 +121,7 @@ public class RageBarOverlay implements LayeredDraw.Layer {
         if (anchor == Anchor.Hunger)
             return screenHeight - (getAndIncrementRightHeight(gui) - 2) - IMAGE_HEIGHT / 2;
         if (anchor == Anchor.Center)
-            return screenHeight - HOTBAR_HEIGHT - (int) (ICON_ROW_HEIGHT * 2.5f) - IMAGE_HEIGHT / 2 - (Math.max(gui.rightHeight, gui.leftHeight) - 39);
+            return screenHeight - HOTBAR_HEIGHT - (int) (ICON_ROW_HEIGHT * 2.5f) - IMAGE_HEIGHT / 2 - (Math.max(gui.rightHeight, gui.leftHeight) - 35);
         if (anchor == Anchor.TopLeft || anchor == Anchor.TopRight)
             return SCREEN_BORDER_MARGIN;
         return screenHeight - SCREEN_BORDER_MARGIN - IMAGE_HEIGHT;
