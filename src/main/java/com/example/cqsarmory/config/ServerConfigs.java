@@ -9,6 +9,7 @@ public class ServerConfigs {
     public static final ModConfigSpec.ConfigValue<Boolean> DISABLE_IFRAMES;
     public static final ModConfigSpec.ConfigValue<Boolean> DISABLE_RAGE;
     public static final ModConfigSpec.ConfigValue<Boolean> DISABLE_MOMENTUM;
+    public static final ModConfigSpec.ConfigValue<Boolean> DISABLE_MAGE_AOE;
     public static final ModConfigSpec.ConfigValue<Boolean> DISABLE_SHIELD_CHANGES;
 
     static {
@@ -22,6 +23,9 @@ public class ServerConfigs {
 
         BUILDER.comment("Disables the momentum combat system. Default: false");
         DISABLE_MOMENTUM = BUILDER.worldRestart().define("disableMomentum", false);
+
+        BUILDER.comment("Disables the mage aoe combat system. Default: false");
+        DISABLE_MAGE_AOE = BUILDER.worldRestart().define("disableMageAOE", false);
 
         BUILDER.comment("Disables the shield block strength and shield disabling system. Default: false");
         DISABLE_SHIELD_CHANGES = BUILDER.worldRestart().define("disableShieldChanges", false);

@@ -646,6 +646,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void mageAOE(PlayerTickEvent.Pre event) {
+        if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
+
         Player player = event.getEntity();
         if (player.level().isClientSide) return;
         float defaultMinManaSpent = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
@@ -665,6 +667,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void trackManaSpent(ChangeManaEvent event) {
+        if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
+
         Player player = event.getEntity();
         if (player.level().isClientSide) return;
         float manaSpent = event.getOldMana() - event.getNewMana();
@@ -679,6 +683,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void manaSpentDecay(PlayerTickEvent.Pre event) {
+        if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
+
         Player player = event.getEntity();
         if (player.level().isClientSide) {
             return;
