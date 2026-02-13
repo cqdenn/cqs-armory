@@ -157,6 +157,7 @@ public class BarrageSpell extends AbstractSpell {
             projectile.xRotO = projectile.getXRot();
             //projectile.setBaseDamage(dmg);
             projectile.setCritArrow(true);
+            projectile.setShotFromAbility(true);
             projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
 
 

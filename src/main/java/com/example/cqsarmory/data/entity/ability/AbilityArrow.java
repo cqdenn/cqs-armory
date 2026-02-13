@@ -28,6 +28,7 @@ import org.jetbrains.annotations.Nullable;
 public class AbilityArrow extends AbstractArrow {
     private static final EntityDataAccessor<Float> ID_SCALE = SynchedEntityData.defineId(AbilityArrow.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Boolean> ID_IGNORE_BLOCKS = SynchedEntityData.defineId(AbilityArrow.class, EntityDataSerializers.BOOLEAN);
+    boolean shotFromAbility;
 
     public AbilityArrow(EntityType<? extends AbstractArrow> entityType, Level level) {
         super(entityType, level);
@@ -42,6 +43,14 @@ public class AbilityArrow extends AbstractArrow {
         super.defineSynchedData(builder);
         builder.define(ID_SCALE, 1f);
         builder.define(ID_IGNORE_BLOCKS, false);
+    }
+
+    public void setShotFromAbility(boolean shotFromAbility) {
+        this.shotFromAbility = shotFromAbility;
+    }
+
+    public boolean getShotFromAbility() {
+         return this.shotFromAbility;
     }
 
     public void setWeaponItem(ItemStack weaponItem) {

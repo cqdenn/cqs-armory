@@ -149,6 +149,7 @@ public class PiercingArrowSpell extends AbstractSpell {
         projectile.xRotO = projectile.getXRot();
         projectile.setPierceLevel((byte) 10);
         projectile.setCritArrow(true);
+        projectile.setShotFromAbility(true);
         projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
 
 

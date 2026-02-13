@@ -142,6 +142,7 @@ public class RapidFireSpell extends AbstractSpell {
             projectile.xRotO = projectile.getXRot();
             projectile.setPierceLevel((byte) 0);
             projectile.setCritArrow(true);
+            projectile.setShotFromAbility(true);
             projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
 
             level.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
