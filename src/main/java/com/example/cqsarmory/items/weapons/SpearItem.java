@@ -106,15 +106,23 @@ public class SpearItem extends ExtendedWeaponItem {
     public double getThrownDamage(Player player) {
         double arrowModifier = 1;
         double meleeModifier = 1;
-        if (player.getAttribute(BowAttributes.ARROW_DAMAGE).getModifiers() != null) {
+        /*if (player.getAttribute(BowAttributes.ARROW_DAMAGE).getModifiers() != null) {
             for (AttributeModifier modifier : player.getAttribute(BowAttributes.ARROW_DAMAGE).getModifiers()) {
                 switch(modifier.operation()) {
                     case ADD_MULTIPLIED_BASE -> arrowModifier += 1 * modifier.amount();
                     case ADD_MULTIPLIED_TOTAL -> arrowModifier *= 1 + modifier.amount();
                 }
             }
+        }*/
+        if (player.getAttribute(Attributes.ATTACK_DAMAGE).getModifiers() != null) {
+            for (AttributeModifier modifier : player.getAttribute(Attributes.ATTACK_DAMAGE).getModifiers()) {
+                switch(modifier.operation()) {
+                    case ADD_MULTIPLIED_BASE -> meleeModifier += 1 * modifier.amount();
+                    case ADD_MULTIPLIED_TOTAL -> meleeModifier *= 1 + modifier.amount();
+                }
+            }
         }
-        return (1 + power.attackDamage() + tier.getAttackDamageBonus() + WeaponType.SPEAR.attackDamage()) * arrowModifier;
+        return (1 + power.attackDamage() + tier.getAttackDamageBonus() + WeaponType.SPEAR.attackDamage()) * meleeModifier;
     }
 
     private static boolean isTooDamagedToUse(ItemStack stack) {

@@ -27,6 +27,7 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.MOB_ATTACK);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.PLAYER_ATTACK);
+        tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.TRIDENT);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.MELEE_SKILL);
 
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.FIREWORKS);
