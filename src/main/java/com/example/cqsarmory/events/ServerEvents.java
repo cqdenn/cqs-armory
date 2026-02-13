@@ -27,6 +27,7 @@ import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
+import io.redspace.ironsspellbooks.entity.spells.thrown_spear.ThrownSpear;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.Holder;
@@ -457,12 +458,13 @@ public class ServerEvents {
         Entity sourceEntity = event.getSource().getEntity();
         DamageSource dmgSource = event.getSource();
 
-        if (sourceEntity == directEntity && directEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+        if (sourceEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+            int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) ? 5 : 1;
             if (AbilityData.get(player).getRage() > 0) {
                 event.setNewDamage(event.getOriginalDamage() + (event.getOriginalDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
             }
 
-            float newRageTest = (AbilityData.get(player).getRage() + (float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue());
+            float newRageTest = (AbilityData.get(player).getRage() + ((float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue() * abilityGainMultiplier));
             float newRage = newRageTest < player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
@@ -569,13 +571,12 @@ public class ServerEvents {
     public static void momentumOnHit(LivingDamageEvent.Pre event) {
         if (ServerConfigs.DISABLE_MOMENTUM.get()) return;
 
-
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
+        DamageSource dmgSource = event.getSource();
         Entity target = event.getEntity();
 
-
-        if (directEntity instanceof AbstractArrow && sourceEntity instanceof Player player) {
+        if (directEntity instanceof AbstractArrow && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
@@ -599,7 +600,8 @@ public class ServerEvents {
 
             } else {
 
-                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue());
+                int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 5 : 1;
+                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue() * abilityGainMultiplier);
                 float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
                 AbilityData.get(player).setMomentum(newMomentum);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
