@@ -12,6 +12,7 @@ import com.example.cqsarmory.items.curios.brands.SummonersBrand;
 import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
+import com.example.cqsarmory.utils.CQItemPropertyHelper;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
@@ -291,20 +292,20 @@ public class ItemRegistry {
             ));*/
 
 
-    public static final Weaponset DIAMOND_WEAPONSET = createWeaponset(ExtendedWeaponTier.DIAMOND, WeaponPower.POWER_ONE, "diamond", false);
-    public static final Weaponset NETHERITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.NETHERITE, WeaponPower.POWER_THREE, "netherite", false);
-    public static final Weaponset IRON_WEAPONSET = createWeaponset(ExtendedWeaponTier.IRON, WeaponPower.POWER_ONE, "iron", false);
-    public static final Weaponset GOLD_WEAPONSET = createWeaponset(ExtendedWeaponTier.GOLD, WeaponPower.POWER_ONE, "gold", false);
-    public static final Weaponset COPPER_WEAPONSET = createWeaponset(ExtendedWeaponTier.COPPER, WeaponPower.POWER_ONE, "copper", false);
-    public static final Weaponset WITHERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.WITHERSTEEL, WeaponPower.POWER_THREE, "withersteel", true);
-    public static final Weaponset SCULK_WEAPONSET = createWeaponset(ExtendedWeaponTier.SCULK, WeaponPower.POWER_TWO, "sculk", true);
-    public static final Weaponset OBSIDIAN_WEAPONSET = createWeaponset(ExtendedWeaponTier.OBSIDIAN, WeaponPower.POWER_ONE, "obsidian", false);
-    public static final Weaponset AMETHYST_WEAPONSET = createWeaponset(ExtendedWeaponTier.AMETHYST, WeaponPower.POWER_ONE, "amethyst", false);
-    public static final Weaponset BLAZING_WEAPONSET = createWeaponset(ExtendedWeaponTier.BLAZING, WeaponPower.POWER_THREE, "blazing", true);
-    public static final Weaponset LIVING_WEAPONSET = createWeaponset(ExtendedWeaponTier.LIVING, WeaponPower.POWER_TWO, "living", true);
-    public static final Weaponset UMBRITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.UMBRITE, WeaponPower.POWER_TWO, "umbrite", true);
-    public static final Weaponset SILVERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.SILVERSTEEL, WeaponPower.POWER_TWO, "silversteel", true);
-    public static final Weaponset DWARVEN_STEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.DWARVEN_STEEL, WeaponPower.POWER_TWO, "dwarvensteel", true);
+    public static final Weaponset DIAMOND_WEAPONSET = createWeaponset(ExtendedWeaponTier.DIAMOND, WeaponPower.POWER_ONE, "diamond", false, false);
+    public static final Weaponset NETHERITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.NETHERITE, WeaponPower.POWER_THREE, "netherite", false, true);
+    public static final Weaponset IRON_WEAPONSET = createWeaponset(ExtendedWeaponTier.IRON, WeaponPower.POWER_ONE, "iron", false, false);
+    public static final Weaponset GOLD_WEAPONSET = createWeaponset(ExtendedWeaponTier.GOLD, WeaponPower.POWER_ONE, "gold", false, false);
+    public static final Weaponset COPPER_WEAPONSET = createWeaponset(ExtendedWeaponTier.COPPER, WeaponPower.POWER_ONE, "copper", false, false);
+    public static final Weaponset WITHERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.WITHERSTEEL, WeaponPower.POWER_THREE, "withersteel", true, true);
+    public static final Weaponset SCULK_WEAPONSET = createWeaponset(ExtendedWeaponTier.SCULK, WeaponPower.POWER_TWO, "sculk", true, false);
+    public static final Weaponset OBSIDIAN_WEAPONSET = createWeaponset(ExtendedWeaponTier.OBSIDIAN, WeaponPower.POWER_ONE, "obsidian", false, false);
+    public static final Weaponset AMETHYST_WEAPONSET = createWeaponset(ExtendedWeaponTier.AMETHYST, WeaponPower.POWER_ONE, "amethyst", false, false);
+    public static final Weaponset BLAZING_WEAPONSET = createWeaponset(ExtendedWeaponTier.BLAZING, WeaponPower.POWER_THREE, "blazing", true, true);
+    public static final Weaponset LIVING_WEAPONSET = createWeaponset(ExtendedWeaponTier.LIVING, WeaponPower.POWER_TWO, "living", true, false);
+    public static final Weaponset UMBRITE_WEAPONSET = createWeaponset(ExtendedWeaponTier.UMBRITE, WeaponPower.POWER_TWO, "umbrite", true, false);
+    public static final Weaponset SILVERSTEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.SILVERSTEEL, WeaponPower.POWER_TWO, "silversteel", true, false);
+    public static final Weaponset DWARVEN_STEEL_WEAPONSET = createWeaponset(ExtendedWeaponTier.DWARVEN_STEEL, WeaponPower.POWER_TWO, "dwarvensteel", true, false);
 
     public record Weaponset (DeferredItem warhammer,
                              DeferredItem greatsword,
@@ -331,7 +332,7 @@ public class ItemRegistry {
         }
     }
 
-    public static Weaponset createWeaponset(ExtendedWeaponTier material, WeaponPower power, String name, boolean create_ingot) {
+    public static Weaponset createWeaponset(ExtendedWeaponTier material, WeaponPower power, String name, boolean create_ingot, boolean fireRes) {
 
         final List<CQSpellDataRegistryHolder> iceSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.ICICLE_SPELL, 6),
@@ -416,103 +417,103 @@ public class ItemRegistry {
         }
 
         var warhammer = ITEMS.register(name + "_warhammer",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.WARHAMMER.attackDamage(), WeaponType.WARHAMMER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 6 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, power.power())))
         );
 
         var greatsword = ITEMS.register(name + "_greatsword",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.GREATSWORD.attackDamage(), WeaponType.GREATSWORD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MAX_HEALTH, 4 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, power.power())))
         );
 
         var halberd = ITEMS.register(name + "_halberd",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.UPPERCUT_SPELL, power.power())))
         );
 
         var scythe = ITEMS.register(name + "_scythe",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.4 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REAP_SPELL, power.power())))
         );
 
         var mace = ITEMS.register(name + "_mace",
-                () -> new ExtendedMaceItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedMaceItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_KNOCKBACK, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRECKING_BALL_SPELL, power.power())))
         );
 
         var spear = ITEMS.register(name + "_spear",
-                () -> new SpearItem(material, power, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new SpearItem(material, power, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SPEAR.attackDamage(), WeaponType.SPEAR.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKEWER_SPELL, power.power())))
         );
 
         var rapier = ITEMS.register(name + "_rapier",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.RAPIER.attackDamage(), WeaponType.RAPIER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RIPOSTE_SPELL, power.power())))
         );
 
         var greataxe = ITEMS.register(name + "_greataxe",
-                () -> new ExtendedWeaponItem(material, new Item.Properties().attributes(ExtendedWeaponItem
+                () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
         );
 
         var shortbow = ITEMS.register(name + "_shortbow",
-                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
+                () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.SHORTBOW.attackDamage(), WeaponType.SHORTBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RAPID_FIRE_SPELL, power.power())))
         );
 
         var recurve = ITEMS.register(name + "_recurve_bow",
-                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
+                () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BARRAGE_SPELL, power.power())))
         );
 
         var longbow = ITEMS.register(name + "_longbow",
-                () -> new ExtendedBowItem(new Item.Properties().durability(material.uses).attributes(ExtendedBowItem
+                () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power())))
         );
 
         var ice = ITEMS.register(name + "_ice_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), iceSpellsForPower)
         );
 
         var fire = ITEMS.register(name + "_fire_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), fireSpellsForPower)
         );
 
         var lightning = ITEMS.register(name + "_lightning_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), lightningSpellsForPower)
         );
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 1 + (0.2 * material.getMult()), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), necromancySpellsForPower)
         );
 
         var arcane = ITEMS.register(name + "_arcane_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), arcaneSpellsForPower)
         );
 
         var holy = ITEMS.register(name + "_holy_staff",
-                () -> new MagicStaffItem(material, new Item.Properties().attributes(MagicStaffItem
+                () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
                 ), holySpellsForPower)
         );
@@ -521,7 +522,7 @@ public class ItemRegistry {
 
         if (create_ingot) {
             var val = ITEMS.register(name + "_ingot",
-                    () -> new Item(new Item.Properties())
+                    () -> new Item(CQItemPropertyHelper.weaponsetItem(fireRes))
             );
             ingot = Optional.of(val);
             ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(val));
