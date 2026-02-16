@@ -445,7 +445,7 @@ public class ItemRegistry {
         var mace = ITEMS.register(name + "_mace",
                 () -> new ExtendedMaceItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_KNOCKBACK, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRECKING_BALL_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WIND_BURST_SPELL, power.power())))
         );
 
         var spear = ITEMS.register(name + "_spear",
