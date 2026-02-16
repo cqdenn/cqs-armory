@@ -876,4 +876,13 @@ public class ServerEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void cancelFallDmg (LivingFallEvent event) {
+        LivingEntity entity = event.getEntity();
+        if (DamageData.get(entity).cancelNextFall) {
+            event.setCanceled(true);
+        }
+
+    }
+
 }
