@@ -44,6 +44,7 @@ public class AttributeRegistry {
     public static final DeferredHolder<Attribute, Attribute> EXPLOSIVE_DAMAGE = ATTRIBUTES.register("explosive_damage", () -> (new RangedAttribute("attribute.cqs_armory.explosive_damage", 1.0D, -100.0D, 100.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> ARROW_PIERCING = ATTRIBUTES.register("arrow_pierce", () -> (new RangedAttribute("attribute.cqs_armory.arrow_pierce", 0.0D, 0.0D, 100.0D).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> AUTO_CRIT = ATTRIBUTES.register("auto_crit", () -> (new RangedAttribute("attribute.cqs_armory.auto_crit", 0.0D, 0.0D, 100.0D).setSyncable(true)));
+    public static final DeferredHolder<Attribute, Attribute> BLEED_CHANCE = ATTRIBUTES.register("bleed_chance", () -> (new PercentageAttribute("attribute.cqs_armory.bleed_chance", 0.0D, 0.0D, 1.0D, 100).setSyncable(true)));
     public static final DeferredHolder<Attribute, Attribute> MELEE_SKILL_RESIST = newResistanceAttribute("melee");
     public static final DeferredHolder<Attribute, Attribute> MELEE_SKILL_POWER = newSkillAttribute("melee");
     public static final DeferredHolder<Attribute, Attribute> ARCHER_SKILL_RESIST = newResistanceAttribute("archer");

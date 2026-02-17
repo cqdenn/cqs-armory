@@ -23,7 +23,7 @@ public class CQMobEffectInstance extends MobEffectInstance {
         return owner;
     }
 
-    private boolean triggersEvent;
+    private boolean triggersEvent; //should be true for all applications of bleed other than the merging of stacks in the event.
 
     public void setTriggersEvent(boolean triggersEvent) {
         this.triggersEvent = triggersEvent;

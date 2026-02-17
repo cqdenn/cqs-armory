@@ -881,6 +881,14 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void bleedChance (LivingIncomingDamageEvent event) {
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof LivingEntity attacker && Utils.random.nextFloat() <= attacker.getAttributeValue(AttributeRegistry.BLEED_CHANCE)) {
+            event.getEntity().addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 40, 0, false, false, true, attacker, true));
+        }
+    }
+
+    @SubscribeEvent
     public static void cancelFallDmg (LivingFallEvent event) {
         LivingEntity entity = event.getEntity();
         if (DamageData.get(entity).cancelNextFall + 200 >= entity.level().getGameTime()) {

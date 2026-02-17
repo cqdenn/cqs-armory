@@ -432,7 +432,7 @@ public class ItemRegistry {
 
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
-                        .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.02 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                        .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLEED_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.UPPERCUT_SPELL, power.power())))
         );
 

@@ -120,6 +120,7 @@
   "attribute.cqs_armory.necromancy_spell_resist": "Necromancy Spell Resistance",
   "attribute.cqs_armory.necromancy_spell_power": "Necromancy Spell Power",
   "attribute.cqs_armory.auto_crit": "Lingering Crit Seconds",
+  "attribute.cqs_armory.bleed_chance": "Bleed Chance",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
