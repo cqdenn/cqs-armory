@@ -17,7 +17,7 @@ public class EntityDataAttachmentRegistry {
             "ability_data", () -> AttachmentType.builder(() -> new AbilityData()).build()
     );
     public static final Supplier<AttachmentType<DamageData>> DAMAGE_DATA = ATTACHMENT_TYPES.register(
-            "damage_data", () -> AttachmentType.builder(() -> new DamageData()).build()
+            "damage_data", () -> AttachmentType.builder(() -> new DamageData()).sync(DamageData.STREAM_CODEC).build()
     );
     public static final Supplier<AttachmentType<DodgeData>> DODGE_DATA = ATTACHMENT_TYPES.register(
             "dodge_data", () -> AttachmentType.builder(() -> new DodgeData()).build()

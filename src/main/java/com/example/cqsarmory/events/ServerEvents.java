@@ -69,6 +69,7 @@ import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -793,7 +794,7 @@ public class ServerEvents {
         int charge = event.getCharge();
         Player player = event.getEntity();
 
-        float f = (float)charge / 20.0F;
+        float f = (float) charge / 20.0F;
         f = (f * f + f * 2.0F) / 3.0F;
         if (f > 1.0F) {
             f = 1.0F;
@@ -881,7 +882,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void bleedChance (LivingIncomingDamageEvent event) {
+    public static void bleedChance(LivingIncomingDamageEvent event) {
         Entity entity = event.getSource().getEntity();
         if (entity instanceof LivingEntity attacker && Utils.random.nextFloat() <= attacker.getAttributeValue(AttributeRegistry.BLEED_CHANCE)) {
             event.getEntity().addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 40, 0, false, false, true, attacker, true));
@@ -889,7 +890,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void cancelFallDmg (LivingFallEvent event) {
+    public static void cancelFallDmg(LivingFallEvent event) {
         LivingEntity entity = event.getEntity();
         if (DamageData.get(entity).cancelNextFall + 200 >= entity.level().getGameTime()) {
             event.setCanceled(true);
@@ -899,7 +900,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void autoCrit (CriticalHitEvent event) {
+    public static void autoCrit(CriticalHitEvent event) {
         Player player = event.getEntity();
         double autoCrit = player.getAttribute(AttributeRegistry.AUTO_CRIT).getValue();
         if (player.hasEffect(MobEffectRegistry.AUTO_CRIT)) {
@@ -908,6 +909,25 @@ public class ServerEvents {
             event.setDamageMultiplier(event.getDamageMultiplier() == 1f ? 1.5f : event.getDamageMultiplier());
         } else if (event.isVanillaCritical() && autoCrit > 0) {
             player.addEffect(new MobEffectInstance(MobEffectRegistry.AUTO_CRIT, (int) (autoCrit * 20), 0, false, false, true));
+        }
+    }
+
+    @SubscribeEvent
+    public static void chainWhipTether(EntityTickEvent.Pre event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof LivingEntity living) {
+            if (!living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
+                DamageData.get(living).chainWhipLocation = null;
+            }
+            if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
+                Vec3 delta = DamageData.get(living).chainWhipLocation.subtract(living.position());
+                double distance = delta.length();
+                double springConstant = 0.15 / 1.5;
+                Vec3 force = delta.normalize().scale(distance * distance * springConstant);
+                living.push(force);
+                living.hurtMarked = true;
+            }
+
         }
     }
 
