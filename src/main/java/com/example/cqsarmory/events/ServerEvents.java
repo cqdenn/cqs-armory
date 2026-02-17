@@ -68,6 +68,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.ArrowLooseEvent;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -713,6 +714,9 @@ public class ServerEvents {
         if (DodgeData.get(event.getEntity()).invulnerableTimeEnd > event.getEntity().level().getGameTime()) {
             event.setCanceled(true);
         }
+        if (event.getEntity().hasEffect(MobEffectRegistry.SPIN)) {
+            event.setAmount(event.getAmount() * 0.75f);
+        }
     }
 
     @SubscribeEvent
@@ -883,6 +887,19 @@ public class ServerEvents {
             event.setCanceled(true);
         }
 
+    }
+
+    @SubscribeEvent
+    public static void autoCrit (CriticalHitEvent event) {
+        Player player = event.getEntity();
+        double autoCrit = player.getAttribute(AttributeRegistry.AUTO_CRIT).getValue();
+        if (player.hasEffect(MobEffectRegistry.AUTO_CRIT)) {
+            event.setCriticalHit(true);
+            event.setDisableSweep(true);
+            event.setDamageMultiplier(event.getDamageMultiplier() == 1f ? 1.5f : event.getDamageMultiplier());
+        } else if (event.isVanillaCritical() && autoCrit > 0) {
+            player.addEffect(new MobEffectInstance(MobEffectRegistry.AUTO_CRIT, (int) (autoCrit * 20), 0, false, false, true));
+        }
     }
 
 }
