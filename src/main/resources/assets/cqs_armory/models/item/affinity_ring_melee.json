@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "cqs_armory:item/affinity_ring_melee"
+  }
+}
