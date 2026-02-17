@@ -10,23 +10,29 @@
 							"vector": [0, 0, 0]
 						},
 						"5.0": {
-							"vector": [0, 7200, 0]
+							"vector": [0, 4800, 0]
 						}
 					}
 				},
 				"right_arm": {
 					"rotation": {
-						"vector": [-35.54053, -20.13968, -10.4265]
+						"vector": [-64.62555, -6.66078, -3.64198]
+					},
+					"position": {
+						"vector": [3, 0, -4]
 					}
 				},
 				"bipedHandRight": {
 					"rotation": {
-						"vector": [65, 0, 0]
+						"vector": [67.5, 0, 0]
 					}
 				},
 				"left_arm": {
 					"rotation": {
-						"vector": [-43.60782, 18.05776, 8.74472]
+						"vector": [-60.27112, 2.95682, -0.27906]
+					},
+					"position": {
+						"vector": [-3, 0, -4]
 					}
 				},
 				"torso": {
@@ -59,6 +65,16 @@
 					},
 					"position": {
 						"vector": [0, 0, 0]
+					}
+				},
+				"rightItem": {
+					"rotation": {
+						"vector": [270.00836, -29.6168, -270.03768]
+					}
+				},
+				"leftItem": {
+					"rotation": {
+						"vector": [60, 0, 0]
 					}
 				}
 			}

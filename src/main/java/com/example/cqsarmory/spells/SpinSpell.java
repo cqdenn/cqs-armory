@@ -4,17 +4,20 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -87,7 +90,8 @@ public class SpinSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 100)
+                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (50 * spellLevel)),
+                Component.literal("25% damage reduction")
         );
     }
 
@@ -96,13 +100,15 @@ public class SpinSpell extends AbstractSpell {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
         var damageSource = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(entity);
+        float playerAttackDamage = (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
+        float dmg = playerAttackDamage + ((playerAttackDamage / 2) * spellLevel);
         for (Entity target : entities) {
-            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator()) {
-                if (DamageSources.applyDamage(target, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue(), damageSource)) {
+            if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && Utils.hasLineOfSight(target.level(), entity.position(), target.getBoundingBox().getCenter(), true)) {
+                if (DamageSources.applyDamage(target, dmg, damageSource)) {
                     EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
                 }
             }
         }
-
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SPIN, 11, 0, false, false, false));
     }
 }
