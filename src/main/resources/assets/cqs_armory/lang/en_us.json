@@ -94,6 +94,8 @@
   "effect.cqs_armory.infinite_magic": "Infinite Magic",
   "effect.cqs_armory.generic_mage_aoe": "Generic Mage AOE",
   "effect.cqs_armory.hellfire_mage_aoe": "Hellfire Mage AOE",
+  "effect.cqs_armory.spin": "Spin",
+  "effect.cqs_armory.auto_crit": "Auto Crit",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -117,6 +119,7 @@
   "attribute.cqs_armory.arcane_spell_power": "Arcane Spell Power",
   "attribute.cqs_armory.necromancy_spell_resist": "Necromancy Spell Resistance",
   "attribute.cqs_armory.necromancy_spell_power": "Necromancy Spell Power",
+  "attribute.cqs_armory.auto_crit": "Lingering Crit Seconds",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
