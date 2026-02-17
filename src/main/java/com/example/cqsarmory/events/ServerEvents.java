@@ -885,6 +885,7 @@ public class ServerEvents {
         LivingEntity entity = event.getEntity();
         if (DamageData.get(entity).cancelNextFall) {
             event.setCanceled(true);
+            DamageData.get(entity).cancelNextFall = false;
         }
 
     }
