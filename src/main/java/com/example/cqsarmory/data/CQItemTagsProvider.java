@@ -3,6 +3,7 @@ package com.example.cqsarmory.data;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.weapons.ExtendedMaceItem;
+import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
@@ -53,7 +54,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 if (weapon.get() instanceof ExtendedMaceItem) {
                     tag(maceTag).add((Item) weapon.get());
                 }
-                if (weapon.get() instanceof SwordItem) {
+                if (weapon.get() instanceof SwordItem || weapon.get() instanceof GreataxeItem) {
                     tag(swordTag).add((Item) weapon.get());
                 }
                 else if (weapon.get() instanceof BowItem) {
@@ -63,7 +64,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
             }
         }
         for (DeferredHolder item : ItemRegistry.ITEMS.getEntries()) {
-            if (item.get() instanceof SwordItem) {
+            if (item.get() instanceof SwordItem || item.get() instanceof GreataxeItem) {
                 tag(swordTag).add((Item)item.get());
             }else if (item.get() instanceof BoosterBaseItem || item.get() instanceof SimpleDescriptiveBooster) {
                 tag(boosterTag).add((Item)item.get());
