@@ -9,7 +9,7 @@ public class DamageData {
     public DamageSource lastSource;
     public float lastDamage;
     public LivingEntity markedBy;
-    public boolean cancelNextFall;
+    public long cancelNextFall;
 
     public static DamageData get (Entity entity) {
         return entity.getData(EntityDataAttachmentRegistry.DAMAGE_DATA);

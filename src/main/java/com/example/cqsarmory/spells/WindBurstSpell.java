@@ -122,7 +122,7 @@ public class WindBurstSpell extends AbstractSpell {
                 ParticleTypes.GUST_EMITTER_LARGE, //big particle
                 SoundEvents.WIND_CHARGE_BURST //sound
         );
-        DamageData.get(entity).cancelNextFall = true;
+        DamageData.get(entity).cancelNextFall = level.getGameTime();
 
     }
 }

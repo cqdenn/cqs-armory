@@ -883,9 +883,9 @@ public class ServerEvents {
     @SubscribeEvent
     public static void cancelFallDmg (LivingFallEvent event) {
         LivingEntity entity = event.getEntity();
-        if (DamageData.get(entity).cancelNextFall) {
+        if (DamageData.get(entity).cancelNextFall + 200 >= entity.level().getGameTime()) {
             event.setCanceled(true);
-            DamageData.get(entity).cancelNextFall = false;
+            DamageData.get(entity).cancelNextFall = 0;
         }
 
     }
