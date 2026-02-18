@@ -10,6 +10,8 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.render.SpellRenderingHelper;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -26,6 +28,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.earlydisplay.ElementShader;
 import net.neoforged.neoforge.client.event.MovementInputUpdateEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.event.RenderLivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -92,7 +95,7 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
-    public static void chained (RenderLivingEvent.Post<?, ?> event) {
+    public static void chained(RenderLivingEvent.Post<?, ?> event) {
         LivingEntity living = event.getEntity();
         if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
 
@@ -107,10 +110,10 @@ public class ClientEvents {
             for (int i = 0; i < 2; i++) {
                 for (int j = 0; j < 2; j++) {
                     poseStack.pushPose();
-                    Vec3 dir = new Vec3((i - 0.5) * j,0,(i - 0.5) * (1-j)).scale(2);
+                    Vec3 dir = new Vec3((i - 0.5) * j, 0, (i - 0.5) * (1 - j)).scale(2);
                     Vec3 translate = dir.scale(living.getHitbox().getXsize() / 2).scale(0.5);
                     poseStack.translate(translate.x, translate.y, translate.z);
-                    RenderingUtils.renderChainBetween(start, to.add(dir.scale(1)) , event.getPoseStack(), event.getMultiBufferSource());
+                    RenderingUtils.renderChainBetween(start, to.add(dir.scale(1)), event.getPoseStack(), event.getMultiBufferSource());
                     poseStack.popPose();
                 }
             }
