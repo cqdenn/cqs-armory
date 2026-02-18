@@ -463,7 +463,7 @@ public class ServerEvents {
         if (sourceEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
             int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) ? 5 : 1;
             if (AbilityData.get(player).getRage() > 0) {
-                event.setNewDamage(event.getOriginalDamage() + (event.getOriginalDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
+                event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
             }
 
             float newRageTest = (AbilityData.get(player).getRage() + ((float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue() * abilityGainMultiplier));
@@ -578,7 +578,7 @@ public class ServerEvents {
         DamageSource dmgSource = event.getSource();
         Entity target = event.getEntity();
 
-        if (directEntity instanceof AbstractArrow && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+        if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
