@@ -91,7 +91,7 @@ public class SpinSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 100 + (50 * spellLevel)),
-                Component.literal("25% damage reduction")
+                Component.literal("25% Damage Reduction")
         );
     }
 
