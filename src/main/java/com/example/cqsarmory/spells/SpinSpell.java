@@ -40,8 +40,8 @@ public class SpinSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
-            .setMaxLevel(1)
-            .setCooldownSeconds(8)
+            .setMaxLevel(4)
+            .setCooldownSeconds(20)
             .build();
 
     public SpinSpell() {
