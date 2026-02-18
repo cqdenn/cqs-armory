@@ -97,6 +97,7 @@
   "effect.cqs_armory.hellfire_mage_aoe": "Hellfire Mage AOE",
   "effect.cqs_armory.spin": "Spin",
   "effect.cqs_armory.auto_crit": "Auto Crit",
+  "effect.cqs_armory.chained": "Chained",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
