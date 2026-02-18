@@ -104,5 +104,6 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.BAT_PROJECTILE.get(), BatProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegistry.THROWN_ITEM.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ANVIL_PROJECTILE.get(), AnvilProjectileRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.SCYTHE_PROJECTILE.get(), ScytheProjectileRenderer::new);
     }
 }

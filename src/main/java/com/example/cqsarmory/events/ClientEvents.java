@@ -32,6 +32,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
+import javax.swing.plaf.basic.BasicTreeUI;
+
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
@@ -93,38 +95,25 @@ public class ClientEvents {
     public static void chained (RenderLivingEvent.Post<?, ?> event) {
         LivingEntity living = event.getEntity();
         if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
+
+            float chainHeight = 1;
+            Vec3 old = new Vec3(living.xo, living.yo, living.zo);
+            Vec3 start = old.add(living.position().subtract(old).scale(event.getPartialTick()));
+            Vec3 to = DamageData.get(living).chainWhipLocation.subtract(0, chainHeight, 0);
             PoseStack poseStack = event.getPoseStack();
             poseStack.pushPose();
-            Vec3 old = new Vec3(living.xo, living.yo, living.zo);
-            Vec3 pos= old.add(living.position().subtract(old).scale(event.getPartialTick()));
-            Vec3 start = pos;
-            VertexConsumer consumer = event.getMultiBufferSource().getBuffer(RenderType.entityCutoutNoCull(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/chain_whip.png")));
-            // find chain anchor location in local space (subtract from player pos, un-rotate. probably)
-            Vec3 anchor = DamageData.get(living).chainWhipLocation;
-            Vec3 delta = anchor.subtract(start);
-            float distance = (float) delta.length();
-            Vec3 direction = delta.normalize();
-            Vec3 rotationOffset = delta.normalize();
-            Quaternionf rotation = new Quaternionf()
-                    .rotationTo(new Vector3f(0, 0, 1), new Vector3f(
-                            (float) direction.x,
-                            (float) direction.y,
-                            (float) direction.z
-                    ));
-            poseStack.mulPose(rotation);
-           /* Vec3 rotationOffset = DamageData.get(living).chainWhipLocation.subtract(pos).normalize();
-            Vec3 delta = DamageData.get(living).chainWhipLocation.subtract(pos).yRot((living.getYRot() + 90) * Mth.DEG_TO_RAD);*/
-            // find distance between anchor and destination (probably entity hitbox center)
-            /*float distance = (float) DamageData.get(living).chainWhipLocation.distanceTo(living.getHitbox().getCenter());*/
-            // find rotation this vector forms. apply rotation to pose stack
-            /*Vec2 rot = Utils.rotationFromDirection(rotationOffset);
-            // use spell rendering helper to render two quads, forming the t shape of the chain. travel only along z axis
-            // should be able to render directly between vectors. use vector distance as UV max. it should tile automatically
-            // will need horiztonal chain texture
-            poseStack.mulPose(Axis.XP.rotation(-rot.x));
-            poseStack.mulPose(Axis.YP.rotation(rot.y));*/
-            SpellRenderingHelper.drawQuad(Vec3.ZERO, new Vec3(0, 0, distance), 1, 0, poseStack.last(), consumer, 255, 255, 255, 255, 0, distance);
-            SpellRenderingHelper.drawQuad(Vec3.ZERO, new Vec3(0, 0, distance), 0, 1, poseStack.last(), consumer, 255, 255, 255, 255, 0, distance);
+            poseStack.translate(0, chainHeight, 0);
+
+            for (int i = 0; i < 2; i++) {
+                for (int j = 0; j < 2; j++) {
+                    poseStack.pushPose();
+                    Vec3 dir = new Vec3((i - 0.5) * j,0,(i - 0.5) * (1-j)).scale(2);
+                    Vec3 translate = dir.scale(living.getHitbox().getXsize() / 2).scale(0.5);
+                    poseStack.translate(translate.x, translate.y, translate.z);
+                    RenderingUtils.renderChainBetween(start, to.add(dir.scale(1)) , event.getPoseStack(), event.getMultiBufferSource());
+                    poseStack.popPose();
+                }
+            }
             poseStack.popPose();
         }
     }

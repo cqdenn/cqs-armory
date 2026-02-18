@@ -38,5 +38,5 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> INFINITE_MAGIC = MOB_EFFECT_DEFERRED_REGISTER.register("infinite_magic", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x1134eb));
     public static final DeferredHolder<MobEffect, MobEffect> SPIN = MOB_EFFECT_DEFERRED_REGISTER.register("spin", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x1221eb).addAttributeModifier(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.CASTING_MOVESPEED, CqsArmory.id("mobeffect_spin_casting_movespeed"), 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     public static final DeferredHolder<MobEffect, MobEffect> AUTO_CRIT = MOB_EFFECT_DEFERRED_REGISTER.register("auto_crit", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x1221af));
-    public static final DeferredHolder<MobEffect, MobEffect> CHAINED = MOB_EFFECT_DEFERRED_REGISTER.register("chained", () -> new ChainedEffect(MobEffectCategory.HARMFUL, 0x7721af).addAttributeModifier(Attributes.MOVEMENT_SPEED, CqsArmory.id("mobeffect_chained"), -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    public static final DeferredHolder<MobEffect, MobEffect> CHAINED = MOB_EFFECT_DEFERRED_REGISTER.register("chained", () -> new ChainedEffect(MobEffectCategory.HARMFUL, 0x7721af));
 }

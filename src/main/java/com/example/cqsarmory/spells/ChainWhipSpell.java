@@ -2,11 +2,13 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
+import com.example.cqsarmory.data.entity.ability.ScytheProjectile;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -19,15 +21,18 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
@@ -84,26 +89,36 @@ public class ChainWhipSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 50),
-                Component.translatable("ui.cqs_armory.stun_duration", getDuration(spellLevel, caster)/20 + "s"),
-                Component.translatable("ui.irons_spellbooks.distance", Utils.stringTruncation(getRange(spellLevel, caster), 1))
+                Component.translatable("ui.cqs_armory.stun_duration", getDuration(spellLevel, caster)/20 + "s")
         );
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-
-        var hitResult = Utils.raycastForEntity(level, entity, getRange(spellLevel, entity), true, .15f);
-
-        if (hitResult.getType() == HitResult.Type.ENTITY) {
-            Entity target = ((EntityHitResult) hitResult).getEntity();
-            if (target.canBeHitByProjectile() && target instanceof LivingEntity living) {
-                DamageSources.applyDamage(living, getDamage(entity), getDamageSource(entity));
-                living.addEffect(new MobEffectInstance(MobEffectRegistry.CHAINED, getDuration(spellLevel, entity), 0, false, false, true));
-            }
+        if (playerMagicData != null) {
+            ItemStack item = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+            ScytheProjectile scythe = new ScytheProjectile(level, item, 0, 1, spellLevel);
+            scythe.setBaseDamage(entity.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.5);
+            scythe.setOwner(entity);
+            scythe.setNoGravity(false);
+            scythe.setScale(1f);
+            scythe.setPos(entity.position().add(0, entity.getEyeHeight() - scythe.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
+            scythe.setDeltaMovement(scythe.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, (float) scythe.getSpeed(), 0.00f));
+            Vec3 vec3 = scythe.getDeltaMovement();
+            double d0 = vec3.horizontalDistance();
+            scythe.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+            scythe.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+            scythe.yRotO = scythe.getYRot();
+            scythe.xRotO = scythe.getXRot();
+            scythe.setPierceLevel((byte) 0);
+            scythe.setCritArrow(false);
+            scythe.setShotFromAbility(true);
+            level.addFreshEntity(scythe);
         }
-        MagicManager.spawnParticles(level, ParticleTypes.CRIT, hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, 10, 0, 0, 0, .3, false);
     }
+
+
 
     public static float getRange(int level, LivingEntity caster) {
         return 5 * level;

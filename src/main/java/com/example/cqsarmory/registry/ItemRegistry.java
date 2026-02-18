@@ -439,7 +439,7 @@ public class ItemRegistry {
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.4 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REAP_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CHAIN_WHIP_SPELL, power.power())))
         );
 
         var mace = ITEMS.register(name + "_mace",
