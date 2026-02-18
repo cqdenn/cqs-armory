@@ -920,7 +920,7 @@ public class ServerEvents {
             if (!living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
                 DamageData.get(living).chainWhipLocation = null;
             }
-            if (living.hasEffect(MobEffectRegistry.CHAINED) && living.position().distanceToSqr(DamageData.get(living).chainWhipLocation) > 4 * 4) {
+            if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null && living.position().distanceToSqr(DamageData.get(living).chainWhipLocation) > 4 * 4) {
                 living.removeEffect(MobEffectRegistry.CHAINED);
                 living.playSound(SoundEvents.CHAIN_BREAK, 10, 1);
                 return;
