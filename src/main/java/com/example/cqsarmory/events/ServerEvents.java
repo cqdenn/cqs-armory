@@ -37,6 +37,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -913,11 +914,16 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void chainWhipTether(EntityTickEvent.Pre event) {
+    public static void chainWhipTether(EntityTickEvent.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity living) {
             if (!living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
                 DamageData.get(living).chainWhipLocation = null;
+            }
+            if (living.hasEffect(MobEffectRegistry.CHAINED) && living.position().distanceToSqr(DamageData.get(living).chainWhipLocation) > 4 * 4) {
+                living.removeEffect(MobEffectRegistry.CHAINED);
+                living.playSound(SoundEvents.CHAIN_BREAK, 10, 1);
+                return;
             }
             if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
                 Vec3 delta = DamageData.get(living).chainWhipLocation.subtract(living.position());
