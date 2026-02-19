@@ -839,7 +839,7 @@ public class ServerEvents {
         if (entity instanceof Player player) {
             var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
             var brandSlot = CQtils.getPlayerCurioStack(player, "brand");
-            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
+            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && source.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
                 coating.doOnHitEffect(player, target, damage);
             } else if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
                 coating.doOnSwingEffect(player, damage);
