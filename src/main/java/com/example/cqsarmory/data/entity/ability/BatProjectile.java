@@ -38,6 +38,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.entity.PartEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class BatProjectile extends AbilityArrow implements IMagicSummon {
@@ -91,12 +92,11 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
 
     public void bite(Entity entity) {
         float damage = (float) getDamage(entity);
+        if (entity instanceof PartEntity<?> part) entity = part.getParent();
         if (entity instanceof LivingEntity target) {
-            target.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
             target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, (int) Math.floor(this.getBaseDamage()) / 10, false, false, true, getOwner(), true));
-        } else if (entity instanceof MomentumOrb orb) {
-            orb.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         }
+        entity.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         level().playSound(null, this.blockPosition(), SoundEvents.BAT_AMBIENT, SoundSource.PLAYERS, 1, 1);
     }
 

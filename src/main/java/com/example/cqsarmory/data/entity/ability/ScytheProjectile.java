@@ -21,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 
 import static com.example.cqsarmory.spells.ChainWhipSpell.getDuration;
 
@@ -139,6 +140,7 @@ public class ScytheProjectile extends AbilityArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         var target = result.getEntity();
+        if (target instanceof PartEntity<?> part) target = part.getParent();
         double damage = getDamage(target);
         var damageType = damageSources().damageTypes.getHolder(DamageTypes.MELEE_SKILL).get();
 

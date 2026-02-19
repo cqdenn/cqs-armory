@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -138,6 +139,7 @@ public class ThrownItemProjectile extends AbilityArrow {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         var target = result.getEntity();
+        if (target instanceof PartEntity<?> part) target = part.getParent();
         double damage = getDamage(target);
         var damageType = damageSources().damageTypes.getHolder(DamageTypes.THROWN_ITEM).get();
 

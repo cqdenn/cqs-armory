@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.entity.spells.snowball.Snowball;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -16,6 +17,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.entity.PartEntity;
 
 public class IceArrow extends AbilityArrow{
 
@@ -85,7 +87,9 @@ public class IceArrow extends AbilityArrow{
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (this.isSpellArrow && result.getEntity() instanceof LivingEntity livingEntity) {
+        Entity target = result.getEntity();
+        if (target instanceof PartEntity<?> part) target = part.getParent();
+        if (this.isSpellArrow && target instanceof LivingEntity livingEntity) {
             createAoe(result.getLocation());
             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED,  60));
         }
