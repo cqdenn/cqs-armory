@@ -7,6 +7,7 @@ import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
@@ -95,16 +97,27 @@ public class SpinSpell extends AbstractSpell {
         );
     }
 
+    public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem, int spellLevel) {
+        float playerAttackDamage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
+        float damage = playerAttackDamage + ((playerAttackDamage / 2) * spellLevel);
+        var source = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(caster);
+        if (caster.level() instanceof ServerLevel serverLevel && target != null) {
+            return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
+        }
+        return damage;
+    }
+
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
         var damageSource = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(entity);
-        float playerAttackDamage = (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
-        float dmg = playerAttackDamage + ((playerAttackDamage / 2) * spellLevel);
+        ItemStack weaponItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+
         for (Entity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && Utils.hasLineOfSight(target.level(), entity.position(), target.getBoundingBox().getCenter(), true)) {
-                if (DamageSources.applyDamage(target, dmg, damageSource)) {
+                float damage = (float) getDamage(target, entity, weaponItem, spellLevel);
+                if (DamageSources.applyDamage(target, damage, damageSource)) {
                     EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
                 }
             }

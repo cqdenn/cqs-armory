@@ -8,6 +8,7 @@ import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 
@@ -107,11 +109,21 @@ public class RuptureSpell extends AbstractSpell {
         );
     }
 
+    public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem) {
+        float damage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 0.75f;
+        var source = CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(caster);
+        if (caster.level() instanceof ServerLevel serverLevel && target != null) {
+            return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
+        }
+        return damage;
+    }
+
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 2 * spellLevel + 2;
         var entities = level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(radius));
+        ItemStack weaponItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
         EarthquakeAoe aoeEntity = new EarthquakeAoe(level);
         aoeEntity.moveTo(entity.position());
         aoeEntity.setOwner(entity);
@@ -125,7 +137,8 @@ public class RuptureSpell extends AbstractSpell {
         for (Entity target : entities) {
             if (target instanceof LivingEntity || target instanceof MomentumOrb) {
                 if (!(target == entity)) {
-                    target.hurt(CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(entity), (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 0.75f);
+                    float damage = (float) getDamage(target, entity, weaponItem);
+                    target.hurt(CQSpellRegistry.RUPTURE_SPELL.get().getDamageSource(entity), damage);
                 }
             }
         }

@@ -4,9 +4,11 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
+import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -20,6 +22,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -27,6 +30,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -110,17 +114,28 @@ public class StunSpell extends AbstractSpell {
         );
     }
 
+    public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem) {
+        float damage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
+        var source = CQSpellRegistry.STUN_SPELL.get().getDamageSource(caster);
+        if (caster.level() instanceof ServerLevel serverLevel && target != null) {
+            return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
+        }
+        return damage;
+    }
+
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
         var damageSource = CQSpellRegistry.STUN_SPELL.get().getDamageSource(entity);
+        ItemStack weaponItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
 
         for (Entity target : entities) {
             if (target instanceof LivingEntity livingEntity) {
+                float damage = (float) getDamage(target, entity, weaponItem);
                 if (!DamageSources.isFriendlyFireBetween(entity, target) && !livingEntity.isSpectator() && Utils.hasLineOfSight(level, entity.position(), livingEntity.getBoundingBox().getCenter(), true)) {
                     livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 20 * spellLevel, 100, false, false, true));
-                    target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
+                    target.hurt(damageSource, damage);
                 }
             }
         }
