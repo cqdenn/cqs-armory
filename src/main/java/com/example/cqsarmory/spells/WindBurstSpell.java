@@ -92,6 +92,16 @@ public class WindBurstSpell extends AbstractSpell {
     }
 
     @Override
+    public AnimationHolder getCastStartAnimation() {
+        return SpellAnimations.ONE_HANDED_VERTICAL_UPSWING_ANIMATION;
+    }
+
+    @Override
+    public AnimationHolder getCastFinishAnimation() {
+        return AnimationHolder.pass();
+    }
+
+    @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.literal("Burst into the air")
