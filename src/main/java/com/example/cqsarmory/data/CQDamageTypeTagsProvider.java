@@ -7,11 +7,14 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import top.theillusivec4.curios.CuriosConstants;
+
 import java.util.concurrent.CompletableFuture;
 
 public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
@@ -29,6 +32,8 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.PLAYER_ATTACK);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.TRIDENT);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.MELEE_SKILL);
+
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLEEDING);
 
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.FIREWORKS);
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.EXPLOSION);
