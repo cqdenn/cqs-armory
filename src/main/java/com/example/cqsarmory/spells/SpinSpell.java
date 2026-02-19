@@ -92,14 +92,14 @@ public class SpinSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (50 * spellLevel)),
+                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (25 * spellLevel)),
                 Component.literal("25% Damage Reduction")
         );
     }
 
     public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem, int spellLevel) {
         float playerAttackDamage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
-        float damage = playerAttackDamage + ((playerAttackDamage / 2) * spellLevel);
+        float damage = playerAttackDamage + ((playerAttackDamage / 4) * spellLevel);
         var source = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(caster);
         if (caster.level() instanceof ServerLevel serverLevel && target != null) {
             return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
