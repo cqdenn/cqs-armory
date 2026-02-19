@@ -10,6 +10,7 @@
     "ProjectileWeaponItemMixin"
   ],
   "client": [
+    "GameRendererMixin",
     "LocalPlayerMixin"
   ],
   "injectors": {
