@@ -10,6 +10,7 @@ public class  AbilityAnimations {
         public static final AnimationHolder REAP_ANIMATION = new AnimationHolder(CqsArmory.MODID + ":reap", true);
         public static final AnimationHolder RIPOSTE_ANIMATION = new AnimationHolder(CqsArmory.MODID + ":riposte", true);
         public static final AnimationHolder UPPERCUT_ANIMATION = new AnimationHolder(CqsArmory.MODID + ":uppercut", true);
+        public static final AnimationHolder INSTANT_OVERHEAD_SLAM_ANIMATION = new AnimationHolder(CqsArmory.MODID + ":instant_overhead_slam", true);
 
 
 
