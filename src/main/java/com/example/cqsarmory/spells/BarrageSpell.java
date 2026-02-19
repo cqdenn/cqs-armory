@@ -8,6 +8,7 @@ import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -158,7 +159,8 @@ public class BarrageSpell extends AbstractSpell {
             //projectile.setBaseDamage(dmg);
             projectile.setCritArrow(true);
             projectile.setShotFromAbility(true);
-            projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
+            ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+            projectile.setWeaponItem(wepaonItem);
 
 
             //world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);

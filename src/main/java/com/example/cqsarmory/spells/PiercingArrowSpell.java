@@ -10,6 +10,7 @@ import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -150,7 +152,8 @@ public class PiercingArrowSpell extends AbstractSpell {
         projectile.setPierceLevel((byte) 10);
         projectile.setCritArrow(true);
         projectile.setShotFromAbility(true);
-        projectile.setWeaponItem(playerMagicData.getPlayerCastingItem());
+        ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+        projectile.setWeaponItem(wepaonItem);
 
 
         level.addFreshEntity(projectile);

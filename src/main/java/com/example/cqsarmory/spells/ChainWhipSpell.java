@@ -114,6 +114,7 @@ public class ChainWhipSpell extends AbstractSpell {
             scythe.setPierceLevel((byte) 0);
             scythe.setCritArrow(false);
             scythe.setShotFromAbility(true);
+            scythe.setWeaponItem(item);
             level.addFreshEntity(scythe);
         }
     }

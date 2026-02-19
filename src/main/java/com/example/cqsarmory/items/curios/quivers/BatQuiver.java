@@ -20,6 +20,7 @@ public class BatQuiver extends SimpleDescriptiveQuiver {
         BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg * 0.33f);
         //bat.copyStats(arrow, shooter);
         bat.setPos(arrow.position());
+        bat.setWeaponItem(arrow.getWeaponItem());
         return bat;
     }
 }

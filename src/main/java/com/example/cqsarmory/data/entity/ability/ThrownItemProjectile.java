@@ -126,10 +126,19 @@ public class ThrownItemProjectile extends AbilityArrow {
         return super.canHitEntity(target) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(target.getId()));
     }
 
+    public double getDamage(Entity target) {
+        double damage = this.getBaseDamage();
+        if (this.level() instanceof ServerLevel serverLevel && target != null) {
+            DamageSource source = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.THROWN_ITEM).get(), this, this.getOwner());
+            return EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), target, source, (float) damage) ;
+        }
+        return damage;
+    }
+
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        double damage = getBaseDamage();
         var target = result.getEntity();
+        double damage = getDamage(target);
         var damageType = damageSources().damageTypes.getHolder(DamageTypes.THROWN_ITEM).get();
 
         if (this.canHitEntity(result.getEntity())) {

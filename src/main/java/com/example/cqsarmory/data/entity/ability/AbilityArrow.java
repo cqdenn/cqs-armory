@@ -165,6 +165,7 @@ public class AbilityArrow extends AbstractArrow {
         if (arrow instanceof AbstractArrow abstractArrow && abstractArrow.isCritArrow()) {
             this.setCritArrow(true);
         }
+        this.setWeaponItem(arrow.getWeaponItem());
     }
 }
 

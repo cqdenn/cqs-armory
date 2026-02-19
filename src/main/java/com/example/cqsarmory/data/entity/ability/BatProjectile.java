@@ -16,6 +16,7 @@ import io.redspace.ironsspellbooks.util.ParticleHelper;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,6 +30,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -78,12 +80,22 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         return super.getMovementToShoot(x, y, z, velocity, inaccuracy).scale(0.3f);
     }
 
+    public double getDamage(Entity target) {
+        double damage = this.getBaseDamage();
+        if (this.level() instanceof ServerLevel serverLevel && target != null) {
+            DamageSource source = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, this.getOwner());
+            return EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), target, source, (float) damage) ;
+        }
+        return damage;
+    }
+
     public void bite(Entity entity) {
+        float damage = (float) getDamage(entity);
         if (entity instanceof LivingEntity target) {
-            target.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), (float) this.getBaseDamage());
+            target.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
             target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, (int) Math.floor(this.getBaseDamage()) / 10, false, false, true, getOwner(), true));
         } else if (entity instanceof MomentumOrb orb) {
-            orb.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), (float) this.getBaseDamage());
+            orb.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         }
         level().playSound(null, this.blockPosition(), SoundEvents.BAT_AMBIENT, SoundSource.PLAYERS, 1, 1);
     }

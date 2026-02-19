@@ -14,6 +14,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -29,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.FireworkExplosion;
 import net.minecraft.world.item.component.Fireworks;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
@@ -68,8 +70,6 @@ public class FireworkProjectile extends AbilityArrow {
     private int life;
     private int lifetime;
     private boolean shotAtAngle;
-
-    public float getDamage() { return damage; }
 
     public boolean isShotAtAngle() {return shotAtAngle;}
 
@@ -195,18 +195,29 @@ public class FireworkProjectile extends AbilityArrow {
         return fireworks != null ? fireworks.explosions() : List.of();
     }
 
+    public double getDamage(Entity target) {
+        double damage = this.damage;
+        if (this.level() instanceof ServerLevel serverLevel && target != null) {
+            DamageSource source = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner());
+            return EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), target, source, (float) damage) ;
+        }
+        return damage;
+    }
+
     private void dealExplosionDamage(Vec3 hitPos) {
         Level level = this.level();
         double explosionRadius = 2;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
+            float damage = (float) getDamage(livingentity);
             if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
-                DamageSources.applyDamage(livingentity, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
+                DamageSources.applyDamage(livingentity, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
             }
         }
 
         for (MomentumOrb orb : level.getEntitiesOfClass(MomentumOrb.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
+            float damage = (float) getDamage(orb);
             if (Utils.hasLineOfSight(level, hitPos, orb.getBoundingBox().getCenter(), true)) {
-                DamageSources.applyDamage(orb, this.getDamage(), new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
+                DamageSources.applyDamage(orb, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
             }
         }
     }

@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -21,6 +22,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -44,8 +46,13 @@ public class AnvilProjectile extends AbilityArrow{
         blocksFallen = 0;
     }
 
-    public double getDamage() {
-        return this.getBaseDamage() + (2 * this.blocksFallen);
+    public double getDamage(Entity target) {
+        double damage = this.getBaseDamage() + (2 * this.blocksFallen);
+        if (this.level() instanceof ServerLevel serverLevel && target != null) {
+            DamageSource source = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FALLING_ANVIL).get(), this, this.getOwner());
+            return EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), target, source, (float) damage) ;
+        }
+        return damage;
     }
 
     public Vec3 deltaMovementOld = Vec3.ZERO;
@@ -91,8 +98,8 @@ public class AnvilProjectile extends AbilityArrow{
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        double damage = getDamage();
         var target = result.getEntity();
+        double damage = getDamage(target);
         var damageType = damageSources().damageTypes.getHolder(DamageTypes.FALLING_ANVIL).get();
         level().playSound(null, this.blockPosition(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS);
 
@@ -125,7 +132,7 @@ public class AnvilProjectile extends AbilityArrow{
 
         Level level = this.level();
         Vec3 hitPos = result.getLocation();
-        float damage = (float) this.getDamage() * 0.25f;
+        float damage = (float) this.getDamage(null) * 0.25f;
         float radius = (float) Math.min(1 + 0.5 * this.blocksFallen, 4);
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(radius, radius, radius), hitPos.add(radius, radius, radius)))) {
             if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
