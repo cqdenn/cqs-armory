@@ -39,6 +39,7 @@ public abstract class ProjectileWeaponItemMixin {
 
     @Inject(method = "createProjectile", at = @At("RETURN"), cancellable = true)
     private void cqs_armory$createProjectile(Level level, LivingEntity shooter, ItemStack weapon, ItemStack ammo, boolean isCrit, CallbackInfoReturnable<Projectile> cir) {
+        if (!ammo.is(Items.ARROW)) return;
         if (shooter instanceof Player player && cir.getReturnValue() instanceof AbstractArrow abstractArrow) {
             var quiverSlot = CQtils.getPlayerCurioStack(player, "quiver");
             if (!quiverSlot.isEmpty() && quiverSlot.getItem() instanceof QuiverItem quiver) {
