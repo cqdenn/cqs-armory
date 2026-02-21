@@ -22,7 +22,7 @@ public class ChainedEffect extends MobEffect implements ISyncedMobEffect {
     public void onEffectAdded(LivingEntity livingEntity, int amplifier) {
         super.onEffectAdded(livingEntity, amplifier);
         if (!livingEntity.level().isClientSide && livingEntity.isAddedToLevel() && livingEntity.level().isLoaded(livingEntity.blockPosition())) {
-            DamageData.get(livingEntity).chainWhipLocation = Utils.moveToRelativeGroundLevel(livingEntity.level(), livingEntity.position(), 5);
+            DamageData.get(livingEntity).chainWhipLocation = Utils.moveToRelativeGroundLevel(livingEntity.level(), livingEntity.position(), 4);
             livingEntity.syncData(EntityDataAttachmentRegistry.DAMAGE_DATA);
         }
     }

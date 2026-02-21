@@ -53,6 +53,7 @@
   "ui.cqs_armory.shield_bash_target_failure": "Spell requires a shield in off hand",
   "ui.cqs_armory.damage_per_bleed_stack": "%s Damage Per Bleed Stack",
   "ui.cqs_armory.no_bleed_stack_error": "Target must be bleeding",
+  "ui.cqs_armory.chained_duration": "%s Chained Duration",
 
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",

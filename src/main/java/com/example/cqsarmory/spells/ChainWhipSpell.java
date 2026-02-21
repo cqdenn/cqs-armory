@@ -89,7 +89,7 @@ public class ChainWhipSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 50),
-                Component.translatable("ui.cqs_armory.stun_duration", getDuration(spellLevel, caster)/20 + "s")
+                Component.translatable("ui.cqs_armory.chained_duration", getDuration(spellLevel, caster)/20 + "s")
         );
     }
 
