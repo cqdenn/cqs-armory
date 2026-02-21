@@ -14,6 +14,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
 public class ChainedEffect extends MobEffect implements ISyncedMobEffect {
+    public static final int CHAINED_EFFECT_MAX_CHAIN_LENGTH = 6;
+
     public ChainedEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
@@ -22,7 +24,7 @@ public class ChainedEffect extends MobEffect implements ISyncedMobEffect {
     public void onEffectAdded(LivingEntity livingEntity, int amplifier) {
         super.onEffectAdded(livingEntity, amplifier);
         if (!livingEntity.level().isClientSide && livingEntity.isAddedToLevel() && livingEntity.level().isLoaded(livingEntity.blockPosition())) {
-            DamageData.get(livingEntity).chainWhipLocation = Utils.moveToRelativeGroundLevel(livingEntity.level(), livingEntity.position(), 4);
+            DamageData.get(livingEntity).chainWhipLocation = Utils.moveToRelativeGroundLevel(livingEntity.level(), livingEntity.position(), CHAINED_EFFECT_MAX_CHAIN_LENGTH);
             livingEntity.syncData(EntityDataAttachmentRegistry.DAMAGE_DATA);
         }
     }

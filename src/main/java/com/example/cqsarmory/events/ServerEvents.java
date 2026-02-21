@@ -7,6 +7,7 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.DodgeData;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
+import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
@@ -960,7 +961,7 @@ public class ServerEvents {
             if (!living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
                 DamageData.get(living).chainWhipLocation = null;
             }
-            if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null && living.position().distanceToSqr(DamageData.get(living).chainWhipLocation) > 4 * 4) {
+            if (living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null && living.position().distanceToSqr(DamageData.get(living).chainWhipLocation) > ChainedEffect.CHAINED_EFFECT_MAX_CHAIN_LENGTH * ChainedEffect.CHAINED_EFFECT_MAX_CHAIN_LENGTH) {
                 living.removeEffect(MobEffectRegistry.CHAINED);
                 living.playSound(SoundEvents.CHAIN_BREAK, 10, 1);
                 return;
