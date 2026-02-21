@@ -40,6 +40,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
@@ -60,7 +61,9 @@ import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -76,6 +79,8 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.function.Function;
 
 @EventBusSubscriber
 public class ServerEvents {
@@ -243,6 +248,41 @@ public class ServerEvents {
             if (poisonAspectLevel > 0) {
                 entity.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.BLIGHT, 80 * poisonAspectLevel, poisonAspectLevel));
                 entity.addEffect(new MobEffectInstance(MobEffects.POISON, 80 * poisonAspectLevel, poisonAspectLevel - 1));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void windAspectBow(LivingIncomingDamageEvent event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof LivingEntity attacker) {
+            Holder.Reference<Enchantment> poisonAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "wind_aspect")));
+            int windAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(poisonAspectHolder);
+            int windAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(poisonAspectHolder);
+            int windAspectLevel = Math.max(windAspectOffHand, windAspectMainHand);
+            if (windAspectLevel > 0 && event.getSource().getDirectEntity() instanceof Projectile) {
+                float kb = 1.1f + (0.1f * windAspectLevel);
+
+                ExplosionDamageCalculator explosionDamageCalc = new SimpleExplosionDamageCalculator(
+                        true, false, Optional.of(kb), BuiltInRegistries.BLOCK.getTag(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
+                );
+
+                Vec3 vec3 = target.position().add(0, 0.1, 0);
+                target.level().explode(
+                        null, //source
+                        CQSpellRegistry.WIND_BURST_SPELL.get().getDamageSource(entity), //damage source
+                        explosionDamageCalc, //dmg calc
+                        vec3.x(), //location x, y, z
+                        vec3.y(),
+                        vec3.z(),
+                        3.5f, //radius
+                        false, // fire
+                        Level.ExplosionInteraction.TRIGGER, //explosion interaction
+                        ParticleTypes.GUST_EMITTER_SMALL, //small particle
+                        ParticleTypes.GUST_EMITTER_LARGE, //big particle
+                        SoundEvents.WIND_CHARGE_BURST //sound
+                );
             }
         }
     }
