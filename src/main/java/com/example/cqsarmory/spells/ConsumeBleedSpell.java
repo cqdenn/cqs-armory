@@ -149,7 +149,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
                     if (victim != entity && victim.canBeHitByProjectile() && distanceSqr < explosionRadius * explosionRadius && Utils.hasLineOfSight(level, target.getBoundingBox().getCenter(), victim.getBoundingBox().getCenter(), true)) {
                         float p = (float) (distanceSqr / (explosionRadius * explosionRadius));
                         p = 1 - p * p * p;
-                        DamageSources.applyDamage(victim, damage * p, new DamageSource(entity.level().damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get(), null, entity));
+                        victim.hurt(new DamageSource(entity.level().damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get(), null, entity), damage * p);
                     }
                 }
                 CameraShakeManager.addCameraShake(new CameraShakeData(10, target.position(), 20));

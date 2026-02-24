@@ -117,7 +117,7 @@ public class SpinSpell extends AbstractSpell {
         for (Entity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && Utils.hasLineOfSight(target.level(), entity.position(), target.getBoundingBox().getCenter(), true)) {
                 float damage = (float) getDamage(target, entity, weaponItem, spellLevel);
-                if (DamageSources.applyDamage(target, damage, damageSource)) {
+                if (target.hurt(damageSource, damage)) {
                     EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
                 }
             }
