@@ -20,18 +20,16 @@
     "hand"
   ],
   "effects": {
-    "minecraft:post_attack": [
+    "minecraft:attributes": [
       {
-        "effect": {
-          "type": "cqs_armory:life_steal",
-          "health": {
-            "type": "minecraft:linear",
-            "base": 1,
-            "per_level_above_first": 1
-          }
+        "attribute": "cqs_armory:life_steal",
+        "id": "cqs_armory:life_steal_enchantment",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 0.03,
+          "per_level_above_first": 0.02
         },
-        "enchanted": "attacker",
-        "affected": "attacker"
+        "operation": "add_value"
       }
     ]
   }

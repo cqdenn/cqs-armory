@@ -25,6 +25,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
+import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
@@ -298,9 +299,20 @@ public class ServerEvents {
             int lifeStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(lifeStealHolder), player.getMainHandItem().getEnchantmentLevel(lifeStealHolder));
             int manaStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(manaStealHolder), player.getMainHandItem().getEnchantmentLevel(manaStealHolder));
             int speedStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(speedStealHolder), player.getMainHandItem().getEnchantmentLevel(speedStealHolder));
-            //life steal
-            if (lifeStealLevel > 0) {
-                player.heal(lifeStealLevel);
+            //life steal -- now more than just an enchantment, all life-stealing is done here
+            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0) {
+                boolean isMelee = event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN);
+                double damageRatio = event.getNewDamage() / player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                if (event.getSource().getDirectEntity() instanceof Projectile projectile && !isMelee) {
+                    if (projectile instanceof AbstractArrow arrow) {
+                        damageRatio = event.getNewDamage() / arrow.getBaseDamage();
+                    } else if (projectile instanceof AbstractMagicProjectile magic) {
+                        damageRatio = event.getNewDamage() / magic.getDamage();
+                    }
+                }
+                damageRatio = Math.min(1, damageRatio);
+                float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
+                player.heal(heal);
             }
             //mana steal
             if (manaStealLevel > 0 && player instanceof ServerPlayer serverPlayer) {

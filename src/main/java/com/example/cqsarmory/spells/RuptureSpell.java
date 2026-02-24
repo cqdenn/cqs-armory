@@ -104,8 +104,8 @@ public class RuptureSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 75),
-                Component.translatable("ui.irons_spellbooks.radius", 2 * spellLevel + 2),
-                Component.translatable("ui.cqs_armory.absorption_per_enemy", 2 * spellLevel)
+                Component.translatable("ui.irons_spellbooks.radius", getRadius(spellLevel)),
+                Component.translatable("ui.cqs_armory.absorption_per_enemy", getAbsorptionPerEnemy(spellLevel))
         );
     }
 
@@ -121,8 +121,9 @@ public class RuptureSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        int radius = 2 * spellLevel + 2;
+        int radius = getRadius(spellLevel);
         var entities = level.getEntitiesOfClass(LivingEntity.class, entity.getBoundingBox().inflate(radius));
+        if (entities.contains(entity)) entities.remove(entity);
         ItemStack weaponItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
         EarthquakeAoe aoeEntity = new EarthquakeAoe(level);
         aoeEntity.moveTo(entity.position());
@@ -132,8 +133,8 @@ public class RuptureSpell extends AbstractSpell {
         aoeEntity.setDuration(20);
         aoeEntity.setSlownessAmplifier(1);
         level.addFreshEntity(aoeEntity);
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * spellLevel) - 1, false, false, true));
-        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + (entities.size() * (2 * spellLevel)));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.ABSORBING_RUPTURE, 100 * spellLevel, (entities.size() * getAbsorptionPerEnemy(spellLevel)) - 1 + (int) entity.getAbsorptionAmount(), false, false, true));
+        entity.setAbsorptionAmount(entity.getAbsorptionAmount() + (entities.size() * (getAbsorptionPerEnemy(spellLevel))));
         for (Entity target : entities) {
             if (target instanceof LivingEntity || target instanceof MomentumOrb) {
                 if (!(target == entity)) {
@@ -143,6 +144,14 @@ public class RuptureSpell extends AbstractSpell {
             }
         }
 
+    }
+
+    public int getRadius(int spellLevel) {
+        return 6;
+    }
+
+    public int getAbsorptionPerEnemy (int spellLevel) {
+        return spellLevel;
     }
 }
 
