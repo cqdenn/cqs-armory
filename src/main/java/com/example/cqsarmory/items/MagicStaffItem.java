@@ -85,7 +85,7 @@ public class MagicStaffItem extends ExtendedSwordItem implements IPresetSpellCon
                 )
                 .add(
                         AttributeRegistry.SPELL_POWER,
-                        new AttributeModifier(BASE_SPELL_POWER_ID, material.getSpellPower() + power.spellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
+                        new AttributeModifier(BASE_SPELL_POWER_ID, /*material.getSpellPower() + */power.spellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE),
                         EquipmentSlotGroup.MAINHAND
                 );
 

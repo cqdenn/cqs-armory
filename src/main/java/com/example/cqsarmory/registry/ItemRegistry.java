@@ -487,37 +487,37 @@ public class ItemRegistry {
 
         var ice = ITEMS.register(name + "_ice_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), iceSpellsForPower)
         );
 
         var fire = ITEMS.register(name + "_fire_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), fireSpellsForPower)
         );
 
         var lightning = ITEMS.register(name + "_lightning_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), lightningSpellsForPower)
         );
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 1 + (0.2 * material.getMult()), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), necromancySpellsForPower)
         );
 
         var arcane = ITEMS.register(name + "_arcane_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARCANE_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), arcaneSpellsForPower)
         );
 
         var holy = ITEMS.register(name + "_holy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{}) // attributes? FIXME
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), holySpellsForPower)
         );
 
