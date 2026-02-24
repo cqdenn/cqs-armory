@@ -36,6 +36,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> swordTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "swords"));
     public static final TagKey<Item> bowTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/bow"));
     public static final TagKey<Item> boosterTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "booster"));
+    public static final TagKey<Item> necklaceTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "necklace"));
     public static final TagKey<Item> quiverTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "quiver"));
     public static final TagKey<Item> brandTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "brand"));
     public static final TagKey<Item> coatingTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("curios", "coating"));
@@ -83,6 +84,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 }
             }
         }
+        tag(necklaceTag).add(ItemRegistry.BOOSTER_BEADS.get());
         //tag(swordTag).add(ItemRegistry.MJOLNIR.get());
 
 
