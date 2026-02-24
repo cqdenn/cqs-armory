@@ -16,8 +16,6 @@ public class BoosterBeadsItem extends CurioBaseItem {
         super(properties);
     }
 
-    private final UUID MODIFIER_UUID = UUID.fromString("dad7b2ae-9bb6-47eb-b789-f25ca8c2783b");
-
     @Override
     public void onEquip(SlotContext slotContext, ItemStack prevStack, ItemStack stack) {
         CuriosApi.addSlotModifier(stack, "booster", ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "booster_beads"), 1, AttributeModifier.Operation.ADD_VALUE, "necklace");
