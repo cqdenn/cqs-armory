@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-18T22:19:04.7718456	Recipes
+// 1.21.1	2026-02-23T21:57:39.5087725	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -49,6 +49,7 @@ c149cf750a74fbb5b0c4eaf1b5ed1f8b5dfa6e32 data/cqs_armory/advancement/recipes/com
 c6a7ce42029a6295d10cb49edc0b62f88dc7486c data/cqs_armory/advancement/recipes/combat/blazing_warhammer.json
 90776927d935539798b8ed5d815eed1c56580d50 data/cqs_armory/advancement/recipes/combat/bleed_coating.json
 6ecb4020f2b5694c50b0eebb7acf069972debb01 data/cqs_armory/advancement/recipes/combat/blood_brand.json
+6471aee98c6c08933e779fb0d038d638b3521776 data/cqs_armory/advancement/recipes/combat/booster_locket.json
 d73ac197c9916ad66c2d8070ecde39c0977f750e data/cqs_armory/advancement/recipes/combat/champion_talisman.json
 9844b0d638f6e2567f51130c696b547350618148 data/cqs_armory/advancement/recipes/combat/chronowarp_rune.json
 70af32f6ddced2fb108e7a24bfe8b68574bb52dd data/cqs_armory/advancement/recipes/combat/cold_brand.json
@@ -360,6 +361,7 @@ bfc0ab6ff53fff6ae27c6ecb954976f055dd1638 data/cqs_armory/recipe/blazing_mace.jso
 b05d4e17e7c19bfa12d3937602ae17dbd35dab64 data/cqs_armory/recipe/blazing_warhammer.json
 352301c4e0112ef403b2a39a2b089983280735b9 data/cqs_armory/recipe/bleed_coating.json
 b155a9119cc37f33e64f8cae23f87c14f9598690 data/cqs_armory/recipe/blood_brand.json
+6e221d360a9f12cca0d196d2124eaadbd8c521bf data/cqs_armory/recipe/booster_locket.json
 49fc1491e08f35326816e881eea83f2396f9b4f1 data/cqs_armory/recipe/champion_talisman.json
 38ffdbadc3221c6460f021f6f6d906c03193505c data/cqs_armory/recipe/chronowarp_rune.json
 28e61edd926f33cf159b15ae0271a2ac684416c3 data/cqs_armory/recipe/cold_brand.json

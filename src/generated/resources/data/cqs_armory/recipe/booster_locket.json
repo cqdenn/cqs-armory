@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "e": {
+      "item": "minecraft:emerald_block"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "m": {
+      "tag": "cqs_armory:ingots/power_three"
+    }
+  },
+  "pattern": [
+    " g ",
+    "geg",
+    " m "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:booster_locket"
+  }
+}

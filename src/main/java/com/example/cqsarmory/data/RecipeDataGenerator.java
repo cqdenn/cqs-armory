@@ -315,6 +315,16 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         //accessories
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.BOOSTER_LOCKET.get())
+                .pattern(" g ")
+                .pattern("geg")
+                .pattern(" m ")
+                .define('g', Items.GOLD_INGOT)
+                .define('e', Items.EMERALD_BLOCK)
+                .define('m', Tags.Items.MATERIALS_POWER_THREE)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GOLD_INGOT))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BERSERKERS_FURY.get(), 1)
                 .requires(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get(), 1)
                 .requires(Items.DIAMOND, 8)
