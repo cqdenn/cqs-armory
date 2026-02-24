@@ -84,7 +84,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 }
             }
         }
-        tag(necklaceTag).add(ItemRegistry.BOOSTER_BEADS.get());
+        tag(necklaceTag).add(ItemRegistry.BOOSTER_LOCKET.get());
         //tag(swordTag).add(ItemRegistry.MJOLNIR.get());
 
 

@@ -146,7 +146,7 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
 
-    public static final Supplier<CurioBaseItem> BOOSTER_BEADS = ITEMS.register("booster_beads", () -> new BoosterBeadsItem(ItemPropertiesHelper.equipment(1).fireResistant()));
+    public static final Supplier<CurioBaseItem> BOOSTER_LOCKET = ITEMS.register("booster_locket", () -> new BoosterLocketItem(ItemPropertiesHelper.equipment(1).fireResistant()));
     public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> WARDSTONE = ITEMS.register("wardstone", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
