@@ -27,7 +27,7 @@
         "amount": {
           "type": "minecraft:linear",
           "base": 0.03,
-          "per_level_above_first": 0.02
+          "per_level_above_first": 0.01
         },
         "operation": "add_value"
       }
