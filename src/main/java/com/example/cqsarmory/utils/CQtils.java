@@ -82,14 +82,14 @@ public class CQtils {
         //BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
         DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
         //IceExplosionMomentumOrb iceExplosionMomentumOrb = new IceExplosionMomentumOrb(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-        RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
+        //RootMomentumOrb rootMomentumOrb = new RootMomentumOrb(EntityRegistry.ROOT_MOMENTUM_ORB.get(), level, player);
         //ChainLightningMomentumOrb chainLightningMomentumOrb = new ChainLightningMomentumOrb(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), level, player);
         SpeedMomentumOrb speedMomentumOrb = new SpeedMomentumOrb(EntityRegistry.SPEED_MOMENTUM_ORB.get(), level, player);
         ArrowDamageMomentumOrb arrowDamageMomentumOrb = new ArrowDamageMomentumOrb(EntityRegistry.ARROW_DAMAGE_MOMENTUM_ORB.get(), level, player);
         //InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
 
         List<MomentumOrb> orbs = List.of(
-                speedMomentumOrb, arrowDamageMomentumOrb/*, instaDrawMomentumOrb*/, explosiveMomentumOrb, /*blackHoleMomentumOrb,*/ dodgeMomentumOrb/*, iceExplosionMomentumOrb*/, rootMomentumOrb/*, chainLightningMomentumOrb*/
+                speedMomentumOrb, arrowDamageMomentumOrb/*, instaDrawMomentumOrb*/, explosiveMomentumOrb, /*blackHoleMomentumOrb,*/ dodgeMomentumOrb/*, iceExplosionMomentumOrb*//*, rootMomentumOrb*//*, chainLightningMomentumOrb*/
         );
         return orbs.get(Utils.random.nextIntBetweenInclusive(0, orbs.size() - 1));
     }
