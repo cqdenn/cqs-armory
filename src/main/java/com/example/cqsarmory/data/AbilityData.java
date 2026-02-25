@@ -21,6 +21,7 @@ public class AbilityData {
     public float currentShieldDamage;
     private float rage;
     private float momentum;
+    public int momentumOrbsOwned;
     public int combatEndRage;
     public int combatEndMomentum;
     public boolean focused;

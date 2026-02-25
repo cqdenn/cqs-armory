@@ -448,7 +448,7 @@ public class ServerEvents {
 
             entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), com.example.cqsarmory.registry.SoundRegistry.DODGE_SOUND, SoundSource.PLAYERS, 1, 1.5f);
 
-            //entity.removeEffect(MobEffectRegistry.DODGE);
+            entity.removeEffect(MobEffectRegistry.DODGE);
 
             event.setCanceled(true);
         }
@@ -635,6 +635,7 @@ public class ServerEvents {
         if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
+                if (AbilityData.get(player).momentumOrbsOwned >= 4) return; //caps maximum orbs per play to 4. with so many ways to get momentum, many orbs is VERY laggy
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
                 //add logic for creating momentum orbs
@@ -646,12 +647,14 @@ public class ServerEvents {
 
                 int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
                 for (int i = 0; i < orbsSpawned; i++) {
+                    if (AbilityData.get(player).momentumOrbsOwned >= 4) break;
                     MomentumOrb orb = CQtils.getRandomOrbType(level, player);
                     if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
                     }
                     CQtils.findOrbLoc(startingPos, orb, level);
                     level.addFreshEntity(orb);
+                    if (!level.isClientSide) AbilityData.get(player).momentumOrbsOwned++;
                 }
 
             } else {

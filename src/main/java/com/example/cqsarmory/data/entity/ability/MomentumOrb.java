@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.SoundRegistry;
 import com.example.cqsarmory.utils.CQtils;
@@ -96,6 +97,9 @@ public class MomentumOrb extends Entity implements GeoEntity {
 
         if (tickCount == waitTime) {
             discard();
+            if (!level().isClientSide) {
+                AbilityData.get(getCreator()).momentumOrbsOwned--;
+            }
         }
 
     }
