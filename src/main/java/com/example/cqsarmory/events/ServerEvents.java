@@ -582,7 +582,7 @@ public class ServerEvents {
             float speed = (float) Math.min(speedStacks * 0.1, 1);
 
             ResourceLocation orbSpeedModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_speed_modifier");
-            AttributeModifier speedModifierOrb = new AttributeModifier(orbSpeedModifier, speed, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            AttributeModifier speedModifierOrb = new AttributeModifier(orbSpeedModifier, speed, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
             AttributeInstance attributeinstance = player.getAttribute(Attributes.MOVEMENT_SPEED);
             attributeinstance.removeModifier(speedModifierOrb.id());
 
@@ -607,7 +607,7 @@ public class ServerEvents {
             float dmg = (float) Math.min(dmgStacks * 0.1, 1);
 
             ResourceLocation orbDmgModifier = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "orb_dmg_modifier");
-            AttributeModifier dmgModifierOrb = new AttributeModifier(orbDmgModifier, dmg, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            AttributeModifier dmgModifierOrb = new AttributeModifier(orbDmgModifier, dmg, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
             AttributeInstance attributeinstance = player.getAttribute(BowAttributes.ARROW_DAMAGE);
             attributeinstance.removeModifier(dmgModifierOrb.id());
 
