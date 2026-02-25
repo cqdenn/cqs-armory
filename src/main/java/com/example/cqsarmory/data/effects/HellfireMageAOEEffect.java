@@ -27,22 +27,26 @@ public class HellfireMageAOEEffect extends MobEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         float radius = 5;
-        int randX = Utils.random.nextBoolean() ? 1 : -1;
-        int randZ = Utils.random.nextBoolean() ? 1 : -1;
-        var x = livingEntity.position().x + (Utils.random.nextFloat() * radius) * randX;
-        var y = livingEntity.position().y + 4;
-        var z = livingEntity.position().z + (Utils.random.nextFloat() * radius) * randZ;
         Level level = livingEntity.level();
         //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 20; //5% of max mana
         float damage = (float) (30 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
 
-        SmallMagicFireball fireball = new SmallMagicFireball(level, livingEntity);
-        fireball.setDamage(damage);
-        fireball.setExplosionRadius(1f);
-        fireball.setPos(new Vec3(x, y, z));
-        fireball.setDeltaMovement(0, -1, 0);
-        level.addFreshEntity(fireball);
-        level.playSound(null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 0.2f, 1);
+        int rings = 3;
+        for (int i = 1; i <= rings; i++) {
+            int randX = Utils.random.nextBoolean() ? 1 : -1;
+            int randZ = Utils.random.nextBoolean() ? 1 : -1;
+            var x = livingEntity.position().x + (Utils.random.nextFloat() * radius * i/rings) * randX;
+            var y = livingEntity.position().y + 4;
+            var z = livingEntity.position().z + (Utils.random.nextFloat() * radius * i/rings) * randZ;
+
+            SmallMagicFireball fireball = new SmallMagicFireball(level, livingEntity);
+            fireball.setDamage(damage);
+            fireball.setExplosionRadius(1f);
+            fireball.setPos(new Vec3(x, y, z));
+            fireball.setDeltaMovement(0, -1, 0);
+            level.addFreshEntity(fireball);
+            level.playSound(null, x, y, z, SoundEvents.BLAZE_SHOOT, SoundSource.PLAYERS, 0.2f, 1);
+        }
 
 
         return true;
