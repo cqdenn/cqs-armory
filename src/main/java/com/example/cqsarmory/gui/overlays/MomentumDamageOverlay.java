@@ -90,9 +90,9 @@ public class MomentumDamageOverlay implements LayeredDraw.Layer {
 
         if (com.example.cqsarmory.config.ClientConfigs.MOMENTUM_DAMAGE_TEXT_VISIBLE.get()) {
             guiHelper.drawString(Minecraft.getInstance().font, stacksFraction, textX, textY, TEXT_COLOR);
-            if (((AbilityData.get(player).momentumOrbEffects.arrowDamageEnd - player.tickCount) / 20 ) > 0) {
+            /*if (((AbilityData.get(player).momentumOrbEffects.arrowDamageEnd - player.tickCount) / 20 ) > 0) {
                 guiHelper.drawString(Minecraft.getInstance().font, stacksTimer, timerTextX, timerTextY, TEXT_COLOR);
-            } else { guiHelper.drawString(Minecraft.getInstance().font, (0) + "s", timerTextX, timerTextY, TEXT_COLOR); }
+            } else { guiHelper.drawString(Minecraft.getInstance().font, (0) + "s", timerTextX, timerTextY, TEXT_COLOR); }*/
             //gui.getFont().draw(poseStack, manaFraction, textX, textY, TEXT_COLOR);
         }
     }
