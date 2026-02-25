@@ -73,7 +73,7 @@ public class MomentumOrb extends Entity implements GeoEntity {
         if (source.getDirectEntity() instanceof AbstractArrow arrow) {
             DamageData.get(this).lastDamage = (float) arrow.getBaseDamage();
         } else if (source.getEntity() instanceof OrbExplosion orbExplosion) {
-            DamageData.get(this).lastDamage = (orbExplosion.getDamage() * 0.625f);
+            DamageData.get(this).lastDamage = (orbExplosion.getDamage()); //see CQtils#momentumOrbEffects (or dont)
         }else {
             DamageData.get(this).lastDamage = amount;
         }

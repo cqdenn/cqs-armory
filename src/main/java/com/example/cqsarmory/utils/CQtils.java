@@ -110,7 +110,7 @@ public class CQtils {
             float radius = 10;
             float dmg = DamageData.get(explosiveMomentumOrb).lastDamage;
 
-            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg * 4, radius); // dmg tbd FIXME
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg, radius); // last damage must be updated in MomentumOrb if damage mult is changed
             orbExplosion.moveTo(explosiveMomentumOrb.position());
             level.addFreshEntity(orbExplosion);
 
