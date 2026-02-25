@@ -722,23 +722,75 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MAX_RAGE_UPGRADE_ORB.get())
-                .pattern("   ")
-                .pattern("dxl")
-                .pattern("   ")
+                .pattern("rrr")
+                .pattern("rxr")
+                .pattern("rrr")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
-                .define('d', ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get())
-                .define('l', ItemRegistry.LIVING_WEAPONSET.ingot().get())
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()))
+                .define('r', ItemRegistry.MELEE_RUNE.get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MOMENTUM_ON_HIT_UPGRADE_ORB.get())
-                .pattern("   ")
-                .pattern("sxu")
-                .pattern("   ")
+                .pattern("rrr")
+                .pattern("rxr")
+                .pattern("rrr")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
-                .define('s', ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get())
-                .define('u', ItemRegistry.UMBRITE_WEAPONSET.ingot().get())
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
+                .define('r', ItemRegistry.ARCHER_RUNE.get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MAX_HEALTH_UPGRADE_ORB.get())
+                .pattern("rrr")
+                .pattern("rxr")
+                .pattern("rrr")
+                .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .define('r', ItemRegistry.HEALTHY_RUNE.get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.BLOCK_STRENGTH_UPGRADE_ORB.get())
+                .pattern("rrr")
+                .pattern("rxr")
+                .pattern("rrr")
+                .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
+                .define('r', ItemRegistry.TANK_RUNE.get())
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MELEE_RUNE.get())
+                .pattern("mmm")
+                .pattern("mrm")
+                .pattern("mmm")
+                .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
+                .define('m', Items.IRON_INGOT)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.ARCHER_RUNE.get())
+                .pattern("mmm")
+                .pattern("mrm")
+                .pattern("mmm")
+                .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
+                .define('m', Items.ARROW)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.TANK_RUNE.get())
+                .pattern("mmm")
+                .pattern("mrm")
+                .pattern("mmm")
+                .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
+                .define('m', Items.GOLD_INGOT)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.HEALTHY_RUNE.get())
+                .pattern("mmm")
+                .pattern("mrm")
+                .pattern("mmm")
+                .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
+                .define('m', Items.GLISTERING_MELON_SLICE)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
                 .save(recipeOutput);
 
     }

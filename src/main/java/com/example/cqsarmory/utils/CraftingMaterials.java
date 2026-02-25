@@ -48,10 +48,10 @@ public class CraftingMaterials {
             return Items.FEATHER;
         }
         else if (armorItem instanceof WarriorArmorItem) {
-            return Items.GOLD_INGOT;
+            return Items.IRON_INGOT;
         }
         else if (armorItem instanceof RampartArmorItem) {
-            return Items.IRON_INGOT;
+            return Items.GOLD_INGOT;
         }
         else if (armorItem instanceof ApprenticeArmorItem) {
             return io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_ESSENCE.get();

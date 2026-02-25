@@ -215,6 +215,13 @@ public class ItemRegistry {
 
     public static final DeferredHolder<Item, Item> MAX_RAGE_UPGRADE_ORB = ITEMS.register("max_rage_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_RAGE)));
     public static final DeferredHolder<Item, Item> MOMENTUM_ON_HIT_UPGRADE_ORB = ITEMS.register("momentum_on_hit_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MOMENTUM_ON_HIT)));
+    public static final DeferredHolder<Item, Item> MAX_HEALTH_UPGRADE_ORB = ITEMS.register("max_health_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_HEALTH)));
+    public static final DeferredHolder<Item, Item> BLOCK_STRENGTH_UPGRADE_ORB = ITEMS.register("block_strength_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.BLOCK_STRENGTH)));
+
+    public static final DeferredHolder<Item, Item> MELEE_RUNE = ITEMS.register("melee_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> TANK_RUNE = ITEMS.register("tank_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> ARCHER_RUNE = ITEMS.register("archer_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> HEALTHY_RUNE = ITEMS.register("healthy_rune", () -> new Item(ItemPropertiesHelper.material()));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

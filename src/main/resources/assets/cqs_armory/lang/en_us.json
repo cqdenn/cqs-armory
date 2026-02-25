@@ -148,6 +148,13 @@
 
   "item.cqs_armory.max_rage_upgrade_orb": "Max Rage Upgrade Orb",
   "item.cqs_armory.momentum_on_hit_upgrade_orb": "Momentum on Hit Upgrade Orb",
+  "item.cqs_armory.max_health_upgrade_orb": "Max Health Upgrade Orb",
+  "item.cqs_armory.block_strength_upgrade_orb": "Block Strength Upgrade Orb",
+
+  "item.cqs_armory.tank_rune": "Tank Rune",
+  "item.cqs_armory.melee_rune": "Melee Rune",
+  "item.cqs_armory.archer_rune": "Archer Rune",
+  "item.cqs_armory.healthy_rune": "Healthy Rune",
 
   "item.cqs_armory.booster_locket": "Booster Locket",
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
