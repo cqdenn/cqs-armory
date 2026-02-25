@@ -90,7 +90,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onDeath(LivingDeathEvent event) {
         Entity entity = event.getEntity().getKillCredit();
-        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (entity instanceof LivingEntity livingEntity1 && ItemRegistry.VOLCANO_COATING.get().isEquippedBy(livingEntity1) && event.getSource().getEntity() == event.getSource().getDirectEntity())/* || (entity instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))*/) {
+        if (event.getSource().typeHolder().is(DamageTypes.VOLCANO) || (entity instanceof LivingEntity livingEntity1 && ItemRegistry.VOLCANO_COATING.get().isEquippedBy(livingEntity1) && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN))/* || (entity instanceof LivingEntity livingEntity && livingEntity.getMainHandItem().is(ItemRegistry.VOLCANO))*/) {
             float damage = entity instanceof LivingEntity living ? (float) living.getAttributeValue(Attributes.ATTACK_DAMAGE) : 20f;
             if (entity instanceof VolcanoExplosion volcano) {
                 damage = volcano.getDamage();
@@ -626,6 +626,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void momentumOnHit(LivingDamageEvent.Pre event) {
         if (ServerConfigs.DISABLE_MOMENTUM.get()) return;
+        int MAX_ORBS = 2; //caps maximum orbs per play to 4. with so many ways to get momentum, many orbs is VERY laggy
 
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
@@ -635,7 +636,7 @@ public class ServerEvents {
         if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
-                if (AbilityData.get(player).momentumOrbsOwned >= 4) return; //caps maximum orbs per play to 4. with so many ways to get momentum, many orbs is VERY laggy
+                if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) return;
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
                 //add logic for creating momentum orbs
@@ -647,7 +648,7 @@ public class ServerEvents {
 
                 int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
                 for (int i = 0; i < orbsSpawned; i++) {
-                    if (AbilityData.get(player).momentumOrbsOwned >= 4) break;
+                    if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) break;
                     MomentumOrb orb = CQtils.getRandomOrbType(level, player);
                     if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
@@ -867,7 +868,7 @@ public class ServerEvents {
             Level level = player.level();
             if (ItemRegistry.POISON_QUIVER.get().isEquippedBy(player) && event.getSource().getDirectEntity() instanceof AbstractArrow) {
                 AbilityData.get(player).poisonStacks++;
-            } else if (ItemRegistry.POISON_COATING.get().isEquippedBy(player) && event.getSource().getDirectEntity() == event.getSource().getEntity()) {
+            } else if (ItemRegistry.POISON_COATING.get().isEquippedBy(player) && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
                 AbilityData.get(player).poisonStacks++;
             }
             if (AbilityData.get(player).poisonStacks >= 20) {
