@@ -30,14 +30,14 @@ public class InfiniteMagicSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCANE_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(360)
+            .setCooldownSeconds(120)
             .build();
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.literal("Grants no cooldowns and mana costs"),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(200, 1)));
+                Component.literal("Grants no mana costs"),
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(getDurationTicks(), 1)));
     }
 
     public InfiniteMagicSpell() {
@@ -65,8 +65,12 @@ public class InfiniteMagicSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, 200, 0));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, getDurationTicks(), 0, false, false, true));
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    }
+
+    public int getDurationTicks () {
+        return 400;
     }
 
     @Override
