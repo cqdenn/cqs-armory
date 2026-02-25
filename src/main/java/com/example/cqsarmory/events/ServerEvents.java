@@ -310,7 +310,7 @@ public class ServerEvents {
                 float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
                 player.heal(heal);
             }
-            //separate from attribute to fix offhanding issues
+            //separate from attribute to fix offhand stacking issues
             if (lifeStealLevel > 0) {
                 boolean isMelee = event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN);
                 double damageRatio = event.getNewDamage() / player.getAttributeValue(Attributes.ATTACK_DAMAGE);
