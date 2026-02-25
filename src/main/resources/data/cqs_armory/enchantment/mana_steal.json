@@ -18,21 +18,5 @@
   "anvil_cost": 4,
   "slots": [
     "hand"
-  ],
-  "effects": {
-    "minecraft:post_attack": [
-      {
-        "effect": {
-          "type": "cqs_armory:mana_steal",
-          "mana": {
-            "type": "minecraft:linear",
-            "base": 20,
-            "per_level_above_first": 20
-          }
-        },
-        "enchanted": "attacker",
-        "affected": "attacker"
-      }
-    ]
-  }
+  ]
 }

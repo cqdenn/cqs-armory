@@ -58,6 +58,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -175,7 +176,7 @@ public class ServerEvents {
         Level level = target.level();
         Holder.Reference<Enchantment> fireAspectHolder = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT);
         if (source instanceof LivingEntity attacker) {
-            int fireAspectLevel = attacker.getMainHandItem().getEnchantmentLevel(fireAspectHolder);
+            int fireAspectLevel = CQtils.getAttackingWeaponItem(attacker, event.getSource()).getEnchantmentLevel(fireAspectHolder);
 
             if (fireAspectLevel > 0 && !level.isClientSide && AbilityData.get(attacker).fireAspectCooldownEnd < attacker.tickCount) {
                 FireField fire = new FireField(level);
@@ -199,9 +200,7 @@ public class ServerEvents {
         Level level = entity.level();
         if (damageSource != null && damageSource.getEntity() instanceof LivingEntity attacker) {
             Holder.Reference<Enchantment> frostAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
-            int frostAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(frostAspectHolder);
-            int frostAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(frostAspectHolder);
-            int frostAspectLevel = frostAspectMainHand + frostAspectOffHand;
+            int frostAspectLevel = CQtils.getAttackingWeaponItem(attacker, damageSource).getEnchantmentLevel(frostAspectHolder);
             int damage = event.getSource().getDirectEntity() instanceof Arrow arrow ? (int) arrow.getBaseDamage() : (int) DamageData.get(entity).lastDamage;
 
             if (frostAspectLevel > 0) {
@@ -225,9 +224,7 @@ public class ServerEvents {
         Level level = entity.level();
         if (entityAttacker instanceof LivingEntity attacker && !(event.getSource().getDirectEntity() instanceof ChainLightning)) {
             Holder.Reference<Enchantment> lightningAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_aspect")));
-            int lightningAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(lightningAspectHolder);
-            int lightningAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(lightningAspectHolder);
-            int lightningAspectLevel = Math.max(lightningAspectOffHand, lightningAspectMainHand);
+            int lightningAspectLevel = CQtils.getAttackingWeaponItem(attacker, event.getSource()).getEnchantmentLevel(lightningAspectHolder);
             if (rand <= 0.35 && lightningAspectLevel > 0) {
                 float dmg = event.getAmount() * 0.5f;
                 ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
@@ -245,9 +242,7 @@ public class ServerEvents {
         Entity entityAttacker = event.getSource().getEntity();
         if (entityAttacker instanceof LivingEntity attacker) {
             Holder.Reference<Enchantment> poisonAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "poison_aspect")));
-            int poisonAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(poisonAspectHolder);
-            int poisonAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(poisonAspectHolder);
-            int poisonAspectLevel = Math.max(poisonAspectOffHand, poisonAspectMainHand);
+            int poisonAspectLevel = CQtils.getAttackingWeaponItem(attacker, event.getSource()).getEnchantmentLevel(poisonAspectHolder);
             if (poisonAspectLevel > 0) {
                 entity.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.BLIGHT, 80 * poisonAspectLevel, poisonAspectLevel));
                 entity.addEffect(new MobEffectInstance(MobEffects.POISON, 80 * poisonAspectLevel, poisonAspectLevel - 1));
@@ -260,10 +255,9 @@ public class ServerEvents {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();
         if (entity instanceof LivingEntity attacker) {
-            Holder.Reference<Enchantment> poisonAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "wind_aspect")));
-            int windAspectMainHand = attacker.getMainHandItem().getEnchantmentLevel(poisonAspectHolder);
-            int windAspectOffHand = attacker.getOffhandItem().getEnchantmentLevel(poisonAspectHolder);
-            int windAspectLevel = Math.max(windAspectOffHand, windAspectMainHand);
+            ItemStack usedWeapon = CQtils.getAttackingWeaponItem(attacker, event.getSource());
+            Holder.Reference<Enchantment> windAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "wind_aspect")));
+            int windAspectLevel = usedWeapon.getEnchantmentLevel(windAspectHolder);
             if (windAspectLevel > 0 && event.getSource().getDirectEntity() instanceof Projectile) {
                 float kb = 1.1f + (0.1f * windAspectLevel);
 
@@ -294,12 +288,13 @@ public class ServerEvents {
     public static void stealingEnchants(LivingDamageEvent.Post event) {
         Entity entity = event.getSource().getEntity();
         if (entity instanceof Player player) {
+            ItemStack usedWeapon = CQtils.getAttackingWeaponItem(player, event.getSource());
             Holder.Reference<Enchantment> lifeStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "life_steal")));
             Holder.Reference<Enchantment> manaStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "mana_steal")));
             Holder.Reference<Enchantment> speedStealHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "speed_steal")));
-            int lifeStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(lifeStealHolder), player.getMainHandItem().getEnchantmentLevel(lifeStealHolder));
-            int manaStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(manaStealHolder), player.getMainHandItem().getEnchantmentLevel(manaStealHolder));
-            int speedStealLevel = Math.max(player.getOffhandItem().getEnchantmentLevel(speedStealHolder), player.getMainHandItem().getEnchantmentLevel(speedStealHolder));
+            int lifeStealLevel = usedWeapon.getEnchantmentLevel(lifeStealHolder);
+            int manaStealLevel = usedWeapon.getEnchantmentLevel(manaStealHolder);
+            int speedStealLevel = usedWeapon.getEnchantmentLevel(speedStealHolder);
             //life steal -- now more than just an enchantment, all life-stealing is done here
             if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0) {
                 boolean isMelee = event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN);
@@ -313,6 +308,22 @@ public class ServerEvents {
                 }
                 damageRatio = Math.min(1, damageRatio);
                 float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
+                player.heal(heal);
+            }
+            //separate from attribute to fix offhanding issues
+            if (lifeStealLevel > 0) {
+                boolean isMelee = event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN);
+                double damageRatio = event.getNewDamage() / player.getAttributeValue(Attributes.ATTACK_DAMAGE);
+                if (event.getSource().getDirectEntity() instanceof Projectile projectile && !isMelee) {
+                    if (projectile instanceof AbstractArrow arrow) {
+                        damageRatio = event.getNewDamage() / arrow.getBaseDamage();
+                    } else if (projectile instanceof AbstractMagicProjectile magic) {
+                        damageRatio = event.getNewDamage() / magic.getDamage();
+                    }
+                }
+                damageRatio = Math.min(1, damageRatio);
+                float lifeStealValue = 0.02f + (0.01f * lifeStealLevel);
+                float heal = (float) (player.getMaxHealth() * damageRatio * lifeStealValue);
                 player.heal(heal);
             }
             //mana steal

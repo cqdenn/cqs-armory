@@ -18,19 +18,5 @@
   "anvil_cost": 4,
   "slots": [
     "hand"
-  ],
-  "effects": {
-    "minecraft:attributes": [
-      {
-        "attribute": "cqs_armory:life_steal",
-        "id": "cqs_armory:life_steal_enchantment",
-        "amount": {
-          "type": "minecraft:linear",
-          "base": 0.03,
-          "per_level_above_first": 0.01
-        },
-        "operation": "add_value"
-      }
-    ]
-  }
+  ]
 }

@@ -8,22 +8,27 @@ import com.example.cqsarmory.network.SyncMomentumDamagePacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedEndPacket;
 import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.registry.*;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -49,6 +54,12 @@ public class CQtils {
         player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
         player.stopUsingItem();
         player.level().broadcastEntityEvent(player, (byte) 30);
+    }
+
+    public static ItemStack getAttackingWeaponItem (LivingEntity attacker, DamageSource source) {
+        if (source.getDirectEntity() instanceof Projectile projectile && projectile.getWeaponItem() != null) return projectile.getWeaponItem();
+        if (source instanceof SpellDamageSource) return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
+        return attacker.getMainHandItem();
     }
 
     private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap () {
