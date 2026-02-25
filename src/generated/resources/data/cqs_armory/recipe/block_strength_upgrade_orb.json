@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "r": {
-      "item": "cqs_armory:melee_rune"
+      "item": "cqs_armory:tank_rune"
     },
     "x": {
       "item": "irons_spellbooks:upgrade_orb"
@@ -16,6 +16,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "cqs_armory:max_rage_upgrade_orb"
+    "id": "cqs_armory:block_strength_upgrade_orb"
   }
 }

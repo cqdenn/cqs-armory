@@ -1,0 +1,9 @@
+{
+  "amount": 20,
+  "attribute": "cqs_armory:block_strength",
+  "containerItem": {
+    "count": 1,
+    "id": "cqs_armory:block_strength_upgrade_orb"
+  },
+  "operation": "add_value"
+}
