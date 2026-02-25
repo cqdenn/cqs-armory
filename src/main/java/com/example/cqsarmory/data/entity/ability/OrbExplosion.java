@@ -69,7 +69,7 @@ public class OrbExplosion extends AoeEntity {
 
             } else {
                 PacketDistributor.sendToPlayersTrackingEntityAndSelf(this, new FieryExplosionParticlesPacket(this.getBoundingBox().getCenter(), getRadius()));
-                DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
+                DamageSource damageSource = level.damageSources().explosion(this, this.getOwner()); //weirdly this seems to reverse direct and causing entites when causing entity is player
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {
                     if (Utils.hasLineOfSight(level, this.position(), target.getBoundingBox().getCenter(), true)) {

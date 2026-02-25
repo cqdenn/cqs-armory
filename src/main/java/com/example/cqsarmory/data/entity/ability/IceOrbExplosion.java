@@ -68,7 +68,7 @@ public class IceOrbExplosion extends AoeEntity {
                 level.addParticle(new BlastwaveParticleOptions(SchoolRegistry.ICE.get().getTargetingColor(), radius + 1), x, y, z, 0, 0, 0);
 
             } else {
-                DamageSource damageSource = level.damageSources().explosion(this.getOwner(), this);
+                DamageSource damageSource = level.damageSources().explosion(this, this.getOwner()); //weirdly this seems to reverse direct and causing entites when causing entity is player
                 var entities = level.getEntities(this, new AABB(this.position(), this.position()).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(getOwner(), targeted) || targeted instanceof MomentumOrb);
                 for (Entity target : entities) {
                     if (target instanceof LivingEntity && Utils.hasLineOfSight(target.level(), this.position(), target.getBoundingBox().getCenter(), true)) {
