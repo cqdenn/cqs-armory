@@ -150,4 +150,28 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scythe_projectile").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ChainLightningEnchantEntity>> CHAIN_LIGHTNING_ENCHANT_ENTITY =
+            ENTITIES.register("chain_lightning_enchant_entity", () -> EntityType.Builder.<ChainLightningEnchantEntity>of(ChainLightningEnchantEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "chain_lightning_enchant_entity").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FrostAspectEnchantEntity>> FROST_ASPECT_ENCHANT_ENTITY =
+            ENTITIES.register("frost_aspect_enchant_entity", () -> EntityType.Builder.<FrostAspectEnchantEntity>of(FrostAspectEnchantEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect_enchant_entity").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FrostAspectEnchantProjectileEntity>> FROST_ASPECT_ENCHANT_PROJECTILE_ENTITY =
+            ENTITIES.register("frost_aspect_enchant_projectile_entity", () -> EntityType.Builder.<FrostAspectEnchantProjectileEntity>of(FrostAspectEnchantProjectileEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect_enchant_projectile_entity").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<FireAspectEnchantEntity>> FIRE_ASPECT_ENCHANT_ENTITY =
+            ENTITIES.register("fire_aspect_enchant_entity", () -> EntityType.Builder.<FireAspectEnchantEntity>of(FireAspectEnchantEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "fire_aspect_enchant_entity").toString()));
 }

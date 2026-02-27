@@ -6,6 +6,7 @@ import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
+import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleRenderer;
 import io.redspace.ironsspellbooks.item.SpellBook;
 import io.redspace.ironsspellbooks.item.WaywardCompass;
 import io.redspace.ironsspellbooks.item.weapons.AutoloaderCrossbow;
@@ -105,5 +106,9 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.THROWN_ITEM.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ANVIL_PROJECTILE.get(), AnvilProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegistry.SCYTHE_PROJECTILE.get(), ScytheProjectileRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CHAIN_LIGHTNING_ENCHANT_ENTITY.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.FROST_ASPECT_ENCHANT_ENTITY.get(), FrostAspectEnchantEntityRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.FIRE_ASPECT_ENCHANT_ENTITY.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.FROST_ASPECT_ENCHANT_PROJECTILE_ENTITY.get(), IcicleRenderer::new);
     }
 }

@@ -32,15 +32,25 @@ public class OrbExplosion extends AoeEntity {
         this.setCircular();
     }
 
-    public OrbExplosion(Level level, LivingEntity owner, float damage, float radius) {
+    public OrbExplosion(Level level, LivingEntity owner, float damage, float radius, DamageSource source) {
         this(EntityRegistry.ORB_EXPLOSION.get(), level);
         setOwner(owner);
         this.setRadius(radius);
         this.setDamage(damage);
         this.setLevel(level);
+        setSource(source); //damagedata.lastSource of the momentum orb that spawned the explosion
     }
 
+    private DamageSource source;
     public int waitTime = 20;
+
+    public void setSource (DamageSource source) {
+        this.source = source;
+    }
+
+    public DamageSource getSource() {
+        return this.source;
+    }
 
     @Override
     public void tick() {

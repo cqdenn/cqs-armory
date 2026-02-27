@@ -40,10 +40,7 @@ import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Supplier;
 
 public class CQtils {
@@ -57,8 +54,15 @@ public class CQtils {
     }
 
     public static ItemStack getAttackingWeaponItem (LivingEntity attacker, DamageSource source) {
+        if (source.getDirectEntity() instanceof OrbExplosion explosion) source = explosion.getSource();
+        if (source.getDirectEntity() instanceof ChainLightningEnchantEntity lightning) return lightning.getWeapon();
+        if (source.getDirectEntity() instanceof FrostAspectEnchantEntity frost) return frost.getWeapon();
+        if (source.getDirectEntity() instanceof FrostAspectEnchantProjectileEntity frostProj) return frostProj.getWeapon();
+        if (source.getDirectEntity() instanceof FireAspectEnchantEntity fire) return fire.getWeapon();
         if (source.getDirectEntity() instanceof Projectile projectile && projectile.getWeaponItem() != null) return projectile.getWeaponItem();
-        if (source instanceof SpellDamageSource) return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
+        MagicData magicData = MagicData.getPlayerMagicData(attacker);
+        boolean isWeaponCasting = magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) || magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.MAINHAND);
+        if (source instanceof SpellDamageSource && isWeaponCasting) return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
         return attacker.getMainHandItem();
     }
 
@@ -120,8 +124,9 @@ public class CQtils {
         } else if (momentumOrb instanceof ExplosiveMomentumOrb explosiveMomentumOrb) {
             float radius = 10;
             float dmg = DamageData.get(explosiveMomentumOrb).lastDamage;
+            DamageSource source = DamageData.get(explosiveMomentumOrb).lastSource;
 
-            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg, radius); // last damage must be updated in MomentumOrb if damage mult is changed
+            OrbExplosion orbExplosion = new OrbExplosion(level, explosiveMomentumOrb.getCreator(), dmg, radius, source); // last damage must be updated in MomentumOrb if damage mult is changed
             orbExplosion.moveTo(explosiveMomentumOrb.position());
             level.addFreshEntity(orbExplosion);
 

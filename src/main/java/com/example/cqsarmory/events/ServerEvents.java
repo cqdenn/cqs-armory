@@ -51,6 +51,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -176,10 +177,11 @@ public class ServerEvents {
         Level level = target.level();
         Holder.Reference<Enchantment> fireAspectHolder = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FIRE_ASPECT);
         if (source instanceof LivingEntity attacker) {
-            int fireAspectLevel = CQtils.getAttackingWeaponItem(attacker, event.getSource()).getEnchantmentLevel(fireAspectHolder);
+            ItemStack usedWeapon = CQtils.getAttackingWeaponItem(attacker, event.getSource());
+            int fireAspectLevel = usedWeapon.getEnchantmentLevel(fireAspectHolder);
 
             if (fireAspectLevel > 0 && !level.isClientSide && AbilityData.get(attacker).fireAspectCooldownEnd < attacker.tickCount) {
-                FireField fire = new FireField(level);
+                FireAspectEnchantEntity fire = new FireAspectEnchantEntity(level, usedWeapon);
                 fire.setOwner(attacker);
                 fire.setDuration(100);
                 fire.setDamage(2 * fireAspectLevel);
@@ -200,11 +202,12 @@ public class ServerEvents {
         Level level = entity.level();
         if (damageSource != null && damageSource.getEntity() instanceof LivingEntity attacker) {
             Holder.Reference<Enchantment> frostAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
-            int frostAspectLevel = CQtils.getAttackingWeaponItem(attacker, damageSource).getEnchantmentLevel(frostAspectHolder);
+            ItemStack usedWeapon = CQtils.getAttackingWeaponItem(attacker, damageSource);
+            int frostAspectLevel = usedWeapon.getEnchantmentLevel(frostAspectHolder);
             int damage = event.getSource().getDirectEntity() instanceof Arrow arrow ? (int) arrow.getBaseDamage() : (int) DamageData.get(entity).lastDamage;
 
             if (frostAspectLevel > 0) {
-                FrozenHumanoid iceClone = new FrozenHumanoid(level, entity);
+                FrostAspectEnchantEntity iceClone = new FrostAspectEnchantEntity(level, entity, usedWeapon);
                 iceClone.setSummoner(attacker);
                 iceClone.setShatterDamage(damage);
                 iceClone.setDeathTimer(20 * 5);
@@ -224,10 +227,11 @@ public class ServerEvents {
         Level level = entity.level();
         if (entityAttacker instanceof LivingEntity attacker && !(event.getSource().getDirectEntity() instanceof ChainLightning)) {
             Holder.Reference<Enchantment> lightningAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_aspect")));
-            int lightningAspectLevel = CQtils.getAttackingWeaponItem(attacker, event.getSource()).getEnchantmentLevel(lightningAspectHolder);
+            ItemStack usedWeapon = CQtils.getAttackingWeaponItem(attacker, event.getSource());
+            int lightningAspectLevel = usedWeapon.getEnchantmentLevel(lightningAspectHolder);
             if (rand <= 0.35 && lightningAspectLevel > 0) {
                 float dmg = event.getAmount() * 0.5f;
-                ChainLightning chainLightning = new ChainLightning(level, attacker, entity);
+                ChainLightningEnchantEntity chainLightning = new ChainLightningEnchantEntity(level, attacker, entity, usedWeapon);
                 chainLightning.setDamage(dmg);
                 chainLightning.maxConnections = 3 * lightningAspectLevel;
                 chainLightning.range = 8;
@@ -295,8 +299,8 @@ public class ServerEvents {
             int lifeStealLevel = usedWeapon.getEnchantmentLevel(lifeStealHolder);
             int manaStealLevel = usedWeapon.getEnchantmentLevel(manaStealHolder);
             int speedStealLevel = usedWeapon.getEnchantmentLevel(speedStealHolder);
-            //life steal -- now more than just an enchantment, all life-stealing is done here
-            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0) {
+            //life steal attribute
+            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0 && event.getSource().getDirectEntity() == event.getSource().getEntity()) { //must be melee, only GS has this attribute so this prevents offhanding with bow
                 double damageRatio = event.getNewDamage() / event.getOriginalDamage();
                 damageRatio = Math.min(1, damageRatio);
                 float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
