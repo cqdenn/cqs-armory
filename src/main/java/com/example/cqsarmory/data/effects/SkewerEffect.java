@@ -4,6 +4,7 @@ import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -30,10 +31,7 @@ public class SkewerEffect extends MobEffect {
     public static final float SKEWER_ATTACK_DAMAGE_MULTIPLIER = 1.3f;
 
     public double getDamage(Entity target, LivingEntity caster) {
-        ItemStack weaponItem = caster.getMainHandItem().getItem() instanceof SwordItem || caster.getMainHandItem().getItem() instanceof GreataxeItem ? caster.getMainHandItem() : null;
-        if (weaponItem == null) {
-            weaponItem = caster.getOffhandItem().getItem() instanceof SwordItem || caster.getOffhandItem().getItem() instanceof GreataxeItem ? caster.getOffhandItem() : null;
-        }
+        ItemStack weaponItem = MagicData.getPlayerMagicData(caster).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? caster.getOffhandItem() : caster.getMainHandItem();
         float damage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * SKEWER_ATTACK_DAMAGE_MULTIPLIER;
         var source = CQSpellRegistry.SKEWER_SPELL.get().getDamageSource(caster);
         if (caster.level() instanceof ServerLevel serverLevel && target != null) {
