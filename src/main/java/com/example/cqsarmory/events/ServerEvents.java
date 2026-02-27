@@ -24,6 +24,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
+import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
 import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
@@ -300,7 +301,7 @@ public class ServerEvents {
             int manaStealLevel = usedWeapon.getEnchantmentLevel(manaStealHolder);
             int speedStealLevel = usedWeapon.getEnchantmentLevel(speedStealHolder);
             //life steal attribute
-            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0 && event.getSource().getDirectEntity() == event.getSource().getEntity()) { //must be melee, only GS has this attribute so this prevents offhanding with bow
+            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0 && (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK) || (event.getSource() instanceof SpellDamageSource spellDamageSource && spellDamageSource.spell().getSpellId().equals("cqs_armory:rupture_spell")))) { //must be melee, only GS has this attribute so this prevents offhanding with bow
                 double damageRatio = event.getNewDamage() / event.getOriginalDamage();
                 damageRatio = Math.min(1, damageRatio);
                 float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
