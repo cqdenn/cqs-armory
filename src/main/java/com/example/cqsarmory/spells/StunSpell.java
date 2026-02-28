@@ -110,7 +110,7 @@ public class StunSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 100),
-                Component.translatable("ui.cqs_armory.stun_duration", (1 * spellLevel) + "s")
+                Component.translatable("ui.cqs_armory.stun_duration", getDurationTicks(spellLevel)/20 + "s")
         );
     }
 
@@ -121,6 +121,10 @@ public class StunSpell extends AbstractSpell {
             return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
         }
         return damage;
+    }
+
+    public int getDurationTicks (int spellLevel) {
+        return 20 + (20 * spellLevel);
     }
 
     @Override
@@ -134,7 +138,7 @@ public class StunSpell extends AbstractSpell {
             if (target instanceof LivingEntity livingEntity) {
                 float damage = (float) getDamage(target, entity, weaponItem);
                 if (!DamageSources.isFriendlyFireBetween(entity, target) && !livingEntity.isSpectator() && Utils.hasLineOfSight(level, entity.position(), livingEntity.getBoundingBox().getCenter(), true)) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 20 * spellLevel, 100, false, false, true));
+                    livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, getDurationTicks(spellLevel), 100, false, false, true));
                     target.hurt(damageSource, damage);
                 }
             }
