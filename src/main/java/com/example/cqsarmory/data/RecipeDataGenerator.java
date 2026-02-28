@@ -275,8 +275,8 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.UMBRITE_WEAPONSET.ingot().get().asItem(), 1)
-                .requires(Items.DIAMOND, 3)
-                .requires(Items.ENDER_PEARL, 3)
+                .requires(Items.NETHERITE_INGOT, 1)
+                .requires(Items.ENDER_PEARL, 8)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 
