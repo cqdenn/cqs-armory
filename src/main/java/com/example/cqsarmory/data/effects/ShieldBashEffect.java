@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class ShieldBashEffect extends MobEffect {
+public class ShieldBashEffect extends NonCurableEffect {
     public ShieldBashEffect(MobEffectCategory category, int color) {
         super(category, color);
     }

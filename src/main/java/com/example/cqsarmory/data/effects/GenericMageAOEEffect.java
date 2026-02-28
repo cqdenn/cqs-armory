@@ -22,7 +22,7 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-public class GenericMageAOEEffect extends MobEffect {
+public class GenericMageAOEEffect extends NonCurableEffect {
     public GenericMageAOEEffect(MobEffectCategory category, int color) {
         super(category, color);
     }

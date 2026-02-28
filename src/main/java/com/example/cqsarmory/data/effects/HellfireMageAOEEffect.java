@@ -19,7 +19,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
-public class HellfireMageAOEEffect extends MobEffect {
+public class HellfireMageAOEEffect extends NonCurableEffect {
     public HellfireMageAOEEffect(MobEffectCategory category, int color) {
         super(category, color);
     }

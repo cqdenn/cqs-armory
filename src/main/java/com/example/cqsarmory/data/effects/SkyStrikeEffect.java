@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class SkyStrikeEffect extends MobEffect {
+public class SkyStrikeEffect extends NonCurableEffect {
     public SkyStrikeEffect(MobEffectCategory category, int color) {
         super(category, color);
     }

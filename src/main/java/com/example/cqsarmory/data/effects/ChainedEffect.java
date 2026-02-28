@@ -10,10 +10,14 @@ import io.redspace.ironsspellbooks.effect.ISyncedMobEffect;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.EffectCure;
 
-public class ChainedEffect extends MobEffect implements ISyncedMobEffect {
+import java.util.Set;
+
+public class ChainedEffect extends NonCurableEffect implements ISyncedMobEffect {
     public static final int CHAINED_EFFECT_MAX_CHAIN_LENGTH = 6;
 
     public ChainedEffect(MobEffectCategory category, int color) {
@@ -37,5 +41,10 @@ public class ChainedEffect extends MobEffect implements ISyncedMobEffect {
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         return true;
+    }
+
+    @Override
+    public void fillEffectCures(Set<EffectCure> cures, MobEffectInstance effectInstance) {
+        super.fillEffectCures(cures, effectInstance);
     }
 }

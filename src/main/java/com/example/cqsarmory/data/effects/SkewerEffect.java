@@ -23,7 +23,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import java.util.List;
 
-public class SkewerEffect extends MobEffect {
+public class SkewerEffect extends NonCurableEffect {
     public SkewerEffect(MobEffectCategory category, int color) {
         super(category, color);
     }

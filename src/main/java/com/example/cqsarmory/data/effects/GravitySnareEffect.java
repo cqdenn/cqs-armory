@@ -7,7 +7,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-public class GravitySnareEffect extends MobEffect {
+public class GravitySnareEffect extends NonCurableEffect {
     public GravitySnareEffect(MobEffectCategory category, int color) {
         super(category, color);
     }
