@@ -4,6 +4,8 @@ import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.spells.SkewerSpell;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -48,9 +50,10 @@ public class SkewerEffect extends NonCurableEffect {
             for (Entity entity : list) {
                 if (entity instanceof LivingEntity target && !DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(livingEntity.level(), livingEntity.position(), target.getBoundingBox().getCenter(), true)) {
                     float damage = (float) getDamage(target, livingEntity);
-                    int duration = 40 * (amplifier + 1);
+                    //amp == spellLevel == stacks
+                    int duration = SkewerSpell.getBleedDurationTicks(amplifier);
                     target.hurt(damageSource, damage);
-                    target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, duration, amplifier, false, false, true, livingEntity, true));
+                    CQtils.addBleedStacks(livingEntity, target, amplifier, duration);
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;
                     return false;

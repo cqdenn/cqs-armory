@@ -5,6 +5,7 @@ import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -93,8 +94,8 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     public void bite(Entity entity) {
         float damage = (float) getDamage(entity);
         if (entity instanceof PartEntity<?> part) entity = part.getParent();
-        if (entity instanceof LivingEntity target) {
-            target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, (int) Math.floor(this.getBaseDamage()) / 10, false, false, true, getOwner(), true));
+        if (entity instanceof LivingEntity target && getOwner() instanceof LivingEntity attacker) {
+            CQtils.addBleedStacks(attacker, target, 1, 100);
         }
         entity.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         level().playSound(null, this.blockPosition(), SoundEvents.BAT_AMBIENT, SoundSource.PLAYERS, 1, 1);

@@ -2,6 +2,7 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ServerConfigs;
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.effects.BleedEffect;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.AttributeRegistry;
@@ -112,14 +113,12 @@ public class ConsumeBleedSpell extends AbstractSpell {
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
         var target = Utils.raycastForEntity(entity.level(), entity, 64, true, 0.1f);
         if (target instanceof EntityHitResult entityHitResult && !entity.level().isClientSide) {
-            if (entityHitResult.getEntity() instanceof LivingEntity living && living.getEffect(MobEffectRegistry.BLEED) instanceof CQMobEffectInstance effectInstance) {
-                if (effectInstance.getOwner() == entity) {
-                    if (entity instanceof ServerPlayer serverPlayer) {
-                        serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.irons_spellbooks.spell_target_success", living.getDisplayName().getString(), this.getDisplayName(serverPlayer)).withStyle(ChatFormatting.GREEN)));
-                    }
-                    playerMagicData.setAdditionalCastData(new TargetEntityCastData(living));
-                    return true;
+            if (entityHitResult.getEntity() instanceof LivingEntity living && DamageData.get(living).bleedStacks.get(entity) > 0) {
+                if (entity instanceof ServerPlayer serverPlayer) {
+                    serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.irons_spellbooks.spell_target_success", living.getDisplayName().getString(), this.getDisplayName(serverPlayer)).withStyle(ChatFormatting.GREEN)));
                 }
+                playerMagicData.setAdditionalCastData(new TargetEntityCastData(living));
+                return true;
             }
         }
         if (entity instanceof ServerPlayer serverPlayer) {
@@ -136,7 +135,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
             var target = targetingData.getTarget((ServerLevel) level);
             if (target != null) {
                 MobEffectInstance effectInstance = target.getEffect(MobEffectRegistry.BLEED);
-                int stacks = effectInstance.getAmplifier() + 1;
+                int stacks = DamageData.get(target).bleedStacks.get(entity);
                 int seconds = (int) Math.ceil(effectInstance.getDuration() / 20);
                 float damage = BleedEffect.DAMAGE_PER_STACK * stacks * seconds;
                 float explosionRadius = 5;

@@ -925,7 +925,7 @@ public class ServerEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void bleedStacks(MobEffectEvent.Added event) {
         MobEffectInstance newInstance = event.getEffectInstance();
         MobEffectInstance oldInstance = event.getOldEffectInstance();
@@ -938,13 +938,29 @@ public class ServerEvents {
                 living.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, duration, newAmplifier, false, false, true, newInstanceCQ.getOwner(), false));
             }
         }
+    }*/
+
+    @SubscribeEvent
+    public static void resetBleed (MobEffectEvent.Expired event) {
+        LivingEntity entity = event.getEntity();
+        if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
+            DamageData.get(entity).bleedStacks.clear();
+        }
+    }
+
+    @SubscribeEvent
+    public static void resetBleed (MobEffectEvent.Remove event) {
+        LivingEntity entity = event.getEntity();
+        if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
+            DamageData.get(entity).bleedStacks.clear();
+        }
     }
 
     @SubscribeEvent
     public static void bleedChance(LivingIncomingDamageEvent event) {
         Entity entity = event.getSource().getEntity();
         if (entity instanceof LivingEntity attacker && Utils.random.nextFloat() <= attacker.getAttributeValue(AttributeRegistry.BLEED_CHANCE)) {
-            event.getEntity().addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 40, 0, false, false, true, attacker, true));
+            CQtils.addBleedStacks(attacker, event.getEntity(), 1, 100);
         }
     }
 

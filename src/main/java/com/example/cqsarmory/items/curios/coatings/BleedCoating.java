@@ -1,8 +1,10 @@
 package com.example.cqsarmory.items.curios.coatings;
 
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
 import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
@@ -52,16 +54,6 @@ public class BleedCoating extends OnHitCoating implements IPresetSpellContainer 
 
     @Override
     public void doOnHitEffect(Player attacker, LivingEntity target, float hitDamage) {
-        /*if (target.getEffect(MobEffectRegistry.BLEED) instanceof CQMobEffectInstance effectInstance) {
-            int amplifier = effectInstance.getAmplifier();
-            if (amplifier < 4) {
-                target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, amplifier + 1, false, false, true, attacker));
-            } else {
-                target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, 4, false, false, true, attacker));
-            }
-        } else {
-            target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 100, 0, false, false, true, attacker));
-        }*/
-        target.addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 80, 0, false, false, true, attacker, true));
+        CQtils.addBleedStacks(attacker, target, 1, 80);
     }
 }

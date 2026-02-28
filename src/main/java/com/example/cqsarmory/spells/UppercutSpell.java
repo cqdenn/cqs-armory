@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
@@ -111,9 +112,9 @@ public class UppercutSpell extends AbstractSpell {
         Vec3 direction = new Vec3(entity.getForward().x * 0.1, 0.2 * spellLevel, entity.getForward().z * 0.1);
 
         for (Entity target : entities) {
-            if (target instanceof LivingEntity && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS) && Utils.hasLineOfSight(level, entity.position(), target.getBoundingBox().getCenter(), true)) {
+            if (target instanceof LivingEntity targetLiving && (Utils.checkEntityIntersecting(target, entity.getEyePosition(), entity.getEyePosition().add(entity.getForward().scale(radius)), 1f).getType() != HitResult.Type.MISS) && Utils.hasLineOfSight(level, entity.position(), target.getBoundingBox().getCenter(), true)) {
                 target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
-                ((LivingEntity) target).addEffect(new CQMobEffectInstance(MobEffectRegistry.BLEED, 60 * spellLevel, spellLevel - 1, false, false, true, entity, true));
+                CQtils.addBleedStacks(entity, targetLiving, 1, 60 * spellLevel);
                 target.push(direction);
                 target.hurtMarked = true;
             }

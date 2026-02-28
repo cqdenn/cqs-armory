@@ -53,6 +53,13 @@ public class CQtils {
         player.level().broadcastEntityEvent(player, (byte) 30);
     }
 
+    public static void addBleedStacks (LivingEntity attacker, LivingEntity target, int stacks, int duration) {
+        DamageData.get(target).bleedStacks.putIfAbsent(attacker, 0);
+        int newStacks = Math.min(10, DamageData.get(target).bleedStacks.get(attacker) + stacks);
+        DamageData.get(target).bleedStacks.put(attacker, newStacks);
+        target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, duration, 0, false, false, true));
+    }
+
     public static ItemStack getAttackingWeaponItem (LivingEntity attacker, DamageSource source) {
         if (source.getDirectEntity() instanceof OrbExplosion explosion) source = explosion.getSource();
         if (source.getDirectEntity() instanceof ChainLightningEnchantEntity lightning) return lightning.getWeapon();

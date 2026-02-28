@@ -96,8 +96,12 @@ public class SkewerSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent()),
-                Component.translatable("ui.cqs_armory.bleed_duration", (2 * spellLevel) + "s")
+                Component.translatable("ui.cqs_armory.bleed_duration", getBleedDurationTicks(spellLevel)/20 + "s")
         );
+    }
+
+    public static int getBleedDurationTicks (int spellLevel) {
+        return 40 * spellLevel;
     }
 
     @Override
@@ -107,7 +111,7 @@ public class SkewerSpell extends AbstractSpell {
 
         entity.setDeltaMovement(forward.x, y, forward.z);
         entity.hurtMarked = true;
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 40, spellLevel - 1, false, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 40, spellLevel, false, false, false));
         entity.invulnerableTime = 20;
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }

@@ -9,6 +9,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
+
 public class DamageData {
     public DamageData (Vec3 chainWhipLocation) {
         this.chainWhipLocation = chainWhipLocation;
@@ -41,18 +43,12 @@ public class DamageData {
                     }
             );
 
-    /*public static final StreamCodec<FriendlyByteBuf, DamageData> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.DOUBLE, damage -> damage.chainWhipLocation == null ? 0 : damage.chainWhipLocation.x,
-            ByteBufCodecs.DOUBLE, damage -> damage.chainWhipLocation == null ? 0 : damage.chainWhipLocation.y,
-            ByteBufCodecs.DOUBLE, damage -> damage.chainWhipLocation == null ? 0 : damage.chainWhipLocation.z,
-            (x, y, z) -> new DamageData(new Vec3(x, y, z))
-    );*/
-
     public DamageSource lastSource;
     public float lastDamage;
     public LivingEntity markedBy;
     public long cancelNextFall;
     public Vec3 chainWhipLocation;
+    public HashMap<LivingEntity, Integer> bleedStacks = new HashMap<>();
 
     public static DamageData get (Entity entity) {
         return entity.getData(EntityDataAttachmentRegistry.DAMAGE_DATA);
