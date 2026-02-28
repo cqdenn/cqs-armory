@@ -3,6 +3,7 @@
     "minecraft:mob_attack",
     "minecraft:player_attack",
     "minecraft:trident",
-    "cqs_armory:melee_skill"
+    "cqs_armory:melee_skill",
+    "cqs_armory:thrown_item"
   ]
 }

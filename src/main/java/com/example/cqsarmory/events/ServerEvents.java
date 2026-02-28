@@ -516,7 +516,8 @@ public class ServerEvents {
         DamageSource dmgSource = event.getSource();
 
         if (sourceEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
-            int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) ? 5 : 1;
+            boolean swordQuiverAbility = dmgSource.getDirectEntity() instanceof ThrownItemProjectile thrownItem && thrownItem.getShotFromAbility();
+            int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) || swordQuiverAbility ? 5 : 1;
             if (AbilityData.get(player).getRage() > 0) {
                 event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
             }

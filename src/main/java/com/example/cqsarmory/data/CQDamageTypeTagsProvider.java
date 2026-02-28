@@ -32,6 +32,7 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.PLAYER_ATTACK);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(DamageTypes.TRIDENT);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.MELEE_SKILL);
+        tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.THROWN_ITEM);
 
         tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLEEDING);
 
