@@ -104,6 +104,12 @@ public class AnvilProjectile extends AbilityArrow{
         level().playSound(null, this.blockPosition(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS);
 
         if (this.canHitEntity(result.getEntity())) {
+
+            boolean flag = target.getType() == EntityType.ENDERMAN;
+            if (this.isOnFire() && !flag) {
+                target.igniteForSeconds(5.0F);
+            }
+
             if (!this.level().isClientSide) {
                 target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage);
             }

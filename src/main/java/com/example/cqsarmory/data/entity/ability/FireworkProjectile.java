@@ -142,6 +142,12 @@ public class FireworkProjectile extends AbilityArrow {
     protected void onHitEntity(EntityHitResult result) {
         //super.onHitEntity(result);
         if (this.canHitEntity(result.getEntity())) {
+
+            boolean flag = result.getEntity().getType() == EntityType.ENDERMAN;
+            if (this.isOnFire() && !flag) {
+                result.getEntity().igniteForSeconds(5.0F);
+            }
+
             if (!this.level().isClientSide) {
                 this.explode(result.getLocation());
             }

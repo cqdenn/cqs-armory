@@ -19,6 +19,9 @@ public class BatQuiver extends SimpleDescriptiveQuiver {
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg * 0.33f);
         //bat.copyStats(arrow, shooter);
+        if (arrow.isOnFire()) {
+            bat.igniteForSeconds(100);
+        }
         bat.setPos(arrow.position());
         bat.setWeaponItem(arrow.getWeaponItem());
         return bat;

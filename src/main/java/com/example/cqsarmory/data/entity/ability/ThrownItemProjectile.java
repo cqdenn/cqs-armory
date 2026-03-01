@@ -144,6 +144,12 @@ public class ThrownItemProjectile extends AbilityArrow {
         var damageType = damageSources().damageTypes.getHolder(DamageTypes.THROWN_ITEM).get();
 
         if (this.canHitEntity(result.getEntity())) {
+
+            boolean flag = target.getType() == EntityType.ENDERMAN;
+            if (this.isOnFire() && !flag) {
+                target.igniteForSeconds(5.0F);
+            }
+
             if (!this.level().isClientSide) {
                 target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage);
             }

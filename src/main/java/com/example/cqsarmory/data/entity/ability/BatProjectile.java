@@ -116,6 +116,12 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     protected void onHitEntity(EntityHitResult result) {
         Entity entity = result.getEntity();
         if (this.canHitEntity(entity)) {
+
+            boolean flag = entity.getType() == EntityType.ENDERMAN;
+            if (this.isOnFire() && !flag) {
+                entity.igniteForSeconds(5.0F);
+            }
+
             if (!this.level().isClientSide) {
                 this.bite(entity);
                 this.setBaseDamage(this.getBaseDamage() * 0.9);

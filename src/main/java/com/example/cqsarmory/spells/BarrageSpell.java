@@ -16,6 +16,8 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +31,8 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -139,6 +143,11 @@ public class BarrageSpell extends AbstractSpell {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
             AbilityArrow projectile = new AbilityArrow(world);
+            ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+            Holder.Reference<Enchantment> flameHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FLAME);
+            if (wepaonItem.getEnchantmentLevel(flameHolder) > 0) {
+                projectile.igniteForSeconds(100);
+            }
             if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
                 if (CQtils.getPlayerCurioStack(player, "quiver").getItem() instanceof QuiverItem quiver) {
                     projectile = quiver.getCustomProjectile(projectile, player, dmg);
@@ -159,7 +168,6 @@ public class BarrageSpell extends AbstractSpell {
             //projectile.setBaseDamage(dmg);
             projectile.setCritArrow(true);
             //projectile.setShotFromAbility(true); too op
-            ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
             projectile.setWeaponItem(wepaonItem);
 
 
