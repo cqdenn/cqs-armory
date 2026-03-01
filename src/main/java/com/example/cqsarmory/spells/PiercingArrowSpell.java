@@ -59,7 +59,7 @@ public class PiercingArrowSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 30;
+        this.castTime = 20;
         this.baseManaCost = 0;
     }
 

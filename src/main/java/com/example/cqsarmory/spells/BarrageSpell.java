@@ -158,7 +158,7 @@ public class BarrageSpell extends AbstractSpell {
             projectile.xRotO = projectile.getXRot();
             //projectile.setBaseDamage(dmg);
             projectile.setCritArrow(true);
-            projectile.setShotFromAbility(true);
+            //projectile.setShotFromAbility(true); too op
             ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
             projectile.setWeaponItem(wepaonItem);
 
