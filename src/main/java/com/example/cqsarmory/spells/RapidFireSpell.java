@@ -55,7 +55,7 @@ public class RapidFireSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 40;
+        this.castTime = 10;
         this.baseManaCost = 0;
     }
 
@@ -108,7 +108,7 @@ public class RapidFireSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 100),
-                Component.translatable("ui.cqs_armory.arrows_per_second", Utils.stringTruncation(20d / Math.max(5 - spellLevel, 1), 1))
+                Component.translatable("ui.cqs_armory.arrows_per_second", Utils.stringTruncation(10, 1))
         );
     }
 
@@ -118,9 +118,14 @@ public class RapidFireSpell extends AbstractSpell {
     }
 
     @Override
+    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
+        return super.getEffectiveCastTime(spellLevel, entity) + 10 * spellLevel;
+    }
+
+    @Override
     public void onServerCastTick(Level level, int spellLevel, LivingEntity entity, @Nullable MagicData playerMagicData) {
         int speed = Math.max(5 - spellLevel, 1); //4, 3, 2, 1 == 5, 6.6, 10, 20 times per second
-        if (playerMagicData != null && (playerMagicData.getCastDurationRemaining() + 1) % speed == 0) {
+        if (playerMagicData != null && (playerMagicData.getCastDurationRemaining() + 1) % 2 == 0) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE);
             AbilityArrow projectile = new AbilityArrow(level);

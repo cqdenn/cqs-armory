@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.IceArrow;
 import com.example.cqsarmory.registry.SoundRegistry;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -18,6 +19,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -80,6 +82,15 @@ public class IceArrowSpell extends AbstractSpell {
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
         return Optional.of(SoundRegistry.ARROW_SHOOT.get());
+    }
+
+    @Override
+    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
+        double entityCastTimeModifier = 1;
+        if (entity != null) {
+            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
+        }
+        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
     }
 
     @Override

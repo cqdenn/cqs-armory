@@ -120,9 +120,9 @@ public class PiercingArrowSpell extends AbstractSpell {
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
         double entityCastTimeModifier = 1;
         if (entity != null) {
-            entityCastTimeModifier = 2 - Utils.softCapFormula(entity.getAttributeValue(BowAttributes.DRAW_SPEED));
+            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
         }
-        return Math.round(this.getCastTime(spellLevel) * (float) entityCastTimeModifier);
+        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
     }
 
     @Override
