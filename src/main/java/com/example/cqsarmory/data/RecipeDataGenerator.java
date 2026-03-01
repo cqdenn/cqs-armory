@@ -576,42 +576,42 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.MAGMA_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.MAGMA_BLOCK, 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.COLD_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.ICE, 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.VOLT_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.LIGHTNING_BOTTLE.get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLOOD_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.BLOOD_VIAL.get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.EVASIVE_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.ENDER_EYE, 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.ANGEL_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
@@ -648,6 +648,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(Items.GLASS_BOTTLE, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_THREE), 1)
                 .requires(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get(), 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.OVERCHARGE_BRAND.get(), 1)
+                .requires(Items.GLASS_BOTTLE, 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_ESSENCE.get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
