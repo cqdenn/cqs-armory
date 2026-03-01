@@ -174,4 +174,10 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "fire_aspect_enchant_entity").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ScatterProjectile>> SCATTER_ARROW =
+            ENTITIES.register("scatter_arrow", () -> EntityType.Builder.<ScatterProjectile>of(ScatterProjectile::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scatter_arrow").toString()));
 }

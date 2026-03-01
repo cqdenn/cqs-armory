@@ -110,5 +110,6 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.FROST_ASPECT_ENCHANT_ENTITY.get(), FrostAspectEnchantEntityRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FIRE_ASPECT_ENCHANT_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FROST_ASPECT_ENCHANT_PROJECTILE_ENTITY.get(), IcicleRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.SCATTER_ARROW.get(), AbilityArrowRenderer::new);
     }
 }

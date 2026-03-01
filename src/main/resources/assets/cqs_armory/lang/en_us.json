@@ -257,6 +257,8 @@
   "item.cqs_armory.sword_quiver.desc": "Arrows also scale with attack damage",
   "item.cqs_armory.anvil_quiver": "Anvil Quiver",
   "item.cqs_armory.anvil_quiver.desc": "Arrows do more damage the further they fall",
+  "item.cqs_armory.scatter_quiver": "Scatter Quiver",
+  "item.cqs_armory.scatter_quiver.desc": "Arrows bounce and scatter",
 
   "item.cqs_armory.magma_brand": "Brand of Magma",
   "item.cqs_armory.cold_brand": "Brand of Cold",

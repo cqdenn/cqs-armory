@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-28T17:55:15.7039379	Recipes
+// 1.21.1	2026-03-01T03:37:07.1099415	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -228,6 +228,7 @@ c0b8ba9495c8fbf7fc21fcf4b7ea62cb894903f4 data/cqs_armory/advancement/recipes/com
 83c7c9a0513f179b8aa087bb44c845fd8664ee18 data/cqs_armory/advancement/recipes/combat/rampart_talisman.json
 aa7b31f12285f2d484926a56203521d021a77478 data/cqs_armory/advancement/recipes/combat/ranger_talisman.json
 a44b46325fdee53a20483cf72a2374e6129d5c51 data/cqs_armory/advancement/recipes/combat/sage_talisman.json
+777da1c24d88dd90ff97ecd261bd448f38be2b2e data/cqs_armory/advancement/recipes/combat/scatter_quiver.json
 7220dc806180d61b5d183b37626834042af7882b data/cqs_armory/advancement/recipes/combat/scout_talisman.json
 1a12a546afd902d769a5f966ef91f54848822268 data/cqs_armory/advancement/recipes/combat/sculk_arcane_staff.json
 65fecbb02d0ef9e20c411c0d4f060a6cfea8bf01 data/cqs_armory/advancement/recipes/combat/sculk_fire_staff.json
@@ -546,6 +547,7 @@ ae7da4b0395c2ea512b1fc58af1721f29752962a data/cqs_armory/recipe/poison_quiver.js
 7b26786cfc05111c4a06f53e168d37ca1f3cebbb data/cqs_armory/recipe/rampart_talisman.json
 27b6cc58d55dae99ff555d097c6ddcaea2029b2e data/cqs_armory/recipe/ranger_talisman.json
 b6ef2b6f73f9a31215d28e92d3f967a2ec9ffefc data/cqs_armory/recipe/sage_talisman.json
+cce7c9ae66e02258b332397388afa8fab5abb35e data/cqs_armory/recipe/scatter_quiver.json
 48066f207edc7ae68f0aa06124a98c1292200f63 data/cqs_armory/recipe/scout_talisman.json
 4b2f9cbc25c8871764391b1d8d63b614c0a8ec0d data/cqs_armory/recipe/sculk_arcane_staff.json
 350338c93951ecea0a4609e23bf94dc06043340d data/cqs_armory/recipe/sculk_fire_staff.json
