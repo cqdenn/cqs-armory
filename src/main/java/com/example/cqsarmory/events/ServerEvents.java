@@ -18,6 +18,7 @@ import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
+import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -728,6 +729,17 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void overchargeBrand (SpellOnCastEvent event) {
+        int manaSpent = event.getManaCost();
+        Player player = event.getEntity();
+
+        if (ItemRegistry.OVERCHARGE_BRAND.get().isEquippedBy(player)) {
+            int newManaCost = (int) (manaSpent * 1.5);
+            event.setManaCost(newManaCost);
+        }
+    }
+
+    @SubscribeEvent
     public static void trackManaSpent(ChangeManaEvent event) {
         if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
 
@@ -960,7 +972,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void bleedChance(LivingIncomingDamageEvent event) {
         Entity entity = event.getSource().getEntity();
-        if (entity instanceof LivingEntity attacker && Utils.random.nextFloat() <= attacker.getAttributeValue(AttributeRegistry.BLEED_CHANCE)) {
+        if (!event.getSource().is(DamageTypes.BLEEDING) && entity instanceof LivingEntity attacker && Utils.random.nextFloat() <= attacker.getAttributeValue(AttributeRegistry.BLEED_CHANCE)) {
             CQtils.addBleedStacks(attacker, event.getEntity(), 1, 100);
         }
     }

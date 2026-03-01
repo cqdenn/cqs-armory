@@ -200,6 +200,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1))));
     public static final Supplier<CurioBaseItem> ELEMENTAL_BRAND = ITEMS.register("elemental_brand", () -> new ElementalBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand"));
     public static final Supplier<CurioBaseItem> SUMMONERS_BRAND = ITEMS.register("summoners_brand", () -> new SummonersBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand"));
+    public static final Supplier<CurioBaseItem> OVERCHARGE_BRAND = ITEMS.register("overcharge_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
 
     public static final Supplier<CurioBaseItem> POISON_COATING = ITEMS.register("poison_coating", () -> new PoisonCoating(ItemPropertiesHelper.equipment(1), "coating"));
     public static final Supplier<CurioBaseItem> VOLCANO_COATING = ITEMS.register("volcano_coating", () -> new SimpleDescriptiveCoating(ItemPropertiesHelper.equipment(1).fireResistant(), "coating"));
