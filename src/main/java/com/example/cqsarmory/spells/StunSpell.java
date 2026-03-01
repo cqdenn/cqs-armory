@@ -34,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -125,6 +126,12 @@ public class StunSpell extends AbstractSpell {
 
     public int getDurationTicks (int spellLevel) {
         return 20 + (20 * spellLevel);
+    }
+
+    @Override
+    public void onServerPreCast(Level level, int spellLevel, LivingEntity entity, @Nullable MagicData playerMagicData) {
+        super.onServerPreCast(level, spellLevel, entity, playerMagicData);
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.CASTING_SPEED, getEffectiveCastTime(spellLevel, entity), 0, false, false, false));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.example.cqsarmory.spells;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -15,6 +16,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -105,5 +107,6 @@ public class RiposteSpell extends AbstractSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.CASTING_SPEED, getEffectiveCastTime(spellLevel, entity), 0, false, false, false));
     }
 }

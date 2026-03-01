@@ -28,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -107,6 +108,12 @@ public class RuptureSpell extends AbstractSpell {
                 Component.translatable("ui.irons_spellbooks.radius", getRadius(spellLevel)),
                 Component.translatable("ui.cqs_armory.absorption_per_enemy", getAbsorptionPerEnemy(spellLevel))
         );
+    }
+
+    @Override
+    public void onServerPreCast(Level level, int spellLevel, LivingEntity entity, @Nullable MagicData playerMagicData) {
+        super.onServerPreCast(level, spellLevel, entity, playerMagicData);
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.CASTING_SPEED, getEffectiveCastTime(spellLevel, entity), 0, false, false, false));
     }
 
     public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem) {
