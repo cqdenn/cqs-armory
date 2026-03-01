@@ -111,7 +111,7 @@ public class PiercingArrowSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 200 * spellLevel),
+                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (50 * spellLevel)),
                 Component.literal("Pierces 10 Times")
         );
     }
@@ -119,7 +119,7 @@ public class PiercingArrowSpell extends AbstractSpell {
     @Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
         double entityCastTimeModifier = 1;
-        if (entity != null) {
+        if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
             entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
         }
         return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
@@ -127,7 +127,7 @@ public class PiercingArrowSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 2 * spellLevel;
+        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * (1 + (0.5f * spellLevel));
         float scale = 6f;
         AbilityArrow projectile = new AbilityArrow(level);
         if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {

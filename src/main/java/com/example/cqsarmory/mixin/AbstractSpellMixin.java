@@ -29,7 +29,7 @@ public abstract class AbstractSpellMixin {
 
         if (self.getSpellId().equals("irons_spellbooks:poison_arrow") || self.getSpellId().equals("irons_spellbooks:fire_arrow") || self.getSpellId().equals("irons_spellbooks:magic_arrow")) {
             double entityCastTimeModifier = 1;
-            if (entity != null) {
+            if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
                 entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
             }
             cir.setReturnValue(Math.round(cir.getReturnValue() / (float) entityCastTimeModifier));
