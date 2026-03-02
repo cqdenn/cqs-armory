@@ -13,6 +13,7 @@ import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
+import com.example.cqsarmory.items.curios.coatings.HeavyCoating;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
@@ -35,18 +36,24 @@ import io.redspace.ironsspellbooks.entity.spells.thrown_spear.ThrownSpear;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
@@ -71,7 +78,10 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SimpleExplosionDamageCalculator;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -729,7 +739,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void overchargeBrand (SpellOnCastEvent event) {
+    public static void overchargeBrand(SpellOnCastEvent event) {
         int manaSpent = event.getManaCost();
         Player player = event.getEntity();
 
@@ -938,6 +948,35 @@ public class ServerEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void heavyCoating(LivingDamageEvent.Pre event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        Level level = target.level();
+        if (entity instanceof LivingEntity attacker && ItemRegistry.HEAVY_COATING.get().isEquippedBy(attacker)) {
+            var coating = ((HeavyCoating) ItemRegistry.HEAVY_COATING.get());
+            if (attacker instanceof ServerPlayer player && coating.tryProcCooldown(player) && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+                event.setNewDamage(event.getNewDamage() * 1.25f);
+                Vec3 start = target.position();
+                Vec3 end = start.subtract(0, 10, 0); // check 10 blocks downward
+                ClipContext context = new ClipContext(
+                        start,
+                        end,
+                        ClipContext.Block.COLLIDER,
+                        ClipContext.Fluid.NONE,
+                        target
+                );
+                BlockHitResult result = target.level().clip(context);
+                if (result.getType() == HitResult.Type.BLOCK) {
+                    BlockPos groundPos = result.getBlockPos();
+                    PacketDistributor.sendToPlayersTrackingEntity(target, new SmashParticlePacket(groundPos));
+                    level.playSound(null, groundPos, SoundEvents.MACE_SMASH_AIR, SoundSource.PLAYERS, 0.7f, 0.5f);
+                    level.playSound(null, groundPos, SoundEvents.ANVIL_FALL, SoundSource.PLAYERS, 0.5f, 0.5f);
+                }
+            }
+        }
+    }
+
     /*@SubscribeEvent
     public static void bleedStacks(MobEffectEvent.Added event) {
         MobEffectInstance newInstance = event.getEffectInstance();
@@ -954,7 +993,7 @@ public class ServerEvents {
     }*/
 
     @SubscribeEvent
-    public static void resetBleed (MobEffectEvent.Expired event) {
+    public static void resetBleed(MobEffectEvent.Expired event) {
         LivingEntity entity = event.getEntity();
         if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
             DamageData.get(entity).bleedStacks.clear();
@@ -962,7 +1001,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void resetBleed (MobEffectEvent.Remove event) {
+    public static void resetBleed(MobEffectEvent.Remove event) {
         LivingEntity entity = event.getEntity();
         if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
             DamageData.get(entity).bleedStacks.clear();

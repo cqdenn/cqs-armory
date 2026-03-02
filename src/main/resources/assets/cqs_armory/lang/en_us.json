@@ -302,6 +302,8 @@
   "item.cqs_armory.ice_coating.desc": "Shoots ice, scales with ice spell power",
   "item.cqs_armory.bash_coating": "Bash Coating",
   "item.cqs_armory.taunt_coating": "Taunt Coating",
+  "item.cqs_armory.heavy_coating": "Heavy Coating",
+  "item.cqs_armory.heavy_coating.desc": "Next Hit does 1.25x Damage",
 
   "item.cqs_armory.hunter_helmet": "Hunter Helmet",
   "item.cqs_armory.hunter_chestplate": "Hunter Chestplate",

@@ -73,7 +73,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 tag(quiverTag).add((Item)item.get());
             }else if (item.get() instanceof BrandBaseItem || item.get() instanceof SimpleDescriptiveBrand || item.get() instanceof PassiveAbilityBrand) {
                 tag(brandTag).add((Item)item.get());
-            }else if (item.get() instanceof CoatingBaseItem || item.get() instanceof SimpleDescriptiveCoating) {
+            }else if (item.get() instanceof CoatingBaseItem || item.get() instanceof SimpleDescriptiveCoating || item.get() instanceof PassiveAbilityCoating) {
                 tag(coatingTag).add((Item)item.get());
             }else if (item.get() instanceof ArmorItem armorItem) {
                 switch (armorItem.getEquipmentSlot()) {

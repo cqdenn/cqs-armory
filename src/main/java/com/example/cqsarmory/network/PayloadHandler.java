@@ -27,5 +27,6 @@ public class PayloadHandler {
         payloadRegistrar.playToClient(SyncElementalistStacksPacket.TYPE, SyncElementalistStacksPacket.STREAM_CODEC, SyncElementalistStacksPacket::handle);
         payloadRegistrar.playToClient(SyncSummonersStacksPacket.TYPE, SyncSummonersStacksPacket.STREAM_CODEC, SyncSummonersStacksPacket::handle);
         payloadRegistrar.playToServer(PlayerDodgePacket.TYPE, PlayerDodgePacket.STREAM_CODEC, PlayerDodgePacket::handle);
+        payloadRegistrar.playToClient(SmashParticlePacket.TYPE, SmashParticlePacket.STREAM_CODEC, SmashParticlePacket::handle);
     }
 }
