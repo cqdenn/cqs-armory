@@ -44,4 +44,5 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> CONSUME_BLEED_SPELL = registerSpell(new ConsumeBleedSpell());
     public static final Supplier<AbstractSpell> WIND_BURST_SPELL = registerSpell(new WindBurstSpell());
     public static final Supplier<AbstractSpell> CHAIN_WHIP_SPELL = registerSpell(new ChainWhipSpell());
+    public static final Supplier<AbstractSpell> WRATH_ERUPTION_SPELL = registerSpell(new WrathEruptionSpell());
 }

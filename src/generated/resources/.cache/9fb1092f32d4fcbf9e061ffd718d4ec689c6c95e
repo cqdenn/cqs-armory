@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-01T15:00:30.8700397	Recipes
+// 1.21.1	2026-03-01T19:52:32.5849863	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -300,6 +300,7 @@ b3a3d3690fd3e33366f7d4d701505f4340f47bf8 data/cqs_armory/advancement/recipes/com
 9aaac61751065eaf2bbc1bb33e300596d9f111db data/cqs_armory/advancement/recipes/combat/volcano_coating.json
 72d0e70ee572a7dfae6def9215764c316fee7530 data/cqs_armory/advancement/recipes/combat/volt_brand.json
 7154e945e5e298d193371d0ed0524782d3ba8d0e data/cqs_armory/advancement/recipes/combat/wardstone.json
+9723a3c5d3daa7b4b7b2d0db3809ad4f96c8fad0 data/cqs_armory/advancement/recipes/combat/warheart.json
 24bd65d99635376a697abfc9cab6ee84727b596a data/cqs_armory/advancement/recipes/combat/warrior_talisman.json
 007a367ed8445526a7218b4ba7a915bf4fcee2b1 data/cqs_armory/advancement/recipes/combat/withersteel_arcane_staff.json
 5bf0353c78f2506e3f066d903de629c5a3a7f70a data/cqs_armory/advancement/recipes/combat/withersteel_fire_staff.json
@@ -620,6 +621,7 @@ c5fa395dd7625a96c9092a9e244e84d1bca6eb00 data/cqs_armory/recipe/veil_brand.json
 d845e1bbfd0ec381b9eafd7688ff4052d5cba3ff data/cqs_armory/recipe/volcano_coating.json
 20148606da27be9a60a482a1a7d8144d780f8547 data/cqs_armory/recipe/volt_brand.json
 8541a3d2e2df6923bb91090fbe713d1502465eb1 data/cqs_armory/recipe/wardstone.json
+4fa1abea6b46487b4b31ba20bc4447f7b10fd489 data/cqs_armory/recipe/warheart.json
 f05ea5a7221f27ce7c50136ac2f4801fd77d3b1c data/cqs_armory/recipe/warrior_talisman.json
 14632d50452fdf7cf07781e56b140ab496a84eaf data/cqs_armory/recipe/withersteel_arcane_staff.json
 0af91144e74259a4e46c4dc74fc5016df9c95b82 data/cqs_armory/recipe/withersteel_fire_staff.json

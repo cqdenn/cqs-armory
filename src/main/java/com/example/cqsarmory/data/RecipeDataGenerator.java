@@ -342,6 +342,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.WARHEART.get(), 1)
+                .requires(ItemRegistry.HEALTHY_RUNE.get(), 1)
+                .requires(Items.DIAMOND, 8)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HELLFIRE_SIGIL.get(), 1)
                 .requires(ItemRegistry.BLAZING_WEAPONSET.ingot().get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))

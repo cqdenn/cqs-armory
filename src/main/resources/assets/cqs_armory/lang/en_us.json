@@ -39,6 +39,7 @@
   "spell.cqs_armory.consume_bleed_spell": "Consume Bleed",
   "spell.cqs_armory.chain_whip_spell": "Chain Whip",
   "spell.cqs_armory.wind_burst_spell": "Wind Burst",
+  "spell.cqs_armory.wrath_eruption_spell": "Wrath Eruption",
 
   "school.cqs_armory.arcane": "Arcane",
   "school.cqs_armory.necromancy": "Necromancy",
@@ -210,6 +211,7 @@
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
   "item.cqs_armory.wardstone": "Wardstone",
   "item.cqs_armory.wardstone.desc": "Gain 25% damage reduction at max rage",
+  "item.cqs_armory.warheart": "Warheart",
   "item.cqs_armory.hellfire_sigil": "Hellfire Sigil",
   "item.cqs_armory.hellfire_sigil.desc": "Converts generic mage AOE into a meteor storm",
   "item.cqs_armory.chronowarp_rune": "Chronowarp Rune",
