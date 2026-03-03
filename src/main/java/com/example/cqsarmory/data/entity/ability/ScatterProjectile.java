@@ -23,7 +23,7 @@ public class ScatterProjectile extends AbilityArrow{
         this.hasBounced = false;
     }
 
-    public static final int lifetime = 100;
+    public final int lifetime = 100;
     boolean hasBounced;
     HashMap<UUID, Integer> victims;
     int scattersLeft;
