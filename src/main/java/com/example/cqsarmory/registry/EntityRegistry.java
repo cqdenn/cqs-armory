@@ -147,7 +147,7 @@ public class EntityRegistry {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ScytheProjectile>> SCYTHE_PROJECTILE =
             ENTITIES.register("scythe_projectile", () -> EntityType.Builder.<ScytheProjectile>of(ScytheProjectile::new, MobCategory.MISC)
-                    .sized(.5f, .5f)
+                    .sized(1f, 1f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scythe_projectile").toString()));
 
