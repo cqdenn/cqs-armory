@@ -173,6 +173,7 @@ public class AbilityArrow extends AbstractArrow {
         }
         if (arrow instanceof AbilityArrow abilityArrow) {
             this.setScale(abilityArrow.getScale());
+            this.setShotFromAbility(abilityArrow.getShotFromAbility());
         }
         this.setWeaponItem(arrow.getWeaponItem());
     }
