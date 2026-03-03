@@ -10,17 +10,22 @@ import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
 import com.example.cqsarmory.registry.*;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
+import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,6 +42,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
@@ -46,6 +52,46 @@ import java.util.function.Supplier;
 public class CQtils {
 
     public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
+
+    public static void doGenericMageAOE (LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {
+        Vector3f center = new Vector3f(1, 1f, 1f);
+        var x = from.x;
+        var y = from.y;
+        var z = from.z;
+        Level level = owner.level();
+        DamageSource damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(DamageTypes.MAGE_AOE).get(), directEntity, owner);
+        //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 40; //2.5% of max mana
+        float damage = (float) (baseDamage * owner.getAttributeValue(AttributeRegistry.SPELL_POWER));
+        var entities = level.getEntities(owner, new AABB(from, from).inflate(radius, 1, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(owner, targeted) && Utils.hasLineOfSight(level, from, targeted.position(), true));
+
+        if (!owner.level().isClientSide) {
+            genericMageAOEParticlesServer(owner.level(), radius, center, from);
+        } else {
+            level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
+            level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
+        }
+
+        for (Entity target : entities) {
+            if (target instanceof LivingEntity) {
+                target.hurt(damageSource, damage);
+            }
+        }
+        entities.clear();
+    }
+
+    public static void genericMageAOEParticlesServer (Level level, float radius, Vector3f center, Vec3 from) {
+        var x = from.x;
+        var y = from.y;
+        var z = from.z;
+
+        MagicManager.spawnParticles(level, new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 1, 0, 0, 0, 0, false);
+        MagicManager.spawnParticles(level, new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 1, 0, 0, 0, 0, false);
+        MagicManager.spawnParticles(level, new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 1, 0, 0, 0, 0, false);
+        MagicManager.spawnParticles(level, new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 1, 0, 0, 0, 0, false);
+    }
 
     public static void disableShield(Player player, int ticks) {
         player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);

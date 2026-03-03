@@ -24,4 +24,6 @@ public class DamageTypes {
     public static final ResourceKey<DamageType> BAT_PROJECTILE = register("bat_projectile");
     public static final ResourceKey<DamageType> ICE = register("ice");
     public static final ResourceKey<DamageType> THROWN_ITEM = register("thrown_item");
+    public static final ResourceKey<DamageType> MAGE_AOE = register("mage_aoe");
+    public static final ResourceKey<DamageType> HELLFIRE_MAGE_AOE = register("hellfire_mage_aoe");
 }

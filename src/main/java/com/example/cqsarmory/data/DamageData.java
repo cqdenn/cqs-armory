@@ -49,6 +49,7 @@ public class DamageData {
     public long cancelNextFall;
     public Vec3 chainWhipLocation;
     public HashMap<LivingEntity, Integer> bleedStacks = new HashMap<>();
+    public boolean preventAOEChaining;
 
     public static DamageData get (Entity entity) {
         return entity.getData(EntityDataAttachmentRegistry.DAMAGE_DATA);

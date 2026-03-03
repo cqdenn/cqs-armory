@@ -180,4 +180,16 @@ public class EntityRegistry {
                     .sized(.5f, .5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scatter_arrow").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<HellfireAOEEntity>> HELLFIRE_AOE_ENTITY =
+            ENTITIES.register("hellfire_aoe_entity", () -> EntityType.Builder.<HellfireAOEEntity>of(HellfireAOEEntity::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "hellfire_aoe_entity").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<DelayedGenericMageAOE>> DELAYED_GENERIC_MAGE_AOE_ENTITY =
+            ENTITIES.register("delayed_generic_aoe_entity", () -> EntityType.Builder.<DelayedGenericMageAOE>of(DelayedGenericMageAOE::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "delayed_generic_aoe_entity").toString()));
 }

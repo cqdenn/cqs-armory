@@ -1,9 +1,9 @@
-// 1.21.1	2026-03-01T21:29:05.3821329	Tags for minecraft:item mod id cqs_armory
+// 1.21.1	2026-03-02T16:41:54.2615196	Tags for minecraft:item mod id cqs_armory
 7bfe59bf58e4916df21173dffdf1edc3f8aa5af1 data/cqs_armory/tags/item/arrows.json
 f1226abaa51fc09eca620ffd9298f8ac52422852 data/cqs_armory/tags/item/ingots/power_one.json
 d4c8ee7f43ee48273cf1e9cd1226be32f9db3840 data/cqs_armory/tags/item/ingots/power_three.json
 93e2a340cd07c82e91b429d7d4b0263db3597e2c data/cqs_armory/tags/item/ingots/power_two.json
-a658d33e73d9ad84b2856ea1d955572dcd058c9f data/curios/tags/item/booster.json
+08a11408fdc8b0398a8fcb22e2844198e7162ca1 data/curios/tags/item/booster.json
 9cb373d6e1dc7b9d6e66ef053740577c90e95754 data/curios/tags/item/brand.json
 bbaaeb7fd7b5195d8eaf03c3535f99984e45e7b3 data/curios/tags/item/coating.json
 2db1297cbfd9e70494f4f707e0099b0a186031ec data/curios/tags/item/necklace.json

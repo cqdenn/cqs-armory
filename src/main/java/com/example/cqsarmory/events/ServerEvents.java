@@ -6,7 +6,6 @@ import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.DodgeData;
-import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.OnHitBrand;
@@ -27,40 +26,29 @@ import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
-import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
-import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
-import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
-import io.redspace.ironsspellbooks.entity.spells.thrown_spear.ThrownSpear;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
-import net.minecraft.util.ParticleUtils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -68,7 +56,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
@@ -78,7 +65,6 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SimpleExplosionDamageCalculator;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -839,6 +825,36 @@ public class ServerEvents {
 
     }
 
+    @SubscribeEvent
+    public static void unendingAuraBrand(LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof Player player && ItemRegistry.UNENDING_AURA.get().isEquippedBy(player)) {
+            DamageSource source = event.getSource();
+            if ((source.is(DamageTypes.MAGE_AOE) || source.is(DamageTypes.HELLFIRE_MAGE_AOE)) && !(source.getDirectEntity() instanceof DelayedGenericMageAOE)) {
+                if (!player.level().isClientSide) {
+                    DelayedGenericMageAOE aoe = new DelayedGenericMageAOE(player.level(), player, target.position());
+                    player.level().addFreshEntity(aoe);
+                }
+
+                //was gonna extend aoe duration on hit, but too similar to chronowarp rune
+                /*if (source.is(DamageTypes.MAGE_AOE)) {
+                    MobEffectInstance effect = player.getEffect(MobEffectRegistry.GENERIC_MAGE_AOE);
+                    if (effect != null) {
+                        player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 10, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+                    }
+                }
+                if (source.is(DamageTypes.HELLFIRE_MAGE_AOE)) {
+                    MobEffectInstance effect = player.getEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE);
+                    if (effect != null) {
+                        player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 10, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
+                    }
+                }*/
+            }
+
+        }
+    }
+
     /*@SubscribeEvent
     public static void infinityBrandCD(SpellCooldownAddedEvent.Pre event) {
         Player player = event.getEntity();
@@ -955,7 +971,7 @@ public class ServerEvents {
         Level level = target.level();
         if (entity instanceof LivingEntity attacker && ItemRegistry.HEAVY_COATING.get().isEquippedBy(attacker)) {
             var coating = ((HeavyCoating) ItemRegistry.HEAVY_COATING.get());
-            if (attacker instanceof ServerPlayer player && coating.tryProcCooldown(player) && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+            if (attacker instanceof ServerPlayer player && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN) && coating.tryProcCooldown(player)) {
                 event.setNewDamage(event.getNewDamage() * 1.25f);
                 Vec3 start = target.position();
                 Vec3 end = start.subtract(0, 10, 0); // check 10 blocks downward

@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.effects;
 
+import com.example.cqsarmory.data.entity.ability.HellfireAOEEntity;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -39,7 +40,7 @@ public class HellfireMageAOEEffect extends NonCurableEffect {
             var y = livingEntity.position().y + 4;
             var z = livingEntity.position().z + (Utils.random.nextFloat() * radius * i/rings) * randZ;
 
-            SmallMagicFireball fireball = new SmallMagicFireball(level, livingEntity);
+            HellfireAOEEntity fireball = new HellfireAOEEntity(level, livingEntity);
             fireball.setDamage(damage);
             fireball.setExplosionRadius(1f);
             fireball.setPos(new Vec3(x, y, z));

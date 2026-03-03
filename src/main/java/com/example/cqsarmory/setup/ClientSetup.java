@@ -111,5 +111,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.FIRE_ASPECT_ENCHANT_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FROST_ASPECT_ENCHANT_PROJECTILE_ENTITY.get(), IcicleRenderer::new);
         event.registerEntityRenderer(EntityRegistry.SCATTER_ARROW.get(), AbilityArrowRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.DELAYED_GENERIC_MAGE_AOE_ENTITY.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.HELLFIRE_AOE_ENTITY.get(), NoopRenderer::new);
     }
 }

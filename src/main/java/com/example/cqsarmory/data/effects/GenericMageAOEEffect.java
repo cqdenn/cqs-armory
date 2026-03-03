@@ -1,15 +1,19 @@
 package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.registry.CQSpellRegistry;
+import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
+import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -29,35 +33,13 @@ public class GenericMageAOEEffect extends NonCurableEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        float radius = 5;
-        Vector3f center = new Vector3f(1, 1f, 1f);
-        var x = livingEntity.position().x;
-        var y = livingEntity.position().y;
-        var z = livingEntity.position().z;
-        Level level = livingEntity.level();
-        var damageSource = SpellRegistry.MAGIC_MISSILE_SPELL.get().getDamageSource(livingEntity);
-        //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 40; //2.5% of max mana
-        float damage = (float) (30 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER));
-        var entities = level.getEntities(livingEntity, new AABB(livingEntity.position(), livingEntity.position()).inflate(radius, 1, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(livingEntity, targeted) && Utils.hasLineOfSight(level, livingEntity.position(), targeted.position(), true));
-
-        level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
-        level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
-        level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
-        level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
-        level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
-
-        for (Entity target : entities) {
-            if (target instanceof LivingEntity) {
-                target.hurt(damageSource, damage);
-            }
-        }
-        entities.clear();
-
+        if (!(livingEntity.level().getGameTime() % 20 == 0) || livingEntity.level().isClientSide) return true;
+        CQtils.doGenericMageAOE(livingEntity, null, livingEntity.position(), 5, 30);
         return true;
     }
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int pDuration, int pAmplifier) {
-        return pDuration % 20 == 0;
+        return true;
     }
 }
