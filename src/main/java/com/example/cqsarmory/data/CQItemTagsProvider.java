@@ -67,7 +67,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
         for (DeferredHolder item : ItemRegistry.ITEMS.getEntries()) {
             if (item.get() instanceof SwordItem || item.get() instanceof GreataxeItem) {
                 tag(swordTag).add((Item)item.get());
-            }else if (item.get() instanceof BoosterBaseItem || item.get() instanceof SimpleDescriptiveBooster) {
+            }else if (item.get() instanceof BoosterBaseItem || item.get() instanceof SimpleDescriptiveBooster || item.get() instanceof PassiveAbilityBooster) {
                 tag(boosterTag).add((Item)item.get());
             }else if (item.get() instanceof QuiverItem) {
                 tag(quiverTag).add((Item)item.get());
