@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.HashMap;
@@ -16,36 +17,43 @@ public class ScatterProjectile extends AbilityArrow{
         super(entityType, level);
     }
 
-    public ScatterProjectile(Level level, int scattersLeft) {
+    public ScatterProjectile(Level level, int scattersLeft, int bouncesLeft, boolean initial) {
         super(level);
         this.scattersLeft = scattersLeft;
+        this.bouncesLeft = bouncesLeft;
         this.victims = new HashMap<>();
         this.hasBounced = false;
+        this.initial = initial;
     }
 
-    public final int lifetime = 100;
+    public final int lifetime = 400;
     boolean hasBounced;
+    boolean initial;
     HashMap<UUID, Integer> victims;
     int scattersLeft;
+    int bouncesLeft;
     int bounces;
 
     public Vec3 getAfterBounceSpeed () {
         return new Vec3(0.5, 0.5, 0.5);
     }
 
-    /*public boolean canHitVictim(Entity entity) {
-        var timestamp = victims.get(entity.getUUID());
-        return timestamp == null || entity.tickCount - timestamp >= 10;
+    @Override
+    protected boolean canHitEntity(Entity target) {
+        return super.canHitEntity(target) && target != getOwner();
     }
 
     @Override
-    protected boolean canHitEntity(Entity target) {
-        return super.canHitEntity(target) && canHitVictim(target);
-    }*/
-
-    @Override
     protected void onHitBlock(BlockHitResult pResult) {
-        if (!this.hasBounced) {
+        Vec3 normal = Vec3.atLowerCornerOf(pResult.getDirection().getNormal());
+        double push = this.getBbWidth() / 2.0 + 0.001;
+
+        this.setPos(
+                pResult.getLocation().x + normal.x * push,
+                pResult.getLocation().y + normal.y * push,
+                pResult.getLocation().z + normal.z * push
+        );
+        if (!this.hasBounced && initial) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(this.getAfterBounceSpeed()));
             this.hasBounced = true;
         }
@@ -59,8 +67,9 @@ public class ScatterProjectile extends AbilityArrow{
             if (getOwner() instanceof LivingEntity owner) {
                 int deg = 30;
                 for (int i = - deg; i <= deg; i += deg * 2) {
-                    ScatterProjectile scatterArrow = new ScatterProjectile(level(), this.scattersLeft - 1);
+                    ScatterProjectile scatterArrow = new ScatterProjectile(level(), this.scattersLeft - 1, this.bouncesLeft - 1, false);
                     scatterArrow.copyStats(this, owner, (float) getBaseDamage());
+                    scatterArrow.setCritArrow(false);
 
                     Vec3 original = this.getDeltaMovement().normalize();
                     float speed = (float)this.getDeltaMovement().length();
@@ -82,8 +91,8 @@ public class ScatterProjectile extends AbilityArrow{
             }
             this.scattersLeft -= 1;
         }
-        if (++this.bounces >= 4) {
-            discard();
+        if (this.bounces++ >= this.bouncesLeft) {
+            super.onHitBlock(pResult);
         }
     }
 
