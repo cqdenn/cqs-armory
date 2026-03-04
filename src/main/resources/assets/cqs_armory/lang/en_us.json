@@ -141,6 +141,7 @@
   "curios.identifier.coating": "Coating",
 
   "death.attack.volcano": "%1$s was erupted by %2$s",
+  "death.attack.bat_projectile": "%1$s was nibbled",
   "death.attack.melee_skill": "%1$s was dominated by %2$s",
   "death.attack.archer_skill": "%1$s was dominated by %2$s",
   "death.attack.arcane_skill": "%1$s was slain by %2$s's arcane magic",
