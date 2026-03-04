@@ -56,10 +56,10 @@ public class SmashParticlePacket implements CustomPacketPayload {
                 double d5 = level.getRandom().nextGaussian() * 0.2F;
                 level.addParticle(blockparticleoption, d0, d1, d2, d3, d4, d5);
             }
-            for (int j = 0; (float) j < (float) 750 / 1.5F; j++) {
-                double d6 = vec3.x + 3.5 * Math.cos((double) j) + level.getRandom().nextGaussian() / 2.0;
+            for (int j = 0; (float) j < (float) 750 / 1.5F; j+=2) {
+                double d6 = vec3.x + 2.5 * Math.cos((double) j) + level.getRandom().nextGaussian() / 2.0;
                 double d7 = vec3.y;
-                double d8 = vec3.z + 3.5 * Math.sin((double) j) + level.getRandom().nextGaussian() / 2.0;
+                double d8 = vec3.z + 2.5 * Math.sin((double) j) + level.getRandom().nextGaussian() / 2.0;
                 double d9 = level.getRandom().nextGaussian() * 0.05F;
                 double d10 = level.getRandom().nextGaussian() * 0.05F;
                 double d11 = level.getRandom().nextGaussian() * 0.05F;
