@@ -52,9 +52,9 @@ public class DoubleJumpPacket implements CustomPacketPayload {
                     player.push(motion.x, y, motion.z);
                     player.hurtMarked = true;
                     DoubleJumpData.get(player).jumps--;
-                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 20, 0, false, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
 
-                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST));
+                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
                     float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
                     AbilityData.get(player).setMomentum(newMomentum);
                     PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
@@ -64,9 +64,9 @@ public class DoubleJumpPacket implements CustomPacketPayload {
                     player.push(motion.x, 0.25, motion.z);
                     player.hurtMarked = true;
                     DoubleJumpData.get(player).dashes--;
-                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 20, 0, false, false, false));
+                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
 
-                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST));
+                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
                     float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
                     AbilityData.get(player).setMomentum(newMomentum);
                     PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));

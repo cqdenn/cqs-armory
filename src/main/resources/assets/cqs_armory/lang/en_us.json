@@ -129,7 +129,7 @@
   "attribute.cqs_armory.life_steal": "HP Life Steal",
   "attribute.cqs_armory.momentum_jumps": "Momentum Jumps",
   "attribute.cqs_armory.momentum_dashes": "Momentum Dashes",
-  "attribute.cqs_armory.momentum_movement_cost": "Momentum Cost",
+  "attribute.cqs_armory.momentum_movement_cost_reduction": "Momentum Cost Reduction",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
