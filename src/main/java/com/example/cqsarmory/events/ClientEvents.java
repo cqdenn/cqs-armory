@@ -45,15 +45,16 @@ import software.bernie.geckolib.event.GeoRenderEvent;
 import software.bernie.geckolib.service.GeckoLibEvents;
 
 import javax.swing.plaf.basic.BasicTreeUI;
+import java.awt.event.KeyEvent;
 
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
 
     @SubscribeEvent
-    public static void archerDoubleJump (ClientTickEvent.Pre event) {
-        if (Minecraft.getInstance().options.keyJump.consumeClick()) {
-            var options = Minecraft.getInstance().options;
+    public static void archerDoubleJump (InputEvent.Key event) {
+        var options = Minecraft.getInstance().options;
+        if (options.keyJump.getKey().getValue() == event.getKey() && event.getAction() == 1) {
             int lateral = 0;
             int forward = 0;
             if (options.keyUp.isDown()) {
@@ -68,7 +69,7 @@ public class ClientEvents {
             if (options.keyLeft.isDown()) {
                 lateral += 1;
             }
-
+            if (lateral == 0 && forward == 0) {forward = -1;}
             PacketDistributor.sendToServer(new DoubleJumpPacket(new Vec3(lateral, 0, forward)));
         }
     }
