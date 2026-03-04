@@ -98,12 +98,12 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
 
         tag(Tags.Items.MATERIALS_POWER_TWO).add(ItemRegistry.SCULK_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_TWO).add(ItemRegistry.LIVING_WEAPONSET.ingot().get().asItem());
-        tag(Tags.Items.MATERIALS_POWER_TWO).add(ItemRegistry.UMBRITE_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_TWO).add(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_TWO).add(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().asItem());
 
         tag(Tags.Items.MATERIALS_POWER_THREE).add(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_THREE).add(ItemRegistry.BLAZING_WEAPONSET.ingot().get().asItem());
+        tag(Tags.Items.MATERIALS_POWER_THREE).add(ItemRegistry.UMBRITE_WEAPONSET.ingot().get().asItem());
         tag(Tags.Items.MATERIALS_POWER_THREE).add(Items.NETHERITE_INGOT);
 
         tag(Tags.Items.ARROWS).add(Items.ARROW);

@@ -36,13 +36,16 @@ public class CQWanderingTrades {
 
         List<ItemStack> tierTwoIngots = List.of(
                 ItemRegistry.LIVING_WEAPONSET.ingot().get().toStack(),
-                ItemRegistry.UMBRITE_WEAPONSET.ingot().get().toStack(),
                 ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get().toStack(),
-                ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack());
+                ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack(),
+                ItemRegistry.SCULK_WEAPONSET.ingot().get().toStack());
 
         List<ItemStack> tierThreeIngots = List.of(
                 ItemRegistry.BLAZING_WEAPONSET.ingot().get().toStack(),
-                ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get().toStack());
+                ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get().toStack(),
+                ItemRegistry.UMBRITE_WEAPONSET.ingot().get().toStack()
+        );
+
 
         List<VillagerTrades.ItemListing> additionalGenericTrades = List.of(
                 //repeated method calls to increase odds of appearing

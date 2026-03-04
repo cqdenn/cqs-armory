@@ -552,7 +552,7 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GRAVITY_QUIVER.get(), 1)
                 .requires(ItemRegistry.BASIC_QUIVER.get(), 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
-                .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 1)
+                .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BASIC_QUIVER.get()))
                 .save(recipeOutput);
 
