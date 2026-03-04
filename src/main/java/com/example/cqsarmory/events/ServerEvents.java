@@ -1037,7 +1037,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void resetBleed(MobEffectEvent.Expired event) {
         LivingEntity entity = event.getEntity();
-        if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
+        if (event.getEffectInstance() != null && event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
             DamageData.get(entity).bleedStacks.clear();
         }
     }
@@ -1045,7 +1045,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void resetBleed(MobEffectEvent.Remove event) {
         LivingEntity entity = event.getEntity();
-        if (event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
+        if (event.getEffectInstance() != null && event.getEffectInstance().getEffect() == MobEffectRegistry.BLEED && DamageData.get(entity).bleedStacks != null) {
             DamageData.get(entity).bleedStacks.clear();
         }
     }
