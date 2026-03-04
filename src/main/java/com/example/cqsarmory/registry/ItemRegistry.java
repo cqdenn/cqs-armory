@@ -8,7 +8,6 @@ import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.brands.ElementalBrand;
 import com.example.cqsarmory.items.curios.brands.SummonersBrand;
-import com.example.cqsarmory.items.curios.brands.VeilBrand;
 import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.*;
