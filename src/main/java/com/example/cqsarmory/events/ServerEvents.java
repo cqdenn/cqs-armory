@@ -462,7 +462,7 @@ public class ServerEvents {
         Item item = livingEntity.getUseItem().getItem();
 
         if (item instanceof ShieldItem && livingEntity instanceof Player player) {
-            CQtils.disableShield(player, 20);
+            if (AbilityData.get(player).currentShieldDamage > 0) CQtils.disableShield(player, 20, false);
             AbilityData.get(player).currentShieldDamage = 0;
         }
 
@@ -480,7 +480,7 @@ public class ServerEvents {
                 AbilityData.get(livingEntity).currentShieldDamage += damage;
 
                 if (AbilityData.get(livingEntity).currentShieldDamage >= livingEntity.getAttribute(AttributeRegistry.BLOCK_STRENGTH).getValue()) {
-                    CQtils.disableShield(player, 100);
+                    CQtils.disableShield(player, 100, true);
                     AbilityData.get(livingEntity).currentShieldDamage = 0;
                 }
             }

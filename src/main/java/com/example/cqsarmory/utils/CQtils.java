@@ -53,7 +53,7 @@ public class CQtils {
 
     public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
 
-    public static void doGenericMageAOE (LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {
+    public static void doGenericMageAOE(LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {
         Vector3f center = new Vector3f(1, 1f, 1f);
         var x = from.x;
         var y = from.y;
@@ -82,7 +82,7 @@ public class CQtils {
         entities.clear();
     }
 
-    public static void genericMageAOEParticlesServer (Level level, float radius, Vector3f center, Vec3 from) {
+    public static void genericMageAOEParticlesServer(Level level, float radius, Vector3f center, Vec3 from) {
         var x = from.x;
         var y = from.y;
         var z = from.z;
@@ -93,33 +93,47 @@ public class CQtils {
         MagicManager.spawnParticles(level, new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 1, 0, 0, 0, 0, false);
     }
 
-    public static void disableShield(Player player, int ticks) {
+    public static void disableShield(Player player, int ticks, boolean playSound) {
         player.getCooldowns().addCooldown(player.getUseItem().getItem(), ticks);
         player.stopUsingItem();
-        player.level().broadcastEntityEvent(player, (byte) 30);
+        if (playSound) {
+            player.level().playSound(
+                    null,
+                    player.getX(),
+                    player.getY(),
+                    player.getZ(),
+                    SoundEvents.SHIELD_BREAK,
+                    player.getSoundSource(),
+                    1F,
+                    0.8F + player.level().random.nextFloat() * 0.4F
+            );
+        }
     }
 
-    public static void addBleedStacks (LivingEntity attacker, LivingEntity target, int stacks, int duration) {
+    public static void addBleedStacks(LivingEntity attacker, LivingEntity target, int stacks, int duration) {
         DamageData.get(target).bleedStacks.putIfAbsent(attacker, 0);
         int newStacks = Math.min(10, DamageData.get(target).bleedStacks.get(attacker) + stacks);
         DamageData.get(target).bleedStacks.put(attacker, newStacks);
         target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, duration, 0, false, false, true));
     }
 
-    public static ItemStack getAttackingWeaponItem (LivingEntity attacker, DamageSource source) {
+    public static ItemStack getAttackingWeaponItem(LivingEntity attacker, DamageSource source) {
         if (source.getDirectEntity() instanceof OrbExplosion explosion) source = explosion.getSource();
         if (source.getDirectEntity() instanceof ChainLightningEnchantEntity lightning) return lightning.getWeapon();
         if (source.getDirectEntity() instanceof FrostAspectEnchantEntity frost) return frost.getWeapon();
-        if (source.getDirectEntity() instanceof FrostAspectEnchantProjectileEntity frostProj) return frostProj.getWeapon();
+        if (source.getDirectEntity() instanceof FrostAspectEnchantProjectileEntity frostProj)
+            return frostProj.getWeapon();
         if (source.getDirectEntity() instanceof FireAspectEnchantEntity fire) return fire.getWeapon();
-        if (source.getDirectEntity() instanceof Projectile projectile && projectile.getWeaponItem() != null) return projectile.getWeaponItem();
+        if (source.getDirectEntity() instanceof Projectile projectile && projectile.getWeaponItem() != null)
+            return projectile.getWeaponItem();
         MagicData magicData = MagicData.getPlayerMagicData(attacker);
         boolean isWeaponCasting = magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) || magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.MAINHAND);
-        if (source instanceof SpellDamageSource && isWeaponCasting) return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
+        if (source instanceof SpellDamageSource && isWeaponCasting)
+            return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
         return attacker.getMainHandItem();
     }
 
-    private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap () {
+    private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap() {
         Map<AbstractSpell, Supplier<SchoolType>> schoolMap = new HashMap<>();
 
         schoolMap.put(SpellRegistry.FANG_STRIKE_SPELL.get(), CQSchoolRegistry.NECROMANCY);
@@ -261,13 +275,13 @@ public class CQtils {
         }
         if (!orbs.isEmpty()) {
             Vec3 add = Utils.getRandomVec3(1).multiply(1, 0, 1).add(0, Utils.random.nextFloat() / 2, 0);
-            findOrbLoc(startLoc.add(add),orb, level);
+            findOrbLoc(startLoc.add(add), orb, level);
         } else {
             orb.moveTo(startLoc);
         }
     }
 
-    public static ItemStack getPlayerCurioStack (@NotNull Player player, String slot) {
+    public static ItemStack getPlayerCurioStack(@NotNull Player player, String slot) {
         return CuriosApi.getCuriosInventory(player).flatMap(curios -> curios.findCurio(slot, 0).map(SlotResult::stack)).orElse(ItemStack.EMPTY);
     }
 }
