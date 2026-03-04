@@ -15,7 +15,7 @@ public class ScatterQuiver extends SimpleDescriptiveQuiver {
 
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        ScatterProjectile scatter = new ScatterProjectile(shooter.level(), 2, 1, true);
+        ScatterProjectile scatter = new ScatterProjectile(shooter.level(), 1, 5, true);
         scatter.copyStats(arrow, shooter, arrowDmg);
         return scatter;
     }
