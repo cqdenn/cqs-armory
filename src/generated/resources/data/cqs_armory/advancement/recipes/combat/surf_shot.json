@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "cqs_armory:sculk_ingot"
+            "items": "cqs_armory:silversteel_ingot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cqs_armory:hunters_echo"
+        "recipe": "cqs_armory:surf_shot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cqs_armory:hunters_echo"
+      "cqs_armory:surf_shot"
     ]
   }
 }

@@ -1,0 +1,9 @@
+{
+  "amount": 5,
+  "attribute": "cqs_armory:max_momentum",
+  "containerItem": {
+    "count": 1,
+    "id": "cqs_armory:max_momentum_upgrade_orb"
+  },
+  "operation": "add_value"
+}

@@ -127,6 +127,9 @@
   "attribute.cqs_armory.auto_crit": "Lingering Crit Seconds",
   "attribute.cqs_armory.bleed_chance": "Bleed Chance",
   "attribute.cqs_armory.life_steal": "HP Life Steal",
+  "attribute.cqs_armory.momentum_jumps": "Momentum Jumps",
+  "attribute.cqs_armory.momentum_dashes": "Momentum Dashes",
+  "attribute.cqs_armory.momentum_movement_cost": "Momentum Cost",
 
   "curios.modifiers.booster": "When boosting:",
   "curios.identifier.booster": "Booster",
@@ -198,7 +201,7 @@
   "death.attack.cqs_armory.chain_whip_spell.item": "%1$s was killed by %2$s using %3$s",
 
   "item.cqs_armory.max_rage_upgrade_orb": "Max Rage Upgrade Orb",
-  "item.cqs_armory.momentum_on_hit_upgrade_orb": "Momentum on Hit Upgrade Orb",
+  "item.cqs_armory.max_momentum_upgrade_orb": "Max Momentum Upgrade Orb",
   "item.cqs_armory.max_health_upgrade_orb": "Max Health Upgrade Orb",
   "item.cqs_armory.block_strength_upgrade_orb": "Block Strength Upgrade Orb",
 
@@ -223,6 +226,9 @@
   "item.cqs_armory.unending_aura.desc": "Mage AOE damage summons a smaller generic AOE",
   "item.cqs_armory.blaster": "Blaster",
   "item.cqs_armory.blaster.desc": "Swaps momentum orbs spawned for explosive orbs",
+  "item.cqs_armory.surf_shot": "Surf Shot",
+  "item.cqs_armory.surf_shot.desc": "Resets momentum movement on midair shot",
+  "item.cqs_armory.double_dasher": "Double Dasher",
   "item.cqs_armory.sharpshooter": "Sharpshooter",
   "item.cqs_armory.hunters_echo": "Hunter's Echo",
   "item.cqs_armory.bigger_boomer": "Bigger Boomer",

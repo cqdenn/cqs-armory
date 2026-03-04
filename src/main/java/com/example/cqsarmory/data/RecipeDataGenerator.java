@@ -365,7 +365,7 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTERS_ECHO.get(), 1)
+        /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTERS_ECHO.get(), 1)
                 .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
                 .requires(Items.ARROW)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SCULK_WEAPONSET.ingot().get()))
@@ -375,6 +375,17 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(Items.TNT, 1)
                 .requires(Items.DIAMOND, 8)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.TNT))
+                .save(recipeOutput);*/
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SURF_SHOT.get(), 1)
+                .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 4)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.DOUBLE_DASHER.get(), 1)
+                .requires(Items.WIND_CHARGE, 2)
+                .requires(Items.DIAMOND, 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WIND_CHARGE))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SHARPHOOTER.get(), 1)
@@ -750,7 +761,7 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MOMENTUM_ON_HIT_UPGRADE_ORB.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MAX_MOMENTUM_UPGRADE_ORB.get())
                 .pattern("rrr")
                 .pattern("rxr")
                 .pattern("rrr")

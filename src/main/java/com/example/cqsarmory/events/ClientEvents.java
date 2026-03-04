@@ -2,6 +2,7 @@ package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.DamageData;
+import com.example.cqsarmory.network.DoubleJumpPacket;
 import com.example.cqsarmory.network.doOnSwingEffectPacket;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.RenderingUtils;
@@ -10,6 +11,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.render.SpellRenderingHelper;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.RenderType;
@@ -35,6 +37,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.entity.PartEntity;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import software.bernie.geckolib.event.GeckoLibEventsNeoForge;
@@ -46,6 +49,29 @@ import javax.swing.plaf.basic.BasicTreeUI;
 
 @EventBusSubscriber(Dist.CLIENT)
 public class ClientEvents {
+
+    @SubscribeEvent
+    public static void archerDoubleJump (ClientTickEvent.Pre event) {
+        if (Minecraft.getInstance().options.keyJump.consumeClick()) {
+            var options = Minecraft.getInstance().options;
+            int lateral = 0;
+            int forward = 0;
+            if (options.keyUp.isDown()) {
+                forward += 1;
+            }
+            if (options.keyDown.isDown()) {
+                forward -= 1;
+            }
+            if (options.keyRight.isDown()) {
+                lateral -= 1;
+            }
+            if (options.keyLeft.isDown()) {
+                lateral += 1;
+            }
+
+            PacketDistributor.sendToServer(new DoubleJumpPacket(new Vec3(lateral, 0, forward)));
+        }
+    }
 
     /*@SubscribeEvent
     public static void dodge(ClientTickEvent.Pre event) {

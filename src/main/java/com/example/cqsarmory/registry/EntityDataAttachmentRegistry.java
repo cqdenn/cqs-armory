@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.DodgeData;
+import com.example.cqsarmory.data.DoubleJumpData;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -21,6 +22,9 @@ public class EntityDataAttachmentRegistry {
     );
     public static final Supplier<AttachmentType<DodgeData>> DODGE_DATA = ATTACHMENT_TYPES.register(
             "dodge_data", () -> AttachmentType.builder(() -> new DodgeData()).build()
+    );
+    public static final Supplier<AttachmentType<DoubleJumpData>> DOUBLE_JUMP_DATA = ATTACHMENT_TYPES.register(
+            "double_jump_data", () -> AttachmentType.builder(() -> new DoubleJumpData()).build()
     );
 
 }

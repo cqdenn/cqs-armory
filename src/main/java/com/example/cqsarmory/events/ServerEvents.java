@@ -6,6 +6,7 @@ import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.DodgeData;
+import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.items.curios.OnHitBrand;
@@ -514,7 +515,7 @@ public class ServerEvents {
 
         if (sourceEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
             boolean swordQuiverAbility = dmgSource.getDirectEntity() instanceof ThrownItemProjectile thrownItem && thrownItem.getShotFromAbility();
-            int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) || swordQuiverAbility ? 5 : 1;
+            int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) || swordQuiverAbility ? 2 : 1;
             if (AbilityData.get(player).getRage() > 0) {
                 event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * (float) player.getAttribute(AttributeRegistry.RAGE_DAMAGE).getValue() * AbilityData.get(player).getRage()));
             }
@@ -623,9 +624,34 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void resetMomentumMovements (PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        if (player.onGround()) {
+            DoubleJumpData.get(player).jumps = (int) player.getAttributeValue(AttributeRegistry.MOMENTUM_JUMPS);
+            DoubleJumpData.get(player).dashes = (int) player.getAttributeValue(AttributeRegistry.MOMENTUM_DASHES);
+        }
+    }
+
+    @SubscribeEvent
+    public static void resetMomentumMovementOnHit (LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        Entity directEntity = event.getSource().getDirectEntity();
+        if (entity instanceof Player player
+                && ItemRegistry.SURF_SHOT.get().isEquippedBy(player)
+                && !player.onGround()
+                && directEntity instanceof AbstractArrow
+                && !(directEntity instanceof ScytheProjectile)
+                && !event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+            DoubleJumpData.get(player).jumps = (int) player.getAttributeValue(AttributeRegistry.MOMENTUM_JUMPS);
+            DoubleJumpData.get(player).dashes = (int) player.getAttributeValue(AttributeRegistry.MOMENTUM_DASHES);
+        }
+    }
+
+    @SubscribeEvent
     public static void momentumOnHit(LivingDamageEvent.Pre event) {
         if (ServerConfigs.DISABLE_MOMENTUM.get()) return;
-        int MAX_ORBS = 2; //caps maximum orbs per play to 4. with so many ways to get momentum, many orbs is VERY laggy
+        int MAX_ORBS = 5; //caps maximum orbs per play to 5. with so many ways to get momentum, many orbs is VERY laggy
 
         Entity directEntity = event.getSource().getDirectEntity();
         Entity sourceEntity = event.getSource().getEntity();
@@ -634,11 +660,11 @@ public class ServerEvents {
 
         if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
 
-            if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue()) {
+            if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() && player.getAttributeValue(AttributeRegistry.MOMENTUM_ORBS_SPAWNED) > 0 && false) {//disabling momentum orb spawning D:
                 if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) return;
                 AbilityData.get(player).setMomentum((float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue());
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue()));
-                //add logic for creating momentum orbs
+
                 Level level = player.level();
                 int startX = Utils.random.nextBoolean() ? 1 : -1;
                 int startZ = Utils.random.nextBoolean() ? 1 : -1;
@@ -649,9 +675,9 @@ public class ServerEvents {
                 for (int i = 0; i < orbsSpawned; i++) {
                     if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) break;
                     MomentumOrb orb = CQtils.getRandomOrbType(level, player);
-                    if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
+                    /*if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-                    }
+                    }*/
                     CQtils.findOrbLoc(startingPos, orb, level);
                     level.addFreshEntity(orb);
                     if (!level.isClientSide) AbilityData.get(player).momentumOrbsOwned++;
@@ -659,7 +685,7 @@ public class ServerEvents {
 
             } else {
 
-                int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 3 : 1;
+                int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 2 : 1;
                 float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue() * abilityGainMultiplier);
                 float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
                 AbilityData.get(player).setMomentum(newMomentum);

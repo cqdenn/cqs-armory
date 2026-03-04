@@ -27,7 +27,7 @@ import java.util.Optional;
 public class CQUpgradeOrbTypeRegistry {
 
     public static ResourceKey<UpgradeOrbType> MAX_RAGE = ResourceKey.create(UpgradeOrbTypeRegistry.UPGRADE_ORB_REGISTRY_KEY, CqsArmory.id("max_rage"));
-    public static ResourceKey<UpgradeOrbType> MOMENTUM_ON_HIT = ResourceKey.create(UpgradeOrbTypeRegistry.UPGRADE_ORB_REGISTRY_KEY, CqsArmory.id("momentum_on_hit"));
+    public static ResourceKey<UpgradeOrbType> MAX_MOMENTUM = ResourceKey.create(UpgradeOrbTypeRegistry.UPGRADE_ORB_REGISTRY_KEY, CqsArmory.id("max_momentum"));
     public static ResourceKey<UpgradeOrbType> BLOCK_STRENGTH = ResourceKey.create(UpgradeOrbTypeRegistry.UPGRADE_ORB_REGISTRY_KEY, CqsArmory.id("block_strength"));
     public static ResourceKey<UpgradeOrbType> MAX_HEALTH = ResourceKey.create(UpgradeOrbTypeRegistry.UPGRADE_ORB_REGISTRY_KEY, CqsArmory.id("max_health"));
 
