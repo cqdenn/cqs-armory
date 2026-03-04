@@ -1,12 +1,7 @@
 package com.example.cqsarmory.network;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.AbilityData;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
-import io.redspace.ironsspellbooks.player.ClientSpellCastHelper;
-import net.minecraft.client.Minecraft;
+import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -15,8 +10,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
@@ -41,7 +34,7 @@ public class SmashParticlePacket implements CustomPacketPayload {
 
     public static void handle(SmashParticlePacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
-            Level level = Minecraft.getInstance().level;
+            Level level = MinecraftInstanceHelper.getPlayer().level();
             if (level == null) return;
             BlockPos blockpos = packet.pos;
             Vec3 vec3 = blockpos.getCenter().add(0.0, 0.5, 0.0);

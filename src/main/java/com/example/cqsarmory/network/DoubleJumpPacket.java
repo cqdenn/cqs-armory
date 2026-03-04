@@ -2,7 +2,6 @@ package com.example.cqsarmory.network;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.data.DodgeData;
 import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
