@@ -838,7 +838,8 @@ public class ServerEvents {
         Player player = event.getEntity();
 
         if (ItemRegistry.VEIL_BRAND.get().isEquippedBy(player)) {
-            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, true));
+            player.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0, false, false, false));
+            player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.PLANAR_SIGHT, 40, 0, false, false, false));
         }
 
         if (ItemRegistry.ARCANE_BRAND.get().isEquippedBy(player) && player instanceof ServerPlayer serverPlayer) {

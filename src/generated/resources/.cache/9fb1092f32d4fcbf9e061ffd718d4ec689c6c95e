@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-04T15:05:36.8261651	Recipes
+// 1.21.1	2026-03-04T15:20:07.1311665	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -617,7 +617,7 @@ a2ef451dec958f19c42d5d4dbcc3b011c5c96ef8 data/cqs_armory/recipe/umbrite_recurve_
 c255028fbcf95a5184c0c22d47a316a67ade9f1a data/cqs_armory/recipe/umbrite_shortbow.json
 a6e7d381be503fd1b52f3d26e4428656c9bd310a data/cqs_armory/recipe/umbrite_spear.json
 b9af879abbac61f98ac5726a9ec23899fd26bbf4 data/cqs_armory/recipe/umbrite_warhammer.json
-7a55b899ab839bd39d267b479a687a9453d539c6 data/cqs_armory/recipe/veil_brand.json
+c5fa395dd7625a96c9092a9e244e84d1bca6eb00 data/cqs_armory/recipe/veil_brand.json
 d845e1bbfd0ec381b9eafd7688ff4052d5cba3ff data/cqs_armory/recipe/volcano_coating.json
 20148606da27be9a60a482a1a7d8144d780f8547 data/cqs_armory/recipe/volt_brand.json
 8541a3d2e2df6923bb91090fbe713d1502465eb1 data/cqs_armory/recipe/wardstone.json
