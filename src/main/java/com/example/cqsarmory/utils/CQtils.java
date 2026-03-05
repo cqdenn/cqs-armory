@@ -2,11 +2,9 @@ package com.example.cqsarmory.utils;
 
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
+import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.entity.ability.*;
-import com.example.cqsarmory.network.SyncMomentumDamageEndPacket;
-import com.example.cqsarmory.network.SyncMomentumDamagePacket;
-import com.example.cqsarmory.network.SyncMomentumSpeedEndPacket;
-import com.example.cqsarmory.network.SyncMomentumSpeedPacket;
+import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
@@ -23,6 +21,7 @@ import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -52,6 +51,33 @@ import java.util.function.Supplier;
 public class CQtils {
 
     public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
+
+    public static void doMomentumMovement (ServerPlayer player, Vec3 motion) {
+        //motion + fall damage
+        player.push(motion.x, motion.y, motion.z);
+        player.hurtMarked = true;
+        player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
+
+        //momentum
+        float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
+        float newMomentum = newMomentumTest > player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MIN_MOMENTUM).getValue();
+        AbilityData.get(player).setMomentum(newMomentum);
+        PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
+
+        //booster effects
+        if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
+
+        //sounds/visuals, change when explosive jump is added
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), io.redspace.ironsspellbooks.registries.SoundRegistry.LIGHTNING_WOOSH_01.get(), player.getSoundSource(), 0.75f, 2);
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BREEZE_DEATH, player.getSoundSource(), 0.2f, 2);
+
+        Vec3 bottom = player.getBoundingBox().getBottomCenter();
+        double dx = motion.scale(-1).x;
+        double dy = motion.scale(-1).y;
+        double dz = motion.scale(-1).z;
+        MagicManager.spawnParticles(player.level(), ParticleTypes.CLOUD, bottom.x, bottom.y, bottom.z, 100, dx, dy, dz, 0, false);
+
+    }
 
     public static void doGenericMageAOE(LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {
         Vector3f center = new Vector3f(1, 1f, 1f);

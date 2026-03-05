@@ -5,13 +5,18 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.phys.Vec3;
@@ -45,37 +50,18 @@ public class DoubleJumpPacket implements CustomPacketPayload {
     public static void handle(DoubleJumpPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
-                if (player.isInLiquid() || player.onGround() || AbilityData.get(player).getMomentum() < 5) return;
+                if (player.isSpectator() || player.isInLiquid() || player.onGround() || AbilityData.get(player).getMomentum() < 5) return;
                 Vec3 push = packet.motion.yRot(Mth.DEG_TO_RAD * -player.getYRot()).normalize();
                 if (DoubleJumpData.get(player).jumps > 0) {
                     Vec3 motion = push.scale(0.25);
                     double y = player.getDeltaMovement().y < 0 ? 0.75 + player.getDeltaMovement().scale(-1).y : 0.75;
-                    player.push(motion.x, y, motion.z);
-                    player.hurtMarked = true;
+                    CQtils.doMomentumMovement(player, new Vec3(motion.x, y, motion.z));
                     DoubleJumpData.get(player).jumps--;
-                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
-
-                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
-                    float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
-                    AbilityData.get(player).setMomentum(newMomentum);
-                    PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
-
-                    if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
-
                 } else if (DoubleJumpData.get(player).dashes > 0) {
                     Vec3 motion = push.scale(0.75);
-                    player.push(motion.x, 0.25, motion.z);
-                    player.hurtMarked = true;
+                    double y = player.getDeltaMovement().y < 0 ? 0.25 + player.getDeltaMovement().scale(-1).y : 0.25;
+                    CQtils.doMomentumMovement(player, new Vec3(motion.x, y, motion.z));
                     DoubleJumpData.get(player).dashes--;
-                    player.addEffect(new MobEffectInstance(MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
-
-                    float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
-                    float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
-                    AbilityData.get(player).setMomentum(newMomentum);
-                    PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
-
-                    if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
-
                 }
             }
         });
