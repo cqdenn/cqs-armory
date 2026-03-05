@@ -50,7 +50,7 @@ public class DoubleJumpPacket implements CustomPacketPayload {
     public static void handle(DoubleJumpPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             if (context.player() instanceof ServerPlayer player) {
-                if (player.isSpectator() || player.isInLiquid() || player.onGround() || AbilityData.get(player).getMomentum() < 5) return;
+                if (player.isSpectator() || player.isInLiquid() || player.onGround() || AbilityData.get(player).getMomentum() < (5 - player.getAttributeValue(AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION))) return;
                 Vec3 push = packet.motion.yRot(Mth.DEG_TO_RAD * -player.getYRot()).normalize();
                 if (DoubleJumpData.get(player).jumps > 0) {
                     Vec3 motion = push.scale(0.25);
