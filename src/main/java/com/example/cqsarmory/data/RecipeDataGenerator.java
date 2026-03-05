@@ -412,6 +412,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SLIPSTREAM.get(), 1)
+                .requires(Items.FEATHER, 2)
+                .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTER_TALISMAN.get(), 1)
                 .requires(Items.ARROW, 1)
                 .requires(Items.IRON_INGOT, 5)
