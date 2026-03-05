@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:umbrite_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:unending_aura"
+  }
+}

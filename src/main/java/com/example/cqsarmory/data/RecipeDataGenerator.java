@@ -365,6 +365,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.UNENDING_AURA.get(), 1)
+                .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 1)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 5)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
+                .save(recipeOutput);
+
         /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTERS_ECHO.get(), 1)
                 .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
                 .requires(Items.ARROW)
@@ -767,6 +773,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(Items.IRON_SWORD, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.ICE, 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HEAVY_COATING.get(), 1)
+                .requires(Items.IRON_SWORD, 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Items.HEAVY_CORE, 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
                 .save(recipeOutput);
 

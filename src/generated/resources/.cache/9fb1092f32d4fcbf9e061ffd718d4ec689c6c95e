@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-04T21:07:22.9054449	Recipes
+// 1.21.1	2026-03-04T21:40:35.5582579	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -134,6 +134,7 @@ a2ab79c65a884dadf81ce03d17d7b825023c19b3 data/cqs_armory/advancement/recipes/com
 dad6a36174dbe753f52c081529ddb1852e31c47c data/cqs_armory/advancement/recipes/combat/gold_warhammer.json
 26b450777d175518f5538ae00d73a325694579e2 data/cqs_armory/advancement/recipes/combat/gravity_quiver.json
 e34a0ef4bf267b2c01d254ed6b78a1a8dec3a091 data/cqs_armory/advancement/recipes/combat/healthy_rune.json
+3459816dff245355d9fddf62d6438a0e08a76a23 data/cqs_armory/advancement/recipes/combat/heavy_coating.json
 84e686ece7e3134730aeffb4e3df227394c3de8e data/cqs_armory/advancement/recipes/combat/hellfire_sigil.json
 d8a4caf293bfcb4c972b17d62e7cc5becd8143bb data/cqs_armory/advancement/recipes/combat/hunters_quiver.json
 fd432bb309705ae7e83d554feab700d39c8f2929 data/cqs_armory/advancement/recipes/combat/hunter_talisman.json
@@ -299,6 +300,7 @@ a2d18980a7b783730d5a1fd59434790a7c0a83bb data/cqs_armory/advancement/recipes/com
 bd238820d6cea3ba1ad6e9dba4d0ecf536f7817b data/cqs_armory/advancement/recipes/combat/umbrite_shortbow.json
 351c4c826efd820fbd1059afe15b89353720f19a data/cqs_armory/advancement/recipes/combat/umbrite_spear.json
 b3a3d3690fd3e33366f7d4d701505f4340f47bf8 data/cqs_armory/advancement/recipes/combat/umbrite_warhammer.json
+43cf9f66a5e1d24355131c78123df1836fcabff1 data/cqs_armory/advancement/recipes/combat/unending_aura.json
 6a6105a372ed991f88a5c02430200b66f1f47e63 data/cqs_armory/advancement/recipes/combat/veil_brand.json
 9aaac61751065eaf2bbc1bb33e300596d9f111db data/cqs_armory/advancement/recipes/combat/volcano_coating.json
 72d0e70ee572a7dfae6def9215764c316fee7530 data/cqs_armory/advancement/recipes/combat/volt_brand.json
@@ -458,6 +460,7 @@ dab57542680e98c5b7b232c29da6d16d06c1e1f9 data/cqs_armory/recipe/gold_spear.json
 cb98160a8cc9104a70406a21e8fd1e901df62bc9 data/cqs_armory/recipe/gold_warhammer.json
 211e244e856bd357f5aee82361dfb81727824058 data/cqs_armory/recipe/gravity_quiver.json
 420b28f5cff74cb8b981ae498a3e3f4c8c8e68cb data/cqs_armory/recipe/healthy_rune.json
+40ed099eb997f267f0253bd06407342e8e83c846 data/cqs_armory/recipe/heavy_coating.json
 c4571d0d15b8e5a20b77ccbf21818c321f6845bc data/cqs_armory/recipe/hellfire_sigil.json
 8185e071c77b4a95b7a8418925cf754dc9e9adee data/cqs_armory/recipe/hunters_quiver.json
 0898b7a864f0608c7e3fc9415242e1e97ee0ef13 data/cqs_armory/recipe/hunter_talisman.json
@@ -623,6 +626,7 @@ a2ef451dec958f19c42d5d4dbcc3b011c5c96ef8 data/cqs_armory/recipe/umbrite_recurve_
 c255028fbcf95a5184c0c22d47a316a67ade9f1a data/cqs_armory/recipe/umbrite_shortbow.json
 a6e7d381be503fd1b52f3d26e4428656c9bd310a data/cqs_armory/recipe/umbrite_spear.json
 b9af879abbac61f98ac5726a9ec23899fd26bbf4 data/cqs_armory/recipe/umbrite_warhammer.json
+de4f3a84c24ace932a70a0974f2d07c6f6611441 data/cqs_armory/recipe/unending_aura.json
 c5fa395dd7625a96c9092a9e244e84d1bca6eb00 data/cqs_armory/recipe/veil_brand.json
 d845e1bbfd0ec381b9eafd7688ff4052d5cba3ff data/cqs_armory/recipe/volcano_coating.json
 20148606da27be9a60a482a1a7d8144d780f8547 data/cqs_armory/recipe/volt_brand.json
