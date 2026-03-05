@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.registry.AttributeRegistry;
+import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -59,6 +60,8 @@ public class DoubleJumpPacket implements CustomPacketPayload {
                     AbilityData.get(player).setMomentum(newMomentum);
                     PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
 
+                    if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
+
                 } else if (DoubleJumpData.get(player).dashes > 0) {
                     Vec3 motion = push.scale(0.75);
                     player.push(motion.x, 0.25, motion.z);
@@ -70,6 +73,8 @@ public class DoubleJumpPacket implements CustomPacketPayload {
                     float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
                     AbilityData.get(player).setMomentum(newMomentum);
                     PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
+
+                    if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
 
                 }
             }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "criteria": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:wind_charge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cqs_armory:quickdraw"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "criteria"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cqs_armory:quickdraw"
+    ]
+  }
+}

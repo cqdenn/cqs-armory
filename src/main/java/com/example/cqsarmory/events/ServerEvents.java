@@ -915,6 +915,15 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void overwatch (LivingDamageEvent.Pre event) {
+        Entity entity = event.getSource().getEntity();
+        LivingEntity target = event.getEntity();
+        if (entity instanceof LivingEntity attacker && ItemRegistry.OVERWATCH.get().isEquippedBy(attacker) && target.position().y + 3 <= attacker.position().y) { //3 or more blocks above
+            event.setNewDamage(event.getNewDamage() * 1.25f);
+        }
+    }
+
+    @SubscribeEvent
     public static void bowVelocity(ArrowLooseEvent event) {
         int charge = event.getCharge();
         Player player = event.getEntity();

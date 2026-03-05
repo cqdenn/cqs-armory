@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cqs_armory:item/lightstep"
+    "layer0": "cqs_armory:item/double_step"
   }
 }

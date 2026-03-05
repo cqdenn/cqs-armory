@@ -9,6 +9,12 @@
       "item": "minecraft:wind_charge"
     },
     {
+      "item": "minecraft:wind_charge"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
       "item": "minecraft:diamond"
     },
     {
@@ -17,6 +23,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "cqs_armory:double_dasher"
+    "id": "cqs_armory:double_step"
   }
 }

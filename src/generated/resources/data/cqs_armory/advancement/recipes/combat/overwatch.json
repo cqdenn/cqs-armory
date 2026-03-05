@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:wind_charge"
+            "items": "minecraft:gunpowder"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cqs_armory:double_dasher"
+        "recipe": "cqs_armory:overwatch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cqs_armory:double_dasher"
+      "cqs_armory:overwatch"
     ]
   }
 }

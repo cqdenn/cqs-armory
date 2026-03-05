@@ -382,9 +382,15 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.DOUBLE_DASHER.get(), 1)
-                .requires(Items.WIND_CHARGE, 2)
-                .requires(Items.DIAMOND, 2)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.DOUBLE_STEP.get(), 1)
+                .requires(Items.WIND_CHARGE, 3)
+                .requires(Items.DIAMOND, 3)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WIND_CHARGE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.QUICKDRAW.get(), 1)
+                .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 3)
+                .requires(ItemRegistry.ARCHER_RUNE.get(), 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WIND_CHARGE))
                 .save(recipeOutput);
 
@@ -397,6 +403,12 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BIGGER_BOOMER.get(), 1)
                 .requires(Items.GUNPOWDER, 1)
                 .requires(Items.DIAMOND, 8)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.OVERWATCH.get(), 1)
+                .requires(Items.PHANTOM_MEMBRANE, 2)
+                .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
                 .save(recipeOutput);
 

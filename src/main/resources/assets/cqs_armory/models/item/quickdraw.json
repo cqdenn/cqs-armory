@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "cqs_armory:item/double_dasher"
+    "layer0": "cqs_armory:item/quickdraw"
   }
 }
