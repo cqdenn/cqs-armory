@@ -60,7 +60,9 @@ public class DoubleJumpPacket implements CustomPacketPayload {
                 } else if (DoubleJumpData.get(player).dashes > 0) {
                     Vec3 motion = push.scale(0.75);
                     double y = player.getDeltaMovement().y < 0 ? 0.25 + player.getDeltaMovement().scale(-1).y : 0.25;
-                    CQtils.doMomentumMovement(player, new Vec3(motion.x, y, motion.z));
+                    double x = (player.getDeltaMovement().x < 0 && motion.x > 0) || (player.getDeltaMovement().x > 0 && motion.x < 0) ? motion.x + player.getDeltaMovement().scale(-1).x : motion.x;
+                    double z = (player.getDeltaMovement().z < 0 && motion.z > 0) || (player.getDeltaMovement().z > 0 && motion.z < 0) ? motion.z + player.getDeltaMovement().scale(-1).z : motion.z;
+                    CQtils.doMomentumMovement(player, new Vec3(x, y, z));
                     DoubleJumpData.get(player).dashes--;
                 }
             }
