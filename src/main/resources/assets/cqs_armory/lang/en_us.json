@@ -140,6 +140,14 @@
   "curios.modifiers.coating": "When coating:",
   "curios.identifier.coating": "Coating",
 
+  "trim_material.cqs_armory.withersteel": "Withersteel Material",
+  "trim_material.cqs_armory.blazing": "Blazing Material",
+  "trim_material.cqs_armory.dwarvensteel": "Dwarvensteel Material",
+  "trim_material.cqs_armory.living": "Living Material",
+  "trim_material.cqs_armory.sculk": "Sculk Material",
+  "trim_material.cqs_armory.silversteel": "Silversteel Material",
+  "trim_material.cqs_armory.umbrite": "Umbrite Material",
+
   "death.attack.volcano": "%1$s was erupted by %2$s",
   "death.attack.bat_projectile": "%1$s was nibbled",
   "death.attack.melee_skill": "%1$s was dominated by %2$s",

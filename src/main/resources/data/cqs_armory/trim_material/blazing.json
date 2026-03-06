@@ -1,0 +1,9 @@
+{
+  "asset_name": "blazing",
+  "description": {
+    "color": "#ff8b04",
+    "translate": "trim_material.cqs_armory.blazing"
+  },
+  "ingredient": "cqs_armory:blazing_ingot",
+  "item_model_index": 0.60877
+}

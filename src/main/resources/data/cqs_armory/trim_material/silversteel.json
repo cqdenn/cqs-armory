@@ -1,0 +1,9 @@
+{
+  "asset_name": "silversteel",
+  "description": {
+    "color": "#6087bf",
+    "translate": "trim_material.cqs_armory.silversteel"
+  },
+  "ingredient": "cqs_armory:silversteel_ingot",
+  "item_model_index": 0.80877
+}

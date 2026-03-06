@@ -47,6 +47,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
     public static final TagKey<Item> bootsTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/foot_armor"));
     public static final TagKey<Item> durabilityTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/durability"));
     public static final TagKey<Item> maceTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "enchantable/mace"));
+    public static final TagKey<Item> trimTag = ItemTags.create(ResourceLocation.fromNamespaceAndPath("minecraft", "trim_materials"));
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
@@ -63,6 +64,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                     tag(durabilityTag).add((Item) weapon.get());
                 }
             }
+            if (weaponset.ingot().isPresent()) tag(trimTag).add(weaponset.ingot().get().asItem());
         }
         for (DeferredHolder item : ItemRegistry.ITEMS.getEntries()) {
             if (item.get() instanceof SwordItem || item.get() instanceof GreataxeItem) {

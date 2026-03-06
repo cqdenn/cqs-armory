@@ -1,0 +1,9 @@
+{
+  "asset_name": "dwarvensteel",
+  "description": {
+    "color": "#54421f",
+    "translate": "trim_material.cqs_armory.dwarvensteel"
+  },
+  "ingredient": "cqs_armory:dwarvensteel_ingot",
+  "item_model_index": 0.50877
+}

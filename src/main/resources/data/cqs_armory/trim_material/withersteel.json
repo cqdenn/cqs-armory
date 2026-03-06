@@ -1,0 +1,9 @@
+{
+  "asset_name": "withersteel",
+  "description": {
+    "color": "#545454",
+    "translate": "trim_material.cqs_armory.withersteel"
+  },
+  "ingredient": "cqs_armory:withersteel_ingot",
+  "item_model_index": 0.30877
+}

@@ -1,0 +1,9 @@
+{
+  "asset_name": "umbrite",
+  "description": {
+    "color": "#8f04d4",
+    "translate": "trim_material.cqs_armory.umbrite"
+  },
+  "ingredient": "cqs_armory:umbrite_ingot",
+  "item_model_index": 1.00877
+}

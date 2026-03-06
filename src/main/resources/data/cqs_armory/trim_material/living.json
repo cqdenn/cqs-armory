@@ -1,0 +1,9 @@
+{
+  "asset_name": "living",
+  "description": {
+    "color": "#56ad19",
+    "translate": "trim_material.cqs_armory.living"
+  },
+  "ingredient": "cqs_armory:living_ingot",
+  "item_model_index": 0.70877
+}

@@ -1,0 +1,9 @@
+{
+  "asset_name": "sculk",
+  "description": {
+    "color": "#042229",
+    "translate": "trim_material.cqs_armory.sculk"
+  },
+  "ingredient": "cqs_armory:sculk_ingot",
+  "item_model_index": 0.90877
+}
