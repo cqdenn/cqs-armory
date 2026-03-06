@@ -21,7 +21,7 @@ group = mod_group_id
 repositories {
     mavenLocal()
     maven {
-        url "https://cursemaven.com"
+        url = "https://cursemaven.com"
     }
     maven {
         url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
@@ -37,7 +37,7 @@ repositories {
     }
     maven {
         // Shadows (Attribute Lib)
-        url "https://maven.shadowsoffire.dev/releases"
+        url = "https://maven.shadowsoffire.dev/releases"
         content {
             includeGroup "dev.shadowsoffire"
         }
@@ -196,7 +196,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url = "file://${project.projectDir}/repo"
         }
     }
 }
