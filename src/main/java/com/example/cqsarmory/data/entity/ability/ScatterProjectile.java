@@ -94,12 +94,6 @@ public class ScatterProjectile extends AbilityArrow{
     }
 
     public final int lifetime = 400;
-    boolean hasBounced;
-    boolean initial;
-    HashMap<UUID, Integer> victims;
-    int scattersLeft;
-    int bouncesLeft;
-    int bounces;
 
     public Vec3 getAfterBounceSpeed () {
         return new Vec3(0.5, 0.5, 0.5);
@@ -112,6 +106,7 @@ public class ScatterProjectile extends AbilityArrow{
 
     @Override
     protected void onHitBlock(BlockHitResult pResult) {
+        this.resetPiercedEntities();
         Vec3 normal = Vec3.atLowerCornerOf(pResult.getDirection().getNormal());
         double push = this.getBbWidth() / 2.0 + 0.001;
 
@@ -136,7 +131,6 @@ public class ScatterProjectile extends AbilityArrow{
                 for (int i = - deg; i <= deg; i += deg * 2) {
                     ScatterProjectile scatterArrow = new ScatterProjectile(level(), getScattersLeft() - 1, getBouncesLeft() - 1, false);
                     scatterArrow.copyStats(this, owner, (float) getBaseDamage());
-                    scatterArrow.setCritArrow(false);
 
                     Vec3 original = this.getDeltaMovement().normalize();
                     float speed = (float)this.getDeltaMovement().length();
