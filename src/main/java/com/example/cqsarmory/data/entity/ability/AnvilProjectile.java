@@ -141,7 +141,7 @@ public class AnvilProjectile extends AbilityArrow{
         float damage = (float) this.getDamage(null) * 0.25f;
         float radius = (float) Math.min(1 + 0.5 * this.blocksFallen, 4);
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(radius, radius, radius), hitPos.add(radius, radius, radius)))) {
-            if (livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
+            if (livingentity != getOwner() && livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
                 DamageSources.applyDamage(livingentity, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FALLING_ANVIL).get(), this, this.getOwner()));
             }
         }
