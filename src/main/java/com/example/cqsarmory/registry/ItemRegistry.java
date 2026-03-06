@@ -538,7 +538,7 @@ public class ItemRegistry {
                     () -> new Item(CQItemPropertyHelper.weaponsetItem(fireRes))
             );
             ingot = Optional.of(val);
-            ItemModelDataGenerator.toRegister.add(generator -> generator.atlasItem(val));
+            ItemModelDataGenerator.toRegister.add(generator -> generator.ingotItem(val));
         }
 
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(warhammer, generator.atlas3DItem(warhammer, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "item/base_warhammer_handheld"))));
