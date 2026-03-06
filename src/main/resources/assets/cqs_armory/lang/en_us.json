@@ -272,7 +272,7 @@
   "item.cqs_armory.bat_quiver": "Bat Quiver",
   "item.cqs_armory.bat_quiver.desc": "Arrows also scales with summon damage",
   "item.cqs_armory.sword_quiver": "Sword Quiver",
-  "item.cqs_armory.sword_quiver.desc": "Arrows also scale with attack damage",
+  "item.cqs_armory.sword_quiver.desc": "Arrows scale with and give rage",
   "item.cqs_armory.anvil_quiver": "Anvil Quiver",
   "item.cqs_armory.anvil_quiver.desc": "Arrows do more damage the further they fall",
   "item.cqs_armory.scatter_quiver": "Scatter Quiver",
