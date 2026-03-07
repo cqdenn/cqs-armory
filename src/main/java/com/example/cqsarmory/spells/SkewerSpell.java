@@ -95,7 +95,7 @@ public class SkewerSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent()),
+                Component.translatable("ui.cqs_armory.weapon_damage", (int) getWeaponDamagePercent()),
                 Component.translatable("ui.cqs_armory.bleed_duration", getBleedDurationTicks(spellLevel)/20 + "s")
         );
     }
