@@ -90,6 +90,14 @@ public class ScytheProjectile extends AbilityArrow {
         if (lifetime >= 15) {
             discard();
         }
+        var entities = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.1));
+        if (!entities.isEmpty()) {
+            for (LivingEntity target : entities) {
+                if (canHitEntity(target)) {
+                    onHitEntity(new EntityHitResult(target));
+                }
+            }
+        }
     }
 
     @Override
