@@ -113,7 +113,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
         var target = Utils.raycastForEntity(entity.level(), entity, 64, true, 0.1f);
         if (target instanceof EntityHitResult entityHitResult && !entity.level().isClientSide) {
-            if (entityHitResult.getEntity() instanceof LivingEntity living && DamageData.get(living).bleedStacks.get(entity) > 0) {
+            if (entityHitResult.getEntity() instanceof LivingEntity living && DamageData.get(living).bleedStacks.containsKey(entity) && DamageData.get(living).bleedStacks.get(entity) > 0) {
                 if (entity instanceof ServerPlayer serverPlayer) {
                     serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.irons_spellbooks.spell_target_success", living.getDisplayName().getString(), this.getDisplayName(serverPlayer)).withStyle(ChatFormatting.GREEN)));
                 }
