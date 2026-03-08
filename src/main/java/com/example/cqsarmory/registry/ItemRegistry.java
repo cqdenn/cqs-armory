@@ -444,7 +444,7 @@ public class ItemRegistry {
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLEED_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.EXECUTE_SPELL, power.power())))
         );
 
         var scythe = ITEMS.register(name + "_scythe",
@@ -474,7 +474,7 @@ public class ItemRegistry {
         var greataxe = ITEMS.register(name + "_greataxe",
                 () -> new GreataxeItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).component(DataComponents.TOOL,GreataxeItem.createGreataxeToolProperties(material, power)).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BERSERK_SPELL, power.power())))
+                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
         );
 
         var shortbow = ITEMS.register(name + "_shortbow",

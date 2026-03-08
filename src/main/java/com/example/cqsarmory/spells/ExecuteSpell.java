@@ -99,7 +99,7 @@ public class ExecuteSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 100),
-                Component.literal("+" + getBonusDamagePercent(spellLevel) + "% Damage Per Negative Effect on Target")
+                Component.literal("+" + getBonusDamagePercent(spellLevel) + "% Damage Per Debuff on Target")
         );
     }
 
