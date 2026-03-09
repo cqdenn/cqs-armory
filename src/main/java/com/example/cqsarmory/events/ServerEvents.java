@@ -521,10 +521,13 @@ public class ServerEvents {
             }
 
             float newRageTest = (AbilityData.get(player).getRage() + ((float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue() * abilityGainMultiplier));
-            /*if (player.hasEffect(MobEffectRegistry.PERFECT_TECHNIQUE)){
-                newRageTest = (AbilityData.get(player).getRage() - 1);
-            }*/ //FIXME peftect technique takes 1 rage on hit if perfect technique do ^^ else do below
             float newRage = newRageTest < player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
+            //perfect technique
+            if (player.hasEffect(MobEffectRegistry.PERFECT_TECHNIQUE)){
+                newRageTest = (AbilityData.get(player).getRage() - 1);
+                newRage = newRageTest > 0 ? newRageTest : 0;
+                if (newRage == 0) player.removeEffect(MobEffectRegistry.PERFECT_TECHNIQUE);
+            }
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
 
