@@ -53,11 +53,20 @@ public class CQWanderingTrades {
                 ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
                 ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
                 ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
+                ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
+                ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
+                ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
+                ingotTrade(tierOneIngots, new ItemCost(Items.EMERALD, 5 + random.nextIntBetweenInclusive(1, 5)), Optional.empty()),
 
                 ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
                 ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
                 ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
+                ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
+                ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
+                ingotTrade(tierTwoIngots, new ItemCost(Items.EMERALD, 20 + random.nextIntBetweenInclusive(1, 15)), Optional.empty()),
 
+                ingotTrade(tierThreeIngots, new ItemCost(Items.EMERALD_BLOCK, 10 + random.nextIntBetweenInclusive(1, 5)), Optional.of(new ItemCost(Items.EMERALD, 10 + random.nextInt(1, 45)))),
+                ingotTrade(tierThreeIngots, new ItemCost(Items.EMERALD_BLOCK, 10 + random.nextIntBetweenInclusive(1, 5)), Optional.of(new ItemCost(Items.EMERALD, 10 + random.nextInt(1, 45)))),
                 ingotTrade(tierThreeIngots, new ItemCost(Items.EMERALD_BLOCK, 10 + random.nextIntBetweenInclusive(1, 5)), Optional.of(new ItemCost(Items.EMERALD, 10 + random.nextInt(1, 45)))),
                 ingotTrade(tierThreeIngots, new ItemCost(Items.EMERALD_BLOCK, 10 + random.nextIntBetweenInclusive(1, 5)), Optional.of(new ItemCost(Items.EMERALD, 10 + random.nextInt(1, 45))))
         );
