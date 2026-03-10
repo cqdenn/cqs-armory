@@ -20,6 +20,7 @@ import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
+import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
@@ -67,15 +68,31 @@ public class CQtils {
         //booster effects
         if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
 
-        //sounds/visuals, change when explosive jump is added
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), io.redspace.ironsspellbooks.registries.SoundRegistry.LIGHTNING_WOOSH_01.get(), player.getSoundSource(), 0.75f, 2);
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BREEZE_DEATH, player.getSoundSource(), 0.2f, 2);
+        //explosive jump if equipped
+        if (ItemRegistry.BLAST_DASH.get().isEquippedBy(player)) {
+            Vec3 pos = player.position().subtract(0, 0.5, 0);
+            float radius = 1;
+            DamageSource damageSource = player.level().damageSources().explosion(null, player); //swapped because game bad
+            var entities = player.level().getEntities(player, new AABB(pos, pos).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(player, targeted) || targeted instanceof MomentumOrb);
+            for (Entity target : entities) {
+                if (Utils.hasLineOfSight(player.level(), pos, target.getBoundingBox().getCenter(), true)) {
+                    if (target instanceof LivingEntity || target instanceof MomentumOrb) {
+                        target.hurt(damageSource, 10);//dmg tbd, maybe scale with something? idk
+                    }
+                }
+            }
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new FieryExplosionParticlesPacket(pos, radius));
+            player.level().playSound(null, pos.x, pos.y, pos.z, SoundEvents.DRAGON_FIREBALL_EXPLODE, player.getSoundSource(), 0.7f, 1f);
+        }else {
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), io.redspace.ironsspellbooks.registries.SoundRegistry.LIGHTNING_WOOSH_01.get(), player.getSoundSource(), 0.75f, 2);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BREEZE_DEATH, player.getSoundSource(), 0.2f, 2);
 
-        Vec3 bottom = player.getBoundingBox().getBottomCenter();
-        double dx = motion.scale(-1).x;
-        double dy = motion.scale(-1).y;
-        double dz = motion.scale(-1).z;
-        MagicManager.spawnParticles(player.level(), ParticleTypes.CLOUD, bottom.x, bottom.y, bottom.z, 100, dx, dy, dz, 0, false);
+            Vec3 bottom = player.getBoundingBox().getBottomCenter();
+            double dx = motion.scale(-1).x;
+            double dy = motion.scale(-1).y;
+            double dz = motion.scale(-1).z;
+            MagicManager.spawnParticles(player.level(), ParticleTypes.CLOUD, bottom.x, bottom.y, bottom.z, 100, dx, dy, dz, 0, false);
+        }
 
     }
 
