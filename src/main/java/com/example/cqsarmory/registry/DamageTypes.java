@@ -27,4 +27,5 @@ public class DamageTypes {
     public static final ResourceKey<DamageType> MAGE_AOE = register("mage_aoe");
     public static final ResourceKey<DamageType> HELLFIRE_MAGE_AOE = register("hellfire_mage_aoe");
     public static final ResourceKey<DamageType> BLIZZARD_MAGE_AOE = register("blizzard_mage_aoe");
+    public static final ResourceKey<DamageType> SHOCKWAVE_MAGE_AOE = register("shockwave_mage_aoe");
 }

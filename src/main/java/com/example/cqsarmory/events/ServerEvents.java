@@ -747,6 +747,8 @@ public class ServerEvents {
         if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
             if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
+            } else if (ItemRegistry.SHOCKWAVE.get().isEquippedBy(player)) {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.SHOCKWAVE_MAGE_AOE, 5, 0, false, false, false));
             } else if (ItemRegistry.BLIZZARD.get().isEquippedBy(player)) {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.BLIZZARD_MAGE_AOE, (20 * seconds), 0, false, false, false));
             } else {

@@ -46,9 +46,11 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.MAGE_AOE);
         tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.HELLFIRE_MAGE_AOE);
         tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLIZZARD_MAGE_AOE);
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.SHOCKWAVE_MAGE_AOE);
 
         tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.MAGE_AOE);
         tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.HELLFIRE_MAGE_AOE);
         tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.BLIZZARD_MAGE_AOE);
+        tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.SHOCKWAVE_MAGE_AOE);
     }
 }

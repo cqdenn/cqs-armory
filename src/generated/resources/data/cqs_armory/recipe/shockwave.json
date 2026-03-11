@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "cqs_armory:silversteel_ingot"
+    },
+    {
+      "item": "irons_spellbooks:lightning_bottle"
+    },
+    {
+      "item": "irons_spellbooks:lightning_bottle"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:shockwave"
+  }
+}

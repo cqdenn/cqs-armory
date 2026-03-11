@@ -149,6 +149,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> RETALIATE = ITEMS.register("retaliate", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1).fireResistant(), "booster"));
     public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
+    public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
