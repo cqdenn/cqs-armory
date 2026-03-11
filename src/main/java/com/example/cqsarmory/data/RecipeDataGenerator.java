@@ -8,6 +8,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
@@ -356,18 +357,31 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BEHIND_YOU.get(), 1)
                 .requires(ItemRegistry.MELEE_RUNE.get(), 2)
+                .requires(ItemRegistry.LIVING_WEAPONSET.ingot().get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.LIVING_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.RETALIATE.get(), 1)
+                .requires(ItemRegistry.MELEE_RUNE.get(), 2)
                 .requires(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HELLFIRE_SIGIL.get(), 1)
                 .requires(ItemRegistry.BLAZING_WEAPONSET.ingot().get(), 2)
+                .requires(Items.BLAZE_POWDER, 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLIZZARD.get(), 1)
-                .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 2)
                 .requires(Items.PACKED_ICE, 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SHOCKWAVE.get(), 1)
+                .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.LIGHTNING_BOTTLE.get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
