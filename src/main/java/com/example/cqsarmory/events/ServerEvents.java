@@ -941,7 +941,7 @@ public class ServerEvents {
     public static void backstabDamage (LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();
-        if (entity instanceof Player attacker) {
+        if (entity instanceof Player attacker && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
             float multiplier = (float) attacker.getAttributeValue(AttributeRegistry.BACKSTAB_DAMAGE);
             Vec3 forward = target.getLookAngle();
             Vec3 toAttacker = attacker.position().subtract(target.position()).normalize();
