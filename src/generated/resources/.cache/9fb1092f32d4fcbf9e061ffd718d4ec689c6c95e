@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-10T23:07:15.367693	Recipes
+// 1.21.1	2026-03-11T14:57:34.636519	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -26,7 +26,7 @@ b8fcd73e4a16ad453028b6031fbdb6aae2714f39 data/cqs_armory/advancement/recipes/com
 dfb29e7f34e1624a22416297a579eb1eccbdbf74 data/cqs_armory/advancement/recipes/combat/basic_quiver.json
 0098726b92a3a721fa1c48176a70e78d8c891c88 data/cqs_armory/advancement/recipes/combat/bastion_talisman.json
 5e065a52b74b34670be0d42b3005397d5fe60d9a data/cqs_armory/advancement/recipes/combat/bat_quiver.json
-c82966d947a1018c69c3d33ddd570feb505c96b9 data/cqs_armory/advancement/recipes/combat/behind_you.json
+bcbf6ccc910ab6501c8e816a19cb460c9f9caee8 data/cqs_armory/advancement/recipes/combat/behind_you.json
 3b90e1796e62797706fd3e9a21ff58c69c22742e data/cqs_armory/advancement/recipes/combat/berserkers_rush.json
 589eaebf15be7543a01ee027d08cddd745d44201 data/cqs_armory/advancement/recipes/combat/bigger_boomer.json
 94b00925fb21b2d35882f3177ae25eee6e984bb4 data/cqs_armory/advancement/recipes/combat/blade_mastery.json
@@ -163,6 +163,7 @@ d07f28b5d2e2787d186ac879f277ae23c4721a53 data/cqs_armory/advancement/recipes/com
 c405e04d214183e215ac949856b27542d8b28a62 data/cqs_armory/advancement/recipes/combat/iron_spear.json
 d7a66c9b3a07ea1e695f15787a92328a8e02d296 data/cqs_armory/advancement/recipes/combat/iron_warhammer.json
 da8a5d2803bb134bd43a4cbfb483cd299ba5747d data/cqs_armory/advancement/recipes/combat/juggernaut_talisman.json
+3475ccced055f54599fb6b0853f105568fa166b0 data/cqs_armory/advancement/recipes/combat/kinetic_strike.json
 a64c1fe79518312eacd437c780664b06fe5032b3 data/cqs_armory/advancement/recipes/combat/lightning_coating.json
 e22a24ce756e6aaa3505e05e4e14f7b1b0fbb718 data/cqs_armory/advancement/recipes/combat/living_arcane_staff.json
 acf08f1fc9eddfe934864d85d2e540977c2eacc7 data/cqs_armory/advancement/recipes/combat/living_fire_staff.json
@@ -494,6 +495,7 @@ b9d23dd0a070d432c0e40143d984c30ef5eb017a data/cqs_armory/recipe/iron_halberd.jso
 7a1564b3e40033e83312ce5a22eb09b96dee2c8d data/cqs_armory/recipe/iron_spear.json
 77a7540097fd87a0e153463dc493103f80cee72e data/cqs_armory/recipe/iron_warhammer.json
 875aee57e83f73ce07538fa126ccda7d470069c8 data/cqs_armory/recipe/juggernaut_talisman.json
+86f326885501e09a3a756460c48d4642e3155b89 data/cqs_armory/recipe/kinetic_strike.json
 19f9399038511bc58612f2c62ee9b3c171e574ee data/cqs_armory/recipe/lightning_coating.json
 8744f21c2a41b32ea7b323bb3bbbbbf6b7aa4aba data/cqs_armory/recipe/living_arcane_staff.json
 a6bf6699f9866b46b1c01e80527db2ed69578e84 data/cqs_armory/recipe/living_fire_staff.json
