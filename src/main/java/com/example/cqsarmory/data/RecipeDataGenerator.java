@@ -358,7 +358,7 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BEHIND_YOU.get(), 1)
                 .requires(ItemRegistry.MELEE_RUNE.get(), 2)
                 .requires(ItemRegistry.LIVING_WEAPONSET.ingot().get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.LIVING_WEAPONSET.ingot().get()))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.MELEE_RUNE.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.RETALIATE.get(), 1)
@@ -430,6 +430,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 3)
                 .requires(ItemRegistry.ARCHER_RUNE.get(), 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WIND_CHARGE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.KINETIC_STRIKE.get(), 1)
+                .requires(ItemRegistry.ARCHER_RUNE.get(), 2)
+                .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.ARCHER_RUNE.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLAST_DASH.get(), 1)

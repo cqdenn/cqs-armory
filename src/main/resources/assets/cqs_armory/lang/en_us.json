@@ -109,6 +109,7 @@
   "effect.cqs_armory.chained": "Chained",
   "effect.cqs_armory.perfect_technique": "Perfect Technique",
   "effect.cqs_armory.retaliate": "Retaliate",
+  "effect.cqs_armory.kinetic_strike": "Kinetic Strike",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -259,6 +260,8 @@
   "item.cqs_armory.double_step": "Double Step",
   "item.cqs_armory.quickdraw": "Quickdraw",
   "item.cqs_armory.quickdraw.desc": "Momentum movement grants insta draw",
+  "item.cqs_armory.kinetic_strike": "Kinetic Strike",
+  "item.cqs_armory.kinetic_strike.desc": "+25% arrow damage on momentum movement, stacks 3 times",
   "item.cqs_armory.blast_dash": "Blast Dash",
   "item.cqs_armory.blast_dash.desc": "Momentum movement causes an explosion",
   "item.cqs_armory.sharpshooter": "Sharpshooter",
