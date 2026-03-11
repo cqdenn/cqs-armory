@@ -923,6 +923,19 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void retaliate (LivingDamageEvent.Post event) {
+        LivingEntity target = event.getEntity();
+        if (ItemRegistry.RETALIATE.get().isEquippedBy(target)) {
+            var effect = target.getEffect(MobEffectRegistry.RETALIATE);
+            if (effect != null) {
+                target.addEffect(new MobEffectInstance(MobEffectRegistry.RETALIATE, 100, Math.min(effect.getAmplifier() + 1, 2), false, false, true));
+            } else {
+                target.addEffect(new MobEffectInstance(MobEffectRegistry.RETALIATE, 100, 0, false, false, true));
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void backstabDamage (LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();

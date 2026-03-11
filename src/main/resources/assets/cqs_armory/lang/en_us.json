@@ -107,6 +107,7 @@
   "effect.cqs_armory.auto_crit": "Auto Crit",
   "effect.cqs_armory.chained": "Chained",
   "effect.cqs_armory.perfect_technique": "Perfect Technique",
+  "effect.cqs_armory.retaliate": "Retaliate",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -234,6 +235,8 @@
   "item.cqs_armory.warheart": "Warheart",
   "item.cqs_armory.blade_mastery": "Blade Mastery",
   "item.cqs_armory.behind_you": "Behind You",
+  "item.cqs_armory.retaliate": "Retaliate",
+  "item.cqs_armory.retaliate.desc": "+25% attack damage on incoming damage, stacks 3 times",
   "item.cqs_armory.hellfire_sigil": "Hellfire Sigil",
   "item.cqs_armory.hellfire_sigil.desc": "Converts generic mage AOE into a meteor storm",
   "item.cqs_armory.blizzard": "Blizzard",
