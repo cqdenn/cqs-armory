@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-10T19:01:44.2541672	Recipes
+// 1.21.1	2026-03-10T21:23:01.5500494	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -50,6 +50,7 @@ c149cf750a74fbb5b0c4eaf1b5ed1f8b5dfa6e32 data/cqs_armory/advancement/recipes/com
 10afb654e42aea1bd5aad99d7ade4f12e141b29f data/cqs_armory/advancement/recipes/combat/blazing_spear.json
 c6a7ce42029a6295d10cb49edc0b62f88dc7486c data/cqs_armory/advancement/recipes/combat/blazing_warhammer.json
 90776927d935539798b8ed5d815eed1c56580d50 data/cqs_armory/advancement/recipes/combat/bleed_coating.json
+41674774aa78a5d2da1ffbef504e5bb560096cd4 data/cqs_armory/advancement/recipes/combat/blizzard.json
 43525b80a9741723041ca42de7de4d3c681821eb data/cqs_armory/advancement/recipes/combat/block_strength_upgrade_orb.json
 6ecb4020f2b5694c50b0eebb7acf069972debb01 data/cqs_armory/advancement/recipes/combat/blood_brand.json
 6471aee98c6c08933e779fb0d038d638b3521776 data/cqs_armory/advancement/recipes/combat/booster_locket.json
@@ -378,6 +379,7 @@ bfc0ab6ff53fff6ae27c6ecb954976f055dd1638 data/cqs_armory/recipe/blazing_mace.jso
 92e2f297b252808a831eeb1d41951d37bc6eb460 data/cqs_armory/recipe/blazing_spear.json
 b05d4e17e7c19bfa12d3937602ae17dbd35dab64 data/cqs_armory/recipe/blazing_warhammer.json
 352301c4e0112ef403b2a39a2b089983280735b9 data/cqs_armory/recipe/bleed_coating.json
+cd6b5025052dd1831aef55d4ad9425767a36b6a0 data/cqs_armory/recipe/blizzard.json
 f7453d50362e7531673811b851bd8c5ce81534f8 data/cqs_armory/recipe/block_strength_upgrade_orb.json
 cbd4a8755b76c4a44073a26ccd79c098a46e3138 data/cqs_armory/recipe/blood_brand.json
 6e221d360a9f12cca0d196d2124eaadbd8c521bf data/cqs_armory/recipe/booster_locket.json

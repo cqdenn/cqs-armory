@@ -1,4 +1,5 @@
-// 1.21.1	2026-02-28T17:44:43.2013944	Tags for minecraft:damage_type mod id cqs_armory
+// 1.21.1	2026-03-10T21:05:05.9808289	Tags for minecraft:damage_type mod id cqs_armory
 7c96888d95a7833dc244a69c454f25669ef8c2b5 data/cqs_armory/tags/damage_type/causes_rage_gain.json
 bc4ccf9ada57ae7a6ed9e953e87abead9a94505d data/cqs_armory/tags/damage_type/explosive_damage.json
-c55f6bc49ef92f4629a22434aac35c4b37715d0d data/minecraft/tags/damage_type/no_knockback.json
+214fba03c0f47b5e5a8000bff91f9b89b9c47e63 data/cqs_armory/tags/damage_type/mage_aoe.json
+bff7d18df750427a0de6f6bf6fc5fb44a8a38f57 data/minecraft/tags/damage_type/no_knockback.json

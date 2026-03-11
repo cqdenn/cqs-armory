@@ -747,6 +747,8 @@ public class ServerEvents {
         if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
             if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
+            } else if (ItemRegistry.BLIZZARD.get().isEquippedBy(player)) {
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.BLIZZARD_MAGE_AOE, (20 * seconds), 0, false, false, false));
             } else {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
             }
@@ -864,7 +866,7 @@ public class ServerEvents {
         Entity entity = event.getSource().getEntity();
         if (entity instanceof Player player && ItemRegistry.UNENDING_AURA.get().isEquippedBy(player)) {
             DamageSource source = event.getSource();
-            if ((source.is(DamageTypes.MAGE_AOE) || source.is(DamageTypes.HELLFIRE_MAGE_AOE)) && !(source.getDirectEntity() instanceof DelayedGenericMageAOE)) {
+            if (source.is(Tags.DamageTypes.MAGE_AOE) && !(source.getDirectEntity() instanceof DelayedGenericMageAOE)) {
                 if (!player.level().isClientSide) {
                     DelayedGenericMageAOE aoe = new DelayedGenericMageAOE(player.level(), player, target.position());
                     player.level().addFreshEntity(aoe);

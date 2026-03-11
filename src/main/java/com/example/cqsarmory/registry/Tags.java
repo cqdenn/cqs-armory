@@ -26,6 +26,7 @@ public class Tags {
     public static class DamageTypes {
         public static final TagKey<DamageType> CAUSES_RAGE_GAIN = tag("causes_rage_gain");
         public static final TagKey<DamageType> EXPLOSIVE_DAMAGE = tag("explosive_damage");
+        public static final TagKey<DamageType> MAGE_AOE = tag("mage_aoe");
 
         private static TagKey<DamageType> tag(String name) {
             return TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));

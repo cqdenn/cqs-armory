@@ -365,6 +365,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLIZZARD.get(), 1)
+                .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
+                .requires(Items.PACKED_ICE, 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.CHRONOWARP_RUNE.get(), 1)
                 .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
                 .requires(Items.CLOCK)

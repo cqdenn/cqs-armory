@@ -34,8 +34,6 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.MELEE_SKILL);
         tag(Tags.DamageTypes.CAUSES_RAGE_GAIN).add(com.example.cqsarmory.registry.DamageTypes.THROWN_ITEM);
 
-        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLEEDING);
-
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.FIREWORKS);
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.EXPLOSION);
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.PLAYER_EXPLOSION);
@@ -43,5 +41,14 @@ public class CQDamageTypeTagsProvider extends TagsProvider<DamageType> {
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(DamageTypes.UNATTRIBUTED_FIREBALL);
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(com.example.cqsarmory.registry.DamageTypes.VOLCANO);
         tag(Tags.DamageTypes.EXPLOSIVE_DAMAGE).add(com.example.cqsarmory.registry.DamageTypes.FIREWORK_PROJECTILE);
+
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLEEDING);
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.MAGE_AOE);
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.HELLFIRE_MAGE_AOE);
+        tag(DamageTypeTags.NO_KNOCKBACK).add(com.example.cqsarmory.registry.DamageTypes.BLIZZARD_MAGE_AOE);
+
+        tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.MAGE_AOE);
+        tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.HELLFIRE_MAGE_AOE);
+        tag(Tags.DamageTypes.MAGE_AOE).add(com.example.cqsarmory.registry.DamageTypes.BLIZZARD_MAGE_AOE);
     }
 }
