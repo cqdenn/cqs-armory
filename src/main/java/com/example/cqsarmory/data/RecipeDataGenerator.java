@@ -345,12 +345,18 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.WARHEART.get(), 1)
                 .requires(ItemRegistry.HEALTHY_RUNE.get(), 1)
                 .requires(Items.DIAMOND, 8)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.HEALTHY_RUNE.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLADE_MASTERY.get(), 1)
                 .requires(ItemRegistry.MELEE_RUNE.get(), 1)
                 .requires(Items.DIAMOND, 8)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.MELEE_RUNE.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BEHIND_YOU.get(), 1)
+                .requires(ItemRegistry.MELEE_RUNE.get(), 2)
+                .requires(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
@@ -404,6 +410,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 3)
                 .requires(ItemRegistry.ARCHER_RUNE.get(), 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WIND_CHARGE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLAST_DASH.get(), 1)
+                .requires(Items.TNT, 3)
+                .requires(Items.DIAMOND, 3)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.TNT))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SHARPHOOTER.get(), 1)

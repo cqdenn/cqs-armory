@@ -921,6 +921,21 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
+    public static void backstabDamage (LivingIncomingDamageEvent event) {
+        LivingEntity target = event.getEntity();
+        Entity entity = event.getSource().getEntity();
+        if (entity instanceof Player attacker) {
+            float multiplier = (float) attacker.getAttributeValue(AttributeRegistry.BACKSTAB_DAMAGE);
+            Vec3 forward = target.getLookAngle();
+            Vec3 toAttacker = attacker.position().subtract(target.position()).normalize();
+            boolean isBackstab = forward.dot(toAttacker) < -0.5;
+            if (isBackstab) {
+                event.setAmount(event.getAmount() * multiplier);
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void overwatch (LivingDamageEvent.Pre event) {
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();

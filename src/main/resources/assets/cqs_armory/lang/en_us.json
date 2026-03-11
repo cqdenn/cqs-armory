@@ -42,6 +42,7 @@
   "spell.cqs_armory.wrath_eruption_spell": "Wrath Eruption",
   "spell.cqs_armory.execute_spell": "Execute",
   "spell.cqs_armory.perfect_technique_spell": "Perfect Technique",
+  "spell.cqs_armory.flank_step_spell": "Flank Step",
 
   "school.cqs_armory.arcane": "Arcane",
   "school.cqs_armory.necromancy": "Necromancy",
@@ -118,6 +119,7 @@
   "attribute.cqs_armory.momentum_orbs_spawned": "Momentum Orbs Spawned",
   "attribute.cqs_armory.quiver_capacity": "Quiver Capacity",
   "attribute.cqs_armory.explosive_damage": "Explosive Damage",
+  "attribute.cqs_armory.backstab_damage": "Backstab Damage",
   "attribute.cqs_armory.arrow_pierce": "Arrow Pierce",
   "attribute.cqs_armory.momentum_on_hit": "Momentum on Hit",
   "attribute.cqs_armory.archer_spell_resist": "Archer Skill Resistance",
@@ -230,6 +232,7 @@
   "item.cqs_armory.wardstone.desc": "Gain 25% damage reduction at max rage",
   "item.cqs_armory.warheart": "Warheart",
   "item.cqs_armory.blade_mastery": "Blade Mastery",
+  "item.cqs_armory.behind_you": "Behind You",
   "item.cqs_armory.hellfire_sigil": "Hellfire Sigil",
   "item.cqs_armory.hellfire_sigil.desc": "Converts generic mage AOE into a meteor storm",
   "item.cqs_armory.chronowarp_rune": "Chronowarp Rune",
