@@ -89,8 +89,16 @@ public class FireworkProjectile extends AbilityArrow {
         return false;
     }
 
+    public void resetCustomPierce() {
+        if (this.piercingIgnoreEntityIds != null) {
+            this.piercingIgnoreEntityIds.clear();
+        }
+    }
+
     @Override
     public void tick() {
+        resetPiercedEntities();
+        resetCustomPierce();
         super.tick();
         /*if (!this.isShotAtAngle()) {
             double d2 = this.horizontalCollision ? 1.0 : 1.15;
@@ -170,7 +178,6 @@ public class FireworkProjectile extends AbilityArrow {
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        resetPiercedEntities();
         BlockPos blockpos = new BlockPos(result.getBlockPos());
         this.level().getBlockState(blockpos).entityInside(this.level(), blockpos, this);
         if (!this.level().isClientSide) {
