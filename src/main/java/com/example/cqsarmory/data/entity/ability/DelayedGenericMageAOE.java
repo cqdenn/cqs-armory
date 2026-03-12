@@ -51,7 +51,7 @@ public class DelayedGenericMageAOE extends AoeEntity {
     public void tick() {
 
         if (tickCount == 10 && !level().isClientSide) {
-            CQtils.doGenericMageAOE(getLivingOwner(), this, getFrom(), 3, 15);
+            CQtils.doGenericMageAOE(getLivingOwner(), this, getFrom(), 3, 10);
         } else if (tickCount > 10) discard();
 
     }

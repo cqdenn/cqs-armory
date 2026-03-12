@@ -34,7 +34,7 @@ public class GenericMageAOEEffect extends NonCurableEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (!(livingEntity.level().getGameTime() % 20 == 0) || livingEntity.level().isClientSide) return true;
-        CQtils.doGenericMageAOE(livingEntity, null, livingEntity.position(), 5, 30);
+        CQtils.doGenericMageAOE(livingEntity, null, livingEntity.position(), 5, 10);
         return true;
     }
 
