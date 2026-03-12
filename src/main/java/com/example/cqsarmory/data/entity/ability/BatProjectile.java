@@ -133,7 +133,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
 
                 if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1 || this.numPierced >= this.getPierceLevel()) {
                     removeBat();
-                    MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
+                    if (!level().isClientSide) MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
                     return;
                 }
 
