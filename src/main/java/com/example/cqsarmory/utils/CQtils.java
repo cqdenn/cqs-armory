@@ -81,7 +81,7 @@ public class CQtils {
         //explosive jump if equipped
         if (ItemRegistry.BLAST_DASH.get().isEquippedBy(player)) {
             Vec3 pos = player.position().subtract(0, 0.5, 0);
-            float radius = 1;
+            float radius = 1.5f;
             DamageSource damageSource = player.level().damageSources().explosion(null, player); //swapped because game bad
             var entities = player.level().getEntities(player, new AABB(pos, pos).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(player, targeted) || targeted instanceof MomentumOrb);
             for (Entity target : entities) {
