@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.particle.SwirlingParticleOptions;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,6 +37,7 @@ public class BlizzardMageAOEEffect extends NonCurableEffect {
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.level().isClientSide) return true;
         float radius = 5;
+        float diameter = radius * 2;
         Level level = livingEntity.level();
         float damage = (float) (2 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER));
         Vec3 from = livingEntity.position().add(0, 1, 0);
@@ -63,23 +65,22 @@ public class BlizzardMageAOEEffect extends NonCurableEffect {
         }
 
         int particles = 100;
-        Vec3 center = livingEntity.position().add(0, 1, 0);
+        Vec3 center = livingEntity.position();
 
         for (int i = 0; i < particles; i++) {
 
-            double angle = i * Math.PI * 2 / particles;
-
-            double x = center.x + Math.cos(angle) * radius;
-            double z = center.z + Math.sin(angle) * radius;
+            double x = center.x;
+            double z = center.z;
             double y = center.y;
+            double deltaHW = Utils.random.nextFloat() / 10;
 
             MagicManager.spawnParticles(
                     level,
-                    ParticleRegistry.SNOWFLAKE_PARTICLE.get(),
-                    x, y, z,
+                    new SwirlingParticleOptions(ParticleRegistry.SNOWFLAKE_PARTICLE.get(), new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(diameter, diameter, 35), new Vec3(deltaHW, deltaHW, 0.01)),
+                    x, y + (0.04 * i), z,
                     1,
-                    0, -0.02, 0,   // fall slowly
-                    1,
+                    0, 0, 0,
+                    0,
                     false
             );
         }
