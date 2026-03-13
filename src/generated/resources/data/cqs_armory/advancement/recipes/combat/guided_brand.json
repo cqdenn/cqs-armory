@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cqs_armory:angel_brand"
+        "recipe": "cqs_armory:guided_brand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cqs_armory:angel_brand"
+      "cqs_armory:guided_brand"
     ]
   }
 }

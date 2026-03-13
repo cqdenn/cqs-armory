@@ -694,7 +694,7 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GLASS_BOTTLE))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.ANGEL_BRAND.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GUIDED_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 1)

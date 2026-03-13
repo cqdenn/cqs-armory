@@ -19,7 +19,7 @@
       "irons_spellbooks:spell_container": {
         "data": [
           {
-            "id": "irons_spellbooks:guiding_bolt",
+            "id": "irons_spellbooks:wisp",
             "index": 0,
             "level": 8,
             "locked": true

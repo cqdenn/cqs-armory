@@ -201,7 +201,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.VOLT_STRIKE_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.BLOOD_NEEDLES_SPELL, 10))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.EVASION_SPELL, 5))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARCANE_SKILL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> ANGEL_BRAND = ITEMS.register("angel_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.ANGEL_WINGS_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> GUIDED_BRAND = ITEMS.register("guided_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrand().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1))));
@@ -410,7 +410,7 @@ public class ItemRegistry {
         );
 
         final List<CQSpellDataRegistryHolder> holySpells = List.of(
-                new CQSpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 6),
+                new CQSpellDataRegistryHolder(SpellRegistry.WISP_SPELL, 6),
                 new CQSpellDataRegistryHolder(SpellRegistry.BLESSING_OF_LIFE_SPELL, 2),
                 new CQSpellDataRegistryHolder(SpellRegistry.SHIELD_SPELL, 2),
                 new CQSpellDataRegistryHolder(SpellRegistry.FORTIFY_SPELL, 2),
