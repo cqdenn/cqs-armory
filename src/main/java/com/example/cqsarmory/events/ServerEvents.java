@@ -828,6 +828,10 @@ public class ServerEvents {
     public static void arrowPierce(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof AbstractArrow arrow && arrow.getOwner() != null && arrow.getOwner() instanceof LivingEntity living) {
             arrow.setPierceLevel((byte) (arrow.getPierceLevel() + living.getAttributeValue(AttributeRegistry.ARROW_PIERCING)));
+            if (AbilityData.get(living).focusArrowDamage > 1) {
+                arrow.setBaseDamage(arrow.getBaseDamage() * AbilityData.get(living).focusArrowDamage);
+                AbilityData.get(living).focusArrowDamage = 1;
+            }
         }
     }
 

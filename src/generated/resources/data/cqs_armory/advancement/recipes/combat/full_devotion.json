@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:wind_charge"
+            "items": "cqs_armory:archer_rune"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cqs_armory:quickdraw"
+        "recipe": "cqs_armory:full_devotion"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cqs_armory:quickdraw"
+      "cqs_armory:full_devotion"
     ]
   }
 }

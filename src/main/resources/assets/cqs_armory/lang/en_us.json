@@ -43,6 +43,7 @@
   "spell.cqs_armory.execute_spell": "Execute",
   "spell.cqs_armory.perfect_technique_spell": "Perfect Technique",
   "spell.cqs_armory.flank_step_spell": "Flank Step",
+  "spell.cqs_armory.focus_spell": "Focus",
 
   "school.cqs_armory.arcane": "Arcane",
   "school.cqs_armory.necromancy": "Necromancy",
@@ -59,6 +60,7 @@
   "ui.cqs_armory.no_bleed_stack_error": "Target does not have bleed stacks owned by you",
   "ui.cqs_armory.chained_duration": "%s Chained Duration",
   "ui.cqs_armory.no_rage_error": "Must have more than 0 rage",
+  "ui.cqs_armory.no_momentum_error": "Must have more than 0 momentum",
 
   "enchantment.cqs_armory.smoldering_hone": "Hone: Smoldering",
   "enchantment.cqs_armory.defense_hone": "Hone: Defense",
@@ -260,8 +262,9 @@
   "item.cqs_armory.double_step": "Double Step",
   "item.cqs_armory.quickdraw": "Quickdraw",
   "item.cqs_armory.quickdraw.desc": "Momentum movement grants insta draw",
+  "item.cqs_armory.full_devotion": "Full Devotion",
   "item.cqs_armory.kinetic_strike": "Kinetic Strike",
-  "item.cqs_armory.kinetic_strike.desc": "+10% arrow damage on momentum movement, stacks 3 times",
+  "item.cqs_armory.kinetic_strike.desc": "+5% arrow damage on momentum movement, stacks 6 times",
   "item.cqs_armory.blast_dash": "Blast Dash",
   "item.cqs_armory.blast_dash.desc": "Momentum movement causes an explosion",
   "item.cqs_armory.sharpshooter": "Sharpshooter",

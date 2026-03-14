@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-13T18:48:42.0215129	Recipes
+// 1.21.1	2026-03-13T23:00:44.0134992	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -117,6 +117,7 @@ a2c2378815f3c0dc01868a9fc91de66d30de8094 data/cqs_armory/advancement/recipes/com
 488fda469545262735713493fb5f0c805b39fec0 data/cqs_armory/advancement/recipes/combat/fire_coating.json
 15cf0e74008aa0e68338d0f9472ec43213294079 data/cqs_armory/advancement/recipes/combat/fire_quiver.json
 10eb3b88e3be82fabac1090be3bc87c1c5b68876 data/cqs_armory/advancement/recipes/combat/flashguard.json
+83fa7baf63d4f020693c9012f9fe34b96a7d4646 data/cqs_armory/advancement/recipes/combat/full_devotion.json
 e17ab294b20afec4bd697a96d666cc6c78ddc99a data/cqs_armory/advancement/recipes/combat/gold_arcane_staff.json
 d658c7f54f7cabde2432386d81e8ee8e8b620fda data/cqs_armory/advancement/recipes/combat/gold_fire_staff.json
 d1b6cea4ffda19a1349c4214255bcbda1d87711a data/cqs_armory/advancement/recipes/combat/gold_greataxe.json
@@ -231,7 +232,6 @@ d1c2ca8e4712c58b83d0aafc6e797bfdbde466e7 data/cqs_armory/advancement/recipes/com
 f5d6c202b9b671e438e8ba6a22ca2d272a13a36e data/cqs_armory/advancement/recipes/combat/plenty_quiver.json
 2c8580df8700fe7ec60cd160bcb1d320a5324326 data/cqs_armory/advancement/recipes/combat/poison_coating.json
 c0b8ba9495c8fbf7fc21fcf4b7ea62cb894903f4 data/cqs_armory/advancement/recipes/combat/poison_quiver.json
-5a62e0be246d43ee75be33f58a2131573287eb99 data/cqs_armory/advancement/recipes/combat/quickdraw.json
 83c7c9a0513f179b8aa087bb44c845fd8664ee18 data/cqs_armory/advancement/recipes/combat/rampart_talisman.json
 aa7b31f12285f2d484926a56203521d021a77478 data/cqs_armory/advancement/recipes/combat/ranger_talisman.json
 1ef9d53115801724866cafdfbdf317c2a7d7d3b1 data/cqs_armory/advancement/recipes/combat/retaliate.json
@@ -449,6 +449,7 @@ cd3d952b5eab1ecaf68ba9df3bc11ab8d64cf3cc data/cqs_armory/recipe/fang_coating.jso
 4d73c68c1df040e7fae87e3b5ca69756d3f74c90 data/cqs_armory/recipe/fire_coating.json
 3826c73d25666f7bc773c8e217b053dc7ab570bf data/cqs_armory/recipe/fire_quiver.json
 0401de67b65069e632b4ca264a430af43572e678 data/cqs_armory/recipe/flashguard.json
+a5afa258a6ae4c3ab95d1d445a72786c07e5a32c data/cqs_armory/recipe/full_devotion.json
 a07282d40d47c0fad76ec8907f3cd76856444c04 data/cqs_armory/recipe/gold_arcane_staff.json
 b310e3d6eff1a5c82e565514fe7ba0279f589e4d data/cqs_armory/recipe/gold_fire_staff.json
 516b101829a64896577b4e6f19b66bb2b0578fb4 data/cqs_armory/recipe/gold_greataxe.json
@@ -563,7 +564,6 @@ c3980e3eeb00abdb01fb30c74cd94df9ed639377 data/cqs_armory/recipe/obsidian_spear.j
 a7532258c9c3e20aca95baaaa75d8d67fed51f6e data/cqs_armory/recipe/plenty_quiver.json
 d57e9e4020e05bd162d7543f412949bcbd2f183f data/cqs_armory/recipe/poison_coating.json
 ae7da4b0395c2ea512b1fc58af1721f29752962a data/cqs_armory/recipe/poison_quiver.json
-6d1daf89f53618e32fe6f0b4961a79b5c3452d30 data/cqs_armory/recipe/quickdraw.json
 7b26786cfc05111c4a06f53e168d37ca1f3cebbb data/cqs_armory/recipe/rampart_talisman.json
 27b6cc58d55dae99ff555d097c6ddcaea2029b2e data/cqs_armory/recipe/ranger_talisman.json
 96fe1c909d97dc0cd049b60f7b218c55afa37cf7 data/cqs_armory/recipe/retaliate.json
