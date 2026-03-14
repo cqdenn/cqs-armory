@@ -38,7 +38,7 @@ public class ShockwaveMageAOEEffect extends NonCurableEffect {
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         if (livingEntity.level().isClientSide) return true;
-        float radius = 5;
+        float radius = 10;
         Level level = livingEntity.level();
         float damage = (float) (60 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.LIGHTNING_SPELL_POWER));
 
