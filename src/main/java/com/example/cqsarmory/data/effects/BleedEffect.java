@@ -17,6 +17,7 @@ public class BleedEffect extends NonCurableEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+        if (livingEntity.level().getGameTime() % 20 != 0) return true;
         /*var dTypeReg = livingEntity.damageSources().damageTypes;
         var dType = dTypeReg.getHolder(net.neoforged.neoforge.common.NeoForgeMod.POISON_DAMAGE).orElse(dTypeReg.getHolderOrThrow(net.minecraft.world.damagesource.DamageTypes.MAGIC));*/
         for (Map.Entry<LivingEntity, Integer> entry : DamageData.get(livingEntity).bleedStacks.entrySet()) {
@@ -32,6 +33,6 @@ public class BleedEffect extends NonCurableEffect {
 
     @Override
     public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
-        return duration % 20 == 0;
+        return true;
     }
 }
