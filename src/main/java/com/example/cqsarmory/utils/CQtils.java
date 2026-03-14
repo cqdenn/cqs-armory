@@ -66,13 +66,13 @@ public class CQtils {
         PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
 
         //booster effects
-        if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
+        //if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
 
         //25% arrow damage per stack, max 3
         if (ItemRegistry.KINETIC_STRIKE.get().isEquippedBy(player)) {
             var effect = player.getEffect(MobEffectRegistry.KINETIC_STRIKE);
             if (effect != null) {
-                player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, Math.min(effect.getAmplifier() + 1, 2), false, false, true));
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, Math.min(effect.getAmplifier() + 1, 5), false, false, true));
             } else {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, 0, false, false, true));
             }
