@@ -50,7 +50,7 @@ public class FireworkProjectile extends AbilityArrow {
         this.setOwner(shooter);
         this.entityData.set(DATA_ID_FIREWORKS_ITEM, stack.copy());
         this.setPos(x, y, z);
-        this.damage = damage;
+        setBaseDamage(damage);
         this.life = 0;
         this.lifetime = 10 + (Utils.random.nextInt(10));
         this.shotAtAngle = shotAtAngle;
@@ -66,7 +66,6 @@ public class FireworkProjectile extends AbilityArrow {
         builder.define(DATA_ID_FIREWORKS_ITEM, new ItemStack(Items.FIREWORK_ROCKET));
     }
 
-    private float damage;
     private int life;
     private int lifetime;
     private boolean shotAtAngle;
@@ -210,7 +209,7 @@ public class FireworkProjectile extends AbilityArrow {
     }
 
     public double getDamage(Entity target) {
-        double damage = this.damage;
+        double damage = getBaseDamage();
         if (this.level() instanceof ServerLevel serverLevel && target != null) {
             DamageSource source = new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner());
             return EnchantmentHelper.modifyDamage(serverLevel, this.getWeaponItem(), target, source, (float) damage) ;
