@@ -6,6 +6,7 @@
   "mixins": [
     "AbstractSpellMixin",
     "BowItemMixin",
+    "IceTombEntityMixin",
     "PlayerMixin",
     "ProjectileWeaponItemMixin"
   ],
