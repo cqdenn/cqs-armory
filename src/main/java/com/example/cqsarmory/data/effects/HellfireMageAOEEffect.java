@@ -29,13 +29,13 @@ public class HellfireMageAOEEffect extends NonCurableEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        float radius = 5;
+        float radius = 7;
         Level level = livingEntity.level();
         //float damage = (float) livingEntity.getAttributeValue(AttributeRegistry.MAX_MANA) / 20; //5% of max mana
         float damage = (float) (30 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
         int total = 6;
         float height = 4;
-        var entities = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.position(), livingEntity.position()).inflate(radius));
+        var entities = livingEntity.level().getEntitiesOfClass(LivingEntity.class, new AABB(livingEntity.position(), livingEntity.position()).inflate(radius, radius*2, radius));
 
         for (LivingEntity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(livingEntity, target) && !livingEntity.isSpectator() && DamageData.get(target).hellfireAOETargetingDelay <= 0) {
