@@ -264,7 +264,7 @@
   "item.cqs_armory.quickdraw.desc": "Momentum movement grants insta draw",
   "item.cqs_armory.full_devotion": "Full Devotion",
   "item.cqs_armory.kinetic_strike": "Kinetic Strike",
-  "item.cqs_armory.kinetic_strike.desc": "+5% arrow damage on momentum movement, stacks 6 times",
+  "item.cqs_armory.kinetic_strike.desc": "+3% arrow damage on momentum movement, stacks 10 times",
   "item.cqs_armory.blast_dash": "Blast Dash",
   "item.cqs_armory.blast_dash.desc": "Momentum movement causes an explosion",
   "item.cqs_armory.sharpshooter": "Sharpshooter",

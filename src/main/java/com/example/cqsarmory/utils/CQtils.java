@@ -72,7 +72,7 @@ public class CQtils {
         if (ItemRegistry.KINETIC_STRIKE.get().isEquippedBy(player)) {
             var effect = player.getEffect(MobEffectRegistry.KINETIC_STRIKE);
             if (effect != null) {
-                player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, Math.min(effect.getAmplifier() + 1, 5), false, false, true));
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, Math.min(effect.getAmplifier() + 1, 9), false, false, true));
             } else {
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.KINETIC_STRIKE, 100, 0, false, false, true));
             }
