@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.HellfireAOEEntity;
+import com.example.cqsarmory.registry.CQParticleRegistry;
 import com.example.cqsarmory.registry.DamageTypes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -76,7 +77,7 @@ public class BlizzardMageAOEEffect extends NonCurableEffect {
 
             MagicManager.spawnParticles(
                     level,
-                    new SwirlingParticleOptions(ParticleRegistry.SNOWFLAKE_PARTICLE.get(), new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(diameter, diameter, 35), new Vec3(deltaHW, deltaHW, 0.01)),
+                    new SwirlingParticleOptions(CQParticleRegistry.BLIZZARD_PARTICLE.get(), new Vec3(0, 1, 0), new Vec3(1, 0, 0), new Vec3(diameter, diameter, 35), new Vec3(deltaHW, deltaHW, 0.01)),
                     x, y + (0.04 * i), z,
                     1,
                     0, 0, 0,

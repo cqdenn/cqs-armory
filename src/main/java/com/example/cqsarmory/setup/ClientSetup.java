@@ -3,6 +3,8 @@ package com.example.cqsarmory.setup;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.renderers.*;
 import com.example.cqsarmory.items.weapons.SpearItem;
+import com.example.cqsarmory.particles.BlizzardParticle;
+import com.example.cqsarmory.registry.CQParticleRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
@@ -10,6 +12,8 @@ import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleRenderer;
 import io.redspace.ironsspellbooks.item.SpellBook;
 import io.redspace.ironsspellbooks.item.WaywardCompass;
 import io.redspace.ironsspellbooks.item.weapons.AutoloaderCrossbow;
+import io.redspace.ironsspellbooks.particle.*;
+import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.render.SpellBookCurioRenderer;
 import io.redspace.ironsspellbooks.util.IMinecraftInstanceHelper;
 import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
@@ -32,6 +36,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
@@ -113,5 +118,10 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.SCATTER_ARROW.get(), AbilityArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DELAYED_GENERIC_MAGE_AOE_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.HELLFIRE_AOE_ENTITY.get(), NoopRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(CQParticleRegistry.BLIZZARD_PARTICLE.get(), BlizzardParticle.Provider::new);
     }
 }

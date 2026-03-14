@@ -111,6 +111,7 @@ public class CqsArmory
         AssetHandlerRegistry.register(modEventBus);
         ArmorMaterialsRegistry.register(modEventBus);
         CQSchoolRegistry.register(modEventBus);
+        CQParticleRegistry.register(modEventBus);
 
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, ClientConfigs.SPEC, String.format("%s-client.toml", CqsArmory.MODID));
