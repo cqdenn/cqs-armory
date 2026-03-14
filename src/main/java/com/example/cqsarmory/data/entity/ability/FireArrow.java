@@ -22,12 +22,4 @@ public class FireArrow extends AbilityArrow{
     public boolean isOnFire() {
         return true;
     }
-
-    @Override
-    public double getBaseDamage() {
-        if (this.getOwner() instanceof LivingEntity owner) {
-            return super.getBaseDamage() * owner.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER);
-        }
-        return super.getBaseDamage();
-    }
 }

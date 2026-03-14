@@ -4,6 +4,7 @@ import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.data.entity.ability.FireArrow;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveQuiver;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -25,6 +26,7 @@ public class FireQuiver extends SimpleDescriptiveQuiver {
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         FireArrow abilityArrow = new FireArrow(shooter.level());
         abilityArrow.copyStats(arrow, shooter, arrowDmg);
+        abilityArrow.setBaseDamage(arrowDmg * shooter.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
         return abilityArrow;
     }
 }

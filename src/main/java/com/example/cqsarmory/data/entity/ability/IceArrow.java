@@ -50,14 +50,6 @@ public class IceArrow extends AbilityArrow{
     }
 
     @Override
-    public double getBaseDamage() {
-        if (this.getOwner() instanceof LivingEntity owner) {
-            return super.getBaseDamage() * owner.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER);
-        }
-        return super.getBaseDamage();
-    }
-
-    @Override
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
         living.setTicksFrozen(living.getTicksFrozen() + 60);
