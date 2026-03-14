@@ -50,6 +50,7 @@ public class DamageData {
     public Vec3 chainWhipLocation;
     public HashMap<LivingEntity, Integer> bleedStacks = new HashMap<>();
     public boolean preventAOEChaining;
+    public int hellfireAOETargetingDelay;
 
     public static DamageData get (Entity entity) {
         return entity.getData(EntityDataAttachmentRegistry.DAMAGE_DATA);
