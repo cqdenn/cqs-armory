@@ -18,15 +18,21 @@ import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.api.config.ModifyDefaultConfigValuesEvent;
+import io.redspace.ironsspellbooks.api.config.SpellConfigParameter;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.CooldownInstance;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
+import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
@@ -82,6 +88,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -523,7 +530,7 @@ public class ServerEvents {
             float newRageTest = (AbilityData.get(player).getRage() + ((float) player.getAttribute(AttributeRegistry.RAGE_ON_HIT).getValue() * abilityGainMultiplier));
             float newRage = newRageTest < player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
             //perfect technique
-            if (player.hasEffect(MobEffectRegistry.PERFECT_TECHNIQUE)){
+            if (player.hasEffect(MobEffectRegistry.PERFECT_TECHNIQUE)) {
                 newRageTest = (AbilityData.get(player).getRage() - 1);
                 newRage = newRageTest > 0 ? newRageTest : 0;
                 if (newRage == 0) player.removeEffect(MobEffectRegistry.PERFECT_TECHNIQUE);
@@ -630,7 +637,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void resetMomentumMovements (PlayerTickEvent.Pre event) {
+    public static void resetMomentumMovements(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
         if (player.onGround()) {
             DoubleJumpData.get(player).jumps = (int) player.getAttributeValue(AttributeRegistry.MOMENTUM_JUMPS);
@@ -639,7 +646,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void resetMomentumMovementOnHit (LivingDamageEvent.Post event) {
+    public static void resetMomentumMovementOnHit(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();
         Entity directEntity = event.getSource().getDirectEntity();
@@ -929,7 +936,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void retaliate (LivingDamageEvent.Post event) {
+    public static void retaliate(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
         if (ItemRegistry.RETALIATE.get().isEquippedBy(target)) {
             var effect = target.getEffect(MobEffectRegistry.RETALIATE);
@@ -942,7 +949,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void backstabDamage (LivingIncomingDamageEvent event) {
+    public static void backstabDamage(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();
         if (entity instanceof Player attacker && event.getSource().is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
@@ -957,7 +964,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void overwatch (LivingDamageEvent.Pre event) {
+    public static void overwatch(LivingDamageEvent.Pre event) {
         Entity entity = event.getSource().getEntity();
         LivingEntity target = event.getEntity();
         if (entity instanceof LivingEntity attacker && ItemRegistry.OVERWATCH.get().isEquippedBy(attacker) && target.position().y + 3 <= attacker.position().y) { //3 or more blocks above
@@ -1154,6 +1161,39 @@ public class ServerEvents {
                 living.hurtMarked = true;
             }
 
+        }
+    }
+
+    /*@SubscribeEvent
+    public static void summonCDR(LivingDamageEvent.Post event) {
+        Entity entity = event.getSource().getDirectEntity();
+        if (entity instanceof IMagicSummon summon && summon.getSummoner() instanceof ServerPlayer player) {
+            var cooldowns = MagicData.getPlayerMagicData(player).getPlayerCooldowns();
+            cooldowns.getSpellCooldowns().forEach((key, value) -> {
+                SpellRegistry.REGISTRY.getHolder(SpellRegistry.getSpell(key).getSpellResource()).ifPresent(holder -> {
+                    if (holder.is(Tags.AbstractSpells.SUMMONING_SPELLS)) {
+                        cooldowns.decrementCooldown(value, 20);
+                        cooldowns.syncToPlayer(player);
+                    }
+                });
+            });
+        }
+    }*/
+
+    @SubscribeEvent
+    public static void summonSpellCooldowns (ModifyDefaultConfigValuesEvent event) {
+        SpellRegistry.REGISTRY.getHolder(event.getSpell().getSpellResource()).ifPresent(holder -> {
+            if (holder.is(Tags.AbstractSpells.SUMMONING_SPELLS)) {
+                event.setDefaultValue(SpellConfigParameter.COOLDOWN_IN_SECONDS, 10.0);
+            }
+        });
+    }
+
+    @SubscribeEvent
+    public static void summonDamageCap (LivingIncomingDamageEvent event) {
+        LivingEntity target = event.getEntity();
+        if (target instanceof IMagicSummon summon) {
+            event.setAmount(Math.min(event.getAmount(), target.getMaxHealth() * 0.25f));
         }
     }
 
