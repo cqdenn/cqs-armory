@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -127,6 +128,11 @@ public class AbilityArrow extends AbstractArrow {
         if (this.isInWater() && this.isNoGravity()) {
             this.setDeltaMovement(vec3);
         }
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity target) {
+        return super.canHitEntity(target) && !DamageSources.isFriendlyFireBetween(getOwner(), target);
     }
 
     @Override
