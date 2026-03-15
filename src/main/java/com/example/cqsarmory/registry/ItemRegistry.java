@@ -457,7 +457,7 @@ public class ItemRegistry {
 
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
-                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.4 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CHAIN_WHIP_SPELL, power.power())))
         );
 
@@ -523,7 +523,7 @@ public class ItemRegistry {
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), necromancySpellsForPower)
         );
 
