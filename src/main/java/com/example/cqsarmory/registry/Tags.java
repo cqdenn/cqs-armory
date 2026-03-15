@@ -1,6 +1,8 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
@@ -38,6 +40,14 @@ public class Tags {
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
+        }
+    }
+
+    public static class AbstractSpells {
+        public static final TagKey<AbstractSpell> SUMMONING_SPELLS = tag("summoning_spells");
+
+        private static TagKey<AbstractSpell> tag(String name) {
+            return TagKey.create(SpellRegistry.SPELL_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
         }
     }
 }

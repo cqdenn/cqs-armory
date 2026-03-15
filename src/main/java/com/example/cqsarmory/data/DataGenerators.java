@@ -31,5 +31,8 @@ public class DataGenerators {
         generator.addProvider(event.includeServer(),
                 new RecipeDataGenerator(packOutput, event.getLookupProvider()));
 
+        generator.addProvider(event.includeServer(),
+                new SpellTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
+
     }
 }
