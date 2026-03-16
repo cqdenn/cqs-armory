@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "m": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "r": {
+      "item": "irons_spellbooks:blank_rune"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "mrm",
+    "mmm"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:arcanist_rune"
+  }
+}

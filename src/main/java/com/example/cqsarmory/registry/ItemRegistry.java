@@ -228,11 +228,15 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MAX_MOMENTUM_UPGRADE_ORB = ITEMS.register("max_momentum_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_MOMENTUM)));
     public static final DeferredHolder<Item, Item> MAX_HEALTH_UPGRADE_ORB = ITEMS.register("max_health_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_HEALTH)));
     public static final DeferredHolder<Item, Item> BLOCK_STRENGTH_UPGRADE_ORB = ITEMS.register("block_strength_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.BLOCK_STRENGTH)));
+    public static final DeferredHolder<Item, Item> ARCANIST_UPGRADE_ORB = ITEMS.register("arcanist_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.ARCANIST)));
+    public static final DeferredHolder<Item, Item> NECROMANCY_UPGRADE_ORB = ITEMS.register("necromancy_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.NECROMANCY)));
 
     public static final DeferredHolder<Item, Item> MELEE_RUNE = ITEMS.register("melee_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> TANK_RUNE = ITEMS.register("tank_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> ARCHER_RUNE = ITEMS.register("archer_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> HEALTHY_RUNE = ITEMS.register("healthy_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(ItemPropertiesHelper.material()));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "r": {
+      "item": "cqs_armory:necromancer_rune"
+    },
+    "x": {
+      "item": "irons_spellbooks:upgrade_orb"
+    }
+  },
+  "pattern": [
+    "rrr",
+    "rxr",
+    "rrr"
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:necromancy_upgrade_orb"
+  }
+}

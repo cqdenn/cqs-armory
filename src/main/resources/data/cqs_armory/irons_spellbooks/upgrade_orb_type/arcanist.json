@@ -1,0 +1,9 @@
+{
+  "amount": 0.05,
+  "attribute": "cqs_armory:arcane_spell_power",
+  "containerItem": {
+    "count": 1,
+    "id": "cqs_armory:arcanist_upgrade_orb"
+  },
+  "operation": "add_multiplied_base"
+}

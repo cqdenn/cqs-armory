@@ -61,7 +61,7 @@ public class CQSchoolRegistry {
 
     public static final Supplier<SchoolType> ARCANE = registerSchool(new SchoolType(
             ARCANE_RESOURCE,
-            Tags.Items.ENDER_PEARLS,
+            Tags.Items.GEMS_AMETHYST,
             Component.translatable("school.cqs_armory.arcane").withStyle(ChatFormatting.DARK_PURPLE),
             AttributeRegistry.ARCANE_SKILL_POWER,
             AttributeRegistry.ARCANE_SKILL_RESIST,
