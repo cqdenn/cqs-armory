@@ -28,6 +28,7 @@ public abstract class ProjectileWeaponItemMixin {
     @Inject(method = "useAmmo", at = @At("HEAD"), cancellable = true)
     private static void cqs_armory$useAmmo(ItemStack weapon, ItemStack ammo, LivingEntity shooter, boolean intangable, CallbackInfoReturnable<ItemStack> cir) {
         if (!ammo.is(Items.ARROW)) return;
+        if (shooter instanceof Player player && player.isCreative()) return;
         if (AbilityData.get(shooter).quiverArrowCount <= 0 || (shooter instanceof Player player && CQtils.getPlayerCurioStack(player, "quiver").isEmpty()))
             return;
         if (intangable) return;
