@@ -124,7 +124,6 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
 
             if (!this.level().isClientSide) {
                 this.bite(entity);
-                this.setBaseDamage(this.getBaseDamage() * 0.9);
             }
             if (this.getPierceLevel() > 0) {
                 if (this.piercingIgnoreEntityIds == null) {

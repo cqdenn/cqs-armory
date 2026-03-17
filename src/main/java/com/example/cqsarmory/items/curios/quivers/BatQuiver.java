@@ -17,7 +17,7 @@ public class BatQuiver extends SimpleDescriptiveQuiver {
 
     @Override
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
-        BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg * 0.33f);
+        BatProjectile bat = new BatProjectile(shooter.level(), shooter, arrowDmg);
         //bat.copyStats(arrow, shooter);
         if (arrow.isOnFire()) {
             bat.igniteForSeconds(100);
