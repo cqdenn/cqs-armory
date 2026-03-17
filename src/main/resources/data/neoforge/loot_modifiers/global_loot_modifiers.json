@@ -1,6 +1,7 @@
 {
   "replace": false,
   "entries": [
-    "cqs_armory:rotting_curse"
+    "cqs_armory:rotting_curse",
+    "cqs_armory:entity_drops/warden_modifier"
   ]
 }
