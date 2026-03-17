@@ -9,6 +9,7 @@ import com.example.cqsarmory.registry.*;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SchoolType;
@@ -208,6 +209,8 @@ public class CQtils {
         schoolMap.put(SpellRegistry.TELEKINESIS_SPELL.get(), CQSchoolRegistry.ARCANE);
         schoolMap.put(SpellRegistry.TELEPORT_SPELL.get(), CQSchoolRegistry.ARCANE);
         schoolMap.put(SpellRegistry.EVASION_SPELL.get(), CQSchoolRegistry.ARCANE);
+
+        schoolMap.put(SpellRegistry.SHIELD_SPELL.get(), SchoolRegistry.HOLY);
 
         return schoolMap;
     }
