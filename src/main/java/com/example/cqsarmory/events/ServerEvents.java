@@ -671,7 +671,7 @@ public class ServerEvents {
         DamageSource dmgSource = event.getSource();
         Entity target = event.getEntity();
 
-        if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && !dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+        if (directEntity instanceof AbstractArrow && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && (!dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN) || directEntity instanceof ThrownItemProjectile)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() && player.getAttributeValue(AttributeRegistry.MOMENTUM_ORBS_SPAWNED) > 0 && false) {//disabling momentum orb spawning D:
                 if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) return;
