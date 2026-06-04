@@ -28,5 +28,15 @@
     "sounds": [
       "cqs_armory:melee_cast"
     ]
+  },
+  "mace_cast": {
+    "sounds": [
+      "cqs_armory:mace_cast"
+    ]
+  },
+  "spear_skewer": {
+    "sounds": [
+      "cqs_armory:spear_skewer"
+    ]
   }
 }

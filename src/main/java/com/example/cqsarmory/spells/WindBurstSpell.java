@@ -5,13 +5,13 @@ import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.DamageTypes;
+import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -99,6 +99,11 @@ public class WindBurstSpell extends AbstractSpell {
     @Override
     public AnimationHolder getCastFinishAnimation() {
         return AnimationHolder.pass();
+    }
+
+    @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.of(SoundRegistry.MACE_CAST_SOUND.get());
     }
 
     @Override

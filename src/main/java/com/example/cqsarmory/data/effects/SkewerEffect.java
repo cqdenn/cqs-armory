@@ -11,7 +11,9 @@ import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -56,10 +58,11 @@ public class SkewerEffect extends NonCurableEffect {
                     CQtils.addBleedStacks(livingEntity, target, amplifier, duration);
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;
+                    livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundRegistry.KEEPER_SWORD_IMPACT.get(), SoundSource.PLAYERS);
                     return false;
                 }
             }
-        } else if (livingEntity.onGround()) {
+        } else if (livingEntity.onGround() && livingEntity.hasEffect(MobEffectRegistry.SKEWER) && livingEntity.getEffect(MobEffectRegistry.SKEWER).getDuration() < 15) {
             return false;
         }
         livingEntity.fallDistance = 0;

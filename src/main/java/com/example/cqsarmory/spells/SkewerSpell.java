@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.effects.ShieldBashEffect;
 import com.example.cqsarmory.data.effects.SkewerEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
@@ -16,7 +17,6 @@ import io.redspace.ironsspellbooks.capabilities.magic.ImpulseCastData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
 import io.redspace.ironsspellbooks.player.SpinAttackType;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.spells.fire.BurningDashSpell;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -24,6 +24,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -84,6 +85,11 @@ public class SkewerSpell extends AbstractSpell {
     }
 
     @Override
+    public Optional<SoundEvent> getCastFinishSound() {
+        return Optional.of(SoundRegistry.SPEAR_SKEWER_SOUND.get());
+    }
+
+    @Override
     public boolean canBeInterrupted(Player player) {
         return false;
     }
@@ -111,7 +117,7 @@ public class SkewerSpell extends AbstractSpell {
 
         entity.setDeltaMovement(forward.x, y, forward.z);
         entity.hurtMarked = true;
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 40, spellLevel, false, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 20, spellLevel, false, false, false));
         entity.invulnerableTime = 20;
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }

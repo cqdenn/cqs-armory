@@ -23,6 +23,8 @@ public class SoundRegistry {
     public static DeferredHolder<SoundEvent, SoundEvent> RIPOSTE_HIT_SOUND = registerSoundEvent("riposte_hit");
     public static DeferredHolder<SoundEvent, SoundEvent> ORB_SHOT_SOUND = registerSoundEvent("orb_shot");
     public static DeferredHolder<SoundEvent, SoundEvent> MELEE_CAST_SOUND = registerSoundEvent("melee_cast");
+    public static DeferredHolder<SoundEvent, SoundEvent> MACE_CAST_SOUND = registerSoundEvent("mace_cast");
+    public static DeferredHolder<SoundEvent, SoundEvent> SPEAR_SKEWER_SOUND = registerSoundEvent("spear_skewer");
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_SHOOT = SOUND_EVENTS.register("arrow_shoot", () -> SoundEvents.ARROW_SHOOT);
 
 
