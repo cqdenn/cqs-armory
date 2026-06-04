@@ -33,7 +33,7 @@ public class ThrownItemRenderer extends EntityRenderer<ThrownItemProjectile> {
         float yRot = -((float) (Mth.atan2(motion.z, motion.x) * (double) (180F / (float) Math.PI)) + 90.0F);
         if (!entity.isInGround()) {
             poseStack.mulPose(Axis.YP.rotationDegrees(yRot));
-            poseStack.mulPose(Axis.XP.rotationDegrees(xRot - (entity.tickCount + partialTick) * 36));
+            poseStack.mulPose(Axis.XP.rotationDegrees(-(entity.tickCount + partialTick) * 36));
         }
         else {
             poseStack.mulPose(Axis.XP.rotationDegrees(180));
