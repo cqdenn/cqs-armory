@@ -200,8 +200,8 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGMA_BOMB_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.CONE_OF_COLD_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.VOLT_STRIKE_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.BLOOD_NEEDLES_SPELL, 10))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.EVASION_SPELL, 5))).withAttributes("brand", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARCANE_SKILL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.BLOOD_NEEDLES_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.EVASION_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ENDER_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> GUIDED_BRAND = ITEMS.register("guided_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrand().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
@@ -228,15 +228,15 @@ public class ItemRegistry {
     public static final DeferredHolder<Item, Item> MAX_MOMENTUM_UPGRADE_ORB = ITEMS.register("max_momentum_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_MOMENTUM)));
     public static final DeferredHolder<Item, Item> MAX_HEALTH_UPGRADE_ORB = ITEMS.register("max_health_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_HEALTH)));
     public static final DeferredHolder<Item, Item> BLOCK_STRENGTH_UPGRADE_ORB = ITEMS.register("block_strength_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.BLOCK_STRENGTH)));
-    public static final DeferredHolder<Item, Item> ARCANIST_UPGRADE_ORB = ITEMS.register("arcanist_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.ARCANIST)));
-    public static final DeferredHolder<Item, Item> NECROMANCY_UPGRADE_ORB = ITEMS.register("necromancy_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.NECROMANCY)));
+    //public static final DeferredHolder<Item, Item> ARCANIST_UPGRADE_ORB = ITEMS.register("arcanist_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.ARCANIST)));
+    //public static final DeferredHolder<Item, Item> NECROMANCY_UPGRADE_ORB = ITEMS.register("necromancy_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.NECROMANCY)));
 
     public static final DeferredHolder<Item, Item> MELEE_RUNE = ITEMS.register("melee_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> TANK_RUNE = ITEMS.register("tank_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> ARCHER_RUNE = ITEMS.register("archer_rune", () -> new Item(ItemPropertiesHelper.material()));
     public static final DeferredHolder<Item, Item> HEALTHY_RUNE = ITEMS.register("healthy_rune", () -> new Item(ItemPropertiesHelper.material()));
-    public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(ItemPropertiesHelper.material()));
-    public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(ItemPropertiesHelper.material()));
+    //public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(ItemPropertiesHelper.material()));
+    //public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(ItemPropertiesHelper.material()));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
@@ -359,7 +359,7 @@ public class ItemRegistry {
 
     public static Weaponset createWeaponset(ExtendedWeaponTier material, WeaponPower power, String name, boolean create_ingot, boolean fireRes) {
 
-        final List<CQSpellDataRegistryHolder> iceSpells = List.of(
+        /*final List<CQSpellDataRegistryHolder> iceSpells = List.of(
                 new CQSpellDataRegistryHolder(SpellRegistry.ICICLE_SPELL, 6),
                 new CQSpellDataRegistryHolder(SpellRegistry.SNOWBALL_SPELL, 2),
                 new CQSpellDataRegistryHolder(SpellRegistry.RAY_OF_FROST_SPELL, 1),
@@ -439,7 +439,7 @@ public class ItemRegistry {
             necromancySpellsForPower[i] = new CQSpellDataRegistryHolder(necromancySpells.get(i).getSpellSupplier(), necromancySpells.get(i).getLevel() + (power.power() * 2));
             arcaneSpellsForPower[i] = new CQSpellDataRegistryHolder(arcaneSpells.get(i).getSpellSupplier(), arcaneSpells.get(i).getLevel() + (power.power() * 2));
             holySpellsForPower[i] = new CQSpellDataRegistryHolder(holySpells.get(i).getSpellSupplier(), holySpells.get(i).getLevel() + (power.power() * 2));
-        }
+        }*/
 
         var warhammer = ITEMS.register(name + "_warhammer",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
@@ -510,37 +510,37 @@ public class ItemRegistry {
         var ice = ITEMS.register(name + "_ice_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), iceSpellsForPower)
+                ))
         );
 
         var fire = ITEMS.register(name + "_fire_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), fireSpellsForPower)
+                ))
         );
 
         var lightning = ITEMS.register(name + "_lightning_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), lightningSpellsForPower)
+                ))
         );
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.NECROMANCY_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), necromancySpellsForPower)
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.EVOCATION_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ))
         );
 
         var arcane = ITEMS.register(name + "_arcane_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARCANE_SKILL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), arcaneSpellsForPower)
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.ENDER_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.ELDRITCH_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ))
         );
 
         var holy = ITEMS.register(name + "_holy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), holySpellsForPower)
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.NATURE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                ))
         );
 
         Optional<DeferredItem> ingot = Optional.empty();

@@ -59,7 +59,7 @@ public class SkewerEffect extends NonCurableEffect {
                     return false;
                 }
             }
-        } else if (livingEntity.horizontalCollision || livingEntity.verticalCollisionBelow) {
+        } else if (livingEntity.onGround()) {
             return false;
         }
         livingEntity.fallDistance = 0;

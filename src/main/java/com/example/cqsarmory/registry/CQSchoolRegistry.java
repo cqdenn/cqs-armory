@@ -59,7 +59,7 @@ public class CQSchoolRegistry {
             DamageTypes.ARCHER_SKILL
     ));
 
-    public static final Supplier<SchoolType> ARCANE = registerSchool(new SchoolType(
+    /*public static final Supplier<SchoolType> ARCANE = registerSchool(new SchoolType(
             ARCANE_RESOURCE,
             Tags.Items.GEMS_AMETHYST,
             Component.translatable("school.cqs_armory.arcane").withStyle(ChatFormatting.DARK_PURPLE),
@@ -67,9 +67,9 @@ public class CQSchoolRegistry {
             AttributeRegistry.ARCANE_SKILL_RESIST,
             io.redspace.ironsspellbooks.registries.SoundRegistry.ENDER_CAST,
             DamageTypes.ARCANE_SKILL
-    ));
+    ));*/
 
-    public static final Supplier<SchoolType> NECROMANCY = registerSchool(new SchoolType(
+    /*public static final Supplier<SchoolType> NECROMANCY = registerSchool(new SchoolType(
             NECROMANCY_RESOURCE,
             Tags.Items.BONES,
             Component.translatable("school.cqs_armory.necromancy").withStyle(ChatFormatting.GRAY),
@@ -77,7 +77,7 @@ public class CQSchoolRegistry {
             AttributeRegistry.NECROMANCY_SKILL_RESIST,
             io.redspace.ironsspellbooks.registries.SoundRegistry.BLOOD_CAST,
             DamageTypes.NECROMANCY_SKILL
-    ));
+    ));*/
 
 
 }

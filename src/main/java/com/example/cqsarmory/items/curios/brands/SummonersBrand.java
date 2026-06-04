@@ -5,10 +5,10 @@ import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveBrand;
 import com.example.cqsarmory.network.SyncElementalistStacksPacket;
 import com.example.cqsarmory.network.SyncSummonersStacksPacket;
-import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import com.mojang.datafixers.types.templates.Sum;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import net.minecraft.resources.ResourceLocation;
@@ -40,7 +40,7 @@ public class SummonersBrand extends SimpleDescriptiveBrand {
 
         ResourceLocation summonID = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "summon_stacks_modifier");
         AttributeModifier summonMod = new AttributeModifier(summonID, damagePerStack * summonStacks, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
-        AttributeInstance summonInstance = player.getAttribute(AttributeRegistry.NECROMANCY_SKILL_POWER);
+        AttributeInstance summonInstance = player.getAttribute(AttributeRegistry.SUMMON_DAMAGE);// changed from necromancy skill power, might be OP idk
         summonInstance.removeModifier(summonMod.id());
 
         if (summonStacks > 0 && CQtils.getPlayerCurioStack(player, "brand").getItem() instanceof SummonersBrand) {

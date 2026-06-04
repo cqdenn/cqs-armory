@@ -331,7 +331,7 @@
   "item.cqs_armory.elemental_brand": "Brand of Elements",
   "item.cqs_armory.elemental_brand.desc": "Gain damage stacks on elemental damage",
   "item.cqs_armory.summoners_brand": "Brand of Summons",
-  "item.cqs_armory.summoners_brand.desc": "Gain necromancy damage stacks for each of your summons",
+  "item.cqs_armory.summoners_brand.desc": "Gain summon damage stacks for each of your summons",
   "item.cqs_armory.overcharge_brand": "Brand of Overcharged",
   "item.cqs_armory.overcharge_brand.desc": "1.5x mana costs",
 

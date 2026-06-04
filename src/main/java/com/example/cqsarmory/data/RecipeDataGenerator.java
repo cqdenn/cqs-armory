@@ -869,23 +869,23 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.ARCANIST_UPGRADE_ORB.get())
+        /*ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.ARCANIST_UPGRADE_ORB.get())
                 .pattern("rrr")
                 .pattern("rxr")
                 .pattern("rrr")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
                 .define('r', ItemRegistry.ARCANIST_RUNE.get())
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.NECROMANCY_UPGRADE_ORB.get())
+        /*ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.NECROMANCY_UPGRADE_ORB.get())
                 .pattern("rrr")
                 .pattern("rxr")
                 .pattern("rrr")
                 .define('x', io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get())
                 .define('r', ItemRegistry.NECROMANCER_RUNE.get())
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.UPGRADE_ORB.get()))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.MELEE_RUNE.get())
                 .pattern("mmm")
@@ -923,23 +923,23 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.ARCANIST_RUNE.get())
+        /*ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.ARCANIST_RUNE.get())
                 .pattern("mmm")
                 .pattern("mrm")
                 .pattern("mmm")
                 .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
                 .define('m', Items.AMETHYST_SHARD)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.NECROMANCER_RUNE.get())
+        /*ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.NECROMANCER_RUNE.get())
                 .pattern("mmm")
                 .pattern("mrm")
                 .pattern("mmm")
                 .define('r', io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get())
                 .define('m', Items.BONE)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.BLANK_RUNE.get()))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
     }
 }

@@ -52,7 +52,7 @@ import java.util.function.Supplier;
 
 public class CQtils {
 
-    public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
+    //public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
 
     public static void doMomentumMovement (ServerPlayer player, Vec3 motion) {
         //motion + fall damage
@@ -187,7 +187,7 @@ public class CQtils {
         return attacker.getMainHandItem();
     }
 
-    private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap() {
+    /*private static Map<AbstractSpell, Supplier<SchoolType>> buildSchoolMap() {
         Map<AbstractSpell, Supplier<SchoolType>> schoolMap = new HashMap<>();
 
         schoolMap.put(SpellRegistry.FANG_STRIKE_SPELL.get(), CQSchoolRegistry.NECROMANCY);
@@ -213,7 +213,7 @@ public class CQtils {
         schoolMap.put(SpellRegistry.SHIELD_SPELL.get(), SchoolRegistry.HOLY);
 
         return schoolMap;
-    }
+    }*/
 
     public static MomentumOrb getRandomOrbType(Level level, Player player) {
         ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);

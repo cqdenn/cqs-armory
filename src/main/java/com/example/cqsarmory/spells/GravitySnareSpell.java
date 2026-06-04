@@ -31,7 +31,7 @@ public class GravitySnareSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "gravity_snare_spell");
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
-            .setSchoolResource(CQSchoolRegistry.ARCANE_RESOURCE)
+            .setSchoolResource(SchoolRegistry.ENDER_RESOURCE)
             .setMaxLevel(1)
             .setCooldownSeconds(15)
             .build();

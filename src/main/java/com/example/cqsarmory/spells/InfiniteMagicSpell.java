@@ -7,6 +7,7 @@ import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -18,7 +19,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +31,7 @@ public class InfiniteMagicSpell extends AbstractSpell {
     private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "infinite_magic_spell");
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
-            .setSchoolResource(CQSchoolRegistry.ARCANE_RESOURCE)
+            .setSchoolResource(SchoolRegistry.ELDRITCH_RESOURCE)
             .setMaxLevel(1)
             .setCooldownSeconds(120)
             .build();
@@ -37,7 +40,7 @@ public class InfiniteMagicSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
                 Component.literal("Grants no mana costs"),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(getDurationTicks(), 1)));
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(getDurationTicks(caster), 1)));
     }
 
     public InfiniteMagicSpell() {
@@ -46,6 +49,11 @@ public class InfiniteMagicSpell extends AbstractSpell {
         this.spellPowerPerLevel = 1;
         this.castTime = 0;
         this.baseManaCost = 400;
+    }
+
+    @Override
+    public boolean isLearned(@Nullable Player player) {
+        return true;
     }
 
     @Override
@@ -65,12 +73,12 @@ public class InfiniteMagicSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, getDurationTicks(), 0, false, false, true));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, getDurationTicks(entity), 0, false, false, true));
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
-    public int getDurationTicks () {
-        return 400;
+    public int getDurationTicks (LivingEntity caster) {
+        return (int) (400 * caster.getAttributeValue(AttributeRegistry.SPELL_POWER) * caster.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
     }
 
     @Override

@@ -14,6 +14,7 @@ import io.redspace.ironsspellbooks.api.spells.SpellData;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -25,26 +26,30 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 import java.util.Arrays;
 import java.util.List;
 
-public class MagicStaffItem extends ExtendedSwordItem implements IPresetSpellContainer {
+public class MagicStaffItem extends ExtendedSwordItem {
 
-    List<SpellData> spellData = null;
-    CQSpellDataRegistryHolder[] spellDataRegistryHolders;
+    /*List<SpellData> spellData = null;
+    CQSpellDataRegistryHolder[] spellDataRegistryHolders;*/
 
     public MagicStaffItem(Tier pTier, Properties pProperties, CQSpellDataRegistryHolder[] spellDataRegistryHolders) {
-        super(pTier, pProperties);
-        this.spellDataRegistryHolders = spellDataRegistryHolders;
+        super(pTier, pProperties.component(ComponentRegistry.CASTING_IMPLEMENT, Unit.INSTANCE));
+        //this.spellDataRegistryHolders = spellDataRegistryHolders;
 
     }
 
-    public List<SpellData> getSpells() {
+    public MagicStaffItem(Tier pTier, Properties pProperties) {
+        super(pTier, pProperties.component(ComponentRegistry.CASTING_IMPLEMENT, Unit.INSTANCE));
+    }
+
+    /*public List<SpellData> getSpells() {
         if (spellData == null) {
             spellData = Arrays.stream(spellDataRegistryHolders).map(CQSpellDataRegistryHolder::getSpellData).toList();
             spellDataRegistryHolders = null;
         }
         return spellData;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void initializeSpellContainer(ItemStack itemStack) {
         if (itemStack == null) {
             return;
@@ -56,7 +61,7 @@ public class MagicStaffItem extends ExtendedSwordItem implements IPresetSpellCon
             spells.forEach(spellData -> spellContainer.addSpell(spellData.getSpell(), spellData.getLevel(), true));
             itemStack.set(ComponentRegistry.SPELL_CONTAINER, spellContainer.toImmutable());
         }
-    }
+    }*/
 
     public static ResourceLocation BASE_MANA_REGEN_ID = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_mana_regen_id");
     public static ResourceLocation BASE_SPELL_POWER_ID = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "base_spell_power_id");

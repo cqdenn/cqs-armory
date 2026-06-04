@@ -53,14 +53,14 @@ public abstract class AbstractSpellMixin {
         }
     }
 
-    @Inject(method = "getSchoolType", at = @At("HEAD"), cancellable = true)
+    /*@Inject(method = "getSchoolType", at = @At("HEAD"), cancellable = true)
     private void cqs_armory$getSchoolType (CallbackInfoReturnable<SchoolType> cir) {
         var self = (AbstractSpell) (Object) this;
 
         if (CQtils.schoolMap.containsKey(self)) {
             cir.setReturnValue(CQtils.schoolMap.get(self).get());
         }
-    }
+    }*/
 
     @Inject(method = "getEffectiveCastTime", at = @At("RETURN"), cancellable = true)
     private void cqs_armory$getEffectiveCastTime (int spellLevel, LivingEntity entity, CallbackInfoReturnable<Integer> cir) {
