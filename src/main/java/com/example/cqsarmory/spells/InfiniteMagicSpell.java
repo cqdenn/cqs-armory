@@ -33,7 +33,7 @@ public class InfiniteMagicSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.ELDRITCH_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(120)
+            .setCooldownSeconds(240)
             .build();
 
     @Override
@@ -78,7 +78,7 @@ public class InfiniteMagicSpell extends AbstractSpell {
     }
 
     public int getDurationTicks (LivingEntity caster) {
-        return (int) (400 * caster.getAttributeValue(AttributeRegistry.SPELL_POWER) * caster.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
+        return (int) (300 * caster.getAttributeValue(AttributeRegistry.SPELL_POWER) * caster.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
     }
 
     @Override
