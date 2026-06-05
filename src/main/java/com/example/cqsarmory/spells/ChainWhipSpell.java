@@ -89,6 +89,11 @@ public class ChainWhipSpell extends AbstractSpell {
     }
 
     @Override
+    public AnimationHolder getCastStartAnimation() {
+        return SpellAnimations.SLASH_ANIMATION;
+    }
+
+    @Override
     public boolean canBeInterrupted(Player player) {
         return false;
     }
