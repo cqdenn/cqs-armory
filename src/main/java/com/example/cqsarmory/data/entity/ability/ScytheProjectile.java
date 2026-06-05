@@ -94,7 +94,7 @@ public class ScytheProjectile extends AbilityArrow {
         if (!entities.isEmpty()) {
             for (LivingEntity target : entities) {
                 if (canHitEntity(target)) {
-                    onHitEntity(new EntityHitResult(target));
+                    customHit(new EntityHitResult(target));
                 }
             }
         }
@@ -145,8 +145,7 @@ public class ScytheProjectile extends AbilityArrow {
         return damage;
     }
 
-    @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void customHit(EntityHitResult result) {
         var target = result.getEntity();
         if (target instanceof PartEntity<?> part) target = part.getParent();
         double damage = getDamage(target);
@@ -161,6 +160,24 @@ public class ScytheProjectile extends AbilityArrow {
             }
             discard();
         }
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult result) {
+        /*var target = result.getEntity();
+        if (target instanceof PartEntity<?> part) target = part.getParent();
+        double damage = getDamage(target);
+        var damageType = damageSources().damageTypes.getHolder(DamageTypes.MELEE_SKILL).get();
+
+        if (this.canHitEntity(result.getEntity())) {
+            if (!this.level().isClientSide) {
+                target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage);
+                if (target instanceof LivingEntity living && getOwner() instanceof LivingEntity owner) {
+                    living.addEffect(new MobEffectInstance(MobEffectRegistry.CHAINED, getDuration(this.spellLevel, owner), 0, false, false, true));
+                }
+            }
+            discard();
+        }*/
     }
 
     @Override
