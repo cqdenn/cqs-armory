@@ -9,10 +9,12 @@ import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.MobEffectRegistry;
+import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.CameraShakeData;
 import io.redspace.ironsspellbooks.api.util.CameraShakeManager;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -63,7 +65,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 0;
+        this.castTime = 10;
         this.baseManaCost = 0;
     }
 
@@ -84,7 +86,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.INSTANT;
+        return CastType.LONG;
     }
 
     @Override
@@ -95,6 +97,16 @@ public class ConsumeBleedSpell extends AbstractSpell {
     @Override
     public Optional<SoundEvent> getCastStartSound() {
         return Optional.empty();
+    }
+
+    @Override
+    public AnimationHolder getCastStartAnimation() {
+        return new AnimationHolder(ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "simple_sword_stab_alternate"), true);
+    }
+
+    @Override
+    public AnimationHolder getCastFinishAnimation() {
+        return AnimationHolder.none();
     }
 
     @Override
@@ -111,7 +123,8 @@ public class ConsumeBleedSpell extends AbstractSpell {
 
     @Override
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        var target = Utils.raycastForEntity(entity.level(), entity, 64, true, 0.1f);
+        var target = Utils.raycastForEntity(entity.level(), entity, 2, true, 0.1f);
+        var distance = Utils.raycastForEntity(entity.level(), entity, 64, true, 0.1f);
         if (target instanceof EntityHitResult entityHitResult && !entity.level().isClientSide) {
             if (entityHitResult.getEntity() instanceof LivingEntity living && DamageData.get(living).bleedStacks.containsKey(entity) && DamageData.get(living).bleedStacks.get(entity) > 0) {
                 if (entity instanceof ServerPlayer serverPlayer) {
@@ -121,7 +134,11 @@ public class ConsumeBleedSpell extends AbstractSpell {
                 return true;
             }
         }
-        if (entity instanceof ServerPlayer serverPlayer) {
+        if (distance instanceof EntityHitResult && !(target instanceof EntityHitResult) && !entity.level().isClientSide) {
+            if (entity instanceof ServerPlayer serverPlayer) {
+                serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.literal("Too Far!").withStyle(ChatFormatting.RED)));
+            }
+        } else if (entity instanceof ServerPlayer serverPlayer) {
             serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.cqs_armory.no_bleed_stack_error").withStyle(ChatFormatting.RED)));
         }
         return false;
@@ -135,6 +152,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
             var target = targetingData.getTarget((ServerLevel) level);
             if (target != null) {
                 MobEffectInstance effectInstance = target.getEffect(MobEffectRegistry.BLEED);
+                if (DamageData.get(target).bleedStacks.get(entity) == null) return;
                 int stacks = DamageData.get(target).bleedStacks.get(entity);
                 int seconds = (int) Math.ceil(effectInstance.getDuration() / 20);
                 float damage = BleedEffect.DAMAGE_PER_STACK * stacks * seconds;
