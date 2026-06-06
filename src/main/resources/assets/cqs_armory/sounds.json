@@ -38,5 +38,10 @@
     "sounds": [
       "cqs_armory:spear_skewer"
     ]
+  },
+  "arrow_draw": {
+    "sounds": [
+      "cqs_armory:arrow_draw"
+    ]
   }
 }

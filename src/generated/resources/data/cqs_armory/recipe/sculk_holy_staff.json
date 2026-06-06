@@ -15,39 +15,6 @@
     "x  "
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "irons_spellbooks:wisp",
-            "index": 0,
-            "level": 10,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:blessing_of_life",
-            "index": 1,
-            "level": 6,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:shield",
-            "index": 2,
-            "level": 6,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:fortify",
-            "index": 3,
-            "level": 6,
-            "locked": true
-          }
-        ],
-        "maxSpells": 4,
-        "mustEquip": false,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:sculk_holy_staff"
   }

@@ -55,7 +55,7 @@ public class CQSchoolRegistry {
             Component.translatable("school.cqs_armory.archer").withStyle(ChatFormatting.GREEN),
             AttributeRegistry.ARCHER_SKILL_POWER,
             AttributeRegistry.ARCHER_SKILL_RESIST,
-            SoundRegistry.ARROW_SHOOT,
+            SoundRegistry.ARROW_DRAW_SOUND,
             DamageTypes.ARCHER_SKILL
     ));
 

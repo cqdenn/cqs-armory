@@ -15,39 +15,6 @@
     "x  "
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "irons_spellbooks:fang_strike",
-            "index": 0,
-            "level": 10,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:raise_dead",
-            "index": 1,
-            "level": 6,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:devour",
-            "index": 2,
-            "level": 7,
-            "locked": true
-          },
-          {
-            "id": "irons_spellbooks:sacrifice",
-            "index": 3,
-            "level": 5,
-            "locked": true
-          }
-        ],
-        "maxSpells": 4,
-        "mustEquip": false,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:silversteel_necromancy_staff"
   }

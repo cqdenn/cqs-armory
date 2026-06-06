@@ -138,7 +138,7 @@ dependencies {
     localRuntime "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
     localRuntime "curse.maven:mmmmmmmmmmmm-225738:7206981"
     localRuntime "curse.maven:selene-499980:7522321"
-    implementation 'io.redspace:bow_attributes:0.0.3-SNAPSHOT'
+    implementation 'io.redspace:bow_attributes:0.0.5-SNAPSHOT'
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

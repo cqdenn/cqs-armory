@@ -63,7 +63,6 @@ public class CqsArmory
     // Creates a creative tab with the id "cqs_armory:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.cqs_armory")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> GROUND_POUNDER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 /*output.accept(SUMMON_SWORD.get());
