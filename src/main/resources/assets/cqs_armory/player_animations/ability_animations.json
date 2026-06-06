@@ -2,15 +2,15 @@
 	"format_version": "1.8.0",
 	"animations": {
 		"spin": {
-			"animation_length": 10,
+			"animation_length": 100,
 			"bones": {
 				"body": {
 					"rotation": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"10.0": {
-							"vector": [0, 9600, 0]
+						"100.0": {
+							"vector": [0, 96000, 0]
 						}
 					}
 				},
@@ -392,7 +392,7 @@
 			}
 		},
 		"riposte": {
-			"animation_length": 1,
+			"animation_length": 5,
 			"bones": {
 				"body": {
 					"rotation": {
@@ -458,7 +458,7 @@
 							"vector": [0, 0, 0]
 						},
 						"0.0833": {
-							"vector": [0, 0, 2]
+							"vector": [0, 3, 0]
 						}
 					}
 				},
