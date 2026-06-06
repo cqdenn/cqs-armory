@@ -11,6 +11,7 @@ import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -37,6 +38,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
@@ -107,16 +109,25 @@ public class WindBurstSpell extends AbstractSpell {
     }
 
     @Override
+    public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
+        return spellLevel;
+    }
+
+    @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.literal("Burst into the air")
+                Component.literal("Burst into the air"),
+                Component.translatable("ui.irons_spellbooks.recast_count", getRecastCount(spellLevel, caster))
         );
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        float kb = 1.15f + (spellLevel * 0.35f);
+        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
+            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 100, castSource, null), playerMagicData);
+        }
+        float kb = 1.5f;
 
         ExplosionDamageCalculator explosionDamageCalc = new SimpleExplosionDamageCalculator(
                 true, false, Optional.of(kb), BuiltInRegistries.BLOCK.getTag(BlockTags.BLOCKS_WIND_CHARGE_EXPLOSIONS).map(Function.identity())
@@ -137,7 +148,7 @@ public class WindBurstSpell extends AbstractSpell {
                 ParticleTypes.GUST_EMITTER_LARGE, //big particle
                 SoundEvents.WIND_CHARGE_BURST //sound
         );
-        DamageData.get(entity).cancelNextFall = level.getGameTime();
+        //DamageData.get(entity).cancelNextFall = level.getGameTime();
 
     }
 }
