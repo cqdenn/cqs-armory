@@ -29,13 +29,16 @@ public class ScatterProjectile extends AbilityArrow{
         super(entityType, level);
     }
 
-    public ScatterProjectile(Level level, int scattersLeft, int bouncesLeft, boolean initial) {
+    float sideArrowDamageMult;
+
+    public ScatterProjectile(Level level, int scattersLeft, int bouncesLeft, boolean initial, float sideArrowDamageMult) {
         super(EntityRegistry.SCATTER_ARROW.get(), level);
         setScattersLeft(scattersLeft);
         setBouncesLeft(bouncesLeft);
         setHasBounced(false);
         setInitial(initial);
         setBounces(0);
+        this.sideArrowDamageMult = sideArrowDamageMult;
     }
 
     public void setHasBounced (boolean hasBounced) {
@@ -129,8 +132,9 @@ public class ScatterProjectile extends AbilityArrow{
             if (getOwner() instanceof LivingEntity owner) {
                 int deg = 30;
                 for (int i = - deg; i <= deg; i += deg * 2) {
-                    ScatterProjectile scatterArrow = new ScatterProjectile(level(), getScattersLeft() - 1, getBouncesLeft() - 1, false);
+                    ScatterProjectile scatterArrow = new ScatterProjectile(level(), getScattersLeft() - 1, getBouncesLeft() - 1, false, 1);
                     scatterArrow.copyStats(this, owner, (float) getBaseDamage());
+                    scatterArrow.setBaseDamage(getBaseDamage() * this.sideArrowDamageMult);
 
                     Vec3 original = this.getDeltaMovement().normalize();
                     float speed = (float)this.getDeltaMovement().length();
