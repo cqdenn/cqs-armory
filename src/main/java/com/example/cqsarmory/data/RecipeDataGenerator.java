@@ -791,14 +791,21 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.TAUNT_COATING.get(), 1)
+        /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.TAUNT_COATING.get(), 1)
                 .requires(Items.IRON_SWORD, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.IRON_CHESTPLATE, 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BASH_COATING.get(), 1)
+        /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BASH_COATING.get(), 1)
+                .requires(Items.IRON_SWORD, 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
+                .requires(Items.SHIELD, 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
+                .save(recipeOutput);*/
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GUARD_COATING.get(), 1)
                 .requires(Items.IRON_SWORD, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
                 .requires(Items.SHIELD, 1)

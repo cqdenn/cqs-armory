@@ -9,6 +9,7 @@ import com.example.cqsarmory.data.DodgeData;
 import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
+import com.example.cqsarmory.items.curios.OnBlockCoating;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
@@ -465,8 +466,9 @@ public class ServerEvents {
         Item item = livingEntity.getUseItem().getItem();
 
         if (item instanceof ShieldItem && livingEntity instanceof Player player) {
-            if (AbilityData.get(player).currentShieldDamage > 0) CQtils.disableShield(player, 20, false);
+            if (AbilityData.get(player).currentShieldDamage > 0 && !AbilityData.get(player).cancelNextShieldDropCooldown) CQtils.disableShield(player, 20, false);
             AbilityData.get(player).currentShieldDamage = 0;
+            AbilityData.get(player).cancelNextShieldDropCooldown = false;
         }
 
     }
@@ -479,6 +481,10 @@ public class ServerEvents {
         float damage = event.getBlockedDamage();
         if (event.getOriginalBlock()) {
             Item item = livingEntity.getUseItem().getItem();
+            boolean isPerfect = item.getUseDuration(livingEntity.getUseItem(), livingEntity) - livingEntity.getUseItemRemainingTicks() <=5;
+            if (isPerfect) {
+                livingEntity.level().playSound(null, livingEntity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.PERFECT_BLOCK_SOUND.get(), SoundSource.PLAYERS);
+            }
             if (item instanceof ShieldItem shield && livingEntity instanceof Player player) {
                 AbilityData.get(livingEntity).currentShieldDamage += damage;
 
@@ -486,6 +492,9 @@ public class ServerEvents {
                     CQtils.disableShield(player, 100, true);
                     AbilityData.get(livingEntity).currentShieldDamage = 0;
                 }
+            }
+            if (livingEntity instanceof Player player && CQtils.getPlayerCurioStack(player, "coating").getItem() instanceof OnBlockCoating coating) {
+                coating.doOnBlockEffect(player, event.getDamageSource().getDirectEntity(), event.getDamageSource().getEntity(), event.getBlockedDamage(), item.getUseDuration(livingEntity.getUseItem(), player) - player.getUseItemRemainingTicks(), isPerfect);
             }
         }
 

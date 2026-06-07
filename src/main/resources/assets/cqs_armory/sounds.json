@@ -43,5 +43,10 @@
     "sounds": [
       "cqs_armory:arrow_draw"
     ]
+  },
+  "perfect_block": {
+    "sounds": [
+      "cqs_armory:perfect_block"
+    ]
   }
 }

@@ -19,6 +19,7 @@ public class AbilityData {
     public ElementalistStacks elementalistStacks = new ElementalistStacks();
     public SummonersStacks summonersStacks = new SummonersStacks();
     public float currentShieldDamage;
+    public boolean cancelNextShieldDropCooldown;
     private float rage;
     private float momentum;
     public int momentumOrbsOwned;

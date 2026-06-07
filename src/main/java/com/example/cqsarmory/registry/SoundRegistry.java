@@ -26,6 +26,7 @@ public class SoundRegistry {
     public static DeferredHolder<SoundEvent, SoundEvent> MACE_CAST_SOUND = registerSoundEvent("mace_cast");
     public static DeferredHolder<SoundEvent, SoundEvent> SPEAR_SKEWER_SOUND = registerSoundEvent("spear_skewer");
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_DRAW_SOUND = registerSoundEvent("arrow_draw");
+    public static DeferredHolder<SoundEvent, SoundEvent> PERFECT_BLOCK_SOUND = registerSoundEvent("perfect_block");
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_SHOOT = SOUND_EVENTS.register("arrow_shoot", () -> SoundEvents.ARROW_SHOOT);
 
 
