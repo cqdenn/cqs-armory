@@ -7,6 +7,7 @@
     "AbstractSpellMixin",
     "BowItemMixin",
     "IceTombEntityMixin",
+    "LivingEntityMixin",
     "PlayerMixin",
     "ProjectileWeaponItemMixin"
   ],
