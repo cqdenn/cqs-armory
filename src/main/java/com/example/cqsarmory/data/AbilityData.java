@@ -20,6 +20,7 @@ public class AbilityData {
     public SummonersStacks summonersStacks = new SummonersStacks();
     public float currentShieldDamage;
     public boolean cancelNextShieldDropCooldown;
+    public boolean tankCoatingDoubleNextMelee;
     private float rage;
     private float momentum;
     public int momentumOrbsOwned;

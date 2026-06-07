@@ -48,5 +48,10 @@
     "sounds": [
       "cqs_armory:perfect_block"
     ]
+  },
+  "tank_coating": {
+    "sounds": [
+      "cqs_armory:tank_coating"
+    ]
   }
 }

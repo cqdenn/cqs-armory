@@ -360,6 +360,8 @@
   "item.cqs_armory.taunt_coating": "Taunt Coating",
   "item.cqs_armory.guard_coating": "Guard Coating",
   "item.cqs_armory.guard_coating.desc": "Perfect blocks remove the cooldown after lowering shield",
+  "item.cqs_armory.tank_coating": "Tank Coating",
+  "item.cqs_armory.tank_coating.desc": "Blocking damage doubles next outgoing melee damage",
   "item.cqs_armory.heavy_coating": "Heavy Coating",
   "item.cqs_armory.heavy_coating.desc": "Next Hit does 1.25x Damage",
 

@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-07T16:17:18.6293508	Recipes
+// 1.21.1	2026-06-07T17:06:49.0100933	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
 fb5f2e9afb3d6b4824b08d91c6ca7af41ae04fe4 data/cqs_armory/advancement/recipes/combat/amethyst_greataxe.json
@@ -283,6 +283,7 @@ e684e0f90d162a2872e41bdb1a4250bacd5bdc62 data/cqs_armory/advancement/recipes/com
 eed89f7d3269b26977d7d3cf1597efa2e4390f73 data/cqs_armory/advancement/recipes/combat/summoners_brand.json
 30a9c884445b57e0df0f607aac6b195688496988 data/cqs_armory/advancement/recipes/combat/surf_shot.json
 94454ba208da359bab165b242f6cea6fa3b5901a data/cqs_armory/advancement/recipes/combat/sword_quiver.json
+748660d22a6dccd803fbc676773cb658b3b4d9a2 data/cqs_armory/advancement/recipes/combat/tank_coating.json
 75d8504bd9f2f4c0b3b930798c24fd9a358fb16c data/cqs_armory/advancement/recipes/combat/tank_rune.json
 3e34a4527539e3547e7e095e86a97af8799fba7e data/cqs_armory/advancement/recipes/combat/thornbark.json
 3beb0f383f14034c180b1bc665b44eff345d31f9 data/cqs_armory/advancement/recipes/combat/thorn_coating.json
@@ -614,6 +615,7 @@ fe2e032780836340164a18ccb4a792b96e3f83c9 data/cqs_armory/recipe/slipstream.json
 ca9f031277ce5d1e480b1280ca565872ce4f7950 data/cqs_armory/recipe/summoners_brand.json
 047f0ed418224e483a119097e811ab6e70f22877 data/cqs_armory/recipe/surf_shot.json
 a2fb7af696a7a7f60410eb380ab599d5407cfb14 data/cqs_armory/recipe/sword_quiver.json
+e2289070ca16fb849f55866e339731e41cc493bf data/cqs_armory/recipe/tank_coating.json
 61df52ac02af244972451d3cdcd8f33f1f04fab1 data/cqs_armory/recipe/tank_rune.json
 fb330a5f26dcdef6b0aa80a064ed914dd6f27c5d data/cqs_armory/recipe/thornbark.json
 df6e393c051e91e5dda15c11af059179bca5e45b data/cqs_armory/recipe/thorn_coating.json

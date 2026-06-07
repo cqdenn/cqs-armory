@@ -812,6 +812,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.TANK_COATING.get(), 1)
+                .requires(Items.IRON_SWORD, 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)
+                .requires(Items.SHIELD, 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_SWORD))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLEED_COATING.get(), 1)
                 .requires(Items.IRON_SWORD, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_THREE), 1)
