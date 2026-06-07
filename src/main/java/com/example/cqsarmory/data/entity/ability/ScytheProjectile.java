@@ -145,6 +145,11 @@ public class ScytheProjectile extends AbilityArrow {
         return damage;
     }
 
+    @Override
+    public byte getPierceLevel() {
+        return (byte) 0;
+    }
+
     protected void customHit(EntityHitResult result) {
         var target = result.getEntity();
         if (target instanceof PartEntity<?> part) target = part.getParent();
