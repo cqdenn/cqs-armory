@@ -111,7 +111,7 @@ public class RapidFireSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 50),
+                Component.translatable("ui.cqs_armory.weapon_damage", 75),
                 Component.translatable("ui.cqs_armory.arrows_per_second", Utils.stringTruncation(10, 1))
         );
     }
@@ -123,7 +123,7 @@ public class RapidFireSpell extends AbstractSpell {
 
     @Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        return super.getEffectiveCastTime(spellLevel, entity) + 20 * spellLevel;
+        return super.getEffectiveCastTime(spellLevel, entity) + 10 * spellLevel;
     }
 
     @Override
