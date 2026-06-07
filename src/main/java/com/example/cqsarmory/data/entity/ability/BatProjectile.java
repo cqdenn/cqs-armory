@@ -94,9 +94,9 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     public void bite(Entity entity) {
         float damage = (float) getDamage(entity);
         if (entity instanceof PartEntity<?> part) entity = part.getParent();
-        if (entity instanceof LivingEntity target && getOwner() instanceof LivingEntity attacker) {
+        /*if (entity instanceof LivingEntity target && getOwner() instanceof LivingEntity attacker) {
             CQtils.addBleedStacks(attacker, target, 1, 100);
-        }
+        }*/
         entity.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         level().playSound(null, this.blockPosition(), SoundEvents.BAT_AMBIENT, SoundSource.PLAYERS, 1, 1);
     }
