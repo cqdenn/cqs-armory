@@ -59,7 +59,7 @@ public class RapidFireSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 10;
+        this.castTime = 20;
         this.baseManaCost = 0;
     }
 
@@ -111,7 +111,7 @@ public class RapidFireSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 75),
+                Component.translatable("ui.cqs_armory.weapon_damage", 50),
                 Component.translatable("ui.cqs_armory.arrows_per_second", Utils.stringTruncation(10, 1))
         );
     }
@@ -123,7 +123,7 @@ public class RapidFireSpell extends AbstractSpell {
 
     @Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        return super.getEffectiveCastTime(spellLevel, entity) + 10 * spellLevel;
+        return super.getEffectiveCastTime(spellLevel, entity) + 20 * spellLevel;
     }
 
     @Override
@@ -131,7 +131,7 @@ public class RapidFireSpell extends AbstractSpell {
         int speed = Math.max(5 - spellLevel, 1); //4, 3, 2, 1 == 5, 6.6, 10, 20 times per second
         if (playerMagicData != null && (playerMagicData.getCastDurationRemaining() + 1) % 2 == 0) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
-            float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.75f;
+            float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.5f;
             AbilityArrow projectile = new AbilityArrow(level);
             ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
             Holder.Reference<Enchantment> flameHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FLAME);
