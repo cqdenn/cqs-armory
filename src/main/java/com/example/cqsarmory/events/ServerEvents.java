@@ -314,11 +314,7 @@ public class ServerEvents {
             }
             //separate from attribute to fix offhand stacking issues
             if (lifeStealLevel > 0) {
-                double damageRatio = event.getNewDamage() / event.getOriginalDamage();
-                damageRatio = Math.min(1, damageRatio);
-                float lifeStealValue = 0.02f + (0.01f * lifeStealLevel);
-                float heal = (float) (player.getMaxHealth() * damageRatio * lifeStealValue);
-                player.heal(heal);
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.LIFE_STEAL, 50 * lifeStealLevel, 0, false, false, true));
             }
             //mana steal
             if (manaStealLevel > 0 && player instanceof ServerPlayer serverPlayer) {

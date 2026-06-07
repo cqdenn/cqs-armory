@@ -13,6 +13,7 @@
   ],
   "client": [
     "GameRendererMixin",
+    "GuiMixin",
     "LocalPlayerMixin"
   ],
   "injectors": {
