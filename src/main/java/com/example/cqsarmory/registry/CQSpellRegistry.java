@@ -21,17 +21,17 @@ public class CQSpellRegistry {
     }
 
     public static final Supplier<AbstractSpell> SPIN_SPELL = registerSpell(new SpinSpell());
-    public static final Supplier<AbstractSpell> ICE_SMASH_SPELL = registerSpell(new IceSmashSpell()); // WIP
+    //public static final Supplier<AbstractSpell> ICE_SMASH_SPELL = registerSpell(new IceSmashSpell()); // WIP
     public static final Supplier<AbstractSpell> STUN_SPELL = registerSpell(new StunSpell());
     public static final Supplier<AbstractSpell> RUPTURE_SPELL = registerSpell(new RuptureSpell());
-    public static final Supplier<AbstractSpell> BERSERK_SPELL = registerSpell(new BerserkSpell());
-    public static final Supplier<AbstractSpell> REAP_SPELL = registerSpell(new ReapSpell());
-    public static final Supplier<AbstractSpell> WRECKING_BALL_SPELL = registerSpell(new WreckingBallSpell());
+    //public static final Supplier<AbstractSpell> BERSERK_SPELL = registerSpell(new BerserkSpell());
+    //public static final Supplier<AbstractSpell> REAP_SPELL = registerSpell(new ReapSpell());
+    //public static final Supplier<AbstractSpell> WRECKING_BALL_SPELL = registerSpell(new WreckingBallSpell());
     public static final Supplier<AbstractSpell> RIPOSTE_SPELL = registerSpell(new RiposteSpell());
     public static final Supplier<AbstractSpell> SKEWER_SPELL = registerSpell(new SkewerSpell());
-    public static final Supplier<AbstractSpell> UPPERCUT_SPELL = registerSpell(new UppercutSpell());
+    //public static final Supplier<AbstractSpell> UPPERCUT_SPELL = registerSpell(new UppercutSpell());
     public static final Supplier<AbstractSpell> TAUNT_SPELL = registerSpell(new TauntSpell());
-    public static final Supplier<AbstractSpell> SKY_STRIKE_SPELL = registerSpell(new SkyStrikeSpell());
+    //public static final Supplier<AbstractSpell> SKY_STRIKE_SPELL = registerSpell(new SkyStrikeSpell());
     public static final Supplier<AbstractSpell> SHIELD_BASH_SPELL = registerSpell(new ShieldBashSpell());
     public static final Supplier<AbstractSpell> PIERCING_ARROW_SPELL = registerSpell(new PiercingArrowSpell());
     public static final Supplier<AbstractSpell> RAPID_FIRE_SPELL = registerSpell(new RapidFireSpell());
