@@ -161,7 +161,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> FULL_DEVOTION = ITEMS.register("full_devotion", () -> new SpellHolderBooster(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.FOCUS_SPELL, 1))));
     public static final Supplier<CurioBaseItem> KINETIC_STRIKE = ITEMS.register("kinetic_strike", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> BLAST_DASH = ITEMS.register("blast_dash", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARROW_PIERCING, 2, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARROW_PIERCING, 1, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BIGGER_BOOMER = ITEMS.register("bigger_boomer", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.EXPLOSIVE_DAMAGE, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> OVERWATCH = ITEMS.register("overwatch", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
     public static final Supplier<CurioBaseItem> SLIPSTREAM = ITEMS.register("slipstream", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
@@ -461,7 +461,7 @@ public class ItemRegistry {
 
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
-                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                        .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.05 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CHAIN_WHIP_SPELL, power.power())))
         );
 
@@ -527,7 +527,7 @@ public class ItemRegistry {
 
         var necromancy = ITEMS.register(name + "_necromancy_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
-                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.2 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.EVOCATION_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
+                        .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.05 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.EVOCATION_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
                 ))
         );
 
