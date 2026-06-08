@@ -122,7 +122,7 @@ public class SkyStrikeSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        /*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 4;
         Vec3 direction = new Vec3(entity.getForward().x, 1, entity.getForward().z);
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
@@ -144,7 +144,7 @@ public class SkyStrikeSpell extends AbstractSpell {
             entity.setDeltaMovement(direction.multiply(1, -1, 1));
             entity.hurtMarked = true;
             entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKY_STRIKE, 40, 0, false, false, false));
-        }
+        }*/
 
 
     }

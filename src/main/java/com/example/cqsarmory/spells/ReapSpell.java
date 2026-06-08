@@ -105,7 +105,7 @@ public class ReapSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        /*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 1 * spellLevel;
         Vec3 pullTo = entity.position();
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
@@ -122,6 +122,6 @@ public class ReapSpell extends AbstractSpell {
                 target.push(diff.x, diff.y, diff.z);
                 target.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue());
             }
-        }
+        }*/
     }
 }
