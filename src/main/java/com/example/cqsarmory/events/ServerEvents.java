@@ -38,6 +38,8 @@ import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
+import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
+import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -87,6 +89,7 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Vector3f;
 
 import java.util.List;
 import java.util.Map;
@@ -483,7 +486,9 @@ public class ServerEvents {
             Item item = livingEntity.getUseItem().getItem();
             boolean isPerfect = item.getUseDuration(livingEntity.getUseItem(), livingEntity) - livingEntity.getUseItemRemainingTicks() <=5;
             if (isPerfect) {
-                livingEntity.level().playSound(null, livingEntity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.PERFECT_BLOCK_SOUND.get(), SoundSource.PLAYERS);
+                livingEntity.level().playSound(null, livingEntity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.PERFECT_BLOCK_SOUND.get(), SoundSource.PLAYERS, 2f, 1);
+                Vec3 forward = livingEntity.getForward();
+                MagicManager.spawnParticles(livingEntity.level(), new SparkParticleOptions(1, 0.8f, 0.4f), livingEntity.getX(), livingEntity.getY() + 1, livingEntity.getZ(), 10, Utils.random.nextFloat(), Utils.random.nextFloat(), Utils.random.nextFloat(), 0.1f, false);
             }
             if (item instanceof ShieldItem shield && livingEntity instanceof Player player) {
                 AbilityData.get(livingEntity).currentShieldDamage += damage;
