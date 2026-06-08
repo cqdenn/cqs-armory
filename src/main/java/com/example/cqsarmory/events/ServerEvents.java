@@ -562,7 +562,7 @@ public class ServerEvents {
 
         if ((!AbilityData.inCombatRage(player) || player.hasEffect(MobEffectRegistry.BERSERK)) && player.level().getGameTime() % 20 == 0) {
             float newRageTest = ((float) (AbilityData.get(player).getRage() - player.getAttribute(AttributeRegistry.MAX_RAGE).getValue() * 0.1));
-            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) player.getAttribute(AttributeRegistry.MIN_RAGE).getValue();
+            float newRage = newRageTest > player.getAttribute(AttributeRegistry.MIN_RAGE).getValue() ? newRageTest : (float) Math.min(player.getAttribute(AttributeRegistry.MIN_RAGE).getValue(), player.getAttribute(AttributeRegistry.MAX_RAGE).getValue());
             AbilityData.get(player).setRage(newRage);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) newRage));
         }
