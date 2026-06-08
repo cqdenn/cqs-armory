@@ -84,6 +84,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                     case LEGS -> tag(legsTag).add((Item)item.get());
                     case FEET -> tag(bootsTag).add((Item)item.get());
                 }
+                tag(durabilityTag).add(armorItem);
             }
         }
         tag(necklaceTag).add(ItemRegistry.BOOSTER_LOCKET.get());
