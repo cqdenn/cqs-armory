@@ -43,11 +43,11 @@ public class ArmorMaterialsRegistry {
             0);
 
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> MARKSMAN = register("marksman",
-            makeArmorMap(4, 9, 7, 4),
+            makeArmorMap(3, 8, 6, 3),
             20,
             SoundEvents.ARMOR_EQUIP_IRON,
             () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
-            2,
+            3,
             0);
 
     //archer speed

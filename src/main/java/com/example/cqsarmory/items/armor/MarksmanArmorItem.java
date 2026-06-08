@@ -6,10 +6,10 @@ import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 
 public class MarksmanArmorItem extends ExtendedArmorItem {
     public MarksmanArmorItem(Type type, Properties properties, AttributeContainer extraAttribute) {
-        super(ArmorMaterialsRegistry.MARKSMAN, type, properties, genericArcherArmorAttributes(0f, 0f, 5, 0, 0.025f, 0, extraAttribute));
+        super(ArmorMaterialsRegistry.MARKSMAN, type, properties, genericArcherArmorAttributes(0f, 0f, 5, 0, 0.00f, 0.025f, extraAttribute));
     }
     public MarksmanArmorItem(Type type, Properties properties) {
-        super(ArmorMaterialsRegistry.MARKSMAN, type, properties, genericArcherArmorAttributes(0f, 0f, 5, 0, 0.025f, 0));
+        super(ArmorMaterialsRegistry.MARKSMAN, type, properties, genericArcherArmorAttributes(0f, 0f, 5, 0, 0.00f, 0.025f));
     }
 
 
