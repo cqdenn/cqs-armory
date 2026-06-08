@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
+import com.example.cqsarmory.items.armor.*;
 import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.brands.ElementalBrand;
@@ -40,105 +41,103 @@ public class ItemRegistry {
     public static final List<Weaponset> WEAPONSETS = new ArrayList<>();
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
-/*
 
     //archer dmg
-    public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+   /* public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> HUNTER_CHESTPLATE = ITEMS.register("hunter_chestplate", () -> new HunterArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> HUNTER_LEGGINGS = ITEMS.register("hunter_leggings", () -> new HunterArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> TRACKER_HELMET = ITEMS.register("tracker_helmet", () -> new TrackerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+   /* public static final DeferredHolder<Item, Item> TRACKER_HELMET = ITEMS.register("tracker_helmet", () -> new TrackerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> TRACKER_CHESTPLATE = ITEMS.register("tracker_chestplate", () -> new TrackerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> TRACKER_LEGGINGS = ITEMS.register("tracker_leggings", () -> new TrackerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> TRACKER_BOOTS = ITEMS.register("tracker_boots", () -> new TrackerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
+*/
     public static final DeferredHolder<Item, Item> MARKSMAN_HELMET = ITEMS.register("marksman_helmet", () -> new MarksmanArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> MARKSMAN_CHESTPLATE = ITEMS.register("marksman_chestplate", () -> new MarksmanArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> MARKSMAN_CHESTPLATE = ITEMS.register("marksman_chestplate", () -> new MarksmanArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
     public static final DeferredHolder<Item, Item> MARKSMAN_LEGGINGS = ITEMS.register("marksman_leggings", () -> new MarksmanArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> MARKSMAN_BOOTS = ITEMS.register("marksman_boots", () -> new MarksmanArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> MARKSMAN_BOOTS = ITEMS.register("marksman_boots", () -> new MarksmanArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
 
     //archer speed
-    public static final DeferredHolder<Item, Item> SCOUT_HELMET = ITEMS.register("scout_helmet", () -> new ScoutArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> SCOUT_HELMET = ITEMS.register("scout_helmet", () -> new ScoutArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> SCOUT_CHESTPLATE = ITEMS.register("scout_chestplate", () -> new ScoutArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> SCOUT_LEGGINGS = ITEMS.register("scout_leggings", () -> new ScoutArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> SCOUT_BOOTS = ITEMS.register("scout_boots", () -> new ScoutArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> RANGER_HELMET = ITEMS.register("ranger_helmet", () -> new RangerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+    /*public static final DeferredHolder<Item, Item> RANGER_HELMET = ITEMS.register("ranger_helmet", () -> new RangerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> RANGER_CHESTPLATE = ITEMS.register("ranger_chestplate", () -> new RangerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> RANGER_LEGGINGS = ITEMS.register("ranger_leggings", () -> new RangerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> RANGER_BOOTS = ITEMS.register("ranger_boots", () -> new RangerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
-    public static final DeferredHolder<Item, Item> SKIRMISHER_HELMET = ITEMS.register("skirmisher_helmet", () -> new SkirmisherArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+*/
+    /*public static final DeferredHolder<Item, Item> SKIRMISHER_HELMET = ITEMS.register("skirmisher_helmet", () -> new SkirmisherArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
     public static final DeferredHolder<Item, Item> SKIRMISHER_CHESTPLATE = ITEMS.register("skirmisher_chestplate", () -> new SkirmisherArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
     public static final DeferredHolder<Item, Item> SKIRMISHER_LEGGINGS = ITEMS.register("skirmisher_leggings", () -> new SkirmisherArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> SKIRMISHER_BOOTS = ITEMS.register("skirmisher_boots", () -> new SkirmisherArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
-
+*/
     //melee dmg
-    public static final DeferredHolder<Item, Item> WARRIOR_HELMET = ITEMS.register("warrior_helmet", () -> new WarriorArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> WARRIOR_HELMET = ITEMS.register("warrior_helmet", () -> new WarriorArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> WARRIOR_CHESTPLATE = ITEMS.register("warrior_chestplate", () -> new WarriorArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> WARRIOR_LEGGINGS = ITEMS.register("warrior_leggings", () -> new WarriorArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> WARRIOR_BOOTS = ITEMS.register("warrior_boots", () -> new WarriorArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> SOLDIER_HELMET = ITEMS.register("soldier_helmet", () -> new SoldierArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+    /*public static final DeferredHolder<Item, Item> SOLDIER_HELMET = ITEMS.register("soldier_helmet", () -> new SoldierArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> SOLDIER_CHESTPLATE = ITEMS.register("soldier_chestplate", () -> new SoldierArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> SOLDIER_LEGGINGS = ITEMS.register("soldier_leggings", () -> new SoldierArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> SOLDIER_BOOTS = ITEMS.register("soldier_boots", () -> new SoldierArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
+*/
     public static final DeferredHolder<Item, Item> CHAMPION_HELMET = ITEMS.register("champion_helmet", () -> new ChampionArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> CHAMPION_CHESTPLATE = ITEMS.register("champion_chestplate", () -> new ChampionArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> CHAMPION_CHESTPLATE = ITEMS.register("champion_chestplate", () -> new ChampionArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
     public static final DeferredHolder<Item, Item> CHAMPION_LEGGINGS = ITEMS.register("champion_leggings", () -> new ChampionArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> CHAMPION_BOOTS = ITEMS.register("champion_boots", () -> new ChampionArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> CHAMPION_BOOTS = ITEMS.register("champion_boots", () -> new ChampionArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
 
     //melee tank
-    public static final DeferredHolder<Item, Item> RAMPART_HELMET = ITEMS.register("rampart_helmet", () -> new RampartArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> RAMPART_HELMET = ITEMS.register("rampart_helmet", () -> new RampartArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> RAMPART_CHESTPLATE = ITEMS.register("rampart_chestplate", () -> new RampartArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> RAMPART_LEGGINGS = ITEMS.register("rampart_leggings", () -> new RampartArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> RAMPART_BOOTS = ITEMS.register("rampart_boots", () -> new RampartArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> BASTION_HELMET = ITEMS.register("bastion_helmet", () -> new BastionArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+    /*public static final DeferredHolder<Item, Item> BASTION_HELMET = ITEMS.register("bastion_helmet", () -> new BastionArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> BASTION_CHESTPLATE = ITEMS.register("bastion_chestplate", () -> new BastionArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> BASTION_LEGGINGS = ITEMS.register("bastion_leggings", () -> new BastionArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> BASTION_BOOTS = ITEMS.register("bastion_boots", () -> new BastionArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
-    public static final DeferredHolder<Item, Item> JUGGERNAUT_HELMET = ITEMS.register("juggernaut_helmet", () -> new JuggernautArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+*/
+    /*public static final DeferredHolder<Item, Item> JUGGERNAUT_HELMET = ITEMS.register("juggernaut_helmet", () -> new JuggernautArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
     public static final DeferredHolder<Item, Item> JUGGERNAUT_CHESTPLATE = ITEMS.register("juggernaut_chestplate", () -> new JuggernautArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
     public static final DeferredHolder<Item, Item> JUGGERNAUT_LEGGINGS = ITEMS.register("juggernaut_leggings", () -> new JuggernautArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> JUGGERNAUT_BOOTS = ITEMS.register("juggernaut_boots", () -> new JuggernautArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
-
+*/
     //mage dmg
-    public static final DeferredHolder<Item, Item> APPRENTICE_HELMET = ITEMS.register("apprentice_helmet", () -> new ApprenticeArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> APPRENTICE_HELMET = ITEMS.register("apprentice_helmet", () -> new ApprenticeArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> APPRENTICE_CHESTPLATE = ITEMS.register("apprentice_chestplate", () -> new ApprenticeArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> APPRENTICE_LEGGINGS = ITEMS.register("apprentice_leggings", () -> new ApprenticeArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> APPRENTICE_BOOTS = ITEMS.register("apprentice_boots", () -> new ApprenticeArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> MAGUS_HELMET = ITEMS.register("magus_helmet", () -> new MagusArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+    /*public static final DeferredHolder<Item, Item> MAGUS_HELMET = ITEMS.register("magus_helmet", () -> new MagusArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> MAGUS_CHESTPLATE = ITEMS.register("magus_chestplate", () -> new MagusArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> MAGUS_LEGGINGS = ITEMS.register("magus_leggings", () -> new MagusArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> MAGUS_BOOTS = ITEMS.register("magus_boots", () -> new MagusArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
-    public static final DeferredHolder<Item, Item> ARCHMAGE_HELMET = ITEMS.register("archmage_helmet", () -> new ArchmageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+*/
+    /*public static final DeferredHolder<Item, Item> ARCHMAGE_HELMET = ITEMS.register("archmage_helmet", () -> new ArchmageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
     public static final DeferredHolder<Item, Item> ARCHMAGE_CHESTPLATE = ITEMS.register("archmage_chestplate", () -> new ArchmageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
     public static final DeferredHolder<Item, Item> ARCHMAGE_LEGGINGS = ITEMS.register("archmage_leggings", () -> new ArchmageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> ARCHMAGE_BOOTS = ITEMS.register("archmage_boots", () -> new ArchmageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
-
+*/
     //mage mana
-    public static final DeferredHolder<Item, Item> SEER_HELMET = ITEMS.register("seer_helmet", () -> new SeerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> SEER_HELMET = ITEMS.register("seer_helmet", () -> new SeerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
     public static final DeferredHolder<Item, Item> SEER_CHESTPLATE = ITEMS.register("seer_chestplate", () -> new SeerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
     public static final DeferredHolder<Item, Item> SEER_LEGGINGS = ITEMS.register("seer_leggings", () -> new SeerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
     public static final DeferredHolder<Item, Item> SEER_BOOTS = ITEMS.register("seer_boots", () -> new SeerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
-
-    public static final DeferredHolder<Item, Item> MYSTIC_HELMET = ITEMS.register("mystic_helmet", () -> new MysticArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+*/
+    /*public static final DeferredHolder<Item, Item> MYSTIC_HELMET = ITEMS.register("mystic_helmet", () -> new MysticArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
     public static final DeferredHolder<Item, Item> MYSTIC_CHESTPLATE = ITEMS.register("mystic_chestplate", () -> new MysticArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
     public static final DeferredHolder<Item, Item> MYSTIC_LEGGINGS = ITEMS.register("mystic_leggings", () -> new MysticArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
     public static final DeferredHolder<Item, Item> MYSTIC_BOOTS = ITEMS.register("mystic_boots", () -> new MysticArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
-
-    public static final DeferredHolder<Item, Item> SAGE_HELMET = ITEMS.register("sage_helmet", () -> new SageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+*/
+    /*public static final DeferredHolder<Item, Item> SAGE_HELMET = ITEMS.register("sage_helmet", () -> new SageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_CHESTPLATE = ITEMS.register("sage_chestplate", () -> new SageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
     public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
-
     public static final Supplier<CurioBaseItem> BOOSTER_LOCKET = ITEMS.register("booster_locket", () -> new BoosterLocketItem(ItemPropertiesHelper.equipment(1).fireResistant()));
     public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
     //public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));

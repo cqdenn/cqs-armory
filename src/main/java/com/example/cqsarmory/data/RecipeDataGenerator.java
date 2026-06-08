@@ -30,9 +30,22 @@ public class RecipeDataGenerator extends RecipeProvider {
         for (DeferredHolder item : ItemRegistry.ITEMS.getEntries()) {
             if (item.get() instanceof ArmorItem armor) {
                 var slot = armor.getEquipmentSlot();
-                var material = CraftingMaterials.getArmorMaterial(armor);
+                var downgrade = CraftingMaterials.getSmithingDowngrade(armor);
 
-                if (armor instanceof HunterArmorItem || armor instanceof ScoutArmorItem || armor instanceof WarriorArmorItem || armor instanceof RampartArmorItem || armor instanceof ApprenticeArmorItem || armor instanceof  SeerArmorItem) {
+                if (armor instanceof ChampionArmorItem) {
+                    SmithingTransformRecipeBuilder.smithing(Ingredient.of(), Ingredient.of(downgrade), Ingredient.of(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()), RecipeCategory.COMBAT, armor)
+                            .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()))
+                            .save(recipeOutput, armor + "_smithing");
+                }
+                if (armor instanceof MarksmanArmorItem) {
+                    SmithingTransformRecipeBuilder.smithing(Ingredient.of(), Ingredient.of(downgrade), Ingredient.of(ItemRegistry.BLAZING_WEAPONSET.ingot().get()), RecipeCategory.COMBAT, armor)
+                            .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
+                            .save(recipeOutput, armor + "_smithing");
+                }
+
+                //var material = CraftingMaterials.getArmorMaterial(armor);
+
+                /*if (armor instanceof HunterArmorItem || armor instanceof ScoutArmorItem || armor instanceof WarriorArmorItem || armor instanceof RampartArmorItem || armor instanceof ApprenticeArmorItem || armor instanceof  SeerArmorItem) {
 
                     if (slot == EquipmentSlot.HEAD) {
                         ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, armor)
@@ -89,7 +102,7 @@ public class RecipeDataGenerator extends RecipeProvider {
                                 .unlocks("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                                 .save(recipeOutput, armor + "_smithing");
                     }
-                }
+                }*/
             }
         }
 

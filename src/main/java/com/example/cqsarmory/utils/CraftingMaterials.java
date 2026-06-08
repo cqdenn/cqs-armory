@@ -62,7 +62,8 @@ public class CraftingMaterials {
     }
 
     public static Item getSmithingDowngrade (ArmorItem armorItem) {
-        /*var slot = armorItem.getEquipmentSlot();
+        var slot = armorItem.getEquipmentSlot();
+        /*
         if (armorItem instanceof TrackerArmorItem) {
             if (slot == EquipmentSlot.HEAD) {
                 return ItemRegistry.HUNTER_HELMET.get();
@@ -231,6 +232,20 @@ public class CraftingMaterials {
                 return ItemRegistry.MYSTIC_BOOTS.get();
             }
         }*/
+
+        if (slot == EquipmentSlot.HEAD) {
+            return Items.NETHERITE_HELMET;
+        }
+        else if (slot == EquipmentSlot.CHEST) {
+            return Items.NETHERITE_CHESTPLATE;
+        }
+        else if (slot == EquipmentSlot.LEGS) {
+            return Items.NETHERITE_LEGGINGS;
+        }
+        else if (slot == EquipmentSlot.FEET) {
+            return Items.NETHERITE_BOOTS;
+        }
+
         return Items.ACACIA_TRAPDOOR;
     }
 }

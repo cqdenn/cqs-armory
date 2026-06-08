@@ -68,12 +68,12 @@ public class ArmorMaterialsRegistry {
             0);
 
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> SKIRMISHER = register("skirmisher",
-            makeArmorMap(4, 9, 7, 4),
+            makeArmorMap(3, 8, 6, 3),
             20,
             SoundEvents.ARMOR_EQUIP_IRON,
             () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
             2,
-            0);
+            0.1f);
 
     //melee dmg
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> WARRIOR = register("warrior",
@@ -93,11 +93,11 @@ public class ArmorMaterialsRegistry {
             0.1f);
 
     public static DeferredHolder<ArmorMaterial, ArmorMaterial> CHAMPION = register("champion",
-            makeArmorMap(5, 10, 8, 5),
+            makeArmorMap(4, 9, 7, 4),
             20,
             SoundEvents.ARMOR_EQUIP_NETHERITE,
             () -> Ingredient.of(Tags.Items.MATERIALS_POWER_THREE),
-            4,
+            3,
             0.15f);
 
     //melee tank
