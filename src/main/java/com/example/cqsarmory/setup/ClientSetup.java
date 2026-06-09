@@ -106,7 +106,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.GENERIC_MAGE_AOE.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FIREWORK_PROJECTILE.get(), FireworkProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegistry.FIRE_ARROW.get(), FireQuiverArrowRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.ICE_ARROW.get(), AbilityArrowRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.ICE_ARROW.get(), IceQuiverArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.BAT_PROJECTILE.get(), BatProjectileRenderer::new);
         event.registerEntityRenderer(EntityRegistry.THROWN_ITEM.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ANVIL_PROJECTILE.get(), AnvilProjectileRenderer::new);

@@ -93,6 +93,23 @@ public class IceArrow extends AbilityArrow{
     }
 
     @Override
+    public void customCritParticles() {
+        Vec3 vec3 = getDeltaMovement();
+        double d0 = this.getX() - vec3.x;
+        double d1 = this.getY() - vec3.y;
+        double d2 = this.getZ() - vec3.z;
+        var count = Mth.clamp((int) (vec3.lengthSqr() * 4), 1, 4);
+        for (int i = 0; i < count; i++) {
+            Vec3 random = Utils.getRandomVec3(1).add(vec3.normalize()).scale(0.25);
+            var f = i / ((float) count);
+            var x = Mth.lerp(f, d0, this.getX() + vec3.x);
+            var y = Mth.lerp(f, d1, this.getY() + vec3.y) - .4;
+            var z = Mth.lerp(f, d2, this.getZ() + vec3.z);
+            this.level().addParticle(ParticleHelper.SNOWFLAKE, true, x - random.x, y + 0.5D - random.y, z - random.z, random.x * .5f, random.y * .5f, random.z * .5f);
+        }
+    }
+
+    @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         if (getIsSpellArrow()) {
