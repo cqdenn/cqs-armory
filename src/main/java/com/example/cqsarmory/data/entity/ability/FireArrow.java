@@ -2,13 +2,19 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
 import io.redspace.ironsspellbooks.entity.spells.snowball.FrostField;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
@@ -16,6 +22,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -48,31 +55,49 @@ public class FireArrow extends AbilityArrow{
         }
     }
 
-    /*
-    @Override
-    protected void onHitBlock(BlockHitResult result) {
-        super.onHitBlock(result);
-        createAoe(result.getLocation());
-    }
-
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity target = result.getEntity();
         if (target instanceof PartEntity<?> part) target = part.getParent();
-        createAoe(result.getLocation());
+        level().getEntities(this, target.getBoundingBox().inflate(0.1f), (entity) ->
+                entity instanceof FireField fire
+                        && DamageSources.isFriendlyFireBetween(fire.getOwner(), getOwner()))
+                .forEach(entity -> {
+                    if (entity instanceof FireField fire) {
+                        float radius = 2.5f;
+                        if (fire.getRadius() <= radius) {
+                            Entity owner = getOwner();
+                            Vec3 targetArea = fire.position();
+                            MagicManager.spawnParticles(level(), ParticleTypes.LAVA, targetArea.x, targetArea.y, targetArea.z, 25, 1, 1, 1, 1, true);
+                            MagicManager.spawnParticles(level(), ParticleTypes.LAVA, targetArea.x, targetArea.y + 1, targetArea.z, 25, .25, 1.5, .25, 1, false);
+                            level().playSound(null, targetArea.x, targetArea.y, targetArea.z, SoundRegistry.FIERY_EXPLOSION.get(), SoundSource.PLAYERS, 2, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
+                            var radiusSqr = radius * radius;
+                            float damage = (float) this.getBaseDamage();
+                            var source = SpellDamageSource.source(owner, owner, SpellRegistry.SCORCH_SPELL.get());
+                            level().getEntitiesOfClass(LivingEntity.class, new AABB(targetArea.subtract(radius, radius, radius), targetArea.add(radius, radius, radius)),
+                                            livingEntity -> livingEntity != owner &&
+                                                    horizontalDistanceSqr(livingEntity, targetArea) < radiusSqr &&
+                                                    livingEntity.isPickable() &&
+                                                    !DamageSources.isFriendlyFireBetween(livingEntity, owner) &&
+                                                    Utils.hasLineOfSight(level(), targetArea.add(0, 1.5, 0), livingEntity.getBoundingBox().getCenter(), true))
+                                    .forEach(livingEntity -> {
+                                        DamageSources.applyDamage(livingEntity, damage, source);
+                                        DamageSources.ignoreNextKnockback(livingEntity);
+                                    });
+                            fire.discard();
+
+                        } else {
+                            fire.setRadius(fire.getRadius() - 0.5f);
+                            fire.setDamage(fire.getDamage() * 1.25f);
+                        }
+                    }
+                });
     }
 
-    public void createAoe(Vec3 location) {
-        if (!level().isClientSide) {
-            FireField fire = new FireField(level());
-            fire.setDamage(4);
-            fire.setOwner(getOwner());
-            fire.setDuration(100);
-            fire.setRadius(3);
-            fire.setCircular();
-            fire.moveTo(location);
-            level().addFreshEntity(fire);
-        }
-    }*/
+    private float horizontalDistanceSqr(LivingEntity livingEntity, Vec3 vec3) {
+        var dx = livingEntity.getX() - vec3.x;
+        var dz = livingEntity.getZ() - vec3.z;
+        return (float) (dx * dx + dz * dz);
+    }
 }

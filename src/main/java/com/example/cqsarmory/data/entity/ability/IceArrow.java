@@ -2,11 +2,18 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
+import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.entity.spells.ice_tomb.IceTombEntity;
 import io.redspace.ironsspellbooks.entity.spells.poison_cloud.PoisonCloud;
 import io.redspace.ironsspellbooks.entity.spells.snowball.FrostField;
 import io.redspace.ironsspellbooks.entity.spells.snowball.Snowball;
+import io.redspace.ironsspellbooks.network.particles.ShockwaveParticlesPacket;
+import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -23,6 +30,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class IceArrow extends AbilityArrow{
 
@@ -119,13 +127,29 @@ public class IceArrow extends AbilityArrow{
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
         Entity target = result.getEntity();
         if (target instanceof PartEntity<?> part) target = part.getParent();
         if (getIsSpellArrow() && target instanceof LivingEntity livingEntity) {
             createAoe(result.getLocation());
             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED,  60));
         }
+        if (target instanceof IceTombEntity tomb && tomb.hasIndirectPassenger(this)) { //hasIndirectPassenger() returns evil, waiting for mr. 431 to make a real accessor
+            float radius = 4;
+            Entity entity = getOwner();
+            if (entity == null) return;
+            MagicManager.spawnParticles(level(), new BlastwaveParticleOptions(SchoolRegistry.ICE.get().getTargetingColor(), radius), tomb.getX(), tomb.getY() + .165f, tomb.getZ(), 1, 0, 0, 0, 0, true);
+            PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new ShockwaveParticlesPacket(new Vec3(tomb.getX(), tomb.getY() + .165f, tomb.getZ()), radius, ParticleRegistry.SNOWFLAKE_PARTICLE.get()));
+            level().getEntities(tomb.getFirstPassenger() == null ? tomb : tomb.getFirstPassenger(), tomb.getBoundingBox().inflate(radius, 4, radius), (enemy) ->
+                            !DamageSources.isFriendlyFireBetween(enemy, entity)
+                                    && Utils.hasLineOfSight(level(), tomb, enemy, true))
+                    .forEach(enemy -> {
+                        if (enemy instanceof LivingEntity livingEntity && livingEntity.distanceToSqr(tomb) < radius * radius) {
+                            livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED, 100));
+                            MagicManager.spawnParticles(level(), ParticleHelper.SNOWFLAKE, livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() * .5f, livingEntity.getZ(), 50, livingEntity.getBbWidth() * .5f, livingEntity.getBbHeight() * .5f, livingEntity.getBbWidth() * .5f, .03, false);
+                        }
+                    });
+        }
+        super.onHitEntity(result);
     }
 
     public void createAoe(Vec3 location) {

@@ -26,7 +26,7 @@ public class FireQuiver extends SimpleDescriptiveQuiver {
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         FireArrow abilityArrow = new FireArrow(shooter.level());
         abilityArrow.copyStats(arrow, shooter, arrowDmg);
-        abilityArrow.setBaseDamage(arrowDmg * shooter.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
+        //abilityArrow.setBaseDamage(arrowDmg * shooter.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER));
         return abilityArrow;
     }
 }

@@ -26,7 +26,7 @@ public class IceQuiver extends SimpleDescriptiveQuiver {
     public AbilityArrow getCustomProjectile(Projectile arrow, Player shooter, float arrowDmg) {
         IceArrow abilityArrow = new IceArrow(shooter.level());
         abilityArrow.copyStats(arrow, shooter, arrowDmg);
-        abilityArrow.setBaseDamage(arrowDmg * shooter.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER));
+        //abilityArrow.setBaseDamage(arrowDmg * shooter.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER));
         return abilityArrow;
     }
 }
