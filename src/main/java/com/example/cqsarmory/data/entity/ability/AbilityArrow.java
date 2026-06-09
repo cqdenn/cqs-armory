@@ -4,6 +4,8 @@ import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -127,6 +129,27 @@ public class AbilityArrow extends AbstractArrow {
         super.tick();
         if (this.isInWater() && this.isNoGravity()) {
             this.setDeltaMovement(vec3);
+        }
+    }
+
+    public void customCritParticles () {
+        //default vanilla crit particles
+        Vec3 vec3 = this.getDeltaMovement();
+        double d5 = vec3.x;
+        double d6 = vec3.y;
+        double d1 = vec3.z;
+
+        for (int i = 0; i < 4; i++) {
+            this.level()
+                    .addParticle(
+                            ParticleTypes.CRIT,
+                            this.getX() + d5 * (double)i / 4.0,
+                            this.getY() + d6 * (double)i / 4.0,
+                            this.getZ() + d1 * (double)i / 4.0,
+                            -d5,
+                            -d6 + 0.2,
+                            -d1
+                    );
         }
     }
 
