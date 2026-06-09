@@ -2,11 +2,16 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.spells.poison_cloud.PoisonCloud;
 import io.redspace.ironsspellbooks.entity.spells.snowball.FrostField;
 import io.redspace.ironsspellbooks.entity.spells.snowball.Snowball;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -29,8 +34,25 @@ public class IceArrow extends AbilityArrow{
         this(EntityRegistry.ICE_ARROW.get(), level);
     }
 
-    boolean isSpellArrow;
+    private static final EntityDataAccessor<Boolean> IS_SPELL_ARROW = SynchedEntityData.defineId(IceArrow.class, EntityDataSerializers.BOOLEAN);
+
     float aoeDamage;
+
+    public void setSpellArrow (boolean isSpellArrow) {
+        if (level().isClientSide) return;
+        entityData.set(IS_SPELL_ARROW, isSpellArrow);
+        this.setNoGravity(isSpellArrow);
+    }
+
+    public boolean getIsSpellArrow () {
+        return entityData.get(IS_SPELL_ARROW);
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IS_SPELL_ARROW, false);
+    }
 
     public void setAoeDamage(float damage) {
         this.aoeDamage = damage;
@@ -38,15 +60,6 @@ public class IceArrow extends AbilityArrow{
 
     public float getAoeDamage() {
         return aoeDamage;
-    }
-
-    public boolean isSpellArrow() {
-        return isSpellArrow;
-    }
-
-    public void setSpellArrow(boolean isSpellArrow) {
-        this.isSpellArrow = isSpellArrow;
-        this.setNoGravity(isSpellArrow);
     }
 
     @Override
@@ -58,11 +71,22 @@ public class IceArrow extends AbilityArrow{
     @Override
     public void tick() {
         super.tick();
-        if (this.isSpellArrow) {
+        if (getIsSpellArrow()) {
             if (tickCount == 10) {this.setNoGravity(false);}
             if (this.level().isClientSide) {
-                Vec3 vec3 = this.position().subtract(getDeltaMovement().scale(2));
-                level().addParticle(ParticleHelper.ICY_FOG, vec3.x, vec3.y, vec3.z, 0, 0, 0);
+                Vec3 vec3 = getDeltaMovement();
+                double d0 = this.getX() - vec3.x;
+                double d1 = this.getY() - vec3.y;
+                double d2 = this.getZ() - vec3.z;
+                var count = Mth.clamp((int) (vec3.lengthSqr() * 4), 1, 4);
+                for (int i = 0; i < count; i++) {
+                    Vec3 random = Utils.getRandomVec3(1).add(vec3.normalize()).scale(0.25);
+                    var f = i / ((float) count);
+                    var x = Mth.lerp(f, d0, this.getX() + vec3.x);
+                    var y = Mth.lerp(f, d1, this.getY() + vec3.y) - .4;
+                    var z = Mth.lerp(f, d2, this.getZ() + vec3.z);
+                    this.level().addParticle(ParticleHelper.SNOWFLAKE, true, x - random.x, y + 0.5D - random.y, z - random.z, random.x * .5f, random.y * .5f, random.z * .5f);
+                }
             }
 
         }
@@ -71,7 +95,7 @@ public class IceArrow extends AbilityArrow{
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        if (this.isSpellArrow) {
+        if (getIsSpellArrow()) {
             createAoe(result.getLocation());
         }
     }
@@ -81,7 +105,7 @@ public class IceArrow extends AbilityArrow{
         super.onHitEntity(result);
         Entity target = result.getEntity();
         if (target instanceof PartEntity<?> part) target = part.getParent();
-        if (this.isSpellArrow && target instanceof LivingEntity livingEntity) {
+        if (getIsSpellArrow() && target instanceof LivingEntity livingEntity) {
             createAoe(result.getLocation());
             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED,  60));
         }
