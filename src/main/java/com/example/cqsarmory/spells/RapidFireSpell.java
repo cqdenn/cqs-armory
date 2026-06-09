@@ -146,7 +146,7 @@ public class RapidFireSpell extends AbstractSpell {
                 projectile.setBaseDamage(dmg);
             }
             projectile.setOwner(entity);
-            projectile.setNoGravity(false);
+            //projectile.setNoGravity(false);
             projectile.setScale(1f);
             projectile.setPos(entity.position().add(0, entity.getEyeHeight() - projectile.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
             projectile.setDeltaMovement(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f));

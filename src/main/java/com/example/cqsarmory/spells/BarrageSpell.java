@@ -156,7 +156,7 @@ public class BarrageSpell extends AbstractSpell {
                 projectile.setBaseDamage(dmg);
             }
             projectile.setOwner(entity);
-            projectile.setNoGravity(false);
+            //projectile.setNoGravity(false);
             projectile.setPos(origin.subtract(0, projectile.getBbHeight() * 0.5f, 0));
             shootFromRandom(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f), .1f, projectile);
             Vec3 vec3 = projectile.getDeltaMovement();
