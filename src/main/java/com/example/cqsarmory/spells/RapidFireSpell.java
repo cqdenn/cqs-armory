@@ -59,7 +59,7 @@ public class RapidFireSpell extends AbstractSpell {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
-        this.castTime = 20;
+        this.castTime = 10;
         this.baseManaCost = 0;
     }
 
