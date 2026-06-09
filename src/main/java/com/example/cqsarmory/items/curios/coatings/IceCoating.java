@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
+import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ray_of_frost.RayOfFrostVisualEntity;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
@@ -29,7 +30,15 @@ public class IceCoating extends OnSwingCoating {
         Level level = attacker.level();
         double damage = (hitDamage * 0.25) * attacker.getAttributeValue(AttributeRegistry.ICE_SPELL_POWER);
         DamageSource damageSource = new DamageSource(level.damageSources().damageTypes.getHolder(ISSDamageTypes.ICE_MAGIC).get(), null, attacker);
-        var hitResult = Utils.raycastForEntity(level, attacker, 32, true, .15f);
+
+        IcicleProjectile icicle = new IcicleProjectile(level, attacker);
+        icicle.setPos(attacker.position().add(0, attacker.getEyeHeight() - icicle.getBoundingBox().getYsize() * .5f, 0));
+        icicle.shoot(attacker.getLookAngle());
+        icicle.setDamage((float) damage);
+        icicle.setNoGravity(true);
+        level.addFreshEntity(icicle);
+
+        /*var hitResult = Utils.raycastForEntity(level, attacker, 32, true, .15f);
         level.addFreshEntity(new RayOfFrostVisualEntity(level, attacker.getEyePosition(), hitResult.getLocation(), attacker));
         if (hitResult.getType() == HitResult.Type.ENTITY) {
             Entity target = ((EntityHitResult) hitResult).getEntity();
@@ -40,6 +49,6 @@ public class IceCoating extends OnSwingCoating {
             MagicManager.spawnParticles(level, ParticleHelper.ICY_FOG, hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, 4, 0, 0, 0, .3, true);
         }
         MagicManager.spawnParticles(level, ParticleHelper.SNOWFLAKE, hitResult.getLocation().x, hitResult.getLocation().y, hitResult.getLocation().z, 50, 0, 0, 0, .3, false);
-        level.playSound(null, attacker.blockPosition(), SoundRegistry.RAY_OF_FROST.get(), SoundSource.PLAYERS);
+        level.playSound(null, attacker.blockPosition(), SoundRegistry.RAY_OF_FROST.get(), SoundSource.PLAYERS);*/
     }
 }

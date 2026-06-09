@@ -47,7 +47,7 @@ public class doOnSwingEffectPacket implements CustomPacketPayload {
         context.enqueueWork(() -> {
             Player player = context.player();
             var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
-            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating) {
+            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && player.getAttackStrengthScale(0) >= 0.8) {
                 coating.doOnSwingEffect(player, (float) (player.getAttackStrengthScale(0) * player.getAttributeValue(Attributes.ATTACK_DAMAGE)));
             }
         });
