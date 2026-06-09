@@ -42,7 +42,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.entity.PartEntity;
 import org.jetbrains.annotations.NotNull;
 
-public class BatProjectile extends AbilityArrow implements IMagicSummon {
+public class BatProjectile extends AbilityArrow/* implements IMagicSummon */{
 
     public final AnimationState flyAnimationState = new AnimationState();
     public final AnimationState restAnimationState = new AnimationState();
@@ -63,7 +63,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         this.setBaseDamage(damage);
         this.life = 0;
         this.lifetime = 160 + Utils.random.nextInt(40);
-        SummonManager.initSummon(shooter, this, this.lifetime, new SummonedEntitiesCastData());
+        //SummonManager.initSummon(shooter, this, this.lifetime, new SummonedEntitiesCastData());
     }
 
     @Override
@@ -94,9 +94,9 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     public void bite(Entity entity) {
         float damage = (float) getDamage(entity);
         if (entity instanceof PartEntity<?> part) entity = part.getParent();
-        /*if (entity instanceof LivingEntity target && getOwner() instanceof LivingEntity attacker) {
-            CQtils.addBleedStacks(attacker, target, 1, 100);
-        }*/
+        if (entity instanceof LivingEntity target && getOwner() instanceof LivingEntity attacker) {
+            CQtils.addBleedStacks(attacker, target, 1, 60);
+        }
         entity.hurt(new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.BAT_PROJECTILE).get(), this, getOwner()), damage);
         level().playSound(null, this.blockPosition(), SoundEvents.BAT_AMBIENT, SoundSource.PLAYERS, 1, 1);
     }
@@ -145,7 +145,7 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
     }
 
     public void removeBat() {
-        SummonManager.removeSummon(this);
+        //SummonManager.removeSummon(this);
         discard();
     }
 
@@ -371,12 +371,12 @@ public class BatProjectile extends AbilityArrow implements IMagicSummon {
         this.baseTick();
     }
 
-    @Override
+    /*@Override
     public Entity getSummoner() {
         return getOwner();
     }
 
     @Override
     public void onUnSummon() {
-    }
+    }*/
 }
