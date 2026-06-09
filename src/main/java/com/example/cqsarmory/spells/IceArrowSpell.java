@@ -17,8 +17,10 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -101,6 +103,12 @@ public class IceArrowSpell extends AbstractSpell {
         magicArrow.setScale(2);
         magicArrow.setPos(entity.position().add(0, entity.getEyeHeight() - magicArrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         magicArrow.setDeltaMovement(entity.getLookAngle().scale(2.5));
+        Vec3 vec3 = magicArrow.getDeltaMovement();
+        double d0 = vec3.horizontalDistance();
+        magicArrow.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
+        magicArrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
+        magicArrow.yRotO = magicArrow.getYRot();
+        magicArrow.xRotO = magicArrow.getXRot();
         magicArrow.setBaseDamage(getArrowDamage(spellLevel, entity));
         level.addFreshEntity(magicArrow);
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
