@@ -153,7 +153,7 @@ public class RapidFireSpell extends AbstractSpell {
             //projectile.setNoGravity(false);
             projectile.setScale(1f);
             projectile.setPos(entity.position().add(0, entity.getEyeHeight() - projectile.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
-            projectile.setDeltaMovement(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f));
+            projectile.setDeltaMovement(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.25f));
             Vec3 vec3 = projectile.getDeltaMovement();
             double d0 = vec3.horizontalDistance();
             projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));

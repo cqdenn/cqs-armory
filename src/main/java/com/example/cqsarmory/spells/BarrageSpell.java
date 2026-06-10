@@ -138,7 +138,7 @@ public class BarrageSpell extends AbstractSpell {
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
             playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
         }
-        int arrowCount = 15; //tbd fixme
+        int arrowCount = 15;
         for (int i=0;i<arrowCount;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
@@ -158,7 +158,7 @@ public class BarrageSpell extends AbstractSpell {
             projectile.setOwner(entity);
             //projectile.setNoGravity(false);
             projectile.setPos(origin.subtract(0, projectile.getBbHeight() * 0.5f, 0));
-            shootFromRandom(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f), .1f, projectile);
+            shootFromRandom(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f), .2f, projectile);
             Vec3 vec3 = projectile.getDeltaMovement();
             double d0 = vec3.horizontalDistance();
             projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
@@ -174,6 +174,9 @@ public class BarrageSpell extends AbstractSpell {
             //world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
             world.addFreshEntity(projectile);
         }
+
+        entity.push(entity.getForward().scale(-1).multiply(1, 0, 1).add(0, Math.max(entity.getForward().scale(-1).y, 0.3), 0));
+        entity.hurtMarked = true;
 
         super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }

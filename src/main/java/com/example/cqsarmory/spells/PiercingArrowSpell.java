@@ -2,6 +2,7 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.quivers.FireworkQuiver;
@@ -115,7 +116,8 @@ public class PiercingArrowSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (50 * spellLevel)),
+                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent(spellLevel) * 100),
+                Component.literal((getBonusDmgPerMomentumPercent() * 100) + "% Bonus Damage per Momentum"),
                 Component.literal("Pierces 10 Times")
         );
     }
@@ -129,9 +131,18 @@ public class PiercingArrowSpell extends AbstractSpell {
         return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
     }
 
+    public float getWeaponDamagePercent(int spellLevel) {
+        return 1 + (0.5f * spellLevel);
+    }
+
+    public float getBonusDmgPerMomentumPercent() {
+        return 0.025f;
+    }
+
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * (1 + (0.5f * spellLevel));
+        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * getWeaponDamagePercent(spellLevel);
+        dmg *= 1 + (AbilityData.get(entity).getMomentum() * getBonusDmgPerMomentumPercent());
         float scale = 6f;
         AbilityArrow projectile = new AbilityArrow(level);
         ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
