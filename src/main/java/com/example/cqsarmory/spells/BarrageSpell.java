@@ -54,7 +54,7 @@ public class BarrageSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCHER_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(40)
             .build();
 
     public BarrageSpell() {
@@ -112,7 +112,7 @@ public class BarrageSpell extends AbstractSpell {
 
     @Override
     public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
-        return spellLevel * 2;
+        return spellLevel;
     }
 
     @Override

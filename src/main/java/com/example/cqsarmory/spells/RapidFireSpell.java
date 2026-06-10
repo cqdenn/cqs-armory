@@ -52,7 +52,7 @@ public class RapidFireSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCHER_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(40)
             .build();
 
     public RapidFireSpell() {
