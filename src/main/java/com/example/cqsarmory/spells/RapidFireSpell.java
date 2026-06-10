@@ -127,7 +127,7 @@ public class RapidFireSpell extends AbstractSpell {
     }
 
     public float getWeaponDmgPercent () {
-        return 0.33f;
+        return 0.333f;
     }
 
     @Override
