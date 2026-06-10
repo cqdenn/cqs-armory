@@ -708,8 +708,8 @@ public class ServerEvents {
 
             } else {
 
-                int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 2 : 1;
-                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue() * abilityGainMultiplier);
+                //int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 2 : 1; //TOO MUCH MOMENTUM
+                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue()/* * abilityGainMultiplier*/);
                 float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
                 AbilityData.get(player).setMomentum(newMomentum);
                 PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
