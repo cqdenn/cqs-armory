@@ -41,6 +41,14 @@
     "cqs_armory:silversteel_longbow",
     "cqs_armory:dwarvensteel_shortbow",
     "cqs_armory:dwarvensteel_recurve_bow",
-    "cqs_armory:dwarvensteel_longbow"
+    "cqs_armory:dwarvensteel_longbow",
+    "cqs_armory:marksman_helmet",
+    "cqs_armory:marksman_chestplate",
+    "cqs_armory:marksman_leggings",
+    "cqs_armory:marksman_boots",
+    "cqs_armory:champion_helmet",
+    "cqs_armory:champion_chestplate",
+    "cqs_armory:champion_leggings",
+    "cqs_armory:champion_boots"
   ]
 }
