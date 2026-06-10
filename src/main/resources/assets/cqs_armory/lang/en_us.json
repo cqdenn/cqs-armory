@@ -113,6 +113,7 @@
   "effect.cqs_armory.retaliate": "Retaliate",
   "effect.cqs_armory.kinetic_strike": "Kinetic Strike",
   "effect.cqs_armory.life_steal": "Life Steal",
+  "effect.cqs_armory.elemental_charge": "Elemental Charge",
 
   "attribute.cqs_armory.dodge_chance": "Dodge Chance",
   "attribute.cqs_armory.block_strength": "Block Strength",
@@ -330,7 +331,7 @@
   "item.cqs_armory.arcane_brand.desc": "Refills your mana when below 10%",
   "item.cqs_armory.infinity_brand": "Brand of Infinity",
   "item.cqs_armory.elemental_brand": "Brand of Elements",
-  "item.cqs_armory.elemental_brand.desc": "Gain damage stacks on elemental damage",
+  "item.cqs_armory.elemental_brand.desc": "Gain elemental damage stacks, switching elements at max stacks grants bonus power",
   "item.cqs_armory.summoners_brand": "Brand of Summons",
   "item.cqs_armory.summoners_brand.desc": "Gain summon damage stacks for each of your summons",
   "item.cqs_armory.overcharge_brand": "Brand of Overcharged",

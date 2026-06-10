@@ -4,6 +4,7 @@ import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.network.SyncElementalistStacksPacket;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -11,6 +12,7 @@ import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -30,22 +32,35 @@ public class ElementalBrand extends OnHitBrand {
 
     @Override
     public void doOnHitEffect(Player attacker, LivingEntity target, float hitDamage, DamageSource source) {
+        int maxStacks = 15;
         if (source.is(ISSDamageTypes.FIRE_MAGIC)) {
-            int newFire = Math.min(AbilityData.get(attacker).elementalistStacks.fireStacks + 1, 15);
+            if (AbilityData.get(attacker).elementalistStacks.iceStacks >= maxStacks || AbilityData.get(attacker).elementalistStacks.lightningStacks >= maxStacks) {
+                attacker.addEffect(new MobEffectInstance(MobEffectRegistry.ELEMENTAL_CHARGE, 200, 0, false, false, true));
+            }
+
+            int newFire = Math.min(AbilityData.get(attacker).elementalistStacks.fireStacks + 1, maxStacks);
             AbilityData.get(attacker).elementalistStacks.fireStacks = newFire;
             AbilityData.get(attacker).elementalistStacks.iceStacks = 0;
             AbilityData.get(attacker).elementalistStacks.lightningStacks = 0;
             PacketDistributor.sendToPlayer((ServerPlayer) attacker, new SyncElementalistStacksPacket(newFire, 0, 0));
             AbilityData.get(attacker).elementalistStacks.stackDecayTime = attacker.tickCount + 200;
         } else if (source.is(ISSDamageTypes.ICE_MAGIC)) {
-            int newIce = Math.min(AbilityData.get(attacker).elementalistStacks.iceStacks + 1, 15);
+            if (AbilityData.get(attacker).elementalistStacks.fireStacks >= maxStacks || AbilityData.get(attacker).elementalistStacks.lightningStacks >= maxStacks) {
+                attacker.addEffect(new MobEffectInstance(MobEffectRegistry.ELEMENTAL_CHARGE, 200, 0, false, false, true));
+            }
+
+            int newIce = Math.min(AbilityData.get(attacker).elementalistStacks.iceStacks + 1, maxStacks);
             AbilityData.get(attacker).elementalistStacks.fireStacks = 0;
             AbilityData.get(attacker).elementalistStacks.iceStacks = newIce;
             AbilityData.get(attacker).elementalistStacks.lightningStacks = 0;
             PacketDistributor.sendToPlayer((ServerPlayer) attacker, new SyncElementalistStacksPacket(0, newIce, 0));
             AbilityData.get(attacker).elementalistStacks.stackDecayTime = attacker.tickCount + 200;
         } else if (source.is(ISSDamageTypes.LIGHTNING_MAGIC)) {
-            int newLighting = Math.min(AbilityData.get(attacker).elementalistStacks.lightningStacks + 1, 15);
+            if (AbilityData.get(attacker).elementalistStacks.iceStacks >= maxStacks || AbilityData.get(attacker).elementalistStacks.fireStacks >= maxStacks) {
+                attacker.addEffect(new MobEffectInstance(MobEffectRegistry.ELEMENTAL_CHARGE, 200, 0, false, false, true));
+            }
+
+            int newLighting = Math.min(AbilityData.get(attacker).elementalistStacks.lightningStacks + 1, maxStacks);
             AbilityData.get(attacker).elementalistStacks.fireStacks = 0;
             AbilityData.get(attacker).elementalistStacks.iceStacks = 0;
             AbilityData.get(attacker).elementalistStacks.lightningStacks = newLighting;
