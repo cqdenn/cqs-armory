@@ -17,9 +17,9 @@
       "irons_spellbooks:spell_container": {
         "data": [
           {
-            "id": "irons_spellbooks:cone_of_cold",
+            "id": "irons_spellbooks:snowball",
             "index": 0,
-            "level": 10,
+            "level": 5,
             "locked": true
           }
         ],
