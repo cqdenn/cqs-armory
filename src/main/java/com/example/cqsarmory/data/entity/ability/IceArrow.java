@@ -137,15 +137,17 @@ public class IceArrow extends AbilityArrow{
             float radius = 4;
             Entity entity = getOwner();
             if (entity == null) return;
-            MagicManager.spawnParticles(level(), new BlastwaveParticleOptions(SchoolRegistry.ICE.get().getTargetingColor(), radius), tomb.getX(), tomb.getY() + .165f, tomb.getZ(), 1, 0, 0, 0, 0, true);
-            PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new ShockwaveParticlesPacket(new Vec3(tomb.getX(), tomb.getY() + .165f, tomb.getZ()), radius, ParticleRegistry.SNOWFLAKE_PARTICLE.get()));
+            if (!level().isClientSide) {
+                MagicManager.spawnParticles(level(), new BlastwaveParticleOptions(SchoolRegistry.ICE.get().getTargetingColor(), radius), tomb.getX(), tomb.getY() + .165f, tomb.getZ(), 1, 0, 0, 0, 0, true);
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new ShockwaveParticlesPacket(new Vec3(tomb.getX(), tomb.getY() + .165f, tomb.getZ()), radius, ParticleRegistry.SNOWFLAKE_PARTICLE.get()));
+            }
             level().getEntities(tomb.getFirstPassenger() == null ? tomb : tomb.getFirstPassenger(), tomb.getBoundingBox().inflate(radius, 4, radius), (enemy) ->
                             !DamageSources.isFriendlyFireBetween(enemy, entity)
                                     && Utils.hasLineOfSight(level(), tomb, enemy, true))
                     .forEach(enemy -> {
                         if (enemy instanceof LivingEntity livingEntity && livingEntity.distanceToSqr(tomb) < radius * radius) {
                             livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.CHILLED, 100));
-                            MagicManager.spawnParticles(level(), ParticleHelper.SNOWFLAKE, livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() * .5f, livingEntity.getZ(), 50, livingEntity.getBbWidth() * .5f, livingEntity.getBbHeight() * .5f, livingEntity.getBbWidth() * .5f, .03, false);
+                            //MagicManager.spawnParticles(level(), ParticleHelper.SNOWFLAKE, livingEntity.getX(), livingEntity.getY() + livingEntity.getBbHeight() * .5f, livingEntity.getZ(), 50, livingEntity.getBbWidth() * .5f, livingEntity.getBbHeight() * .5f, livingEntity.getBbWidth() * .5f, .03, false);
                         }
                     });
         }
