@@ -11,6 +11,7 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.particle.SwirlingParticleOptions;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import net.minecraft.Util;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -50,7 +51,7 @@ public class BlizzardMageAOEEffect extends NonCurableEffect {
                 if (entity instanceof LivingEntity target) {
                     target.hurt(new DamageSource(livingEntity.damageSources().damageTypes.getHolder(DamageTypes.BLIZZARD_MAGE_AOE).get(), null, livingEntity), damage);
                     target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 11, 1, false, false, true)); //40% slow
-                    target.setTicksFrozen(target.getTicksFrozen() + 30);
+                    Utils.addFreezeTicks(target, 30);
                 }
             }
         }

@@ -73,7 +73,7 @@ public class IceArrow extends AbilityArrow{
     @Override
     protected void doPostHurtEffects(LivingEntity living) {
         super.doPostHurtEffects(living);
-        living.setTicksFrozen(living.getTicksFrozen() + 60);
+        Utils.addFreezeTicks(living, 60);
     }
 
     @Override
