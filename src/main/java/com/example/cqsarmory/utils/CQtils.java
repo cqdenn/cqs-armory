@@ -54,6 +54,8 @@ public class CQtils {
 
     //public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
 
+    public static int MOMENTUM_BASE_COST = 10;
+
     public static void doMomentumMovement (ServerPlayer player, Vec3 motion) {
         //motion + fall damage
         player.push(motion.x, motion.y, motion.z);
@@ -61,7 +63,7 @@ public class CQtils {
         player.addEffect(new MobEffectInstance(io.redspace.ironsspellbooks.registries.MobEffectRegistry.FALL_DAMAGE_IMMUNITY, 40, 0, false, false, false));
 
         //momentum
-        float newMomentumTest = (AbilityData.get(player).getMomentum() - 5 + (float) player.getAttributeValue(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
+        float newMomentumTest = (AbilityData.get(player).getMomentum() - MOMENTUM_BASE_COST + (float) player.getAttributeValue(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION));
         float newMomentum = newMomentumTest > player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MIN_MOMENTUM).getValue();
         AbilityData.get(player).setMomentum(newMomentum);
         PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
@@ -69,7 +71,7 @@ public class CQtils {
         //booster effects
         //if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
 
-        //25% arrow damage per stack, max 3
+        //arrow damage stacks
         if (ItemRegistry.KINETIC_STRIKE.get().isEquippedBy(player)) {
             var effect = player.getEffect(MobEffectRegistry.KINETIC_STRIKE);
             if (effect != null) {
