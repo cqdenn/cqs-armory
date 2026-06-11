@@ -54,7 +54,7 @@ public class CQtils {
 
     //public static final Map<AbstractSpell, Supplier<SchoolType>> schoolMap = buildSchoolMap();
 
-    public static int MOMENTUM_BASE_COST = 10;
+    public static int MOMENTUM_BASE_COST = 5;
 
     public static void doMomentumMovement (ServerPlayer player, Vec3 motion) {
         //motion + fall damage
