@@ -43,6 +43,7 @@ import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -68,7 +69,9 @@ import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
@@ -81,6 +84,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -1205,6 +1209,24 @@ public class ServerEvents {
         if (target instanceof IMagicSummon summon) {
             event.setAmount(Math.min(event.getAmount(), target.getMaxHealth() * 0.25f));
         }
+    }
+
+    @SubscribeEvent
+    public static void vanillaShieldAttributes (ModifyDefaultComponentsEvent event) {
+        var modifiers = ItemAttributeModifiers.builder()
+                .add(
+                        AttributeRegistry.BLOCK_STRENGTH,
+                        new AttributeModifier(
+                                CqsArmory.BASE_BLOCK_STRENGTH_ID, 10, AttributeModifier.Operation.ADD_VALUE
+                        ),
+                        EquipmentSlotGroup.HAND
+                )
+                .build();
+
+        event.modify(
+                Items.SHIELD,
+                builder -> builder.set(DataComponents.ATTRIBUTE_MODIFIERS, modifiers)
+        );
     }
 
 }
