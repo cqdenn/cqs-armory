@@ -556,7 +556,7 @@ public class ServerEvents {
             /*AbilityData.get(player).setMomentum(0);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) 0));*/
 
-            AbilityData.get(player).combatEndRage = player.tickCount + (20 * 5);
+            AbilityData.get(player).combatEndRage = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
 
         }
 
@@ -723,7 +723,7 @@ public class ServerEvents {
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));*/
 
 
-                AbilityData.get(player).combatEndMomentum = player.tickCount + (20 * 15);
+                AbilityData.get(player).combatEndMomentum = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
             }
 
         }
@@ -804,7 +804,7 @@ public class ServerEvents {
             float newManaSpent = AbilityData.get(player).manaSpentSinceLastAOE + manaSpent;
             AbilityData.get(player).manaSpentSinceLastAOE = newManaSpent;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket((int) newManaSpent));
-            AbilityData.get(player).startMageAOEDecay = player.tickCount + (20 * 5);
+            AbilityData.get(player).startMageAOEDecay = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
         }
     }
 
