@@ -32,13 +32,14 @@ public class LightningRodSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.LIGHTNING_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(20)
             .build();
 
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
-                Component.literal(getLifetime()/20 + " Second Lifetime"));
+                Component.literal(getLifetime()/20 + " Second Lifetime"),
+                Component.translatable("ui.irons_spellbooks.radius", getRadius()));
     }
 
     public LightningRodSpell() {
@@ -84,12 +85,16 @@ public class LightningRodSpell extends AbstractSpell {
     }*/
 
     public int getLifetime() {
-        return 100;
+        return 400;
+    }
+
+    public int getRadius() {
+        return 5;
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        LightningRodEntity rod = new LightningRodEntity(level, entity, getLifetime());
+        LightningRodEntity rod = new LightningRodEntity(level, entity, getLifetime(), getRadius());
         rod.setDeltaMovement(entity.getForward().scale(0.75));
         rod.setNoGravity(false);
         rod.noPhysics = false;

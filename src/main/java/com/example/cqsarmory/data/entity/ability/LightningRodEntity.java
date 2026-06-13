@@ -3,10 +3,14 @@ package com.example.cqsarmory.data.entity.ability;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
+import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
+import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundSource;
@@ -25,16 +29,18 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 public class LightningRodEntity extends Entity implements GeoEntity {
 
     private LivingEntity owner;
-    int lifetime = 100;
+    int lifetime;
+    int radius;
 
     public LightningRodEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
-    public LightningRodEntity (Level level, LivingEntity owner, int lifetime) {
+    public LightningRodEntity (Level level, LivingEntity owner, int lifetime, int radius) {
         this(EntityRegistry.LIGHTNING_ROD.get(), level);
         this.owner = owner;
         this.lifetime = lifetime;
+        this.radius = radius;
     }
 
     public LivingEntity getOwner() {
@@ -63,8 +69,9 @@ public class LightningRodEntity extends Entity implements GeoEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (!DamageSources.isFriendlyFireBetween(source.getEntity(), getOwner()) || !(source.is(ISSDamageTypes.LIGHTNING_MAGIC) || (source.getDirectEntity() instanceof LightningArrow))) return false;
-        float radius = 4;
-        level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(radius), entity -> entity != getOwner()
+        float radius = this.radius;
+        level().getEntities(this, this.getBoundingBox().inflate(radius), entity -> entity != getOwner()
+                && (entity instanceof LivingEntity)
                 && entity.isAlive()
                 && Utils.hasLineOfSight(level(), this, entity, true))
                 .forEach(target -> {
@@ -74,6 +81,7 @@ public class LightningRodEntity extends Entity implements GeoEntity {
                     lightning.maxConnections = 1;
                     level().addFreshEntity(lightning);
                 });
+        if (!level().isClientSide) MagicManager.spawnParticles(level(), ParticleHelper.ELECTRIC_SPARKS, this.getX(), this.getY() + 2, this.getZ(), 2 + Utils.random.nextIntBetweenInclusive(0, 2), 0, 0, 0, 0.3, false);
         if (source.getDirectEntity() instanceof LightningArrow arrow && arrow.getPierceLevel() == (byte) 0) arrow.discard();
         return true;
     }
