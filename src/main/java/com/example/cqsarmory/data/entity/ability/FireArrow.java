@@ -76,6 +76,8 @@ public class FireArrow extends AbilityArrow{
                             level().playSound(null, targetArea.x, targetArea.y, targetArea.z, SoundRegistry.FIERY_EXPLOSION.get(), SoundSource.PLAYERS, 2, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
                             var radiusSqr = radius * radius;
                             float damage = (float) this.getBaseDamage();
+                            if (getOwner() instanceof LivingEntity living) damage *= (float) living.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER);
+                            float finalDmg = damage;
                             var source = SpellDamageSource.source(owner, owner, SpellRegistry.SCORCH_SPELL.get());
                             level().getEntitiesOfClass(LivingEntity.class, new AABB(targetArea.subtract(radius, radius, radius), targetArea.add(radius, radius, radius)),
                                             livingEntity -> livingEntity != owner &&
@@ -84,7 +86,7 @@ public class FireArrow extends AbilityArrow{
                                                     !DamageSources.isFriendlyFireBetween(livingEntity, owner) &&
                                                     Utils.hasLineOfSight(level(), targetArea.add(0, 1.5, 0), livingEntity.getBoundingBox().getCenter(), true))
                                     .forEach(livingEntity -> {
-                                        DamageSources.applyDamage(livingEntity, damage, source);
+                                        DamageSources.applyDamage(livingEntity, finalDmg, source);
                                         DamageSources.ignoreNextKnockback(livingEntity);
                                     });
                             fire.discard();
