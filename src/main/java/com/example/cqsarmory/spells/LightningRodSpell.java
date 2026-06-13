@@ -1,0 +1,101 @@
+package com.example.cqsarmory.spells;
+
+import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.entity.ability.IceArrow;
+import com.example.cqsarmory.data.entity.ability.LightningRodEntity;
+import com.example.cqsarmory.registry.SoundRegistry;
+import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.api.config.DefaultConfig;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
+import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.util.Utils;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
+import java.util.Optional;
+
+@AutoSpellConfig
+public class LightningRodSpell extends AbstractSpell {
+    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_rod_spell");
+    private final DefaultConfig defaultConfig = new DefaultConfig()
+            .setMinRarity(SpellRarity.COMMON)
+            .setSchoolResource(SchoolRegistry.LIGHTNING_RESOURCE)
+            .setMaxLevel(1)
+            .setCooldownSeconds(30)
+            .build();
+
+    @Override
+    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+        return List.of(
+                Component.literal(getLifetime()/20 + " Second Lifetime"));
+    }
+
+    public LightningRodSpell() {
+        this.manaCostPerLevel = 0;
+        this.baseSpellPower = 5;
+        this.spellPowerPerLevel = 1;
+        this.castTime = 20;
+        this.baseManaCost = 0;
+    }
+
+    @Override
+    public CastType getCastType() {
+        return CastType.INSTANT;
+    }
+
+    @Override
+    public boolean allowCrafting() {
+        return false;
+    }
+
+    @Override
+    public boolean allowLooting() {
+        return false;
+    }
+
+    @Override
+    public DefaultConfig getDefaultConfig() {
+        return defaultConfig;
+    }
+
+    @Override
+    public ResourceLocation getSpellResource() {
+        return spellId;
+    }
+
+    /*@Override
+    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
+        double entityCastTimeModifier = 1;
+        if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
+            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
+        }
+        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
+    }*/
+
+    public int getLifetime() {
+        return 100;
+    }
+
+    @Override
+    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+        LightningRodEntity rod = new LightningRodEntity(level, entity, getLifetime());
+        rod.setDeltaMovement(entity.getForward().scale(0.75));
+        rod.setNoGravity(false);
+        rod.noPhysics = false;
+        rod.setPos(entity.getEyePosition());
+        level.addFreshEntity(rod);
+        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    }
+
+}

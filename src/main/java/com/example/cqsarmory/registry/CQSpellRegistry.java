@@ -49,4 +49,5 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> PERFECT_TECHNIQUE_SPELL = registerSpell(new PerfectTechniqueSpell());
     public static final Supplier<AbstractSpell> FLANK_STEP_SPELL = registerSpell(new FlankStepSpell());
     public static final Supplier<AbstractSpell> FOCUS_SPELL = registerSpell(new FocusSpell());
+    public static final Supplier<AbstractSpell> LIGHTNING_ROD_SPELL = registerSpell(new LightningRodSpell());
 }

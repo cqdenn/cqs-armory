@@ -636,6 +636,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BASIC_QUIVER.get()))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.LIGHTNING_QUIVER.get(), 1)
+                .requires(ItemRegistry.BASIC_QUIVER.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.LIGHTNING_BOTTLE.get(), 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BASIC_QUIVER.get()))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GRAVITY_QUIVER.get(), 1)
                 .requires(ItemRegistry.BASIC_QUIVER.get(), 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 1)

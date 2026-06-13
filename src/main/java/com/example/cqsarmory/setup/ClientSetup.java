@@ -119,6 +119,8 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.SCATTER_ARROW.get(), AbilityArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DELAYED_GENERIC_MAGE_AOE_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.HELLFIRE_AOE_ENTITY.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.LIGHTNING_ROD.get(), LightningRodEntityRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CQ_CHAIN_LIGHTNING_ENTITY.get(), NoopRenderer::new);
     }
 
     @SubscribeEvent
