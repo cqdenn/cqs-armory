@@ -308,6 +308,8 @@
   "item.cqs_armory.ice_quiver.desc": "Shooting ice tombs spreads chilled",
   "item.cqs_armory.fire_quiver": "Fire Quiver",
   "item.cqs_armory.fire_quiver.desc": "Shooting targets in a fire field condenses the fire field",
+  "item.cqs_armory.lightning_quiver": "Lightning Quiver",
+  "item.cqs_armory.lightning_quiver.desc": "Shooting tesla coils chains lightning to nearby enemies",
   "item.cqs_armory.gravity_quiver": "Gravity Quiver",
   "item.cqs_armory.plenty_quiver": "Quiver of Plenty",
   "item.cqs_armory.bat_quiver": "Bat Quiver",
