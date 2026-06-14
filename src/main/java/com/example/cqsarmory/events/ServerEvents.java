@@ -1043,6 +1043,7 @@ public class ServerEvents {
 
                 final List<ResourceKey<DamageType>> spellTypes = List.of(
                         ISSDamageTypes.FIRE_MAGIC,
+                        ISSDamageTypes.FIRE_FIELD,
                         ISSDamageTypes.HOLY_MAGIC,
                         ISSDamageTypes.ICE_MAGIC,
                         ISSDamageTypes.LIGHTNING_MAGIC,

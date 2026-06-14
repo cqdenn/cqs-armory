@@ -33,7 +33,7 @@ public class ElementalBrand extends OnHitBrand {
     @Override
     public void doOnHitEffect(Player attacker, LivingEntity target, float hitDamage, DamageSource source) {
         int maxStacks = 15;
-        if (source.is(ISSDamageTypes.FIRE_MAGIC)) {
+        if (source.is(ISSDamageTypes.FIRE_MAGIC) || source.is(ISSDamageTypes.FIRE_FIELD)) {
             if (AbilityData.get(attacker).elementalistStacks.iceStacks >= maxStacks || AbilityData.get(attacker).elementalistStacks.lightningStacks >= maxStacks) {
                 attacker.addEffect(new MobEffectInstance(MobEffectRegistry.ELEMENTAL_CHARGE, 200, 0, false, false, true));
             }
