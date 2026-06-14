@@ -36,7 +36,7 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> PIERCING_ARROW_SPELL = registerSpell(new PiercingArrowSpell());
     public static final Supplier<AbstractSpell> RAPID_FIRE_SPELL = registerSpell(new RapidFireSpell());
     public static final Supplier<AbstractSpell> BARRAGE_SPELL = registerSpell(new BarrageSpell());
-    public static final Supplier<AbstractSpell> HUNTERS_MARK_SPELL = registerSpell(new HuntersMarkSpell());
+    //public static final Supplier<AbstractSpell> HUNTERS_MARK_SPELL = registerSpell(new HuntersMarkSpell());
     public static final Supplier<AbstractSpell> ICE_ARROW_SPELL = registerSpell(new IceArrowSpell());
     public static final Supplier<AbstractSpell> GRAVITY_SNARE_SPELL = registerSpell(new GravitySnareSpell());
     public static final Supplier<AbstractSpell> INFINITE_MAGIC_SPELL = registerSpell(new InfiniteMagicSpell());
@@ -48,6 +48,6 @@ public class CQSpellRegistry {
     public static final Supplier<AbstractSpell> EXECUTE_SPELL = registerSpell(new ExecuteSpell());
     public static final Supplier<AbstractSpell> PERFECT_TECHNIQUE_SPELL = registerSpell(new PerfectTechniqueSpell());
     public static final Supplier<AbstractSpell> FLANK_STEP_SPELL = registerSpell(new FlankStepSpell());
-    public static final Supplier<AbstractSpell> FOCUS_SPELL = registerSpell(new FocusSpell());
+    //public static final Supplier<AbstractSpell> FOCUS_SPELL = registerSpell(new FocusSpell());
     public static final Supplier<AbstractSpell> LIGHTNING_ROD_SPELL = registerSpell(new LightningRodSpell());
 }
