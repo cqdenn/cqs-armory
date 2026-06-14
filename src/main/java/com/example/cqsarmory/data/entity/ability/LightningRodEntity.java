@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.EntityRegistry;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -77,7 +78,7 @@ public class LightningRodEntity extends Entity implements GeoEntity {
                 .forEach(target -> {
                     CQChainLightning lightning = new CQChainLightning(level(), getOwner(), target, this.getPosition(0).add(0, 2, 0));
                     lightning.range = radius + 2;
-                    lightning.setDamage(amount);
+                    lightning.setDamage(amount * (float) getOwner().getAttributeValue(AttributeRegistry.LIGHTNING_SPELL_POWER));
                     lightning.maxConnections = 1;
                     level().addFreshEntity(lightning);
                 });
