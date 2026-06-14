@@ -445,7 +445,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.ARCHER_RUNE.get()))
                 .save(recipeOutput);*/
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.FULL_DEVOTION.get(), 1)
+        /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.FULL_DEVOTION.get(), 1)
+                .requires(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get(), 2)
+                .requires(ItemRegistry.ARCHER_RUNE.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.ARCHER_RUNE.get()))
+                .save(recipeOutput);*/ //change if ever re-added
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTERS_MARK.get(), 1)
                 .requires(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get(), 2)
                 .requires(ItemRegistry.ARCHER_RUNE.get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.ARCHER_RUNE.get()))

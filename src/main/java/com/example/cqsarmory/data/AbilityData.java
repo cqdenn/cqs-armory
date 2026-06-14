@@ -35,6 +35,7 @@ public class AbilityData {
     public int poisonStacks;
     public boolean firstBlizzardTick;
     public float focusArrowDamage;
+    public float huntersMarkConsecutiveArrowsHit;
 
     public float getRage() {
         return rage;

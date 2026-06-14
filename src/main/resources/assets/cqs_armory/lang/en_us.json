@@ -270,6 +270,8 @@
   "item.cqs_armory.quickdraw": "Quickdraw",
   "item.cqs_armory.quickdraw.desc": "Momentum movement grants insta draw",
   "item.cqs_armory.full_devotion": "Full Devotion",
+  "item.cqs_armory.hunters_mark": "Hunters Mark",
+  "item.cqs_armory.hunters_mark.desc": "+10% arrow damage, up to +100%, for every arrow hit without missing",
   "item.cqs_armory.kinetic_strike": "Kinetic Strike",
   "item.cqs_armory.kinetic_strike.desc": "+3% arrow damage on momentum movement, stacks 10 times",
   "item.cqs_armory.blast_dash": "Blast Dash",
