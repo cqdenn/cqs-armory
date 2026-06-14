@@ -78,7 +78,7 @@ public class FireArrow extends AbilityArrow{
                             float damage = (float) this.getBaseDamage();
                             if (getOwner() instanceof LivingEntity living) damage *= (float) living.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER);
                             float finalDmg = damage;
-                            var source = SpellDamageSource.source(owner, owner, SpellRegistry.SCORCH_SPELL.get());
+                            var source = SpellDamageSource.source(this, owner, SpellRegistry.SCORCH_SPELL.get());
                             level().getEntitiesOfClass(LivingEntity.class, new AABB(targetArea.subtract(radius, radius, radius), targetArea.add(radius, radius, radius)),
                                             livingEntity -> livingEntity != owner &&
                                                     horizontalDistanceSqr(livingEntity, targetArea) < radiusSqr &&
