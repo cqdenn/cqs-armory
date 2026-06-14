@@ -218,7 +218,7 @@ public class ServerEvents {
             Holder.Reference<Enchantment> frostAspectHolder = attacker.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "frost_aspect")));
             ItemStack usedWeapon = CQtils.getAttackingWeaponItem(attacker, damageSource);
             int frostAspectLevel = usedWeapon.getEnchantmentLevel(frostAspectHolder);
-            int damage = event.getSource().getDirectEntity() instanceof Arrow arrow ? (int) arrow.getBaseDamage() : (int) DamageData.get(entity).lastDamage;
+            int damage = event.getSource().getDirectEntity() instanceof AbstractArrow arrow ? (int) arrow.getBaseDamage() : (int) DamageData.get(entity).lastDamage;
 
             if (frostAspectLevel > 0) {
                 FrostAspectEnchantEntity iceClone = new FrostAspectEnchantEntity(level, entity, usedWeapon);
