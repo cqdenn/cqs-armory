@@ -1232,7 +1232,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void huntersMarkBoosterDamage (LivingDamageEvent.Pre event) {
         Entity causingEntity = event.getSource().getEntity();
-        if (causingEntity instanceof Player player && ItemRegistry.HUNTERS_MARK.get().isEquippedBy(player)) {
+        if (causingEntity instanceof Player player && ItemRegistry.HUNTERS_MARK.get().isEquippedBy(player) && event.getSource().getDirectEntity() instanceof AbstractArrow) {
             float damagePerStack = 0.1f;
             event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * damagePerStack * AbilityData.get(player).huntersMarkConsecutiveArrowsHit));
 
