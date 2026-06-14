@@ -1236,7 +1236,7 @@ public class ServerEvents {
             float damagePerStack = 0.1f;
             event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * damagePerStack * AbilityData.get(player).huntersMarkConsecutiveArrowsHit));
 
-            AbilityData.get(player).huntersMarkConsecutiveArrowsHit++;
+            AbilityData.get(player).huntersMarkConsecutiveArrowsHit = Math.min(AbilityData.get(player).huntersMarkConsecutiveArrowsHit + 1, 10); //cap 10
         }
     }
 
