@@ -187,6 +187,12 @@ public class EntityRegistry {
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scatter_arrow").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<HitscanArcaneBeam>> HITSCAN_ARCANE_BEAM =
+            ENTITIES.register("hitscan_arcane_beam", () -> EntityType.Builder.<HitscanArcaneBeam>of(HitscanArcaneBeam::new, MobCategory.MISC)
+                    .sized(1f, 1f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "hitscan_arcane_beam").toString()));
+
     public static final DeferredHolder<EntityType<?>, EntityType<HellfireAOEEntity>> HELLFIRE_AOE_ENTITY =
             ENTITIES.register("hellfire_aoe_entity", () -> EntityType.Builder.<HellfireAOEEntity>of(HellfireAOEEntity::new, MobCategory.MISC)
                     .sized(.5f, .5f)

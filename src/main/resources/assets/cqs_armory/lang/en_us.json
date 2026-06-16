@@ -314,6 +314,8 @@
   "item.cqs_armory.lightning_quiver": "Lightning Quiver",
   "item.cqs_armory.lightning_quiver.desc": "Shooting lightning rods chains lightning to nearby enemies",
   "item.cqs_armory.gravity_quiver": "Gravity Quiver",
+  "item.cqs_armory.arcane_quiver": "Arcane Quiver",
+  "item.cqs_armory.arcane_quiver.desc": "Shoots hitscan arrows that bounce off walls",
   "item.cqs_armory.plenty_quiver": "Quiver of Plenty",
   "item.cqs_armory.bat_quiver": "Bat Quiver",
   "item.cqs_armory.bat_quiver.desc": "Arrows follow where the player is looking",

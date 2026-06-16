@@ -8,6 +8,7 @@ import com.example.cqsarmory.registry.CQParticleRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
 import io.redspace.ironsspellbooks.effect.PlanarSightEffect;
+import io.redspace.ironsspellbooks.entity.spells.eldritch_blast.EldritchBlastRenderer;
 import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleRenderer;
 import io.redspace.ironsspellbooks.item.SpellBook;
 import io.redspace.ironsspellbooks.item.WaywardCompass;
@@ -121,6 +122,12 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.HELLFIRE_AOE_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.LIGHTNING_ROD.get(), LightningRodEntityRenderer::new);
         event.registerEntityRenderer(EntityRegistry.CQ_CHAIN_LIGHTNING_ENTITY.get(), NoopRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.HITSCAN_ARCANE_BEAM.get(), HitscanArcaneBeamRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterLayers (EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(HitscanArcaneBeamRenderer.MODEL_LAYER_LOCATION, HitscanArcaneBeamRenderer::createBodyLayer);
     }
 
     @SubscribeEvent
