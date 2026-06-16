@@ -54,6 +54,11 @@ public class LightningRodEntity extends Entity implements GeoEntity {
     }
 
     @Override
+    public boolean isOnFire() {
+        return false;
+    }
+
+    @Override
     public void tick() {
         super.tick();
         this.move(MoverType.SELF, this.getDeltaMovement());

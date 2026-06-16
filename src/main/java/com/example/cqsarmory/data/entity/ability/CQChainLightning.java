@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.particle.ZapParticleOption;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -59,6 +60,7 @@ public class CQChainLightning extends ChainLightning {
                     var dest = getinitialVictim().position().add(0, getinitialVictim().getBbHeight() / 2, 0);
                     ((ServerLevel) level()).sendParticles(new ZapParticleOption(dest), start.x, start.y, start.z, 1, 0, 0, 0, 0);
                 }
+                level().playSound(null, this.blockPosition(), SoundRegistry.CHAIN_LIGHTNING_CHAIN.get(), SoundSource.PLAYERS);
 
             } else {
                 int j = getLastVictims().size();
