@@ -54,11 +54,12 @@ public class SkewerEffect extends NonCurableEffect {
                     float damage = (float) getDamage(target, livingEntity);
                     //amp == spellLevel == stacks
                     int duration = SkewerSpell.getBleedDurationTicks(amplifier);
-                    target.hurt(damageSource, damage);
-                    CQtils.addBleedStacks(livingEntity, target, amplifier, duration);
+                    if (target.hurt(damageSource, damage)) {
+                        CQtils.addBleedStacks(livingEntity, target, amplifier, duration);
+                        livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundRegistry.KEEPER_SWORD_IMPACT.get(), SoundSource.PLAYERS);
+                    }
                     livingEntity.setDeltaMovement(0, 0, 0);
                     livingEntity.hurtMarked = true;
-                    livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundRegistry.KEEPER_SWORD_IMPACT.get(), SoundSource.PLAYERS);
                     return false;
                 }
             }

@@ -145,8 +145,9 @@ public class StunSpell extends AbstractSpell {
             if (target instanceof LivingEntity livingEntity) {
                 float damage = (float) getDamage(target, entity, weaponItem);
                 if (!DamageSources.isFriendlyFireBetween(entity, target) && !livingEntity.isSpectator() && Utils.hasLineOfSight(level, entity.position(), livingEntity.getBoundingBox().getCenter(), true)) {
-                    livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, getDurationTicks(spellLevel), 100, false, false, true));
-                    target.hurt(damageSource, damage);
+                    if (target.hurt(damageSource, damage)) {
+                        livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, getDurationTicks(spellLevel), 100, false, false, true));
+                    }
                 }
             }
         }
