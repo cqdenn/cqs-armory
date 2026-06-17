@@ -1,8 +1,10 @@
 package com.example.cqsarmory.mixin;
 
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.network.SyncQuiverArrowsPacket;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
@@ -29,6 +31,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -40,6 +43,49 @@ import static net.minecraft.world.item.BowItem.getPowerForTime;
 
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
+
+    @Redirect(
+            method = "releaseUsing",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/world/level/Level;playSound" +
+                            "(Lnet/minecraft/world/entity/player/Player;" +
+                            "DDDLnet/minecraft/sounds/SoundEvent;" +
+                            "Lnet/minecraft/sounds/SoundSource;FF)V"
+            )
+    )
+    private void cqs_armory$customBowShootSound(
+            Level level,
+            Player sourcePlayer,
+            double x,
+            double y,
+            double z,
+            SoundEvent sound,
+            SoundSource source,
+            float volume,
+            float pitch,
+
+            // releaseUsing parameters
+            ItemStack stack,
+            Level level2,
+            LivingEntity entityLiving,
+            int timeLeft
+    ) {
+        if (entityLiving instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+            ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(level, player, x, y, z);
+        } else {
+            level.playSound(
+                    sourcePlayer,
+                    x,
+                    y,
+                    z,
+                    sound,
+                    source,
+                    volume,
+                    pitch
+            );
+        }
+    }
 
     /*@Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void cqs_armory$bowUse (Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {

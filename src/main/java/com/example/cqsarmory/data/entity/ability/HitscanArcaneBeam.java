@@ -41,7 +41,7 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
         this.originalDistance = originalDistance;
         this.raycast = raycast;
         this.bouncesLeft = bouncesLeft;
-        this.angle = start.subtract(end);
+        this.angle = end.subtract(start).normalize();
     }
 
     public static final int lifetime = 16;
@@ -50,10 +50,6 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
     public List<HitResult> raycast;
     public int bouncesLeft;
     public Vec3 angle;
-    public final AnimationState flyAnimationState = new AnimationState();
-    public final AnimationState restAnimationState = new AnimationState();
-    private IntOpenHashSet piercingIgnoreEntityIds;
-    private int numPierced;
 
     @Override
     public void tick() {
@@ -73,7 +69,7 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
                         onHitEntity(result);
                     }
                     if (getPierceLevel() > 0) {
-                        for (int i = 1; i<=getPierceLevel(); i++) {
+                        for (int i = 1; i<=Math.min(getPierceLevel(), this.raycast.size() - 1); i++) {
                             if (raycast.get(i).getType() == HitResult.Type.BLOCK) {
                                 BlockHitResult blockHitResult = (BlockHitResult) raycast.get(i);
                                 onHitBlock(blockHitResult);
@@ -94,21 +90,18 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
     protected void onHitBlock(BlockHitResult result) {
 
         if (this.bouncesLeft > 0) {
-            Vec3 newAngle = this.angle.scale(-1);
-            switch (result.getDirection()) {
-                case UP, DOWN -> newAngle = this.angle.multiply(1, -1, 1);
-                case EAST, WEST -> newAngle = this.angle.multiply(-1, 1, 1);
-                case NORTH, SOUTH -> newAngle = this.angle.multiply(1, 1, -1);
-            }
+            Vec3 normal = Vec3.atLowerCornerOf(result.getDirection().getNormal());
+            Vec3 newAngle = this.angle.subtract(normal.scale((this.angle.dot(normal) * 2)));
+            //newAngle = new Vec3(0, 1, 0);
 
-            Vec3 location = result.getLocation();
+            Vec3 location = result.getLocation().subtract(this.angle.scale(0.0));
             var hitResult = CQRaycaster.begin(level(), getOwner())
                     .rangeFromStart(originalDistance, location, newAngle)
                     .checkForBlocks(true)
                     .bbInflation(.15f)
                     .buildList();
             int pierce = getPierceLevel();
-            Vec3 end = hitResult.get(pierce).getLocation();
+            Vec3 end = hitResult.get(Math.min(pierce, hitResult.size() - 1)).getLocation();//list is never empty, see CQRaycaster
             HitscanArcaneBeam beam = new HitscanArcaneBeam(level(), location, end, originalDistance, getOwner(), hitResult, this.bouncesLeft - 1);
             Vec3 vec3 = newAngle;
             double d0 = vec3.horizontalDistance();
@@ -116,8 +109,12 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
             beam.setXRot((float) (Mth.atan2(vec3.y, d0) * 180.0F / (float) Math.PI));
             beam.yRotO = beam.getYRot();
             beam.xRotO = beam.getXRot();
-            beam.copyStats(this, getOwner() instanceof LivingEntity livingOwner ? livingOwner : null, (float) getBaseDamage());
+            beam.setBaseDamage(this.getBaseDamage());
+            beam.setScale(this.getScale());
+            beam.setShotFromAbility(this.getShotFromAbility());
+            beam.setWeaponItem(this.getWeaponItem());
             level().addFreshEntity(beam);
+            MagicManager.spawnParticles(level(), ParticleHelper.ENDER_SPARKS, result.getLocation().x, result.getLocation().y, result.getLocation().z, 10, 0.1, 0.1, 0.1, 0.2, false);
         } else {
             MagicManager.spawnParticles(level(), ParticleHelper.UNSTABLE_ENDER, result.getLocation().x, result.getLocation().y, result.getLocation().z, 50, 0, 0, 0, .3, false);
         }
@@ -125,7 +122,7 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
 
     @Override
     protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
+        //super.onHitEntity(result);
         Entity entity = result.getEntity();
         boolean flag = entity.getType() == EntityType.ENDERMAN;
         if (this.isOnFire() && !flag) {
@@ -137,13 +134,11 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
             entity.hurt(damageSources().arrow(this, getOwner()), (float) getBaseDamage());
         }
         if (this.getPierceLevel() > 0) {
-            for (int i = 1; i<=getPierceLevel(); i++) {
+            for (int i = 1; i<=Math.min(getPierceLevel(), this.raycast.size() - 1); i++) {
                 if (this.raycast.get(i).getType() == HitResult.Type.ENTITY && ((EntityHitResult) this.raycast.get(i)).getEntity() instanceof LivingEntity target) {
                     target.hurt(damageSources().arrow(this, getOwner()), (float) getBaseDamage());
                 }
             }
-        } else {
-            discard();
         }
         MagicManager.spawnParticles(level(), ParticleHelper.UNSTABLE_ENDER, result.getLocation().x, result.getLocation().y, result.getLocation().z, 50, 0, 0, 0, .3, false);
     }
@@ -176,10 +171,18 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
     @Override
     public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
         buffer.writeInt((int) (distance * 10));
+        buffer.writeFloat(this.getYRot());
+        buffer.writeFloat(this.getXRot());
+        buffer.writeFloat(this.yRotO);
+        buffer.writeFloat(this.xRotO);
     }
 
     @Override
     public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
         this.distance = additionalData.readInt() / 10f;
+        this.setYRot(additionalData.readFloat());
+        this.setXRot(additionalData.readFloat());
+        this.yRotO = additionalData.readFloat();
+        this.xRotO = additionalData.readFloat();
     }
 }

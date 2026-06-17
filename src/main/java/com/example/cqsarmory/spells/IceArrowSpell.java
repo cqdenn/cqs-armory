@@ -44,11 +44,11 @@ public class IceArrowSpell extends AbstractSpell {
     }
 
     public IceArrowSpell() {
-        this.manaCostPerLevel = 0;
+        this.manaCostPerLevel = 5;
         this.baseSpellPower = 5;
         this.spellPowerPerLevel = 1;
         this.castTime = 20;
-        this.baseManaCost = 0;
+        this.baseManaCost = 40;
     }
 
     @Override

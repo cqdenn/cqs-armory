@@ -64,7 +64,7 @@ public class HitscanArcaneBeamRenderer extends EntityRenderer<HitscanArcaneBeam>
         float scale = entity.getScale() * scalar;
         float forLoop = 0;
         for (float i = 0; i < entity.distance * 4; i += length) forLoop++;
-        float accuracyScalar = (entity.distance) / forLoop * 0.5f;
+        float accuracyScalar = entity.distance / forLoop * 0.5f + 0.5f;
         poseStack.scale(1, accuracyScalar, 1);
         poseStack.scale(scale, scale, scale);
 
@@ -72,8 +72,8 @@ public class HitscanArcaneBeamRenderer extends EntityRenderer<HitscanArcaneBeam>
 
         float alpha = Mth.clamp(1f - f / lifetime, 0, 1);
 
+        poseStack.translate(0, length/2, 0);
         for (float i = 0; i < entity.distance * 4; i += length) {
-            poseStack.translate(0, length, 0);
             //Render overlay
             //VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityTranslucent(TEXTURE_OVERLAY));
             VertexConsumer consumer = bufferSource.getBuffer(RenderHelper.CustomerRenderType.magicNoCull(TEXTURE_OVERLAY));
@@ -97,6 +97,7 @@ public class HitscanArcaneBeamRenderer extends EntityRenderer<HitscanArcaneBeam>
                 this.body.render(poseStack, consumer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, -1);
                 poseStack.popPose();
             }
+            poseStack.translate(0, length, 0);
         }
 
 

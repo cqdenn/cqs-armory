@@ -105,7 +105,7 @@ public class PiercingArrowSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundEvents.ARROW_SHOOT);
+        return Optional.empty();
     }
 
     @Override
@@ -176,6 +176,9 @@ public class PiercingArrowSpell extends AbstractSpell {
 
 
         level.addFreshEntity(projectile);
+        if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+            ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(level, player, entity.getX(), entity.getY(), entity.getZ());
+        }
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }

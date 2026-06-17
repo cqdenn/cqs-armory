@@ -1,6 +1,7 @@
 package com.example.cqsarmory.items.curios;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
@@ -13,6 +14,8 @@ import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -23,6 +26,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
+import net.minecraft.world.level.Level;
 
 import java.util.Arrays;
 import java.util.List;
@@ -67,5 +71,18 @@ public class QuiverItem extends CurioBaseItem implements IPresetSpellContainer {
         AbilityArrow abilityArrow = new AbilityArrow(shooter.level());
         abilityArrow.copyStats(arrow, shooter, arrowDmg);
         return abilityArrow;
+    }
+
+    public void playCustomBowShootSound (Level level, Player player, double x, double y, double z) {
+        level.playSound(
+                null,
+                x,
+                y,
+                z,
+                SoundEvents.ARROW_SHOOT,
+                SoundSource.PLAYERS,
+                1.0F,
+                1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + AbilityData.get(player).bowVelocity * 0.5F
+        );
     }
 }

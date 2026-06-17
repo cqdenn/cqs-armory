@@ -100,7 +100,7 @@ public class RapidFireSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundEvents.ARROW_SHOOT);
+        return Optional.empty();
     }
 
     @Override
@@ -165,7 +165,9 @@ public class RapidFireSpell extends AbstractSpell {
             projectile.setShotFromAbility(true);
             projectile.setWeaponItem(wepaonItem);
 
-            level.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
+            if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+                ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(level, player, entity.getX(), entity.getY(), entity.getZ());
+            }
             level.addFreshEntity(projectile);
         }
     }

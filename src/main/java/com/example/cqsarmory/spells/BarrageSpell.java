@@ -2,8 +2,12 @@ package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
+import com.example.cqsarmory.data.entity.ability.HitscanArcaneBeam;
+import com.example.cqsarmory.data.entity.renderers.HitscanArcaneBeamRenderer;
 import com.example.cqsarmory.items.curios.QuiverItem;
+import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
+import com.example.cqsarmory.utils.CQRaycaster;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
@@ -27,6 +31,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
@@ -102,7 +107,7 @@ public class BarrageSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundEvents.ARROW_SHOOT);
+        return Optional.empty();
     }
 
     @Override
@@ -157,8 +162,21 @@ public class BarrageSpell extends AbstractSpell {
             }
             projectile.setOwner(entity);
             //projectile.setNoGravity(false);
-            projectile.setPos(origin.subtract(0, projectile.getBbHeight() * 0.5f, 0));
+            Vec3 pos = origin.subtract(0, projectile.getBbHeight() * 0.5f, 0);
+            projectile.setPos(pos);
             shootFromRandom(projectile.getMovementToShoot(entity.getForward().x, entity.getForward().y, entity.getForward().z, 3f, 0.05f), .2f, projectile);
+            if (projectile instanceof HitscanArcaneBeam beam) {
+                beam.raycast = CQRaycaster.begin(entity.level(), entity)
+                        .rangeFromStart(64, pos, beam.getDeltaMovement())//if changes in arcane quiver, update here
+                        .checkForBlocks(true)
+                        .bbInflation(.15f)
+                        .buildList();
+                int pierce = 0;
+                pierce += beam.getPierceLevel();
+                pierce += (int) entity.getAttributeValue(AttributeRegistry.ARROW_PIERCING);
+                Vec3 end = beam.raycast.get(Math.min(pierce, beam.raycast.size() - 1)).getLocation();
+                beam.distance = (float) pos.distanceTo(end);
+            }
             Vec3 vec3 = projectile.getDeltaMovement();
             double d0 = vec3.horizontalDistance();
             projectile.setYRot((float)(Mth.atan2(vec3.x, vec3.z) * 180.0F / (float)Math.PI));
@@ -173,6 +191,9 @@ public class BarrageSpell extends AbstractSpell {
 
             //world.playSound(null, origin.x, origin.y, origin.z, SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0f, 1.0f);
             world.addFreshEntity(projectile);
+        }
+        if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
+            ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(world, player, entity.getX(), entity.getY(), entity.getZ());
         }
 
         entity.push(entity.getForward().scale(-1).multiply(1, 0, 1).add(0, Math.max(entity.getForward().scale(-1).y, 0.3), 0));
