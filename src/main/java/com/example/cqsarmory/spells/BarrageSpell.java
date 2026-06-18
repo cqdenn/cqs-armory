@@ -125,6 +125,7 @@ public class BarrageSpell extends AbstractSpell {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 20),
                 Component.literal("15 Projectiles"),
+                Component.literal("Pushes you backwards"),
                 Component.translatable("ui.irons_spellbooks.recast_count", getRecastCount(spellLevel, caster))
         );
     }
