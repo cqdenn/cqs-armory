@@ -712,18 +712,20 @@ public class ServerEvents {
 
             } else {
 
+                CQtils.addMomentum(player);
+
                 //int abilityGainMultiplier = directEntity instanceof AbilityArrow abilityArrow && abilityArrow.getShotFromAbility() ? 2 : 1; //TOO MUCH MOMENTUM
-                float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue()/* * abilityGainMultiplier*/);
+                /*float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(AttributeRegistry.MOMENTUM_ON_HIT).getValue()*//* * abilityGainMultiplier*//*);
                 float newMomentum = newMomentumTest < player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue();
                 AbilityData.get(player).setMomentum(newMomentum);
-                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+                PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));*/
 
                 //remove rage on momentum gain
             /*AbilityData.get(player).setRage(0);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncRagePacket((int) 0));*/
 
 
-                AbilityData.get(player).combatEndMomentum = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
+                //AbilityData.get(player).combatEndMomentum = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
             }
 
         }
@@ -738,7 +740,7 @@ public class ServerEvents {
         }
 
         if (!AbilityData.inCombatMomentum(player) && player.level().getGameTime() % 20 == 0) {
-            float newMomentumTest = ((float) (AbilityData.get(player).getMomentum() - 5));
+            float newMomentumTest = ((float) (AbilityData.get(player).getMomentum() - player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() * 0.1));
             float newMomentum = newMomentumTest > player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(AttributeRegistry.MIN_MOMENTUM).getValue();
             AbilityData.get(player).setMomentum(newMomentum);
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
