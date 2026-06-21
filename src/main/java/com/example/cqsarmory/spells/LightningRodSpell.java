@@ -38,6 +38,7 @@ public class LightningRodSpell extends AbstractSpell {
     @Override
     public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
         return List.of(
+                Component.literal("Splits Damage Between Targets"),
                 Component.literal(getLifetime()/20 + " Second Lifetime"),
                 Component.translatable("ui.irons_spellbooks.radius", getRadius()));
     }

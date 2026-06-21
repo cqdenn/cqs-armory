@@ -1,7 +1,9 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.EntityRegistry;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -20,12 +22,16 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.checkerframework.checker.units.qual.C;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import java.util.List;
 
 public class LightningRodEntity extends Entity implements GeoEntity {
 
@@ -37,7 +43,7 @@ public class LightningRodEntity extends Entity implements GeoEntity {
         super(entityType, level);
     }
 
-    public LightningRodEntity (Level level, LivingEntity owner, int lifetime, int radius) {
+    public LightningRodEntity(Level level, LivingEntity owner, int lifetime, int radius) {
         this(EntityRegistry.LIGHTNING_ROD.get(), level);
         this.owner = owner;
         this.lifetime = lifetime;
@@ -74,21 +80,27 @@ public class LightningRodEntity extends Entity implements GeoEntity {
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
-        if (!DamageSources.isFriendlyFireBetween(source.getEntity(), getOwner()) || !(source.is(ISSDamageTypes.LIGHTNING_MAGIC) || (source.getDirectEntity() instanceof LightningArrow))) return false;
+        if (!DamageSources.isFriendlyFireBetween(source.getEntity(), getOwner()) || !(source.is(ISSDamageTypes.LIGHTNING_MAGIC) || (source.getDirectEntity() instanceof LightningArrow)))
+            return false;
         float radius = this.radius;
-        level().getEntities(this, this.getBoundingBox().inflate(radius), entity -> entity != getOwner()
+        if (source.getEntity() instanceof Player player) CQtils.addMomentum(player);
+        List<Entity> entities = level().getEntities(this, this.getBoundingBox().inflate(radius), entity -> entity != getOwner()
+                && !DamageSources.isFriendlyFireBetween(getOwner(), entity)
                 && (entity instanceof LivingEntity)
                 && entity.isAlive()
-                && Utils.hasLineOfSight(level(), this, entity, true))
-                .forEach(target -> {
-                    CQChainLightning lightning = new CQChainLightning(level(), getOwner(), target, this.getPosition(0).add(0, 2, 0));
-                    lightning.range = radius + 2;
-                    lightning.setDamage(amount * (float) getOwner().getAttributeValue(AttributeRegistry.LIGHTNING_SPELL_POWER));
-                    lightning.maxConnections = 1;
-                    level().addFreshEntity(lightning);
-                });
-        if (!level().isClientSide) MagicManager.spawnParticles(level(), ParticleHelper.ELECTRIC_SPARKS, this.getX(), this.getY() + 2, this.getZ(), 2 + Utils.random.nextIntBetweenInclusive(0, 2), 0, 0, 0, 0.3, false);
-        if (source.getDirectEntity() instanceof LightningArrow arrow && arrow.getPierceLevel() == (byte) 0) arrow.discard();
+                && Utils.hasLineOfSight(level(), this, entity, true));
+        float damage = amount / entities.size() * (float) getOwner().getAttributeValue(AttributeRegistry.LIGHTNING_SPELL_POWER);
+        entities.forEach(target -> {
+            CQChainLightning lightning = new CQChainLightning(level(), getOwner(), target, this.getPosition(0).add(0, 2, 0));
+            lightning.range = radius + 2;
+            lightning.setDamage(damage);
+            lightning.maxConnections = 1;
+            level().addFreshEntity(lightning);
+        });
+        if (!level().isClientSide)
+            MagicManager.spawnParticles(level(), ParticleHelper.ELECTRIC_SPARKS, this.getX(), this.getY() + 2, this.getZ(), 2 + Utils.random.nextIntBetweenInclusive(0, 2), 0, 0, 0, 0.3, false);
+        if (source.getDirectEntity() instanceof LightningArrow arrow && arrow.getPierceLevel() == (byte) 0)
+            arrow.discard();
         return true;
     }
 
