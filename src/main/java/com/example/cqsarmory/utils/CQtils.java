@@ -110,6 +110,14 @@ public class CQtils {
 
     }
 
+    public static void addMomentum (Player player) {
+        float newMomentumTest = (AbilityData.get(player).getMomentum() + (float) player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT).getValue()/* * abilityGainMultiplier*/);
+        float newMomentum = newMomentumTest < player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM).getValue() ? newMomentumTest : (float) player.getAttribute(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM).getValue();
+        AbilityData.get(player).setMomentum(newMomentum);
+        PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
+        AbilityData.get(player).combatEndMomentum = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
+    }
+
     public static void doGenericMageAOE(LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {
         Vector3f center = new Vector3f(1, 1f, 1f);
         var x = from.x;
