@@ -58,7 +58,7 @@ public class CQOverworldBiomes {
     public static Biome dwarvenCaves(HolderGetter<PlacedFeature> placedFeatures, HolderGetter<ConfiguredWorldCarver<?>> worldCarvers) {
         MobSpawnSettings.Builder mobspawnsettings$builder = new MobSpawnSettings.Builder();
         mobspawnsettings$builder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.MAGMA_CUBE, 100, 8, 8));
-        mobspawnsettings$builder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SKELETON, 100, 4, 4));
+        mobspawnsettings$builder.addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(EntityType.SKELETON, 100, 8, 8));
         BiomeGenerationSettings.Builder builder = new BiomeGenerationSettings.Builder(placedFeatures, worldCarvers);
         //globalOverworldGeneration(builder);
         builder.addCarver(GenerationStep.Carving.AIR, Carvers.CAVE);
