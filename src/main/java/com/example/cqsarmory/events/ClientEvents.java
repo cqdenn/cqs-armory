@@ -53,6 +53,7 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void archerDoubleJump (InputEvent.Key event) {
+        if (Minecraft.getInstance().level == null) return;
         var options = Minecraft.getInstance().options;
         if (options.keyJump.getKey().getValue() == event.getKey() && event.getAction() == 1) {
             int lateral = 0;
