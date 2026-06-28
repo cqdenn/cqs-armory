@@ -1255,7 +1255,7 @@ public class ServerEvents {
             RegistryAccess registryAccess = skeleton.level().registryAccess();
             Holder<TrimMaterial> material = registryAccess
                     .lookupOrThrow(Registries.TRIM_MATERIAL)
-                    .getOrThrow(TrimMaterials.COPPER);
+                    .getOrThrow(ResourceKey.create(Registries.TRIM_MATERIAL, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "dwarvensteel")));
             Holder<TrimPattern> pattern = registryAccess
                     .lookupOrThrow(Registries.TRIM_PATTERN)
                     .getOrThrow(TrimPatterns.SILENCE);
