@@ -2,6 +2,7 @@
   "replace": false,
   "entries": [
     "cqs_armory:rotting_curse",
-    "cqs_armory:entity_drops/warden_modifier"
+    "cqs_armory:entity_drops/warden_modifier",
+    "cqs_armory:entity_drops/dwarven_caves_skeleton_modifier"
   ]
 }

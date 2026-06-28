@@ -1,0 +1,18 @@
+{
+  "type": "irons_spellbooks:append_loot",
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "minecraft:skeleton"
+      }
+    },
+    {
+      "condition": "cqs_armory:spawn_biome",
+      "entity": "this",
+      "spawn_biome": "cqs_armory:dwarven_caves"
+    }
+  ],
+  "key": "cqs_armory:entities/additional_dwarven_skeleton_loot"
+}

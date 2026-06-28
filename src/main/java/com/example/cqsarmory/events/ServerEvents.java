@@ -1269,10 +1269,7 @@ public class ServerEvents {
             chest.set(DataComponents.TRIM, trim);
             skeleton.setItemSlot(EquipmentSlot.CHEST, chest);
 
-            skeleton.setItemSlot(EquipmentSlot.LEGS, ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack());
-            skeleton.setDropChance(EquipmentSlot.LEGS, 0.125f);
-            skeleton.setItemSlot(EquipmentSlot.FEET, ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack());
-            skeleton.setDropChance(EquipmentSlot.FEET, 0.125f);
+            skeleton.getPersistentData().putString("cqs_armory:spawn_biome", "cqs_armory:dwarven_caves");
         }
     }
 

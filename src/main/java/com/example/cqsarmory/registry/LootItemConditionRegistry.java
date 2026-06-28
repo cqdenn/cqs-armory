@@ -2,6 +2,7 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.conditions.HealthCheck;
+import com.example.cqsarmory.data.conditions.SpawnBiomeCheck;
 import com.example.cqsarmory.data.enchants.LightningAspect;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.registries.Registries;
@@ -23,4 +24,7 @@ public class LootItemConditionRegistry {
 
     public static  final Supplier<LootItemConditionType> HEALTH_CHECK_CONDITION =
             CONDITION_TYPES.register("health_check", ()-> new LootItemConditionType(HealthCheck.CODEC));
+
+    public static  final Supplier<LootItemConditionType> SPAWN_BIOME_CONDITION =
+            CONDITION_TYPES.register("spawn_biome", ()-> new LootItemConditionType(SpawnBiomeCheck.CODEC));
 }
