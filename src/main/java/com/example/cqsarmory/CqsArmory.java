@@ -2,6 +2,9 @@ package com.example.cqsarmory;
 
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.config.ServerConfigs;
+import com.example.cqsarmory.data.biomes.CQBiomeRegister;
+import com.example.cqsarmory.data.biomes.CQRegions;
+import com.example.cqsarmory.data.biomes.CQSurfaceRules;
 import com.example.cqsarmory.gui.overlays.RageBarOverlay;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
@@ -36,6 +39,8 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
+import terrablender.api.Regions;
+import terrablender.api.SurfaceRuleManager;
 
 import static com.example.cqsarmory.registry.ItemRegistry.*;
 
@@ -123,9 +128,23 @@ public class CqsArmory
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+        modEventBus.addListener(this::commonSetup);
 
 
     }
+
+    private void commonSetup(final FMLCommonSetupEvent event)
+    {
+        event.enqueueWork(() ->
+        {
+            Regions.register(new CQRegions(ResourceLocation.fromNamespaceAndPath(MODID, "overworld"), 4));
+
+            // Register our surface rules
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, CQSurfaceRules.makeRules());
+        });
+    }
+
+
 
 
     public static ResourceLocation id(@NotNull String path) {

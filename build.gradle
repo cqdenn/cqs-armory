@@ -48,6 +48,7 @@ repositories {
     }
 
     maven { url = "https://maven.blamejared.com" }
+    maven { url = 'https://maven.minecraftforge.net/' }
 
 }
 
@@ -139,6 +140,7 @@ dependencies {
     localRuntime "curse.maven:mmmmmmmmmmmm-225738:7206981"
     localRuntime "curse.maven:selene-499980:7522321"
     implementation 'io.redspace:bow_attributes:0.0.5-SNAPSHOT'
+    implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

@@ -1,12 +1,17 @@
 package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.biomes.CQBiomeRegister;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+
+import java.util.Set;
 
 @EventBusSubscriber(modid = CqsArmory.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
@@ -33,6 +38,16 @@ public class DataGenerators {
 
         generator.addProvider(event.includeServer(),
                 new SpellTagsProvider(packOutput, event.getLookupProvider(), existingFileHelper));
+
+        generator.addProvider(
+                event.includeServer(),
+                (DataProvider.Factory<DatapackBuiltinEntriesProvider>) output -> new DatapackBuiltinEntriesProvider(
+                        output,
+                        event.getLookupProvider(),
+                        CQBiomeRegister.BIOME_BUILDER,
+                        Set.of(CqsArmory.MODID)
+                )
+        );
 
     }
 }

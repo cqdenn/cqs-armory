@@ -43,6 +43,7 @@ import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -63,17 +64,15 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.armortrim.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.*;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
@@ -95,10 +94,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 @EventBusSubscriber
@@ -1240,6 +1236,43 @@ public class ServerEvents {
             event.setNewDamage(event.getNewDamage() + (event.getNewDamage() * damagePerStack * AbilityData.get(player).huntersMarkConsecutiveArrowsHit));
 
             AbilityData.get(player).huntersMarkConsecutiveArrowsHit = Math.min(AbilityData.get(player).huntersMarkConsecutiveArrowsHit + 1, 10); //cap 10
+        }
+    }
+
+    @SubscribeEvent
+    public static void flameBowSkeletons (EntityJoinLevelEvent event) {
+        if (event.getEntity() instanceof Skeleton skeleton && skeleton.level().getBiome(skeleton.blockPosition()).is(BiomesRegistry.DWARVEN_CAVES) && skeleton.getMainHandItem().getItem() instanceof BowItem) {
+            ItemStack bowStack = skeleton.getMainHandItem();
+            ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(EnchantmentHelper.getEnchantmentsForCrafting(bowStack));
+            mutable.set(skeleton.level().registryAccess()
+                    .lookupOrThrow(Registries.ENCHANTMENT)
+                    .getOrThrow(Enchantments.FLAME), 1);
+            mutable.set(skeleton.level().registryAccess()
+                    .lookupOrThrow(Registries.ENCHANTMENT)
+                    .getOrThrow(Enchantments.POWER), 5);
+            EnchantmentHelper.setEnchantments(bowStack, mutable.toImmutable());
+
+            RegistryAccess registryAccess = skeleton.level().registryAccess();
+            Holder<TrimMaterial> material = registryAccess
+                    .lookupOrThrow(Registries.TRIM_MATERIAL)
+                    .getOrThrow(TrimMaterials.COPPER);
+            Holder<TrimPattern> pattern = registryAccess
+                    .lookupOrThrow(Registries.TRIM_PATTERN)
+                    .getOrThrow(TrimPatterns.SILENCE);
+            ArmorTrim trim = new ArmorTrim(material, pattern, true);
+
+            ItemStack helmet = new ItemStack(Items.NETHERITE_HELMET);
+            helmet.set(DataComponents.TRIM, trim);
+            skeleton.setItemSlot(EquipmentSlot.HEAD, helmet);
+
+            ItemStack chest = new ItemStack(Items.NETHERITE_CHESTPLATE);
+            chest.set(DataComponents.TRIM, trim);
+            skeleton.setItemSlot(EquipmentSlot.CHEST, chest);
+
+            skeleton.setItemSlot(EquipmentSlot.LEGS, ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack());
+            skeleton.setDropChance(EquipmentSlot.LEGS, 0.125f);
+            skeleton.setItemSlot(EquipmentSlot.FEET, ItemRegistry.DWARVEN_STEEL_WEAPONSET.ingot().get().toStack());
+            skeleton.setDropChance(EquipmentSlot.FEET, 0.125f);
         }
     }
 
