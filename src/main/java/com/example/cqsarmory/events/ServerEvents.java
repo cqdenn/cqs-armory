@@ -39,6 +39,7 @@ import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
+import io.redspace.ironsspellbooks.particle.SwirlingParticle;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.BlockPos;
@@ -1242,6 +1243,10 @@ public class ServerEvents {
     @SubscribeEvent
     public static void flameBowSkeletons (EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Skeleton skeleton && skeleton.level().getBiome(skeleton.blockPosition()).is(BiomesRegistry.DWARVEN_CAVES) && skeleton.getMainHandItem().getItem() instanceof BowItem) {
+            ItemStack newBow = ItemRegistry.DWARVEN_STEEL_WEAPONSET.shortbow().toStack();
+            if (Utils.random.nextFloat() <= 0.33f) newBow = ItemRegistry.DWARVEN_STEEL_WEAPONSET.recurve().toStack();
+            else if (Utils.random.nextFloat() <= 0.66f) newBow = ItemRegistry.DWARVEN_STEEL_WEAPONSET.longbow().toStack();
+            skeleton.setItemSlot(EquipmentSlot.MAINHAND, newBow);
             ItemStack bowStack = skeleton.getMainHandItem();
             ItemEnchantments.Mutable mutable = new ItemEnchantments.Mutable(EnchantmentHelper.getEnchantmentsForCrafting(bowStack));
             mutable.set(skeleton.level().registryAccess()
