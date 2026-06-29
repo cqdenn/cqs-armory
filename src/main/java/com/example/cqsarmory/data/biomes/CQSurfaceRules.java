@@ -5,20 +5,23 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.Noises;
 import net.minecraft.world.level.levelgen.SurfaceRules;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class CQSurfaceRules {
     private static final SurfaceRules.RuleSource BLACKSTONE = makeStateRule(Blocks.BLACKSTONE);
     private static final SurfaceRules.RuleSource DEEPSLATE = makeStateRule(Blocks.DEEPSLATE);
-    private static final SurfaceRules.RuleSource BASALT = makeStateRule(Blocks.BASALT);
+    private static final SurfaceRules.RuleSource SMOOTH_BASALT = makeStateRule(Blocks.SMOOTH_BASALT);
     private static final SurfaceRules.RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
     private static final SurfaceRules.RuleSource COAL_BLOCK = makeStateRule(Blocks.COAL_BLOCK);
     private static final SurfaceRules.RuleSource TUFF = makeStateRule(Blocks.TUFF);
     private static final SurfaceRules.RuleSource MAGMA = makeStateRule(Blocks.MAGMA_BLOCK);
     private static final SurfaceRules.RuleSource COBBLED_DEEPSLATE = makeStateRule(Blocks.COBBLED_DEEPSLATE);
+    private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
 
     public static SurfaceRules.RuleSource makeRules() {
         SurfaceRules.RuleSource dwarvenCaveBlocks = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D, -0.28D),
                         MAGMA
@@ -108,10 +111,28 @@ public class CQSurfaceRules {
                         MAGMA
                 ),
 
-
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -1.0D, -0.8D),
+                        TUFF
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -0.6D, -0.4D),
+                        TUFF
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -0.2D, 0.0D),
+                        TUFF
+                ),SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, 0.2D, 0.4D),
+                        TUFF
+                ),SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, 0.6D, 0.8D),
+                        TUFF
+                ),
 
                 // Fallback
-                BLACKSTONE
+                SMOOTH_BASALT
+
         );
 
         return SurfaceRules.ifTrue(
