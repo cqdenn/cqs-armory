@@ -19,106 +19,109 @@ public class CQSurfaceRules {
     private static final SurfaceRules.RuleSource COBBLED_DEEPSLATE = makeStateRule(Blocks.COBBLED_DEEPSLATE);
     private static final SurfaceRules.RuleSource BEDROCK = makeStateRule(Blocks.BEDROCK);
     private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
-    private static final SurfaceRules.RuleSource COAL_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.COAL_ORE, 0.5D);
-    private static final SurfaceRules.RuleSource COPPER_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.COPPER_ORE, 0.5D);
-    private static final SurfaceRules.RuleSource GOLD_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.GOLD_ORE, 0.3D);
-    private static final SurfaceRules.RuleSource LAPIS_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.LAPIS_ORE, 0.2D);
-    private static final SurfaceRules.RuleSource IRON_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.IRON_ORE, 0.2D);
-    private static final SurfaceRules.RuleSource REDSTONE_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.REDSTONE_ORE, 0.2D);
-    private static final SurfaceRules.RuleSource EMERALD_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.EMERALD_ORE, 0.2D);
-    private static final SurfaceRules.RuleSource DIAMOND_IN_STONE = blockWithSpeckles(Blocks.STONE, Blocks.DIAMOND_ORE, 0.2D);
+    private static final SurfaceRules.RuleSource COAL = makeStateRule(Blocks.COAL_ORE);
+    private static final SurfaceRules.RuleSource COPPER = makeStateRule(Blocks.COPPER_ORE);
+    private static final SurfaceRules.RuleSource GOLD = makeStateRule(Blocks.GOLD_ORE);
+    private static final SurfaceRules.RuleSource LAPIS = makeStateRule(Blocks.LAPIS_ORE);
+    private static final SurfaceRules.RuleSource IRON = makeStateRule(Blocks.IRON_ORE);
+    private static final SurfaceRules.RuleSource REDSTONE = makeStateRule(Blocks.REDSTONE_ORE);
+    private static final SurfaceRules.RuleSource EMERALD = makeStateRule(Blocks.EMERALD_ORE);
+    private static final SurfaceRules.RuleSource DIAMOND = makeStateRule(Blocks.DIAMOND_ORE);
 
 
     public static SurfaceRules.RuleSource makeRules() {
         SurfaceRules.RuleSource dwarvenCaveBlocks = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK),
+
+                dwarvenCavesOreVeins(),
+
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D, -0.28D),
-                        COAL_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.26D, -0.25D),
-                        COPPER_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.25D, 0.26D),
-                        IRON_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.28D, 0.29D),
-                        LAPIS_IN_STONE
+                        STONE
                 ),
 
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.49D, -0.48D),
-                        COPPER_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.46D, -0.45D),
-                        REDSTONE_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.45D, 0.46D),
-                        COAL_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.48D, 0.49D),
-                        IRON_IN_STONE
+                        STONE
                 ),
 
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.69D, -0.68D),
-                        GOLD_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.66D, -0.65D),
-                        COPPER_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.65D, 0.66D),
-                        LAPIS_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.68D, 0.69D),
-                        EMERALD_IN_STONE
+                        STONE
                 ),
 
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.89D, -0.88D),
-                        DIAMOND_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.86D, -0.85D),
-                        REDSTONE_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.85D, 0.86D),
-                        GOLD_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.88D, 0.89D),
-                        COAL_IN_STONE
+                        STONE
                 ),
 
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.09D, -0.08D),
-                        GOLD_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.06D, -0.05D),
-                        COAL_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01D, 0.01D),
-                        COPPER_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.05D, 0.06D),
-                        EMERALD_IN_STONE
+                        STONE
                 ),
                 SurfaceRules.ifTrue(
                         SurfaceRules.noiseCondition(Noises.GRAVEL, 0.08D, 0.09D),
-                        IRON_IN_STONE
+                        STONE
                 ),
 
                 /*SurfaceRules.ifTrue(
@@ -155,104 +158,103 @@ public class CQSurfaceRules {
         return SurfaceRules.state(block.defaultBlockState());
     }
 
-    private static SurfaceRules.RuleSource blockWithSpeckles(
-            Block baseBlock,
-            Block speckleBlock,
-            double threshold) {
-        SurfaceRules.RuleSource base = makeStateRule(baseBlock);
-        SurfaceRules.RuleSource speckle = makeStateRule(speckleBlock);
-        double diff = (1- threshold) * 0.5 * 0.01;
+    private static SurfaceRules.RuleSource dwarvenCavesOreVeins() {
+        double commonOreThreshold = 0.5;
+        double midOreThreshold = 0.3;
+        double rareOreThreshold = 0.2;
+        double commonDiff = (1 - commonOreThreshold) * 0.5 * 0.01;
+        double midDiff = (1 - midOreThreshold) * 0.5 * 0.01;
+        double rareDiff = (1 - rareOreThreshold) * 0.5 * 0.01;
 
         SurfaceRules.RuleSource sequence = SurfaceRules.sequence(
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D + diff, -0.28D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D + commonDiff, -0.28D - commonDiff),
+                        COAL
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.26D + diff, -0.25D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.26D + commonDiff, -0.25D - commonDiff),
+                        COPPER
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.25D + diff, 0.26D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.25D + midDiff, 0.26D - midDiff),
+                        IRON
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.28D + diff, 0.29D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.28D + rareDiff, 0.29D - rareDiff),
+                        LAPIS
                 ),
 
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.49D + diff, -0.48D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.49D + commonDiff, -0.48D - commonDiff),
+                        COPPER
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.46D + diff, -0.45D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.46D + rareDiff, -0.45D - rareDiff),
+                        REDSTONE
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.45D + diff, 0.46D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.45D + commonDiff, 0.46D - commonDiff),
+                        COAL
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.48D + diff, 0.49D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.48D + midDiff, 0.49D - midDiff),
+                        IRON
                 ),
 
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.69D + diff, -0.68D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.69D + midDiff, -0.68D - midDiff),
+                        GOLD
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.66D + diff, -0.65D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.66D + commonDiff, -0.65D - commonDiff),
+                        COPPER
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.65D + diff, 0.66D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.65D + rareDiff, 0.66D - rareDiff),
+                        LAPIS
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.68D + diff, 0.69D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.68D + rareDiff, 0.69D - rareDiff),
+                        EMERALD
                 ),
 
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.89D + diff, -0.88D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.89D + rareDiff, -0.88D - rareDiff),
+                        DIAMOND
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.86D + diff, -0.85D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.86D + midDiff, -0.85D - midDiff),
+                        REDSTONE
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.85D + diff, 0.86D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.85D + midDiff, 0.86D - midDiff),
+                        GOLD
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.88D + diff, 0.89D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.88D + commonDiff, 0.89D - commonDiff),
+                        COAL
                 ),
 
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.09D + diff, -0.08D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.09D + commonDiff, -0.08D - commonDiff),
+                        GOLD
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.06D + diff, -0.05D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.06D + commonDiff, -0.05D - commonDiff),
+                        COAL
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01D + diff,  0.01D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01D + commonDiff, 0.01D - commonDiff),
+                        COPPER
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.05D + diff,  0.06D - diff),
-                        speckle
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.05D + rareDiff, 0.06D - rareDiff),
+                        EMERALD
                 ),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.08D + diff, 0.09D - diff),
-                        speckle
-                ),
-                base
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.08D + midDiff, 0.09D - midDiff),
+                        IRON
+                )
         );
 
         return sequence;
