@@ -35,113 +35,7 @@ public class CQSurfaceRules {
 
                 dwarvenCavesOreVeins(),
 
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D, -0.28D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.26D, -0.25D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.25D, 0.26D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.28D, 0.29D),
-                        STONE
-                ),
-
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.49D, -0.48D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.46D, -0.45D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.45D, 0.46D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.48D, 0.49D),
-                        STONE
-                ),
-
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.69D, -0.68D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.66D, -0.65D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.65D, 0.66D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.68D, 0.69D),
-                        STONE
-                ),
-
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.89D, -0.88D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.86D, -0.85D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.85D, 0.86D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.88D, 0.89D),
-                        STONE
-                ),
-
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.09D, -0.08D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.06D, -0.05D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01D, 0.01D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.05D, 0.06D),
-                        STONE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.08D, 0.09D),
-                        STONE
-                ),
-
-                /*SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -1.0D, -0.8D),
-                        DEEPSLATE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -0.6D, -0.4D),
-                        DEEPSLATE
-                ),
-                SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, -0.2D, 0.0D),
-                        DEEPSLATE
-                ),SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, 0.2D, 0.4D),
-                        DEEPSLATE
-                ),SurfaceRules.ifTrue(
-                        SurfaceRules.noiseCondition(Noises.CAVE_CHEESE, 0.6D, 0.8D),
-                        DEEPSLATE
-                ),*/
+                caveVeins(Blocks.STONE),
 
                 // Fallback
                 DEEPSLATE
@@ -156,6 +50,105 @@ public class CQSurfaceRules {
 
     private static SurfaceRules.RuleSource makeStateRule(Block block) {
         return SurfaceRules.state(block.defaultBlockState());
+    }
+
+    private static SurfaceRules.RuleSource caveVeins (Block block) {
+
+        SurfaceRules.RuleSource material = makeStateRule(block);
+
+        return SurfaceRules.sequence(
+
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.29D, -0.28D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.26D, -0.25D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.25D, 0.26D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.28D, 0.29D),
+                        material
+                ),
+
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.49D, -0.48D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.46D, -0.45D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.45D, 0.46D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.48D, 0.49D),
+                        material
+                ),
+
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.69D, -0.68D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.66D, -0.65D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.65D, 0.66D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.68D, 0.69D),
+                        material
+                ),
+
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.89D, -0.88D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.86D, -0.85D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.85D, 0.86D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.88D, 0.89D),
+                        material
+                ),
+
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.09D, -0.08D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.06D, -0.05D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, -0.01D, 0.01D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.05D, 0.06D),
+                        material
+                ),
+                SurfaceRules.ifTrue(
+                        SurfaceRules.noiseCondition(Noises.GRAVEL, 0.08D, 0.09D),
+                        material
+                )
+
+        );
+
     }
 
     private static SurfaceRules.RuleSource dwarvenCavesOreVeins() {
