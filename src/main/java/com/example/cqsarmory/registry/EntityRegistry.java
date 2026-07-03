@@ -206,10 +206,10 @@ public class EntityRegistry {
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "delayed_generic_aoe_entity").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<LightningRodEntity>> LIGHTNING_ROD =
-            ENTITIES.register("lighting_rod", () -> EntityType.Builder.<LightningRodEntity>of(LightningRodEntity::new, MobCategory.MISC)
+            ENTITIES.register("lightning_rod", () -> EntityType.Builder.<LightningRodEntity>of(LightningRodEntity::new, MobCategory.MISC)
                     .sized(1f, 2f)
                     .clientTrackingRange(64)
-                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lighting_rod").toString()));
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_rod").toString()));
 
     public static final DeferredHolder<EntityType<?>, EntityType<CQChainLightning>> CQ_CHAIN_LIGHTNING_ENTITY =
             ENTITIES.register("chain_lightning_entity", () -> EntityType.Builder.<CQChainLightning>of(CQChainLightning::new, MobCategory.MISC)
