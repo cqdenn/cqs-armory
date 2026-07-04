@@ -21,7 +21,7 @@ public class KeyMappings {
 
     @SubscribeEvent
     public static void onRegisterKeybinds(RegisterKeyMappingsEvent event) {
-        event.register(DODGE_KEYMAP);
+        //event.register(DODGE_KEYMAP);
     }
 
 }
