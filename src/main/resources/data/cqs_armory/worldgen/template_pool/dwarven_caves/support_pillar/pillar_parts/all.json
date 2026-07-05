@@ -1,0 +1,33 @@
+{
+  "name": "cqs_armory:dwarven_caves/support_pillar",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "cqs_armory:dwarven_caves/support_pillar/pillar_chest",
+        "processors": "cqs_armory:air_only",
+        "projection": "rigid"
+      },
+      "weight": 1
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "cqs_armory:dwarven_caves/support_pillar/pillar_extension",
+        "processors": "cqs_armory:air_only",
+        "projection": "rigid"
+      },
+      "weight": 4
+    },
+    {
+      "element": {
+        "element_type": "minecraft:single_pool_element",
+        "location": "cqs_armory:dwarven_caves/support_pillar/pillar_point",
+        "processors": "cqs_armory:air_only",
+        "projection": "rigid"
+      },
+      "weight": 2
+    }
+  ]
+}

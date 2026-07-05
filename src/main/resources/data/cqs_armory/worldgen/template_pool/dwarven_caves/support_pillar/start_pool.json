@@ -1,0 +1,15 @@
+{
+  "name": "cqs_armory:dwarven_caves_start_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "cqs_armory:dwarven_caves/support_pillar/pillar_base",
+        "projection": "rigid",
+        "processors": "cqs_armory:dwarven_caves_support_pillar",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

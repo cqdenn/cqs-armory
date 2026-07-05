@@ -1,0 +1,10 @@
+{
+  "processors": [
+    {
+      "processor_type": "cqs_armory:complex_foundation"
+    },
+    {
+      "processor_type": "cqs_armory:air_only"
+    }
+  ]
+}
