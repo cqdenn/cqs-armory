@@ -1,0 +1,7 @@
+{
+  "processors": [
+    {
+      "processor_type": "cqs_armory:air_only"
+    }
+  ]
+}

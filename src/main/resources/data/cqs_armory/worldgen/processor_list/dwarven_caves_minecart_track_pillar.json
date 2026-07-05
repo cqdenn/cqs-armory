@@ -1,0 +1,13 @@
+{
+  "processors": [
+    {
+      "processor_type": "irons_spellbooks:foundation",
+      "block": {
+        "Name": "minecraft:stripped_spruce_wood"
+      }
+    },
+    {
+      "processor_type": "cqs_armory:air_only"
+    }
+  ]
+}

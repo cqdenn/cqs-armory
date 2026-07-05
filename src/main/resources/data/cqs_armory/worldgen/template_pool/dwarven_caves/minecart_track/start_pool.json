@@ -7,7 +7,7 @@
       "element": {
         "location": "cqs_armory:dwarven_caves/minecart_track/minecart_start",
         "projection": "rigid",
-        "processors": "minecraft:empty",
+        "processors": "cqs_armory:air_only",
         "element_type": "minecraft:single_pool_element"
       }
     }

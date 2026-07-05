@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#minecraft:ores",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:dirt",
+    "#irons_spellbooks:spectral_hammer_mineable",
+    "minecraft:dripstone_block",
+    "minecraft:pointed_dripstone",
+    "minecraft:amethyst_block",
+    "minecraft:budding_amethyst"
+  ]
+}
