@@ -1,0 +1,16 @@
+{
+  "type": "cqs_armory:underground_template",
+  "config": {
+    "templates": [
+      "cqs_armory:dwarven_caves/features/chest",
+      "cqs_armory:dwarven_caves/features/ore_coal",
+      "cqs_armory:dwarven_caves/features/ore_copper",
+      "cqs_armory:dwarven_caves/features/ore_diamond",
+      "cqs_armory:dwarven_caves/features/ore_emerald",
+      "cqs_armory:dwarven_caves/features/ore_gold",
+      "cqs_armory:dwarven_caves/features/ore_iron",
+      "cqs_armory:dwarven_caves/features/point",
+      "cqs_armory:dwarven_caves/features/statue"
+    ]
+  }
+}

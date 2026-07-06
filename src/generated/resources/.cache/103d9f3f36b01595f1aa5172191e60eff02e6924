@@ -1,2 +1,4 @@
-// 1.21.1	2026-06-30T23:11:54.6365653	Registries
-d35b372832fbf91db13a0117bd925dad68a4a375 data/cqs_armory/worldgen/biome/dwarven_caves.json
+// 1.21.1	2026-07-05T23:12:42.2514454	Registries
+0916f6e3eeb4a209d3d547aaaf09fd973b42d52f data/cqs_armory/worldgen/biome/dwarven_caves.json
+e09fb187301f72ae97a9d7ab66f45de2447aac0a data/cqs_armory/worldgen/configured_feature/dwarven_caves_features.json
+4369b283dcd3bbd6e9657d8a61d8d5afd7427d19 data/cqs_armory/worldgen/placed_feature/dwarven_caves_features.json

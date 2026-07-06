@@ -36,7 +36,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "cqs_armory:dwarven_caves_features"
+    ],
     [
       "minecraft:spring_lava"
     ],
@@ -61,14 +63,7 @@
     "axolotls": [],
     "creature": [],
     "misc": [],
-    "monster": [
-      {
-        "type": "minecraft:skeleton",
-        "maxCount": 20,
-        "minCount": 20,
-        "weight": 100
-      }
-    ],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
     "water_creature": []
