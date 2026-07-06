@@ -83,7 +83,7 @@ public class IceArrowSpell extends AbstractSpell {
 
     @Override
     public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.ARROW_SHOOT.get());
+        return Optional.of(SoundRegistry.ARROW_SHOOT_CQ.get());
     }
 
     @Override

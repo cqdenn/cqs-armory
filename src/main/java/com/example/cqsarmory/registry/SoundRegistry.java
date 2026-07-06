@@ -28,7 +28,7 @@ public class SoundRegistry {
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_DRAW_SOUND = registerSoundEvent("arrow_draw");
     public static DeferredHolder<SoundEvent, SoundEvent> PERFECT_BLOCK_SOUND = registerSoundEvent("perfect_block");
     public static DeferredHolder<SoundEvent, SoundEvent> TANK_COATING_SOUND = registerSoundEvent("tank_coating");
-    public static DeferredHolder<SoundEvent, SoundEvent> ARROW_SHOOT = SOUND_EVENTS.register("arrow_shoot", () -> SoundEvents.ARROW_SHOOT);
+    public static DeferredHolder<SoundEvent, SoundEvent> ARROW_SHOOT_CQ = SOUND_EVENTS.register("arrow_shoot", () -> SoundEvents.ARROW_SHOOT);
 
 
 
