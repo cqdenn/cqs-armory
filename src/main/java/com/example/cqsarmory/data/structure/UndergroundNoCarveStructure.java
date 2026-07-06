@@ -188,8 +188,15 @@ public final class UndergroundNoCarveStructure extends Structure {
     }
 
     private boolean isBoxOpenEnough(StructurePoolElement element, BoundingBox box, DensityFunction finalDensity, LevelHeightAccessor heightAccessor) {
-        BoundingBox padded = box.inflatedBy(PADDING);
+        int cx = (box.minX() + box.maxX()) / 2;
+        int cy = (box.minY() + box.maxY()) / 2;
+        int cz = (box.minZ() + box.maxZ()) / 2;
+        double centerDensity = finalDensity.compute(new DensityFunction.SinglePointContext(cx, cy, cz));
+        if (centerDensity > 2.0D) { // clearly deep in solid rock, not just borderline
+            return false; // skip the expensive full grid entirely
+        }
 
+        BoundingBox padded = box.inflatedBy(PADDING);
         int[] xs = sampleCoords(padded.minX(), padded.maxX(), SAMPLE_STEP);
         int[] ys = sampleCoords(padded.minY(), padded.maxY(), SAMPLE_STEP);
         int[] zs = sampleCoords(padded.minZ(), padded.maxZ(), SAMPLE_STEP);
