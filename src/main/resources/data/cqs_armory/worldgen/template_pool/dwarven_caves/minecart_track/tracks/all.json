@@ -9,7 +9,7 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 10
+      "weight": 11
     },
     {
       "element": {
@@ -18,7 +18,7 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 5
+      "weight": 6
     },
     {
       "element": {
@@ -27,7 +27,7 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 5
+      "weight": 6
     },
     {
       "element": {
@@ -36,7 +36,7 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 3
+      "weight": 4
     },
     {
       "element": {
@@ -45,7 +45,7 @@
         "processors": "minecraft:empty",
         "projection": "rigid"
       },
-      "weight": 3
+      "weight": 4
     },
     {
       "element": {

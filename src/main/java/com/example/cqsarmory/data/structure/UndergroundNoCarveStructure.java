@@ -38,9 +38,9 @@ public final class UndergroundNoCarveStructure extends Structure {
     public static final DimensionPadding DEFAULT_DIMENSION_PADDING = DimensionPadding.ZERO;
     public static final LiquidSettings DEFAULT_LIQUID_SETTINGS = LiquidSettings.APPLY_WATERLOGGING;
     private static final int SAMPLE_STEP = 3; // spacing between sample points, in blocks
-    private static final int PADDING = 3; // blocks of buffer sampled around the piece, folded into the one check
+    private static final int PADDING = 2; // blocks of buffer sampled around the piece, folded into the one check
     // Fraction of sampled points that must read as "air" for the spot to count as open.
-    private static final double REQUIRED_OPEN_FRACTION = 0.95;
+    private static final double REQUIRED_OPEN_FRACTION = 0.75;
     private static final int MAX_ATTEMPTS = 6;
     public static final MapCodec<UndergroundNoCarveStructure> CODEC = RecordCodecBuilder.<UndergroundNoCarveStructure>mapCodec(
                     p_227640_ -> p_227640_.group(
