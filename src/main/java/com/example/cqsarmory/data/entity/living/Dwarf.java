@@ -14,10 +14,12 @@ import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.item.weapons.StaffItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -38,33 +40,37 @@ import org.w3c.dom.Attr;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class Dwarf extends NeutralWizard {
 
     public static final ResourceLocation modelResource = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "geo/dwarf.geo.json");
-    private final WizardAttackGoal bowGoal = new WizardAttackGoal(this, 1.25f, 50, 100)
+    private final WizardAttackGoal bowGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
             .setSpells(
                     List.of(CQSpellRegistry.RAPID_FIRE_SPELL.get(), CQSpellRegistry.PIERCING_ARROW_SPELL.get()),
                     List.of(CQSpellRegistry.BARRAGE_SPELL.get()),
                     List.of(),
                     List.of()
             )
+            .setSpellQuality(0.5f, 0.5f)
             .setDrinksPotions();
-    private final WizardAttackGoal meleeGoal = new WarlockAttackGoal(this, 1.25f, 50, 100)
+    private final WizardAttackGoal meleeGoal = new WarlockAttackGoal(this, 1.1f, 50, 100)
             .setSpells(
                     List.of(CQSpellRegistry.CHAIN_WHIP_SPELL.get(), CQSpellRegistry.FLANK_STEP_SPELL.get(), CQSpellRegistry.SKEWER_SPELL.get()),
                     List.of(CQSpellRegistry.SPIN_SPELL.get(), CQSpellRegistry.RIPOSTE_SPELL.get(), CQSpellRegistry.STUN_SPELL.get()),
                     List.of(),
                     List.of()
             )
+            .setSpellQuality(0.5f, 0.5f)
             .setDrinksPotions();
-    private final WizardAttackGoal magicGoal = new WizardAttackGoal(this, 1.25f, 50, 100)
+    private final WizardAttackGoal magicGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
             .setSpells(
                     List.of(SpellRegistry.FIREBOLT_SPELL.get(), SpellRegistry.BALL_LIGHTNING_SPELL.get(), SpellRegistry.ICICLE_SPELL.get()),
                     List.of(SpellRegistry.GUST_SPELL.get(), SpellRegistry.INVISIBILITY_SPELL.get()),
                     List.of(),
                     List.of(SpellRegistry.HEAL_SPELL.get())
             )
+            .setSpellQuality(0.8f, 1)
             .setDrinksPotions();
 
     private final Item meleeHelmet = Items.DIAMOND_HELMET;
@@ -82,6 +88,36 @@ public class Dwarf extends NeutralWizard {
         MELEE,
         ARCHER,
         MAGE
+    }
+
+    @Override
+    public Optional<SoundEvent> getAngerSound() {
+        return super.getAngerSound();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
+        return super.getAmbientSound();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getDeathSound() {
+        return super.getDeathSound();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource damageSource) {
+        return super.getHurtSound(damageSource);
+    }
+
+    @Override
+    protected SoundEvent getDrinkingSound(ItemStack stack) {
+        return super.getDrinkingSound(stack);
+    }
+
+    @Override
+    public SoundEvent getEatingSound(ItemStack stack) {
+        return super.getEatingSound(stack);
     }
 
     public Dwarf(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
@@ -126,7 +162,7 @@ public class Dwarf extends NeutralWizard {
 
     public static AttributeSupplier.Builder prepareAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 3.0)
+                .add(Attributes.ATTACK_DAMAGE, 14.0)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.0)
                 .add(Attributes.MAX_HEALTH, 30.0)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
