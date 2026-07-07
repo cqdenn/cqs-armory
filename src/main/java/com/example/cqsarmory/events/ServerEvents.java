@@ -9,6 +9,7 @@ import com.example.cqsarmory.data.DodgeData;
 import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
+import com.example.cqsarmory.data.entity.living.Dwarf;
 import com.example.cqsarmory.items.curios.OnBlockCoating;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
@@ -33,10 +34,31 @@ import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
-import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
+import io.redspace.ironsspellbooks.entity.mobs.*;
+import io.redspace.ironsspellbooks.entity.mobs.dead_king_boss.DeadKingBoss;
+import io.redspace.ironsspellbooks.entity.mobs.debug_wizard.DebugWizard;
+import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
+import io.redspace.ironsspellbooks.entity.mobs.ice_spider.IceSpiderEntity;
+import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
+import io.redspace.ironsspellbooks.entity.mobs.necromancer.NecromancerEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.alchemist.ApothecaristEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.archevoker.ArchevokerEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.cryomancer.CryomancerEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.cultist.CultistEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.cursed_armor_stand.CursedArmorStandEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.FireBossEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.priest.PriestEntity;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.pyromancer.PyromancerEntity;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
+import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
+import io.redspace.ironsspellbooks.entity.spells.spectral_hammer.SpectralHammer;
+import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedClaymoreEntity;
+import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedRapierEntity;
+import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedSwordEntity;
+import io.redspace.ironsspellbooks.entity.spells.void_tentacle.VoidTentacle;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
+import io.redspace.ironsspellbooks.entity.spells.wisp.WispEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
 import io.redspace.ironsspellbooks.particle.SwirlingParticle;
@@ -65,7 +87,10 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.animal.PolarBear;
 import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.entity.monster.Vindicator;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -85,6 +110,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.*;
@@ -1240,7 +1266,7 @@ public class ServerEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void flameBowSkeletons (EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof Skeleton skeleton && skeleton.level().getBiome(skeleton.blockPosition()).is(BiomesRegistry.DWARVEN_CAVES) && skeleton.getMainHandItem().getItem() instanceof BowItem) {
             ItemStack newBow = ItemRegistry.DWARVEN_STEEL_WEAPONSET.shortbow().toStack();
@@ -1276,6 +1302,11 @@ public class ServerEvents {
 
             skeleton.getPersistentData().putString("cqs_armory:spawn_biome", "cqs_armory:dwarven_caves");
         }
+    }*/
+
+    @SubscribeEvent
+    public static void onAttributeCreate(EntityAttributeCreationEvent event) {
+        event.put(EntityRegistry.DWARF.get(), Dwarf.prepareAttributes().build());
     }
 
 }

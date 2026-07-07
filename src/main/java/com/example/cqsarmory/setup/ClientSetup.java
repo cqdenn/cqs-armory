@@ -123,6 +123,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.LIGHTNING_ROD.get(), LightningRodEntityRenderer::new);
         event.registerEntityRenderer(EntityRegistry.CQ_CHAIN_LIGHTNING_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.HITSCAN_ARCANE_BEAM.get(), HitscanArcaneBeamRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.DWARF.get(), DwarfRenderer::new);
     }
 
     @SubscribeEvent

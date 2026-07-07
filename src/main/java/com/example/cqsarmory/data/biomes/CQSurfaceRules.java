@@ -152,9 +152,9 @@ public class CQSurfaceRules {
     }
 
     private static SurfaceRules.RuleSource dwarvenCavesOreVeins() {
-        double commonOreThreshold = 0.5;
-        double midOreThreshold = 0.3;
-        double rareOreThreshold = 0.2;
+        double commonOreThreshold = 0.3;
+        double midOreThreshold = 0.2;
+        double rareOreThreshold = 0.15;
         double commonDiff = (1 - commonOreThreshold) * 0.5 * 0.01;
         double midDiff = (1 - midOreThreshold) * 0.5 * 0.01;
         double rareDiff = (1 - rareOreThreshold) * 0.5 * 0.01;
