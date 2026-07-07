@@ -51,6 +51,8 @@
   "school.cqs_armory.melee": "Melee",
   "school.cqs_armory.archer": "Archer",
 
+  "entity.cqs_armory.dwarf": "Dwarf",
+
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
   "ui.cqs_armory.bleed_duration": "%s Bleed Duration",
