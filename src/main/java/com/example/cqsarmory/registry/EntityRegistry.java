@@ -32,7 +32,7 @@ public class EntityRegistry {
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "generic_mage_aoe").toString()));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<MomentumOrb>> MOMENTUM_ORB =
+    /*public static final DeferredHolder<EntityType<?>, EntityType<MomentumOrb>> MOMENTUM_ORB =
             ENTITIES.register("momentum_orb", () -> EntityType.Builder.<MomentumOrb>of(MomentumOrb::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
@@ -90,7 +90,7 @@ public class EntityRegistry {
             ENTITIES.register("root_momentum_orb", () -> EntityType.Builder.<RootMomentumOrb>of(RootMomentumOrb::new, MobCategory.MISC)
                     .sized(1f, 1f)
                     .clientTrackingRange(64)
-                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "root_momentum_orb").toString()));
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "root_momentum_orb").toString()));*/
 
     public static final DeferredHolder<EntityType<?>, EntityType<OrbExplosion>> ORB_EXPLOSION =
             ENTITIES.register("orb_explosion", () -> EntityType.Builder.<OrbExplosion>of(OrbExplosion::new, MobCategory.MISC)
