@@ -91,7 +91,7 @@ public class ClientSetup {
     @SubscribeEvent
     public static void rendererRegister(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistry.VOLCANO_EXPLOSION.get(), NoopRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.MOMENTUM_ORB.get(), MomentumOrbRenderer::new);
+        /*event.registerEntityRenderer(EntityRegistry.MOMENTUM_ORB.get(), MomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), ExplosiveMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ARROW_DAMAGE_MOMENTUM_ORB.get(), ArrowDamageMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DODGE_MOMENTUM_ORB.get(), DodgeMomentumOrbRenderer::new);
@@ -100,7 +100,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), BlackHoleMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ICE_EXPLOSIVE_MOMENTUM_ORB.get(), IceExplosionMomentumOrbRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ROOT_MOMENTUM_ORB.get(), RootMomentumOrbRenderer::new);
-        event.registerEntityRenderer(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), ChainLightningMomentumOrbRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CHAIN_LIGHTNING_MOMENTUM_ORB.get(), ChainLightningMomentumOrbRenderer::new);*/
         event.registerEntityRenderer(EntityRegistry.ORB_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ICE_ORB_EXPLOSION.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.ABILITY_ARROW.get(), AbilityArrowRenderer::new);

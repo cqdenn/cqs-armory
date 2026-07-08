@@ -226,7 +226,7 @@ public class CQtils {
         return schoolMap;
     }*/
 
-    public static MomentumOrb getRandomOrbType(Level level, Player player) {
+    /*public static MomentumOrb getRandomOrbType(Level level, Player player) {
         ExplosiveMomentumOrb explosiveMomentumOrb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
         //BlackHoleMomentumOrb blackHoleMomentumOrb = new BlackHoleMomentumOrb(EntityRegistry.BLACK_HOLE_MOMENTUM_ORB.get(), level, player);
         DodgeMomentumOrb dodgeMomentumOrb = new DodgeMomentumOrb(EntityRegistry.DODGE_MOMENTUM_ORB.get(), level, player);
@@ -238,10 +238,10 @@ public class CQtils {
         //InstaDrawMomentumOrb instaDrawMomentumOrb = new InstaDrawMomentumOrb(EntityRegistry.INSTA_DRAW_MOMENTUM_ORB.get(), level, player);
 
         List<MomentumOrb> orbs = List.of(
-                speedMomentumOrb, arrowDamageMomentumOrb/*, instaDrawMomentumOrb*/, explosiveMomentumOrb, /*blackHoleMomentumOrb,*/ dodgeMomentumOrb/*, iceExplosionMomentumOrb*//*, rootMomentumOrb*//*, chainLightningMomentumOrb*/
+                speedMomentumOrb, arrowDamageMomentumOrb*//*, instaDrawMomentumOrb*//*, explosiveMomentumOrb, *//*blackHoleMomentumOrb,*//* dodgeMomentumOrb*//*, iceExplosionMomentumOrb*//**//*, rootMomentumOrb*//**//*, chainLightningMomentumOrb*//*
         );
         return orbs.get(Utils.random.nextIntBetweenInclusive(0, orbs.size() - 1));
-    }
+    }*/
 
     public static void momentumOrbEffects(MomentumOrb momentumOrb) {
         Level level = momentumOrb.level();
