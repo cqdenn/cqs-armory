@@ -285,6 +285,8 @@
   "item.cqs_armory.overwatch.desc": "1.25x damage when 3+ blocks above your target",
   "item.cqs_armory.slipstream": "Slipstream",
   "item.cqs_armory.slipstream.desc": "Enhanced air strafing",
+  "item.cqs_armory.gooper": "Gooper",
+  "item.cqs_armory.gooper.desc": "Cancel fall damage and bounce",
   "item.cqs_armory.hunter_talisman": "Hunter Talisman",
   "item.cqs_armory.tracker_talisman": "Tracker Talisman",
   "item.cqs_armory.marksman_talisman": "Marksman Talisman",
