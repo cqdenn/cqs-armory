@@ -721,17 +721,17 @@ public class ServerEvents {
                 Vec3 startingPos = target == null ? player.getEyePosition().add(0, 1, 0) : target.getEyePosition().add(startX * Utils.random.nextFloat(), 2, startZ * Utils.random.nextFloat());
 
 
-                int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
+                /*int orbsSpawned = (int) player.getAttribute(AttributeRegistry.MOMENTUM_ORBS_SPAWNED).getValue();
                 for (int i = 0; i < orbsSpawned; i++) {
                     if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) break;
                     MomentumOrb orb = CQtils.getRandomOrbType(level, player);
-                    /*if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
+                    *//*if (ItemRegistry.BLASTER.get().isEquippedBy(player)) {
                         orb = new ExplosiveMomentumOrb(EntityRegistry.EXPLOSIVE_MOMENTUM_ORB.get(), level, player);
-                    }*/
+                    }*//*
                     CQtils.findOrbLoc(startingPos, orb, level);
                     level.addFreshEntity(orb);
                     if (!level.isClientSide) AbilityData.get(player).momentumOrbsOwned++;
-                }
+                }*/
 
             } else {
 
