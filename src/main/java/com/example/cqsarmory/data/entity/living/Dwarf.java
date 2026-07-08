@@ -5,6 +5,7 @@ import com.example.cqsarmory.items.MagicStaffItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -12,9 +13,11 @@ import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.Abstra
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.NeutralWizard;
 import io.redspace.ironsspellbooks.entity.mobs.goals.*;
 import io.redspace.ironsspellbooks.item.weapons.StaffItem;
+import net.minecraft.Util;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
@@ -23,10 +26,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FloatGoal;
-import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.world.entity.ai.goal.RangedBowAttackGoal;
+import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.goal.target.ResetUniversalAngerTargetGoal;
@@ -39,6 +39,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import org.w3c.dom.Attr;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,36 +91,6 @@ public class Dwarf extends NeutralWizard {
         MAGE
     }
 
-    @Override
-    public Optional<SoundEvent> getAngerSound() {
-        return super.getAngerSound();
-    }
-
-    @Override
-    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
-        return super.getAmbientSound();
-    }
-
-    @Override
-    protected @org.jetbrains.annotations.Nullable SoundEvent getDeathSound() {
-        return super.getDeathSound();
-    }
-
-    @Override
-    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource damageSource) {
-        return super.getHurtSound(damageSource);
-    }
-
-    @Override
-    protected SoundEvent getDrinkingSound(ItemStack stack) {
-        return super.getDrinkingSound(stack);
-    }
-
-    @Override
-    public SoundEvent getEatingSound(ItemStack stack) {
-        return super.getEatingSound(stack);
-    }
-
     public Dwarf(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.reassessWeaponGoal();
@@ -130,6 +101,47 @@ public class Dwarf extends NeutralWizard {
         this(EntityRegistry.DWARF.get(), level);
         this.type = type;
         this.reassessWeaponGoal();
+    }
+
+    @Override
+    public Optional<SoundEvent> getAngerSound() {
+        return Optional.of(SoundRegistry.DWARF_ANGER_SOUND.get());
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getAmbientSound() {
+        List<SoundEvent> sounds = new ArrayList<>();
+        sounds.add(SoundRegistry.DWARF_DIGGY_HOLE.get());
+        return sounds.get(Utils.random.nextIntBetweenInclusive(0, sounds.size() - 1));
+    }
+
+    @Override
+    public int getAmbientSoundInterval() {
+        return 400;
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getDeathSound() {
+        return SoundRegistry.DWARF_AW_MAN.get();
+    }
+
+    @Override
+    protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource damageSource) {
+        return SoundRegistry.DWARF_HURT.get();
+    }
+
+    @Override
+    protected SoundEvent getDrinkingSound(ItemStack stack) {
+        return SoundRegistry.DWARF_DRINK.get();
+    }
+
+    public SoundEvent getDrinkingSoundPublic() {
+        return SoundRegistry.DWARF_DRINK.get();
+    }
+
+    @Override
+    public SoundEvent getEatingSound(ItemStack stack) {
+        return SoundRegistry.DWARF_EAT.get();
     }
 
     public void reassessWeaponGoal() {

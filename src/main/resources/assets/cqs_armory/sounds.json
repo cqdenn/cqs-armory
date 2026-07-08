@@ -53,5 +53,45 @@
     "sounds": [
       "cqs_armory:tank_coating"
     ]
+  },
+  "dwarf_anger": {
+    "sounds": [
+      "cqs_armory:dwarf_anger"
+    ]
+  },
+  "dwarf_diggy_hole": {
+    "sounds": [
+      "cqs_armory:dwarf_diggy_hole"
+    ]
+  },
+  "dwarf_idk": {
+    "sounds": [
+      "cqs_armory:dwarf_idk"
+    ]
+  },
+  "dwarf_wah": {
+    "sounds": [
+      "cqs_armory:dwarf_wah"
+    ]
+  },
+  "dwarf_aw_man": {
+    "sounds": [
+      "cqs_armory:dwarf_aw_man"
+    ]
+  },
+  "dwarf_hurt": {
+    "sounds": [
+      "cqs_armory:dwarf_hurt"
+    ]
+  },
+  "dwarf_eat": {
+    "sounds": [
+      "cqs_armory:dwarf_eat"
+    ]
+  },
+  "dwarf_drink": {
+    "sounds": [
+      "cqs_armory:dwarf_drink"
+    ]
   }
 }

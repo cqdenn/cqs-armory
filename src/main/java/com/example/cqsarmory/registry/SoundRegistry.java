@@ -28,6 +28,14 @@ public class SoundRegistry {
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_DRAW_SOUND = registerSoundEvent("arrow_draw");
     public static DeferredHolder<SoundEvent, SoundEvent> PERFECT_BLOCK_SOUND = registerSoundEvent("perfect_block");
     public static DeferredHolder<SoundEvent, SoundEvent> TANK_COATING_SOUND = registerSoundEvent("tank_coating");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_ANGER_SOUND = registerSoundEvent("dwarf_anger");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_DIGGY_HOLE = registerSoundEvent("dwarf_diggy_hole");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_IDK = registerSoundEvent("dwarf_idk");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_WAH = registerSoundEvent("dwarf_wah");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_AW_MAN = registerSoundEvent("dwarf_aw_man");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_HURT = registerSoundEvent("dwarf_hurt");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_EAT = registerSoundEvent("dwarf_eat");
+    public static DeferredHolder<SoundEvent, SoundEvent> DWARF_DRINK = registerSoundEvent("dwarf_drink");
     public static DeferredHolder<SoundEvent, SoundEvent> ARROW_SHOOT_CQ = SOUND_EVENTS.register("arrow_shoot", () -> SoundEvents.ARROW_SHOOT);
 
 
