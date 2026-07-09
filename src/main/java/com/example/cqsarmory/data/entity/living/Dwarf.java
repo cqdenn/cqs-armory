@@ -48,8 +48,8 @@ public class Dwarf extends NeutralWizard {
     public static final ResourceLocation modelResource = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "geo/dwarf.geo.json");
     private final WizardAttackGoal bowGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
             .setSpells(
-                    List.of(CQSpellRegistry.RAPID_FIRE_SPELL.get(), CQSpellRegistry.PIERCING_ARROW_SPELL.get()),
-                    List.of(CQSpellRegistry.BARRAGE_SPELL.get()),
+                    List.of(CQSpellRegistry.RAPID_FIRE_SPELL.get(), CQSpellRegistry.PIERCING_ARROW_SPELL.get(), CQSpellRegistry.BARRAGE_SPELL.get()),
+                    List.of(),
                     List.of(),
                     List.of()
             )
@@ -79,7 +79,7 @@ public class Dwarf extends NeutralWizard {
     private final Item mageHelmet = io.redspace.ironsspellbooks.registries.ItemRegistry.NETHERITE_MAGE_HELMET.get();
 
     private final Item meleeHandItem = Items.IRON_PICKAXE;
-    private final Item archerHandItem = ItemRegistry.DWARVEN_STEEL_WEAPONSET.longbow().asItem();
+    private final Item archerHandItem = Items.BOW;
     private final Item mageHandItem = io.redspace.ironsspellbooks.registries.ItemRegistry.GRAYBEARD_STAFF.get();
 
     @Nullable
