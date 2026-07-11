@@ -1,8 +1,10 @@
 package com.example.cqsarmory.network;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.Tags;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -17,6 +19,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -46,9 +49,10 @@ public class doOnSwingEffectPacket implements CustomPacketPayload {
     public static void handle(doOnSwingEffectPacket packet, IPayloadContext context) {
         context.enqueueWork(() -> {
             Player player = context.player();
-            var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
-            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && player.getAttackStrengthScale(0) >= 0.8) {
-                coating.doOnSwingEffect(player, (float) (player.getAttackStrengthScale(0) * player.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+            for (ItemStack stack : CQtils.getPlayerCurioStacks(player, "coating")) {
+                if (stack.getItem() instanceof OnSwingCoating coating && player.getAttackStrengthScale(0) >= 0.8) {
+                    coating.doOnSwingEffect(player, (float) (player.getAttackStrengthScale(0) * player.getAttributeValue(Attributes.ATTACK_DAMAGE)));
+                }
             }
         });
     }
