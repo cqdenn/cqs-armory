@@ -15,6 +15,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.jetbrains.annotations.Nullable;
@@ -97,6 +98,11 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
 
     @Override
     public ItemAttributeModifiers getDefaultAttributeModifiers() {
+        return this.defaultModifiers.get();
+    }
+
+    @Override
+    public ItemAttributeModifiers getDefaultAttributeModifiers(ItemStack stack) {
         return this.defaultModifiers.get();
     }
 

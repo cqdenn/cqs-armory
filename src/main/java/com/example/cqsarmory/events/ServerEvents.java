@@ -120,6 +120,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Vector3f;
+import software.bernie.geckolib.constant.DefaultAnimations;
 
 import java.util.*;
 import java.util.function.Function;
@@ -496,7 +497,8 @@ public class ServerEvents {
         Item item = livingEntity.getUseItem().getItem();
 
         if (item instanceof ShieldItem && livingEntity instanceof Player player) {
-            if (AbilityData.get(player).currentShieldDamage > 0 && !AbilityData.get(player).cancelNextShieldDropCooldown) CQtils.disableShield(player, 20, false);
+            if (AbilityData.get(player).currentShieldDamage > 0 && !AbilityData.get(player).cancelNextShieldDropCooldown)
+                CQtils.disableShield(player, 20, false);
             AbilityData.get(player).currentShieldDamage = 0;
             AbilityData.get(player).cancelNextShieldDropCooldown = false;
         }
@@ -511,7 +513,7 @@ public class ServerEvents {
         float damage = event.getBlockedDamage();
         if (event.getOriginalBlock()) {
             Item item = livingEntity.getUseItem().getItem();
-            boolean isPerfect = item.getUseDuration(livingEntity.getUseItem(), livingEntity) - livingEntity.getUseItemRemainingTicks() <=5;
+            boolean isPerfect = item.getUseDuration(livingEntity.getUseItem(), livingEntity) - livingEntity.getUseItemRemainingTicks() <= 5;
             if (isPerfect) {
                 livingEntity.level().playSound(null, livingEntity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.PERFECT_BLOCK_SOUND.get(), SoundSource.PLAYERS, 2f, 1);
                 Vec3 forward = livingEntity.getForward();
@@ -525,8 +527,12 @@ public class ServerEvents {
                     AbilityData.get(livingEntity).currentShieldDamage = 0;
                 }
             }
-            if (livingEntity instanceof Player player && CQtils.getPlayerCurioStack(player, "coating").getItem() instanceof OnBlockCoating coating) {
-                coating.doOnBlockEffect(player, event.getDamageSource().getDirectEntity(), event.getDamageSource().getEntity(), event.getBlockedDamage(), item.getUseDuration(livingEntity.getUseItem(), player) - player.getUseItemRemainingTicks(), isPerfect);
+            if (livingEntity instanceof Player player) {
+                for (ItemStack stack : CQtils.getPlayerCurioStacks(player, "coating")) {
+                    if (stack.getItem() instanceof OnBlockCoating coating) {
+                        coating.doOnBlockEffect(player, event.getDamageSource().getDirectEntity(), event.getDamageSource().getEntity(), event.getBlockedDamage(), item.getUseDuration(livingEntity.getUseItem(), player) - player.getUseItemRemainingTicks(), isPerfect);
+                    }
+                }
             }
         }
 
@@ -1053,18 +1059,22 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onHitEffects(LivingDamageEvent.Post event) {
         Entity entity = event.getSource().getEntity();
-        Entity directEntity = event.getSource().getDirectEntity();
         DamageSource source = event.getSource();
         float damage = event.getNewDamage();
         LivingEntity target = event.getEntity();
         if (entity instanceof Player player) {
-            var coatingSlot = CQtils.getPlayerCurioStack(player, "coating");
+
+            for (ItemStack stack : CQtils.getPlayerCurioStacks(player, "coating")) {
+                if (stack.getItem() instanceof OnHitCoating coating && source.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+                    coating.doOnHitEffect(player, target, damage);
+                }
+                if (stack.getItem() instanceof OnSwingCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
+                    coating.doOnSwingEffect(player, damage);
+                }
+            }
+
             var brandSlot = CQtils.getPlayerCurioStack(player, "brand");
-            if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnHitCoating coating && source.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
-                coating.doOnHitEffect(player, target, damage);
-            } else if (!coatingSlot.isEmpty() && coatingSlot.getItem() instanceof OnSwingCoating coating && source.is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK)) {
-                coating.doOnSwingEffect(player, damage);
-            } else if (!brandSlot.isEmpty() && brandSlot.getItem() instanceof OnHitBrand brand) {
+            if (!brandSlot.isEmpty() && brandSlot.getItem() instanceof OnHitBrand brand) {
 
                 final List<ResourceKey<DamageType>> spellTypes = List.of(
                         ISSDamageTypes.FIRE_MAGIC,
@@ -1221,7 +1231,7 @@ public class ServerEvents {
     }*/
 
     @SubscribeEvent
-    public static void summonSpellCooldowns (ModifyDefaultConfigValuesEvent event) {
+    public static void summonSpellCooldowns(ModifyDefaultConfigValuesEvent event) {
         SpellRegistry.REGISTRY.getHolder(event.getSpell().getSpellResource()).ifPresent(holder -> {
             if (holder.is(Tags.AbstractSpells.SUMMONING_SPELLS)) {
                 event.setDefaultValue(SpellConfigParameter.COOLDOWN_IN_SECONDS, 10.0);
@@ -1230,7 +1240,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void summonDamageCap (LivingIncomingDamageEvent event) {
+    public static void summonDamageCap(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
         if (target instanceof IMagicSummon summon) {
             event.setAmount(Math.min(event.getAmount(), target.getMaxHealth() * 0.25f));
@@ -1238,7 +1248,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void vanillaShieldAttributes (ModifyDefaultComponentsEvent event) {
+    public static void vanillaShieldAttributes(ModifyDefaultComponentsEvent event) {
         var modifiers = ItemAttributeModifiers.builder()
                 .add(
                         AttributeRegistry.BLOCK_STRENGTH,
@@ -1256,7 +1266,7 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void huntersMarkBoosterDamage (LivingDamageEvent.Pre event) {
+    public static void huntersMarkBoosterDamage(LivingDamageEvent.Pre event) {
         Entity causingEntity = event.getSource().getEntity();
         if (causingEntity instanceof Player player && ItemRegistry.HUNTERS_MARK.get().isEquippedBy(player) && event.getSource().getDirectEntity() instanceof AbstractArrow) {
             float damagePerStack = 0.1f;

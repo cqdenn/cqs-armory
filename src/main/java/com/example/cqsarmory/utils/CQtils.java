@@ -46,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
+import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -350,5 +351,20 @@ public class CQtils {
 
     public static ItemStack getPlayerCurioStack(@NotNull Player player, String slot) {
         return CuriosApi.getCuriosInventory(player).flatMap(curios -> curios.findCurio(slot, 0).map(SlotResult::stack)).orElse(ItemStack.EMPTY);
+    }
+
+    public static List<ItemStack> getPlayerCurioStacks(@NotNull Player player, String slot) {
+        List<ItemStack> stacks = new ArrayList<>();
+        CuriosApi.getCuriosInventory(player).ifPresent(handler ->
+                handler.getStacksHandler(slot).ifPresent(stacksHandler -> {
+                    IDynamicStackHandler stackHandler = stacksHandler.getStacks();
+                    for (int i = 0; i < stackHandler.getSlots(); i++) {
+                        ItemStack stack = stackHandler.getStackInSlot(i);
+                        if (!stack.isEmpty()) {
+                            stacks.add(stack);
+                        }
+                    }
+                }));
+        return stacks;
     }
 }
