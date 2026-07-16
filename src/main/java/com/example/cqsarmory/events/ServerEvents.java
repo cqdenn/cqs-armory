@@ -22,6 +22,7 @@ import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.ModifyDefaultConfigValuesEvent;
 import io.redspace.ironsspellbooks.api.config.SpellConfigParameter;
+import io.redspace.ironsspellbooks.api.entity.IMagicEntity;
 import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -446,11 +447,14 @@ public class ServerEvents {
         LivingEntity entity = event.getEntity();
         DamageSource damage = event.getSource();
         MagicData magicData = MagicData.getPlayerMagicData(entity);
-        int spellLevel = magicData.getCastingSpellLevel();
         var damageSource = CQSpellRegistry.RIPOSTE_SPELL.get().getDamageSource(entity);
 
+        if (entity instanceof IMagicEntity magic) {
+            magicData = magic.getMagicData();
+        }
         if (magicData.isCasting() && Objects.equals(magicData.getCastingSpellId(), "cqs_armory:riposte_spell")) {
             if (damage.getDirectEntity() instanceof LivingEntity livingEntity) {
+                int spellLevel = magicData.getCastingSpellLevel();
                 livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 40 * spellLevel, 100, false, false, true));
                 livingEntity.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 4);
             } else if (damage.getEntity() instanceof Projectile projectile) {
