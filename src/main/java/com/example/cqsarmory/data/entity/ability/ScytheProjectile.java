@@ -29,19 +29,19 @@ public class ScytheProjectile extends AbilityArrow {
     private static final EntityDataAccessor<ItemStack> DATA_ITEM = SynchedEntityData.defineId(ScytheProjectile.class, EntityDataSerializers.ITEM_STACK);
     private double gravity;
     private double speed;
-    public int spellLevel;
+    public int duration;
     public int lifetime;
 
     public ScytheProjectile(EntityType<? extends AbilityArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
-    public ScytheProjectile(Level level, ItemStack itemStack, double gravity, double speed, int spellLevel) {
+    public ScytheProjectile(Level level, ItemStack itemStack, double gravity, double speed, int duration) {
         this(EntityRegistry.SCYTHE_PROJECTILE.get(), level);
         setThrownItem(itemStack);
         setGravity(gravity);
         setSpeed(speed);
-        this.spellLevel = spellLevel;
+        this.duration = duration;
         this.lifetime = 0;
     }
 
@@ -160,7 +160,7 @@ public class ScytheProjectile extends AbilityArrow {
             if (!this.level().isClientSide) {
                 target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage);
                 if (target instanceof LivingEntity living && getOwner() instanceof LivingEntity owner) {
-                    living.addEffect(new MobEffectInstance(MobEffectRegistry.CHAINED, getDuration(this.spellLevel, owner), 0, false, false, true));
+                    living.addEffect(new MobEffectInstance(MobEffectRegistry.CHAINED, duration, 0, false, false, true));
                 }
             }
             discard();

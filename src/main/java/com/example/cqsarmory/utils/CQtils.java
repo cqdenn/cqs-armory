@@ -6,6 +6,7 @@ import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -23,6 +24,7 @@ import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
+import io.redspace.skillcasting.data.CastContext;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -117,6 +119,14 @@ public class CQtils {
         AbilityData.get(player).setMomentum(newMomentum);
         PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncMomentumPacket((int) newMomentum));
         AbilityData.get(player).combatEndMomentum = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
+    }
+
+    public static int getEffectiveBowCastTime(CastContext castContext) {
+        double entityCastTimeModifier = 1;
+        if (castContext.asEntityCaster() instanceof LivingEntity living && living.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
+            entityCastTimeModifier = living.getAttributeValue(BowAttributes.DRAW_SPEED);
+        }
+        return Math.round(castContext.skill().value().getCastTimeTicks() / (float) entityCastTimeModifier);
     }
 
     public static void doGenericMageAOE(LivingEntity owner, Entity directEntity, Vec3 from, float radius, float baseDamage) {

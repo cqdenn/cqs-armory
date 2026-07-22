@@ -12,23 +12,29 @@ import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastSource;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.data.recast.RecastConfig;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -46,14 +52,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class BarrageSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "barrage_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -97,16 +96,16 @@ public class BarrageSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.ARROW_VOLLEY_PREPARE.get());
+    public Optional<PlayableSound> getCastStartSound(CastContext castContext) {
+        return PlayableSound.standard(SoundRegistry.ARROW_VOLLEY_PREPARE.get()).toOpt();
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
         return Optional.empty();
     }
 
@@ -116,40 +115,36 @@ public class BarrageSpell extends AbstractSpell {
     }
 
     @Override
-    public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
-        return spellLevel;
+    public Optional<RecastConfig> provideRecastConfig(CastContext castContext) {
+        return Optional.of(new RecastConfig(castContext.getSkillLevel(), 80));
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 20),
-                Component.literal("15 Projectiles"),
+                Component.literal(castContext.getOrDefault(SkillcastingComponentTypes.PROJECTILE_COUNT, 0) + " Projectiles"),
                 Component.literal("Pushes you backwards"),
-                Component.translatable("ui.irons_spellbooks.recast_count", getRecastCount(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.recast_count", castContext.find(SkillcastingComponentTypes.RECAST_CONFIG).map(RecastConfig::totalCasts).orElse(0))
         );
     }
 
     @Override
-    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        double entityCastTimeModifier = 1;
-        if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
-            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
-        }
-        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.CAST_TIME, CQtils.getEffectiveBowCastTime(castContext));
+        castContext.set(SkillcastingComponentTypes.PROJECTILE_COUNT, 15);
     }
 
     @Override
-    public void onCast(Level world, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
-            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 80, castSource, null), playerMagicData);
-        }
-        int arrowCount = 15;
+    public void onCast(ServerLevel world, CastContext castContext) {
+        int arrowCount = castContext.getOrDefault(SkillcastingComponentTypes.PROJECTILE_COUNT, 0);
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
         for (int i=0;i<arrowCount;i++) {
             Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
             float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * 0.2f;
             AbilityArrow projectile = new AbilityArrow(world);
-            ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+            ItemStack wepaonItem = castContext.getCastSource().isFromSlot(EquipmentSlot.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
             Holder.Reference<Enchantment> flameHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FLAME);
             if (wepaonItem.getEnchantmentLevel(flameHolder) > 0) {
                 projectile.igniteForSeconds(100);
@@ -199,8 +194,6 @@ public class BarrageSpell extends AbstractSpell {
 
         entity.push(entity.getForward().scale(-1).multiply(1, 0, 1).add(0, Math.max(entity.getForward().scale(-1).y, 0.3), 0));
         entity.hurtMarked = true;
-
-        super.onCast(world, spellLevel, entity, castSource, playerMagicData);
     }
 
     public void shootFromRandom(Vec3 rotation, float inaccuracy, AbilityArrow arrow) {

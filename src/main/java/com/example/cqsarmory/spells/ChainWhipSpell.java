@@ -8,7 +8,6 @@ import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.*;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
@@ -17,6 +16,11 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastSource;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -26,6 +30,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -39,14 +44,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class ChainWhipSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "chain_whip_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -84,8 +82,8 @@ public class ChainWhipSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.THROW_DAGGER.get());
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.THROW_DAGGER.get()));
     }
 
     @Override
@@ -99,19 +97,24 @@ public class ChainWhipSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 50),
-                Component.translatable("ui.cqs_armory.chained_duration", getDuration(spellLevel, caster)/20 + "s")
+                Component.translatable("ui.cqs_armory.chained_duration", getDuration(castContext)/20 + "s")
         );
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        if (playerMagicData != null) {
-            ItemStack item = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
-            ScytheProjectile scythe = new ScytheProjectile(level, item, 0, 1, spellLevel);
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.EFFECT_DURATION_TICKS, 60 * castContext.getSkillLevel());
+    }
+
+    @Override
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (castContext.asEntityCaster() instanceof LivingEntity entity) {
+            ItemStack item = castContext.getCastSource().isFromSlot(EquipmentSlot.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();;
+            ScytheProjectile scythe = new ScytheProjectile(level, item, 0, 1, getDuration(castContext));
             scythe.setBaseDamage(entity.getAttributeValue(Attributes.ATTACK_DAMAGE) * 0.5);
             scythe.setOwner(entity);
             scythe.setNoGravity(false);
@@ -132,14 +135,8 @@ public class ChainWhipSpell extends AbstractSpell {
         }
     }
 
-
-
-    public static float getRange(int level, LivingEntity caster) {
-        return 5 * level;
-    }
-
-    public static int getDuration(int level, LivingEntity caster) {
-        return 60 * level;
+    public static int getDuration(CastContext castContext) {
+        return castContext.getOrDefault(SkillcastingComponentTypes.EFFECT_DURATION_TICKS, 0);
     }
 
     public static float getDamage(LivingEntity caster) {

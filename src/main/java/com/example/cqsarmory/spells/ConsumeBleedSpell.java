@@ -24,6 +24,15 @@ import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastSource;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.data.cast.PositionAnchor;
+import io.redspace.skillcasting.data.component.TargetedEntitiesData;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
+import io.redspace.skillcasting.util.RaycastBuilder;
+import io.redspace.skillcasting.util.SkillcastingUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -46,13 +55,7 @@ import net.minecraft.world.phys.EntityHitResult;
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class ConsumeBleedSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "consume_bleed_spell");
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -90,23 +93,23 @@ public class ConsumeBleedSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
         return Optional.empty();
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
+    public Optional<PlayableSound> getCastStartSound(CastContext castContext) {
         return Optional.empty();
     }
 
     @Override
     public AnimationHolder getCastStartAnimation() {
-        return new AnimationHolder(ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "simple_sword_stab_alternate"), true);
+        return new AnimationHolder(SpellAnimations.MOB_ANIMATION_RESOURCE, ResourceLocation.fromNamespaceAndPath(IronsSpellbooks.MODID, "simple_sword_stab_alternate"), true);
     }
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
     @Override
@@ -115,22 +118,23 @@ public class ConsumeBleedSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.literal("Consumes bleed stacks for the damage it would deal")
         );
     }
 
     @Override
-    public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        var target = Utils.raycastForEntity(entity.level(), entity, 2, true, 0.1f);
-        var distance = Utils.raycastForEntity(entity.level(), entity, 64, true, 0.1f);
+    public boolean checkPreCastConditions(CastContext castContext) {
+        var target = RaycastBuilder.fromCast(castContext, PositionAnchor.CASTING_POSITION, 2).checkForBlocks(true).bbInflation(0.1f).build();
+        var distance = RaycastBuilder.fromCast(castContext, PositionAnchor.CASTING_POSITION, 64).checkForBlocks(true).bbInflation(0.1f).build();
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return false;
         if (target instanceof EntityHitResult entityHitResult && !entity.level().isClientSide) {
             if (entityHitResult.getEntity() instanceof LivingEntity living && DamageData.get(living).bleedStacks.containsKey(entity) && DamageData.get(living).bleedStacks.get(entity) > 0) {
                 if (entity instanceof ServerPlayer serverPlayer) {
                     serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.irons_spellbooks.spell_target_success", living.getDisplayName().getString(), this.getDisplayName(serverPlayer)).withStyle(ChatFormatting.GREEN)));
                 }
-                playerMagicData.setAdditionalCastData(new TargetEntityCastData(living));
+                castContext.set(SkillcastingComponentTypes.TARGETED_ENTITIES, new TargetedEntitiesData(living));
                 return true;
             }
         }
@@ -145,35 +149,36 @@ public class ConsumeBleedSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+    }
 
-        if (playerMagicData.getAdditionalCastData() instanceof TargetEntityCastData targetingData) {
-            var target = targetingData.getTarget((ServerLevel) level);
-            if (target != null) {
-                MobEffectInstance effectInstance = target.getEffect(MobEffectRegistry.BLEED);
-                if (DamageData.get(target).bleedStacks.get(entity) == null) return;
-                int stacks = DamageData.get(target).bleedStacks.get(entity);
-                int seconds = (int) Math.ceil(effectInstance.getDuration() / 20);
-                float damage = BleedEffect.DAMAGE_PER_STACK * stacks * seconds;
-                float explosionRadius = 5;
-                MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, true);
-                MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, false);
-                MagicManager.spawnParticles(level, new BlastwaveParticleOptions(SchoolRegistry.BLOOD.get().getTargetingColor(), explosionRadius), target.getX(), target.getBoundingBox().getCenter().y, target.getZ(), 1, 0, 0, 0, 0, true);
-                var entities = level.getEntities(null, target.getBoundingBox().inflate(explosionRadius));
-                for (Entity victim : entities) {
-                    double distanceSqr = victim.distanceToSqr(target.position());
-                    if (victim != entity && victim.canBeHitByProjectile() && distanceSqr < explosionRadius * explosionRadius && Utils.hasLineOfSight(level, target.getBoundingBox().getCenter(), victim.getBoundingBox().getCenter(), true)) {
-                        float p = (float) (distanceSqr / (explosionRadius * explosionRadius));
-                        p = 1 - p * p * p;
-                        victim.hurt(new DamageSource(entity.level().damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get(), null, entity), damage * p);
-                    }
+    @Override
+    public void onCast(ServerLevel level, CastContext castContext) {
+        LivingEntity target = SkillcastingUtils.getTargetedLivingEntity(level, castContext);
+        if (target != null && castContext.asEntityCaster() instanceof LivingEntity entity) {
+            MobEffectInstance effectInstance = target.getEffect(MobEffectRegistry.BLEED);
+            if (DamageData.get(target).bleedStacks.get(entity) == null) return;
+            int stacks = DamageData.get(target).bleedStacks.get(entity);
+            int seconds = effectInstance.getDuration() / 20;
+            float damage = BleedEffect.DAMAGE_PER_STACK * stacks * seconds;
+            float explosionRadius = 5;
+            MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, true);
+            MagicManager.spawnParticles(level, ParticleHelper.BLOOD, target.getX(), target.getY() + .25f, target.getZ(), 100, .03, .4, .03, .4, false);
+            MagicManager.spawnParticles(level, new BlastwaveParticleOptions(SchoolRegistry.BLOOD.get().getTargetingColor(), explosionRadius), target.getX(), target.getBoundingBox().getCenter().y, target.getZ(), 1, 0, 0, 0, 0, true);
+            var entities = level.getEntities(null, target.getBoundingBox().inflate(explosionRadius));
+            for (Entity victim : entities) {
+                double distanceSqr = victim.distanceToSqr(target.position());
+                if (victim != entity && victim.canBeHitByProjectile() && distanceSqr < explosionRadius * explosionRadius && Utils.hasLineOfSight(level, target.getBoundingBox().getCenter(), victim.getBoundingBox().getCenter(), true)) {
+                    float p = (float) (distanceSqr / (explosionRadius * explosionRadius));
+                    p = 1 - p * p * p;
+                    victim.hurt(new DamageSource(entity.level().damageSources().damageTypes.getHolder(DamageTypes.BLEEDING).get(), null, entity), damage * p);
                 }
-                CameraShakeManager.addCameraShake(new CameraShakeData(10, target.position(), 20));
-                target.removeEffect(MobEffectRegistry.BLEED);
-                level.playSound(null, target.blockPosition(), SoundRegistry.BLOOD_EXPLOSION.get(), SoundSource.PLAYERS, 3, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
-
             }
+            CameraShakeManager.addCameraShake(new CameraShakeData(level, 10, target.position(), 10, 10));
+            target.removeEffect(MobEffectRegistry.BLEED);
+            level.playSound(null, target.blockPosition(), SoundRegistry.BLOOD_EXPLOSION.get(), SoundSource.PLAYERS, 3, Utils.random.nextIntBetweenInclusive(8, 12) * .1f);
+
         }
     }
 
