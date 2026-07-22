@@ -118,6 +118,7 @@ public class CqsArmory
         CQParticleRegistry.register(modEventBus);
         CQFeatureRegistry.register(modEventBus);
         CQStructureProcessorType.register(modEventBus);
+        CQSkillComponents.register(modEventBus);
         CQStructureType.STRUCTURE_TYPES.register(modEventBus);
 
 

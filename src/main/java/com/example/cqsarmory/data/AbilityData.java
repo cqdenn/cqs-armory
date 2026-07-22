@@ -1,7 +1,6 @@
 package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
-import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.world.entity.Entity;
@@ -36,6 +35,7 @@ public class AbilityData {
     public boolean firstBlizzardTick;
     public float focusArrowDamage;
     public float huntersMarkConsecutiveArrowsHit;
+    public float crossfireChargeTime;
 
     public float getRage() {
         return rage;
