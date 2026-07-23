@@ -2,7 +2,6 @@ package com.example.cqsarmory.gui.overlays;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.registry.AttributeRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;

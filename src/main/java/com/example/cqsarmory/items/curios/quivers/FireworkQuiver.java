@@ -3,26 +3,21 @@ package com.example.cqsarmory.items.curios.quivers;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.data.entity.ability.FireworkProjectile;
 import com.example.cqsarmory.items.curios.QuiverItem;
-import io.redspace.bowattributes.registry.BowAttributes;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.entity.spells.ExtendedFireworkRocket;
+import io.redspace.skillcasting.data.skill.SkillData;
 import it.unimi.dsi.fastutil.ints.IntImmutableList;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.FireworkExplosion;
 import net.minecraft.world.item.component.Fireworks;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Random;
 
 public class FireworkQuiver extends QuiverItem {
-    public FireworkQuiver(Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolders) {
+    public FireworkQuiver(Properties properties, SkillData... spellDataRegistryHolders) {
         super(properties, spellDataRegistryHolders);
     }
 

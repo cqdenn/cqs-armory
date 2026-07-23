@@ -1,3 +1,4 @@
+/*
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
@@ -110,3 +111,4 @@ public class FocusSpell extends AbstractSpell {
         super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }
+*/

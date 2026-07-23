@@ -1,10 +1,6 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import io.redspace.bowattributes.BowAttributeLib;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
-import io.redspace.ironsspellbooks.api.attribute.MagicPercentAttribute;
-import io.redspace.ironsspellbooks.api.attribute.MagicRangedAttribute;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -68,11 +64,11 @@ public class AttributeRegistry {
     }
 
     private static DeferredHolder<Attribute, Attribute> newResistanceAttribute(String id) {
-        return (DeferredHolder<Attribute, Attribute>) ATTRIBUTES.register(id + "_spell_resist", () -> (new MagicPercentAttribute("attribute.cqs_armory." + id + "_spell_resist", 1.0D, -100, 100).setSyncable(true)));
+        return (DeferredHolder<Attribute, Attribute>) ATTRIBUTES.register(id + "_spell_resist", () -> (new PercentageAttribute("attribute.cqs_armory." + id + "_spell_resist", 1.0D, -100, 100).setSyncable(true)));
     }
 
     private static DeferredHolder<Attribute, Attribute> newSkillAttribute(String id) {
-        return ATTRIBUTES.register(id + "_spell_power", () -> (new MagicPercentAttribute("attribute.cqs_armory." + id + "_spell_power", 1.0D, -100, 100).setSyncable(true)));
+        return ATTRIBUTES.register(id + "_spell_power", () -> (new PercentageAttribute("attribute.cqs_armory." + id + "_spell_power", 1.0D, -100, 100).setSyncable(true)));
     }
 
 }

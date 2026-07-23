@@ -1,40 +1,28 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.DamageData;
-import com.example.cqsarmory.data.effects.BleedEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
-import com.example.cqsarmory.registry.DamageTypes;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.CameraShakeData;
-import io.redspace.ironsspellbooks.api.util.CameraShakeManager;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.capabilities.magic.TargetEntityCastData;
-import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.data.cast.PositionAnchor;
+import io.redspace.skillcasting.data.component.TargetedEntitiesData;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
+import io.redspace.skillcasting.util.RaycastBuilder;
+import io.redspace.skillcasting.util.SkillcastingUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
@@ -42,13 +30,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@AutoSpellConfig
 public class FlankStepSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "flank_step_spell");
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -91,31 +73,32 @@ public class FlankStepSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.BLOOD_STEP.get());
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.BLOOD_STEP.get()));
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.literal("Teleports you behind your target"),
                 Component.translatable("ui.irons_spellbooks.distance", getRange())
         );
     }
 
-    public int getRange () {
+    public int getRange() {
         return 20;
     }
 
     @Override
-    public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        var target = Utils.raycastForEntity(entity.level(), entity, getRange(), true, 0.1f);
+    public boolean checkPreCastConditions(CastContext castContext) {
+        var target = RaycastBuilder.fromCast(castContext, PositionAnchor.CASTING_POSITION, getRange()).checkForBlocks(true).bbInflation(0.1f).build();
+        Entity entity = castContext.asEntityCaster();
         if (target instanceof EntityHitResult entityHitResult && !entity.level().isClientSide) {
             if (entityHitResult.getEntity() instanceof LivingEntity living) {
                 if (entity instanceof ServerPlayer serverPlayer) {
                     serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.irons_spellbooks.spell_target_success", living.getDisplayName().getString(), this.getDisplayName(serverPlayer)).withStyle(ChatFormatting.GREEN)));
                 }
-                playerMagicData.setAdditionalCastData(new TargetEntityCastData(living));
+                castContext.set(SkillcastingComponentTypes.TARGETED_ENTITIES, new TargetedEntitiesData(living));
                 return true;
             }
         }
@@ -126,20 +109,18 @@ public class FlankStepSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-
-        if (playerMagicData.getAdditionalCastData() instanceof TargetEntityCastData targetingData) {
-            var target = targetingData.getTarget((ServerLevel) level);
-            if (target != null) {
-                Vec3 pos = target.position().add(target.getForward().multiply(-1, 0, -1));
-                double y = Utils.findRelativeGroundLevel(level, pos, 2) + 0.1;
-                double diff = y - target.position().y;
-                diff = diff < 0.2 && diff > -0.2 ? 0 : (diff > 0 ? 45 + (10 * diff) : -45 - (10 * diff));
-                if (level instanceof ServerLevel serverLevel) {
-                    entity.teleportTo(serverLevel, pos.x, y, pos.z, Set.of(), target.getYRot(), (float) diff);
-                }
+    public void onCast(ServerLevel level, CastContext castContext) {
+        LivingEntity target = SkillcastingUtils.getTargetedLivingEntity(level, castContext);
+        if (target != null) {
+            Entity entity = castContext.asEntityCaster();
+            Vec3 pos = target.position().add(target.getForward().multiply(-1, 0, -1));
+            double y = Utils.findRelativeGroundLevel(level, pos, 2) + 0.1;
+            double diff = y - target.position().y;
+            diff = diff < 0.2 && diff > -0.2 ? 0 : (diff > 0 ? 45 + (10 * diff) : -45 - (10 * diff));
+            if (level instanceof ServerLevel serverLevel) {
+                entity.teleportTo(serverLevel, pos.x, y, pos.z, Set.of(), target.getYRot(), (float) diff);
             }
+
         }
     }
 }

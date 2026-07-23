@@ -1,7 +1,6 @@
 package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.data.entity.ability.HellfireAOEEntity;
 import com.example.cqsarmory.registry.CQParticleRegistry;
 import com.example.cqsarmory.registry.DamageTypes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
@@ -10,11 +9,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.particle.SwirlingParticleOptions;
 import io.redspace.ironsspellbooks.registries.ParticleRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.Util;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;

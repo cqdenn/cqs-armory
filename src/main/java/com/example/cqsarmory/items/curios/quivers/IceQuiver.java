@@ -1,24 +1,14 @@
 package com.example.cqsarmory.items.curios.quivers;
 
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
-import com.example.cqsarmory.data.entity.ability.FireArrow;
 import com.example.cqsarmory.data.entity.ability.IceArrow;
-import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveQuiver;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class IceQuiver extends SimpleDescriptiveQuiver {
-    public IceQuiver(Properties properties, String slotIdentifier, SpellDataRegistryHolder[] spellDataRegistryHolders) {
+    public IceQuiver(Properties properties, String slotIdentifier, SkillData... spellDataRegistryHolders) {
         super(properties, slotIdentifier, spellDataRegistryHolders);
     }
 

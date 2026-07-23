@@ -1,6 +1,8 @@
 package com.example.cqsarmory.items.curios;
 
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
+import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import io.redspace.skillcasting.data.skill.ISkillContainer;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -13,8 +15,8 @@ public class SimpleDescriptiveQuiver extends QuiverItem{
     final @Nullable String slotIdentifier;
     Style descriptionStyle;
     boolean showHeader;
-    public SimpleDescriptiveQuiver(Properties properties, String slotIdentifier, SpellDataRegistryHolder[] spellDataRegistryHolders) {
-        super(properties, spellDataRegistryHolders);
+    public SimpleDescriptiveQuiver(Properties properties, String slotIdentifier, SkillData... spellDataRegistryHolders) {
+        super(properties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
         this.slotIdentifier = slotIdentifier;
         this.showHeader = true;
         descriptionStyle = Style.EMPTY.withColor(ChatFormatting.YELLOW);

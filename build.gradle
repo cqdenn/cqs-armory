@@ -128,10 +128,10 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "net.neoforged:neoforge:${neo_version}"
-    implementation "io.redspace:irons_spellbooks:1.21.1-4.0.0-SNAPSHOT"
-    implementation "io.redspace:irons_lib:1.21.1-1.0.2"
+    implementation "io.redspace:irons_spellbooks:1.21.1-4.0.0-20260723.010604-5"
+    implementation "io.redspace:irons_lib:1.21.1-2.1.0"
     implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7.5.1"
-    implementation "curse.maven:playeranimator-658587:6024462"
+    implementation "curse.maven:playeranimator-658587:7389814"
     implementation "top.theillusivec4.curios:curios-neoforge:9.2.2+${minecraft_version}"
     implementation "io.redspace:atlas_api:1.21.1-1.1.0-SNAPSHOT"
     implementation "curse.maven:atlasviewer-633577:5490697"

@@ -1,7 +1,7 @@
 package com.example.cqsarmory.items.weapons;
 
 import com.example.cqsarmory.items.ExtendedWeaponItem;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.function.Predicate;
 
 public class ExtendedMaceItem extends ExtendedWeaponItem {
-    public ExtendedMaceItem(Tier tier, Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
+    public ExtendedMaceItem(Tier tier, Properties properties, SkillData... spellDataRegistryHolder) {
         super(tier, properties, spellDataRegistryHolder);
     }
 

@@ -6,11 +6,9 @@ import com.example.cqsarmory.data.entity.ability.HitscanArcaneBeam;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveQuiver;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.utils.CQRaycaster;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.util.RaycastBuilder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import net.minecraft.sounds.SoundEvents;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
@@ -20,7 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class ArcaneQuiver extends SimpleDescriptiveQuiver {
-    public ArcaneQuiver(Properties properties, String slotIdentifier, SpellDataRegistryHolder[] spellDataRegistryHolders) {
+    public ArcaneQuiver(Properties properties, String slotIdentifier, SkillData... spellDataRegistryHolders) {
         super(properties, slotIdentifier, spellDataRegistryHolders);
     }
 

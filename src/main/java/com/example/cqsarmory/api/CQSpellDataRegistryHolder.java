@@ -1,8 +1,7 @@
 package com.example.cqsarmory.api;
 
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
+import io.redspace.skillcasting.data.skill.SkillData;
 
 import java.util.function.Supplier;
 
@@ -20,8 +19,8 @@ public class CQSpellDataRegistryHolder {
 
     public int getLevel() {return this.spellLevel;}
 
-    public SpellData getSpellData() {
-        return new SpellData(registrySpell.get(), spellLevel);
+    public SkillData getSpellData() {
+        return new SkillData(registrySpell.get(), spellLevel);
     }
 
     public static CQSpellDataRegistryHolder[] of(CQSpellDataRegistryHolder... args) {

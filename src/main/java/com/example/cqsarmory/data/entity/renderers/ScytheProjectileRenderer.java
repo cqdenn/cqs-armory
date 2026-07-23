@@ -1,7 +1,6 @@
 package com.example.cqsarmory.data.entity.renderers;
 
 import com.example.cqsarmory.data.entity.ability.ScytheProjectile;
-import com.example.cqsarmory.data.entity.ability.ThrownItemProjectile;
 import com.example.cqsarmory.utils.RenderingUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -12,9 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.phys.Vec3;
 

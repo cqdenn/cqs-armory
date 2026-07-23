@@ -1,8 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
-import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.EntityRegistry;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.AoeEntity;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;

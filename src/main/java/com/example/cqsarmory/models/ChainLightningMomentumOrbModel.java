@@ -1,7 +1,6 @@
 package com.example.cqsarmory.models;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.entity.ability.BlackHoleMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.ChainLightningMomentumOrb;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;

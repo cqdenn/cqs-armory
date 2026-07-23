@@ -1,7 +1,5 @@
 package com.example.cqsarmory.registry;
 
-import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-
 public record WeaponType(float attackDamage, float attackSpeed) {
 
     public static final WeaponType WARHAMMER = new WeaponType(10, -3.0f);

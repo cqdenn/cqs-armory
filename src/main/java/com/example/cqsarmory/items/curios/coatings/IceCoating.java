@@ -1,24 +1,12 @@
 package com.example.cqsarmory.items.curios.coatings;
 
 import com.example.cqsarmory.items.curios.OnSwingCoating;
-import com.example.cqsarmory.registry.DamageTypes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleProjectile;
-import io.redspace.ironsspellbooks.entity.spells.ray_of_frost.RayOfFrostVisualEntity;
-import io.redspace.ironsspellbooks.registries.SoundRegistry;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
 
 public class IceCoating extends OnSwingCoating {
     public IceCoating(Properties properties, String slotIdentifier) {
@@ -33,7 +21,7 @@ public class IceCoating extends OnSwingCoating {
 
         IcicleProjectile icicle = new IcicleProjectile(level, attacker);
         icicle.setPos(attacker.position().add(0, attacker.getEyeHeight() - icicle.getBoundingBox().getYsize() * .5f, 0));
-        icicle.shoot(attacker.getLookAngle());
+        icicle.shoot(attacker.getLookAngle(), 1.4f);
         icicle.setDamage((float) damage);
         icicle.setNoGravity(true);
         level.addFreshEntity(icicle);

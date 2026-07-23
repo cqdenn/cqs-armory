@@ -1,6 +1,5 @@
 package com.example.cqsarmory.gui.overlays;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.items.curios.brands.SummonersBrand;

@@ -2,24 +2,15 @@ package com.example.cqsarmory;
 
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.config.ServerConfigs;
-import com.example.cqsarmory.data.biomes.CQBiomeRegister;
 import com.example.cqsarmory.data.biomes.CQRegions;
 import com.example.cqsarmory.data.biomes.CQSurfaceRules;
-import com.example.cqsarmory.gui.overlays.RageBarOverlay;
-import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.mojang.logging.LogUtils;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.item.ItemProperties;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -29,12 +20,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +30,8 @@ import org.slf4j.Logger;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
-import static com.example.cqsarmory.registry.ItemRegistry.*;
+import static com.example.cqsarmory.registry.ItemRegistry.GROUND_POUNDER;
+import static com.example.cqsarmory.registry.ItemRegistry.ITEMS;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(CqsArmory.MODID)

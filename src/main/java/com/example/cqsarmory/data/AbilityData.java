@@ -1,15 +1,8 @@
 package com.example.cqsarmory.data;
 
 import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import net.minecraft.client.renderer.OutlineBufferSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ShieldItem;
-import net.neoforged.neoforge.common.NeoForge;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AbilityData {
     public Mjolnir mjolnirData = new Mjolnir();

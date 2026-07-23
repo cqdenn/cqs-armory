@@ -1,3 +1,4 @@
+/*
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
@@ -120,3 +121,4 @@ public class IceSmashSpell extends AbstractSpell {
         return start;
     }
 }
+*/

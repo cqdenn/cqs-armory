@@ -3,27 +3,15 @@ package com.example.cqsarmory.gui.overlays;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.config.ClientConfigs;
 import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.data.entity.ability.AbilityArrow;
-import com.example.cqsarmory.items.curios.QuiverItem;
-import com.example.cqsarmory.registry.AttributeRegistry;
-import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.CrossbowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileWeaponItem;
-import top.theillusivec4.curios.api.CuriosApi;
-
-import java.util.function.Predicate;
 
 public class QuiverArrowOverlay implements LayeredDraw.Layer {
     private static QuiverArrowOverlay instance;

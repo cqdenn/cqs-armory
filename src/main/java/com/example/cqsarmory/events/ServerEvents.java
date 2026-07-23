@@ -20,54 +20,33 @@ import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
-import io.redspace.ironsspellbooks.api.config.ModifyDefaultConfigValuesEvent;
 import io.redspace.ironsspellbooks.api.config.SpellConfigParameter;
-import io.redspace.ironsspellbooks.api.entity.IMagicEntity;
-import io.redspace.ironsspellbooks.api.events.ChangeManaEvent;
-import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import io.redspace.ironsspellbooks.api.events.config.ModifyDefaultConfigValuesEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellDamageSource;
+import io.redspace.ironsspellbooks.api.spells.SpellcastingComponentTypes;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.CooldownInstance;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
-import io.redspace.ironsspellbooks.entity.mobs.*;
-import io.redspace.ironsspellbooks.entity.mobs.dead_king_boss.DeadKingBoss;
-import io.redspace.ironsspellbooks.entity.mobs.debug_wizard.DebugWizard;
-import io.redspace.ironsspellbooks.entity.mobs.frozen_humanoid.FrozenHumanoid;
-import io.redspace.ironsspellbooks.entity.mobs.ice_spider.IceSpiderEntity;
-import io.redspace.ironsspellbooks.entity.mobs.keeper.KeeperEntity;
-import io.redspace.ironsspellbooks.entity.mobs.necromancer.NecromancerEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.alchemist.ApothecaristEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.archevoker.ArchevokerEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.cryomancer.CryomancerEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.cultist.CultistEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.cursed_armor_stand.CursedArmorStandEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.FireBossEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.priest.PriestEntity;
-import io.redspace.ironsspellbooks.entity.mobs.wizards.pyromancer.PyromancerEntity;
+import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
-import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
-import io.redspace.ironsspellbooks.entity.spells.spectral_hammer.SpectralHammer;
-import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedClaymoreEntity;
-import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedRapierEntity;
-import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedSwordEntity;
-import io.redspace.ironsspellbooks.entity.spells.void_tentacle.VoidTentacle;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
-import io.redspace.ironsspellbooks.entity.spells.wisp.WispEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
-import io.redspace.ironsspellbooks.particle.SwirlingParticle;
-import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.skillcasting.api.event.BuildCastContextEvent;
+import io.redspace.skillcasting.api.event.SkillEvent;
+import io.redspace.skillcasting.data.SkillcastingData;
+import io.redspace.skillcasting.data.cast.CastEndReason;
+import io.redspace.skillcasting.data.cast.CasterRef;
+import io.redspace.skillcasting.lifecycle.SkillcastingManager;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
+import io.redspace.skillcasting.registry.SkillcastingRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -79,6 +58,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.Mth;
+import net.minecraft.util.Unit;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffect;
@@ -88,18 +68,16 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.PolarBear;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Vindicator;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.*;
-import net.minecraft.world.item.armortrim.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import net.minecraft.world.item.enchantment.*;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
@@ -120,10 +98,10 @@ import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.joml.Vector3f;
-import software.bernie.geckolib.constant.DefaultAnimations;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 @EventBusSubscriber
@@ -311,7 +289,7 @@ public class ServerEvents {
                 Vec3 vec3 = target.position().add(0, 0.1, 0);
                 target.level().explode(
                         null, //source
-                        CQSpellRegistry.WIND_BURST_SPELL.get().getDamageSource(entity), //damage source
+                        CQSpellRegistry.WIND_BURST_SPELL.get().getDamageSource(entity.level(), null, entity), //damage source
                         explosionDamageCalc, //dmg calc
                         vec3.x(), //location x, y, z
                         vec3.y(),
@@ -339,7 +317,7 @@ public class ServerEvents {
             int manaStealLevel = usedWeapon.getEnchantmentLevel(manaStealHolder);
             int speedStealLevel = usedWeapon.getEnchantmentLevel(speedStealHolder);
             //life steal attribute
-            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0 && (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK) || (event.getSource() instanceof SpellDamageSource spellDamageSource && spellDamageSource.spell().getSpellId().equals("cqs_armory:rupture_spell")))) { //must be melee, only GS has this attribute so this prevents offhanding with bow
+            if (player.getAttributeValue(AttributeRegistry.LIFE_STEAL) > 0 && (event.getSource().is(net.minecraft.world.damagesource.DamageTypes.PLAYER_ATTACK) || (event.getSource() instanceof SpellDamageSource spellDamageSource && spellDamageSource.spell().getSkillId().equals("cqs_armory:rupture_spell")))) { //must be melee, only GS has this attribute so this prevents offhanding with bow
                 double damageRatio = event.getNewDamage() / event.getOriginalDamage();
                 damageRatio = Math.min(1, damageRatio);
                 float heal = (float) (player.getMaxHealth() * damageRatio * player.getAttributeValue(AttributeRegistry.LIFE_STEAL));
@@ -351,8 +329,8 @@ public class ServerEvents {
             }
             //mana steal
             if (manaStealLevel > 0 && player instanceof ServerPlayer serverPlayer) {
-                MagicData.getPlayerMagicData(serverPlayer).addMana(5 * manaStealLevel);
-                PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
+                MagicData.get(serverPlayer).addMana(5 * manaStealLevel);
+                SyncManaPacket.syncFor(serverPlayer);
             }
             //speed steal
             if (speedStealLevel > 0) {
@@ -446,23 +424,19 @@ public class ServerEvents {
     public static void riposte(LivingIncomingDamageEvent event) {
         LivingEntity entity = event.getEntity();
         DamageSource damage = event.getSource();
-        MagicData magicData = MagicData.getPlayerMagicData(entity);
-        var damageSource = CQSpellRegistry.RIPOSTE_SPELL.get().getDamageSource(entity);
+        SkillcastingData magicData = SkillcastingData.get(entity);
+        var damageSource = CQSpellRegistry.RIPOSTE_SPELL.get().getDamageSource(entity.level(), null, entity);
 
-        if (entity instanceof IMagicEntity magic) {
-            magicData = magic.getMagicData();
-        }
-        if (magicData.isCasting() && Objects.equals(magicData.getCastingSpellId(), "cqs_armory:riposte_spell")) {
+        if (magicData.isCasting() && Objects.equals(magicData.getActiveSkill(), CQSpellRegistry.RIPOSTE_SPELL)) {
             if (damage.getDirectEntity() instanceof LivingEntity livingEntity) {
-                int spellLevel = magicData.getCastingSpellLevel();
+                int spellLevel = magicData.getActiveCast().context().getSkillLevel();
                 livingEntity.addEffect(new MobEffectInstance(MobEffectRegistry.STUNNED, 40 * spellLevel, 100, false, false, true));
                 livingEntity.hurt(damageSource, (float) entity.getAttribute(Attributes.ATTACK_DAMAGE).getValue() * 4);
             } else if (damage.getEntity() instanceof Projectile projectile) {
                 projectile.setDeltaMovement(entity.getForward().scale(10));
             }
             if (entity instanceof ServerPlayer serverPlayer) {
-                Utils.serverSideCancelCast(serverPlayer, true);
-                MagicData.getPlayerMagicData(serverPlayer).getPlayerRecasts().removeAll(RecastResult.USER_CANCEL);
+                SkillcastingManager.cancelCast(CasterRef.entity(serverPlayer), CastEndReason.COMPLETED);
             }
             entity.level().playSound(null, entity.blockPosition(), com.example.cqsarmory.registry.SoundRegistry.RIPOSTE_HIT_SOUND.get(), SoundSource.PLAYERS, 1, 1);
             event.setCanceled(true);
@@ -817,29 +791,31 @@ public class ServerEvents {
     }
 
     @SubscribeEvent
-    public static void overchargeBrand(SpellOnCastEvent event) {
-        int manaSpent = event.getManaCost();
-        Player player = event.getEntity();
+    public static void overchargeBrand(BuildCastContextEvent.Post event) {
+        int manaSpent = event.context().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
 
-        if (ItemRegistry.OVERCHARGE_BRAND.get().isEquippedBy(player)) {
+        if (manaSpent != 0 && event.context().asEntityCaster() instanceof LivingEntity living && ItemRegistry.OVERCHARGE_BRAND.get().isEquippedBy(living)) {
             int newManaCost = (int) (manaSpent * 1.5);
-            event.setManaCost(newManaCost);
+            event.context().set(SpellcastingComponentTypes.MANA_COST, newManaCost);
         }
     }
 
     @SubscribeEvent
-    public static void trackManaSpent(ChangeManaEvent event) {
+    public static void trackManaSpent(SkillEvent.OnCast event) {
         if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
 
-        Player player = event.getEntity();
-        if (player.level().isClientSide) return;
-        float manaSpent = event.getOldMana() - event.getNewMana();
+        if (event.getCastContext().asEntityCaster() instanceof LivingEntity living) {
+            if (living.level().isClientSide) return;
+            float manaSpent = event.getCastContext().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
 
-        if (manaSpent > 0 && !player.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !player.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE)) {
-            float newManaSpent = AbilityData.get(player).manaSpentSinceLastAOE + manaSpent;
-            AbilityData.get(player).manaSpentSinceLastAOE = newManaSpent;
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket((int) newManaSpent));
-            AbilityData.get(player).startMageAOEDecay = player.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
+            if (manaSpent > 0 && !living.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.BLIZZARD_MAGE_AOE)) { //this is extremely dumb FIXME
+                float newManaSpent = AbilityData.get(living).manaSpentSinceLastAOE + manaSpent;
+                AbilityData.get(living).manaSpentSinceLastAOE = newManaSpent;
+                AbilityData.get(living).startMageAOEDecay = living.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
+                if (living instanceof ServerPlayer serverPlayer) {
+                    PacketDistributor.sendToPlayer(serverPlayer, new SyncManaSpentPacket((int) newManaSpent));
+                }
+            }
         }
     }
 
@@ -914,9 +890,9 @@ public class ServerEvents {
 
         if (ItemRegistry.ARCANE_BRAND.get().isEquippedBy(player) && player instanceof ServerPlayer serverPlayer) {
             var RING = ((ArcaneBrand) ItemRegistry.ARCANE_BRAND.get());
-            if ((MagicData.getPlayerMagicData(player).getMana() <= player.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA) * 0.1) && RING.tryProcCooldown(serverPlayer)) {
-                MagicData.getPlayerMagicData(serverPlayer).setMana((float) serverPlayer.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA));
-                PacketDistributor.sendToPlayer(serverPlayer, new SyncManaPacket(MagicData.getPlayerMagicData(serverPlayer)));
+            if ((MagicData.get(player).getMana() <= player.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA) * 0.1) && RING.tryProcCooldown(serverPlayer)) {
+                MagicData.get(serverPlayer).setMana((float) serverPlayer.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA));
+                SyncManaPacket.syncFor(serverPlayer);
             }
         }
 
@@ -961,14 +937,13 @@ public class ServerEvents {
     }*/ // removed for being too broken
 
     @SubscribeEvent
-    public static void infinityBrandMana(ChangeManaEvent event) {
-        Player player = event.getEntity();
-        if (player.hasEffect(MobEffectRegistry.INFINITE_MAGIC)) {
-            float oldMana = event.getOldMana();
-            float newMana = event.getNewMana();
-            if (newMana - oldMana < 0) {
-                event.setCanceled(true);
-            }
+    public static void infinityBrandMana(BuildCastContextEvent.Post event) {
+        Entity entity = event.context().asEntityCaster();
+        if (entity instanceof LivingEntity living && living.hasEffect(MobEffectRegistry.INFINITE_MAGIC)) {
+            event.context().set(SpellcastingComponentTypes.IGNORE_MANA, Unit.INSTANCE);
+        }
+        if (event.context().skill().equals(SpellRegistry.POISON_ARROW_SPELL) || event.context().skill().equals(SpellRegistry.FIRE_ARROW_SPELL) || event.context().skill().equals(SpellRegistry.MAGIC_ARROW_SPELL)) {
+            event.context().set(SkillcastingComponentTypes.CAST_TIME, CQtils.getEffectiveBowCastTime(event.context()));
         }
     }
 
@@ -1050,11 +1025,11 @@ public class ServerEvents {
                 LivingEntity target = event.getEntity();
                 AcidOrb orb = new AcidOrb(level, player);
                 orb.setPos(target.position().add(0, 1, 0));
-                orb.shoot(new Vec3(0, 0.5f, 0));
+                orb.shoot(new Vec3(0, 0.5f, 0), 1);
                 //orb.setDeltaMovement(orb.getDeltaMovement().add(0, 0.2, 0));
-                orb.setExplosionRadius(3);
-                orb.setRendLevel(4);
-                orb.setRendDuration(200);
+                orb.setRadius(3);
+                orb.setEffectAmplifier(4);
+                orb.setEffectDuration(200);
                 level.addFreshEntity(orb);
             }
         }
@@ -1236,8 +1211,8 @@ public class ServerEvents {
 
     @SubscribeEvent
     public static void summonSpellCooldowns(ModifyDefaultConfigValuesEvent event) {
-        SpellRegistry.REGISTRY.getHolder(event.getSpell().getSpellResource()).ifPresent(holder -> {
-            if (holder.is(Tags.AbstractSpells.SUMMONING_SPELLS)) {
+        SkillcastingRegistries.SKILL_REGISTRY.getHolder(event.getSpell().getSkillId()).ifPresent(holder -> {
+            if (holder.is(Tags.AbstractSkills.SUMMONING_SPELLS)) {
                 event.setDefaultValue(SpellConfigParameter.COOLDOWN_IN_SECONDS, 10.0);
             }
         });

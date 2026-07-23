@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data;
 
-import com.example.cqsarmory.items.armor.*;
+import com.example.cqsarmory.items.armor.ChampionArmorItem;
+import com.example.cqsarmory.items.armor.MarksmanArmorItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
 import com.example.cqsarmory.utils.CraftingMaterials;
@@ -8,10 +9,7 @@ import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.registries.DeferredHolder;

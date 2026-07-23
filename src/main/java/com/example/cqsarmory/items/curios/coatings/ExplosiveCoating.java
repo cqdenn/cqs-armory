@@ -1,13 +1,9 @@
 package com.example.cqsarmory.items.curios.coatings;
 
 import com.example.cqsarmory.items.curios.OnHitCoating;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
-import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;

@@ -2,14 +2,12 @@ package com.example.cqsarmory.items.weapons;
 
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
-import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
+import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import io.redspace.skillcasting.data.skill.ISkillContainer;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,22 +18,16 @@ import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class GreataxeItem extends TieredItem implements IPresetSpellContainer {
+public class GreataxeItem extends TieredItem {
 
-    List<SpellData> spellData = null;
-    SpellDataRegistryHolder[] spellDataRegistryHolders;
-
-    public GreataxeItem(Tier tier, Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolders) {
-        super(tier, properties);
-        this.spellDataRegistryHolders = spellDataRegistryHolders;
+    public GreataxeItem(Tier tier, Properties properties, SkillData... spellDataRegistryHolders) {
+        super(tier, properties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
     }
 
     public static Tool createGreataxeToolProperties(ExtendedWeaponTier material, WeaponPower power) {
@@ -56,28 +48,6 @@ public class GreataxeItem extends TieredItem implements IPresetSpellContainer {
     @Override
     public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
         return super.supportsEnchantment(stack, enchantment) || enchantment.is(Enchantments.EFFICIENCY);
-    }
-
-    public List<SpellData> getSpells() {
-        if (spellData == null) {
-            spellData = Arrays.stream(spellDataRegistryHolders).map(SpellDataRegistryHolder::getSpellData).toList();
-            spellDataRegistryHolders = null;
-        }
-        return spellData;
-    }
-
-    @Override
-    public void initializeSpellContainer(ItemStack itemStack) {
-        if (itemStack == null) {
-            return;
-        }
-
-        if (!ISpellContainer.isSpellContainer(itemStack)) {
-            var spells = getSpells();
-            var spellContainer = ISpellContainer.create(spells.size(), true, false).mutableCopy();
-            spells.forEach(spellData -> spellContainer.addSpell(spellData.getSpell(), spellData.getLevel(), true));
-            ISpellContainer.set(itemStack, spellContainer.toImmutable());
-        }
     }
 
     @Override

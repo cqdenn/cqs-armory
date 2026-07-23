@@ -1,16 +1,10 @@
 package com.example.cqsarmory.items.curios.coatings;
 
 import com.example.cqsarmory.items.curios.OnBlockCoating;
-import com.example.cqsarmory.items.curios.OnHitCoating;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class ThornCoating extends OnBlockCoating {
     public ThornCoating(Properties properties, String slotIdentifier) {

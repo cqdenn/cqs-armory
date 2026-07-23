@@ -1,7 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;

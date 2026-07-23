@@ -1,57 +1,37 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
-import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
-import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.data.recast.RecastConfig;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.windcharge.AbstractWindCharge;
-import net.minecraft.world.item.enchantment.LevelBasedValue;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.SimpleExplosionDamageCalculator;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-@AutoSpellConfig
 public class WindBurstSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "wind_burst_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -104,29 +84,26 @@ public class WindBurstSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.MACE_CAST_SOUND.get());
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.MACE_CAST_SOUND.get()));
     }
 
     @Override
-    public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
-        return spellLevel;
+    public Optional<RecastConfig> provideRecastConfig(CastContext castContext) {
+        return Optional.of(new RecastConfig(castContext.getSkillLevel(), 100));
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.literal("Burst into the air"),
-                Component.translatable("ui.irons_spellbooks.recast_count", getRecastCount(spellLevel, caster))
+                Component.translatable("ui.irons_spellbooks.recast_count", castContext.find(SkillcastingComponentTypes.RECAST_CONFIG).map(RecastConfig::totalCasts).orElse(0))
         );
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
-            playerMagicData.getPlayerRecasts().addRecast(new RecastInstance(getSpellId(), spellLevel, getRecastCount(spellLevel, entity), 100, castSource, null), playerMagicData);
-        }
+    public void onCast(ServerLevel level, CastContext castContext) {
+        Entity entity = castContext.asEntityCaster();
         float kb = 1.5f;
 
         ExplosionDamageCalculator explosionDamageCalc = new SimpleExplosionDamageCalculator(
@@ -136,7 +113,7 @@ public class WindBurstSpell extends AbstractSpell {
         Vec3 vec3 = entity.position().add(0, 0.1, 0);
         level.explode(
                 null, //source
-                CQSpellRegistry.WIND_BURST_SPELL.get().getDamageSource(entity), //damage source
+                CQSpellRegistry.WIND_BURST_SPELL.get().getDamageSource(entity.level(), null, entity), //damage source
                 explosionDamageCalc, //dmg calc
                 vec3.x(), //location x, y, z
                 vec3.y(),

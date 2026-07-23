@@ -1,43 +1,30 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.effects.ShieldBashEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ShieldItem;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class ShieldBashSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "shield_bash_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -75,7 +62,7 @@ public class ShieldBashSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
         return Optional.empty();
     }
 
@@ -89,28 +76,29 @@ public class ShieldBashSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent()),
-                Component.translatable("ui.cqs_armory.stun_duration", (1 * spellLevel) + "s")
+                Component.translatable("ui.cqs_armory.stun_duration", (castContext.getSkillLevel()) + "s")
         );
     }
 
     @Override
-    public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity entity, MagicData playerMagicData) {
-        if (entity.getOffhandItem().getItem() instanceof ShieldItem) {
-            return true;
-        } else if (entity instanceof ServerPlayer serverPlayer) {
-            serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.cqs_armory.shield_bash_target_failure").withStyle(ChatFormatting.RED)));
+    public boolean checkPreCastConditions(CastContext castContext) {
+        if (castContext.asEntityCaster() instanceof LivingEntity entity) {
+            if (entity.getOffhandItem().getItem() instanceof ShieldItem) {
+                return true;
+            } else if (entity instanceof ServerPlayer serverPlayer) {
+                serverPlayer.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ui.cqs_armory.shield_bash_target_failure").withStyle(ChatFormatting.RED)));
+            }
         }
         return false;
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-
-        Vec3 direction = new Vec3(entity.getForward().x * spellLevel, 0.001, entity.getForward().z * spellLevel);
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
+        Vec3 direction = new Vec3(entity.getForward().x * castContext.getSkillLevel(), 0.001, entity.getForward().z * castContext.getSkillLevel());
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(4));
 
         if (entity.onGround()) {
@@ -121,7 +109,7 @@ public class ShieldBashSpell extends AbstractSpell {
         entity.hurtMarked = true;
 
         if (!entities.isEmpty()) {
-            entity.addEffect(new MobEffectInstance(MobEffectRegistry.SHIELD_BASH, 10, spellLevel - 1, false, false, false));
+            entity.addEffect(new MobEffectInstance(MobEffectRegistry.SHIELD_BASH, 10, castContext.getSkillLevel() - 1, false, false, false));
             entity.invulnerableTime = 20;
         }
     }

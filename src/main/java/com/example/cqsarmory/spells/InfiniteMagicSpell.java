@@ -1,34 +1,23 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.entity.ability.IceArrow;
-import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
-import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.cast.CastType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
-@AutoSpellConfig
 public class InfiniteMagicSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "infinite_magic_spell");
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.ELDRITCH_RESOURCE)
@@ -37,10 +26,10 @@ public class InfiniteMagicSpell extends AbstractSpell {
             .build();
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.literal("Grants no mana costs"),
-                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(getDurationTicks(caster), 1)));
+                Component.translatable("ui.irons_spellbooks.effect_length", Utils.timeFromTicks(getDurationTicks(castContext), 1)));
     }
 
     public InfiniteMagicSpell() {
@@ -52,8 +41,8 @@ public class InfiniteMagicSpell extends AbstractSpell {
     }
 
     @Override
-    public boolean isLearned(@Nullable Player player) {
-        return true;
+    public boolean requiresLearning() {
+        return false;
     }
 
     @Override
@@ -67,18 +56,15 @@ public class InfiniteMagicSpell extends AbstractSpell {
     }
 
     @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (!(castContext.asEntityCaster() instanceof LivingEntity living)) return;
+        living.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, getDurationTicks(castContext), 0, false, false, true));
     }
 
-    @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.INFINITE_MAGIC, getDurationTicks(entity), 0, false, false, true));
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-    }
-
-    public int getDurationTicks (LivingEntity caster) {
-        return (int) (300 * caster.getAttributeValue(AttributeRegistry.SPELL_POWER) * caster.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
+    public int getDurationTicks (CastContext castContext) {
+        if (castContext.asEntityCaster() instanceof LivingEntity caster) {
+            return (int) (300 * caster.getAttributeValue(AttributeRegistry.SPELL_POWER) * caster.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
+        } else return 0;
     }
 
     @Override

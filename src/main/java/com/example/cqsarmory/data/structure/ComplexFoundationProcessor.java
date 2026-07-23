@@ -2,7 +2,6 @@ package com.example.cqsarmory.data.structure;
 
 import com.example.cqsarmory.registry.CQStructureProcessorType;
 import com.mojang.serialization.MapCodec;
-import io.redspace.ironsspellbooks.registries.StructureProcessorRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.WorldGenRegion;

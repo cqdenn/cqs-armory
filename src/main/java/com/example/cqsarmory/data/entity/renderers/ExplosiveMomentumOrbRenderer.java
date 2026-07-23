@@ -1,9 +1,7 @@
 package com.example.cqsarmory.data.entity.renderers;
 
 import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
-import com.example.cqsarmory.data.entity.ability.MomentumOrb;
 import com.example.cqsarmory.models.ExplosiveMomentumOrbModel;
-import com.example.cqsarmory.models.MomentumOrbModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

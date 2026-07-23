@@ -1,34 +1,32 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.IceArrow;
 import com.example.cqsarmory.registry.SoundRegistry;
-import io.redspace.bowattributes.registry.BowAttributes;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
+import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.entity.spells.poison_arrow.PoisonArrow;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class IceArrowSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_arrow_spell");
+
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.ICE_RESOURCE)
@@ -37,9 +35,9 @@ public class IceArrowSpell extends AbstractSpell {
             .build();
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
-                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getArrowDamage(spellLevel, caster), 1)));
+                Component.translatable("ui.irons_spellbooks.damage", Utils.stringTruncation(getArrowDamage(castContext), 1)));
                 //Component.translatable("ui.irons_spellbooks.aoe_damage", Utils.stringTruncation(getAOEDamage(spellLevel, caster), 1)));
     }
 
@@ -72,32 +70,25 @@ public class IceArrowSpell extends AbstractSpell {
     }
 
     @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
+    public Optional<PlayableSound> getCastStartSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundEvents.CROSSBOW_LOADING_MIDDLE.value()));
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundEvents.CROSSBOW_LOADING_MIDDLE.value());
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.ARROW_SHOOT_CQ.get()));
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.ARROW_SHOOT_CQ.get());
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.CAST_TIME, CQtils.getEffectiveBowCastTime(castContext));
     }
 
     @Override
-    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        double entityCastTimeModifier = 1;
-        if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
-            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
-        }
-        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
-    }
-
-    @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+    public void onCast(ServerLevel level, CastContext castContext) {
         IceArrow magicArrow = new IceArrow(level);
+        Entity entity = castContext.asEntityCaster();
         magicArrow.setOwner(entity);
         magicArrow.setSpellArrow(true);
         magicArrow.setScale(2);
@@ -109,13 +100,12 @@ public class IceArrowSpell extends AbstractSpell {
         magicArrow.setXRot((float)(Mth.atan2(vec3.y, d0) * 180.0F / (float)Math.PI));
         magicArrow.yRotO = magicArrow.getYRot();
         magicArrow.xRotO = magicArrow.getXRot();
-        magicArrow.setBaseDamage(getArrowDamage(spellLevel, entity));
+        magicArrow.setBaseDamage(getArrowDamage(castContext));
         level.addFreshEntity(magicArrow);
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
-    public float getArrowDamage(int spellLevel, LivingEntity caster) {
-        return getSpellPower(spellLevel, caster);
+    public float getArrowDamage(CastContext castContext) {
+        return getSpellPower(castContext);
     }
 
     /*public float getAOEDamage(int spellLevel, LivingEntity caster) {return getSpellPower(spellLevel, caster) * .185f;}*/
@@ -127,7 +117,7 @@ public class IceArrowSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
 }

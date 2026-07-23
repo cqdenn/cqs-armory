@@ -2,56 +2,48 @@ package com.example.cqsarmory.utils;
 
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.DamageData;
-import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.network.*;
-import com.example.cqsarmory.registry.*;
+import com.example.cqsarmory.registry.DamageTypes;
+import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
-import io.redspace.ironsspellbooks.api.spells.SchoolType;
+import io.redspace.ironsspellbooks.api.spells.SpellDamageSource;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.compat.Curios;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
 import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.selection.SkillSelectionManager;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
-import java.util.*;
-import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CQtils {
 
@@ -202,10 +194,10 @@ public class CQtils {
         if (source.getDirectEntity() instanceof FireAspectEnchantEntity fire) return fire.getWeapon();
         if (source.getDirectEntity() instanceof Projectile projectile && projectile.getWeaponItem() != null)
             return projectile.getWeaponItem();
-        MagicData magicData = MagicData.getPlayerMagicData(attacker);
-        boolean isWeaponCasting = magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) || magicData.getCastingEquipmentSlot().equals(SpellSelectionManager.MAINHAND);
+        MagicData magicData = MagicData.get(attacker);
+        boolean isWeaponCasting = magicData.getCachedCastingEquipmentSlot().equals(SkillSelectionManager.OFFHAND) || magicData.getCachedCastingEquipmentSlot().equals(SkillSelectionManager.MAINHAND);
         if (source instanceof SpellDamageSource && isWeaponCasting)
-            return MagicData.getPlayerMagicData(attacker).getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
+            return MagicData.get(attacker).getCachedCastingEquipmentSlot().equals(SkillSelectionManager.OFFHAND) ? attacker.getOffhandItem() : attacker.getMainHandItem();
         return attacker.getMainHandItem();
     }
 

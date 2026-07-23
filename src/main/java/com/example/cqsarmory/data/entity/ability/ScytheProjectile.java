@@ -3,8 +3,6 @@ package com.example.cqsarmory.data.entity.ability;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -22,8 +20,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
-
-import static com.example.cqsarmory.spells.ChainWhipSpell.getDuration;
 
 public class ScytheProjectile extends AbilityArrow {
     private static final EntityDataAccessor<ItemStack> DATA_ITEM = SynchedEntityData.defineId(ScytheProjectile.class, EntityDataSerializers.ITEM_STACK);

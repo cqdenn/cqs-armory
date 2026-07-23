@@ -1,53 +1,27 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.api.AbilityAnimations;
-import com.example.cqsarmory.data.effects.ShieldBashEffect;
 import com.example.cqsarmory.data.effects.SkewerEffect;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.capabilities.magic.ImpulseCastData;
-import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.spells.ice_block.IceBlockProjectile;
-import io.redspace.ironsspellbooks.player.SpinAttackType;
-import io.redspace.ironsspellbooks.spells.fire.BurningDashSpell;
-import net.minecraft.core.BlockPos;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.objectweb.asm.util.TraceRecordComponentVisitor;
 
 import java.util.List;
 import java.util.Optional;
-@AutoSpellConfig
-public class SkewerSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "skewer_spell");
 
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
+public class SkewerSpell extends AbstractSpell {
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -85,8 +59,8 @@ public class SkewerSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
-        return Optional.of(SoundRegistry.SPEAR_SKEWER_SOUND.get());
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.SPEAR_SKEWER_SOUND.get()));
     }
 
     @Override
@@ -99,10 +73,10 @@ public class SkewerSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", (int) getWeaponDamagePercent()),
-                Component.translatable("ui.cqs_armory.bleed_duration", getBleedDurationTicks(spellLevel)/20 + "s")
+                Component.translatable("ui.cqs_armory.bleed_duration", getBleedDurationTicks(castContext.getSkillLevel())/20 + "s")
         );
     }
 
@@ -111,14 +85,14 @@ public class SkewerSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        Vec3 forward = entity.getLookAngle().scale(2 + (0.5f * spellLevel));
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
+        Vec3 forward = entity.getLookAngle().scale(2 + (0.5f * castContext.getSkillLevel()));
         float y = !entity.onGround() ? 0.1f : 0.5f;
 
         entity.setDeltaMovement(forward.x, y, forward.z);
         entity.hurtMarked = true;
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 20, spellLevel, false, false, false));
+        entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKEWER, 20, castContext.getSkillLevel(), false, false, false));
         entity.invulnerableTime = 20;
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }

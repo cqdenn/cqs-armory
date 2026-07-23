@@ -1,29 +1,21 @@
 package com.example.cqsarmory.data.entity.ability;
 
 
-import com.example.cqsarmory.data.effects.CQMobEffectInstance;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.CQtils;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
-import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
-import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
-import io.redspace.ironsspellbooks.util.ParticleHelper;
+import io.redspace.skillcasting.data.cast.PositionAnchor;
+import io.redspace.skillcasting.util.RaycastBuilder;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -176,7 +168,7 @@ public class BatProjectile extends AbilityArrow/* implements IMagicSummon */{
             Vec3 look = owner.getLookAngle();
             Vec3 end = start.add(look.scale(reach));
 
-            Vec3 target = Utils.raycastForEntity(level(), owner, owner.getEyePosition(), end, true, 0.1f, entity -> !(entity instanceof BatProjectile) && Utils.canHitWithRaycast(entity)).getLocation();
+            Vec3 target = RaycastBuilder.begin(level(), owner).start(start).end(end).checkForBlocks(true).bbInflation(0.1f).filter(entity -> !(entity instanceof BatProjectile) && Utils.canHitWithRaycast(entity)).build().getLocation();
             //Utils.particleTrail(level(), target, target.add(0, 2, 0), ParticleTypes.HAPPY_VILLAGER);
 
             Vec3 toTarget = target.subtract(this.position());

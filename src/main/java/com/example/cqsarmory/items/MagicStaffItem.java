@@ -2,29 +2,20 @@ package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
-import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.ironsspellbooks.api.item.weapons.ExtendedSwordItem;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
-import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
+import io.redspace.skillcasting.registry.SkillcastingDataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class MagicStaffItem extends ExtendedSwordItem {
 
@@ -32,13 +23,13 @@ public class MagicStaffItem extends ExtendedSwordItem {
     CQSpellDataRegistryHolder[] spellDataRegistryHolders;*/
 
     public MagicStaffItem(Tier pTier, Properties pProperties, CQSpellDataRegistryHolder[] spellDataRegistryHolders) {
-        super(pTier, pProperties.component(ComponentRegistry.CASTING_IMPLEMENT, Unit.INSTANCE));
+        super(pTier, pProperties.component(SkillcastingDataComponents.CASTING_IMPLEMENT, Unit.INSTANCE));
         //this.spellDataRegistryHolders = spellDataRegistryHolders;
 
     }
 
     public MagicStaffItem(Tier pTier, Properties pProperties) {
-        super(pTier, pProperties.component(ComponentRegistry.CASTING_IMPLEMENT, Unit.INSTANCE));
+        super(pTier, pProperties.component(SkillcastingDataComponents.CASTING_IMPLEMENT, Unit.INSTANCE));
     }
 
     /*public List<SpellData> getSpells() {

@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.JigsawBlock;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.levelgen.structure.PoolElementStructurePiece;
 import net.minecraft.world.level.levelgen.structure.Structure;
@@ -22,11 +23,6 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemp
 
 import java.util.*;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import net.minecraft.world.level.block.Rotation;
-
-import java.util.*;
-import java.util.function.ToDoubleFunction;
 
 public final class TerrainAvoidingJigsawPlacement {
 

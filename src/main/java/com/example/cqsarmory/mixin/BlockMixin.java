@@ -1,9 +1,7 @@
 package com.example.cqsarmory.mixin;
 
 import com.example.cqsarmory.registry.ItemRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;

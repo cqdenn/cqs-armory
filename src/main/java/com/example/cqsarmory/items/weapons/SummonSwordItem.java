@@ -2,8 +2,6 @@ package com.example.cqsarmory.items.weapons;
 
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.util.CameraShakeData;
-import io.redspace.ironsspellbooks.api.util.CameraShakeManager;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -68,7 +66,7 @@ public class SummonSwordItem extends SwordItem {
                 float p = (float) (distanceSqr / (explosionRadius * explosionRadius));
                 p = 1 - p * p * p;
                 //IronsSpellbooks.LOGGER.debug("sacrifice spell damage: distance: {}, p: {}, damage: {}/{}", Math.sqrt(distanceSqr), p, damage * p, damage);
-                DamageSources.applyDamage(victim, damage * p, SpellRegistry.SACRIFICE_SPELL.get().getDamageSource(zombie, zombie.getSummoner()));
+                DamageSources.applyDamage(victim, damage * p, SpellRegistry.SACRIFICE_SPELL.get().getDamageSource(zombie.level(), null, zombie.getSummoner()));
             }
         }
         //CameraShakeManager.addCameraShake(new CameraShakeData(10, zombie.position(), 20));

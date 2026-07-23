@@ -3,27 +3,22 @@ package com.example.cqsarmory.data.entity.ability;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.SpellDamageSource;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.magma_ball.FireField;
-import io.redspace.ironsspellbooks.entity.spells.snowball.FrostField;
-import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
-import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.entity.PartEntity;
@@ -78,7 +73,7 @@ public class FireArrow extends AbilityArrow{
                             float damage = (float) this.getBaseDamage();
                             if (getOwner() instanceof LivingEntity living) damage *= (float) living.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER);
                             float finalDmg = damage;
-                            var source = SpellDamageSource.source(this, owner, SpellRegistry.SCORCH_SPELL.get());
+                            var source = SpellDamageSource.source(SpellRegistry.SCORCH_SPELL.get(), level(), this, owner, this.position());
                             level().getEntitiesOfClass(LivingEntity.class, new AABB(targetArea.subtract(radius, radius, radius), targetArea.add(radius, radius, radius)),
                                             livingEntity -> livingEntity != owner &&
                                                     horizontalDistanceSqr(livingEntity, targetArea) < radiusSqr &&

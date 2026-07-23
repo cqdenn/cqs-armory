@@ -2,8 +2,8 @@ package com.example.cqsarmory.data.biomes;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.features.UndergroundTemplateFeatureConfiguration;
-import com.example.cqsarmory.registry.CQFeatureRegistry;
 import com.example.cqsarmory.registry.BiomesRegistry;
+import com.example.cqsarmory.registry.CQFeatureRegistry;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -11,16 +11,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.BiomeFilter;
-import net.minecraft.world.level.levelgen.placement.CountPlacement;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.InSquarePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class CQBiomeRegister
 {

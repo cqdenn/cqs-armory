@@ -6,7 +6,6 @@ import com.example.cqsarmory.items.weapons.ExtendedMaceItem;
 import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.registry.ItemRegistry;
 import com.example.cqsarmory.registry.Tags;
-import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;

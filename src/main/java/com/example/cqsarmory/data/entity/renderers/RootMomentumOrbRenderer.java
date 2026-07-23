@@ -1,8 +1,6 @@
 package com.example.cqsarmory.data.entity.renderers;
 
-import com.example.cqsarmory.data.entity.ability.BlackHoleMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.RootMomentumOrb;
-import com.example.cqsarmory.models.BlackHoleMomentumOrbModel;
 import com.example.cqsarmory.models.RootMomentumOrbModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

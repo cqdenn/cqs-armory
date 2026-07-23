@@ -4,10 +4,8 @@ import com.example.cqsarmory.items.ExtendedWeaponItem;
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
 import com.example.cqsarmory.registry.WeaponType;
-import io.redspace.bowattributes.registry.BowAttributes;
-import io.redspace.ironsspellbooks.api.item.weapons.MagicSwordItem;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.entity.spells.thrown_spear.ThrownSpear;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -21,8 +19,6 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
@@ -30,15 +26,11 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 
-import java.util.Set;
-
-import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
-
 public class SpearItem extends ExtendedWeaponItem {
     public WeaponPower power;
     public ExtendedWeaponTier tier;
 
-    public SpearItem(ExtendedWeaponTier tier, WeaponPower power, Properties properties, SpellDataRegistryHolder[] spellDataRegistryHolder) {
+    public SpearItem(ExtendedWeaponTier tier, WeaponPower power, Properties properties, SkillData... spellDataRegistryHolder) {
         super(tier, properties, spellDataRegistryHolder);
         this.power = power;
         this.tier = tier;

@@ -2,7 +2,6 @@ package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
 import com.mojang.serialization.Codec;
-import io.redspace.skillcasting.Skillcasting;
 import io.redspace.skillcasting.data.component.ComponentType;
 import io.redspace.skillcasting.registry.SkillcastingRegistries;
 import io.redspace.skillcasting.util.StreamCodecUtils;
@@ -28,6 +27,18 @@ public class CQSkillComponents {
 
     public static final DeferredHolder<ComponentType<?>, ComponentType<Float>> PROJECTILE_SPREAD =
             COMPONENT_TYPES.register("projectile_spread", () -> ComponentType.<Float>builder()
+                    .persisted(Codec.FLOAT)
+                    .synced(StreamCodecUtils.FLOAT)
+                    .build());
+
+    public static final DeferredHolder<ComponentType<?>, ComponentType<Float>> MELEE_POWER =
+            COMPONENT_TYPES.register("melee_power", () -> ComponentType.<Float>builder()
+                    .persisted(Codec.FLOAT)
+                    .synced(StreamCodecUtils.FLOAT)
+                    .build());
+
+    public static final DeferredHolder<ComponentType<?>, ComponentType<Float>> ARCHER_POWER =
+            COMPONENT_TYPES.register("archer_power", () -> ComponentType.<Float>builder()
                     .persisted(Codec.FLOAT)
                     .synced(StreamCodecUtils.FLOAT)
                     .build());

@@ -2,7 +2,6 @@ package com.example.cqsarmory.models;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.ArrowDamageMomentumOrb;
-import com.example.cqsarmory.data.entity.ability.ExplosiveMomentumOrb;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;
 

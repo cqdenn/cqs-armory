@@ -3,9 +3,9 @@ package com.example.cqsarmory.data.entity.ability;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.SpellDamageSource;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
@@ -48,7 +48,7 @@ public class LightningArrow extends AbilityArrow{
                 float damage = (float) this.getBaseDamage();
                 if (getOwner() instanceof LivingEntity living) damage *= (float) living.getAttributeValue(AttributeRegistry.LIGHTNING_SPELL_POWER);
                 float finDmg = damage;
-                var source = SpellDamageSource.source(lightningBolt, getOwner(), SpellRegistry.LIGHTNING_BOLT_SPELL.get());
+                var source = SpellDamageSource.source(SpellRegistry.LIGHTNING_BOLT_SPELL.get(), level(), this, getOwner(), this.position());
                 var finalpos = pos;
                 level().getEntities(getOwner(), AABB.ofSize(finalpos, radius * 2, radius * 2, radius * 2), (target) -> this.canHit(getOwner(), target)).forEach(target -> {
                     double distance = target.distanceToSqr(finalpos);

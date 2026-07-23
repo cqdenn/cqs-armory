@@ -1,18 +1,12 @@
 package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.data.DamageData;
-import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
-import io.netty.handler.ssl.util.TrustManagerFactoryWrapper;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.effect.ISyncedMobEffect;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.EffectCure;
 
 import java.util.Set;

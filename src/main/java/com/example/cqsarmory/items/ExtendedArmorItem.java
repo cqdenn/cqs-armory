@@ -1,11 +1,11 @@
 package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.registry.ArmorMaterialsRegistry;
 import com.example.cqsarmory.registry.AttributeRegistry;
 import com.google.common.base.Suppliers;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
+import io.redspace.skillcasting.registry.SkillcastingAttributes;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -15,13 +15,12 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
+import software.bernie.geckolib.animation.AnimatableManager;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Supplier;
@@ -79,11 +78,11 @@ public abstract class ExtendedArmorItem extends ArmorItem implements GeoItem {
     }
 
     public static AttributeContainer[] genericMageArmorAttributes (float spellPower, float manaRegen, int mana, float castTimeReduction, float cdReduction, AttributeContainer extraAttribute) {
-        return new AttributeContainer[]{new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, spellPower, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MANA_REGEN, manaRegen, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA, mana, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.COOLDOWN_REDUCTION, cdReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.CAST_TIME_REDUCTION, castTimeReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), extraAttribute};
+        return new AttributeContainer[]{new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, spellPower, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MANA_REGEN, manaRegen, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA, mana, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(SkillcastingAttributes.COOLDOWN_REDUCTION, cdReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(SkillcastingAttributes.CAST_TIME_REDUCTION, castTimeReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), extraAttribute};
     }
 
     public static AttributeContainer[] genericMageArmorAttributes (float spellPower, float manaRegen, int mana, float castTimeReduction, float cdReduction) {
-        return new AttributeContainer[]{new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, spellPower, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MANA_REGEN, manaRegen, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA, mana, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.COOLDOWN_REDUCTION, cdReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.CAST_TIME_REDUCTION, castTimeReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)};
+        return new AttributeContainer[]{new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER, spellPower, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MANA_REGEN, manaRegen, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.MAX_MANA, mana, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(SkillcastingAttributes.COOLDOWN_REDUCTION, cdReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(SkillcastingAttributes.CAST_TIME_REDUCTION, castTimeReduction, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)};
     }
 
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);

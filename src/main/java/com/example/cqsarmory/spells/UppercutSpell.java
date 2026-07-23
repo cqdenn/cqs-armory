@@ -1,3 +1,4 @@
+/*
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
@@ -105,7 +106,8 @@ public class UppercutSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        /*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        */
+/*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 2 * spellLevel;
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(radius));
         var damageSource = CQSpellRegistry.UPPERCUT_SPELL.get().getDamageSource(entity);
@@ -118,7 +120,9 @@ public class UppercutSpell extends AbstractSpell {
                 target.push(direction);
                 target.hurtMarked = true;
             }
-        }*/
+        }*//*
+
 
     }
 }
+*/

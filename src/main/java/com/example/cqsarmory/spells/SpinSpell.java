@@ -1,43 +1,32 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.cast.CastType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 
 import java.util.List;
-import java.util.Optional;
 
-@AutoSpellConfig
 public class SpinSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "spin_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -81,7 +70,7 @@ public class SpinSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
     @Override
@@ -90,9 +79,9 @@ public class SpinSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (25 * (spellLevel - 1))),
+                Component.translatable("ui.cqs_armory.weapon_damage", 100 + (25 * (castContext.getSkillLevel() - 1))),
                 Component.literal("25% Damage Reduction")
         );
     }
@@ -100,7 +89,7 @@ public class SpinSpell extends AbstractSpell {
     public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem, int spellLevel) {
         float playerAttackDamage = (float) caster.getAttribute(Attributes.ATTACK_DAMAGE).getValue();
         float damage = playerAttackDamage + ((playerAttackDamage / 4) * (spellLevel - 1));
-        var source = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(caster);
+        var source = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(caster.level(), null, caster);
         if (caster.level() instanceof ServerLevel serverLevel && target != null) {
             return EnchantmentHelper.modifyDamage(serverLevel, weaponItem, target, source, damage);
         }
@@ -108,15 +97,15 @@ public class SpinSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
         var entities = level.getEntities(entity, entity.getBoundingBox().inflate(2));
-        var damageSource = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(entity);
-        ItemStack weaponItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+        var damageSource = CQSpellRegistry.SPIN_SPELL.get().getDamageSource(entity.level(), null, entity);
+        ItemStack weaponItem = castContext.getCastSource().isFromSlot(EquipmentSlot.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
 
         for (Entity target : entities) {
             if (!DamageSources.isFriendlyFireBetween(entity, target) && !entity.isSpectator() && Utils.hasLineOfSight(target.level(), entity.position(), target.getBoundingBox().getCenter(), true)) {
-                float damage = (float) getDamage(target, entity, weaponItem, spellLevel);
+                float damage = (float) getDamage(target, entity, weaponItem, castContext.getSkillLevel());
                 if (target.hurt(damageSource, damage)) {
                     EnchantmentHelper.doPostAttackEffects((ServerLevel) level, target, damageSource);
                 }

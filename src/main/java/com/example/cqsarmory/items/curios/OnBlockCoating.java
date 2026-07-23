@@ -1,8 +1,6 @@
 package com.example.cqsarmory.items.curios;
 
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
 public class OnBlockCoating extends SimpleDescriptiveCoating{

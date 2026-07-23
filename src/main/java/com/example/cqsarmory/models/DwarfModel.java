@@ -2,12 +2,9 @@ package com.example.cqsarmory.models;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.living.Dwarf;
-import io.redspace.ironsspellbooks.IronsSpellbooks;
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.AbstractSpellCastingMob;
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.AbstractSpellCastingMobModel;
 import net.minecraft.resources.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animation.Animation;
 
 public class DwarfModel extends AbstractSpellCastingMobModel {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "textures/entity/dwarf.png");

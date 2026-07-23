@@ -1,6 +1,5 @@
 package com.example.cqsarmory.data.entity.ability;
 
-import com.example.cqsarmory.registry.Tags;
 import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleProjectile;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

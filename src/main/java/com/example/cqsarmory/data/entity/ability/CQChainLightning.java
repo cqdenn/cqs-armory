@@ -2,7 +2,6 @@ package com.example.cqsarmory.data.entity.ability;
 
 import com.example.cqsarmory.mixin.ChainLightningMixin;
 import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.entity.spells.AbstractMagicProjectile;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.particle.ZapParticleOption;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
@@ -10,7 +9,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
@@ -25,7 +23,7 @@ public class CQChainLightning extends ChainLightning {
         this.zapStartPos = zapStartPos;
     }
 
-    public CQChainLightning(EntityType<? extends Projectile> pEntityType, Level pLevel) {
+    public CQChainLightning(EntityType<? extends ChainLightning> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
@@ -95,7 +93,6 @@ public class CQChainLightning extends ChainLightning {
         projectileTick();
         if (tickCount == 1) {
             // prevent first-tick flicker due to deltaMoveOld being "uninitialized" on our first tick
-            deltaMovementOld = getDeltaMovement();
         }
         if (tickCount > EXPIRE_TIME) {
             discard();
@@ -105,10 +102,9 @@ public class CQChainLightning extends ChainLightning {
             trailParticles();
         }
         handleEntityHoming();
-        handleCursorHoming();
+        handleCursorHoming(48, .18f);
         handleHitDetection();
         travel();
-        deltaMovementOld = getDeltaMovement();
         rotateWithMotion();
     }
 

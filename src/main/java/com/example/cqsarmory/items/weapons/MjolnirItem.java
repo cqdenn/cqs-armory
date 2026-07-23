@@ -2,7 +2,7 @@ package com.example.cqsarmory.items.weapons;
 
 import com.example.cqsarmory.data.AbilityData;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.damage.SpellDamageSource;
+import io.redspace.ironsspellbooks.api.spells.SpellDamageSource;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +13,10 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TridentItem;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -55,7 +58,7 @@ public class MjolnirItem extends TridentItem {
     }
 
     public SpellDamageSource getDamageSource(Entity projectile, Entity attacker) {
-        return SpellDamageSource.source(projectile, attacker, SpellRegistry.SHOCKWAVE_SPELL.get());
+        return SpellDamageSource.source(SpellRegistry.SHOCKWAVE_SPELL.get(), attacker.level(), projectile, attacker, null);
     }
 
 

@@ -1,7 +1,6 @@
 package com.example.cqsarmory.items.curios.coatings;
 
 import com.example.cqsarmory.items.curios.OnHitCoating;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;

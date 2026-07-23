@@ -1,26 +1,15 @@
 package com.example.cqsarmory.items.curios.quivers;
 
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
-import com.example.cqsarmory.data.entity.ability.FireworkProjectile;
-import com.example.cqsarmory.items.curios.QuiverItem;
 import com.example.cqsarmory.items.curios.SimpleDescriptiveQuiver;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
 
 public class PoisonQuiver extends SimpleDescriptiveQuiver {
-    public PoisonQuiver(Properties properties, String slotIdentifier, SpellDataRegistryHolder[] spellDataRegistryHolders) {
+    public PoisonQuiver(Properties properties, String slotIdentifier, SkillData... spellDataRegistryHolders) {
         super(properties, slotIdentifier, spellDataRegistryHolders);
     }
 

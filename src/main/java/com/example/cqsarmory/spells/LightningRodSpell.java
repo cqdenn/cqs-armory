@@ -1,33 +1,21 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.entity.ability.IceArrow;
 import com.example.cqsarmory.data.entity.ability.LightningRodEntity;
-import com.example.cqsarmory.registry.SoundRegistry;
-import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
-import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.cast.CastType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.Mth;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
-@AutoSpellConfig
 public class LightningRodSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "lightning_rod_spell");
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.LIGHTNING_RESOURCE)
@@ -36,7 +24,7 @@ public class LightningRodSpell extends AbstractSpell {
             .build();
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.literal("Splits Damage Between Targets"),
                 Component.literal(getLifetime()/20 + " Second Lifetime"),
@@ -71,11 +59,6 @@ public class LightningRodSpell extends AbstractSpell {
         return defaultConfig;
     }
 
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
-
     /*@Override
     public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
         double entityCastTimeModifier = 1;
@@ -94,14 +77,15 @@ public class LightningRodSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
+    public void onCast(ServerLevel level, CastContext castContext) {
+        Entity test = castContext.asEntityCaster();
+        if (!(test instanceof LivingEntity entity)) return;
         LightningRodEntity rod = new LightningRodEntity(level, entity, getLifetime(), getRadius());
         rod.setDeltaMovement(entity.getForward().scale(0.75));
         rod.setNoGravity(false);
         rod.noPhysics = false;
         rod.setPos(entity.getEyePosition());
         level.addFreshEntity(rod);
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 
 }

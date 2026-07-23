@@ -1,3 +1,4 @@
+/*
 package com.example.cqsarmory.spells;
 
 import com.example.cqsarmory.CqsArmory;
@@ -88,7 +89,8 @@ public class SkyStrikeSpell extends AbstractSpell {
         return 2;
     }
 
-  /*  @Override
+  */
+/*  @Override
     public void onClientPreCast(Level level, int spellLevel, LivingEntity entity, InteractionHand hand, @Nullable MagicData playerMagicData) {
         super.onClientPreCast(level, spellLevel, entity, hand, playerMagicData);
         if (MagicData.getPlayerMagicData(entity).getPlayerRecasts() != null) {
@@ -96,7 +98,8 @@ public class SkyStrikeSpell extends AbstractSpell {
                 ClientSpellCastHelper.animatePlayerStart(player, AbilityAnimations.UPPERCUT_ANIMATION.getForPlayer().get());
             }
         }
-    }*/
+    }*//*
+
 
     @Override
     public AnimationHolder getCastStartAnimation() {
@@ -122,7 +125,8 @@ public class SkyStrikeSpell extends AbstractSpell {
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        /*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
+        */
+/*super.onCast(level, spellLevel, entity, castSource, playerMagicData);
         int radius = 4;
         Vec3 direction = new Vec3(entity.getForward().x, 1, entity.getForward().z);
         if (!playerMagicData.getPlayerRecasts().hasRecastForSpell(getSpellId())) {
@@ -144,8 +148,10 @@ public class SkyStrikeSpell extends AbstractSpell {
             entity.setDeltaMovement(direction.multiply(1, -1, 1));
             entity.hurtMarked = true;
             entity.addEffect(new MobEffectInstance(MobEffectRegistry.SKY_STRIKE, 40, 0, false, false, false));
-        }*/
+        }*//*
+
 
 
     }
 }
+*/

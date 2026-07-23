@@ -1,20 +1,11 @@
 package com.example.cqsarmory.data.entity.ability;
 
-import com.example.cqsarmory.data.AbilityData;
-import com.example.cqsarmory.registry.AttributeRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.utils.CQRaycaster;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.registries.ParticleRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;

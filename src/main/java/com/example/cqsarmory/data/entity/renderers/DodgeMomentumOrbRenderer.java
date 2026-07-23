@@ -1,8 +1,6 @@
 package com.example.cqsarmory.data.entity.renderers;
 
-import com.example.cqsarmory.data.entity.ability.ArrowDamageMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.DodgeMomentumOrb;
-import com.example.cqsarmory.models.ArrowDamageMomentumOrbModel;
 import com.example.cqsarmory.models.DodgeMomentumOrbModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

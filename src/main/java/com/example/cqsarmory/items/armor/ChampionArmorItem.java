@@ -3,30 +3,16 @@ package com.example.cqsarmory.items.armor;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.ExtendedArmorItem;
 import com.example.cqsarmory.registry.ArmorMaterialsRegistry;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Multimap;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterials;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-import top.theillusivec4.curios.CuriosConstants;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotAttribute;
-
-import java.util.Optional;
 
 public class ChampionArmorItem extends ExtendedArmorItem {
 

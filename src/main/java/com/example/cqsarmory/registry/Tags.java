@@ -1,11 +1,10 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
-import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.skillcasting.data.AbstractSkill;
+import io.redspace.skillcasting.registry.SkillcastingRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
@@ -43,11 +42,11 @@ public class Tags {
         }
     }
 
-    public static class AbstractSpells {
-        public static final TagKey<AbstractSpell> SUMMONING_SPELLS = tag("summoning_spells");
+    public static class AbstractSkills {
+        public static final TagKey<AbstractSkill> SUMMONING_SPELLS = tag("summoning_spells");
 
-        private static TagKey<AbstractSpell> tag(String name) {
-            return TagKey.create(SpellRegistry.SPELL_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
+        private static TagKey<AbstractSkill> tag(String name) {
+            return TagKey.create(SkillcastingRegistries.SKILL_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
         }
     }
 }

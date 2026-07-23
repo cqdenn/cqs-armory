@@ -3,24 +3,15 @@ package com.example.cqsarmory.data.effects;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.data.entity.ability.HellfireAOEEntity;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
-import io.redspace.ironsspellbooks.entity.spells.fireball.MagicFireball;
-import io.redspace.ironsspellbooks.entity.spells.fireball.SmallMagicFireball;
-import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
-import io.redspace.ironsspellbooks.spells.fire.FireballSpell;
-import net.minecraft.Util;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 
 public class HellfireMageAOEEffect extends NonCurableEffect {
     public HellfireMageAOEEffect(MobEffectCategory category, int color) {
@@ -45,7 +36,7 @@ public class HellfireMageAOEEffect extends NonCurableEffect {
 
                 HellfireAOEEntity fireball = new HellfireAOEEntity(level, livingEntity);
                 fireball.setDamage(damage);
-                fireball.setExplosionRadius(1f);
+                fireball.setRadius(1f);
                 fireball.setPos(new Vec3(targetX, targetY, targetZ));
                 fireball.setDeltaMovement(0, -1, 0);
                 level.addFreshEntity(fireball);
@@ -67,7 +58,7 @@ public class HellfireMageAOEEffect extends NonCurableEffect {
 
             HellfireAOEEntity fireball = new HellfireAOEEntity(level, livingEntity);
             fireball.setDamage(damage);
-            fireball.setExplosionRadius(1f);
+            fireball.setRadius(1f);
             fireball.setPos(new Vec3(x, y, z));
             fireball.setDeltaMovement(0, -1, 0);
             level.addFreshEntity(fireball);

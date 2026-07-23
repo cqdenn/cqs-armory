@@ -1,7 +1,6 @@
 package com.example.cqsarmory.models;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.data.entity.ability.IceExplosionMomentumOrb;
 import com.example.cqsarmory.data.entity.ability.RootMomentumOrb;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.DefaultedEntityGeoModel;

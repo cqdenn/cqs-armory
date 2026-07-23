@@ -1,40 +1,25 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.level.Level;
 
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class RiposteSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "riposte_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -72,12 +57,12 @@ public class RiposteSpell extends AbstractSpell {
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.RIPOSTE_CAST_SOUND.get());
+    public Optional<PlayableSound> getCastStartSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.RIPOSTE_CAST_SOUND.get()));
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
         return Optional.empty();
     }
 
@@ -88,7 +73,7 @@ public class RiposteSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
     @Override
@@ -97,16 +82,21 @@ public class RiposteSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 400),
-                Component.translatable("ui.cqs_armory.stun_duration", (2 * spellLevel) + "s")
+                Component.translatable("ui.cqs_armory.stun_duration", (2 * castContext.getSkillLevel()) + "s")
         );
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
-        entity.addEffect(new MobEffectInstance(MobEffectRegistry.CASTING_SPEED, getEffectiveCastTime(spellLevel, entity), 0, false, false, false));
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.CASTING_MOVESPEED_MULTIPLIER, 1f);
+    }
+
+    @Override
+    public void onCast(ServerLevel level, CastContext castContext) {
+
     }
 }

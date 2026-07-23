@@ -1,9 +1,7 @@
 package com.example.cqsarmory.items.curios.coatings;
 
-import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -12,13 +10,12 @@ import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.particle.FlameStrikeParticleOptions;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.ironsspellbooks.util.ParticleHelper;
+import io.redspace.skillcasting.data.selection.SkillSelectionManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -35,7 +32,7 @@ public class FireCoating extends OnSwingCoating {
         Level level = attacker.level();
         float radius = 3.25f;
         float distance = 1.9f;
-        MagicData playerMagicData = MagicData.getPlayerMagicData(attacker);
+        MagicData playerMagicData = MagicData.get(attacker);
         double damage = (hitDamage * 0.25) * attacker.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER);
         Vec3 forward = attacker.getForward();
         Vec3 hitLocation = attacker.position().add(0, attacker.getBbHeight() * .3f, 0).add(forward.scale(distance));
@@ -52,7 +49,7 @@ public class FireCoating extends OnSwingCoating {
                 }
             }
         }
-        boolean mirrored = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.MAINHAND);
+        boolean mirrored = playerMagicData.getCachedCastingEquipmentSlot().equals(SkillSelectionManager.MAINHAND);
         MagicManager.spawnParticles(level, new FlameStrikeParticleOptions((float) forward.x, (float) forward.y, (float) forward.z, mirrored, false, 1f), hitLocation.x, hitLocation.y+.3, hitLocation.z, 1, 0, 0, 0, 0, true);
         level.playSound(null, attacker.blockPosition(), SoundRegistry.FLAMING_STRIKE_SWING.get(), SoundSource.PLAYERS, 0.2f, 1);
     }

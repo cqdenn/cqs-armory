@@ -1,66 +1,25 @@
 package com.example.cqsarmory.items;
 
-import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
-import io.redspace.bowattributes.BowAttributeLib;
 import io.redspace.bowattributes.registry.BowAttributes;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
-import io.redspace.ironsspellbooks.api.spells.IPresetSpellContainer;
-import io.redspace.ironsspellbooks.api.spells.ISpellContainer;
-import io.redspace.ironsspellbooks.api.spells.SpellData;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EquipmentSlot;
+import io.redspace.skillcasting.data.skill.ISkillContainer;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.BowItem;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
 
 import static io.redspace.bowattributes.BowAttributeLib.BASE_ARROW_DAMAGE_ID;
 import static io.redspace.bowattributes.BowAttributeLib.BASE_DRAWSPEED_ID;
 
-public class ExtendedBowItem extends BowItem implements IPresetSpellContainer {
+public class ExtendedBowItem extends BowItem {
 
-    List<SpellData> spellData = null;
-    SpellDataRegistryHolder[] spellDataRegistryHolders;
-
-    public ExtendedBowItem(Properties pProperties, SpellDataRegistryHolder[] spellDataRegistryHolders) {
-        super(pProperties);
-        this.spellDataRegistryHolders = spellDataRegistryHolders;
-
+    public ExtendedBowItem(Properties pProperties, SkillData... spellDataRegistryHolders) {
+        super(pProperties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
     }
-
-    public List<SpellData> getSpells() {
-        if (spellData == null) {
-            spellData = Arrays.stream(spellDataRegistryHolders).map(SpellDataRegistryHolder::getSpellData).toList();
-            spellDataRegistryHolders = null;
-        }
-        return spellData;
-    }
-
-
-    public void initializeSpellContainer(ItemStack itemStack) {
-        if (itemStack == null) {
-            return;
-        }
-
-        if (!ISpellContainer.isSpellContainer(itemStack)) {
-            var spells = getSpells();
-            var spellContainer = ISpellContainer.create(spells.size(), true, false).mutableCopy();
-            spells.forEach(spellData -> spellContainer.addSpell(spellData.getSpell(), spellData.getLevel(), true));
-            itemStack.set(ComponentRegistry.SPELL_CONTAINER, spellContainer.toImmutable());
-        }
-    }
-
 
     public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float arrowDamage, float drawSpeed, AttributeContainer[] attributes) {
 

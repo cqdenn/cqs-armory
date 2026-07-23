@@ -1,32 +1,36 @@
 package com.example.cqsarmory.registry;
 
 import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.api.CQSpellDataRegistryHolder;
 import com.example.cqsarmory.data.ItemModelDataGenerator;
 import com.example.cqsarmory.items.*;
-import com.example.cqsarmory.items.armor.*;
+import com.example.cqsarmory.items.armor.ChampionArmorItem;
+import com.example.cqsarmory.items.armor.MarksmanArmorItem;
 import com.example.cqsarmory.items.curios.*;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.brands.ElementalBrand;
 import com.example.cqsarmory.items.curios.brands.SummonersBrand;
 import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
-import com.example.cqsarmory.items.weapons.*;
+import com.example.cqsarmory.items.weapons.ExtendedMaceItem;
+import com.example.cqsarmory.items.weapons.GreataxeItem;
+import com.example.cqsarmory.items.weapons.GroundPounderItem;
+import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.utils.CQItemPropertyHelper;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
-import io.redspace.ironsspellbooks.api.registry.SpellDataRegistryHolder;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.item.UpgradeOrbItem;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
 import io.redspace.ironsspellbooks.registries.ComponentRegistry;
-import io.redspace.ironsspellbooks.util.ItemPropertiesHelper;
+import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ArmorItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -44,205 +48,205 @@ public class ItemRegistry {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CqsArmory.MODID);
 
     //archer dmg
-   /* public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> HUNTER_CHESTPLATE = ITEMS.register("hunter_chestplate", () -> new HunterArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> HUNTER_LEGGINGS = ITEMS.register("hunter_leggings", () -> new HunterArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+   /* public static final DeferredHolder<Item, Item> HUNTER_HELMET = ITEMS.register("hunter_helmet", () -> new HunterArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_CHESTPLATE = ITEMS.register("hunter_chestplate", () -> new HunterArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_LEGGINGS = ITEMS.register("hunter_leggings", () -> new HunterArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> HUNTER_BOOTS = ITEMS.register("hunter_boots", () -> new HunterArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-   /* public static final DeferredHolder<Item, Item> TRACKER_HELMET = ITEMS.register("tracker_helmet", () -> new TrackerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> TRACKER_CHESTPLATE = ITEMS.register("tracker_chestplate", () -> new TrackerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> TRACKER_LEGGINGS = ITEMS.register("tracker_leggings", () -> new TrackerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> TRACKER_BOOTS = ITEMS.register("tracker_boots", () -> new TrackerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+   /* public static final DeferredHolder<Item, Item> TRACKER_HELMET = ITEMS.register("tracker_helmet", () -> new TrackerArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> TRACKER_CHESTPLATE = ITEMS.register("tracker_chestplate", () -> new TrackerArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> TRACKER_LEGGINGS = ITEMS.register("tracker_leggings", () -> new TrackerArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> TRACKER_BOOTS = ITEMS.register("tracker_boots", () -> new TrackerArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    public static final DeferredHolder<Item, Item> MARKSMAN_HELMET = ITEMS.register("marksman_helmet", () -> new MarksmanArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
-    public static final DeferredHolder<Item, Item> MARKSMAN_CHESTPLATE = ITEMS.register("marksman_chestplate", () -> new MarksmanArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
-    public static final DeferredHolder<Item, Item> MARKSMAN_LEGGINGS = ITEMS.register("marksman_leggings", () -> new MarksmanArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> MARKSMAN_BOOTS = ITEMS.register("marksman_boots", () -> new MarksmanArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> MARKSMAN_HELMET = ITEMS.register("marksman_helmet", () -> new MarksmanArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
+    public static final DeferredHolder<Item, Item> MARKSMAN_CHESTPLATE = ITEMS.register("marksman_chestplate", () -> new MarksmanArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
+    public static final DeferredHolder<Item, Item> MARKSMAN_LEGGINGS = ITEMS.register("marksman_leggings", () -> new MarksmanArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> MARKSMAN_BOOTS = ITEMS.register("marksman_boots", () -> new MarksmanArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 
     //archer speed
-    /*public static final DeferredHolder<Item, Item> SCOUT_HELMET = ITEMS.register("scout_helmet", () -> new ScoutArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SCOUT_CHESTPLATE = ITEMS.register("scout_chestplate", () -> new ScoutArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SCOUT_LEGGINGS = ITEMS.register("scout_leggings", () -> new ScoutArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SCOUT_BOOTS = ITEMS.register("scout_boots", () -> new ScoutArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> SCOUT_HELMET = ITEMS.register("scout_helmet", () -> new ScoutArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SCOUT_CHESTPLATE = ITEMS.register("scout_chestplate", () -> new ScoutArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SCOUT_LEGGINGS = ITEMS.register("scout_leggings", () -> new ScoutArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SCOUT_BOOTS = ITEMS.register("scout_boots", () -> new ScoutArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-    /*public static final DeferredHolder<Item, Item> RANGER_HELMET = ITEMS.register("ranger_helmet", () -> new RangerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> RANGER_CHESTPLATE = ITEMS.register("ranger_chestplate", () -> new RangerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> RANGER_LEGGINGS = ITEMS.register("ranger_leggings", () -> new RangerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> RANGER_BOOTS = ITEMS.register("ranger_boots", () -> new RangerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+    /*public static final DeferredHolder<Item, Item> RANGER_HELMET = ITEMS.register("ranger_helmet", () -> new RangerArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> RANGER_CHESTPLATE = ITEMS.register("ranger_chestplate", () -> new RangerArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> RANGER_LEGGINGS = ITEMS.register("ranger_leggings", () -> new RangerArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> RANGER_BOOTS = ITEMS.register("ranger_boots", () -> new RangerArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    /*public static final DeferredHolder<Item, Item> SKIRMISHER_HELMET = ITEMS.register("skirmisher_helmet", () -> new SkirmisherArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SKIRMISHER_CHESTPLATE = ITEMS.register("skirmisher_chestplate", () -> new SkirmisherArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SKIRMISHER_LEGGINGS = ITEMS.register("skirmisher_leggings", () -> new SkirmisherArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SKIRMISHER_BOOTS = ITEMS.register("skirmisher_boots", () -> new SkirmisherArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    /*public static final DeferredHolder<Item, Item> SKIRMISHER_HELMET = ITEMS.register("skirmisher_helmet", () -> new SkirmisherArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SKIRMISHER_CHESTPLATE = ITEMS.register("skirmisher_chestplate", () -> new SkirmisherArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SKIRMISHER_LEGGINGS = ITEMS.register("skirmisher_leggings", () -> new SkirmisherArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SKIRMISHER_BOOTS = ITEMS.register("skirmisher_boots", () -> new SkirmisherArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
     //melee dmg
-    /*public static final DeferredHolder<Item, Item> WARRIOR_HELMET = ITEMS.register("warrior_helmet", () -> new WarriorArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> WARRIOR_CHESTPLATE = ITEMS.register("warrior_chestplate", () -> new WarriorArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> WARRIOR_LEGGINGS = ITEMS.register("warrior_leggings", () -> new WarriorArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> WARRIOR_BOOTS = ITEMS.register("warrior_boots", () -> new WarriorArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> WARRIOR_HELMET = ITEMS.register("warrior_helmet", () -> new WarriorArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> WARRIOR_CHESTPLATE = ITEMS.register("warrior_chestplate", () -> new WarriorArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> WARRIOR_LEGGINGS = ITEMS.register("warrior_leggings", () -> new WarriorArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> WARRIOR_BOOTS = ITEMS.register("warrior_boots", () -> new WarriorArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-    /*public static final DeferredHolder<Item, Item> SOLDIER_HELMET = ITEMS.register("soldier_helmet", () -> new SoldierArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> SOLDIER_CHESTPLATE = ITEMS.register("soldier_chestplate", () -> new SoldierArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> SOLDIER_LEGGINGS = ITEMS.register("soldier_leggings", () -> new SoldierArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> SOLDIER_BOOTS = ITEMS.register("soldier_boots", () -> new SoldierArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+    /*public static final DeferredHolder<Item, Item> SOLDIER_HELMET = ITEMS.register("soldier_helmet", () -> new SoldierArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> SOLDIER_CHESTPLATE = ITEMS.register("soldier_chestplate", () -> new SoldierArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> SOLDIER_LEGGINGS = ITEMS.register("soldier_leggings", () -> new SoldierArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> SOLDIER_BOOTS = ITEMS.register("soldier_boots", () -> new SoldierArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    public static final DeferredHolder<Item, Item> CHAMPION_HELMET = ITEMS.register("champion_helmet", () -> new ChampionArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
-    public static final DeferredHolder<Item, Item> CHAMPION_CHESTPLATE = ITEMS.register("champion_chestplate", () -> new ChampionArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
-    public static final DeferredHolder<Item, Item> CHAMPION_LEGGINGS = ITEMS.register("champion_leggings", () -> new ChampionArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> CHAMPION_BOOTS = ITEMS.register("champion_boots", () -> new ChampionArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> CHAMPION_HELMET = ITEMS.register("champion_helmet", () -> new ChampionArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37)), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
+    public static final DeferredHolder<Item, Item> CHAMPION_CHESTPLATE = ITEMS.register("champion_chestplate", () -> new ChampionArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> CHAMPION_LEGGINGS = ITEMS.register("champion_leggings", () -> new ChampionArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> CHAMPION_BOOTS = ITEMS.register("champion_boots", () -> new ChampionArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 
     //melee tank
-    /*public static final DeferredHolder<Item, Item> RAMPART_HELMET = ITEMS.register("rampart_helmet", () -> new RampartArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> RAMPART_CHESTPLATE = ITEMS.register("rampart_chestplate", () -> new RampartArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> RAMPART_LEGGINGS = ITEMS.register("rampart_leggings", () -> new RampartArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> RAMPART_BOOTS = ITEMS.register("rampart_boots", () -> new RampartArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> RAMPART_HELMET = ITEMS.register("rampart_helmet", () -> new RampartArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> RAMPART_CHESTPLATE = ITEMS.register("rampart_chestplate", () -> new RampartArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> RAMPART_LEGGINGS = ITEMS.register("rampart_leggings", () -> new RampartArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> RAMPART_BOOTS = ITEMS.register("rampart_boots", () -> new RampartArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-    /*public static final DeferredHolder<Item, Item> BASTION_HELMET = ITEMS.register("bastion_helmet", () -> new BastionArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> BASTION_CHESTPLATE = ITEMS.register("bastion_chestplate", () -> new BastionArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> BASTION_LEGGINGS = ITEMS.register("bastion_leggings", () -> new BastionArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> BASTION_BOOTS = ITEMS.register("bastion_boots", () -> new BastionArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+    /*public static final DeferredHolder<Item, Item> BASTION_HELMET = ITEMS.register("bastion_helmet", () -> new BastionArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> BASTION_CHESTPLATE = ITEMS.register("bastion_chestplate", () -> new BastionArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> BASTION_LEGGINGS = ITEMS.register("bastion_leggings", () -> new BastionArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> BASTION_BOOTS = ITEMS.register("bastion_boots", () -> new BastionArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    /*public static final DeferredHolder<Item, Item> JUGGERNAUT_HELMET = ITEMS.register("juggernaut_helmet", () -> new JuggernautArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> JUGGERNAUT_CHESTPLATE = ITEMS.register("juggernaut_chestplate", () -> new JuggernautArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
-    public static final DeferredHolder<Item, Item> JUGGERNAUT_LEGGINGS = ITEMS.register("juggernaut_leggings", () -> new JuggernautArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> JUGGERNAUT_BOOTS = ITEMS.register("juggernaut_boots", () -> new JuggernautArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    /*public static final DeferredHolder<Item, Item> JUGGERNAUT_HELMET = ITEMS.register("juggernaut_helmet", () -> new JuggernautArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> JUGGERNAUT_CHESTPLATE = ITEMS.register("juggernaut_chestplate", () -> new JuggernautArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> JUGGERNAUT_LEGGINGS = ITEMS.register("juggernaut_leggings", () -> new JuggernautArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> JUGGERNAUT_BOOTS = ITEMS.register("juggernaut_boots", () -> new JuggernautArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
     //mage dmg
-    /*public static final DeferredHolder<Item, Item> APPRENTICE_HELMET = ITEMS.register("apprentice_helmet", () -> new ApprenticeArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> APPRENTICE_CHESTPLATE = ITEMS.register("apprentice_chestplate", () -> new ApprenticeArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> APPRENTICE_LEGGINGS = ITEMS.register("apprentice_leggings", () -> new ApprenticeArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> APPRENTICE_BOOTS = ITEMS.register("apprentice_boots", () -> new ApprenticeArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> APPRENTICE_HELMET = ITEMS.register("apprentice_helmet", () -> new ApprenticeArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_CHESTPLATE = ITEMS.register("apprentice_chestplate", () -> new ApprenticeArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_LEGGINGS = ITEMS.register("apprentice_leggings", () -> new ApprenticeArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> APPRENTICE_BOOTS = ITEMS.register("apprentice_boots", () -> new ApprenticeArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-    /*public static final DeferredHolder<Item, Item> MAGUS_HELMET = ITEMS.register("magus_helmet", () -> new MagusArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MAGUS_CHESTPLATE = ITEMS.register("magus_chestplate", () -> new MagusArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MAGUS_LEGGINGS = ITEMS.register("magus_leggings", () -> new MagusArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MAGUS_BOOTS = ITEMS.register("magus_boots", () -> new MagusArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+    /*public static final DeferredHolder<Item, Item> MAGUS_HELMET = ITEMS.register("magus_helmet", () -> new MagusArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_CHESTPLATE = ITEMS.register("magus_chestplate", () -> new MagusArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_LEGGINGS = ITEMS.register("magus_leggings", () -> new MagusArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MAGUS_BOOTS = ITEMS.register("magus_boots", () -> new MagusArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    /*public static final DeferredHolder<Item, Item> ARCHMAGE_HELMET = ITEMS.register("archmage_helmet", () -> new ArchmageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> ARCHMAGE_CHESTPLATE = ITEMS.register("archmage_chestplate", () -> new ArchmageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
-    public static final DeferredHolder<Item, Item> ARCHMAGE_LEGGINGS = ITEMS.register("archmage_leggings", () -> new ArchmageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> ARCHMAGE_BOOTS = ITEMS.register("archmage_boots", () -> new ArchmageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    /*public static final DeferredHolder<Item, Item> ARCHMAGE_HELMET = ITEMS.register("archmage_helmet", () -> new ArchmageArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_CHESTPLATE = ITEMS.register("archmage_chestplate", () -> new ArchmageArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_LEGGINGS = ITEMS.register("archmage_leggings", () -> new ArchmageArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> ARCHMAGE_BOOTS = ITEMS.register("archmage_boots", () -> new ArchmageArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
     //mage mana
-    /*public static final DeferredHolder<Item, Item> SEER_HELMET = ITEMS.register("seer_helmet", () -> new SeerArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SEER_CHESTPLATE = ITEMS.register("seer_chestplate", () -> new SeerArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SEER_LEGGINGS = ITEMS.register("seer_leggings", () -> new SeerArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
-    public static final DeferredHolder<Item, Item> SEER_BOOTS = ITEMS.register("seer_boots", () -> new SeerArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
+    /*public static final DeferredHolder<Item, Item> SEER_HELMET = ITEMS.register("seer_helmet", () -> new SeerArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_CHESTPLATE = ITEMS.register("seer_chestplate", () -> new SeerArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_LEGGINGS = ITEMS.register("seer_leggings", () -> new SeerArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(22))));
+    public static final DeferredHolder<Item, Item> SEER_BOOTS = ITEMS.register("seer_boots", () -> new SeerArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(22))));
 */
-    /*public static final DeferredHolder<Item, Item> MYSTIC_HELMET = ITEMS.register("mystic_helmet", () -> new MysticArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MYSTIC_CHESTPLATE = ITEMS.register("mystic_chestplate", () -> new MysticArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MYSTIC_LEGGINGS = ITEMS.register("mystic_leggings", () -> new MysticArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
-    public static final DeferredHolder<Item, Item> MYSTIC_BOOTS = ITEMS.register("mystic_boots", () -> new MysticArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
+    /*public static final DeferredHolder<Item, Item> MYSTIC_HELMET = ITEMS.register("mystic_helmet", () -> new MysticArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_CHESTPLATE = ITEMS.register("mystic_chestplate", () -> new MysticArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_LEGGINGS = ITEMS.register("mystic_leggings", () -> new MysticArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(26))));
+    public static final DeferredHolder<Item, Item> MYSTIC_BOOTS = ITEMS.register("mystic_boots", () -> new MysticArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(26))));
 */
-    /*public static final DeferredHolder<Item, Item> SAGE_HELMET = ITEMS.register("sage_helmet", () -> new SageArmorItem(ArmorItem.Type.HELMET, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SAGE_CHESTPLATE = ITEMS.register("sage_chestplate", () -> new SageArmorItem(ArmorItem.Type.CHESTPLATE, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
-    public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, ItemPropertiesHelper.equipment(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+    /*public static final DeferredHolder<Item, Item> SAGE_HELMET = ITEMS.register("sage_helmet", () -> new SageArmorItem(ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_CHESTPLATE = ITEMS.register("sage_chestplate", () -> new SageArmorItem(ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_LEGGINGS = ITEMS.register("sage_leggings", () -> new SageArmorItem(ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+    public static final DeferredHolder<Item, Item> SAGE_BOOTS = ITEMS.register("sage_boots", () -> new SageArmorItem(ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
 */
-    public static final Supplier<CurioBaseItem> BOOSTER_LOCKET = ITEMS.register("booster_locket", () -> new BoosterLocketItem(ItemPropertiesHelper.equipment(1).fireResistant()));
-    public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
-    //public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> WARDSTONE = ITEMS.register("wardstone", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> WARHEART = ITEMS.register("warheart", () -> new SpellHolderBooster(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WRATH_ERUPTION_SPELL, 1))));
-    public static final Supplier<CurioBaseItem> BLADE_MASTERY = ITEMS.register("blade_mastery", () -> new SpellHolderBooster(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PERFECT_TECHNIQUE_SPELL, 1))));
-    public static final Supplier<CurioBaseItem> BEHIND_YOU = ITEMS.register("behind_you", () -> new SpellHolderBooster(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.FLANK_STEP_SPELL, 1))).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BACKSTAB_DAMAGE, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> RETALIATE = ITEMS.register("retaliate", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1).fireResistant(), "booster"));
-    public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    //public static final Supplier<CurioBaseItem> HUNTERS_ECHO = ITEMS.register("hunters_echo", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ORBS_SPAWNED, 1, AttributeModifier.Operation.ADD_VALUE)));
-    //public static final Supplier<CurioBaseItem> BLASTER = ITEMS.register("blaster", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SURF_SHOT = ITEMS.register("surf_shot", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> DOUBLE_STEP = ITEMS.register("double_step", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_DASHES, 1, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
-    //public static final Supplier<CurioBaseItem> QUICKDRAW = ITEMS.register("quickdraw", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    //public static final Supplier<CurioBaseItem> FULL_DEVOTION = ITEMS.register("full_devotion", () -> new SpellHolderBooster(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.FOCUS_SPELL, 1))));
-    public static final Supplier<CurioBaseItem> HUNTERS_MARK = ITEMS.register("hunters_mark", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> KINETIC_STRIKE = ITEMS.register("kinetic_strike", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> BLAST_DASH = ITEMS.register("blast_dash", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARROW_PIERCING, 1, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(BowAttributes.ARROW_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> BIGGER_BOOMER = ITEMS.register("bigger_boomer", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.EXPLOSIVE_DAMAGE, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> OVERWATCH = ITEMS.register("overwatch", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> SLIPSTREAM = ITEMS.register("slipstream", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> GOOPER = ITEMS.register("gooper", () -> new SimpleDescriptiveBooster(ItemPropertiesHelper.equipment(1), "booster"));
-    public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> MARKSMAN_TALISMAN = ITEMS.register("marksman_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 3, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> SCOUT_TALISMAN = ITEMS.register("scout_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 5, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> RANGER_TALISMAN = ITEMS.register("ranger_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 10, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> SKIRMISHER_TALISMAN = ITEMS.register("skirmisher_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 15, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> WARRIOR_TALISMAN = ITEMS.register("warrior_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 5, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> SOLDIER_TALISMAN = ITEMS.register("soldier_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> CHAMPION_TALISMAN = ITEMS.register("champion_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 15, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> RAMPART_TALISMAN = ITEMS.register("rampart_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 15, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> BASTION_TALISMAN = ITEMS.register("bastion_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 25, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> JUGGERNAUT_TALISMAN = ITEMS.register("juggernaut_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 35, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> SEER_TALISMAN = ITEMS.register("seer_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> MYSTIC_TALISMAN = ITEMS.register("mystic_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> SAGE_TALISMAN = ITEMS.register("sage_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> APPRENTICE_TALISMAN = ITEMS.register("apprentice_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> MAGUS_TALISMAN = ITEMS.register("magus_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
-    public static final Supplier<CurioBaseItem> ARCHMAGE_TALISMAN = ITEMS.register("archmage_talisman", () -> new BoosterBaseItem(ItemPropertiesHelper.equipment(1).fireResistant()).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> BOOSTER_LOCKET = ITEMS.register("booster_locket", () -> new BoosterLocketItem(new Item.Properties().stacksTo(1).fireResistant()));
+    public static final Supplier<CurioBaseItem> BERSERKERS_RUSH = ITEMS.register("berserkers_rush", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_SPEED, 0.01, AttributeModifier.Operation.ADD_VALUE)));
+    //public static final Supplier<CurioBaseItem> BERSERKERS_FURY = ITEMS.register("berserkers_fury", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_DAMAGE, 0.01, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> WARDSTONE = ITEMS.register("wardstone", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> WARHEART = ITEMS.register("warheart", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.WRATH_ERUPTION_SPELL, 1)));
+    public static final Supplier<CurioBaseItem> BLADE_MASTERY = ITEMS.register("blade_mastery", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.PERFECT_TECHNIQUE_SPELL, 1)));
+    public static final Supplier<CurioBaseItem> BEHIND_YOU = ITEMS.register("behind_you", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.FLANK_STEP_SPELL, 1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BACKSTAB_DAMAGE, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> RETALIATE = ITEMS.register("retaliate", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
+    public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    //public static final Supplier<CurioBaseItem> HUNTERS_ECHO = ITEMS.register("hunters_echo", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ORBS_SPAWNED, 1, AttributeModifier.Operation.ADD_VALUE)));
+    //public static final Supplier<CurioBaseItem> BLASTER = ITEMS.register("blaster", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> SURF_SHOT = ITEMS.register("surf_shot", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> DOUBLE_STEP = ITEMS.register("double_step", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_DASHES, 1, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
+    //public static final Supplier<CurioBaseItem> QUICKDRAW = ITEMS.register("quickdraw", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    //public static final Supplier<CurioBaseItem> FULL_DEVOTION = ITEMS.register("full_devotion", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.FOCUS_SPELL, 1))));
+    public static final Supplier<CurioBaseItem> HUNTERS_MARK = ITEMS.register("hunters_mark", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> KINETIC_STRIKE = ITEMS.register("kinetic_strike", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> BLAST_DASH = ITEMS.register("blast_dash", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> SHARPHOOTER = ITEMS.register("sharpshooter", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.ARROW_PIERCING, 1, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(BowAttributes.ARROW_DAMAGE, -0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> BIGGER_BOOMER = ITEMS.register("bigger_boomer", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.EXPLOSIVE_DAMAGE, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> OVERWATCH = ITEMS.register("overwatch", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> SLIPSTREAM = ITEMS.register("slipstream", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> GOOPER = ITEMS.register("gooper", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> MARKSMAN_TALISMAN = ITEMS.register("marksman_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 3, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SCOUT_TALISMAN = ITEMS.register("scout_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 5, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> RANGER_TALISMAN = ITEMS.register("ranger_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 10, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SKIRMISHER_TALISMAN = ITEMS.register("skirmisher_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM, 15, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> WARRIOR_TALISMAN = ITEMS.register("warrior_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 5, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SOLDIER_TALISMAN = ITEMS.register("soldier_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> CHAMPION_TALISMAN = ITEMS.register("champion_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_RAGE, 15, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> RAMPART_TALISMAN = ITEMS.register("rampart_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 15, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BASTION_TALISMAN = ITEMS.register("bastion_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 25, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> JUGGERNAUT_TALISMAN = ITEMS.register("juggernaut_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 35, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SEER_TALISMAN = ITEMS.register("seer_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> MYSTIC_TALISMAN = ITEMS.register("mystic_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> SAGE_TALISMAN = ITEMS.register("sage_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(AttributeRegistry.MANA_REGEN, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> APPRENTICE_TALISMAN = ITEMS.register("apprentice_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.05, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> MAGUS_TALISMAN = ITEMS.register("magus_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
+    public static final Supplier<CurioBaseItem> ARCHMAGE_TALISMAN = ITEMS.register("archmage_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
 
-    public static final Supplier<CurioBaseItem> BASIC_QUIVER = ITEMS.register("basic_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(100));
-    public static final Supplier<CurioBaseItem> POISON_QUIVER = ITEMS.register("poison_quiver", () -> new PoisonQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.POISON_ARROW_SPELL, 5))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> FIREWORK_QUIVER = ITEMS.register("firework_quiver", () -> new FireworkQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of()).withQuiverAttributes(250));
-    //public static final Supplier<CurioBaseItem> HUNTERS_QUIVER = ITEMS.register("hunters_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.HUNTERS_MARK_SPELL, 1))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> FIRE_QUIVER = ITEMS.register("fire_quiver", () -> new FireQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.FIRE_ARROW_SPELL, 5))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> ICE_QUIVER = ITEMS.register("ice_quiver", () -> new IceQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.ICE_ARROW_SPELL, 5))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> LIGHTNING_QUIVER = ITEMS.register("lightning_quiver", () -> new LightningQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.LIGHTNING_ROD_SPELL, 1))).withQuiverAttributes(250));
-    //public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> ARCANE_QUIVER = ITEMS.register("arcane_quiver", () -> new ArcaneQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGIC_ARROW_SPELL, 5))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> PLENTY_QUIVER = ITEMS.register("plenty_quiver", () -> new QuiverItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.REFILL_SPELL, 1))).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> BAT_QUIVER = ITEMS.register("bat_quiver", () -> new BatQuiver(ItemPropertiesHelper.equipment(1).fireResistant(), "quiver", SpellDataRegistryHolder.of()).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> SWORD_QUIVER = ITEMS.register("sword_quiver", () -> new SwordQuiver(ItemPropertiesHelper.equipment(1), "quiver", SpellDataRegistryHolder.of()).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> ANVIL_QUIVER = ITEMS.register("anvil_quiver", () -> new AnvilQuiver(ItemPropertiesHelper.equipment(1).fireResistant(), "quiver", SpellDataRegistryHolder.of()).withQuiverAttributes(250));
-    public static final Supplier<CurioBaseItem> SCATTER_QUIVER = ITEMS.register("scatter_quiver", () -> new ScatterQuiver(ItemPropertiesHelper.equipment(1).fireResistant(), "quiver", SpellDataRegistryHolder.of()).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> BASIC_QUIVER = ITEMS.register("basic_quiver", () -> new QuiverItem(new Item.Properties().stacksTo(1)).withQuiverAttributes(100));
+    public static final Supplier<CurioBaseItem> POISON_QUIVER = ITEMS.register("poison_quiver", () -> new PoisonQuiver(new Item.Properties().stacksTo(1), "quiver", new SkillData(SpellRegistry.POISON_ARROW_SPELL, 5)).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> FIREWORK_QUIVER = ITEMS.register("firework_quiver", () -> new FireworkQuiver(new Item.Properties().stacksTo(1)).withQuiverAttributes(250));
+    //public static final Supplier<CurioBaseItem> HUNTERS_QUIVER = ITEMS.register("hunters_quiver", () -> new QuiverItem(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.HUNTERS_MARK_SPELL, 1))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> FIRE_QUIVER = ITEMS.register("fire_quiver", () -> new FireQuiver(new Item.Properties().stacksTo(1), "quiver", new SkillData(SpellRegistry.FIRE_ARROW_SPELL, 5)).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> ICE_QUIVER = ITEMS.register("ice_quiver", () -> new IceQuiver(new Item.Properties().stacksTo(1), "quiver", new SkillData(CQSpellRegistry.ICE_ARROW_SPELL, 5)).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> LIGHTNING_QUIVER = ITEMS.register("lightning_quiver", () -> new LightningQuiver(new Item.Properties().stacksTo(1), "quiver", new SkillData(CQSpellRegistry.LIGHTNING_ROD_SPELL, 1)).withQuiverAttributes(250));
+    //public static final Supplier<CurioBaseItem> GRAVITY_QUIVER = ITEMS.register("gravity_quiver", () -> new GravityQuiver(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.GRAVITY_SNARE_SPELL, 1))).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> ARCANE_QUIVER = ITEMS.register("arcane_quiver", () -> new ArcaneQuiver(new Item.Properties().stacksTo(1), "quiver", new SkillData(SpellRegistry.MAGIC_ARROW_SPELL, 5)).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> PLENTY_QUIVER = ITEMS.register("plenty_quiver", () -> new QuiverItem(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.REFILL_SPELL, 1)).withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> BAT_QUIVER = ITEMS.register("bat_quiver", () -> new BatQuiver(new Item.Properties().stacksTo(1).fireResistant(), "quiver").withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> SWORD_QUIVER = ITEMS.register("sword_quiver", () -> new SwordQuiver(new Item.Properties().stacksTo(1), "quiver").withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> ANVIL_QUIVER = ITEMS.register("anvil_quiver", () -> new AnvilQuiver(new Item.Properties().stacksTo(1).fireResistant(), "quiver").withQuiverAttributes(250));
+    public static final Supplier<CurioBaseItem> SCATTER_QUIVER = ITEMS.register("scatter_quiver", () -> new ScatterQuiver(new Item.Properties().stacksTo(1).fireResistant(), "quiver").withQuiverAttributes(250));
 
-    public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.MAGMA_BOMB_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.SNOWBALL_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.VOLT_STRIKE_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.BLOOD_NEEDLES_SPELL, 10))).withAttributes("brand", new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.EVASION_SPELL, 5))).withAttributes("brand", new AttributeContainer(AttributeRegistry.ENDER_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> GUIDED_BRAND = ITEMS.register("guided_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(SpellRegistry.GUIDING_BOLT_SPELL, 8))).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.MAGMA_BOMB_SPELL, 8)).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.SNOWBALL_SPELL, 5)).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.VOLT_STRIKE_SPELL, 10)).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.BLOOD_NEEDLES_SPELL, 10)).withAttributes("brand", new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> EVASIVE_BRAND = ITEMS.register("evasive_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.EVASION_SPELL, 5)).withAttributes("brand", new AttributeContainer(AttributeRegistry.ENDER_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> GUIDED_BRAND = ITEMS.register("guided_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.GUIDING_BOLT_SPELL, 8)).withAttributes("brand", new AttributeContainer(AttributeRegistry.HOLY_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> VEIL_BRAND = ITEMS.register("veil_brand", () -> new SimpleDescriptiveBrand(new Item.Properties().stacksTo(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 1, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> ARCANE_BRAND = ITEMS.register("arcane_brand", () -> new ArcaneBrand().withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1))).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> ELEMENTAL_BRAND = ITEMS.register("elemental_brand", () -> new ElementalBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> SUMMONERS_BRAND = ITEMS.register("summoners_brand", () -> new SummonersBrand(ItemPropertiesHelper.equipment(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> OVERCHARGE_BRAND = ITEMS.register("overcharge_brand", () -> new SimpleDescriptiveBrand(ItemPropertiesHelper.equipment(1), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> INFINITY_BRAND = ITEMS.register("infinity_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.INFINITE_MAGIC_SPELL, 1)).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> ELEMENTAL_BRAND = ITEMS.register("elemental_brand", () -> new ElementalBrand(new Item.Properties().stacksTo(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SUMMONERS_BRAND = ITEMS.register("summoners_brand", () -> new SummonersBrand(new Item.Properties().stacksTo(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> OVERCHARGE_BRAND = ITEMS.register("overcharge_brand", () -> new SimpleDescriptiveBrand(new Item.Properties().stacksTo(1), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
 
-    public static final Supplier<CurioBaseItem> POISON_COATING = ITEMS.register("poison_coating", () -> new PoisonCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> VOLCANO_COATING = ITEMS.register("volcano_coating", () -> new SimpleDescriptiveCoating(ItemPropertiesHelper.equipment(1).fireResistant(), "coating"));
-    public static final Supplier<CurioBaseItem> LIGHTNING_COATING = ITEMS.register("lightning_coating", () -> new LightningCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> FANG_COATING = ITEMS.register("fang_coating", () -> new FangCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> COSMIC_COATING = ITEMS.register("cosmic_coating", () -> new CosmicCoating(ItemPropertiesHelper.equipment(1).fireResistant(), "coating"));
-    public static final Supplier<CurioBaseItem> THORN_COATING = ITEMS.register("thorn_coating", () -> new ThornCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    //public static final Supplier<CurioBaseItem> EXPLOSIVE_COATING = ITEMS.register("explosive_coating", () -> new ExplosiveCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    //public static final Supplier<CurioBaseItem> TAUNT_COATING = ITEMS.register("taunt_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 50, AttributeModifier.Operation.ADD_VALUE)));
-    //public static final Supplier<CurioBaseItem> BASH_COATING = ITEMS.register("bash_coating", () -> new CoatingBaseItem(ItemPropertiesHelper.equipment(1), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MIN_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
-    public static final Supplier<CurioBaseItem> GUARD_COATING = ITEMS.register("guard_coating", () -> new GuardCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> TANK_COATING = ITEMS.register("tank_coating", () -> new TankCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> BLEED_COATING = ITEMS.register("bleed_coating", () -> new BleedCoating(ItemPropertiesHelper.equipment(1).fireResistant(), "coating", SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CONSUME_BLEED_SPELL, 1))));
-    public static final Supplier<CurioBaseItem> FIRE_COATING = ITEMS.register("fire_coating", () -> new FireCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> ICE_COATING = ITEMS.register("ice_coating", () -> new IceCoating(ItemPropertiesHelper.equipment(1), "coating"));
-    public static final Supplier<CurioBaseItem> HEAVY_COATING = ITEMS.register("heavy_coating", () -> new HeavyCoating(ItemPropertiesHelper.equipment(1), "coating"));
+    public static final Supplier<CurioBaseItem> POISON_COATING = ITEMS.register("poison_coating", () -> new PoisonCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> VOLCANO_COATING = ITEMS.register("volcano_coating", () -> new SimpleDescriptiveCoating(new Item.Properties().stacksTo(1).fireResistant(), "coating"));
+    public static final Supplier<CurioBaseItem> LIGHTNING_COATING = ITEMS.register("lightning_coating", () -> new LightningCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> FANG_COATING = ITEMS.register("fang_coating", () -> new FangCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> COSMIC_COATING = ITEMS.register("cosmic_coating", () -> new CosmicCoating(new Item.Properties().stacksTo(1).fireResistant(), "coating"));
+    public static final Supplier<CurioBaseItem> THORN_COATING = ITEMS.register("thorn_coating", () -> new ThornCoating(new Item.Properties().stacksTo(1), "coating"));
+    //public static final Supplier<CurioBaseItem> EXPLOSIVE_COATING = ITEMS.register("explosive_coating", () -> new ExplosiveCoating(new Item.Properties().stacksTo(1), "coating"));
+    //public static final Supplier<CurioBaseItem> TAUNT_COATING = ITEMS.register("taunt_coating", () -> new CoatingBaseItem(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.TAUNT_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLOCK_STRENGTH, 50, AttributeModifier.Operation.ADD_VALUE)));
+    //public static final Supplier<CurioBaseItem> BASH_COATING = ITEMS.register("bash_coating", () -> new CoatingBaseItem(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.SHIELD_BASH_SPELL, 3))).withAttributes("coating", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MIN_RAGE, 10, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> GUARD_COATING = ITEMS.register("guard_coating", () -> new GuardCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> TANK_COATING = ITEMS.register("tank_coating", () -> new TankCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> BLEED_COATING = ITEMS.register("bleed_coating", () -> new BleedCoating(new Item.Properties().stacksTo(1).fireResistant(), "coating", new SkillData(CQSpellRegistry.CONSUME_BLEED_SPELL, 1)));
+    public static final Supplier<CurioBaseItem> FIRE_COATING = ITEMS.register("fire_coating", () -> new FireCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> ICE_COATING = ITEMS.register("ice_coating", () -> new IceCoating(new Item.Properties().stacksTo(1), "coating"));
+    public static final Supplier<CurioBaseItem> HEAVY_COATING = ITEMS.register("heavy_coating", () -> new HeavyCoating(new Item.Properties().stacksTo(1), "coating"));
 
-    public static final DeferredHolder<Item, Item> MAX_RAGE_UPGRADE_ORB = ITEMS.register("max_rage_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_RAGE)));
-    public static final DeferredHolder<Item, Item> MAX_MOMENTUM_UPGRADE_ORB = ITEMS.register("max_momentum_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_MOMENTUM)));
-    public static final DeferredHolder<Item, Item> MAX_HEALTH_UPGRADE_ORB = ITEMS.register("max_health_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_HEALTH)));
-    public static final DeferredHolder<Item, Item> BLOCK_STRENGTH_UPGRADE_ORB = ITEMS.register("block_strength_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.BLOCK_STRENGTH)));
-    //public static final DeferredHolder<Item, Item> ARCANIST_UPGRADE_ORB = ITEMS.register("arcanist_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.ARCANIST)));
-    //public static final DeferredHolder<Item, Item> NECROMANCY_UPGRADE_ORB = ITEMS.register("necromancy_upgrade_orb", () -> new UpgradeOrbItem(ItemPropertiesHelper.material().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.NECROMANCY)));
+    public static final DeferredHolder<Item, Item> MAX_RAGE_UPGRADE_ORB = ITEMS.register("max_rage_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_RAGE)));
+    public static final DeferredHolder<Item, Item> MAX_MOMENTUM_UPGRADE_ORB = ITEMS.register("max_momentum_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_MOMENTUM)));
+    public static final DeferredHolder<Item, Item> MAX_HEALTH_UPGRADE_ORB = ITEMS.register("max_health_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.MAX_HEALTH)));
+    public static final DeferredHolder<Item, Item> BLOCK_STRENGTH_UPGRADE_ORB = ITEMS.register("block_strength_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.BLOCK_STRENGTH)));
+    //public static final DeferredHolder<Item, Item> ARCANIST_UPGRADE_ORB = ITEMS.register("arcanist_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.ARCANIST)));
+    //public static final DeferredHolder<Item, Item> NECROMANCY_UPGRADE_ORB = ITEMS.register("necromancy_upgrade_orb", () -> new UpgradeOrbItem(new Item.Properties().rarity(Rarity.UNCOMMON).component(ComponentRegistry.UPGRADE_ORB_TYPE, CQUpgradeOrbTypeRegistry.NECROMANCY)));
 
-    public static final DeferredHolder<Item, Item> MELEE_RUNE = ITEMS.register("melee_rune", () -> new Item(ItemPropertiesHelper.material()));
-    public static final DeferredHolder<Item, Item> TANK_RUNE = ITEMS.register("tank_rune", () -> new Item(ItemPropertiesHelper.material()));
-    public static final DeferredHolder<Item, Item> ARCHER_RUNE = ITEMS.register("archer_rune", () -> new Item(ItemPropertiesHelper.material()));
-    public static final DeferredHolder<Item, Item> HEALTHY_RUNE = ITEMS.register("healthy_rune", () -> new Item(ItemPropertiesHelper.material()));
-    //public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(ItemPropertiesHelper.material()));
-    //public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(ItemPropertiesHelper.material()));
+    public static final DeferredHolder<Item, Item> MELEE_RUNE = ITEMS.register("melee_rune", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> TANK_RUNE = ITEMS.register("tank_rune", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> ARCHER_RUNE = ITEMS.register("archer_rune", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> HEALTHY_RUNE = ITEMS.register("healthy_rune", () -> new Item(new Item.Properties()));
+    //public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(new Item.Properties()));
+    //public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(new Item.Properties()));
 
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
@@ -285,7 +289,7 @@ public class ItemRegistry {
     /*public static final DeferredItem<Item> DESERT_FURY = ITEMS.register("desert_fury",
             () -> new DesertFuryItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 12, -2.5F, new AttributeContainer[]{new AttributeContainer(AttributeRegistry.CASTING_MOVESPEED, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-            ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, 1)))
+            ), new SkillData(CQSpellRegistry.SPIN_SPELL, 1)))
     );*/
 
     /*public static final DeferredItem<Item> VILETHORN = ITEMS.register("vilethorn",
@@ -297,25 +301,25 @@ public class ItemRegistry {
     /*public static final DeferredItem<Item> WINGLASH = ITEMS.register("winglash",
             () -> new WinglashItem(ExtendedWeaponTier.CUSTOM, new Item.Properties().stacksTo(1).attributes(ExtendedWeaponItem
                     .createAttributes(ExtendedWeaponTier.CUSTOM, WeaponPower.POWER_TWO, 9, -2.6F, new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})
-            ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
+            ), new SkillData(CQSpellRegistry.SKY_STRIKE_SPELL, 1)))
     );*/
 
     public static final DeferredItem<Item> IRONWALL = ITEMS.register("ironwall",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
                     .attributes(ExtendedShieldItem.createAttributes(100, new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 10, AttributeModifier.Operation.ADD_VALUE)})),
-                    SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.TAUNT_SPELL, 1)))
+                    new SkillData(CQSpellRegistry.TAUNT_SPELL, 1))
     );
 
     public static final DeferredItem<Item> THORNBARK = ITEMS.register("thornbark",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
                     .attributes(ExtendedShieldItem.createAttributes(15, new AttributeContainer[]{new AttributeContainer(Attributes.ATTACK_DAMAGE, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)})),
-                    SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
+                    new SkillData(CQSpellRegistry.SHIELD_BASH_SPELL, 2))
     );
 
     public static final DeferredItem<Item> FLASHGUARD = ITEMS.register("flashguard",
             () -> new ExtendedShieldItem(new Item.Properties().stacksTo(1)
                     .attributes(ExtendedShieldItem.createAttributes(5, new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.10, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.1, AttributeModifier.Operation.ADD_VALUE)})),
-                    SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SHIELD_BASH_SPELL, 2)))
+                    new SkillData(CQSpellRegistry.SHIELD_BASH_SPELL, 2))
     );
 
     /*public static final DeferredItem<Item> SOUL_SUCKER = ITEMS.register("soul_sucker",
@@ -450,67 +454,67 @@ public class ItemRegistry {
         var warhammer = ITEMS.register(name + "_warhammer",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.WARHAMMER.attackDamage(), WeaponType.WARHAMMER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ARMOR, 6 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.STUN_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.STUN_SPELL, power.power()))
         );
 
         var greatsword = ITEMS.register(name + "_greatsword",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.GREATSWORD.attackDamage(), WeaponType.GREATSWORD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.LIFE_STEAL, 0.04 + 0.01 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RUPTURE_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.RUPTURE_SPELL, power.power()))
         );
 
         var halberd = ITEMS.register(name + "_halberd",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.HALBERD.attackDamage(), WeaponType.HALBERD.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLEED_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.EXECUTE_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.EXECUTE_SPELL, power.power()))
         );
 
         var scythe = ITEMS.register(name + "_scythe",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SCYTHE.attackDamage(), WeaponType.SCYTHE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.SUMMON_DAMAGE, 0.05 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.CHAIN_WHIP_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.CHAIN_WHIP_SPELL, power.power()))
         );
 
         var mace = ITEMS.register(name + "_mace",
                 () -> new ExtendedMaceItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.MACE.attackDamage(), WeaponType.MACE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.SAFE_FALL_DISTANCE, 3 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.WIND_BURST_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.WIND_BURST_SPELL, power.power()))
         );
 
         var spear = ITEMS.register(name + "_spear",
                 () -> new SpearItem(material, power, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power, WeaponType.SPEAR.attackDamage(), WeaponType.SPEAR.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.ENTITY_INTERACTION_RANGE, 0.5 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SKEWER_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.SKEWER_SPELL, power.power()))
         );
 
         var rapier = ITEMS.register(name + "_rapier",
                 () -> new ExtendedWeaponItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.RAPIER.attackDamage(), WeaponType.RAPIER.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.AUTO_CRIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RIPOSTE_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.RIPOSTE_SPELL, power.power()))
         );
 
         var greataxe = ITEMS.register(name + "_greataxe",
                 () -> new GreataxeItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).component(DataComponents.TOOL,GreataxeItem.createGreataxeToolProperties(material, power)).attributes(ExtendedWeaponItem
                         .createAttributes(material, power,WeaponType.GREATAXE.attackDamage(), WeaponType.GREATAXE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.RAGE_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.SPIN_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.SPIN_SPELL, power.power()))
         );
 
         var shortbow = ITEMS.register(name + "_shortbow",
                 () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.SHORTBOW.attackDamage(), WeaponType.SHORTBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(Attributes.MOVEMENT_SPEED, 0.1 * material.getMult(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.RAPID_FIRE_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.RAPID_FIRE_SPELL, power.power()))
         );
 
         var recurve = ITEMS.register(name + "_recurve_bow",
                 () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLEED_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.BARRAGE_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.BARRAGE_SPELL, power.power()))
         );
 
         var longbow = ITEMS.register(name + "_longbow",
                 () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
                         .createAttributes(material, power,WeaponType.LONGBOW.attackDamage(), WeaponType.LONGBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
-                ), SpellDataRegistryHolder.of(new SpellDataRegistryHolder(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power())))
+                ), new SkillData(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power()))
         );
 
         var ice = ITEMS.register(name + "_ice_staff",

@@ -1,57 +1,39 @@
 package com.example.cqsarmory.spells;
 
-import com.example.cqsarmory.CqsArmory;
-import com.example.cqsarmory.api.AbilityAnimations;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.items.curios.QuiverItem;
-import com.example.cqsarmory.items.curios.quivers.FireworkQuiver;
 import com.example.cqsarmory.registry.CQSchoolRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.config.DefaultConfig;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
-import io.redspace.ironsspellbooks.api.registry.SchoolRegistry;
-import io.redspace.ironsspellbooks.api.spells.*;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
+import io.redspace.ironsspellbooks.api.spells.SpellRarity;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
-import io.redspace.ironsspellbooks.api.util.Utils;
-import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.PlayableSound;
+import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
-@AutoSpellConfig
 public class PiercingArrowSpell extends AbstractSpell {
-    private final ResourceLocation spellId = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "piercing_arrow_spell");
-
-    @Override
-    public ResourceLocation getSpellResource() {
-        return spellId;
-    }
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -95,16 +77,16 @@ public class PiercingArrowSpell extends AbstractSpell {
 
     @Override
     public AnimationHolder getCastFinishAnimation() {
-        return AnimationHolder.none();
+        return AnimationHolder.stop();
     }
 
     @Override
-    public Optional<SoundEvent> getCastStartSound() {
-        return Optional.of(SoundRegistry.ARROW_VOLLEY_PREPARE.get());
+    public Optional<PlayableSound> getCastStartSound(CastContext castContext) {
+        return Optional.of(PlayableSound.standard(SoundRegistry.ARROW_VOLLEY_PREPARE.get()));
     }
 
     @Override
-    public Optional<SoundEvent> getCastFinishSound() {
+    public Optional<PlayableSound> getOnCastSound(CastContext castContext) {
         return Optional.empty();
     }
 
@@ -114,21 +96,18 @@ public class PiercingArrowSpell extends AbstractSpell {
     }
 
     @Override
-    public List<MutableComponent> getUniqueInfo(int spellLevel, LivingEntity caster) {
+    public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
-                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent(spellLevel) * 100),
+                Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent(castContext.getSkillLevel()) * 100),
                 Component.literal((getBonusDmgPerMomentumPercent() * 100) + "% Bonus Damage per Momentum"),
                 Component.literal("Pierces 10 Times")
         );
     }
 
     @Override
-    public int getEffectiveCastTime(int spellLevel, @Nullable LivingEntity entity) {
-        double entityCastTimeModifier = 1;
-        if (entity != null && entity.getAttributeValue(BowAttributes.DRAW_SPEED) > 0) {
-            entityCastTimeModifier = entity.getAttributeValue(BowAttributes.DRAW_SPEED);
-        }
-        return Math.round(this.getCastTime(spellLevel) / (float) entityCastTimeModifier);
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.CAST_TIME, CQtils.getEffectiveBowCastTime(castContext));
     }
 
     public float getWeaponDamagePercent(int spellLevel) {
@@ -140,12 +119,13 @@ public class PiercingArrowSpell extends AbstractSpell {
     }
 
     @Override
-    public void onCast(Level level, int spellLevel, LivingEntity entity, CastSource castSource, MagicData playerMagicData) {
-        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * getWeaponDamagePercent(spellLevel);
+    public void onCast(ServerLevel level, CastContext castContext) {
+        if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
+        float dmg = (float) entity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * getWeaponDamagePercent(castContext.getSkillLevel());
         dmg *= 1 + (AbilityData.get(entity).getMomentum() * getBonusDmgPerMomentumPercent());
         float scale = 6f;
         AbilityArrow projectile = new AbilityArrow(level);
-        ItemStack wepaonItem = playerMagicData.getCastingEquipmentSlot().equals(SpellSelectionManager.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
+        ItemStack wepaonItem = castContext.getCastSource().isFromSlot(EquipmentSlot.OFFHAND) ? entity.getOffhandItem() : entity.getMainHandItem();
         Holder.Reference<Enchantment> flameHolder = entity.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FLAME);
         if (wepaonItem.getEnchantmentLevel(flameHolder) > 0) {
             projectile.igniteForSeconds(100);
@@ -179,6 +159,5 @@ public class PiercingArrowSpell extends AbstractSpell {
         if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(level, player, entity.getX(), entity.getY(), entity.getZ());
         }
-        super.onCast(level, spellLevel, entity, castSource, playerMagicData);
     }
 }
