@@ -13,21 +13,6 @@
     }
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "irons_spellbooks:fire_arrow",
-            "index": 0,
-            "level": 5,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": true,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:fire_quiver"
   }

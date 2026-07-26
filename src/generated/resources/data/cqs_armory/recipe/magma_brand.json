@@ -13,21 +13,6 @@
     }
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "irons_spellbooks:magma_bomb",
-            "index": 0,
-            "level": 8,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": true,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:magma_brand"
   }

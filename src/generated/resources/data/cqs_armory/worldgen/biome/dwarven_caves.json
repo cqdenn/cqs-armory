@@ -66,8 +66,8 @@
     "monster": [
       {
         "type": "cqs_armory:dwarf",
-        "maxCount": 20,
-        "minCount": 20,
+        "maxCount": 10,
+        "minCount": 10,
         "weight": 100
       }
     ],

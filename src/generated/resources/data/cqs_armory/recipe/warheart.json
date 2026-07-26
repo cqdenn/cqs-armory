@@ -31,21 +31,6 @@
     }
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "cqs_armory:wrath_eruption_spell",
-            "index": 0,
-            "level": 1,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": true,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:warheart"
   }

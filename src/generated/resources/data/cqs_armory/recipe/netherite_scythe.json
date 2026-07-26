@@ -15,21 +15,6 @@
     "s  "
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "cqs_armory:chain_whip_spell",
-            "index": 0,
-            "level": 3,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": false,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:netherite_scythe"
   }

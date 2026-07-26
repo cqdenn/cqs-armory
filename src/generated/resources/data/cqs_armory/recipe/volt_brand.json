@@ -13,21 +13,6 @@
     }
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "irons_spellbooks:volt_strike",
-            "index": 0,
-            "level": 10,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": true,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:volt_brand"
   }

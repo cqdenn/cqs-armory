@@ -18,21 +18,6 @@
     " sS"
   ],
   "result": {
-    "components": {
-      "irons_spellbooks:spell_container": {
-        "data": [
-          {
-            "id": "cqs_armory:rapid_fire_spell",
-            "index": 0,
-            "level": 1,
-            "locked": true
-          }
-        ],
-        "maxSpells": 1,
-        "mustEquip": false,
-        "spellWheel": true
-      }
-    },
     "count": 1,
     "id": "cqs_armory:iron_shortbow"
   }
