@@ -31,7 +31,7 @@ public class ChainWhipSpell extends AbstractSpell {
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
-            .setMaxLevel(1)
+            .setMaxLevel(4)
             .setCooldownSeconds(30)
             .build();
 

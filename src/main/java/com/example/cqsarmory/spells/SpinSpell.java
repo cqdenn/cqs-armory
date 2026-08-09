@@ -12,6 +12,7 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.skillcasting.data.CastContext;
 import io.redspace.skillcasting.data.cast.CastType;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
@@ -84,6 +85,12 @@ public class SpinSpell extends AbstractSpell {
                 Component.translatable("ui.cqs_armory.weapon_damage", 100 + (25 * (castContext.getSkillLevel() - 1))),
                 Component.literal("25% Damage Reduction")
         );
+    }
+
+    @Override
+    public void buildContextComponents(CastContext castContext) {
+        super.buildContextComponents(castContext);
+        castContext.set(SkillcastingComponentTypes.CASTING_MOVESPEED_MULTIPLIER, 1f);
     }
 
     public double getDamage(Entity target, LivingEntity caster, ItemStack weaponItem, int spellLevel) {

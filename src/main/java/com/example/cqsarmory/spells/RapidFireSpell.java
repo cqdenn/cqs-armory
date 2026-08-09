@@ -104,6 +104,11 @@ public class RapidFireSpell extends AbstractSpell {
     }
 
     @Override
+    public int continuousInterval() {
+        return 2;
+    }
+
+    @Override
     public void onCast(ServerLevel level, CastContext castContext) {
         if (!(castContext.asEntityCaster() instanceof LivingEntity entity)) return;
         Vec3 origin = entity.getEyePosition().add(entity.getForward().normalize().scale(.2f));
