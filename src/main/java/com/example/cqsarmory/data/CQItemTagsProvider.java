@@ -59,7 +59,7 @@ public class CQItemTagsProvider extends IntrinsicHolderTagsProvider<Item> {
                 if (weapon.get() instanceof SwordItem || weapon.get() instanceof GreataxeItem) {
                     tag(swordTag).add((Item) weapon.get());
                 }
-                else if (weapon.get() instanceof BowItem) {
+                if (weapon.get() instanceof BowItem) {
                     tag(bowTag).add((Item) weapon.get());
                     tag(durabilityTag).add((Item) weapon.get());
                 }
