@@ -13,10 +13,14 @@ import io.redspace.ironsspellbooks.util.MinecraftInstanceHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CrossbowItem;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -41,7 +45,18 @@ public class ClientSetup {
             };
 
             for (var item : ItemRegistry.ITEMS.getEntries()) {
-                if (item.get() instanceof BowItem) {
+                if (item.get() instanceof CrossbowItem) {
+                    ItemProperties.register(
+                            item.get(),
+                            ResourceLocation.withDefaultNamespace("charged"),
+                            (p_275891_, p_275892_, p_275893_, p_275894_) -> CrossbowItem.isCharged(p_275891_) ? 1.0F : 0.0F
+                    );
+                    ItemProperties.register(item.get(), ResourceLocation.withDefaultNamespace("firework"), (p_329796_, p_329797_, p_329798_, p_329799_) -> {
+                        ChargedProjectiles chargedprojectiles = p_329796_.get(DataComponents.CHARGED_PROJECTILES);
+                        return chargedprojectiles != null && chargedprojectiles.contains(Items.FIREWORK_ROCKET) ? 1.0F : 0.0F;
+                    });
+                }
+                if (item.get() instanceof BowItem || item.get() instanceof CrossbowItem) {
                     ItemProperties.register(
                             item.get(),
                             ResourceLocation.withDefaultNamespace("pulling"),
@@ -106,6 +121,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.LIGHTNING_ROD.get(), LightningRodEntityRenderer::new);
         event.registerEntityRenderer(EntityRegistry.CQ_CHAIN_LIGHTNING_ENTITY.get(), NoopRenderer::new);
         event.registerEntityRenderer(EntityRegistry.HITSCAN_ARCANE_BEAM.get(), HitscanArcaneBeamRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.CHAIN_ARROW.get(), ChainArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DWARF.get(), DwarfRenderer::new);
     }
 

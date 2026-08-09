@@ -517,6 +517,12 @@ public class ItemRegistry {
                 ), new SkillData(CQSpellRegistry.PIERCING_ARROW_SPELL, power.power()))
         );
 
+        var crossbow = ITEMS.register(name + "_crossbow",
+                () -> new ExtendedCrossbowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
+                        .createAttributes(material, power,WeaponType.CROSSBOW.attackDamage(), WeaponType.CROSSBOW.attackSpeed(), new AttributeContainer[]{new AttributeContainer(BowAttributes.AUTOLOAD, 1, AttributeModifier.Operation.ADD_VALUE)})
+                ), new SkillData(CQSpellRegistry.CHAIN_SHOT_SPELL, power.power()))
+        );
+
         var ice = ITEMS.register(name + "_ice_staff",
                 () -> new MagicStaffItem(material, CQItemPropertyHelper.weaponsetItem(fireRes).attributes(MagicStaffItem
                         .createAttributes(material, power,WeaponType.STAFF.attackDamage(), WeaponType.STAFF.attackSpeed(), new AttributeContainer[]{new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, material.getSpellPower(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE)})
@@ -574,6 +580,7 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.bowItemSeparateTransform(longbow, BowType.LONGBOW));
         ItemModelDataGenerator.toRegister.add(generator -> generator.bowItemSeparateTransform(recurve, BowType.RECURVE_BOW));
         ItemModelDataGenerator.toRegister.add(generator -> generator.bowItemStandalone(shortbow, BowType.SHORTBOW));
+        ItemModelDataGenerator.toRegister.add(generator -> generator.crossbowItemStandalone(crossbow));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(ice, generator.atlasLargeItem(ice)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(fire, generator.atlasLargeItem(fire)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(lightning, generator.atlasLargeItem(lightning)));

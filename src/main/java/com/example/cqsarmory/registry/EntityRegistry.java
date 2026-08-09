@@ -126,6 +126,12 @@ public class EntityRegistry {
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "ice_arrow").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<ChainArrow>> CHAIN_ARROW =
+            ENTITIES.register("chain_arrow", () -> EntityType.Builder.<ChainArrow>of(ChainArrow::new, MobCategory.MISC)
+                    .sized(.5f, .5f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "chain_arrow").toString()));
+
     public static final DeferredHolder<EntityType<?>, EntityType<LightningArrow>> LIGHTNING_ARROW =
             ENTITIES.register("lightning_arrow", () -> EntityType.Builder.<LightningArrow>of(LightningArrow::new, MobCategory.MISC)
                     .sized(.5f, .5f)
