@@ -12,6 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -136,6 +137,31 @@ public class ClientEvents {
     }
 
     @SubscribeEvent
+    public static void chainHookRender(RenderLivingEvent.Post<?, ?> event) {
+        LivingEntity living = event.getEntity();
+        DamageData data = DamageData.get(living);
+        if (data.hookedByLocation == null) return;
+
+        float partialTick = event.getPartialTick();
+
+        Vec3 start = new Vec3(
+                Mth.lerp(partialTick, living.xo, living.getX()),
+                Mth.lerp(partialTick, living.yo, living.getY()),
+                Mth.lerp(partialTick, living.zo, living.getZ())
+        ).add(0, 1, 0);
+
+        Vec3 to = data.hookedByLocation;
+
+        PoseStack poseStack = event.getPoseStack();
+        poseStack.pushPose();
+        poseStack.translate(0, 1, 0);
+
+        RenderingUtils.renderChainBetween(start, to, event.getPoseStack(), event.getMultiBufferSource());
+
+        poseStack.popPose();
+    }
+
+    @SubscribeEvent
     public static void chainedGecko (GeoRenderEvent.Entity.Post event) {
         Entity entity = event.getEntity();
         if (entity instanceof LivingEntity living && living.hasEffect(MobEffectRegistry.CHAINED) && DamageData.get(living).chainWhipLocation != null) {
@@ -159,6 +185,31 @@ public class ClientEvents {
             }
             poseStack.popPose();
         }
+    }
+
+    @SubscribeEvent
+    public static void chainHookRender(GeoRenderEvent.Entity.Post event) {
+        Entity living = event.getEntity();
+        DamageData data = DamageData.get(living);
+        if (data.hookedByLocation == null) return;
+
+        float partialTick = event.getPartialTick();
+
+        Vec3 start = new Vec3(
+                Mth.lerp(partialTick, living.xo, living.getX()),
+                Mth.lerp(partialTick, living.yo, living.getY()),
+                Mth.lerp(partialTick, living.zo, living.getZ())
+        ).add(0, 1, 0);
+
+        Vec3 to = data.hookedByLocation;
+
+        PoseStack poseStack = event.getPoseStack();
+        poseStack.pushPose();
+        poseStack.translate(0, 1, 0);
+
+        RenderingUtils.renderChainBetween(start, to, event.getPoseStack(), event.getBufferSource());
+
+        poseStack.popPose();
     }
 
 }

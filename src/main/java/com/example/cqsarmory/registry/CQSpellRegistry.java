@@ -45,7 +45,7 @@ public class CQSpellRegistry {
     public static final DeferredHolder<AbstractSkill, RefillSpell> REFILL_SPELL = registerSpell("refill", RefillSpell::new);
     public static final DeferredHolder<AbstractSkill, ConsumeBleedSpell> CONSUME_BLEED_SPELL = registerSpell("consume_bleed", ConsumeBleedSpell::new);
     public static final DeferredHolder<AbstractSkill, WindBurstSpell> WIND_BURST_SPELL = registerSpell("wind_burst", WindBurstSpell::new);
-    public static final DeferredHolder<AbstractSkill, ChainWhipSpell> CHAIN_WHIP_SPELL = registerSpell("chain_whip", ChainWhipSpell::new);
+    public static final DeferredHolder<AbstractSkill, ChainHookSpell> CHAIN_HOOK_SPELL = registerSpell("chain_hook", ChainHookSpell::new);
     public static final DeferredHolder<AbstractSkill, WrathEruptionSpell> WRATH_ERUPTION_SPELL = registerSpell("wrath_eruption", WrathEruptionSpell::new);
     public static final DeferredHolder<AbstractSkill, ExecuteSpell> EXECUTE_SPELL = registerSpell("execute", ExecuteSpell::new);
     public static final DeferredHolder<AbstractSkill, PerfectTechniqueSpell> PERFECT_TECHNIQUE_SPELL = registerSpell("perfect_technique", PerfectTechniqueSpell::new);

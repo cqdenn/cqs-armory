@@ -369,4 +369,12 @@ public class CQtils {
                 }));
         return stacks;
     }
+
+    public static boolean isFartherThan (Vec3 pos1, Vec3 pos2, float distance) {
+        return pos1.distanceToSqr(pos2) > distance * distance;
+    }
+
+    public static boolean isCloserThan (Vec3 pos1, Vec3 pos2, float distance) {
+        return pos1.distanceToSqr(pos2) < distance * distance;
+    }
 }

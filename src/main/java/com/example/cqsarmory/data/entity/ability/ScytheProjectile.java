@@ -1,18 +1,17 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.registry.DamageTypes;
+import com.example.cqsarmory.registry.EntityDataAttachmentRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
-import com.example.cqsarmory.registry.MobEffectRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
@@ -86,9 +85,9 @@ public class ScytheProjectile extends AbilityArrow {
         if (lifetime >= 15) {
             discard();
         }
-        var entities = level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(0.1));
+        var entities = level().getEntitiesOfClass(Entity.class, this.getBoundingBox().inflate(0.1));
         if (!entities.isEmpty()) {
-            for (LivingEntity target : entities) {
+            for (Entity target : entities) {
                 if (canHitEntity(target)) {
                     customHit(new EntityHitResult(target));
                 }
@@ -154,9 +153,11 @@ public class ScytheProjectile extends AbilityArrow {
 
         if (this.canHitEntity(result.getEntity())) {
             if (!this.level().isClientSide) {
-                target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage);
-                if (target instanceof LivingEntity living && getOwner() instanceof LivingEntity owner) {
-                    living.addEffect(new MobEffectInstance(MobEffectRegistry.CHAINED, duration, 0, false, false, true));
+                if (target.hurt(new DamageSource(damageType, this, getOwner()), (float) damage) && getOwner() != null) {
+                    DamageData.get(target).hookedByLocation = getOwner().position().add(0, 1, 0);
+                    DamageData.get(target).hookedBy = getOwner();
+                    DamageData.get(target).hookedTimestamp = target.level().getGameTime();
+                    target.syncData(EntityDataAttachmentRegistry.DAMAGE_DATA);
                 }
             }
             discard();

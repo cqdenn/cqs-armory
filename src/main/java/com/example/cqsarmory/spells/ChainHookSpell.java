@@ -26,7 +26,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
-public class ChainWhipSpell extends AbstractSpell {
+public class ChainHookSpell extends AbstractSpell {
 
     private final DefaultConfig defaultConfig = new DefaultConfig()
             .setMinRarity(SpellRarity.COMMON)
@@ -35,7 +35,7 @@ public class ChainWhipSpell extends AbstractSpell {
             .setCooldownSeconds(30)
             .build();
 
-    public ChainWhipSpell() {
+    public ChainHookSpell() {
         this.manaCostPerLevel = 0;
         this.baseSpellPower = 4;
         this.spellPowerPerLevel = 1;
@@ -82,7 +82,7 @@ public class ChainWhipSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", 50),
-                Component.translatable("ui.cqs_armory.chained_duration", getDuration(castContext)/20 + "s")
+                Component.literal("Pulls targets towards you")
         );
     }
 

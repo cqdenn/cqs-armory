@@ -52,7 +52,7 @@ public class Dwarf extends NeutralWizard {
             .setDrinksPotions();
     private final WizardAttackGoal meleeGoal = new WarlockAttackGoal(this, 1.1f, 50, 100)
             .setSpells(
-                    List.of(CQSpellRegistry.CHAIN_WHIP_SPELL.get(), CQSpellRegistry.FLANK_STEP_SPELL.get(), CQSpellRegistry.SKEWER_SPELL.get()),
+                    List.of(CQSpellRegistry.CHAIN_HOOK_SPELL.get(), CQSpellRegistry.FLANK_STEP_SPELL.get(), CQSpellRegistry.SKEWER_SPELL.get()),
                     List.of(CQSpellRegistry.SPIN_SPELL.get(), CQSpellRegistry.RIPOSTE_SPELL.get(), CQSpellRegistry.STUN_SPELL.get()),
                     List.of(),
                     List.of()

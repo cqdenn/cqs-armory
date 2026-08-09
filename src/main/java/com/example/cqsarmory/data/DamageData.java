@@ -20,25 +20,37 @@ public class DamageData {
 
     }
 
+    public record OptionalVec3(boolean present, double x, double y, double z) {
+        public static final StreamCodec<FriendlyByteBuf, OptionalVec3> STREAM_CODEC =
+                StreamCodec.composite(
+                        ByteBufCodecs.BOOL, OptionalVec3::present,
+                        ByteBufCodecs.DOUBLE, OptionalVec3::x,
+                        ByteBufCodecs.DOUBLE, OptionalVec3::y,
+                        ByteBufCodecs.DOUBLE, OptionalVec3::z,
+                        OptionalVec3::new
+                );
+
+        public static OptionalVec3 of(Vec3 v) {
+            return v != null ? new OptionalVec3(true, v.x, v.y, v.z) : new OptionalVec3(false, 0, 0, 0);
+        }
+
+        public Vec3 toVec3() {
+            return present ? new Vec3(x, y, z) : null;
+        }
+    }
+
     public static final StreamCodec<FriendlyByteBuf, DamageData> STREAM_CODEC =
             StreamCodec.composite(
-                    ByteBufCodecs.BOOL,
-                    damage -> damage.chainWhipLocation != null,
+                    OptionalVec3.STREAM_CODEC,
+                    damage -> OptionalVec3.of(damage.chainWhipLocation),
 
-                    ByteBufCodecs.DOUBLE,
-                    damage -> damage.chainWhipLocation != null ? damage.chainWhipLocation.x : 0,
+                    OptionalVec3.STREAM_CODEC,
+                    damage -> OptionalVec3.of(damage.hookedByLocation),
 
-                    ByteBufCodecs.DOUBLE,
-                    damage -> damage.chainWhipLocation != null ? damage.chainWhipLocation.y : 0,
-
-                    ByteBufCodecs.DOUBLE,
-                    damage -> damage.chainWhipLocation != null ? damage.chainWhipLocation.z : 0,
-
-                    (hasVec, x, y, z) -> {
+                    (chainLoc, hookedLoc) -> {
                         DamageData data = new DamageData();
-                        if (hasVec) {
-                            data.chainWhipLocation = new Vec3(x, y, z);
-                        }
+                        data.chainWhipLocation = chainLoc.toVec3();
+                        data.hookedByLocation = hookedLoc.toVec3();
                         return data;
                     }
             );
@@ -51,6 +63,9 @@ public class DamageData {
     public HashMap<LivingEntity, Integer> bleedStacks = new HashMap<>();
     public boolean preventAOEChaining;
     public int hellfireAOETargetingDelay;
+    public Vec3 hookedByLocation;
+    public long hookedTimestamp;
+    public Entity hookedBy;
 
     public static DamageData get (Entity entity) {
         return entity.getData(EntityDataAttachmentRegistry.DAMAGE_DATA);

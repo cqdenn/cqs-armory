@@ -1193,6 +1193,33 @@ public class ServerEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void chainHook(EntityTickEvent.Post event) {
+        Entity entity = event.getEntity();
+        if (entity.level().isClientSide) return;
+        int maxHookTime = 10;
+        float minHookDistance = 1.5f;
+        if (DamageData.get(entity).hookedByLocation != null && (DamageData.get(entity).hookedTimestamp <= entity.level().getGameTime() - maxHookTime || CQtils.isCloserThan(DamageData.get(entity).hookedByLocation, entity.position(), minHookDistance))) {
+            DamageData.get(entity).hookedByLocation = null;
+            DamageData.get(entity).hookedBy = null;
+            entity.syncData(EntityDataAttachmentRegistry.DAMAGE_DATA);
+            entity.setDeltaMovement(0, 0, 0);
+            entity.hurtMarked = true;
+        }
+        if (DamageData.get(entity).hookedByLocation != null) {
+            Vec3 delta = DamageData.get(entity).hookedByLocation.subtract(entity.position());
+            double distance = delta.length();
+            double springConstant = 0.02 / 1.5;
+            Vec3 force = delta.normalize().scale(distance * distance * springConstant);
+            entity.push(force);
+            entity.hurtMarked = true;
+        }
+        if (DamageData.get(entity).hookedByLocation != null && DamageData.get(entity).hookedBy != null) {
+            DamageData.get(entity).hookedByLocation = DamageData.get(entity).hookedBy.position().add(0, 1, 0);
+            entity.syncData(EntityDataAttachmentRegistry.DAMAGE_DATA);
+        }
+    }
+
     /*@SubscribeEvent
     public static void summonCDR(LivingDamageEvent.Post event) {
         Entity entity = event.getSource().getDirectEntity();

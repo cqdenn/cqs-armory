@@ -60,7 +60,7 @@ public class ChainShotSpell extends AbstractSpell {
 
     @Override
     public CastType getCastType() {
-        return CastType.LONG;
+        return CastType.INSTANT;
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ChainShotSpell extends AbstractSpell {
     public List<MutableComponent> getUniqueInfo(CastContext castContext) {
         return List.of(
                 Component.translatable("ui.cqs_armory.weapon_damage", getWeaponDamagePercent(castContext.getSkillLevel()) * 100),
-                Component.literal("Pulls in and chain")
+                Component.translatable("ui.cqs_armory.chained_duration", getDuration(castContext)/20 + "s")
         );
     }
 
@@ -113,7 +113,7 @@ public class ChainShotSpell extends AbstractSpell {
 
     @Override
     public void onCast(ServerLevel level, CastContext castContext) {
-        ChainArrow magicArrow = new ChainArrow(level);
+        ChainArrow magicArrow = new ChainArrow(level, getDuration(castContext));
         Entity entity = castContext.asEntityCaster();
         magicArrow.setOwner(entity);
         magicArrow.setScale(2);
