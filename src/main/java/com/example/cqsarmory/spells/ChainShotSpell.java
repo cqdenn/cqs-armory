@@ -117,6 +117,7 @@ public class ChainShotSpell extends AbstractSpell {
         Entity entity = castContext.asEntityCaster();
         magicArrow.setOwner(entity);
         magicArrow.setScale(2);
+        magicArrow.setCritArrow(true);
         magicArrow.setPos(entity.position().add(0, entity.getEyeHeight() - magicArrow.getBoundingBox().getYsize() * .5f, 0).add(entity.getForward()));
         magicArrow.setDeltaMovement(entity.getLookAngle().scale(2.5));
         Vec3 vec3 = magicArrow.getDeltaMovement();

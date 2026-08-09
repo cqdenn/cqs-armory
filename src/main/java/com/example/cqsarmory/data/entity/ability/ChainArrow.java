@@ -42,4 +42,8 @@ public class ChainArrow extends AbilityArrow{
     protected void onHitBlock(BlockHitResult result) {
         discard();
     }
+
+    @Override
+    public void customCritParticles() {
+    }
 }

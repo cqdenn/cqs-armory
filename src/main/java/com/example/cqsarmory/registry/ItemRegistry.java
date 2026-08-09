@@ -353,6 +353,7 @@ public class ItemRegistry {
                              DeferredItem shortbow,
                              DeferredItem recurve,
                              DeferredItem longbow,
+                             DeferredItem crossbow,
                              DeferredItem ice,
                              DeferredItem fire,
                              DeferredItem lightning,
@@ -363,7 +364,7 @@ public class ItemRegistry {
 
         @Override
         public @NotNull Iterator<DeferredItem> iterator() {
-            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ice, fire, lightning, necromancy, arcane, holy).iterator();
+            return List.of(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, crossbow, ice, fire, lightning, necromancy, arcane, holy).iterator();
         }
     }
 
@@ -588,7 +589,7 @@ public class ItemRegistry {
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(arcane, generator.atlasLargeItem(arcane)));
         ItemModelDataGenerator.toRegister.add(generator -> generator.atlasTransform(holy, generator.atlasLargeItem(holy)));
 
-        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, ice, fire, lightning, necromancy, arcane, holy, ingot);
+        var weaponset = new Weaponset(warhammer, greatsword, halberd, scythe, mace, spear, rapier, greataxe, shortbow, recurve, longbow, crossbow, ice, fire, lightning, necromancy, arcane, holy, ingot);
         WEAPONSETS.add(weaponset);
 
         return weaponset;

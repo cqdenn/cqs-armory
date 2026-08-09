@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-07T19:04:13.1524061	Tags for minecraft:item mod id cqs_armory
+// 1.21.1	2026-08-09T18:07:57.360846	Tags for minecraft:item mod id cqs_armory
 7bfe59bf58e4916df21173dffdf1edc3f8aa5af1 data/cqs_armory/tags/item/arrows.json
 f1226abaa51fc09eca620ffd9298f8ac52422852 data/cqs_armory/tags/item/ingots/power_one.json
 86be5780c58d745266fdc1e303a6d24bad9f40b5 data/cqs_armory/tags/item/ingots/power_three.json
@@ -10,7 +10,8 @@ dec925503e611d07a6f9843e3e6e8b839ce9453b data/curios/tags/item/coating.json
 380af273de1a75d2bb59a8d1615583049811c8ce data/curios/tags/item/quiver.json
 562d8ea2481b21360dc3ce5cc9f50a80f1a56062 data/minecraft/tags/item/enchantable/bow.json
 b0a44010524a45d6244015f8495be5fa562ceece data/minecraft/tags/item/enchantable/chest_armor.json
-2f52e52049fcb79e4f350fd63579faea866c17b0 data/minecraft/tags/item/enchantable/durability.json
+267980c62df1134c6758fdbb24b85327e817c95e data/minecraft/tags/item/enchantable/crossbow.json
+9908c9baf49264df2a2a6854d874600c16d31b24 data/minecraft/tags/item/enchantable/durability.json
 6c74a3d825b3e376d4244037bd0e128dca05b12c data/minecraft/tags/item/enchantable/foot_armor.json
 ae65bb1922c0445970aecbf38d06815a18cecd9d data/minecraft/tags/item/enchantable/head_armor.json
 d8fd9b7938781db3038b5023218447dc30ff2130 data/minecraft/tags/item/enchantable/leg_armor.json
