@@ -1,12 +1,12 @@
 package com.example.cqsarmory.data.entity.ability;
 
 
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
-import io.redspace.skillcasting.data.cast.PositionAnchor;
 import io.redspace.skillcasting.util.RaycastBuilder;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -217,7 +217,9 @@ public class BatProjectile extends AbilityArrow/* implements IMagicSummon */{
         if (!level().isClientSide && this.life > this.lifetime) {
             MagicManager.spawnParticles(level(), ParticleTypes.POOF, this.getX(), this.getY(), this.getZ(), 1, 0, 0, 0, 0, false);
             removeBat();
-
+            if (getOwner() != null) {
+                AbilityData.get(getOwner()).huntersMarkConsecutiveArrowsHit = 0;
+            }
         }
     }
 

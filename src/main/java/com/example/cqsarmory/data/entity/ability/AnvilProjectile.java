@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -139,9 +140,11 @@ public class AnvilProjectile extends AbilityArrow{
         Vec3 hitPos = result.getLocation();
         float damage = (float) this.getDamage(null) * 0.25f;
         float radius = (float) Math.min(1 + 0.5 * this.blocksFallen, 4);
+        int hits = 0;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(radius, radius, radius), hitPos.add(radius, radius, radius)))) {
             if (livingentity != getOwner() && livingentity.isAlive() && livingentity.isPickable() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true)) {
                 DamageSources.applyDamage(livingentity, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FALLING_ANVIL).get(), this, this.getOwner()));
+                hits++;
             }
         }
 
@@ -163,6 +166,11 @@ public class AnvilProjectile extends AbilityArrow{
 
         level.playSound(null, result.getBlockPos(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS);
         discard();
+        if (hits == 0) {
+            if (getOwner() != null) {
+                AbilityData.get(getOwner()).huntersMarkConsecutiveArrowsHit = 0;
+            }
+        }
     }
 
     @Override

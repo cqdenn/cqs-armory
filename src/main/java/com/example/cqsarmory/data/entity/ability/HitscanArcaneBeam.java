@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.utils.CQRaycaster;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
@@ -70,6 +71,10 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
                 } else if (this.raycast.get(0).getType() == HitResult.Type.BLOCK) {
                     BlockHitResult result = (BlockHitResult) raycast.get(0);
                     onHitBlock(result);
+                } else if (this.raycast.get(0).getType() == HitResult.Type.MISS) {
+                    if (getOwner() != null) {
+                        AbilityData.get(getOwner()).huntersMarkConsecutiveArrowsHit = 0;
+                    }
                 }
             }
         } else if (tickCount > lifetime) {
@@ -108,6 +113,9 @@ public class HitscanArcaneBeam extends AbilityArrow  implements IEntityWithCompl
             MagicManager.spawnParticles(level(), ParticleHelper.ENDER_SPARKS, result.getLocation().x, result.getLocation().y, result.getLocation().z, 10, 0.1, 0.1, 0.1, 0.2, false);
         } else {
             MagicManager.spawnParticles(level(), ParticleHelper.UNSTABLE_ENDER, result.getLocation().x, result.getLocation().y, result.getLocation().z, 50, 0, 0, 0, .3, false);
+            if (getOwner() != null) {
+                AbilityData.get(getOwner()).huntersMarkConsecutiveArrowsHit = 0;
+            }
         }
     }
 

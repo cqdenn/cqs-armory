@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.ability;
 
+import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.DamageTypes;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
@@ -214,18 +215,26 @@ public class FireworkProjectile extends AbilityArrow {
     private void dealExplosionDamage(Vec3 hitPos) {
         Level level = this.level();
         double explosionRadius = 2;
+        int hits = 0;
         for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
             float damage = (float) getDamage(livingentity);
             if (livingentity.isAlive() && Utils.hasLineOfSight(level, hitPos, livingentity.getBoundingBox().getCenter(), true) && canHitEntity(livingentity)) {
                 DamageSources.applyDamage(livingentity, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
+                hits++;
             }
         }
 
-        for (MomentumOrb orb : level.getEntitiesOfClass(MomentumOrb.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
+        if (hits == 0) {
+            if (getOwner() != null) {
+                AbilityData.get(getOwner()).huntersMarkConsecutiveArrowsHit = 0;
+            }
+        }
+
+        /*for (MomentumOrb orb : level.getEntitiesOfClass(MomentumOrb.class, new AABB(hitPos.subtract(explosionRadius, explosionRadius, explosionRadius), hitPos.add(explosionRadius, explosionRadius, explosionRadius)))) {
             float damage = (float) getDamage(orb);
             if (Utils.hasLineOfSight(level, hitPos, orb.getBoundingBox().getCenter(), true)) {
                 DamageSources.applyDamage(orb, damage, new DamageSource(damageSources().damageTypes.getHolder(DamageTypes.FIREWORK_PROJECTILE).get(), this, this.getOwner()));
             }
-        }
+        }*/
     }
 }
