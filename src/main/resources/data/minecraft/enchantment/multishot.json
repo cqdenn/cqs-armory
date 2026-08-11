@@ -1,0 +1,59 @@
+{
+  "anvil_cost": 4,
+  "description": {
+    "translate": "enchantment.minecraft.multishot"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "attribute": "bow_attributes:arrow_damage",
+        "id": "cqs_armory:multishot_nerf",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": -0.5,
+          "per_level_above_first": -0.2
+        },
+        "operation": "add_multiplied_total"
+      }
+    ],
+    "minecraft:projectile_count": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 2.0,
+            "per_level_above_first": 2.0
+          }
+        }
+      }
+    ],
+    "minecraft:projectile_spread": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 10.0,
+            "per_level_above_first": 10.0
+          }
+        }
+      }
+    ]
+  },
+  "exclusive_set": "#minecraft:exclusive_set/crossbow",
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 20,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "hand"
+  ],
+  "supported_items": "#minecraft:enchantable/crossbow",
+  "weight": 2
+}

@@ -278,7 +278,7 @@
   "item.cqs_armory.kinetic_strike": "Kinetic Strike",
   "item.cqs_armory.kinetic_strike.desc": "+3% arrow damage on momentum movement, stacks 10 times",
   "item.cqs_armory.blast_dash": "Blast Dash",
-  "item.cqs_armory.blast_dash.desc": "Momentum movement causes an explosion",
+  "item.cqs_armory.blast_dash.desc": "Momentum movement explodes, dealing your max momentum as damage",
   "item.cqs_armory.sharpshooter": "Sharpshooter",
   "item.cqs_armory.hunters_echo": "Hunter's Echo",
   "item.cqs_armory.bigger_boomer": "Bigger Boomer",

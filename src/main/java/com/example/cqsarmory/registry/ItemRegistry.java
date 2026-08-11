@@ -508,7 +508,7 @@ public class ItemRegistry {
 
         var recurve = ITEMS.register(name + "_recurve_bow",
                 () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
-                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BLEED_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), new SkillData(CQSpellRegistry.BARRAGE_SPELL, power.power()))
         );
 

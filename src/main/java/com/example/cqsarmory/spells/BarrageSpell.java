@@ -25,6 +25,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -175,6 +177,17 @@ public class BarrageSpell extends AbstractSpell {
         }
         if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(world, player, entity.getX(), entity.getY(), entity.getZ());
+        } else {
+            world.playSound(
+                    null,
+                    entity.getX(),
+                    entity.getY(),
+                    entity.getZ(),
+                    SoundEvents.ARROW_SHOOT,
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    1.0F / (world.getRandom().nextFloat() * 0.4F + 1.2F) + 0.5F
+            );
         }
 
         entity.push(entity.getForward().scale(-1).multiply(1, 0, 1).add(0, Math.max(entity.getForward().scale(-1).y, 0.3), 0));

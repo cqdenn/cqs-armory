@@ -139,7 +139,7 @@ dependencies {
     localRuntime "mezz.jei:jei-1.21.1-neoforge:19.27.0.340"
     localRuntime "curse.maven:mmmmmmmmmmmm-225738:7206981"
     localRuntime "curse.maven:selene-499980:7522321"
-    implementation 'io.redspace:bow_attributes:0.0.5-SNAPSHOT'
+    implementation 'io.redspace:bow_attributes:0.0.7-SNAPSHOT'
     implementation 'com.github.glitchfiend:TerraBlender-neoforge:1.21.1-4.1.0.8'
 
     // Example optional mod dependency with JEI

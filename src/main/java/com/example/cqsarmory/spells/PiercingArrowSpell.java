@@ -21,6 +21,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -158,6 +160,17 @@ public class PiercingArrowSpell extends AbstractSpell {
         level.addFreshEntity(projectile);
         if (entity instanceof Player player && !CQtils.getPlayerCurioStack(player, "quiver").isEmpty()) {
             ((QuiverItem) CQtils.getPlayerCurioStack(player, "quiver").getItem()).playCustomBowShootSound(level, player, entity.getX(), entity.getY(), entity.getZ());
+        }else {
+            level.playSound(
+                    null,
+                    entity.getX(),
+                    entity.getY(),
+                    entity.getZ(),
+                    SoundEvents.ARROW_SHOOT,
+                    SoundSource.PLAYERS,
+                    1.0F,
+                    1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + 0.5F
+            );
         }
     }
 }

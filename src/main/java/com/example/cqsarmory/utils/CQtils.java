@@ -81,12 +81,13 @@ public class CQtils {
         if (ItemRegistry.BLAST_DASH.get().isEquippedBy(player)) {
             Vec3 pos = player.position().subtract(0, 0.5, 0);
             float radius = 1.5f;
+            float dmg = (float) player.getAttributeValue(com.example.cqsarmory.registry.AttributeRegistry.MAX_MOMENTUM);
             DamageSource damageSource = player.level().damageSources().explosion(null, player); //swapped because game bad
             var entities = player.level().getEntities(player, new AABB(pos, pos).inflate(radius, radius, radius), (targeted) -> !DamageSources.isFriendlyFireBetween(player, targeted) || targeted instanceof MomentumOrb);
             for (Entity target : entities) {
                 if (Utils.hasLineOfSight(player.level(), pos, target.getBoundingBox().getCenter(), true)) {
                     if (target instanceof LivingEntity || target instanceof MomentumOrb) {
-                        target.hurt(damageSource, 10);//dmg tbd, maybe scale with something? idk
+                        target.hurt(damageSource, dmg);//dmg tbd, maybe scale with something? idk // update: scales with momentum this might be op idk but it sucked before
                     }
                 }
             }
