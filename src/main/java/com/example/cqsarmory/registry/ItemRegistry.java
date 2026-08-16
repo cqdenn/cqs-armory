@@ -248,6 +248,8 @@ public class ItemRegistry {
     //public static final DeferredHolder<Item, Item> ARCANIST_RUNE = ITEMS.register("arcanist_rune", () -> new Item(new Item.Properties()));
     //public static final DeferredHolder<Item, Item> NECROMANCER_RUNE = ITEMS.register("necromancer_rune", () -> new Item(new Item.Properties()));
 
+    public static final DeferredHolder<Item, Item> SKY_SPLITTER = ITEMS.register("sky_splitter", () -> new TwoLineDescriptiveItem(new Item.Properties().rarity(Rarity.UNCOMMON))); //coming soon tm fixme
+
     //public static final DeferredHolder<Item, Item> REPAIR_KIT = ITEMS.register("repair_kit", () -> new Item(new Item.Properties().stacksTo(4)));
 
     /*public static final DeferredItem<Item> SUMMON_SWORD = ITEMS.register("summon_sword",

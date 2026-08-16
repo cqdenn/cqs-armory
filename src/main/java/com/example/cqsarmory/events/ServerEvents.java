@@ -71,10 +71,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -89,6 +86,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -1336,6 +1334,23 @@ public class ServerEvents {
                 Dwarf::checkMobSpawnRules,
                 RegisterSpawnPlacementsEvent.Operation.REPLACE
         );
+    }
+
+    @SubscribeEvent
+    public static void anvilTest (AnvilUpdateEvent event) {
+        ItemStack leftStack = event.getLeft();
+        if (leftStack.getItem() instanceof CrossbowItem && event.getRight().is(ItemRegistry.SKY_SPLITTER)) {
+            Player player = event.getPlayer();
+            Holder.Reference<Enchantment> multishotHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("multishot")));
+            int multishotLevel = leftStack.getEnchantmentLevel(multishotHolder);
+            if (multishotLevel == 1) {
+                event.setMaterialCost(1);
+                event.setCost(30L * multishotLevel);
+                ItemStack newBow = leftStack.copy();
+                newBow.enchant(multishotHolder, multishotLevel + 1);
+                event.setOutput(newBow);
+            }
+        }
     }
 
 }

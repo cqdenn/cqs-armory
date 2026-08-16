@@ -243,6 +243,10 @@
   "item.cqs_armory.arcanist_rune": "Arcanist Rune",
   "item.cqs_armory.necromancer_rune": "Necromancer Rune",
 
+  "item.cqs_armory.sky_splitter": "Sky Splitter",
+  "item.cqs_armory.sky_splitter.line1": "+1 Multishot Level",
+  "item.cqs_armory.sky_splitter.line2": "Requires Multishot 1",
+
   "item.cqs_armory.booster_locket": "Booster Locket",
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",
   "item.cqs_armory.berserkers_fury": "Berserker's Fury",
