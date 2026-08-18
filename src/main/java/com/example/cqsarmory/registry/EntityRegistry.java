@@ -3,6 +3,7 @@ package com.example.cqsarmory.registry;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.data.entity.living.Dwarf;
+import com.example.cqsarmory.data.entity.living.PhantomPhantom;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -227,4 +228,13 @@ public class EntityRegistry {
                     .sized(0.6f, 1.5f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "dwarf").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<PhantomPhantom>> PHANTOM_PHANTOM =
+            ENTITIES.register("phantom_phantom", () -> EntityType.Builder.<PhantomPhantom>of(PhantomPhantom::new, MobCategory.MONSTER)
+                    .sized(1.1F, 0.5F)
+                    .eyeHeight(0.175F)
+                    .passengerAttachments(-0.3375F)
+                    .ridingOffset(-0.125F)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "phantom_phantom").toString()));
 }

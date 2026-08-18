@@ -53,6 +53,7 @@
   "school.cqs_armory.archer": "Archer",
 
   "entity.cqs_armory.dwarf": "Dwarf",
+  "entity.cqs_armory.phantom_phantom": "Phantom Phantom",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",

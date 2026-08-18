@@ -123,6 +123,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.HITSCAN_ARCANE_BEAM.get(), HitscanArcaneBeamRenderer::new);
         event.registerEntityRenderer(EntityRegistry.CHAIN_ARROW.get(), ChainArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DWARF.get(), DwarfRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.PHANTOM_PHANTOM.get(), PhantomPhantomRenderer::new);
     }
 
     @SubscribeEvent

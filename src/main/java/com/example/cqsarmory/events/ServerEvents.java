@@ -10,6 +10,7 @@ import com.example.cqsarmory.data.DoubleJumpData;
 import com.example.cqsarmory.data.effects.ChainedEffect;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.data.entity.living.Dwarf;
+import com.example.cqsarmory.data.entity.living.PhantomPhantom;
 import com.example.cqsarmory.items.curios.OnBlockCoating;
 import com.example.cqsarmory.items.curios.OnHitBrand;
 import com.example.cqsarmory.items.curios.OnHitCoating;
@@ -1323,6 +1324,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void onAttributeCreate(EntityAttributeCreationEvent event) {
         event.put(EntityRegistry.DWARF.get(), Dwarf.prepareAttributes().build());
+        event.put(EntityRegistry.PHANTOM_PHANTOM.get(), PhantomPhantom.prepareAttributes().build());
     }
 
     @SubscribeEvent
@@ -1332,6 +1334,14 @@ public class ServerEvents {
                 SpawnPlacementTypes.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Dwarf::checkMobSpawnRules,
+                RegisterSpawnPlacementsEvent.Operation.REPLACE
+        );
+
+        event.register(
+                EntityRegistry.PHANTOM_PHANTOM.get(),
+                SpawnPlacementTypes.NO_RESTRICTIONS,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                PhantomPhantom::checkPhantomPhantomSpawnRules,
                 RegisterSpawnPlacementsEvent.Operation.REPLACE
         );
     }
