@@ -1,7 +1,13 @@
 package com.example.cqsarmory.data.entity.living;
 
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.spells.root.PreventDismount;
+import io.redspace.skillcasting.data.CastContext;
+import io.redspace.skillcasting.data.cast.CastSource;
+import io.redspace.skillcasting.data.cast.CasterRef;
+import io.redspace.skillcasting.lifecycle.SkillcastingManager;
+import io.redspace.skillcasting.registry.SkillcastingComponentTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
@@ -34,6 +40,8 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
     Vec3 moveTargetPoint = Vec3.ZERO;
     BlockPos anchorPoint = BlockPos.ZERO;
     ArrayList<Entity> riders = new ArrayList<>();
+    int shootCD = 60;
+    int shootCount = 5;
 
 
     public PhantomPhantom(EntityType<? extends Phantom> entityType, Level level) {
@@ -48,7 +56,6 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
             BlockPos pos,
             RandomSource random
     ) {
-        // Only spawn above Y=180
         if (pos.getY() < 150) {
             return false;
         }
@@ -56,6 +63,27 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
         return level.isEmptyBlock(pos)
                 && level.isEmptyBlock(pos.above())
                 && level.isEmptyBlock(pos.below());
+    }
+
+    @Override
+    public boolean showVehicleHealth() {
+        return false;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (this.getTarget() != null && this.attackPhase == AttackPhase.CIRCLE && !this.riders.contains(this.getTarget())) {
+            if (this.tickCount % 2 == 0 && this.shootCount >= 1 && this.shootCD <= 0) {
+                this.shootCount--;
+                shootWindCharge();
+            }
+            if (this.shootCount <= 0) {
+                this.shootCount = 5;
+                this.shootCD = 60;
+            }
+        }
+        this.shootCD--;
     }
 
     @Override
@@ -74,8 +102,8 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
             if (this.riders.contains(source.getEntity())) {
                 riders.forEach(this::dropRider);
                 riders.clear();
-                return true;
             }
+            return true;
         }
         return false;
     }
@@ -116,7 +144,7 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
             } else {
                 this.nextScanTick = reducedTickDelay(60);
                 List<Player> list = PhantomPhantom.this.level()
-                        .getNearbyPlayers(this.attackTargeting, PhantomPhantom.this, PhantomPhantom.this.getBoundingBox().inflate(16.0, 64.0, 16.0));
+                        .getNearbyPlayers(this.attackTargeting, PhantomPhantom.this, PhantomPhantom.this.getBoundingBox().inflate(64.0, 64.0, 64.0));
                 if (!list.isEmpty()) {
                     list.sort(Comparator.<Player, Double>comparing(Entity::getY).reversed());
 
@@ -166,9 +194,9 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
         public void tick() {
             if (PhantomPhantom.this.attackPhase == PhantomPhantom.AttackPhase.CIRCLE) {
                 this.nextSweepTick--;
-                if (this.nextSweepTick % 2 == 0 && PhantomPhantom.this.getTarget() != null) {
+                /*if (this.nextSweepTick % 2 == 0 && PhantomPhantom.this.getTarget() != null) {
                     shootWindCharge();
-                }
+                }*/
                 if (this.nextSweepTick <= 0) {
                     if (!PhantomPhantom.this.riders.isEmpty()) {
                         PhantomPhantom.this.riders.forEach(PhantomPhantom.this::doHurtTarget);
@@ -227,9 +255,9 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
         @Override
         public void tick() {
 
-            if (PhantomPhantom.this.tickCount % 2 == 0 && PhantomPhantom.this.getTarget() != null) {
+            /*if (PhantomPhantom.this.tickCount % 2 == 0 && PhantomPhantom.this.getTarget() != null) {
                 shootWindCharge();
-            }
+            }*/
 
             if (PhantomPhantom.this.random.nextInt(this.adjustedTickDelay(350)) == 0) {
                 this.height = -4.0F + PhantomPhantom.this.random.nextFloat() * 9.0F;
@@ -345,6 +373,11 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
                     if (PhantomPhantom.this.doHurtTarget(livingentity) && Utils.random.nextBoolean()) {
                         livingentity.startRiding(PhantomPhantom.this, true);
                         PhantomPhantom.this.riders.add(livingentity);
+                    } else {
+                        PhantomPhantom.this.lookAt(livingentity, 1, 1);
+                        CastContext cast = SkillcastingManager.buildCastContext(CasterRef.entity(PhantomPhantom.this), SpellRegistry.GUST_SPELL.get().holder(), 10, CastSource.EMPTY);
+                        cast.set(SkillcastingComponentTypes.CAST_TIME, 0);
+                        SkillcastingManager.initiateCast(CasterRef.entity(PhantomPhantom.this), cast);
                     }
                     PhantomPhantom.this.attackPhase = PhantomPhantom.AttackPhase.CIRCLE;
                     if (!PhantomPhantom.this.isSilent()) {
