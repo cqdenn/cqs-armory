@@ -84,6 +84,7 @@
   "enchantment.cqs_armory.execute": "Execute",
   "enchantment.cqs_armory.prosecute": "Prosecute",
   "enchantment.cqs_armory.hooking": "Hooking",
+  "enchantment.cqs_armory.blunt": "Blunt",
 
   "enchantment.cqs_armory.knockback_curse": "Curse of Knockback",
   "enchantment.cqs_armory.reinforcement_curse": "Curse of Reinforcement",
@@ -245,8 +246,12 @@
   "item.cqs_armory.necromancer_rune": "Necromancer Rune",
 
   "item.cqs_armory.sky_splitter": "Sky Splitter",
-  "item.cqs_armory.sky_splitter.line1": "+1 Multishot Level",
-  "item.cqs_armory.sky_splitter.line2": "Requires Multishot 1",
+  "item.cqs_armory.sky_splitter.line1": "Upgrades Multishot 1 to Multishot 2",
+  "item.cqs_armory.sky_splitter.line2": "Applied in Anvil",
+
+  "item.cqs_armory.dwarven_whetstone": "Dwarven Whetstone",
+  "item.cqs_armory.dwarven_whetstone.line1": "Upgrades Blunt 5 to Blunt 6",
+  "item.cqs_armory.dwarven_whetstone.line2": "Applied in Anvil",
 
   "item.cqs_armory.booster_locket": "Booster Locket",
   "item.cqs_armory.berserkers_rush": "Berserker's Rush",

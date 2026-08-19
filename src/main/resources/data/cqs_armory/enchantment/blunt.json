@@ -1,0 +1,48 @@
+{
+  "anvil_cost": 1,
+  "description": {
+    "translate": "enchantment.cqs_armory.blunt"
+  },
+  "effects": {
+    "minecraft:damage": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 2.5,
+            "per_level_above_first": 2.5
+          }
+        }
+      }
+    ],
+    "minecraft:attributes": [
+      {
+        "attribute": "minecraft:generic.attack_speed",
+        "id": "cqs_armory:blunt",
+        "amount": {
+          "type": "minecraft:linear",
+          "base": -0.05,
+          "per_level_above_first": -0.05
+        },
+        "operation": "add_multiplied_total"
+      }
+    ]
+  },
+  "exclusive_set": "#cqs_armory:exclusive_set/hone",
+  "max_cost": {
+    "base": 21,
+    "per_level_above_first": 11
+  },
+  "max_level": 5,
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 11
+  },
+  "primary_items": "#minecraft:enchantable/sword",
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:enchantable/sharp_weapon",
+  "weight": 10
+}

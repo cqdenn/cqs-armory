@@ -17,6 +17,7 @@ import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.coatings.HeavyCoating;
+import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
@@ -1355,10 +1356,21 @@ public class ServerEvents {
             int multishotLevel = leftStack.getEnchantmentLevel(multishotHolder);
             if (multishotLevel == 1) {
                 event.setMaterialCost(1);
-                event.setCost(30L * multishotLevel);
+                event.setCost(30L);
                 ItemStack newBow = leftStack.copy();
                 newBow.enchant(multishotHolder, multishotLevel + 1);
                 event.setOutput(newBow);
+            }
+        } else if ((leftStack.getItem() instanceof SwordItem || leftStack.getItem() instanceof GreataxeItem) && event.getRight().is(ItemRegistry.DWARVEN_WHETSTONE)) {
+            Player player = event.getPlayer();
+            Holder.Reference<Enchantment> bluntHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "blunt")));
+            int bluntLevel = leftStack.getEnchantmentLevel(bluntHolder);
+            if (bluntLevel == 5) {
+                event.setMaterialCost(1);
+                event.setCost(30L);
+                ItemStack newWeapon = leftStack.copy();
+                newWeapon.enchant(bluntHolder, bluntLevel + 1);
+                event.setOutput(newWeapon);
             }
         }
     }
