@@ -54,6 +54,7 @@
 
   "entity.cqs_armory.dwarf": "Dwarf",
   "entity.cqs_armory.phantom_phantom": "Phantom Phantom",
+  "entity.cqs_armory.loglin": "Loglin",
 
   "ui.cqs_armory.weapon_damage": "%s%% Weapon Damage",
   "ui.cqs_armory.stun_duration": "%s Stun Duration",
@@ -87,7 +88,7 @@
   "enchantment.cqs_armory.blunt": "Blunt",
 
   "enchantment.cqs_armory.knockback_curse": "Curse of Knockback",
-  "enchantment.cqs_armory.reinforcement_curse": "Curse of Reinforcement",
+  "enchantment.cqs_armory.reinforcement_curse": "Curse of Reinforcements",
   "enchantment.cqs_armory.heaviness_curse": "Curse of Heaviness",
   "enchantment.cqs_armory.really_heaviness_curse": "Curse of Really Heaviness",
   "enchantment.cqs_armory.rotting_curse": "Curse of Rotting",

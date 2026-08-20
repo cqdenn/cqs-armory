@@ -3,6 +3,7 @@ package com.example.cqsarmory.registry;
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.data.entity.living.Dwarf;
+import com.example.cqsarmory.data.entity.living.Loglin;
 import com.example.cqsarmory.data.entity.living.PhantomPhantom;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -237,4 +238,11 @@ public class EntityRegistry {
                     .ridingOffset(-0.125F)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "phantom_phantom").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Loglin>> LOGLIN =
+            ENTITIES.register("loglin", () -> EntityType.Builder.<Loglin>of(Loglin::new, MobCategory.MONSTER)
+                    .sized(1.3964844F, 1.4F)
+                    .passengerAttachments(1.49375F)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "loglin").toString()));
 }

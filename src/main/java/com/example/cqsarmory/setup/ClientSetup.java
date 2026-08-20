@@ -124,6 +124,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.CHAIN_ARROW.get(), ChainArrowRenderer::new);
         event.registerEntityRenderer(EntityRegistry.DWARF.get(), DwarfRenderer::new);
         event.registerEntityRenderer(EntityRegistry.PHANTOM_PHANTOM.get(), PhantomPhantomRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.LOGLIN.get(), LoglinRenderer::new);
     }
 
     @SubscribeEvent

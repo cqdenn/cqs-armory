@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_spawns",
+  "biomes": "#cqs_armory:non_snowy_taiga",
+  "spawners": [
+    {
+      "type": "cqs_armory:loglin",
+      "weight": 25,
+      "minCount": 1,
+      "maxCount": 1
+    }
+  ]
+}
