@@ -1382,7 +1382,17 @@ public class ServerEvents {
                 newWeapon.enchant(bluntHolder, bluntLevel + 1);
                 event.setOutput(newWeapon);
             }
-        }
+        } /*else if (leftStack.getItem().components().has(ComponentRegistry.IMBUED_SPELL_CONTAINER.get()) && event.getRight().is(Items.DIAMOND)) {
+            Player player = event.getPlayer();
+            var spellContainer = leftStack.get(ComponentRegistry.IMBUED_SPELL_CONTAINER).getActiveSkills().get(0);
+            var spell = spellContainer.getSkill();
+            var level = spellContainer.getLevel();
+            ItemStack result = leftStack.copy();
+            result.set(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, new SkillData(spell, level + 1)));
+            event.setOutput(result);
+            event.setCost(15L);
+            event.setMaterialCost(1);
+        }*/
     }
 
 }
