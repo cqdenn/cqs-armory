@@ -22,7 +22,7 @@ public class InfiniteMagicSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.ELDRITCH_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(240)
+            .setCooldownSeconds(120)
             .build();
 
     @Override

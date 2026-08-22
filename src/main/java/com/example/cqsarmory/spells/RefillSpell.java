@@ -26,7 +26,7 @@ public class RefillSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCHER_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(120)
+            .setCooldownSeconds(60)
             .build();
 
     @Override

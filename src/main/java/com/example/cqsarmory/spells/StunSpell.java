@@ -36,7 +36,7 @@ public class StunSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(15)
             .build();
 
     public StunSpell() {

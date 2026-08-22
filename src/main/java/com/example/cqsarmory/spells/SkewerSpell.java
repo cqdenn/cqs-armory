@@ -27,7 +27,7 @@ public class SkewerSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(10)
             .build();
 
     public SkewerSpell() {

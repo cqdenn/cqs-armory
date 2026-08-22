@@ -20,7 +20,7 @@ public class LightningRodSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(SchoolRegistry.LIGHTNING_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(10)
             .build();
 
     @Override

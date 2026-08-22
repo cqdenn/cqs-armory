@@ -45,7 +45,7 @@ public class BarrageSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCHER_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(40)
+            .setCooldownSeconds(15)
             .build();
 
     public BarrageSpell() {

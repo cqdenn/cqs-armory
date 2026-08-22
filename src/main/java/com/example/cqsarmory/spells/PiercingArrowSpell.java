@@ -41,7 +41,7 @@ public class PiercingArrowSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.ARCHER_RESOURCE)
             .setMaxLevel(4)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(10)
             .build();
 
     public PiercingArrowSpell() {

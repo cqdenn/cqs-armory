@@ -52,7 +52,7 @@ public class ConsumeBleedSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(60)
+            .setCooldownSeconds(30)
             .build();
 
     public ConsumeBleedSpell() {

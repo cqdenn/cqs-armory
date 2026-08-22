@@ -36,7 +36,7 @@ public class FlankStepSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(20)
+            .setCooldownSeconds(10)
             .build();
 
     public FlankStepSpell() {

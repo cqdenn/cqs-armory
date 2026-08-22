@@ -28,7 +28,7 @@ public class PerfectTechniqueSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(CQSchoolRegistry.MELEE_RESOURCE)
             .setMaxLevel(1)
-            .setCooldownSeconds(30)
+            .setCooldownSeconds(15)
             .build();
 
     public PerfectTechniqueSpell() {
