@@ -5,19 +5,23 @@ import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.util.TooltipsUtils;
 import io.redspace.skillcasting.api.event.GatherSkillSelectionEvent;
 import io.redspace.skillcasting.api.event.SkillSelectionPriority;
+import io.redspace.skillcasting.data.SkillcastingData;
 import io.redspace.skillcasting.data.cast.CastSource;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import io.redspace.skillcasting.data.skill.SkillSlot;
+import io.redspace.skillcasting.network.SkillcastingNetwork;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.event.CurioChangeEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +90,17 @@ public class CQSkillContainerUtils {
             inv.findCurios(CQSkillContainerUtils::has).forEach(
                     slotResult -> event.addSource(CQSkillContainerUtils.get(slotResult.stack()), String.format("%s_%s", slotResult.slotContext().identifier(), slotResult.slotContext().index()), SkillSelectionPriority.CURIO));
         });
+    }
+
+    @SubscribeEvent
+    public static void onCurioChangeEvent(CurioChangeEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        if (has(event.getFrom()) || has(event.getTo())) {
+            SkillcastingData.get(player).selectionManager().refresh(player);
+            SkillcastingNetwork.syncSelection(player, SkillcastingData.get(player));
+        }
     }
 
 }
