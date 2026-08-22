@@ -1,10 +1,10 @@
 package com.example.cqsarmory.items;
 
+import com.example.cqsarmory.registry.CQComponentRegistry;
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
 import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -17,7 +17,7 @@ import static io.redspace.bowattributes.BowAttributeLib.BASE_DRAWSPEED_ID;
 
 public class ExtendedCrossbowItem extends CrossbowItem {
     public ExtendedCrossbowItem(Properties pProperties, SkillData... spellDataRegistryHolders) {
-        super(pProperties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
+        super(pProperties.component(CQComponentRegistry.WEAPON_SKILL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
     }
 
     public static ItemAttributeModifiers createAttributes(ExtendedWeaponTier material, WeaponPower power, float arrowDamage, float drawSpeed, AttributeContainer[] attributes) {

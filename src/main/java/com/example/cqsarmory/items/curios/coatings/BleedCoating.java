@@ -1,8 +1,8 @@
 package com.example.cqsarmory.items.curios.coatings;
 
 import com.example.cqsarmory.items.curios.OnHitCoating;
+import com.example.cqsarmory.registry.CQComponentRegistry;
 import com.example.cqsarmory.utils.CQtils;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,7 +14,7 @@ public class BleedCoating extends OnHitCoating {
     }
 
     public BleedCoating(Properties properties, String slot, SkillData... spellDataRegistryHolders) {
-        super(properties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(true, spellDataRegistryHolders)), slot);
+        super(properties.component(CQComponentRegistry.WEAPON_SKILL_CONTAINER, ISkillContainer.create(true, spellDataRegistryHolders)), slot);
     }
 
     @Override

@@ -3,9 +3,9 @@ package com.example.cqsarmory.items.curios;
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
 import com.example.cqsarmory.registry.AttributeRegistry;
+import com.example.cqsarmory.registry.CQComponentRegistry;
 import io.redspace.ironsspellbooks.item.curios.CurioBaseItem;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.sounds.SoundEvents;
@@ -18,7 +18,7 @@ import net.minecraft.world.level.Level;
 public class QuiverItem extends CurioBaseItem {
 
     public QuiverItem(Properties properties, SkillData... spellDataRegistryHolders) {
-        super(properties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(true, spellDataRegistryHolders)));
+        super(properties.component(CQComponentRegistry.WEAPON_SKILL_CONTAINER, ISkillContainer.create(true, spellDataRegistryHolders)));
     }
 
     public CurioBaseItem withQuiverAttributes(int capacity) {

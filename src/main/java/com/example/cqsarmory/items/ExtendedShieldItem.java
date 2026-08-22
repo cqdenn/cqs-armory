@@ -2,8 +2,8 @@ package com.example.cqsarmory.items;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.registry.AttributeRegistry;
+import com.example.cqsarmory.registry.CQComponentRegistry;
 import io.redspace.ironsspellbooks.item.weapons.AttributeContainer;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -14,7 +14,7 @@ import net.minecraft.world.item.component.ItemAttributeModifiers;
 public class ExtendedShieldItem extends ShieldItem {
 
     public ExtendedShieldItem(Properties pProperties, SkillData... spellDataRegistryHolders) {
-        super(pProperties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
+        super(pProperties.component(CQComponentRegistry.WEAPON_SKILL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
     }
 
     public static ItemAttributeModifiers createAttributes(int blockStrength, AttributeContainer[] attributes) {

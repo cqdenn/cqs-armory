@@ -1,8 +1,8 @@
 package com.example.cqsarmory.items.weapons;
 
+import com.example.cqsarmory.registry.CQComponentRegistry;
 import com.example.cqsarmory.registry.ExtendedWeaponTier;
 import com.example.cqsarmory.registry.WeaponPower;
-import io.redspace.ironsspellbooks.registries.ComponentRegistry;
 import io.redspace.skillcasting.data.skill.ISkillContainer;
 import io.redspace.skillcasting.data.skill.SkillData;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ import java.util.List;
 public class GreataxeItem extends TieredItem {
 
     public GreataxeItem(Tier tier, Properties properties, SkillData... spellDataRegistryHolders) {
-        super(tier, properties.component(ComponentRegistry.IMBUED_SPELL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
+        super(tier, properties.component(CQComponentRegistry.WEAPON_SKILL_CONTAINER, ISkillContainer.create(false, spellDataRegistryHolders)));
     }
 
     public static Tool createGreataxeToolProperties(ExtendedWeaponTier material, WeaponPower power) {
