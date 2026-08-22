@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.entity.renderers;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.entity.ability.AbilityArrow;
+import com.example.cqsarmory.data.entity.ability.ChainArrow;
 import com.example.cqsarmory.utils.RenderingUtils;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -81,7 +82,7 @@ public class ChainArrowRenderer<T extends AbilityArrow> extends ArrowRenderer<T>
         Vec3 casterOld = new Vec3(caster.xo, caster.yo + 1, caster.zo);
         Vec3 to = casterOld.add(caster.position().add(0, 1, 0).subtract(casterOld).scale(partialTicks));
 
-        RenderingUtils.renderChainBetween(start, to, poseStack, bufferSource);
+        if (entity instanceof ChainArrow chain && !chain.isInGround()) RenderingUtils.renderChainBetween(start, to, poseStack, bufferSource);
     }
 
     @Override

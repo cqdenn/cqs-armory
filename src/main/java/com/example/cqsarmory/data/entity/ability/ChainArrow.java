@@ -40,7 +40,11 @@ public class ChainArrow extends AbilityArrow{
 
     @Override
     protected void onHitBlock(BlockHitResult result) {
-        discard();
+        super.onHitBlock(result);
+    }
+
+    public boolean isInGround () {
+        return this.inGround;
     }
 
     @Override
