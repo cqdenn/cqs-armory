@@ -53,5 +53,5 @@ public class CQSpellRegistry {
     //public static final DeferredHolder<AbstractSkill, FocusSpell> FOCUS_SPELL = registerSpell("focus", FocusSpell::new);
     public static final DeferredHolder<AbstractSkill, LightningRodSpell> LIGHTNING_ROD_SPELL = registerSpell("lightning_rod", LightningRodSpell::new);
     public static final DeferredHolder<AbstractSkill, ChainShotSpell> CHAIN_SHOT_SPELL = registerSpell("chain_shot", ChainShotSpell::new);
-    public static final DeferredHolder<AbstractSkill, CrossfireSpell> CROSSFIRE_SPELL = registerSpell("cross_fire", CrossfireSpell::new);
+    //public static final DeferredHolder<AbstractSkill, CrossfireSpell> CROSSFIRE_SPELL = registerSpell("cross_fire", CrossfireSpell::new);
 }
