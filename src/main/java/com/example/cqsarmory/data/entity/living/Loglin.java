@@ -31,7 +31,7 @@ import javax.annotation.Nullable;
 public class Loglin extends Hoglin {
     public final int JUMP_TIME_MAX = 60;
     public final int CHARGE_TIME_MAX = 20;
-    public final int CHARGE_CD_MAX = 150;
+    public final int CHARGE_CD_MAX = 100;
 
     private static final EntityDataAccessor<Boolean> CHARGING_JUMP = SynchedEntityData.defineId(Loglin.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> CHARGING_CHARGE = SynchedEntityData.defineId(Loglin.class, EntityDataSerializers.BOOLEAN);
@@ -66,7 +66,7 @@ public class Loglin extends Hoglin {
                 : this.getLookAngle();
         Vec3 dir = new Vec3(raw.x, 0, raw.z).normalize();
         AABB forward = this.getBoundingBox().inflate(-0.01).move(dir.scale(1.5));
-        AABB above   = forward.move(0, 1.0, 0); // headroom check
+        AABB above   = forward.move(0, 2.5, 0); // headroom check
         return !level().getBlockCollisions(null, forward).iterator().hasNext() && !level().getBlockCollisions(null, above).iterator().hasNext();
     }
 
@@ -76,7 +76,7 @@ public class Loglin extends Hoglin {
         LivingEntity target = this.getTarget();
         this.chargeCD--;
         if (target != null) {
-            if (target.distanceToSqr(this) > 6 * 6 && hasRoomToJump()) {
+            if (target.distanceToSqr(this) > 8 * 8 && hasRoomToJump()) {
                 this.stopInPlace();
                 this.lookAt(target, 1, 1);
                 this.setChargingJump(true);
@@ -93,7 +93,7 @@ public class Loglin extends Hoglin {
             this.chargeTime = CHARGE_TIME_MAX;
             this.setChargingCharge(false);
             this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 4, false, false, false));
-            this.push(calculateJumpVector(this, target != null ? target.position() : this.position()).multiply(1, 0.1, 1));
+            this.push(calculateJumpVector(this, target != null ? target.position() : this.position()).multiply(2, 0.1, 2));
             this.canSlow = true;
             this.chargeCD = CHARGE_CD_MAX;
             this.playSound(SoundEvents.HOGLIN_ANGRY, 2, 2);
