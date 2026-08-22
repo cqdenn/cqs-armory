@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.entity.living;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.items.MagicStaffItem;
+import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
@@ -146,7 +147,7 @@ public class Dwarf extends NeutralWizard {
             ItemStack itemstack = this.getItemInHand(this.getMainHandItem().isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (itemstack.getItem() instanceof BowItem) {
                 this.goalSelector.addGoal(4, this.bowGoal);
-            } else if (itemstack.getItem() instanceof SwordItem || itemstack.getItem() instanceof PickaxeItem) {
+            } else if (itemstack.getItem() instanceof SwordItem || itemstack.getItem() instanceof GreataxeItem || itemstack.getItem() instanceof PickaxeItem) {
                 this.goalSelector.addGoal(4, this.meleeGoal);
             } else if (itemstack.getItem() instanceof StaffItem || itemstack.getItem() instanceof MagicStaffItem) {
                 this.goalSelector.addGoal(4, this.magicGoal);
