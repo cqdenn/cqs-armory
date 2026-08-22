@@ -23,6 +23,6 @@ public class LoglinRenderer extends MobRenderer<Loglin, HoglinModel<Loglin>> {
     }
 
     protected boolean isShaking(Loglin entity) {
-        return super.isShaking(entity) || entity.isChargingJump();
+        return super.isShaking(entity) || entity.isChargingJump() || entity.isChargingCharge();
     }
 }

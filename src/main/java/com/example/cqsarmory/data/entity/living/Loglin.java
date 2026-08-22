@@ -1,31 +1,44 @@
 package com.example.cqsarmory.data.entity.living;
 
 import com.example.cqsarmory.registry.EntityRegistry;
+import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.NotIdioticNavigation;
 import io.redspace.ironsspellbooks.entity.spells.poison_cloud.PoisonCloud;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
 
 public class Loglin extends Hoglin {
+    public final int JUMP_TIME_MAX = 60;
+    public final int CHARGE_TIME_MAX = 20;
+    public final int CHARGE_CD_MAX = 150;
 
     private static final EntityDataAccessor<Boolean> CHARGING_JUMP = SynchedEntityData.defineId(Loglin.class, EntityDataSerializers.BOOLEAN);
-    public int chargeTime = 60;
+    private static final EntityDataAccessor<Boolean> CHARGING_CHARGE = SynchedEntityData.defineId(Loglin.class, EntityDataSerializers.BOOLEAN);
+    public int chargeCD = CHARGE_CD_MAX;
+    public boolean canSlow = false;
+    public int jumpTime = JUMP_TIME_MAX;
+    public int chargeTime = CHARGE_TIME_MAX;
     public boolean poisonOnLand = false;
     public boolean triggerPoison = false;
 
@@ -35,36 +48,68 @@ public class Loglin extends Hoglin {
 
     public static AttributeSupplier.Builder createAttributes() {
         return Monster.createMonsterAttributes()
-                .add(Attributes.MAX_HEALTH, 200.0)
-                .add(Attributes.ARMOR, 6)
-                .add(Attributes.MOVEMENT_SPEED, 0.3F)
+                .add(Attributes.MAX_HEALTH, 300.0)
+                .add(Attributes.ARMOR, 10)
+                .add(Attributes.MOVEMENT_SPEED, 0.4F)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 0.8F)
                 .add(Attributes.ATTACK_KNOCKBACK, 1.0)
                 .add(Attributes.ATTACK_DAMAGE, 10.0)
                 .add(Attributes.GRAVITY, 0.08)
                 .add(Attributes.SCALE, 1.25)
+                .add(Attributes.STEP_HEIGHT, 1.5)
                 .add(Attributes.FOLLOW_RANGE, 4);
+    }
+
+    public boolean hasRoomToJump() {
+        Vec3 raw = this.getTarget() != null
+                ? this.getTarget().position().subtract(this.position())
+                : this.getLookAngle();
+        Vec3 dir = new Vec3(raw.x, 0, raw.z).normalize();
+        AABB forward = this.getBoundingBox().inflate(-0.01).move(dir.scale(1.5));
+        AABB above   = forward.move(0, 1.0, 0); // headroom check
+        return !level().getBlockCollisions(null, forward).iterator().hasNext() && !level().getBlockCollisions(null, above).iterator().hasNext();
     }
 
     @Override
     public void tick() {
         super.tick();
         LivingEntity target = this.getTarget();
+        this.chargeCD--;
         if (target != null) {
-            if (target.distanceToSqr(this) > 6 * 6) {
+            if (target.distanceToSqr(this) > 6 * 6 && hasRoomToJump()) {
                 this.stopInPlace();
                 this.lookAt(target, 1, 1);
                 this.setChargingJump(true);
+            } else if (this.chargeCD <= 0 && target.distanceToSqr(this) > 3 * 3 && Math.abs(this.getY() - this.getTarget().getY()) < 1.5) {
+                this.stopInPlace();
+                this.lookAt(target, 1, 1);
+                this.setChargingCharge(true);
             }
         }
-        if (isChargingJump()) {
+        if (isChargingCharge()) {
             this.chargeTime--;
         }
         if (this.chargeTime <= 0) {
-            this.chargeTime = 60;
+            this.chargeTime = CHARGE_TIME_MAX;
+            this.setChargingCharge(false);
+            this.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20, 4, false, false, false));
+            this.push(calculateJumpVector(this, target != null ? target.position() : this.position()).multiply(1, 0.1, 1));
+            this.canSlow = true;
+            this.chargeCD = CHARGE_CD_MAX;
+            this.playSound(SoundEvents.HOGLIN_ANGRY, 2, 2);
+        }
+        if (!this.hasEffect(MobEffects.MOVEMENT_SPEED)) {
+            this.canSlow = false;
+        }
+        if (isChargingJump()) {
+            this.jumpTime--;
+        }
+        if (this.jumpTime <= 0) {
+            this.jumpTime = JUMP_TIME_MAX;
             this.setChargingJump(false);
             this.push(calculateJumpVector(this, target != null ? target.position() : this.position()));
             this.triggerPoison = true;
+            this.playSound(SoundEvents.HOGLIN_ATTACK, 2, 2);
         }
         if (!this.onGround() && this.triggerPoison) {
             this.poisonOnLand = true;
@@ -84,6 +129,19 @@ public class Loglin extends Hoglin {
     }
 
     @Override
+    public boolean doHurtTarget(Entity entity) {
+        if (canSlow && entity instanceof LivingEntity living) {
+            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 1, false, false, true));
+        }
+        return super.doHurtTarget(entity);
+    }
+
+    @Override
+    protected PathNavigation createNavigation(Level level) {
+        return new NotIdioticNavigation(this, level);
+    }
+
+    @Override
     protected int calculateFallDamage(float fallDistance, float damageMultiplier) {
         return 0;
     }
@@ -96,10 +154,19 @@ public class Loglin extends Hoglin {
         this.getEntityData().set(CHARGING_JUMP, jump);
     }
 
+    public boolean isChargingCharge() {
+        return this.getEntityData().get(CHARGING_CHARGE);
+    }
+
+    public void setChargingCharge(boolean charge) {
+        this.getEntityData().set(CHARGING_CHARGE, charge);
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(CHARGING_JUMP, false);
+        builder.define(CHARGING_CHARGE, false);
     }
 
     @Override
