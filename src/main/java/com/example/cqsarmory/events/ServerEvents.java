@@ -1360,8 +1360,8 @@ public class ServerEvents {
     @SubscribeEvent
     public static void anvilTest (AnvilUpdateEvent event) {
         ItemStack leftStack = event.getLeft();
+        Player player = event.getPlayer();
         if (leftStack.getItem() instanceof CrossbowItem && event.getRight().is(ItemRegistry.SKY_SPLITTER)) {
-            Player player = event.getPlayer();
             Holder.Reference<Enchantment> multishotHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("multishot")));
             int multishotLevel = leftStack.getEnchantmentLevel(multishotHolder);
             if (multishotLevel == 1) {
@@ -1372,7 +1372,6 @@ public class ServerEvents {
                 event.setOutput(newBow);
             }
         } else if ((leftStack.getItem() instanceof SwordItem || leftStack.getItem() instanceof GreataxeItem) && event.getRight().is(ItemRegistry.DWARVEN_WHETSTONE)) {
-            Player player = event.getPlayer();
             Holder.Reference<Enchantment> bluntHolder = player.level().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(ResourceKey.create(Registries.ENCHANTMENT, ResourceLocation.withDefaultNamespace("sharpness")));
             int bluntLevel = leftStack.getEnchantmentLevel(bluntHolder);
             if (bluntLevel == 5) {
@@ -1383,7 +1382,6 @@ public class ServerEvents {
                 event.setOutput(newWeapon);
             }
         } /*else if (leftStack.getItem().components().has(ComponentRegistry.IMBUED_SPELL_CONTAINER.get()) && event.getRight().is(Items.DIAMOND)) {
-            Player player = event.getPlayer();
             var spellContainer = leftStack.get(ComponentRegistry.IMBUED_SPELL_CONTAINER).getActiveSkills().get(0);
             var spell = spellContainer.getSkill();
             var level = spellContainer.getLevel();
@@ -1392,6 +1390,23 @@ public class ServerEvents {
             event.setOutput(result);
             event.setCost(15L);
             event.setMaterialCost(1);
+        } else if (event.getRight().is(Items.IRON_INGOT)) {
+            if (leftStack.get(DataComponents.ATTRIBUTE_MODIFIERS) != null) {
+                ItemAttributeModifiers mods = leftStack.getAttributeModifiers();
+                mods.forEach(EquipmentSlotGroup.HAND, (attribute, modifier) -> {
+                    if (attribute == Attributes.ATTACK_DAMAGE) {
+                        int index = mods.modifiers().indexOf(Attributes.ATTACK_DAMAGE);
+                        mods.modifiers().add(new AttributeModifier(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "damage_upgrade"), 2, AttributeModifier.Operation.ADD_VALUE));
+                    }
+                });
+                leftStack.set(DataComponents.ATTRIBUTE_MODIFIERS, );
+
+                ItemStack result = leftStack.copy();
+
+                event.setOutput(result);
+                event.setCost(15L);
+                event.setMaterialCost(1);
+            }
         }*/
     }
 
