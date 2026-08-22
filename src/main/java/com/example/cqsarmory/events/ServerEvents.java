@@ -18,7 +18,6 @@ import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
 import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.coatings.HeavyCoating;
-import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
 import com.example.cqsarmory.utils.CQtils;
@@ -74,7 +73,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
@@ -89,7 +91,6 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.AnvilUpdateEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -1357,7 +1358,7 @@ public class ServerEvents {
         );
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void anvilTest (AnvilUpdateEvent event) {
         ItemStack leftStack = event.getLeft();
         Player player = event.getPlayer();
@@ -1381,7 +1382,7 @@ public class ServerEvents {
                 newWeapon.enchant(bluntHolder, bluntLevel + 1);
                 event.setOutput(newWeapon);
             }
-        } /*else if (leftStack.getItem().components().has(ComponentRegistry.IMBUED_SPELL_CONTAINER.get()) && event.getRight().is(Items.DIAMOND)) {
+        } *//*else if (leftStack.getItem().components().has(ComponentRegistry.IMBUED_SPELL_CONTAINER.get()) && event.getRight().is(Items.DIAMOND)) {
             var spellContainer = leftStack.get(ComponentRegistry.IMBUED_SPELL_CONTAINER).getActiveSkills().get(0);
             var spell = spellContainer.getSkill();
             var level = spellContainer.getLevel();
@@ -1407,7 +1408,7 @@ public class ServerEvents {
                 event.setCost(15L);
                 event.setMaterialCost(1);
             }
-        }*/
-    }
+        }*//*
+    }*/
 
 }
