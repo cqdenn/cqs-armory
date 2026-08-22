@@ -1,5 +1,6 @@
 package com.example.cqsarmory.data.entity.living;
 
+import com.example.cqsarmory.network.SmashParticlePacket;
 import com.example.cqsarmory.registry.EntityRegistry;
 import io.redspace.ironsspellbooks.entity.mobs.wizards.fire_boss.NotIdioticNavigation;
 import io.redspace.ironsspellbooks.entity.spells.poison_cloud.PoisonCloud;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import javax.annotation.Nullable;
 
@@ -125,6 +127,7 @@ public class Loglin extends Hoglin {
                 level().addFreshEntity(cloud);
             }
             this.poisonOnLand = false;
+            PacketDistributor.sendToPlayersTrackingEntity(this, new SmashParticlePacket(this.getBlockPosBelowThatAffectsMyMovement()));
         }
     }
 
