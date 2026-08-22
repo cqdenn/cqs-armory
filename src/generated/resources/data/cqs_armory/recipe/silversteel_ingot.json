@@ -12,7 +12,13 @@
       "item": "minecraft:diamond"
     },
     {
-      "item": "irons_spellbooks:icy_fang"
+      "item": "minecraft:wind_charge"
+    },
+    {
+      "item": "minecraft:wind_charge"
+    },
+    {
+      "item": "minecraft:wind_charge"
     }
   ],
   "result": {

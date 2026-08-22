@@ -304,7 +304,7 @@ public class RecipeDataGenerator extends RecipeProvider {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get().asItem(), 1)
                 .requires(Items.DIAMOND, 3)
-                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ICY_FANG.get(), 1)
+                .requires(Items.WIND_CHARGE, 3)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.DIAMOND))
                 .save(recipeOutput);
 

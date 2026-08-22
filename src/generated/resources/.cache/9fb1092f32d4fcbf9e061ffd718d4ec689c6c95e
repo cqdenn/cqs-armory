@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-09T18:07:57.3502583	Recipes
+// 1.21.1	2026-08-22T14:27:03.4297059	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 578afef1b3cd8c343569e8b69ea5f87f84434393 data/cqs_armory/advancement/recipes/combat/amethyst_crossbow.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
@@ -642,7 +642,7 @@ dbfb0d6eaed51f381691f4d04e85abdbeb93349b data/cqs_armory/recipe/silversteel_cros
 d46f98716910970e02b0ecbcc414210bc0824302 data/cqs_armory/recipe/silversteel_halberd.json
 dd27301e8bd33dd47b49b954a53f701958255e0a data/cqs_armory/recipe/silversteel_holy_staff.json
 e052812d8786fe7535ef60ba6edba0495576f133 data/cqs_armory/recipe/silversteel_ice_staff.json
-b632292f970cc36af9576b850ea9777af948ef68 data/cqs_armory/recipe/silversteel_ingot.json
+a67cdf46b2e0ff0b904f7405322890d99bb7db5f data/cqs_armory/recipe/silversteel_ingot.json
 8b0f44cd565ae59871c5fd9c3576b055a0548f5f data/cqs_armory/recipe/silversteel_lightning_staff.json
 37aabce78d5a0547da5f1520dc6c05c77c6f60d6 data/cqs_armory/recipe/silversteel_longbow.json
 fe148394befa6a62c5b603db8478ce8d79fc53fc data/cqs_armory/recipe/silversteel_mace.json
