@@ -2,6 +2,7 @@ package com.example.cqsarmory.mixin;
 
 import com.example.cqsarmory.data.AbilityData;
 import com.example.cqsarmory.registry.ItemRegistry;
+import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import net.minecraft.core.Holder;
@@ -25,6 +26,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerMixin {
 
     @Shadow public abstract void playNotifySound(SoundEvent sound, SoundSource source, float volume, float pitch);
+
+    @Inject(method = "jumpFromGround", at = @At("HEAD"), cancellable = true)
+    private void cqs_armory$overrideAirStrafing(CallbackInfo ci) {
+        if (((Player) (Object) this).hasEffect(MobEffectRegistry.STUNNED)) {
+            ci.cancel();
+        }
+    }
 
     @Inject(method = "getFlyingSpeed", at = @At("HEAD"), cancellable = true)
     private void cqs_armory$overrideAirStrafing(CallbackInfoReturnable<Float> cir) {
