@@ -7,6 +7,7 @@ import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
 import com.example.cqsarmory.registry.EntityRegistry;
 import com.example.cqsarmory.registry.SoundRegistry;
+import io.redspace.bowattributes.registry.BowAttributes;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.NeutralWizard;
@@ -42,7 +43,7 @@ import java.util.Optional;
 public class Dwarf extends NeutralWizard {
 
     public static final ResourceLocation modelResource = ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "geo/dwarf.geo.json");
-    private final WizardAttackGoal bowGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
+    private final WizardAttackGoal bowGoal = new WizardAttackGoal(this, 1.1f, 20, 60)
             .setSpells(
                     List.of(CQSpellRegistry.RAPID_FIRE_SPELL.get(), CQSpellRegistry.PIERCING_ARROW_SPELL.get(), CQSpellRegistry.BARRAGE_SPELL.get()),
                     List.of(),
@@ -61,7 +62,7 @@ public class Dwarf extends NeutralWizard {
             .setAllowFleeing(false)
             .setSpellQuality(0.5f, 0.5f)
             .setDrinksPotions();
-    private final WizardAttackGoal magicGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
+    private final WizardAttackGoal magicGoal = new WizardAttackGoal(this, 1.1f, 20, 60)
             .setSpells(
                     List.of(SpellRegistry.FIREBOLT_SPELL.get(), SpellRegistry.BALL_LIGHTNING_SPELL.get(), SpellRegistry.ICICLE_SPELL.get()),
                     List.of(SpellRegistry.GUST_SPELL.get(), SpellRegistry.INVISIBILITY_SPELL.get()),
@@ -176,9 +177,11 @@ public class Dwarf extends NeutralWizard {
 
     public static AttributeSupplier.Builder prepareAttributes() {
         return LivingEntity.createLivingAttributes()
-                .add(Attributes.ATTACK_DAMAGE, 14.0)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.0)
-                .add(Attributes.MAX_HEALTH, 30.0)
+                .add(Attributes.ATTACK_DAMAGE, 14.0)//+4 from iron pic
+                .add(BowAttributes.ARROW_DAMAGE, 6.0)//+8 from vanilla bow
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5)
+                .add(Attributes.MAX_HEALTH, 50.0)
+                .add(Attributes.ARMOR, 6)
                 .add(Attributes.FOLLOW_RANGE, 24.0)
                 .add(Attributes.MOVEMENT_SPEED, .4)
                 .add(Attributes.ENTITY_INTERACTION_RANGE, 3);
