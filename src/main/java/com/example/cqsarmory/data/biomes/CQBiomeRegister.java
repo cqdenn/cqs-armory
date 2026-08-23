@@ -36,12 +36,12 @@ public class CQBiomeRegister
         context.register(DWARVEN_CAVES_FEATURES_CONFIGURED, new ConfiguredFeature<>(
                 CQFeatureRegistry.UNDERGROUND_TEMPLATE.get(),
                 new UndergroundTemplateFeatureConfiguration(List.of(
-                        CqsArmory.id("dwarven_caves/features/ore_coal"),
-                        CqsArmory.id("dwarven_caves/features/ore_copper"),
+                        //CqsArmory.id("dwarven_caves/features/ore_coal"),
+                        //CqsArmory.id("dwarven_caves/features/ore_copper"),
                         //CqsArmory.id("dwarven_caves/features/ore_diamond"),
-                        CqsArmory.id("dwarven_caves/features/ore_emerald"),
-                        CqsArmory.id("dwarven_caves/features/ore_gold"),
-                        CqsArmory.id("dwarven_caves/features/ore_iron"),
+                        //CqsArmory.id("dwarven_caves/features/ore_emerald"),
+                        //CqsArmory.id("dwarven_caves/features/ore_gold"),
+                        //CqsArmory.id("dwarven_caves/features/ore_iron"),
                         CqsArmory.id("dwarven_caves/features/ore_coal"),
                         CqsArmory.id("dwarven_caves/features/ore_copper"),
                         CqsArmory.id("dwarven_caves/features/ore_diamond"),
@@ -50,8 +50,9 @@ public class CQBiomeRegister
                         CqsArmory.id("dwarven_caves/features/ore_iron"),
 
                         CqsArmory.id("dwarven_caves/features/chest"),
-                        CqsArmory.id("dwarven_caves/features/point"),
                         CqsArmory.id("dwarven_caves/features/chest"),
+                        CqsArmory.id("dwarven_caves/features/chest"),
+                        CqsArmory.id("dwarven_caves/features/point"),
                         CqsArmory.id("dwarven_caves/features/point"),
 
                         CqsArmory.id("dwarven_caves/features/statue")
@@ -64,7 +65,7 @@ public class CQBiomeRegister
         context.register(DWARVEN_CAVES_FEATURES_PLACED, new PlacedFeature(
                 context.lookup(Registries.CONFIGURED_FEATURE).getOrThrow(DWARVEN_CAVES_FEATURES_CONFIGURED),
                 List.of(
-                        CountPlacement.of(2),
+                        CountPlacement.of(1),
                         InSquarePlacement.spread(),
                         HeightRangePlacement.uniform(VerticalAnchor.aboveBottom(4), VerticalAnchor.absolute(0)),
                         BiomeFilter.biome()
