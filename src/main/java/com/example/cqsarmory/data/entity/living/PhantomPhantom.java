@@ -374,7 +374,7 @@ public class PhantomPhantom extends Phantom implements PreventDismount {
                         livingentity.startRiding(PhantomPhantom.this, true);
                         PhantomPhantom.this.riders.add(livingentity);
                     } else {
-                        PhantomPhantom.this.lookAt(livingentity, 1, 1);
+                        PhantomPhantom.this.lookAt(livingentity, 30, 30);
                         CastContext cast = SkillcastingManager.buildCastContext(CasterRef.entity(PhantomPhantom.this), SpellRegistry.GUST_SPELL.get().holder(), 10, CastSource.EMPTY);
                         cast.set(SkillcastingComponentTypes.CAST_TIME, 0);
                         SkillcastingManager.initiateCast(CasterRef.entity(PhantomPhantom.this), cast);

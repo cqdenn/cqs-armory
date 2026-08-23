@@ -80,11 +80,11 @@ public class Loglin extends Hoglin {
         if (target != null) {
             if (target.distanceToSqr(this) > 8 * 8 && hasRoomToJump() && !isChargingCharge()) {
                 this.stopInPlace();
-                this.lookAt(target, 1, 1);
+                this.lookAt(target, 30, 30);
                 this.setChargingJump(true);
             } else if (this.chargeCD <= 0 && target.distanceToSqr(this) > 3 * 3 && Math.abs(this.getY() - this.getTarget().getY()) < 1.5 && !isChargingJump()) {
                 this.stopInPlace();
-                this.lookAt(target, 1, 1);
+                this.lookAt(target, 30, 30);
                 this.setChargingCharge(true);
             }
         }
