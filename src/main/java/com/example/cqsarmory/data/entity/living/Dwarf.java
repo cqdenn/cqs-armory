@@ -1,6 +1,7 @@
 package com.example.cqsarmory.data.entity.living;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.data.entity.goals.SkillcastingWarriorGoal;
 import com.example.cqsarmory.items.MagicStaffItem;
 import com.example.cqsarmory.items.weapons.GreataxeItem;
 import com.example.cqsarmory.registry.CQSpellRegistry;
@@ -10,7 +11,6 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.entity.mobs.abstract_spell_casting_mob.NeutralWizard;
 import io.redspace.ironsspellbooks.entity.mobs.goals.PatrolNearLocationGoal;
-import io.redspace.ironsspellbooks.entity.mobs.goals.WarlockAttackGoal;
 import io.redspace.ironsspellbooks.entity.mobs.goals.WizardAttackGoal;
 import io.redspace.ironsspellbooks.entity.mobs.goals.WizardRecoverGoal;
 import io.redspace.ironsspellbooks.item.weapons.StaffItem;
@@ -51,13 +51,14 @@ public class Dwarf extends NeutralWizard {
             )
             .setSpellQuality(0.5f, 0.5f)
             .setDrinksPotions();
-    private final WizardAttackGoal meleeGoal = new WarlockAttackGoal(this, 1.1f, 50, 100)
+    private final WizardAttackGoal meleeGoal = new SkillcastingWarriorGoal(this, 1.1f, 15, 30)
             .setSpells(
-                    List.of(CQSpellRegistry.CHAIN_HOOK_SPELL.get(), CQSpellRegistry.FLANK_STEP_SPELL.get(), CQSpellRegistry.SKEWER_SPELL.get()),
-                    List.of(CQSpellRegistry.SPIN_SPELL.get(), CQSpellRegistry.RIPOSTE_SPELL.get(), CQSpellRegistry.STUN_SPELL.get()),
-                    List.of(),
+                    List.of(CQSpellRegistry.SPIN_SPELL.get(), CQSpellRegistry.STUN_SPELL.get(), CQSpellRegistry.EXECUTE_SPELL.get()),
+                    List.of(CQSpellRegistry.RIPOSTE_SPELL.get()),
+                    List.of(CQSpellRegistry.SKEWER_SPELL.get()),
                     List.of()
             )
+            .setAllowFleeing(false)
             .setSpellQuality(0.5f, 0.5f)
             .setDrinksPotions();
     private final WizardAttackGoal magicGoal = new WizardAttackGoal(this, 1.1f, 50, 100)
@@ -124,6 +125,11 @@ public class Dwarf extends NeutralWizard {
     @Override
     protected @org.jetbrains.annotations.Nullable SoundEvent getHurtSound(DamageSource damageSource) {
         return SoundRegistry.DWARF_HURT.get();
+    }
+
+    @Override
+    public boolean isLeftHanded() {
+        return false;
     }
 
     @Override
