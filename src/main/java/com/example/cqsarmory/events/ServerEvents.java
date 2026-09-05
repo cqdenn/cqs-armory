@@ -779,13 +779,20 @@ public class ServerEvents {
         int seconds = ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(player) ? 16 : 8;
 
         if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
+            int aoes = 0;
             if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
+                aoes++;
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.HELLFIRE_MAGE_AOE, (20 * seconds), 0, false, false, false));
-            } else if (ItemRegistry.SHOCKWAVE.get().isEquippedBy(player)) {
+            }
+            if (ItemRegistry.SHOCKWAVE.get().isEquippedBy(player)) {
+                aoes++;
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.SHOCKWAVE_MAGE_AOE, 5, 0, false, false, false));
-            } else if (ItemRegistry.BLIZZARD.get().isEquippedBy(player)) {
+            }
+            if (ItemRegistry.BLIZZARD.get().isEquippedBy(player)) {
+                aoes++;
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.BLIZZARD_MAGE_AOE, (20 * seconds), 0, false, false, false));
-            } else {
+            }
+            if (aoes == 0){
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
             }
             AbilityData.get(player).manaSpentSinceLastAOE = 0;
