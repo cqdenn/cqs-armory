@@ -151,9 +151,11 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> BLADE_MASTERY = ITEMS.register("blade_mastery", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.PERFECT_TECHNIQUE_SPELL, 1)));
     public static final Supplier<CurioBaseItem> BEHIND_YOU = ITEMS.register("behind_you", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.FLANK_STEP_SPELL, 1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BACKSTAB_DAMAGE, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> RETALIATE = ITEMS.register("retaliate", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> SPRING_BOOT = ITEMS.register("spring_boot", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.LEAP_SPELL, 1)));
     public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
     public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> HOLY_BLESSING = ITEMS.register("holy_blessing", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
@@ -161,7 +163,7 @@ public class ItemRegistry {
     //public static final Supplier<CurioBaseItem> BLASTER = ITEMS.register("blaster", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> SURF_SHOT = ITEMS.register("surf_shot", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> DOUBLE_STEP = ITEMS.register("double_step", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_DASHES, 1, AttributeModifier.Operation.ADD_VALUE), new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_MOVEMENT_COST_REDUCTION, 1, AttributeModifier.Operation.ADD_VALUE)));
-    //public static final Supplier<CurioBaseItem> QUICKDRAW = ITEMS.register("quickdraw", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> QUICKDRAW = ITEMS.register("quickdraw", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     //public static final Supplier<CurioBaseItem> FULL_DEVOTION = ITEMS.register("full_devotion", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.FOCUS_SPELL, 1))));
     public static final Supplier<CurioBaseItem> HUNTERS_MARK = ITEMS.register("hunters_mark", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> KINETIC_STRIKE = ITEMS.register("kinetic_strike", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "item": "cqs_armory:healthy_rune"
+    },
+    {
+      "item": "cqs_armory:healthy_rune"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:holy_blessing"
+  }
+}

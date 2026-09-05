@@ -29,8 +29,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -65,14 +67,20 @@ public class CQtils {
         PacketDistributor.sendToPlayer(player, new SyncMomentumPacket((int) newMomentum));
 
         //booster effects
-        //if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
+        //if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true)); duplicate name
 
         //reload crossbows
-        /*if (ItemRegistry.GOOPER.get().isEquippedBy(player)) {
+        if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) {
             for (int i = 0; i < Inventory.INVENTORY_SIZE; i++) {
                 ItemStack crossbowStack = player.getInventory().getItem(i);
-                if (crossbowStack.getItem() instanceof CrossbowItem crossbow) {
+                if (crossbowStack.getItem() instanceof CrossbowItem) {
                     if (!CrossbowItem.isCharged(crossbowStack) && CrossbowItem.tryLoadProjectiles(player, crossbowStack)) {
+
+                        if (player instanceof ServerPlayer serverPlayer) {
+                            int newArrowCount = AbilityData.get(player).quiverArrowCount;
+                            PacketDistributor.sendToPlayer(serverPlayer, new SyncQuiverArrowsPacket(newArrowCount));
+                        }
+
                         CrossbowItem.ChargingSounds crossbowitem$chargingsounds = CrossbowShortcuts.getChargingSounds(crossbowStack);
                         crossbowitem$chargingsounds.end()
                                 .ifPresent(
@@ -90,7 +98,7 @@ public class CQtils {
                     }
                 }
             }
-        }*/
+        }
 
         //arrow damage stacks
         if (ItemRegistry.KINETIC_STRIKE.get().isEquippedBy(player)) {
@@ -171,6 +179,33 @@ public class CQtils {
         for (Entity target : entities) {
             if (target instanceof LivingEntity) {
                 target.hurt(damageSource, damage);
+            }
+        }
+        entities.clear();
+    }
+
+    public static void doHealingMageAOE(LivingEntity owner, Vec3 from, float radius, float healing) {
+        Vector3f center = new Vector3f(1f, 0f, 0f);
+        var x = from.x;
+        var y = from.y;
+        var z = from.z;
+        Level level = owner.level();
+        float heal = (float) (healing * owner.getAttributeValue(AttributeRegistry.SPELL_POWER) * owner.getAttributeValue(AttributeRegistry.HOLY_SPELL_POWER));
+        var entities = level.getEntities((Entity) null, new AABB(from, from).inflate(radius, 1, radius), (targeted) -> DamageSources.isFriendlyFireBetween(owner, targeted) && Utils.hasLineOfSight(level, from, targeted.position(), true));
+
+        if (!owner.level().isClientSide) {
+            genericMageAOEParticlesServer(owner.level(), radius, center, from);
+        } else {
+            level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
+            level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
+            level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
+        }
+
+        for (Entity target : entities) {
+            if (target instanceof LivingEntity living) {
+                living.heal(heal);
             }
         }
         entities.clear();

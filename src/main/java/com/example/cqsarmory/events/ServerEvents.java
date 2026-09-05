@@ -792,6 +792,10 @@ public class ServerEvents {
                 aoes++;
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.BLIZZARD_MAGE_AOE, (20 * seconds), 0, false, false, false));
             }
+            if (ItemRegistry.HOLY_BLESSING.get().isEquippedBy(player)) {
+                aoes++;
+                player.addEffect(new MobEffectInstance(MobEffectRegistry.HEALING_MAGE_AOE, (20 * seconds), 0, false, false, false));
+            }
             if (aoes == 0){
                 player.addEffect(new MobEffectInstance(MobEffectRegistry.GENERIC_MAGE_AOE, (20 * seconds), 0, false, false, false));
             }
