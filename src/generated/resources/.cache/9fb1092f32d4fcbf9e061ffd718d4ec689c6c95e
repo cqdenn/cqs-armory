@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-22T14:27:03.4297059	Recipes
+// 1.21.1	2026-09-05T16:24:35.5753826	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 578afef1b3cd8c343569e8b69ea5f87f84434393 data/cqs_armory/advancement/recipes/combat/amethyst_crossbow.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
@@ -150,6 +150,7 @@ f2d1c3cfaed3d9216b7f27a6bc4f2c6109d3b4b5 data/cqs_armory/advancement/recipes/com
 e34a0ef4bf267b2c01d254ed6b78a1a8dec3a091 data/cqs_armory/advancement/recipes/combat/healthy_rune.json
 3459816dff245355d9fddf62d6438a0e08a76a23 data/cqs_armory/advancement/recipes/combat/heavy_coating.json
 84e686ece7e3134730aeffb4e3df227394c3de8e data/cqs_armory/advancement/recipes/combat/hellfire_sigil.json
+9247e6a419ea80160a97b900d02358c5c55e5549 data/cqs_armory/advancement/recipes/combat/holy_blessing.json
 871a143f90b1baa01aee55a4b7e996c31adb9ca4 data/cqs_armory/advancement/recipes/combat/hunters_mark.json
 fd432bb309705ae7e83d554feab700d39c8f2929 data/cqs_armory/advancement/recipes/combat/hunter_talisman.json
 7b1e4e035d83cc3eb850a6de72327588a742244b data/cqs_armory/advancement/recipes/combat/ice_coating.json
@@ -251,6 +252,7 @@ d1c2ca8e4712c58b83d0aafc6e797bfdbde466e7 data/cqs_armory/advancement/recipes/com
 f5d6c202b9b671e438e8ba6a22ca2d272a13a36e data/cqs_armory/advancement/recipes/combat/plenty_quiver.json
 2c8580df8700fe7ec60cd160bcb1d320a5324326 data/cqs_armory/advancement/recipes/combat/poison_coating.json
 c0b8ba9495c8fbf7fc21fcf4b7ea62cb894903f4 data/cqs_armory/advancement/recipes/combat/poison_quiver.json
+315b268e486f028154220b5e20dd8c1129ba7dc0 data/cqs_armory/advancement/recipes/combat/quickdraw.json
 83c7c9a0513f179b8aa087bb44c845fd8664ee18 data/cqs_armory/advancement/recipes/combat/rampart_talisman.json
 aa7b31f12285f2d484926a56203521d021a77478 data/cqs_armory/advancement/recipes/combat/ranger_talisman.json
 1ef9d53115801724866cafdfbdf317c2a7d7d3b1 data/cqs_armory/advancement/recipes/combat/retaliate.json
@@ -301,6 +303,7 @@ ba29262ec230fd12b2d2ca7a9daadd57087e04ac data/cqs_armory/advancement/recipes/com
 f65edc2aaac99e0724cece62567c47e31e415c13 data/cqs_armory/advancement/recipes/combat/skirmisher_talisman.json
 64c1453fbc1a63ca2571521293b0cfae4849d02c data/cqs_armory/advancement/recipes/combat/slipstream.json
 e684e0f90d162a2872e41bdb1a4250bacd5bdc62 data/cqs_armory/advancement/recipes/combat/soldier_talisman.json
+bce03c59f606130e3f9b6d0a721f09b23dbb1a21 data/cqs_armory/advancement/recipes/combat/spring_boot.json
 eed89f7d3269b26977d7d3cf1597efa2e4390f73 data/cqs_armory/advancement/recipes/combat/summoners_brand.json
 30a9c884445b57e0df0f607aac6b195688496988 data/cqs_armory/advancement/recipes/combat/surf_shot.json
 94454ba208da359bab165b242f6cea6fa3b5901a data/cqs_armory/advancement/recipes/combat/sword_quiver.json
@@ -505,6 +508,7 @@ a63c7c12225ac5a4894426f7a010002f1464401d data/cqs_armory/recipe/gold_warhammer.j
 420b28f5cff74cb8b981ae498a3e3f4c8c8e68cb data/cqs_armory/recipe/healthy_rune.json
 40ed099eb997f267f0253bd06407342e8e83c846 data/cqs_armory/recipe/heavy_coating.json
 7cac243c93d4661bb2e2170be6cc922100f1e15f data/cqs_armory/recipe/hellfire_sigil.json
+63fd59957ca731c99c8799b15bc0ead7d3e37871 data/cqs_armory/recipe/holy_blessing.json
 38ad180f44c9657656d8925a010971a152e79e21 data/cqs_armory/recipe/hunters_mark.json
 0898b7a864f0608c7e3fc9415242e1e97ee0ef13 data/cqs_armory/recipe/hunter_talisman.json
 e69248223e23474d4dc4bc69fc9fd56b8d0ddb36 data/cqs_armory/recipe/ice_coating.json
@@ -606,6 +610,7 @@ ba33636f7355a842ce7a7b51dd268cc973681a06 data/cqs_armory/recipe/obsidian_shortbo
 229ee595c3d01a5ed6d97283be6035d0e11775ba data/cqs_armory/recipe/plenty_quiver.json
 d57e9e4020e05bd162d7543f412949bcbd2f183f data/cqs_armory/recipe/poison_coating.json
 0ea58dd835b1174688bd7ceb72513e3e0177f690 data/cqs_armory/recipe/poison_quiver.json
+6d1daf89f53618e32fe6f0b4961a79b5c3452d30 data/cqs_armory/recipe/quickdraw.json
 7b26786cfc05111c4a06f53e168d37ca1f3cebbb data/cqs_armory/recipe/rampart_talisman.json
 27b6cc58d55dae99ff555d097c6ddcaea2029b2e data/cqs_armory/recipe/ranger_talisman.json
 96fe1c909d97dc0cd049b60f7b218c55afa37cf7 data/cqs_armory/recipe/retaliate.json
@@ -656,6 +661,7 @@ d1e75c9b30c9679c93e5c7e6d61c1a184a02aa6c data/cqs_armory/recipe/silversteel_warh
 1e8ee8f987aa15118a93a7d98db2623474c172bc data/cqs_armory/recipe/skirmisher_talisman.json
 fe2e032780836340164a18ccb4a792b96e3f83c9 data/cqs_armory/recipe/slipstream.json
 250fb030791d8f342920446a75df2e3186f7edb8 data/cqs_armory/recipe/soldier_talisman.json
+2b3ee80378a0b185ba227e77d84f9ecc38aa90a9 data/cqs_armory/recipe/spring_boot.json
 ca9f031277ce5d1e480b1280ca565872ce4f7950 data/cqs_armory/recipe/summoners_brand.json
 047f0ed418224e483a119097e811ab6e70f22877 data/cqs_armory/recipe/surf_shot.json
 98c0872fc79bf646ef223ec9e34559783b38bfd6 data/cqs_armory/recipe/sword_quiver.json
