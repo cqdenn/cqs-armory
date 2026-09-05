@@ -67,6 +67,31 @@ public class CQtils {
         //booster effects
         //if (ItemRegistry.QUICKDRAW.get().isEquippedBy(player)) player.addEffect(new MobEffectInstance(com.example.cqsarmory.registry.MobEffectRegistry.INSTA_DRAW, 20, 0, false, false, true));
 
+        //reload crossbows
+        /*if (ItemRegistry.GOOPER.get().isEquippedBy(player)) {
+            for (int i = 0; i < Inventory.INVENTORY_SIZE; i++) {
+                ItemStack crossbowStack = player.getInventory().getItem(i);
+                if (crossbowStack.getItem() instanceof CrossbowItem crossbow) {
+                    if (!CrossbowItem.isCharged(crossbowStack) && CrossbowItem.tryLoadProjectiles(player, crossbowStack)) {
+                        CrossbowItem.ChargingSounds crossbowitem$chargingsounds = CrossbowShortcuts.getChargingSounds(crossbowStack);
+                        crossbowitem$chargingsounds.end()
+                                .ifPresent(
+                                        p_352852_ -> player.level().playSound(
+                                                null,
+                                                player.getX(),
+                                                player.getY(),
+                                                player.getZ(),
+                                                p_352852_.value(),
+                                                player.getSoundSource(),
+                                                1.0F,
+                                                1.0F / (player.level().getRandom().nextFloat() * 0.5F + 1.0F) + 0.2F
+                                        )
+                                );
+                    }
+                }
+            }
+        }*/
+
         //arrow damage stacks
         if (ItemRegistry.KINETIC_STRIKE.get().isEquippedBy(player)) {
             var effect = player.getEffect(MobEffectRegistry.KINETIC_STRIKE);
