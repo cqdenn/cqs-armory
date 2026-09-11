@@ -823,7 +823,7 @@ public class ServerEvents {
             if (living.level().isClientSide) return;
             float manaSpent = event.getCastContext().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
 
-            if (manaSpent > 0 && !living.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.BLIZZARD_MAGE_AOE)) { //this is extremely dumb FIXME
+            if (manaSpent > 0 && !living.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.BLIZZARD_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HEALING_MAGE_AOE)) { //this is extremely dumb FIXME
                 float newManaSpent = AbilityData.get(living).manaSpentSinceLastAOE + manaSpent;
                 AbilityData.get(living).manaSpentSinceLastAOE = newManaSpent;
                 AbilityData.get(living).startMageAOEDecay = living.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
