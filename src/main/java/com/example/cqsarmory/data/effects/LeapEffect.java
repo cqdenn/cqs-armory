@@ -59,12 +59,13 @@ public class LeapEffect extends NonCurableEffect {
                 if (target instanceof LivingEntity) {
                     if (!(target == livingEntity)) {
                         float damage = (float) getDamage(target, livingEntity);
-                        target.hurt(damageSource, damage);
-                        if (livingEntity instanceof Player && !livingEntity.level().isClientSide) {
-                            float newRageTest = (AbilityData.get(livingEntity).getRage() + LeapSpell.RAGE_PER_HIT);
-                            float newRage = newRageTest < livingEntity.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) livingEntity.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
-                            AbilityData.get(livingEntity).setRage(newRage);
-                            PacketDistributor.sendToPlayer((ServerPlayer) livingEntity, new SyncRagePacket((int) newRage));
+                        if (target.hurt(damageSource, damage)) {
+                            if (livingEntity instanceof Player && !livingEntity.level().isClientSide) {
+                                float newRageTest = (AbilityData.get(livingEntity).getRage() + LeapSpell.RAGE_PER_HIT);
+                                float newRage = newRageTest < livingEntity.getAttribute(AttributeRegistry.MAX_RAGE).getValue() ? newRageTest : (float) livingEntity.getAttribute(AttributeRegistry.MAX_RAGE).getValue();
+                                AbilityData.get(livingEntity).setRage(newRage);
+                                PacketDistributor.sendToPlayer((ServerPlayer) livingEntity, new SyncRagePacket((int) newRage));
+                            }
                         }
                     }
                 }
