@@ -769,7 +769,7 @@ public class ServerEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void mageAOE(PlayerTickEvent.Pre event) {
         if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
 
@@ -778,7 +778,7 @@ public class ServerEvents {
         float defaultMinManaSpent = ItemRegistry.MANASAVER.get().isEquippedBy(player) ? 250 : 500;
         int seconds = ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(player) ? 16 : 8;
 
-        if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
+        *//*if (AbilityData.get(player).manaSpentSinceLastAOE >= defaultMinManaSpent) {
             int aoes = 0;
             if (ItemRegistry.HELLFIRE_SIGIL.get().isEquippedBy(player)) {
                 aoes++;
@@ -801,9 +801,9 @@ public class ServerEvents {
             }
             AbilityData.get(player).manaSpentSinceLastAOE = 0;
             PacketDistributor.sendToPlayer((ServerPlayer) player, new SyncManaSpentPacket(0));
-        }
+        }*//*
 
-    }
+    }*/
 
     @SubscribeEvent
     public static void overchargeBrand(BuildCastContextEvent.Post event) {
@@ -821,10 +821,20 @@ public class ServerEvents {
 
         if (event.getCastContext().asEntityCaster() instanceof LivingEntity living) {
             if (living.level().isClientSide) return;
+            float defaultMinManaSpent = CQtils.getDefaultManaSpent(living);
             float manaSpent = event.getCastContext().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
+            boolean hasAOE = false;
 
-            if (manaSpent > 0 && !living.hasEffect(MobEffectRegistry.GENERIC_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HELLFIRE_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.BLIZZARD_MAGE_AOE) && !living.hasEffect(MobEffectRegistry.HEALING_MAGE_AOE)) { //this is extremely dumb FIXME
+            for (MobEffectInstance instance : living.getActiveEffects()) {
+                if (instance.getEffect().is(Tags.MobEffects.MAGE_AOES)) {
+                    hasAOE = true;
+                    break;
+                }
+            }
+
+            if (manaSpent > 0 && !hasAOE) {
                 float newManaSpent = AbilityData.get(living).manaSpentSinceLastAOE + manaSpent;
+                newManaSpent = Math.min(newManaSpent, defaultMinManaSpent);
                 AbilityData.get(living).manaSpentSinceLastAOE = newManaSpent;
                 AbilityData.get(living).startMageAOEDecay = living.tickCount + CQtils.CLASS_ABILITIES_DECAY_TIME;
                 if (living instanceof ServerPlayer serverPlayer) {

@@ -28,5 +28,6 @@ public class PayloadHandler {
         payloadRegistrar.playToServer(PlayerDodgePacket.TYPE, PlayerDodgePacket.STREAM_CODEC, PlayerDodgePacket::handle);
         payloadRegistrar.playToClient(SmashParticlePacket.TYPE, SmashParticlePacket.STREAM_CODEC, SmashParticlePacket::handle);
         payloadRegistrar.playToServer(DoubleJumpPacket.TYPE, DoubleJumpPacket.STREAM_CODEC, DoubleJumpPacket::handle);
+        payloadRegistrar.playToServer(MageAOEPacket.TYPE, MageAOEPacket.STREAM_CODEC, MageAOEPacket::handle);
     }
 }

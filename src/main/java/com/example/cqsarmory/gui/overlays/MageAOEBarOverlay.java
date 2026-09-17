@@ -2,6 +2,7 @@ package com.example.cqsarmory.gui.overlays;
 
 import com.example.cqsarmory.CqsArmory;
 import com.example.cqsarmory.data.AbilityData;
+import com.example.cqsarmory.events.KeyMappings;
 import com.example.cqsarmory.registry.ItemRegistry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.DeltaTracker;
@@ -77,14 +78,24 @@ public class MageAOEBarOverlay implements LayeredDraw.Layer {
         guiHelper.blit(TEXTURE, barX, barY, spriteX, spriteY, imageWidth, IMAGE_HEIGHT, 256, 256);
         guiHelper.blit(TEXTURE, barX, barY, spriteX, spriteY + IMAGE_HEIGHT, (int) (imageWidth * Math.min((spent / (double) maxValue), 1)), IMAGE_HEIGHT);
 
-        int textX, textY;
+        int textX, textY, textXX, textYY;
         String fraction = (spent) + "/" + maxValue;
+        String keybind = "[ " + KeyMappings.AOE_KEYMAP.getKey().getDisplayName().getString() +" ]";
+        int min = ChatFormatting.BLUE.getColor();
+        int max = ChatFormatting.AQUA.getColor();
+        int color = Minecraft.getInstance().level.getGameTime() % 20 < 10 ? min : max;
+
 
         textX = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_X_OFFSET.get() + barX + imageWidth / 2 - (int) ((("" + spent).length() + 0.5) * CHAR_WIDTH);
         textY = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_Y_OFFSET.get() + barY + (anchor == Anchor.XP ? ICON_ROW_HEIGHT / 3 : ICON_ROW_HEIGHT);
+        textXX = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_X_OFFSET.get() + barX + imageWidth / 2 - (int) ((((keybind).length()) * CHAR_WIDTH) * 0.5) + 4;
+        textYY = com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_TEXT_Y_OFFSET.get() + barY + (anchor == Anchor.XP ? ICON_ROW_HEIGHT / 3 : ICON_ROW_HEIGHT) - 20;
 
         if (com.example.cqsarmory.config.ClientConfigs.MAGE_AOE_BAR_TEXT_VISIBLE.get()) {
             guiHelper.drawString(Minecraft.getInstance().font, fraction, textX, textY, TEXT_COLOR);
+            if (spent / maxValue >= 1) {
+                guiHelper.drawString(Minecraft.getInstance().font, keybind, textXX, textYY, color);
+            }
             //gui.getFont().draw(poseStack, manaFraction, textX, textY, TEXT_COLOR);
         }
     }

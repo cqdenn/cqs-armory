@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 
@@ -47,6 +48,14 @@ public class Tags {
 
         private static TagKey<AbstractSkill> tag(String name) {
             return TagKey.create(SkillcastingRegistries.SKILL_REGISTRY_KEY, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
+        }
+    }
+
+    public static class MobEffects {
+        public static final TagKey<MobEffect> MAGE_AOES = tag("mage_aoes");
+
+        private static TagKey<MobEffect> tag(String name) {
+            return TagKey.create(Registries.MOB_EFFECT, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));
         }
     }
 }

@@ -184,6 +184,10 @@ public class CQtils {
         entities.clear();
     }
 
+    public static int getDefaultManaSpent(LivingEntity living) {
+        return ItemRegistry.MANASAVER.get().isEquippedBy(living) ? 250 : 500;
+    }
+
     public static void doHealingMageAOE(LivingEntity owner, Vec3 from, float radius, float healing) {
         Vector3f center = new Vector3f(1f, 0f, 0f);
         var x = from.x;

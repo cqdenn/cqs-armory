@@ -18,10 +18,12 @@ public class KeyMappings {
     }
 
     public static final KeyMapping DODGE_KEYMAP = new KeyMapping(getResourceName("dodge"), KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_CAPSLOCK, KEY_BIND_GENERAL_CATEGORY);
+    public static final KeyMapping AOE_KEYMAP = new KeyMapping(getResourceName("activate_aoe"), KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM, InputConstants.KEY_CAPSLOCK, KEY_BIND_GENERAL_CATEGORY);
 
     @SubscribeEvent
     public static void onRegisterKeybinds(RegisterKeyMappingsEvent event) {
         //event.register(DODGE_KEYMAP);
+        event.register(AOE_KEYMAP);
     }
 
 }

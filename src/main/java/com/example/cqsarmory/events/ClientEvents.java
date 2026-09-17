@@ -1,8 +1,10 @@
 package com.example.cqsarmory.events;
 
 import com.example.cqsarmory.CqsArmory;
+import com.example.cqsarmory.config.ServerConfigs;
 import com.example.cqsarmory.data.DamageData;
 import com.example.cqsarmory.network.DoubleJumpPacket;
+import com.example.cqsarmory.network.MageAOEPacket;
 import com.example.cqsarmory.network.doOnSwingEffectPacket;
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.RenderingUtils;
@@ -53,6 +55,15 @@ public class ClientEvents {
             }
             if (lateral == 0 && forward == 0) {forward = -1;}
             PacketDistributor.sendToServer(new DoubleJumpPacket(new Vec3(lateral, 0, forward)));
+        }
+    }
+
+    @SubscribeEvent
+    public static void mageAOE (InputEvent.Key event) {
+        if (Minecraft.getInstance().level == null) return;
+        if (ServerConfigs.DISABLE_MAGE_AOE.get()) return;
+        if (KeyMappings.AOE_KEYMAP.getKey().getValue() == event.getKey() && event.getAction() == 1) {
+            PacketDistributor.sendToServer(new MageAOEPacket());
         }
     }
 
