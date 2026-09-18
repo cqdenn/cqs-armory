@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:extra_aura"
+  }
+}

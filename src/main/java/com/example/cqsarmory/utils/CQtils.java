@@ -19,6 +19,7 @@ import io.redspace.ironsspellbooks.entity.spells.black_hole.BlackHole;
 import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import io.redspace.ironsspellbooks.network.particles.FieryExplosionParticlesPacket;
 import io.redspace.ironsspellbooks.particle.BlastwaveParticleOptions;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import io.redspace.skillcasting.data.CastContext;
 import io.redspace.skillcasting.data.selection.SkillSelectionManager;
 import net.minecraft.core.particles.ParticleTypes;
@@ -168,12 +169,12 @@ public class CQtils {
 
         if (!owner.level().isClientSide) {
             genericMageAOEParticlesServer(owner.level(), radius, center, from);
+            level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
         } else {
             level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
-            level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
         }
 
         for (Entity target : entities) {
@@ -188,6 +189,10 @@ public class CQtils {
         return ItemRegistry.MANASAVER.get().isEquippedBy(living) ? 250 : 500;
     }
 
+    public static int getAOETimeSeconds(LivingEntity living) {
+        return ItemRegistry.CHRONOWARP_RUNE.get().isEquippedBy(living) ? 16 : 8;
+    }
+
     public static void doHealingMageAOE(LivingEntity owner, Vec3 from, float radius, float healing) {
         Vector3f center = new Vector3f(1f, 0f, 0f);
         var x = from.x;
@@ -199,12 +204,12 @@ public class CQtils {
 
         if (!owner.level().isClientSide) {
             genericMageAOEParticlesServer(owner.level(), radius, center, from);
+            level.playSound(null, x, y, z, SoundRegistry.HOLY_CAST, SoundSource.PLAYERS, 0.2f, 1.2f);
         } else {
             level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .165f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius), x, y + .135f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius * 1.02f), x, y + .135f, z, 0, 0, 0);
             level.addParticle(new BlastwaveParticleOptions(center, radius * 0.98f), x, y + .135f, z, 0, 0, 0);
-            level.playSound(null, x, y, z, SoundEvents.BREEZE_SHOOT, SoundSource.PLAYERS, 0.2f, 0.5f);
         }
 
         for (Entity target : entities) {

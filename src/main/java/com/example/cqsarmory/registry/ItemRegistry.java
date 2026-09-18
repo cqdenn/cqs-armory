@@ -6,9 +6,10 @@ import com.example.cqsarmory.items.*;
 import com.example.cqsarmory.items.armor.ChampionArmorItem;
 import com.example.cqsarmory.items.armor.MarksmanArmorItem;
 import com.example.cqsarmory.items.curios.*;
-import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
-import com.example.cqsarmory.items.curios.brands.ElementalBrand;
-import com.example.cqsarmory.items.curios.brands.SummonersBrand;
+import com.example.cqsarmory.items.curios.boosters.ElementalBlessingBooster;
+import com.example.cqsarmory.items.curios.boosters.ExtraAuraBooster;
+import com.example.cqsarmory.items.curios.boosters.SummonersWillBooster;
+import com.example.cqsarmory.items.curios.brands.*;
 import com.example.cqsarmory.items.curios.coatings.*;
 import com.example.cqsarmory.items.curios.quivers.*;
 import com.example.cqsarmory.items.weapons.ExtendedMaceItem;
@@ -152,13 +153,17 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> BEHIND_YOU = ITEMS.register("behind_you", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.FLANK_STEP_SPELL, 1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.BACKSTAB_DAMAGE, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_BASE)));
     public static final Supplier<CurioBaseItem> RETALIATE = ITEMS.register("retaliate", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> SPRING_BOOT = ITEMS.register("spring_boot", () -> new SpellHolderBooster(new Item.Properties().stacksTo(1), new SkillData(CQSpellRegistry.LEAP_SPELL, 1)));
-    public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
-    public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
-    public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
-    public static final Supplier<CurioBaseItem> HOLY_BLESSING = ITEMS.register("holy_blessing", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    //public static final Supplier<CurioBaseItem> HELLFIRE_SIGIL = ITEMS.register("hellfire_sigil", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
+    //public static final Supplier<CurioBaseItem> BLIZZARD = ITEMS.register("blizzard", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    //public static final Supplier<CurioBaseItem> SHOCKWAVE = ITEMS.register("shockwave", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    //public static final Supplier<CurioBaseItem> HOLY_BLESSING = ITEMS.register("holy_blessing", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> EXTRA_AURA = ITEMS.register("extra_aura", () -> new ExtraAuraBooster(new Item.Properties().stacksTo(1).fireResistant()));
+    public static final Supplier<CurioBaseItem> SUMMON_SHIELD = ITEMS.register("summon_shield", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> ELEMENTAL_BLESSING = ITEMS.register("elemental_blessing", () -> new ElementalBlessingBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
+    public static final Supplier<CurioBaseItem> SUMMONERS_WILL = ITEMS.register("summoners_will", () -> new SummonersWillBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
     public static final Supplier<CurioBaseItem> CHRONOWARP_RUNE = ITEMS.register("chronowarp_rune", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> MANASAVER = ITEMS.register("manasaver", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
-    public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> UNENDING_AURA = ITEMS.register("unending_aura", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1).fireResistant(), "booster"));
     //public static final Supplier<CurioBaseItem> HUNTERS_ECHO = ITEMS.register("hunters_echo", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ORBS_SPAWNED, 1, AttributeModifier.Operation.ADD_VALUE)));
     //public static final Supplier<CurioBaseItem> BLASTER = ITEMS.register("blaster", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> SURF_SHOT = ITEMS.register("surf_shot", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
@@ -207,7 +212,13 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> ANVIL_QUIVER = ITEMS.register("anvil_quiver", () -> new AnvilQuiver(new Item.Properties().stacksTo(1).fireResistant(), "quiver").withQuiverAttributes(250));
     public static final Supplier<CurioBaseItem> SCATTER_QUIVER = ITEMS.register("scatter_quiver", () -> new ScatterQuiver(new Item.Properties().stacksTo(1).fireResistant(), "quiver").withQuiverAttributes(250));
 
-    public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.MAGMA_BOMB_SPELL, 8)).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> HELLFIRE_BRAND = ITEMS.register("hellfire_brand", () -> new HellfireAOEBrand(true).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> BLIZZARD_BRAND = ITEMS.register("blizzard_brand", () -> new BlizzardAOEBrand(false).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> SHOCKWAVE_BRAND = ITEMS.register("shockwave_brand", () -> new ShockwaveAOEBrand(false).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> HEALING_BRAND = ITEMS.register("healing_brand", () -> new HealingAOEBrand(false).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
+    public static final Supplier<CurioBaseItem> ARCANE_SWORDS_BRAND = ITEMS.register("arcane_swords_brand", () -> new ArcaneSwordsBrand(true).withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
+
+    /*public static final Supplier<CurioBaseItem> MAGMA_BRAND = ITEMS.register("magma_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.MAGMA_BOMB_SPELL, 8)).withAttributes("brand", new AttributeContainer(AttributeRegistry.FIRE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> COLD_BRAND = ITEMS.register("cold_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.SNOWBALL_SPELL, 5)).withAttributes("brand", new AttributeContainer(AttributeRegistry.ICE_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> VOLT_BRAND = ITEMS.register("volt_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.VOLT_STRIKE_SPELL, 10)).withAttributes("brand", new AttributeContainer(AttributeRegistry.LIGHTNING_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> BLOOD_BRAND = ITEMS.register("blood_brand", () -> new BrandBaseItem(new Item.Properties().stacksTo(1), new SkillData(SpellRegistry.BLOOD_NEEDLES_SPELL, 10)).withAttributes("brand", new AttributeContainer(AttributeRegistry.BLOOD_SPELL_POWER, 0.15, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 100, AttributeModifier.Operation.ADD_VALUE)));
@@ -219,7 +230,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> ELEMENTAL_BRAND = ITEMS.register("elemental_brand", () -> new ElementalBrand(new Item.Properties().stacksTo(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> SUMMONERS_BRAND = ITEMS.register("summoners_brand", () -> new SummonersBrand(new Item.Properties().stacksTo(1).fireResistant(), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.MAX_MANA, 300, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> OVERCHARGE_BRAND = ITEMS.register("overcharge_brand", () -> new SimpleDescriptiveBrand(new Item.Properties().stacksTo(1), "brand").withAttributes("brand", new AttributeContainer(AttributeRegistry.SPELL_POWER, 0.25, AttributeModifier.Operation.ADD_MULTIPLIED_BASE), new AttributeContainer(AttributeRegistry.MAX_MANA, 200, AttributeModifier.Operation.ADD_VALUE)));
-
+*/
     public static final Supplier<CurioBaseItem> POISON_COATING = ITEMS.register("poison_coating", () -> new PoisonCoating(new Item.Properties().stacksTo(1), "coating"));
     public static final Supplier<CurioBaseItem> VOLCANO_COATING = ITEMS.register("volcano_coating", () -> new SimpleDescriptiveCoating(new Item.Properties().stacksTo(1).fireResistant(), "coating"));
     public static final Supplier<CurioBaseItem> LIGHTNING_COATING = ITEMS.register("lightning_coating", () -> new LightningCoating(new Item.Properties().stacksTo(1), "coating"));

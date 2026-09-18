@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "cqs_armory:umbrite_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "cqs_armory:melee_rune"
+    },
+    {
+      "item": "cqs_armory:melee_rune"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:arcane_swords_brand"
+  }
+}

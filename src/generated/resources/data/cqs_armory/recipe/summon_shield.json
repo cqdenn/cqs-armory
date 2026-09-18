@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    {
+      "item": "irons_spellbooks:blood_vial"
+    },
+    {
+      "item": "minecraft:shield"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:summon_shield"
+  }
+}

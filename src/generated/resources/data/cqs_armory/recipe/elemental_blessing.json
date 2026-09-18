@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_rod"
+    },
+    {
+      "item": "irons_spellbooks:frozen_bone"
+    },
+    {
+      "item": "irons_spellbooks:lightning_bottle"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:elemental_blessing"
+  }
+}

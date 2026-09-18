@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:summoners_will"
+  }
+}

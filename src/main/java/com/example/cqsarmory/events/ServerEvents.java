@@ -13,10 +13,9 @@ import com.example.cqsarmory.data.entity.living.Dwarf;
 import com.example.cqsarmory.data.entity.living.Loglin;
 import com.example.cqsarmory.data.entity.living.PhantomPhantom;
 import com.example.cqsarmory.items.curios.OnBlockCoating;
-import com.example.cqsarmory.items.curios.OnHitBrand;
+import com.example.cqsarmory.items.curios.OnHitBooster;
 import com.example.cqsarmory.items.curios.OnHitCoating;
 import com.example.cqsarmory.items.curios.OnSwingCoating;
-import com.example.cqsarmory.items.curios.brands.ArcaneBrand;
 import com.example.cqsarmory.items.curios.coatings.HeavyCoating;
 import com.example.cqsarmory.network.*;
 import com.example.cqsarmory.registry.*;
@@ -35,6 +34,7 @@ import io.redspace.ironsspellbooks.damage.ISSDamageTypes;
 import io.redspace.ironsspellbooks.entity.mobs.IMagicSummon;
 import io.redspace.ironsspellbooks.entity.spells.ChainLightning;
 import io.redspace.ironsspellbooks.entity.spells.acid_orb.AcidOrb;
+import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedWeaponEntity;
 import io.redspace.ironsspellbooks.entity.spells.wall_of_fire.WallOfFireEntity;
 import io.redspace.ironsspellbooks.network.SyncManaPacket;
 import io.redspace.ironsspellbooks.particle.SparkParticleOptions;
@@ -545,7 +545,7 @@ public class ServerEvents {
         Entity sourceEntity = event.getSource().getEntity();
         DamageSource dmgSource = event.getSource();
 
-        if (sourceEntity instanceof Player player && dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN)) {
+        if (sourceEntity instanceof Player player && (dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN) || dmgSource.getDirectEntity() instanceof SummonedWeaponEntity)) {
             boolean swordQuiverAbility = dmgSource.getDirectEntity() instanceof ThrownItemProjectile thrownItem && thrownItem.getShotFromAbility();
             int abilityGainMultiplier = dmgSource.is(DamageTypes.MELEE_SKILL) || swordQuiverAbility ? 2 : 1;
             if (AbilityData.get(player).getRage() > 0) {
@@ -805,7 +805,7 @@ public class ServerEvents {
 
     }*/
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void overchargeBrand(BuildCastContextEvent.Post event) {
         int manaSpent = event.context().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
 
@@ -813,7 +813,7 @@ public class ServerEvents {
             int newManaCost = (int) (manaSpent * 1.5);
             event.context().set(SpellcastingComponentTypes.MANA_COST, newManaCost);
         }
-    }
+    }*/
 
     @SubscribeEvent
     public static void trackManaSpent(SkillEvent.OnCast event) {
@@ -904,7 +904,7 @@ public class ServerEvents {
         }
     }
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void brandEffects(PlayerTickEvent.Pre event) {
         Player player = event.getEntity();
 
@@ -921,7 +921,7 @@ public class ServerEvents {
             }
         }
 
-    }
+    }*/
 
     @SubscribeEvent
     public static void unendingAuraBrand(LivingDamageEvent.Post event) {
@@ -1077,7 +1077,31 @@ public class ServerEvents {
                 }
             }
 
-            var brandSlot = CQtils.getPlayerCurioStack(player, "brand");
+            for (ItemStack stack : CQtils.getPlayerCurioStacks(player, "booster")) {
+                if (stack.getItem() instanceof OnHitBooster booster) {
+                    final List<ResourceKey<DamageType>> spellTypes = List.of(
+                            ISSDamageTypes.FIRE_MAGIC,
+                            ISSDamageTypes.FIRE_FIELD,
+                            ISSDamageTypes.HOLY_MAGIC,
+                            ISSDamageTypes.ICE_MAGIC,
+                            ISSDamageTypes.LIGHTNING_MAGIC,
+                            ISSDamageTypes.BLOOD_MAGIC,
+                            ISSDamageTypes.ELDRITCH_MAGIC,
+                            ISSDamageTypes.EVOCATION_MAGIC,
+                            ISSDamageTypes.NATURE_MAGIC,
+                            ISSDamageTypes.ENDER_MAGIC
+                    );
+
+                    for (ResourceKey<DamageType> spellType : spellTypes) {
+                        if (source.is(spellType)) {
+                            booster.doOnHitEffect(player, target, damage, source);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            /*var brandSlot = CQtils.getPlayerCurioStack(player, "brand");
             if (!brandSlot.isEmpty() && brandSlot.getItem() instanceof OnHitBrand brand) {
 
                 final List<ResourceKey<DamageType>> spellTypes = List.of(
@@ -1099,7 +1123,7 @@ public class ServerEvents {
                         break;
                     }
                 }
-            }
+            }*/
         }
     }
 
@@ -1273,7 +1297,7 @@ public class ServerEvents {
     @SubscribeEvent
     public static void summonDamageCap(LivingIncomingDamageEvent event) {
         LivingEntity target = event.getEntity();
-        if (target instanceof IMagicSummon summon) {
+        if (target instanceof IMagicSummon summon && summon.getSummoner() instanceof LivingEntity living && ItemRegistry.SUMMON_SHIELD.get().isEquippedBy(living)) {
             event.setAmount(Math.min(event.getAmount(), target.getMaxHealth() * 0.25f));
         }
     }
