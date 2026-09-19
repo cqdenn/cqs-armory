@@ -421,6 +421,12 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.WITHER_SKELETON_SKULL))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.OVERCHARGED.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_ESSENCE.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_ESSENCE.get()))
+                .save(recipeOutput);
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.CHRONOWARP_RUNE.get(), 1)
                 .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
                 .requires(Items.CLOCK)
@@ -433,11 +439,11 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.UNENDING_AURA.get(), 1)
+        /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.UNENDING_AURA.get(), 1)
                 .requires(ItemRegistry.UMBRITE_WEAPONSET.ingot().get(), 1)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 5)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
-                .save(recipeOutput);
+                .save(recipeOutput);*/
 
         /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTERS_ECHO.get(), 1)
                 .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
@@ -763,6 +769,26 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 1)
                 .requires(Items.BONE, 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HASTE_BRAND.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 3)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 3)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BRUISER_BRAND.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
+                .requires(ItemRegistry.MELEE_RUNE.get(), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.ARCHER_BRAND.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
+                .requires(ItemRegistry.ARCHER_RUNE.get(), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
                 .save(recipeOutput);
 
         /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.MAGMA_BRAND.get(), 1)

@@ -32,5 +32,10 @@ public class CQEntityTypeTagsProvider extends TagsProvider<EntityType<?>> {
         tag(Tags.EntityTypes.EXPLOSIVE_ENTITIES).add(EntityRegistry.FIRE_ARROW_PROJECTILE.getKey());
         tag(Tags.EntityTypes.EXPLOSIVE_ENTITIES).add(EntityRegistry.FIRE_BOMB.getKey());
         tag(Tags.EntityTypes.EXPLOSIVE_ENTITIES).add(EntityRegistry.MAGIC_FIREBALL.getKey());
+
+        tag(Tags.EntityTypes.MAGIC_ARROWS).add(EntityRegistry.SMALL_MAGIC_ARROW.getKey());
+        tag(Tags.EntityTypes.MAGIC_ARROWS).add(EntityRegistry.POISON_ARROW.getKey());
+        tag(Tags.EntityTypes.MAGIC_ARROWS).add(EntityRegistry.MAGIC_ARROW_PROJECTILE.getKey());
+        tag(Tags.EntityTypes.MAGIC_ARROWS).add(EntityRegistry.FIRE_ARROW_PROJECTILE.getKey());
     }
 }

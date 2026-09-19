@@ -696,7 +696,11 @@ public class ServerEvents {
         DamageSource dmgSource = event.getSource();
         Entity target = event.getEntity();
 
-        if (directEntity instanceof AbstractArrow && !dmgSource.typeHolder().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_MAGIC) && !(directEntity instanceof ScytheProjectile) && sourceEntity instanceof Player player && (!dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN) || directEntity instanceof ThrownItemProjectile)) {
+        if (directEntity != null &&
+                ((directEntity instanceof AbstractArrow && !dmgSource.typeHolder().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_MAGIC)) || directEntity.getType().is(Tags.EntityTypes.MAGIC_ARROWS))
+                && !(directEntity instanceof ScytheProjectile)
+                && sourceEntity instanceof Player player
+                && (!dmgSource.is(Tags.DamageTypes.CAUSES_RAGE_GAIN) || directEntity instanceof ThrownItemProjectile)) {
 
             if (AbilityData.get(player).getMomentum() == player.getAttribute(AttributeRegistry.MAX_MOMENTUM).getValue() && player.getAttributeValue(AttributeRegistry.MOMENTUM_ORBS_SPAWNED) > 0 && false) {//disabling momentum orb spawning D:
                 if (AbilityData.get(player).momentumOrbsOwned >= MAX_ORBS) return;
@@ -805,15 +809,15 @@ public class ServerEvents {
 
     }*/
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void overchargeBrand(BuildCastContextEvent.Post event) {
         int manaSpent = event.context().getOrDefault(SpellcastingComponentTypes.MANA_COST, 0);
 
-        if (manaSpent != 0 && event.context().asEntityCaster() instanceof LivingEntity living && ItemRegistry.OVERCHARGE_BRAND.get().isEquippedBy(living)) {
+        if (manaSpent != 0 && event.context().asEntityCaster() instanceof LivingEntity living && ItemRegistry.OVERCHARGED.get().isEquippedBy(living)) {
             int newManaCost = (int) (manaSpent * 1.5);
             event.context().set(SpellcastingComponentTypes.MANA_COST, newManaCost);
         }
-    }*/
+    }
 
     @SubscribeEvent
     public static void trackManaSpent(SkillEvent.OnCast event) {
@@ -876,7 +880,7 @@ public class ServerEvents {
         if (DodgeData.get(event.getEntity()).invulnerableTimeEnd > event.getEntity().level().getGameTime()) {
             event.setCanceled(true);
         }
-        if (event.getEntity().hasEffect(MobEffectRegistry.SPIN)) {
+        if (event.getEntity().hasEffect(MobEffectRegistry.SPIN) || event.getEntity().hasEffect(MobEffectRegistry.BRUISER)) {
             event.setAmount(event.getAmount() * 0.75f);
         }
     }
@@ -923,7 +927,7 @@ public class ServerEvents {
 
     }*/
 
-    @SubscribeEvent
+    /*@SubscribeEvent
     public static void unendingAuraBrand(LivingDamageEvent.Post event) {
         LivingEntity target = event.getEntity();
         Entity entity = event.getSource().getEntity();
@@ -936,7 +940,7 @@ public class ServerEvents {
                 }
 
                 //was gonna extend aoe duration on hit, but too similar to chronowarp rune
-                /*if (source.is(DamageTypes.MAGE_AOE)) {
+                *//*if (source.is(DamageTypes.MAGE_AOE)) {
                     MobEffectInstance effect = player.getEffect(MobEffectRegistry.GENERIC_MAGE_AOE);
                     if (effect != null) {
                         player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 10, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
@@ -947,11 +951,11 @@ public class ServerEvents {
                     if (effect != null) {
                         player.addEffect(new MobEffectInstance(effect.getEffect(), effect.getDuration() + 10, effect.getAmplifier(), effect.isAmbient(), effect.isVisible(), effect.showIcon()));
                     }
-                }*/
+                }*//*
             }
 
         }
-    }
+    }*/
 
     /*@SubscribeEvent
     public static void infinityBrandCD(SpellCooldownAddedEvent.Pre event) {

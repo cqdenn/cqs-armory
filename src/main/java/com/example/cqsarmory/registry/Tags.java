@@ -37,6 +37,7 @@ public class Tags {
 
     public static class EntityTypes {
         public static final TagKey<EntityType<?>> EXPLOSIVE_ENTITIES = tag("explosive_entities");
+        public static final TagKey<EntityType<?>> MAGIC_ARROWS = tag("magic_arrows");
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, name));

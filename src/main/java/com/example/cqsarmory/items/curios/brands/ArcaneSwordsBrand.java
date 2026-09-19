@@ -11,6 +11,6 @@ public class ArcaneSwordsBrand extends AOEBrandItem {
 
     @Override
     public MobEffectInstance aoeEffect(int seconds) {
-        return new MobEffectInstance(MobEffectRegistry.ARCANE_SWORDS_MAGE_AOE, 5, 0, false, false, true);
+        return new MobEffectInstance(MobEffectRegistry.ARCANE_SWORDS_MAGE_AOE, 2, 0, false, false, true);
     }
 }

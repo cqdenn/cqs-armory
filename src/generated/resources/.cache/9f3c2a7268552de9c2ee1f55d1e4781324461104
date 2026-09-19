@@ -1,2 +1,3 @@
-// 1.21.1	2025-10-01T02:16:34.7441033	Tags for minecraft:entity_type mod id cqs_armory
+// 1.21.1	2026-09-19T17:28:32.6343086	Tags for minecraft:entity_type mod id cqs_armory
 6ebbd06042bee778e29d9693b93a2b87a1288d1e data/cqs_armory/tags/entity_type/explosive_entities.json
+33fc25c3e28f82f05262166ca6e8caa6a9312b5a data/cqs_armory/tags/entity_type/magic_arrows.json

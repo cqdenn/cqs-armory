@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_two"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    },
+    {
+      "item": "irons_spellbooks:divine_pearl"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:haste_brand"
+  }
+}
