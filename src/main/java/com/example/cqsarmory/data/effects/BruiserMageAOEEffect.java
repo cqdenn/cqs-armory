@@ -32,7 +32,7 @@ public class BruiserMageAOEEffect extends NonCurableEffect {
 
         Level level = livingEntity.level();
         int am = (int) (9 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER));
-        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), true));
+        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), false));
         entities.forEach(target -> {
             //2.5% per bruiser level
             target.addEffect(new MobEffectInstance(MobEffectRegistry.BRUISER, 5, am, false, false, true));

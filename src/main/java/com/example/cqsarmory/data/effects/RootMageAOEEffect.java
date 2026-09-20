@@ -24,7 +24,7 @@ public class RootMageAOEEffect extends NonCurableEffect {
         int radius = 5;
         Vector3f center = new Vector3f(0, 1, 0);
         Vec3 from = livingEntity.position().add(0, 1, 0);
-        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> !DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), true) && !target.getType().is(ModTags.CANT_ROOT) && !(target instanceof RootEntity));
+        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> !DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), true) && !target.getType().is(ModTags.CANT_ROOT) && !(target instanceof RootEntity) && target != livingEntity);
         entities.forEach(target -> {
             Vec3 spawn = target.position();
             float health = 40;

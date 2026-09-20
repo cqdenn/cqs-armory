@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "tag": "cqs_armory:ingots/power_three"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "minecraft:echo_shard"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "cqs_armory:flight_brand"
+  }
+}

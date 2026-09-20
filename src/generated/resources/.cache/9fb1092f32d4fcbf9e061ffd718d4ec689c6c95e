@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-20T02:20:10.9164686	Recipes
+// 1.21.1	2026-09-20T12:38:45.2916752	Recipes
 3170385a8f6f114d92d5ba0ece551039dc1c7174 data/cqs_armory/advancement/recipes/combat/amethyst_arcane_staff.json
 578afef1b3cd8c343569e8b69ea5f87f84434393 data/cqs_armory/advancement/recipes/combat/amethyst_crossbow.json
 26d63565ea994e64457eec22be6443e053410ce1 data/cqs_armory/advancement/recipes/combat/amethyst_fire_staff.json
@@ -126,6 +126,7 @@ a2c2378815f3c0dc01868a9fc91de66d30de8094 data/cqs_armory/advancement/recipes/com
 488fda469545262735713493fb5f0c805b39fec0 data/cqs_armory/advancement/recipes/combat/fire_coating.json
 15cf0e74008aa0e68338d0f9472ec43213294079 data/cqs_armory/advancement/recipes/combat/fire_quiver.json
 10eb3b88e3be82fabac1090be3bc87c1c5b68876 data/cqs_armory/advancement/recipes/combat/flashguard.json
+2db47adab84acdce391432abfcbbc3a419e7dfbe data/cqs_armory/advancement/recipes/combat/flight_brand.json
 e17ab294b20afec4bd697a96d666cc6c78ddc99a data/cqs_armory/advancement/recipes/combat/gold_arcane_staff.json
 cd22705aabd80d164d2c03a1d7470d2e33c79ea4 data/cqs_armory/advancement/recipes/combat/gold_crossbow.json
 d658c7f54f7cabde2432386d81e8ee8e8b620fda data/cqs_armory/advancement/recipes/combat/gold_fire_staff.json
@@ -483,6 +484,7 @@ b4dfe37e19f1fe6c4141d467bc8d4d4f3c8444be data/cqs_armory/recipe/firework_quiver.
 4d73c68c1df040e7fae87e3b5ca69756d3f74c90 data/cqs_armory/recipe/fire_coating.json
 6188fef46a031b903041f17ac8d18f80486c7031 data/cqs_armory/recipe/fire_quiver.json
 0401de67b65069e632b4ca264a430af43572e678 data/cqs_armory/recipe/flashguard.json
+1c090426a68ac50351f0f54476a212ee11e8d57a data/cqs_armory/recipe/flight_brand.json
 817d0f3d2235766053ad114081b2b16dcf7e31fe data/cqs_armory/recipe/gold_arcane_staff.json
 97f4f277ff76e349b43c0f4009bf721c203c679e data/cqs_armory/recipe/gold_crossbow.json
 55511e8bba4f9f7640d0ceb4cbe59e9063d99631 data/cqs_armory/recipe/gold_fire_staff.json

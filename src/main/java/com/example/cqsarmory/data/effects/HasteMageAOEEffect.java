@@ -32,7 +32,7 @@ public class HasteMageAOEEffect extends NonCurableEffect {
 
         Level level = livingEntity.level();
         int am = (int) (9 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.BLOOD_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.EVOCATION_SPELL_POWER));
-        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), true));
+        var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), false));
         entities.forEach(target -> {
             //25% hastened * power
             target.addEffect(new MobEffectInstance(MobEffectRegistry.HASTENED, 5, am, false, false, true));

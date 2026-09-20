@@ -9,6 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -41,7 +42,9 @@ public class MobEffectRegistry {
     public static final DeferredHolder<MobEffect, MobEffect> BRUISER_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("bruiser_mage_aoe", () -> new BruiserMageAOEEffect(MobEffectCategory.BENEFICIAL, 0xc7aa16));
     public static final DeferredHolder<MobEffect, MobEffect> ARCHER_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("archer_mage_aoe", () -> new ArcherMageAOEEffect(MobEffectCategory.BENEFICIAL, 0xc00ff00));
     public static final DeferredHolder<MobEffect, MobEffect> GRAVITY_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("gravity_mage_aoe", () -> new GravityMageAOEEffect(MobEffectCategory.BENEFICIAL, 0xc00ff00));
+    public static final DeferredHolder<MobEffect, MobEffect> FLIGHT_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("flight_mage_aoe", () -> new FlightMageAOEEffect(MobEffectCategory.BENEFICIAL, 0xc00ff00));
     public static final DeferredHolder<MobEffect, MobEffect> ROOT_MAGE_AOE = MOB_EFFECT_DEFERRED_REGISTER.register("root_mage_aoe", () -> new RootMageAOEEffect(MobEffectCategory.BENEFICIAL, 0xc00ff00));
+    public static final DeferredHolder<MobEffect, MobEffect> FLIGHT = MOB_EFFECT_DEFERRED_REGISTER.register("flight", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0xc000000).addAttributeModifier(NeoForgeMod.CREATIVE_FLIGHT, CqsArmory.id("mobeffect_flight"), 1, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> BRUISER = MOB_EFFECT_DEFERRED_REGISTER.register("bruiser", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0xc7aa16).addAttributeModifier(Attributes.ATTACK_DAMAGE, CqsArmory.id("mobeffect_bruiser"), 0.025, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     public static final DeferredHolder<MobEffect, MobEffect> GRAVITY_SNARE = MOB_EFFECT_DEFERRED_REGISTER.register("gravity_snare", () -> new GravitySnareEffect(MobEffectCategory.HARMFUL, 0xae34eb).addAttributeModifier(Attributes.GRAVITY, CqsArmory.id("mobeffect_gravity_snare"), -1.02, AttributeModifier.Operation.ADD_MULTIPLIED_BASE).addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, CqsArmory.id("mobeffect_gravity_snare"), 0.9, AttributeModifier.Operation.ADD_VALUE));
     public static final DeferredHolder<MobEffect, MobEffect> INFINITE_MAGIC = MOB_EFFECT_DEFERRED_REGISTER.register("infinite_magic", () -> new GenericEffect(MobEffectCategory.BENEFICIAL, 0x1134eb));
