@@ -2,10 +2,14 @@ package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.registry.AttributeRegistry;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.MagicManager;
 import io.redspace.ironsspellbooks.entity.spells.small_magic_arrow.SmallMagicArrow;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +41,8 @@ public class ArcherMageAOEEffect extends NonCurableEffect {
             if (level instanceof ServerLevel serverLevel) {
                 MagicManager.spawnParticles(serverLevel, ParticleTypes.FIREWORK, spawn.x, spawn.y, spawn.z, 2, .1, .1, .1, .05, false);
             }
+            level.playSound(null, spawn.x, spawn.y, spawn.z, SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.NEUTRAL, 3.0f, 1.1f + Utils.random.nextFloat() * .3f);
+            level.playSound(null, spawn.x, spawn.y, spawn.z, SoundRegistry.BOW_SHOOT.get(), SoundSource.NEUTRAL, 2, Utils.random.nextIntBetweenInclusive(16, 20) * .1f);
         }
         return false;
     }

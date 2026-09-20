@@ -11,6 +11,7 @@ import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedRapier
 import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedSwordEntity;
 import io.redspace.ironsspellbooks.entity.spells.summoned_weapons.SummonedWeaponEntity;
 import io.redspace.ironsspellbooks.registries.EntityRegistry;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,30 +29,31 @@ public class ArcaneSwordsMageAOEEffect extends NonCurableEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
+        Level lev = livingEntity.level();
+        if (lev instanceof ServerLevel level) {
+            Entity caster = livingEntity;
+            //values extracted from level 4 summon swords spell getSpellPower()
+            float power = (float) ((1 + 2 * 3) * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ENDER_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
+            SummonedEntitiesCastData summonedEntitiesCastData = new SummonedEntitiesCastData();
+            AttributeModifier healthModifier = new AttributeModifier(
+                    IronsSpellbooks.id("spell_power_health_bonus"), getHealthBonus(power), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            AttributeModifier damageModifier = new AttributeModifier(
+                    IronsSpellbooks.id("spell_power_damage_bonus"), getDamageBonus(power), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
-        Entity caster = livingEntity;
-        Level level = livingEntity.level();
-        //values extracted from level 4 summon swords spell getSpellPower()
-        float power = (float) ((1 + 2 * 3) * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ENDER_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
-        SummonedEntitiesCastData summonedEntitiesCastData = new SummonedEntitiesCastData();
-        AttributeModifier healthModifier = new AttributeModifier(
-                IronsSpellbooks.id("spell_power_health_bonus"), getHealthBonus(power), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        AttributeModifier damageModifier = new AttributeModifier(
-                IronsSpellbooks.id("spell_power_damage_bonus"), getDamageBonus(power), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+            SummonedWeaponEntity claymore = new SummonedClaymoreEntity(EntityRegistry.SUMMONED_CLAYMORE.get(), level);
+            SummonedWeaponEntity rapier = new SummonedRapierEntity(EntityRegistry.SUMMONED_RAPIER.get(), level);
+            SummonedWeaponEntity sword = new SummonedSwordEntity(EntityRegistry.SUMMONED_SWORD.get(), level);
 
-        SummonedWeaponEntity claymore = new SummonedClaymoreEntity(EntityRegistry.SUMMONED_CLAYMORE.get(), level);
-        SummonedWeaponEntity rapier = new SummonedRapierEntity(EntityRegistry.SUMMONED_RAPIER.get(), level);
-        SummonedWeaponEntity sword = new SummonedSwordEntity(EntityRegistry.SUMMONED_SWORD.get(), level);
-
-        Vec3 spawnBase = livingEntity.position().add(0, 1.2, 0);
-        for (SummonedWeaponEntity weapon : List.of(claymore, rapier, sword)) {
-            weapon.moveTo(spawnBase.add(Utils.getRandomVec3(1)));
-            weapon.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(damageModifier);
-            weapon.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(healthModifier);
-            weapon.setHealth(weapon.getMaxHealth());
-            Entity creature = weapon;
-            level.addFreshEntity(creature);
-            SummonManager.initSummon(caster, creature, CQtils.getAOETimeSeconds(livingEntity) * 20, summonedEntitiesCastData);
+            Vec3 spawnBase = livingEntity.position().add(0, 1.2, 0);
+            for (SummonedWeaponEntity weapon : List.of(claymore, rapier, sword)) {
+                weapon.moveTo(spawnBase.add(Utils.getRandomVec3(1)));
+                weapon.getAttribute(Attributes.ATTACK_DAMAGE).addPermanentModifier(damageModifier);
+                weapon.getAttribute(Attributes.MAX_HEALTH).addPermanentModifier(healthModifier);
+                weapon.setHealth(weapon.getMaxHealth());
+                Entity creature = weapon;
+                level.addFreshEntity(creature);
+                SummonManager.initSummon(caster, creature, CQtils.getAOETimeSeconds(livingEntity) * 20, summonedEntitiesCastData);
+            }
         }
 
         return false;
