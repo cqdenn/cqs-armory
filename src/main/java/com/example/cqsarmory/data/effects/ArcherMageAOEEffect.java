@@ -30,7 +30,7 @@ public class ArcherMageAOEEffect extends NonCurableEffect {
             arrow.setPos(spawn);
             arrow.shoot(dir.x, dir.y, dir.z, 1f, 0f);
             arrow.setOwner(livingEntity);
-            arrow.setDamage((float) Math.max(10, livingEntity.getAttributeValue(BowAttributes.ARROW_DAMAGE)));
+            arrow.setDamage((float) Math.max(10, livingEntity.getAttributeValue(BowAttributes.ARROW_DAMAGE) * livingEntity.getAttributeValue(io.redspace.ironsspellbooks.api.registry.AttributeRegistry.SPELL_POWER)));
             arrow.setPierceLevel((int) livingEntity.getAttributeValue(AttributeRegistry.ARROW_PIERCING));
             level.addFreshEntity(arrow);
             dir = dir.yRot(degPerArrow * Mth.DEG_TO_RAD);

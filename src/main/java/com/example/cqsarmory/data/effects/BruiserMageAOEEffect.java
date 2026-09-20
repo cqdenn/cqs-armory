@@ -2,6 +2,7 @@ package com.example.cqsarmory.data.effects;
 
 import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.CQtils;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
@@ -30,10 +31,11 @@ public class BruiserMageAOEEffect extends NonCurableEffect {
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
 
         Level level = livingEntity.level();
+        int am = (int) (9 * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER));
         var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), true));
         entities.forEach(target -> {
-            //25% per bruiser level
-            target.addEffect(new MobEffectInstance(MobEffectRegistry.BRUISER, 5, 0, false, false, true));
+            //2.5% per bruiser level
+            target.addEffect(new MobEffectInstance(MobEffectRegistry.BRUISER, 5, am, false, false, true));
         });
         return true;
     }

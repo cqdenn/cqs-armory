@@ -32,7 +32,7 @@ public class ArcaneSwordsMageAOEEffect extends NonCurableEffect {
         Entity caster = livingEntity;
         Level level = livingEntity.level();
         //values extracted from level 4 summon swords spell getSpellPower()
-        float power = (float) ((1 + 2 * 3) * livingEntity.getAttributeValue(AttributeRegistry.ENDER_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
+        float power = (float) ((1 + 2 * 3) * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ENDER_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.ELDRITCH_SPELL_POWER));
         SummonedEntitiesCastData summonedEntitiesCastData = new SummonedEntitiesCastData();
         AttributeModifier healthModifier = new AttributeModifier(
                 IronsSpellbooks.id("spell_power_health_bonus"), getHealthBonus(power), AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

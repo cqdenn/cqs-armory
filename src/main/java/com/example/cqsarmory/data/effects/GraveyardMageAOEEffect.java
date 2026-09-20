@@ -37,7 +37,7 @@ public class GraveyardMageAOEEffect extends NonCurableEffect {
             int count = 6;
             float radius = 1.5f + 0.185f * count;
             int skillLevel = 3; //pretend raise dead level
-            float spellPower = (float) ((10 + 3 * (skillLevel - 1)) * livingEntity.getAttributeValue(AttributeRegistry.BLOOD_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.EVOCATION_SPELL_POWER));
+            float spellPower = (float) ((10 + 3 * (skillLevel - 1)) * livingEntity.getAttributeValue(AttributeRegistry.SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.BLOOD_SPELL_POWER) * livingEntity.getAttributeValue(AttributeRegistry.EVOCATION_SPELL_POWER));
             Vec3 castOrigin = caster.position().add(Vec3.ZERO);
             float casterYawRad = (float) Math.atan2(livingEntity.getForward().normalize().x, livingEntity.getForward().normalize().z);
             float casterYawDeg = casterYawRad * Mth.RAD_TO_DEG;
