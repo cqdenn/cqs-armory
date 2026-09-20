@@ -6,6 +6,8 @@ import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +39,7 @@ public class HasteMageAOEEffect extends NonCurableEffect {
             //25% hastened * power
             target.addEffect(new MobEffectInstance(MobEffectRegistry.HASTENED, 5, am, false, false, true));
         });
+        level.playSound(livingEntity, livingEntity.blockPosition(), SoundRegistry.CLEANSE_CAST.get(), SoundSource.PLAYERS, 0.7f, 1.3f);
         return true;
     }
 

@@ -6,6 +6,8 @@ import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.entity.spells.target_area.TargetedAreaEntity;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -37,6 +39,7 @@ public class BruiserMageAOEEffect extends NonCurableEffect {
             //2.5% per bruiser level
             target.addEffect(new MobEffectInstance(MobEffectRegistry.BRUISER, 5, am, false, false, true));
         });
+        level.playSound(livingEntity, livingEntity.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.5f);
         return true;
     }
 

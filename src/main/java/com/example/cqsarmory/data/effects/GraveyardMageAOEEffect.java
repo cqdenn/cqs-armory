@@ -1,11 +1,11 @@
 package com.example.cqsarmory.data.effects;
 
+import com.example.cqsarmory.data.entity.ability.GraveyardSkeleton;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
-import io.redspace.ironsspellbooks.entity.mobs.SummonedSkeleton;
 import io.redspace.ironsspellbooks.registries.SoundRegistry;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
@@ -46,7 +46,7 @@ public class GraveyardMageAOEEffect extends NonCurableEffect {
             for (int i = 0; i < count; i++) {
                 ItemStack[] equipment = getEquipment(spellPower, random, skillLevel);
 
-                Monster undead = new SummonedSkeleton(world, true);
+                Monster undead = new GraveyardSkeleton(world, true);
                 undead.finalizeSpawn(world, world.getCurrentDifficultyAt(undead.getOnPos()), MobSpawnType.MOB_SUMMONED, null);
                 equip(undead, equipment);
 
@@ -64,7 +64,8 @@ public class GraveyardMageAOEEffect extends NonCurableEffect {
 
                 Entity creature = undead;
                 world.addFreshEntity(creature);
-                SummonManager.initSummon(caster, creature, CQtils.getAOETimeSeconds(livingEntity) * 20, summonedEntitiesCastData);
+                //extend duration by 2 to account for spawn animation
+                SummonManager.initSummon(caster, creature, (CQtils.getAOETimeSeconds(livingEntity) + 2) * 20, summonedEntitiesCastData);
             }
 
             Vec3 soundPos = castOrigin;

@@ -4,6 +4,8 @@ import com.example.cqsarmory.registry.MobEffectRegistry;
 import com.example.cqsarmory.utils.CQtils;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.damage.DamageSources;
+import io.redspace.ironsspellbooks.registries.SoundRegistry;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
@@ -18,16 +20,22 @@ public class FlightMageAOEEffect extends NonCurableEffect {
 
     @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
-        if (livingEntity.level().isClientSide) return false;
+        Vec3 from = livingEntity.position().add(0, 1, 0);
+        var x = from.x;
+        var y = from.y;
+        var z = from.z;
         Level level = livingEntity.level();
         int radius = 5;
         Vector3f center = new Vector3f(0, 0, 1);
-        Vec3 from = livingEntity.position().add(0, 1, 0);
+
         var entities = level.getEntitiesOfClass(LivingEntity.class, livingEntity.getBoundingBox().inflate(radius), target -> DamageSources.isFriendlyFireBetween(livingEntity, target) && Utils.hasLineOfSight(level, livingEntity.position(), target.position(), false));
         entities.forEach(target -> {
             target.addEffect(new MobEffectInstance(MobEffectRegistry.FLIGHT, CQtils.getAOETimeSeconds(livingEntity) * 20, 0, false, false, true));
         });
-        CQtils.genericMageAOEParticlesServer(livingEntity.level(), radius, center, from);
+        if (!livingEntity.level().isClientSide) {
+            CQtils.genericMageAOEParticlesServer(livingEntity.level(), radius, center, from);
+        }
+        level.playSound(livingEntity, livingEntity.blockPosition(), SoundRegistry.HOLY_CAST.get(), SoundSource.PLAYERS, 0.7f, 0.7f);
         return false;
     }
 

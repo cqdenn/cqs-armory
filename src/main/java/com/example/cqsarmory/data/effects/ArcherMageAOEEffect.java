@@ -25,7 +25,7 @@ public class ArcherMageAOEEffect extends NonCurableEffect {
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
 
         Level level = livingEntity.level();
-        int degPerArrow = 5;
+        int degPerArrow = 10;
         int arrows = 360 / degPerArrow;
         Vec3 dir = new Vec3(1, 0.2, 0);
         Vec3 spawn = livingEntity.position().add(0, 1, 0);
