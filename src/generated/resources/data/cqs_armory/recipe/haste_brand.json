@@ -3,16 +3,10 @@
   "category": "equipment",
   "ingredients": [
     {
-      "tag": "cqs_armory:ingots/power_two"
+      "tag": "cqs_armory:ingots/power_three"
     },
     {
-      "tag": "cqs_armory:ingots/power_two"
-    },
-    {
-      "tag": "cqs_armory:ingots/power_two"
-    },
-    {
-      "item": "irons_spellbooks:divine_pearl"
+      "tag": "cqs_armory:ingots/power_three"
     },
     {
       "item": "irons_spellbooks:divine_pearl"

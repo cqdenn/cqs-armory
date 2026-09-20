@@ -9,10 +9,13 @@
       "tag": "cqs_armory:ingots/power_one"
     },
     {
-      "item": "minecraft:packed_ice"
+      "item": "minecraft:amethyst_shard"
     },
     {
-      "item": "minecraft:packed_ice"
+      "item": "minecraft:amethyst_shard"
+    },
+    {
+      "item": "irons_spellbooks:arcane_ingot"
     },
     {
       "item": "irons_spellbooks:arcane_ingot"
@@ -20,6 +23,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "cqs_armory:blizzard_brand"
+    "id": "cqs_armory:gravity_brand"
   }
 }

@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:packed_ice"
+            "items": "irons_spellbooks:arcane_ingot"
           }
         ]
       },
