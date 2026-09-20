@@ -736,24 +736,28 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HELLFIRE_BRAND.get(), 1)
                 .requires(ItemRegistry.BLAZING_WEAPONSET.ingot().get(), 2)
                 .requires(Items.BLAZE_POWDER, 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.BLAZING_WEAPONSET.ingot().get()))
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLIZZARD_BRAND.get(), 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 2)
                 .requires(Items.PACKED_ICE, 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.PACKED_ICE))
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SHOCKWAVE_BRAND.get(), 1)
                 .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.LIGHTNING_BOTTLE.get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HEALING_BRAND.get(), 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
                 .requires(ItemRegistry.HEALTHY_RUNE.get(), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 1)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.HEALTHY_RUNE.get()))
                 .save(recipeOutput);
 
@@ -772,8 +776,8 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HASTE_BRAND.get(), 1)
-                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 3)
-                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 3)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_THREE), 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get(), 2)
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
                 .save(recipeOutput);
 
@@ -781,14 +785,21 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
                 .requires(ItemRegistry.MELEE_RUNE.get(), 2)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.ARCHER_BRAND.get(), 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_TWO), 2)
                 .requires(ItemRegistry.ARCHER_RUNE.get(), 2)
                 .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.DIVINE_PEARL.get()))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GRAVITY_BRAND.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 2)
+                .requires(Items.AMETHYST_SHARD, 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
         /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.MAGMA_BRAND.get(), 1)
