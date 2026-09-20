@@ -30,5 +30,13 @@ public class CQMobEffectsTagsProvider extends TagsProvider<MobEffect> {
         tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.BLIZZARD_MAGE_AOE.getKey());
         tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.SHOCKWAVE_MAGE_AOE.getKey());
         tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.HEALING_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.ARCANE_SWORDS_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.GRAVEYARD_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.HASTE_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.BRUISER_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.ARCHER_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.GRAVITY_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.FLIGHT_MAGE_AOE.getKey());
+        tag(Tags.MobEffects.MAGE_AOES).add(MobEffectRegistry.ROOT_MAGE_AOE.getKey());
     }
 }

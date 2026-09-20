@@ -4,6 +4,14 @@
     "cqs_armory:hellfire_mage_aoe",
     "cqs_armory:blizzard_mage_aoe",
     "cqs_armory:shockwave_mage_aoe",
-    "cqs_armory:healing_mage_aoe"
+    "cqs_armory:healing_mage_aoe",
+    "cqs_armory:arcane_swords_mage_aoe",
+    "cqs_armory:graveyard_mage_aoe",
+    "cqs_armory:haste_mage_aoe",
+    "cqs_armory:bruiser_mage_aoe",
+    "cqs_armory:archer_mage_aoe",
+    "cqs_armory:gravity_mage_aoe",
+    "cqs_armory:flight_mage_aoe",
+    "cqs_armory:root_mage_aoe"
   ]
 }

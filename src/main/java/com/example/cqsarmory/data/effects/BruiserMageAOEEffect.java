@@ -27,6 +27,7 @@ public class BruiserMageAOEEffect extends NonCurableEffect {
         visualEntity.setDuration(CQtils.getAOETimeSeconds(livingEntity) * 20);
         visualEntity.setOwner(livingEntity);
         visualEntity.setShouldFade(true);
+        livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.5f);
     }
 
     @Override
@@ -39,7 +40,6 @@ public class BruiserMageAOEEffect extends NonCurableEffect {
             //2.5% per bruiser level
             target.addEffect(new MobEffectInstance(MobEffectRegistry.BRUISER, 5, am, false, false, true));
         });
-        level.playSound(livingEntity, livingEntity.blockPosition(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, 0.7f, 1.5f);
         return true;
     }
 

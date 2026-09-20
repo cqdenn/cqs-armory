@@ -27,6 +27,7 @@ public class HasteMageAOEEffect extends NonCurableEffect {
         visualEntity.setDuration(CQtils.getAOETimeSeconds(livingEntity) * 20);
         visualEntity.setOwner(livingEntity);
         visualEntity.setShouldFade(true);
+        livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundRegistry.CLEANSE_CAST.get(), SoundSource.PLAYERS, 0.7f, 1.3f);
     }
 
     @Override
@@ -39,7 +40,6 @@ public class HasteMageAOEEffect extends NonCurableEffect {
             //25% hastened * power
             target.addEffect(new MobEffectInstance(MobEffectRegistry.HASTENED, 5, am, false, false, true));
         });
-        level.playSound(livingEntity, livingEntity.blockPosition(), SoundRegistry.CLEANSE_CAST.get(), SoundSource.PLAYERS, 0.7f, 1.3f);
         return true;
     }
 

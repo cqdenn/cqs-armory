@@ -19,6 +19,12 @@ public class FlightMageAOEEffect extends NonCurableEffect {
     }
 
     @Override
+    public void onEffectStarted(LivingEntity livingEntity, int amplifier) {
+        super.onEffectStarted(livingEntity, amplifier);
+        livingEntity.level().playSound(null, livingEntity.blockPosition(), SoundRegistry.HOLY_CAST.get(), SoundSource.PLAYERS, 0.7f, 0.7f);
+    }
+
+    @Override
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         Vec3 from = livingEntity.position().add(0, 1, 0);
         var x = from.x;
@@ -35,7 +41,6 @@ public class FlightMageAOEEffect extends NonCurableEffect {
         if (!livingEntity.level().isClientSide) {
             CQtils.genericMageAOEParticlesServer(livingEntity.level(), radius, center, from);
         }
-        level.playSound(livingEntity, livingEntity.blockPosition(), SoundRegistry.HOLY_CAST.get(), SoundSource.PLAYERS, 0.7f, 0.7f);
         return false;
     }
 
