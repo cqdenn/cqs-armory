@@ -802,6 +802,13 @@ public class RecipeDataGenerator extends RecipeProvider {
                 .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
                 .save(recipeOutput);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.ROOT_BRAND.get(), 1)
+                .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 2)
+                .requires(Items.POISONOUS_POTATO, 2)
+                .requires(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get(), 2)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(io.redspace.ironsspellbooks.registries.ItemRegistry.ARCANE_INGOT.get()))
+                .save(recipeOutput);
+
         /*ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.MAGMA_BRAND.get(), 1)
                 .requires(Items.GLASS_BOTTLE, 1)
                 .requires(Ingredient.of(Tags.Items.MATERIALS_POWER_ONE), 1)
