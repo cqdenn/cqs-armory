@@ -513,19 +513,26 @@ public class RecipeDataGenerator extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.OVERWATCH.get(), 1)
                 .requires(Items.PHANTOM_MEMBRANE, 2)
                 .requires(ItemRegistry.SCULK_WEAPONSET.ingot().get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SCULK_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.SLIPSTREAM.get(), 1)
                 .requires(Items.FEATHER, 2)
                 .requires(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.SILVERSTEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.GOOPER.get(), 1)
                 .requires(Items.SLIME_BALL, 2)
                 .requires(ItemRegistry.LIVING_WEAPONSET.ingot().get(), 2)
-                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GUNPOWDER))
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.LIVING_WEAPONSET.ingot().get()))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.BLOODLETTING.get(), 1)
+                .requires(Items.WITHER_SKELETON_SKULL, 1)
+                .requires(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get(), 1)
+                .requires(Items.BUCKET, 1)
+                .unlockedBy("criteria", InventoryChangeTrigger.TriggerInstance.hasItems(ItemRegistry.WITHERSTEEL_WEAPONSET.ingot().get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.COMBAT, ItemRegistry.HUNTER_TALISMAN.get(), 1)
