@@ -129,7 +129,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "io.redspace:irons_spellbooks:1.21.1-4.0.0-20260723.010604-5"
-    implementation "io.redspace:irons_lib:1.21.1-2.1.0"
+    implementation "io.redspace:irons_lib:1.21.1-2.3.0"
     implementation "software.bernie.geckolib:geckolib-neoforge-1.21.1:4.7.5.1"
     implementation "curse.maven:playeranimator-658587:7389814"
     implementation "top.theillusivec4.curios:curios-neoforge:9.2.2+${minecraft_version}"
