@@ -18,6 +18,7 @@ import com.example.cqsarmory.items.weapons.GroundPounderItem;
 import com.example.cqsarmory.items.weapons.SpearItem;
 import com.example.cqsarmory.utils.CQItemPropertyHelper;
 import io.redspace.bowattributes.registry.BowAttributes;
+import io.redspace.ironslib.registry.IronsLibRegistries;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.item.UpgradeOrbItem;
@@ -179,6 +180,7 @@ public class ItemRegistry {
     public static final Supplier<CurioBaseItem> OVERWATCH = ITEMS.register("overwatch", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> SLIPSTREAM = ITEMS.register("slipstream", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
     public static final Supplier<CurioBaseItem> GOOPER = ITEMS.register("gooper", () -> new SimpleDescriptiveBooster(new Item.Properties().stacksTo(1), "booster"));
+    public static final Supplier<CurioBaseItem> BLOODLETTING = ITEMS.register("bloodletting", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MAX_BLEED_STACKS, 5, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> HUNTER_TALISMAN = ITEMS.register("hunter_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 1, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> TRACKER_TALISMAN = ITEMS.register("tracker_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1)).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 2, AttributeModifier.Operation.ADD_VALUE)));
     public static final Supplier<CurioBaseItem> MARKSMAN_TALISMAN = ITEMS.register("marksman_talisman", () -> new BoosterBaseItem(new Item.Properties().stacksTo(1).fireResistant()).withAttributes("booster", new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.MOMENTUM_ON_HIT, 3, AttributeModifier.Operation.ADD_VALUE)));
@@ -532,7 +534,7 @@ public class ItemRegistry {
 
         var recurve = ITEMS.register(name + "_recurve_bow",
                 () -> new ExtendedBowItem(CQItemPropertyHelper.weaponsetItem(fireRes).durability(material.uses).attributes(ExtendedBowItem
-                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(com.example.cqsarmory.registry.AttributeRegistry.DODGE_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
+                        .createAttributes(material, power,WeaponType.RECURVE.attackDamage(), WeaponType.RECURVE.attackSpeed(), new AttributeContainer[]{new AttributeContainer(IronsLibRegistries.AttributeRegistry.DODGE_CHANCE, 0.08 * material.getMult(), AttributeModifier.Operation.ADD_VALUE)})
                 ), new SkillData(CQSpellRegistry.BARRAGE_SPELL, power.power()))
         );
 

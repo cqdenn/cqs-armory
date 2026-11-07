@@ -250,7 +250,7 @@ public class CQtils {
 
     public static void addBleedStacks(LivingEntity attacker, LivingEntity target, int stacks, int duration) {
         DamageData.get(target).bleedStacks.putIfAbsent(attacker, 0);
-        int newStacks = Math.min(10, DamageData.get(target).bleedStacks.get(attacker) + stacks);
+        int newStacks = (int) Math.min(attacker.getAttributeValue(com.example.cqsarmory.registry.AttributeRegistry.MAX_BLEED_STACKS), DamageData.get(target).bleedStacks.get(attacker) + stacks);
         DamageData.get(target).bleedStacks.put(attacker, newStacks);
         target.addEffect(new MobEffectInstance(MobEffectRegistry.BLEED, duration, 0, false, false, true));
     }

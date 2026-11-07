@@ -104,6 +104,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
@@ -1458,6 +1459,27 @@ public class ServerEvents {
                 event.setMaterialCost(1);
             }
         }*//*
+    }*/
+
+    static final Map<String, Integer> stacks = Map.of(
+            "irons_spellbooks:accupuncture", 1,
+            "irons_spellbooks:blood_needles", 1,
+            "irons_spellbooks:blood_slash", 5,
+            "irons_spellbooks:devour", 3,
+            "irons_spellbooks:ray_of_siphoning", 2
+    );
+
+    @SubscribeEvent
+    public static void mageBleed (LivingDamageEvent.Pre event) {
+        if (event.getSource() instanceof SpellDamageSource spellSource && stacks.containsKey(spellSource.spell().getSkillId().toString()) && spellSource.getEntity() instanceof LivingEntity attacker) {
+            LivingEntity target = event.getEntity();
+            CQtils.addBleedStacks(attacker, target, stacks.get(spellSource.spell().getSkillId().toString()), 200);
+        }
+    }
+
+    /*@SubscribeEvent
+    public static void mageBleedTooltip (CustomizeScrollModNameEvent event) {
+        FIXME TODO
     }*/
 
 }
