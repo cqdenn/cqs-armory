@@ -249,7 +249,7 @@ public class EntityRegistry {
 
     public static final DeferredHolder<EntityType<?>, EntityType<ScorchedBlaze>> SCORCHED_BLAZE =
             ENTITIES.register("scorched_blaze", () -> EntityType.Builder.<ScorchedBlaze>of(ScorchedBlaze::new, MobCategory.MONSTER)
-                    .sized(4f, 3.2f)
+                    .sized(2f, 3.2f)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scorched_blaze").toString()));
 }
