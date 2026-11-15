@@ -5,6 +5,7 @@ import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.data.entity.living.Dwarf;
 import com.example.cqsarmory.data.entity.living.Loglin;
 import com.example.cqsarmory.data.entity.living.PhantomPhantom;
+import com.example.cqsarmory.data.entity.living.ScorchedBlaze;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -245,4 +246,10 @@ public class EntityRegistry {
                     .passengerAttachments(1.49375F)
                     .clientTrackingRange(64)
                     .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "loglin").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ScorchedBlaze>> SCORCHED_BLAZE =
+            ENTITIES.register("scorched_blaze", () -> EntityType.Builder.<ScorchedBlaze>of(ScorchedBlaze::new, MobCategory.MONSTER)
+                    .sized(4f, 3.2f)
+                    .clientTrackingRange(64)
+                    .build(ResourceLocation.fromNamespaceAndPath(CqsArmory.MODID, "scorched_blaze").toString()));
 }

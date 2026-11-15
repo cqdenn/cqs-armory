@@ -12,6 +12,7 @@ import com.example.cqsarmory.data.entity.ability.*;
 import com.example.cqsarmory.data.entity.living.Dwarf;
 import com.example.cqsarmory.data.entity.living.Loglin;
 import com.example.cqsarmory.data.entity.living.PhantomPhantom;
+import com.example.cqsarmory.data.entity.living.ScorchedBlaze;
 import com.example.cqsarmory.items.curios.OnBlockCoating;
 import com.example.cqsarmory.items.curios.OnHitBooster;
 import com.example.cqsarmory.items.curios.OnHitCoating;
@@ -871,7 +872,7 @@ public class ServerEvents {
         if (event.getEntity() instanceof Player player && ItemRegistry.WARDSTONE.get().isEquippedBy(player) && AbilityData.get(player).getRage() >= player.getAttribute(AttributeRegistry.MAX_RAGE).getValue()) {
             event.setAmount(event.getAmount() * 0.75f);
         }
-        if ((ServerConfigs.DISABLE_IFRAMES.get() && !(event.getSource().getDirectEntity() instanceof WallOfFireEntity)) || event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
+        if ((ServerConfigs.DISABLE_IFRAMES.get() && !(event.getSource().getDirectEntity() instanceof WallOfFireEntity) && !(event.getSource().is(net.minecraft.world.damagesource.DamageTypes.IN_FIRE))) || event.getSource().getDirectEntity() instanceof AbilityArrow || event.getSource().is(DamageTypes.BLEEDING) || event.getSource().is(net.neoforged.neoforge.common.Tags.DamageTypes.IS_POISON)) {
             event.setInvulnerabilityTicks(0);
         }
         if (DamageData.get(event.getEntity()).markedBy == event.getSource().getEntity() && event.getSource().getDirectEntity() instanceof AbstractArrow) {
@@ -1379,6 +1380,7 @@ public class ServerEvents {
         event.put(EntityRegistry.DWARF.get(), Dwarf.prepareAttributes().build());
         event.put(EntityRegistry.PHANTOM_PHANTOM.get(), PhantomPhantom.prepareAttributes().build());
         event.put(EntityRegistry.LOGLIN.get(), Loglin.createAttributes().build());
+        event.put(EntityRegistry.SCORCHED_BLAZE.get(), ScorchedBlaze.prepareAttributes().build());
     }
 
     @SubscribeEvent

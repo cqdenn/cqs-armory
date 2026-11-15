@@ -125,6 +125,7 @@ public class ClientSetup {
         event.registerEntityRenderer(EntityRegistry.DWARF.get(), DwarfRenderer::new);
         event.registerEntityRenderer(EntityRegistry.PHANTOM_PHANTOM.get(), PhantomPhantomRenderer::new);
         event.registerEntityRenderer(EntityRegistry.LOGLIN.get(), LoglinRenderer::new);
+        event.registerEntityRenderer(EntityRegistry.SCORCHED_BLAZE.get(), ScorchedBlazeRenderer::new);
     }
 
     @SubscribeEvent
